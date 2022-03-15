@@ -22,7 +22,6 @@ namespace EasyMailDiscussion.Web.Worker
             {
                 //do stuff
                 
-                
                 await Task.Delay(DockerEnvironmentVariables.FetchTime, stoppingToken);
             }
 
