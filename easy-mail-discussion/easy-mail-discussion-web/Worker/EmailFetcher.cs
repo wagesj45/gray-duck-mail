@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using NLog;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,10 +17,13 @@ namespace EasyMailDiscussion.Web.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            logger.Info("Beginning email fetch loop.");
             while(!stoppingToken.IsCancellationRequested)
             {
-
-                await Task.Delay(1000, stoppingToken);
+                //do stuff
+                
+                
+                await Task.Delay(DockerEnvironmentVariables.FetchTime, stoppingToken);
             }
 
             return;

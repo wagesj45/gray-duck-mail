@@ -3,6 +3,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
+ENV LOG_LEVEL="debug"
+ENV FETCH_TIME="00:05:00"
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
