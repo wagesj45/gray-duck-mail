@@ -19,6 +19,10 @@ namespace EasyMailDiscussion.Common.Database
         /// <value> The identifier of the discussion list. </value>
         public int DiscussionListID { get; set; }
 
+        /// <summary> Gets or sets the identifier of the contact. </summary>
+        /// <value> The identifier of the contact. </value>
+        public int ContactID { get; set; }
+
         /// <summary> Gets or sets the contact. </summary>
         /// <value> The contact. </value>
         public Contact Contact { get; set; }

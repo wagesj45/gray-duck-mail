@@ -25,6 +25,8 @@ namespace EasyMailDiscussion.Common.Database
         /// <value> True if activated, false if not. </value>
         public bool Activated { get; set; }
 
+        public virtual ICollection<ContactSubscription> ContactSubscriptions { get; set; }
+
         #endregion
     }
 }

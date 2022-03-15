@@ -9,12 +9,13 @@ namespace EasyMailDiscussion.Common.Database
         #region Properties
 
         public int ID { get; set; }
-        public int ParentID { get; set; }
+        public int? ParentID { get; set; }
         public string Raw { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
         public DateTime Recieved { get; set; }
-        
+        public Contact Originator { get; set; }
+
         public virtual Message Parent { get; set; }
         public virtual ICollection<Message> Children { get; set; }
 

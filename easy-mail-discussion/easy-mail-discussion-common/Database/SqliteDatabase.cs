@@ -135,12 +135,37 @@ namespace EasyMailDiscussion.Common.Database
                 entity.HasKey(e => e.ID);
             });
 
+            //Describe the Contact Subscriptions table.
+            modelBuilder.Entity<ContactSubscription>().ToTable("ContactSubscription");
+            modelBuilder.Entity<ContactSubscription>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.HasOne(e => e.Contact)
+                .WithMany(e => e.ContactSubscriptions)
+                .HasForeignKey(e => e.ContactID)
+                .IsRequired();
+                entity.HasOne(e => e.DiscussionList)
+                .WithMany(e => e.Contacts)
+                .HasForeignKey(e => e.DiscussionListID)
+                .IsRequired();
+            });
+
             //Describe the DiscussionList table.
             modelBuilder.Entity<DiscussionList>().ToTable("DiscussionList");
             modelBuilder.Entity<DiscussionList>(entity => 
             {
                 entity.HasKey(e => e.ID);
-                entity.HasMany<ContactSubscription>(e => e.Contacts);
+            });
+
+            //Describe the Messages table.
+            modelBuilder.Entity<Message>().ToTable("Message");
+            modelBuilder.Entity<Message>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.HasOne(e => e.Parent)
+                .WithMany(e => e.Children)
+                .HasForeignKey(e => e.ParentID)
+                .IsRequired(false);
             });
 
             base.OnModelCreating(modelBuilder);
