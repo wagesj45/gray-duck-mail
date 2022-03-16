@@ -1,0 +1,58 @@
+﻿@model EditDiscussionListModel
+@{
+    ViewData["Title"] = "New Discussion List";
+}
+
+<hgroup>
+    <h1>New Discussion List</h1>
+    <h2>Create a new discussion list below.</h2>
+</hgroup>
+
+<form action="~/List/Create" method="post">
+    <input type="hidden" id="id" name="id" value="@Model?.DiscussionList?.ID" />
+    <label for="name">
+        Name
+        <input type="text" id="name" name="name" />
+    </label>
+    <label for="description">
+        Description
+        <input type="text" id="description" name="description" />
+        <small>A short description of the discussion list.</small>
+    </label>
+    <label for="baseEmailAddress">
+        List Email Address
+        <input type="email" id="baseEmailAddress" name="baseEmailAddress" />
+        <small><i class="icofont-info-square"></i> Automatic email aliases will be used, such as <kbd>bounce+list@example.com</kbd> and <kbd>unsubscribe+list@example.com</kbd>.</small>
+    </label>
+    <h3>Remote Email Configuration</h3>
+    <label for="userName">
+        User Name
+        <input type="text" id="userName" name="userName" />
+    </label>
+    <label for="password">
+        Password
+        <input type="password" id="password" name="password" />
+        <small><i class="icofont-warning"></i> Passwords are not encrypted when stored. Always secure your server, and never expose Easy Mail Discussion to the public internet!</small>
+    </label>
+    <label for="incomingMailServer">
+        Incoming Mail Server
+        <input type="text" id="incomingMailServer" name="incomingMailServer" />
+    </label>
+    <label for="incomingMailPort">
+        Incoming Mail Server Port
+        <input type="number" id="incomingMailPort" name="incomingMailPort" />
+    </label>
+    <label for="outgoingMailServer">
+        Outgoing Mail Server
+        <input type="text" id="outgoingMailServer" name="outgoingMailServer" />
+    </label>
+    <label for="outgoingMailPort">
+        Outgoing Mail Server Port
+        <input type="number" id="outgoingMailPort" name="outgoingMailPort" />
+    </label>
+    <label for="useSSL">
+        <input type="checkbox" id="useSSL" name="useSSL" />
+        Use SSL or TLS for a secure connection to the mail server.
+    </label>
+    <button type="submit">Create Discussion List</button>
+</form>

@@ -155,6 +155,7 @@ namespace EasyMailDiscussion.Common.Database
             modelBuilder.Entity<DiscussionList>(entity => 
             {
                 entity.HasKey(e => e.ID);
+
             });
 
             //Describe the Messages table.

@@ -388,3 +388,5 @@ FodyWeavers.xsd
 .idea/
 *.sln.iml
 
+# Generated database file when debugging with Docker
+database.db

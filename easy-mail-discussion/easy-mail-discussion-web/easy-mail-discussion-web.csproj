@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\icofont\fonts\icofont.svg" />
+    <None Include="wwwroot\icofont\fonts\icofont.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="NLog" Version="4.7.14" />
     <PackageReference Include="SQLite" Version="3.13.0" />
