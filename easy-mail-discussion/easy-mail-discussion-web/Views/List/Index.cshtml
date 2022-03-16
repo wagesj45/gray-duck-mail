@@ -1,4 +1,5 @@
-﻿@{
+﻿@model DiscussionListsModel
+@{
     ViewData["Title"] = "Easy Email Discussion";
 }
 
@@ -7,6 +8,36 @@
     <h3>Hello! Welcome to your email lists.</h3>
 </hgroup>
 
+<nav>
+    <ul>
+        <li>
+            <a href="~/List/New"><i class="icofont-ui-add"></i> Create New Discussion List</a>
+        </li>
+    </ul>
+</nav>
+
 <article>
-    <a role=button href="./List/New"><i class="icofont-ui-add"></i> Create New Discussion List</a>
+@foreach (var discussionList in Model.DiscussionLists)
+{
+    <details>
+        <summary>@discussionList.Name</summary>
+        <p>@discussionList.Description</p>
+        <ul>
+            <li>User Name: <strong>@discussionList.UserName</strong></li>
+            <li>Incoming Mail Server: <strong>@discussionList.IncomingMailServer</strong>:<em>@discussionList.IncomingMailPort</em></li>
+            <li>Outgoing Mail Server: <strong>@discussionList.OutgoingMailServer</strong>:<em>@discussionList.OutgoingMailPort</em></li>
+            @if (discussionList.UseSSL)
+            {
+                <li><mark>Using SSL/TLS</mark></li>
+            }
+        </ul>
+        <nav>
+            <ul>
+                <li><a href="/List/Archive/@discussionList.ID"><i class="icofont-history"></i> Archive</a></li>
+                <li><a href="/List/Edit/@discussionList.ID"><i class="icofont-edit"></i> Edit</a></li>
+                <li><a href="/List/Remove/@discussionList.ID"><i class="icofont-delete-alt"></i> Remove</a></li>
+            </ul>
+        </nav>
+    </details>
+}
 </article>

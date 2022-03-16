@@ -28,11 +28,11 @@ namespace EasyMailDiscussion.Common.Database
 
         public string Password { get; set; }
 
-        public Uri IncomingMailServer { get; set; }
+        public string IncomingMailServer { get; set; }
 
         public int IncomingMailPort { get; set; }
 
-        public Uri OutgoingMailServer { get; set; }
+        public string OutgoingMailServer { get; set; }
 
         public int OutgoingMailPort { get; set; }
 

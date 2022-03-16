@@ -15,15 +15,12 @@ namespace EasyMailDiscussion.Web.Worker
         /// <summary> The logging conduit. </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary> The database file. </summary>
-        private static Uri DATABASE_FILE = new Uri("/app/database.db");
-
         #endregion
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            logger.Debug("Establishing database context.");
-            var database = new SqliteDatabase(DATABASE_FILE.AbsolutePath);
+            logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
+            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
 
             logger.Info("Beginning email fetch loop.");
             while (!stoppingToken.IsCancellationRequested)
@@ -33,6 +30,7 @@ namespace EasyMailDiscussion.Web.Worker
                     logger.Debug("Processing list {0}", list.Name);
                 }
 
+                // End the loop and wait the alloted time.
                 await Task.Delay(DockerEnvironmentVariables.FetchTime, stoppingToken);
             }
 

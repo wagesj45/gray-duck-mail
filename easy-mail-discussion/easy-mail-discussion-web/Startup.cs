@@ -1,10 +1,13 @@
+using EasyMailDiscussion.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +18,20 @@ namespace EasyMailDiscussion.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            // Read and store globally accessable application settings. This allows values to be able to be read outside of controllers.
+            var sectionDatabase = Configuration.GetSection(ApplicationSettings.SECTION_DATABASE);
+            var sectionLog = Configuration.GetSection(ApplicationSettings.SECTION_LOG);
+
+            ApplicationSettings.DatabaseFilePath = new Uri(sectionDatabase.GetValue<string>(ApplicationSettings.DATABASE_PATH));
+            ApplicationSettings.LogFilePath = new Uri(sectionLog.GetValue<string>(ApplicationSettings.LOG_PATH));
+
+
+            // Set up the log configuration.
+            var logFileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".log";
+            var fullLogFile = Path.Combine(ApplicationSettings.LogFilePath.AbsolutePath, logFileName);
+
+            LogManager.Configuration = NLogConfiguration.GetConfiguration(DockerEnvironmentVariables.LogLevel, fullLogFile);
         }
 
         public IConfiguration Configuration { get; }

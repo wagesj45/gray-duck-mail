@@ -29,11 +29,6 @@ namespace EasyMailDiscussion.Web
         /// <param name="args"> An array of command-line argument strings. </param>
         public static void Main(string[] args)
         {
-            var logFile = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".log";
-            var fullLogPath = Path.Combine("/var/log/easy-email-discussion/", logFile);
-
-            LogManager.Configuration = NLogConfiguration.GetConfiguration(DockerEnvironmentVariables.LogLevel, fullLogPath);
-
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -49,7 +44,7 @@ namespace EasyMailDiscussion.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }); 
+                });
 
         #endregion
     }

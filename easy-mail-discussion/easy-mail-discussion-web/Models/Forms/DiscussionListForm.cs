@@ -25,7 +25,15 @@
 
         public int OutgoingMailPort { get; set; }
 
-        public bool UseSSL { get; set; }
+        public string UseSSL { get; set; }
+
+        public bool UseSSLChecked
+        {
+            get
+            {
+                return (this.UseSSL ?? string.Empty).Length > 0;
+            }
+        }
 
         #endregion
     }
