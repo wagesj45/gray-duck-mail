@@ -8,36 +8,49 @@
     <h3>Hello! Welcome to your email lists.</h3>
 </hgroup>
 
-<nav>
+<article>
+    <header>
+        <nav>
     <ul>
         <li>
             <a href="~/List/New"><i class="icofont-ui-add"></i> Create New Discussion List</a>
         </li>
     </ul>
 </nav>
-
-<article>
-@foreach (var discussionList in Model.DiscussionLists)
-{
-    <details>
-        <summary>@discussionList.Name</summary>
-        <p>@discussionList.Description</p>
-        <ul>
-            <li>User Name: <strong>@discussionList.UserName</strong></li>
-            <li>Incoming Mail Server: <strong>@discussionList.IncomingMailServer</strong>:<em>@discussionList.IncomingMailPort</em></li>
-            <li>Outgoing Mail Server: <strong>@discussionList.OutgoingMailServer</strong>:<em>@discussionList.OutgoingMailPort</em></li>
-            @if (discussionList.UseSSL)
-            {
-                <li><mark>Using SSL/TLS</mark></li>
-            }
-        </ul>
-        <nav>
-            <ul>
-                <li><a href="/List/Archive/@discussionList.ID"><i class="icofont-history"></i> Archive</a></li>
-                <li><a href="/List/Edit/@discussionList.ID"><i class="icofont-edit"></i> Edit</a></li>
-                <li><a href="/List/Remove/@discussionList.ID"><i class="icofont-delete-alt"></i> Remove</a></li>
-            </ul>
-        </nav>
-    </details>
-}
+    </header>
+    @if (Model?.DiscussionLists?.Any() ?? false)
+    {
+        foreach (var (discussionList, index) in Model.DiscussionLists.Select((discussionList, index) => ( discussionList, index )))
+        {
+            <details @(index == 0 ? "open" : "")>
+                <summary>@discussionList.Name</summary>
+                <p>@discussionList.Description</p>
+                <ul>
+                    <li>User Name: <strong>@discussionList.UserName</strong></li>
+                    <li>Incoming Mail Server: <strong>@discussionList.IncomingMailServer</strong>:<em>@discussionList.IncomingMailPort</em></li>
+                    <li>Outgoing Mail Server: <strong>@discussionList.OutgoingMailServer</strong>:<em>@discussionList.OutgoingMailPort</em></li>
+                    @if (discussionList.UseSSL)
+                    {
+                        <li><mark><i class="icofont-ssl-security"></i> Using SSL/TLS</mark></li>
+                    }
+                    else
+                    {
+                        <li><i class="icofont-unlock"></i> Not using SSL/TLS</li>
+                    }
+                </ul>
+                <nav>
+                    <ul>
+                        <li><a href="/List/Archive/@discussionList.ID"><i class="icofont-history"></i> Archive</a></li>
+                        <li><a href="/List/Assign/@discussionList.ID"><i class="icofont-link"></i> Assign Contacts</a></li>
+                        <li><a href="/List/Edit/@discussionList.ID"><i class="icofont-edit"></i> Edit</a></li>
+                        <li><a href="/List/Remove/@discussionList.ID"><i class="icofont-delete-alt"></i> Remove</a></li>
+                    </ul>
+                </nav>
+            </details>
+        }
+    }
+    else
+    {
+        <p>No discussion lists have been set up yet. You can <a href="~/List/New">create a new discussion list</a> now.</p>
+    }
 </article>

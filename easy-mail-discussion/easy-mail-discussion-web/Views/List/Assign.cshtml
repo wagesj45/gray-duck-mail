@@ -1,0 +1,27 @@
+﻿@model DiscussionListAssignModel
+@{
+    ViewData["Title"] = "Discussion List Assignments";
+}
+
+<hgroup>
+    <h1>Discussion List Assignment</h1>
+    <h2>Assign contacts to <strong>@Model.DiscussionList.Name</strong> below.</h2>
+</hgroup>
+
+<form action="~/List/Assign" method="post">
+    <fieldset>
+        @foreach (var contact in Model.Contacts)
+        {
+            <input type="hidden" name="contactID" id="contactID_@contact.ID" value="@contact.ID" />
+            <label for="assigned">
+                <input type="checkbox"
+                id="assigned" 
+                name="assigned_@contact.ID" 
+                @(Model.GetSubscription(contact.ID) == EasyMailDiscussion.Common.Database.SubscriptionStatus.Subscribed ? "checked" : "") 
+                @(Model.GetSubscription(contact.ID) == EasyMailDiscussion.Common.Database.SubscriptionStatus.Unsubscribed ? "disabled" : "")>
+                @contact.Name
+            </label>
+        }
+    </fieldset>
+    <button type="submit">Save Changes</button>
+</form>

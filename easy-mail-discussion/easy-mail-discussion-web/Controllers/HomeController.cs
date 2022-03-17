@@ -1,6 +1,6 @@
 ﻿using EasyMailDiscussion.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,15 +9,17 @@ using System.Threading.Tasks;
 
 namespace EasyMailDiscussion.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        #region Members
+        
+        /// <summary> The logging conduit. </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        #endregion
 
+        #region Methods
+        
         public IActionResult Index()
         {
             return View();
@@ -32,6 +34,8 @@ namespace EasyMailDiscussion.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        } 
+
+        #endregion
     }
 }

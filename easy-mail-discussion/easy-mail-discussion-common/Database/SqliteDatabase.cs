@@ -22,6 +22,8 @@ namespace EasyMailDiscussion.Common.Database
 
         public DbSet<DiscussionList> DiscussionLists { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<ContactSubscription> ContactSubscriptions {get; set;}
+        public DbSet<Message> Messages { get; set; }
 
         #endregion
 
@@ -133,6 +135,8 @@ namespace EasyMailDiscussion.Common.Database
             modelBuilder.Entity<Contact>(entity =>
             {
                 entity.HasKey(e => e.ID);
+                entity.HasIndex(e => e.Email)
+                .IsUnique();
             });
 
             //Describe the Contact Subscriptions table.

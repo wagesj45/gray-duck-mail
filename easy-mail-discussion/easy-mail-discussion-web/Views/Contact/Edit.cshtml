@@ -1,0 +1,42 @@
+﻿@model EditContactModel
+@{
+    ViewData["Title"] = "Contact Editor";
+}
+
+<hgroup>
+    @if (Model != null && Model.Contact != null)
+    {
+        <h1>Edit Contact</h1>
+        <h2>Edit the details for <strong>@Model.Contact.Name</strong> below.</h2>
+    }
+    else
+    {
+        <h1>New Contact</h1>
+        <h2>Create a new contact below.</h2>
+    }
+</hgroup>
+
+<form action="~/Contact/@(Model?.Contact?.ID > 0 ? "Edit" : "Create")" method="post">
+    <input type="hidden" id="id" name="id" value="@Model?.Contact?.ID" />
+    <label for="name">
+        Name
+        <input type="text" id="name" name="name" value="@Model?.Contact?.Name" />
+    </label>
+    <label for="email">
+        Email
+        <input type="email" id="email" name="email" value="@Model?.Contact?.Email" />
+        <small>A short description of the discussion list.</small>
+    </label>
+    <label for="activated">
+        <input type="checkbox" role="switch" id="activated" name="activated" @((Model?.Contact?.Activated ?? false) ? "checked" : "") />
+        The user is activated and the email address is considered valid and working.
+    </label>
+    @if (Model != null && Model.Contact != null)
+    {
+        <button type="submit"><i class="icofont-save"></i> Save Changes</button>
+    }
+    else
+    {
+        <button type="submit"><i class="icofont-ui-add"></i> Create Contact</button>
+    }
+</form>

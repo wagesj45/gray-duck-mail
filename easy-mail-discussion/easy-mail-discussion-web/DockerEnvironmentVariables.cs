@@ -8,7 +8,8 @@ namespace EasyMailDiscussion.Web
 
         /// <summary> The docker environment varialbe for <see cref="FetchTime"/>. </summary>
         private static Lazy<TimeSpan> envFetchTime = new Lazy<TimeSpan>(() =>
-        {
+        { 
+
             var fetchTime = Environment.GetEnvironmentVariable("FETCH_TIME");
             if (TimeSpan.TryParse(fetchTime, out var time))
             {

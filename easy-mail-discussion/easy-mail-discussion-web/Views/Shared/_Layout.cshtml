@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EasyMailDiscussion.Web</title>
+    <title>Easy Mail Discussion - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/pico.min.css" />
     <link rel="stylesheet" href="~/icofont/icofont.min.css" />
@@ -15,8 +15,12 @@
                 <li><strong>Easy Mail Discussion</strong></li>
             </ul>
             <ul>
-                <li><a href="#" data-theme-switcher="light"><i class="icofont-sun"></i> Light</a></li>
-                <li><a href="#" data-theme-switcher="dark"><i class="icofont-moon"></i> Dark</a></li>
+                <li>
+                    <a href="~/List"><i class="icofont-list"></i> Discussion Lists</a>
+                </li>
+                <li>
+                    <a href="~/Contact"><i class="icofont-ui-user-group"></i> Contacts</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -31,7 +35,6 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="../js/minimal-theme-switcher.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -31,7 +31,7 @@
         {
             get
             {
-                return (this.UseSSL ?? string.Empty).Length > 0;
+                return (!string.IsNullOrWhiteSpace(this.UseSSL));
             }
         }
 

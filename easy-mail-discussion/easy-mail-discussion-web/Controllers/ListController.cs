@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace EasyMailDiscussion.Web.Controllers
 {
-    public class List : Controller
+    public class ListController : BaseController
     {
         #region Members
 
@@ -21,11 +21,9 @@ namespace EasyMailDiscussion.Web.Controllers
 
         public IActionResult Index()
         {
-            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
-
             var model = new DiscussionListsModel()
             {
-                DiscussionLists = database.DiscussionLists.ToArray()
+                DiscussionLists = this.SqliteDatabase.DiscussionLists.ToArray()
             };
 
             return View(model);
@@ -38,8 +36,7 @@ namespace EasyMailDiscussion.Web.Controllers
 
         public IActionResult Edit(int id)
         {
-            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
-            var discussionList = database.DiscussionLists.Where(list => list.ID == id).FirstOrDefault();
+            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == id).FirstOrDefault();
 
             if (discussionList == null)
             {
@@ -71,9 +68,7 @@ namespace EasyMailDiscussion.Web.Controllers
                 //This is wrong, and we will not assume that the user was trying to create a new discussion list.
             }
 
-            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
-
-            var discussionList = database.DiscussionLists.Where(list => list.ID == formInput.ID).FirstOrDefault();
+            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == formInput.ID).FirstOrDefault();
 
             if (discussionList == null)
             {
@@ -92,15 +87,14 @@ namespace EasyMailDiscussion.Web.Controllers
             discussionList.OutgoingMailPort = formInput.OutgoingMailPort;
             discussionList.UseSSL = formInput.UseSSLChecked;
 
-            database.SaveChanges();
+            this.SqliteDatabase.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
         {
-            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
-            var discussionList = database.DiscussionLists.Where(list => list.ID == id).FirstOrDefault();
+            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == id).FirstOrDefault();
 
             if (discussionList == null)
             {
@@ -131,8 +125,6 @@ namespace EasyMailDiscussion.Web.Controllers
                 //This is wrong, but not a breaking data structure. We can safely ignore the ID.
             }
 
-            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
-
             var discussionList = new DiscussionList()
             {
                 Name = formInput.Name,
@@ -147,11 +139,33 @@ namespace EasyMailDiscussion.Web.Controllers
                 UseSSL = formInput.UseSSLChecked
             };
 
-            database.DiscussionLists.Add(discussionList);
+            this.SqliteDatabase.DiscussionLists.Add(discussionList);
 
-            database.SaveChanges();
+            this.SqliteDatabase.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Assign(int id)
+        {
+            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == id).FirstOrDefault();
+            var contacts = this.SqliteDatabase.Contacts.ToArray();
+            var subscriptions = this.SqliteDatabase.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == id).ToArray();
+
+            if (discussionList == null)
+            {
+                logger.Error("Could not find discussion list with ID = {0}", id);
+                return View("Error");
+            }
+
+            var model = new DiscussionListAssignModel()
+            {
+                DiscussionList = discussionList,
+                Contacts = contacts,
+                Subscriptions = subscriptions
+            };
+
+            return View("Assign", model);
         }
 
         #endregion

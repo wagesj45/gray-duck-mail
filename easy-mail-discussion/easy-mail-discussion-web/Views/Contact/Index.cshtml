@@ -1,0 +1,72 @@
+﻿@model ContactsModel
+@{
+    ViewData["Title"] = "Easy Email Discussion";
+}
+
+<hgroup>
+    <h2>Welcome</h2>
+    <h3>Hello! Welcome to your email lists.</h3>
+</hgroup>
+
+<article>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="~/Contact/New"><i class="icofont-ui-add"></i> Create New Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    @if (Model?.Contacts?.Any() ?? false)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Number of Discussion Lists</th>
+                    <th scope="col">Activated</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model.Contacts)
+                {
+                    <tr>
+                        <th scope="row">@contact.Name</th>
+                        <td>@contact.Email</td>
+                        <td>@contact.ContactSubscriptions.Count</td>
+                        <td>
+                            @if(contact.Activated)
+                            {
+                                <i class=icofont-check-circled></i>
+                            }
+                            else
+                            {
+                                <i class=icofont-close-circled></i>
+                            }
+                        </td>
+                        <td>
+                            <a href="~/Contact/Edit/@contact.ID" data-tooltip="Edit"><i class="icofont-edit-alt"></i></a>
+                            <a href="~/Contact/Remove/@contact.ID" data-tooltip="Remove"><i class="icofont-delete-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Total</th>
+                    <th scope="col"><strong>@Model.Contacts.Count()</strong></th>
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else
+    {
+        <p>No contacts have been set up yet. You can <a href="~/Contact/New">create a new contact</a> now.</p>
+    }
+</article>
