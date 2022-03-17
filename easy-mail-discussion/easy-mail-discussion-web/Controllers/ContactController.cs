@@ -2,6 +2,7 @@
 using EasyMailDiscussion.Web.Models;
 using EasyMailDiscussion.Web.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace EasyMailDiscussion.Web.Controllers
         {
             var model = new ContactsModel()
             {
-                Contacts = this.SqliteDatabase.Contacts.ToArray()
+                Contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions).ToArray()
             };
 
             return View(model);

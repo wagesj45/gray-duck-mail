@@ -168,6 +168,45 @@ namespace EasyMailDiscussion.Web.Controllers
             return View("Assign", model);
         }
 
+        [HttpPost]
+        public IActionResult Assign(DiscussionListAssignForm formInput)
+        {
+            foreach (var assignment in formInput.Assignments)
+            {
+                var subscription = this.SqliteDatabase.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == formInput.DiscussionListID && subscription.ContactID == assignment.ContactID).FirstOrDefault();
+
+                if (assignment.IsAssigned)
+                {
+                    // add assignment
+                    if (subscription == null)
+                    {
+                        logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
+                        subscription = new ContactSubscription()
+                        {
+                            ContactID = assignment.ContactID,
+                            DiscussionListID = formInput.DiscussionListID,
+                            Status = SubscriptionStatus.Created
+                        };
+                        this.SqliteDatabase.ContactSubscriptions.Add(subscription);
+                    }
+                }
+                else
+                {
+                    if (subscription != null)
+                    {
+                        logger.Debug("Removing Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
+
+                        this.SqliteDatabase.ContactSubscriptions.Remove(subscription);
+                    }
+                }
+            }
+
+            logger.Info("Saving assignments.");
+            this.SqliteDatabase.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         #endregion
     }
 }

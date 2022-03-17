@@ -27,14 +27,7 @@ namespace EasyMailDiscussion.Common.Database
 
         public virtual ICollection<ContactSubscription> ContactSubscriptions { get; set; }
 
-        #endregion
-
-        #region Constructors
-
-        public Contact()
-        {
-            this.ContactSubscriptions = new HashSet<ContactSubscription>();
-        }
+        public virtual ICollection<Message> Messages { get; set; }
 
         #endregion
     }

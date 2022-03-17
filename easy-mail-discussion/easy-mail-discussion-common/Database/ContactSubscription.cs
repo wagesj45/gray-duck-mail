@@ -25,7 +25,7 @@ namespace EasyMailDiscussion.Common.Database
 
         /// <summary> Gets or sets the contact. </summary>
         /// <value> The contact. </value>
-        public Contact Contact { get; set; }
+        public virtual Contact Contact { get; set; }
 
         /// <summary> Gets or sets the subscription status of the <see cref="Contact"/>. </summary>
         /// <value> The status. </value>

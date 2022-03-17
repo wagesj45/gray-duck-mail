@@ -137,6 +137,9 @@ namespace EasyMailDiscussion.Common.Database
                 entity.HasKey(e => e.ID);
                 entity.HasIndex(e => e.Email)
                 .IsUnique();
+                entity.HasMany(e => e.ContactSubscriptions)
+                .WithOne(e => e.Contact)
+                .HasForeignKey(e => e.ContactID);
             });
 
             //Describe the Contact Subscriptions table.
@@ -159,7 +162,12 @@ namespace EasyMailDiscussion.Common.Database
             modelBuilder.Entity<DiscussionList>(entity => 
             {
                 entity.HasKey(e => e.ID);
-
+                entity.HasMany(e => e.Contacts)
+                .WithOne(e => e.DiscussionList)
+                .HasForeignKey(e => e.DiscussionListID);
+                entity.HasMany(e => e.Messages)
+                .WithOne(e => e.DiscussionList)
+                .HasForeignKey(e => e.DiscussionListID);
             });
 
             //Describe the Messages table.
@@ -171,6 +179,12 @@ namespace EasyMailDiscussion.Common.Database
                 .WithMany(e => e.Children)
                 .HasForeignKey(e => e.ParentID)
                 .IsRequired(false);
+                entity.HasOne(e => e.OriginatorContact)
+                .WithMany(e => e.Messages)
+                .HasForeignKey(e => e.OriginatorContactID);
+                entity.HasOne(e => e.DiscussionList)
+                .WithMany(e => e.Messages)
+                .HasForeignKey(e => e.DiscussionListID);
             });
 
             base.OnModelCreating(modelBuilder);

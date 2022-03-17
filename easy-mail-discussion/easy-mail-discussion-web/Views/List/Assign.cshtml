@@ -1,4 +1,6 @@
-﻿@model DiscussionListAssignModel
+﻿@using EasyMailDiscussion.Common.Database
+@using EasyMailDiscussion.Web.Models.Forms
+@model DiscussionListAssignModel
 @{
     ViewData["Title"] = "Discussion List Assignments";
 }
@@ -9,16 +11,18 @@
 </hgroup>
 
 <form action="~/List/Assign" method="post">
+    <input type="hidden" name="discussionListID" id="discussionListID" value="@Model.DiscussionList.ID" />
     <fieldset>
         @foreach (var contact in Model.Contacts)
         {
             <input type="hidden" name="contactID" id="contactID_@contact.ID" value="@contact.ID" />
             <label for="assigned">
                 <input type="checkbox"
+                name="assigned" 
                 id="assigned" 
-                name="assigned_@contact.ID" 
-                @(Model.GetSubscription(contact.ID) == EasyMailDiscussion.Common.Database.SubscriptionStatus.Subscribed ? "checked" : "") 
-                @(Model.GetSubscription(contact.ID) == EasyMailDiscussion.Common.Database.SubscriptionStatus.Unsubscribed ? "disabled" : "")>
+                @(new []{SubscriptionStatus.Created, SubscriptionStatus.Inactive, SubscriptionStatus.Subscribed}.Contains(Model.GetSubscription(contact.ID)) ? "checked" : "") 
+                @(Model.GetSubscription(contact.ID) == SubscriptionStatus.Unsubscribed ? "disabled" : "")
+                value="@contact.ID"/>
                 @contact.Name
             </label>
         }
