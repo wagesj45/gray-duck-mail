@@ -27,7 +27,7 @@ namespace EasyMailDiscussion.Common
             configuration.AddRule(GetLogLevel(logLevel), LogLevel.Fatal, consoleTarget);
             configuration.AddRule(GetLogLevel(logLevel), LogLevel.Fatal, fileTarget);
 
-            consoleTarget.Layout = "[Easy-Email-Discussion] ${message} ${exception:format=tostring}";
+            consoleTarget.Layout = "[${logger}] ${message} ${exception:format=tostring}";
 
             consoleTarget.RowHighlightingRules.Add(
                 new ConsoleRowHighlightingRule()
