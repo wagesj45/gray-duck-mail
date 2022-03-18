@@ -1,6 +1,7 @@
 ﻿using EasyMailDiscussion.Common;
 using EasyMailDiscussion.Common.Database;
 using MailKit.Net.Smtp;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MimeKit;
 using NLog;
@@ -32,7 +33,7 @@ namespace EasyMailDiscussion.Web.Worker
                 {
                     logger.Debug("Processing list {0}", list.Name);
 
-                    var createdSubscriptions = database.ContactSubscriptions.Where(subscription => subscription.Status == SubscriptionStatus.Created);
+                    var createdSubscriptions = database.ContactSubscriptions.Include(subscription => subscription.Contact).Where(subscription => subscription.Status == SubscriptionStatus.Created);
 
                     if (createdSubscriptions.Any())
                     {
@@ -44,7 +45,7 @@ namespace EasyMailDiscussion.Web.Worker
                                 {
                                     var message = new MimeMessage();
                                     message.From.Add(new MailboxAddress(list.Name, list.BaseEmailAddress));
-                                    message.ReplyTo.Add(new MailboxAddress(list.Name, EmailAliasHelper.GetSubscriberAlias(list)));
+                                    message.ReplyTo.Add(new MailboxAddress(list.Name, EmailAliasHelper.GetSubscribeAlias(list)));
                                     message.To.Add(new MailboxAddress(subscription.Contact.Name, subscription.Contact.Email));
                                     message.Subject = string.Format("Subscribe to {0}", list.Name);
                                     message.Headers.Add(HeaderId.ListSubscribe, list.ID.ToString());
