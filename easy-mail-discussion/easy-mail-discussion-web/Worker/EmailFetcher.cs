@@ -50,7 +50,7 @@ namespace EasyMailDiscussion.Web.Worker
                             {
                                 logger.Info("Processing {0} messages.", client.Count);
 
-                                var emailMessages = client.GetMessages(0, client.Count, cancellationToken: stoppingToken).Select((emailMessage, index) => new IndexedMimeMessage(index, emailMessage));
+                                var emailMessages = client.GetMessages(0, client.Count, cancellationToken: stoppingToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
                                 var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
                                 var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                                 var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
@@ -85,7 +85,7 @@ namespace EasyMailDiscussion.Web.Worker
                                     logger.Info("User {0} unsubscribing from {1}.", contactSubscription.Contact.Name, discussionList.Name);
                                     contactSubscription.Status = SubscriptionStatus.Unsubscribed;
 
-                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.MessageId, subscriptionConfirmation.Index);
+                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", unsubscribeConfirmation.MessageId, unsubscribeConfirmation.Index);
                                     client.DeleteMessage(unsubscribeConfirmation.Index);
                                 }
 
@@ -130,7 +130,7 @@ namespace EasyMailDiscussion.Web.Worker
                                         }
                                     }
 
-                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.MessageId, subscriptionConfirmation.Index);
+                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", request.MessageId, request.Index);
                                     client.DeleteMessage(request.Index);
                                 }
 

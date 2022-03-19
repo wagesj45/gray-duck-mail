@@ -1,5 +1,8 @@
-﻿using System;
+﻿using EasyMailDiscussion.Common.Database;
+using NLog;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Text;
 
@@ -7,42 +10,66 @@ namespace EasyMailDiscussion.Common
 {
     public static class EmailHelper
     {
-        private static string accessEmailTemplate;
+        #region Members
 
-        /// <summary> Gets the access email template. </summary>
-        /// <remarks>
-        /// Using the <see cref="Assembly"/> of the local <see cref="Resources.Language.Language"/>
-        /// library, the embedded HTML template is extracted.
-        /// </remarks>
-        /// <value> The default email template. </value>
-        private static string AccessEmailTemplate
+        /// <summary> The logging conduit. </summary>
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary> The main HTML email template. </summary>
+        private static string mailEmailTemplate; 
+
+        #endregion
+
+        /// <summary> Gets the HTML email template. </summary>
+        /// <value> The mail email template. </value>
+        private static string MailEmailTemplate
         {
             get
             {
-                if (string.IsNullOrEmpty(accessEmailTemplate))
+                if (string.IsNullOrEmpty(mailEmailTemplate))
                 {
-                    var assembly = Assembly.GetAssembly(typeof(ApplicationSetting));
-                    var stream = assembly.GetManifestResourceStream("SurveyWebsite.General.EmailTemplates.access.html");
+                    logger.Info("Loading main HTML email template.");
+                    
+                    var assembly = Assembly.GetAssembly(typeof(EmailHelper));
+                    logger.Debug("Loading assembly {0}", assembly.FullName);
+                    
+                    foreach(var name in assembly.GetManifestResourceNames())
+                    {
+                        logger.Debug("-- {0}", name);
+                    }
+                    
+                    var stream = assembly.GetManifestResourceStream("EasyMailDiscussion.EmailTemplates.Main.html");
+                    
                     using (var reader = new StreamReader(stream))
                     {
-                        accessEmailTemplate = reader.ReadToEnd();
+                        mailEmailTemplate = reader.ReadToEnd();
+
+                        logger.Debug("Email template read into memory: {0}", mailEmailTemplate);
                     }
                 }
-                return accessEmailTemplate;
+
+                return mailEmailTemplate;
             }
         }
 
-        /// <summary> Fills the access email template with content. </summary>
-        /// <param name="listURL">      URL of the survey list page. </param>
-        /// <param name="viewStatsURL"> URL of the view statistics [age. </param>
-        /// <returns> A string containing the raw HTML of of the template. </returns>
-        private static string FillAccessEmailTemplate(string listURL, string viewStatsURL)
+        /// <summary> Fill main HTML email template. </summary>
+        /// <param name="heading">        The heading. </param>
+        /// <param name="subheading">     The subheading. </param>
+        /// <param name="body">           The body. </param>
+        /// <param name="footer">         The footer. </param>
+        /// <param name="discussionList"> the Discussion List database object. </param>
+        /// <returns> A string with a processed main email template. </returns>
+        private static string FillMainTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList)
         {
-            var result = AccessEmailTemplate
-                .Replace("[date]", DateTime.Now.ToLongDateString())
-                .Replace("[list_url]", listURL)
-                .Replace("[view_stats_url]", viewStatsURL)
-                .Replace("[unsubscribeLink]", string.Format("{0}/Account/Manage", ApplicationSettingsHelper.GetApplicationSetting<string>(ApplicationSetting.BaseURL)));
+            var result = MailEmailTemplate
+                .Replace("{heading}", heading)
+                .Replace("{subheading}", subheading)
+                .Replace("{body}", body)
+                .Replace("{footer}", footer)
+                .Replace("{unsubscriibe}", string.Format("mailto:{0}?subject=Unsubscribing", EmailAliasHelper.GetUnsubscribeAlias(discussionList)));
+            
+            logger.Debug("Email template processed: {0}", result);
+
             return result;
         }
     }
