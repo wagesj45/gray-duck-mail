@@ -11,7 +11,7 @@ namespace EasyMailDiscussion.Common.Database
         #region Members
 
         /// <summary> The logging conduit. </summary>
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary> Full pathname of the database file. </summary>
         private Uri databaseFilePath;

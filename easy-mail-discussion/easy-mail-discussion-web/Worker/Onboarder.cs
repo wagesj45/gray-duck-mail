@@ -17,7 +17,7 @@ namespace EasyMailDiscussion.Web.Worker
         #region Members
 
         /// <summary> The logging conduit. </summary>
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 

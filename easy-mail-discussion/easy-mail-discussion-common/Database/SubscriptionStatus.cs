@@ -16,6 +16,10 @@ namespace EasyMailDiscussion.Common.Database
         /// <summary> The contact has confirmed their subscription to the discussion list. </summary>
         Subscribed = 3,
         /// <summary> The contact has requested to be unsubscripted from the discussion list. </summary>
-        Unsubscribed = 4
+        Unsubscribed = 4,
+        /// <summary> The contact has requested access to a discussion list. </summary>
+        Requested = 5,
+        /// <summary> The contact has been denied access to the discussion list by the owner. </summary>
+        Denied
     }
 }

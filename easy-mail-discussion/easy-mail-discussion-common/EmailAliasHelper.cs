@@ -57,6 +57,22 @@ namespace EasyMailDiscussion.Common
             return string.Format("request-{0}", baseEmailAddress);
         }
 
+        /// <summary> Gets the owner address alias. </summary>
+        /// <param name="discussionList"> The discussion list database object. </param>
+        /// <returns> The owner address alias. </returns>
+        public static string GetOwnerAlias(DiscussionList discussionList)
+        {
+            return GetOwnerAlias(discussionList.BaseEmailAddress);
+        }
+
+        /// <summary> Gets the owner address alias. </summary>
+        /// <param name="baseEmailAddress"> The base email address. </param>
+        /// <returns> The owner address alias. </returns>
+        public static string GetOwnerAlias(string baseEmailAddress)
+        {
+            return string.Format("owner-{0}", baseEmailAddress);
+        }
+
         #endregion
     }
 }

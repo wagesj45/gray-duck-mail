@@ -18,7 +18,7 @@ namespace EasyMailDiscussion.Web.Worker
         #region Members
 
         /// <summary> The logging conduit. </summary>
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -32,51 +32,116 @@ namespace EasyMailDiscussion.Web.Worker
             {
                 var discussionLists = database.DiscussionLists.Include(list => list.Contacts).ThenInclude(list => list.Contact);
                 
-                foreach (var list in discussionLists)
+                foreach (var discussionList in discussionLists)
                 {
-                    logger.Debug("Processing list {0}", list.Name);
+                    logger.Debug("Processing list {0}", discussionList.Name);
 
                     using (var client = new Pop3Client())
                     {
                         try
                         {
-                            logger.Debug("Connecting to {0}:{1}{2}", list.IncomingMailServer, list.IncomingMailPort, list.UseSSL ? " using SSL" : "");
-                            client.Connect(list.IncomingMailServer, list.IncomingMailPort, list.UseSSL, cancellationToken: stoppingToken);
+                            logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
+                            client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
 
-                            logger.Debug("Authenticating as {0}:{1}", list.UserName, new string('*', list.Password.Length));
-                            client.Authenticate(list.UserName, list.Password, cancellationToken: stoppingToken);
+                            logger.Debug("Authenticating as {0}:{1}", discussionList.UserName, new string('*', discussionList.Password.Length));
+                            client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
 
                             if(client.Count > 0)
                             {
                                 logger.Info("Processing {0} messages.", client.Count);
 
-                                var messages = client.GetMessages(0, client.Count, cancellationToken: stoppingToken);
-                                var subscriptionConfirmations = FilterMessages(messages, EmailAliasHelper.GetSubscribeAlias(list));
-                                var unsubscribeConfirmations = FilterMessages(messages, EmailAliasHelper.GetUnsubscribeAlias(list));
-                                var requests = FilterMessages(messages, EmailAliasHelper.GetRequestAlias(list));
+                                var emailMessages = client.GetMessages(0, client.Count, cancellationToken: stoppingToken).Select((emailMessage, index) => new IndexedMimeMessage(index, emailMessage));
+                                var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
+                                var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                                var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
 
                                 // Subscription Confirmation Emails
-                                foreach(var subscriptionConfirmation in await subscriptionConfirmations)
+                                var subscriptionConfirmations = await filteredSubscribe;
+                                foreach(var subscriptionConfirmation in subscriptionConfirmations)
                                 {
                                     var from = subscriptionConfirmation.Sender ?? subscriptionConfirmation.From.Mailboxes.SingleOrDefault();
-                                    var contactSubscription = list.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+                                    var contactSubscription = discussionList.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
                                     if(!contactSubscription.Contact.Activated)
                                     {
+                                        logger.Info("Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.", contactSubscription.Contact.Name, contactSubscription.Contact.ID);
                                         contactSubscription.Contact.Activated = true;
                                     }
+
+                                    logger.Info("User {0} subscribing to {1}.", contactSubscription.Contact.Name, discussionList.Name);
+                                    contactSubscription.Status = SubscriptionStatus.Subscribed;
+
+                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.MessageId, subscriptionConfirmation.Index);
+                                    client.DeleteMessage(subscriptionConfirmation.Index);
                                 }
 
                                 // Unsubscribe Confirmation Emails
-                                foreach(var unsubscribeConfirmation in await unsubscribeConfirmations)
+                                var unsubscribeConfirmations = await filteredUnsubscribe;
+                                foreach (var unsubscribeConfirmation in unsubscribeConfirmations)
                                 {
-                                    //
+                                    var from = unsubscribeConfirmation.Sender ?? unsubscribeConfirmation.From.Mailboxes.SingleOrDefault();
+                                    var contactSubscription = discussionList.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+
+                                    logger.Info("User {0} unsubscribing from {1}.", contactSubscription.Contact.Name, discussionList.Name);
+                                    contactSubscription.Status = SubscriptionStatus.Unsubscribed;
+
+                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.MessageId, subscriptionConfirmation.Index);
+                                    client.DeleteMessage(unsubscribeConfirmation.Index);
                                 }
 
                                 // List Assignment Request Emails
-                                foreach (var request in await requests)
+                                var requests = await filteredRequest;
+                                foreach (var request in requests)
                                 {
-                                    //
+                                    var from = request.Sender ?? request.From.Mailboxes.SingleOrDefault();
+                                    var contactSubscription = discussionList.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+
+                                    if(contactSubscription == null)
+                                    {
+                                        logger.Info("An unknown user has requested access to {0}. An alert will be sent to the owner address alias.", discussionList);
+
+                                        var newContact = new Contact()
+                                        {
+                                            Name = from.Name,
+                                            Email = from.Address,
+                                            Activated = true
+                                        };
+
+                                        contactSubscription = new ContactSubscription()
+                                        {
+                                            Contact = newContact,
+                                            DiscussionList = discussionList,
+                                            Status = SubscriptionStatus.Requested
+                                        };
+
+                                        database.Contacts.Add(newContact);
+                                        database.ContactSubscriptions.Add(contactSubscription);
+                                    }
+                                    else
+                                    {
+                                        if(contactSubscription.Status != SubscriptionStatus.Denied)
+                                        {
+                                            logger.Info("{0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed.", contactSubscription.Contact.Name, discussionList.Name);
+                                            contactSubscription.Status = SubscriptionStatus.Subscribed;
+                                        }
+                                        else
+                                        {
+                                            logger.Debug("{0} has requested access to {1}, but has previously been denied. Ignoring this request.", contactSubscription.Contact.Name, discussionList.Name);
+                                        }
+                                    }
+
+                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.MessageId, subscriptionConfirmation.Index);
+                                    client.DeleteMessage(request.Index);
+                                }
+
+                                // Remaining messages can be assumed to be communications between discussion list members.
+                                var discussionMessages = emailMessages.Except(subscriptionConfirmations).Except(unsubscribeConfirmations).Except(requests);
+                                foreach (var message in discussionMessages)
+                                {
+                                    logger.Debug(message.ToString());
+
+                                    logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", message.MessageId, message.Index);
+                                    //client.DeleteMessage(message.Index);
                                 }
                             }
                             else
@@ -112,9 +177,9 @@ namespace EasyMailDiscussion.Web.Worker
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
-        private async Task<IEnumerable<MimeMessage>> FilterMessages(IEnumerable<MimeMessage> messages, string emailToAddress)
+        private async Task<IEnumerable<IndexedMimeMessage>> FilterMessages(IEnumerable<IndexedMimeMessage> messages, string emailToAddress)
         {
-            return await Task.Run<IEnumerable<MimeMessage>>(() =>
+            return await Task.Run<IEnumerable<IndexedMimeMessage>>(() =>
             {
                 var filteredMessages = messages.Where(message => message.GetRecipients(true).Any(recipient => recipient.Address.Equals(emailToAddress, StringComparison.OrdinalIgnoreCase)));
 

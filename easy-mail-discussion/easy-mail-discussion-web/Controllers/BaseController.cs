@@ -10,7 +10,7 @@ namespace EasyMailDiscussion.Web.Controllers
         #region Members
 
         /// <summary> The logging conduit. </summary>
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary> A lazily initialized SQLite database context. </summary>
         private Lazy<SqliteDatabase> sqliteDatabase = new Lazy<SqliteDatabase>(() =>

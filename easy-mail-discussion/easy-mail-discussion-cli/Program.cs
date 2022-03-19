@@ -12,7 +12,6 @@ namespace EasyMailDiscussion.Cli
         #region Members
 
         /// <summary> The logging conduit. </summary>
-        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary> True if application shutdown is requested. </summary>
         private static volatile bool exitRequested = false;
