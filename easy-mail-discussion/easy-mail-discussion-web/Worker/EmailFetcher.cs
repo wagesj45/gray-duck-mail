@@ -209,15 +209,16 @@ namespace EasyMailDiscussion.Web.Worker
 
                                                     if (!string.IsNullOrWhiteSpace(message.BodyHTML))
                                                     {
-                                                        logger.Debug("Mesasge body determined to be HTML.");
+                                                        logger.Debug("Mesasge body determined to contain HTML.");
                                                         relay.Body = new TextPart(TextFormat.Html)
                                                         {
                                                             Text = message.BodyHTML
                                                         };
                                                     }
-                                                    else
+                                                    
+                                                    if(!string.IsNullOrWhiteSpace(message.BodyText))
                                                     {
-                                                        logger.Debug("Message body determined to be plain text.");
+                                                        logger.Debug("Message body determined to contain plain text.");
                                                         relay.Body = new TextPart(TextFormat.Text)
                                                         {
                                                             Text = message.BodyText
@@ -238,13 +239,13 @@ namespace EasyMailDiscussion.Web.Worker
 
                                                     smtpClient.Send(relay, cancellationToken: stoppingToken);
                                                 }
-
-                                                smtpClient.Disconnect(true, cancellationToken: stoppingToken);
                                             }
                                             catch (Exception e)
                                             {
                                                 logger.Error(e);
-                                            } 
+                                            }
+
+                                            smtpClient.Disconnect(true, cancellationToken: stoppingToken);
                                         }
                                     }
                                     else
@@ -260,13 +261,13 @@ namespace EasyMailDiscussion.Web.Worker
                             {
                                 logger.Debug("No messages found.");
                             }
-
-                            pop3Client.Disconnect(true, stoppingToken);
                         }
                         catch (Exception e)
                         {
                             logger.Error(e);
                         }
+
+                        pop3Client.Disconnect(true, stoppingToken);
                     }
                 }
 
