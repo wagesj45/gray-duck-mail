@@ -4,6 +4,7 @@ using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MimeKit;
+using MimeKit.Text;
 using NLog;
 using System;
 using System.Linq;
@@ -29,9 +30,9 @@ namespace EasyMailDiscussion.Web.Worker
             logger.Info("Beginning email fetch loop.");
             while (!stoppingToken.IsCancellationRequested)
             {
-                foreach (var list in database.DiscussionLists)
+                foreach (var discussionList in database.DiscussionLists)
                 {
-                    logger.Debug("Processing list {0}", list.Name);
+                    logger.Debug("Processing list {0}", discussionList.Name);
 
                     var createdSubscriptions = database.ContactSubscriptions.Include(subscription => subscription.Contact).Where(subscription => subscription.Status == SubscriptionStatus.Created);
 
@@ -44,21 +45,27 @@ namespace EasyMailDiscussion.Web.Worker
                                 try
                                 {
                                     var message = new MimeMessage();
-                                    message.From.Add(new MailboxAddress(list.Name, list.BaseEmailAddress));
-                                    message.ReplyTo.Add(new MailboxAddress(list.Name, EmailAliasHelper.GetSubscribeAlias(list)));
+                                    message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
+                                    message.ReplyTo.Add(new MailboxAddress(discussionList.Name, EmailAliasHelper.GetSubscribeAlias(discussionList)));
                                     message.To.Add(new MailboxAddress(subscription.Contact.Name, subscription.Contact.Email));
-                                    message.Subject = string.Format("Subscribe to {0}", list.Name);
-                                    message.Headers.Add(HeaderId.ListSubscribe, list.ID.ToString());
+                                    message.Subject = string.Format("Subscribe to {0}", discussionList.Name);
+                                    message.Headers.Add(HeaderId.ListSubscribe, discussionList.ID.ToString());
 
-                                    message.Body = new TextPart("plain")
+                                    message.Body = new TextPart(TextFormat.Html)
                                     {
-                                        Text = string.Format("You been subscribed to {0}. That ok? Simply reply to this email to subscribe to the discussion list.", list.Name)
+                                        Text = EmailHelper.FillMainTemplate(
+                                            "Welcome!",
+                                            String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
+                                            String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
+                                            discussionList.Name,
+                                            discussionList
+                                            )
                                     };
 
-                                    client.Connect(list.OutgoingMailServer, list.OutgoingMailPort, list.UseSSL, cancellationToken: stoppingToken);
+                                    client.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
 
                                     // Note: only needed if the SMTP server requires authentication
-                                    client.Authenticate(list.UserName, list.Password, cancellationToken: stoppingToken);
+                                    client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
 
                                     client.Send(message, cancellationToken: stoppingToken);
                                     client.Disconnect(true, cancellationToken: stoppingToken);

@@ -1,4 +1,5 @@
-﻿@using EasyMailDiscussion.Common.Database
+﻿@using EasyMailDiscussion.Common
+@using EasyMailDiscussion.Common.Database
 @using EasyMailDiscussion.Web.Models.Forms
 @model DiscussionListAssignModel
 @{
@@ -20,7 +21,7 @@
                 <input type="checkbox"
                 name="assigned" 
                 id="assigned" 
-                @(new []{SubscriptionStatus.Created, SubscriptionStatus.Inactive, SubscriptionStatus.Subscribed}.Contains(Model.GetSubscription(contact.ID)) ? "checked" : "") 
+                @(EmailHelper.Associated.Contains(Model.GetSubscription(contact.ID)) ? "checked" : "") 
                 @(Model.GetSubscription(contact.ID) == SubscriptionStatus.Unsubscribed ? "disabled" : "")
                 value="@contact.ID"/>
                 @contact.Name

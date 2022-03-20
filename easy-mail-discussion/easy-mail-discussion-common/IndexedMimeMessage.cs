@@ -7,7 +7,7 @@ using System.Text;
 namespace EasyMailDiscussion.Common
 {
     /// <summary> An indexed <see cref="MimeMessage"/>. </summary>
-    public class IndexedMimeMessage : MimeMessage
+    public class IndexedMimeMessage
     {
         #region Members
 
@@ -21,6 +21,10 @@ namespace EasyMailDiscussion.Common
         /// <summary> Gets or sets the zero-based index of this object. </summary>
         /// <value> The index. </value>
         public int Index { get; private set; }
+
+        /// <summary> Gets or sets the message. </summary>
+        /// <value> The message. </value>
+        public MimeMessage Message { get; private set; }
 
         #endregion
 
@@ -38,16 +42,45 @@ namespace EasyMailDiscussion.Common
 
         #region Methods
 
-        /// <summary> Indexes a <see cref="MimeMessage"/> into an <see cref="IndexedMimeMessage"/>. </summary>
-        /// <param name="index">            The index. </param>
-        /// <param name="origionalMessage"> Message describing the origional. </param>
+        /// <summary>
+        /// Indexes a <see cref="MimeMessage"/> into an <see cref="IndexedMimeMessage"/>.
+        /// </summary>
+        /// <param name="index">           The index. </param>
+        /// <param name="originalMessage"> The original message object. </param>
         /// <returns> An IndexedMimeMessage. </returns>
-        public static IndexedMimeMessage IndexMimeMessage(int index, MimeMessage origionalMessage)
+        public static IndexedMimeMessage IndexMimeMessage(int index, MimeMessage originalMessage)
         {
-            var clonedMimeMessage = origionalMessage as IndexedMimeMessage;
-            clonedMimeMessage.Index = index;
+            var indexedMimeMessage = new IndexedMimeMessage();
 
-            return clonedMimeMessage;
+            indexedMimeMessage.Index = index;
+            indexedMimeMessage.Message = originalMessage;
+
+            return indexedMimeMessage;
+        }
+
+        /// <summary> Determines whether the specified object is equal to the current object. </summary>
+        /// <param name="obj"> The object to compare with the current object. </param>
+        /// <returns>
+        /// <see langword="true" /> if the specified object  is equal to the current object; otherwise,
+        /// <see langword="false" />.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is IndexedMimeMessage))
+            {
+                return false;
+            }
+            else
+            {
+                return ((IndexedMimeMessage)obj).Index == this.Index;
+            }
+        }
+
+        /// <summary> Serves as the default hash function. </summary>
+        /// <returns> A hash code for the current object. </returns>
+        public override int GetHashCode()
+        {
+            return this.Index;
         }
 
         #endregion

@@ -24,6 +24,7 @@ namespace EasyMailDiscussion.Common.Database
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactSubscription> ContactSubscriptions {get; set;}
         public DbSet<Message> Messages { get; set; }
+        public DbSet<RelayIdentifier> RelayIdentifiers { get; set; }
 
         #endregion
 
@@ -185,6 +186,18 @@ namespace EasyMailDiscussion.Common.Database
                 entity.HasOne(e => e.DiscussionList)
                 .WithMany(e => e.Messages)
                 .HasForeignKey(e => e.DiscussionListID);
+            });
+
+            //Describe the RelayIdentifier table.
+            modelBuilder.Entity<RelayIdentifier>().ToTable("RelayIdentifier");
+            modelBuilder.Entity<RelayIdentifier>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.HasOne(e => e.Message)
+                .WithMany(e => e.RelayIdentifiers)
+                .HasForeignKey(e => e.MessageID);
+                entity.HasIndex(e => e.RelayEmailID)
+                .IsUnique(true);
             });
 
             base.OnModelCreating(modelBuilder);
