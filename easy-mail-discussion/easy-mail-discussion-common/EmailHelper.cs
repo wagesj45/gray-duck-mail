@@ -1,4 +1,7 @@
 ﻿using EasyMailDiscussion.Common.Database;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MimeKit.Text;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -6,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 
 namespace EasyMailDiscussion.Common
 {
@@ -106,10 +110,65 @@ namespace EasyMailDiscussion.Common
             return result;
         }
 
+        /// <summary> Query if a given user is authorized for mail distribution on a given discussion list. </summary>
+        /// <param name="discussionList"> the Discussion List database object. </param>
+        /// <param name="contact">        The contact. </param>
+        /// <returns> True if authorized for mail distribution, false if not. </returns>
         public static bool IsAuthorizedForMailDistribution(DiscussionList discussionList, Contact contact)
         {
+            if(discussionList.Contacts == null || !discussionList.Contacts.Any())
+            {
+                logger.Error("The discussion list is empty.");
+                return false;
+            }
             return discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(contact.Email, StringComparison.OrdinalIgnoreCase) && Authorized.Contains(subscription.Status)).Any();
         }
+
+        public static void RelayEmail(SqliteDatabase database, DiscussionList discussionList, ContactSubscription subscription, Message message, SmtpClient smtpClient, ContactSubscription participant, CancellationToken stoppingToken = default(CancellationToken))
+        {
+            logger.Debug("Relaying message to {0} ({1})", participant.Contact.Name, participant.Contact.Email);
+
+            var relay = new MimeMessage();
+            relay.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
+            relay.ReplyTo.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
+            relay.To.Add(new MailboxAddress(subscription.Contact.Name, subscription.Contact.Email));
+            relay.Subject = string.Format("{0} - Message from {1}", message.Subject.Replace(String.Format("Message from {0}", discussionList.Name), ""), discussionList.Name);
+            relay.Headers.Add(HeaderId.ReturnPath, EmailAliasHelper.GetBounceAlias(discussionList));
+
+            if (!string.IsNullOrWhiteSpace(message.BodyHTML))
+            {
+                logger.Debug("Mesasge body determined to contain HTML.");
+                relay.Body = new TextPart(TextFormat.Html)
+                {
+                    Text = message.BodyHTML
+                };
+            }
+
+            if (!string.IsNullOrWhiteSpace(message.BodyText))
+            {
+                logger.Debug("Message body determined to contain plain text.");
+                relay.Body = new TextPart(TextFormat.Text)
+                {
+                    Text = message.BodyText
+                };
+            }
+
+            var relayIdentifier = new RelayIdentifier()
+            {
+                Message = message,
+                RelayEmailID = relay.MessageId
+            };
+            database.RelayIdentifiers.Add(relayIdentifier);
+
+            smtpClient.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
+
+            // Note: only needed if the SMTP server requires authentication
+            smtpClient.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
+
+            smtpClient.Send(relay, cancellationToken: stoppingToken);
+        }
+
+
 
         #endregion
     }

@@ -73,6 +73,22 @@ namespace EasyMailDiscussion.Common
             return string.Format("owner-{0}", baseEmailAddress);
         }
 
+        /// <summary> Gets bounce alias. </summary>
+        /// <param name="discussionList"> The discussion list database object. </param>
+        /// <returns> The bounce alias. </returns>
+        public static string GetBounceAlias(DiscussionList discussionList)
+        {
+            return GetBounceAlias(discussionList.BaseEmailAddress);
+        }
+
+        /// <summary> Gets bounce alias. </summary>
+        /// <param name="baseEmailAddress"> The base email address. </param>
+        /// <returns> The bounce alias. </returns>
+        public static string GetBounceAlias(string baseEmailAddress)
+        {
+            return string.Format("bounce-{0}", baseEmailAddress);
+        }
+
         #endregion
     }
 }
