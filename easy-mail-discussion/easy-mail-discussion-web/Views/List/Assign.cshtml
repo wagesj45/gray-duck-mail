@@ -21,8 +21,8 @@
                 <input type="checkbox"
                 name="assigned" 
                 id="assigned" 
-                @(EmailHelper.Associated.Contains(Model.GetSubscription(contact.ID)) ? "checked" : "") 
-                @(Model.GetSubscription(contact.ID) == SubscriptionStatus.Unsubscribed ? "disabled" : "")
+                @(EmailHelper.IsAuthorizedForMailDistribution(Model.DiscussionList, contact)) ? "checked" : "") 
+                @(EmailHelper.ContactUnassignableStatuses.Contains(Model.GetSubscription(contact.ID)) ? "disabled" : "")
                 value="@contact.ID"/>
                 @contact.Name
             </label>

@@ -20,6 +20,8 @@ namespace EasyMailDiscussion.Common.Database
         /// <summary> The contact has requested access to a discussion list. </summary>
         Requested = 5,
         /// <summary> The contact has been denied access to the discussion list by the owner. </summary>
-        Denied
+        Denied = 6,
+        /// <summary> The contact's email address bounced for this discussion list. </summary>
+        Bounced = 7
     }
 }

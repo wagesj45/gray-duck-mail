@@ -1,7 +1,9 @@
-﻿using EasyMailDiscussion.Common.Database;
+﻿using EasyMailDiscussion.Common;
+using EasyMailDiscussion.Common.Database;
 using EasyMailDiscussion.Web.Models;
 using EasyMailDiscussion.Web.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace EasyMailDiscussion.Web.Controllers
         #region Members
 
         /// <summary> The logging conduit. </summary>
-        private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -150,7 +152,10 @@ namespace EasyMailDiscussion.Web.Controllers
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == id).FirstOrDefault();
             var contacts = this.SqliteDatabase.Contacts.ToArray();
-            var subscriptions = this.SqliteDatabase.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == id).ToArray();
+            var subscriptions = this.SqliteDatabase.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == id)
+                .Include(subscription => subscription.Contact)
+                .Include(subscription => subscription.DiscussionList)
+                .ToArray();
 
             if (discussionList == null)
             {
@@ -177,7 +182,6 @@ namespace EasyMailDiscussion.Web.Controllers
 
                 if (assignment.IsAssigned)
                 {
-                    // add assignment
                     if (subscription == null)
                     {
                         logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
@@ -188,6 +192,10 @@ namespace EasyMailDiscussion.Web.Controllers
                             Status = SubscriptionStatus.Created
                         };
                         this.SqliteDatabase.ContactSubscriptions.Add(subscription);
+                    }
+                    else
+                    {
+                        subscription.Status = SubscriptionStatus.Inactive;
                     }
                 }
                 else
@@ -205,6 +213,33 @@ namespace EasyMailDiscussion.Web.Controllers
             this.SqliteDatabase.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Archive(int id, int pageNumber = 1)
+        {
+            var discussionList = this.SqliteDatabase.DiscussionLists
+                .Where(discussionList => discussionList.ID == id)
+                .SingleOrDefault();
+            var messages = this.SqliteDatabase.Messages
+                .Where(message => message.DiscussionListID == id)
+                .Where(message => message.ParentID == null)
+                .Include(message => message.OriginatorContact)
+                .Include(message => message.Children)
+                .Page(pageNumber, DockerEnvironmentVariables.PageSize)
+                .ToArray();
+            var pageCount = this.SqliteDatabase.Messages
+                .Where(message => message.DiscussionListID == id)
+                .PageCount(DockerEnvironmentVariables.PageSize);
+
+            var model = new ArchivePageModel()
+            {
+                DiscussionList = discussionList,
+                PageNumber = pageNumber,
+                TotalPages = pageCount,
+                Messages = messages
+            };
+
+            return View("Archive", model);
         }
 
         #endregion

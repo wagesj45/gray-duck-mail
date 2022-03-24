@@ -38,37 +38,19 @@ namespace EasyMailDiscussion.Web.Worker
 
                     if (createdSubscriptions.Any())
                     {
-                        foreach (var subscription in createdSubscriptions)
+                        using (var client = new SmtpClient())
                         {
-                            using (var client = new SmtpClient())
+                            logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
+                            client.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
+
+                            logger.Debug("Authenticating as {0}", discussionList.UserName);
+                            client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
+
+                            foreach (var subscription in createdSubscriptions)
                             {
                                 try
                                 {
-                                    var message = new MimeMessage();
-                                    message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
-                                    message.ReplyTo.Add(new MailboxAddress(discussionList.Name, EmailAliasHelper.GetSubscribeAlias(discussionList)));
-                                    message.To.Add(new MailboxAddress(subscription.Contact.Name, subscription.Contact.Email));
-                                    message.Subject = string.Format("Subscribe to {0}", discussionList.Name);
-                                    message.Headers.Add(HeaderId.ListSubscribe, discussionList.ID.ToString());
-
-                                    message.Body = new TextPart(TextFormat.Html)
-                                    {
-                                        Text = EmailHelper.FillMainTemplate(
-                                            "Welcome!",
-                                            String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
-                                            String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
-                                            discussionList.Name,
-                                            discussionList
-                                            )
-                                    };
-
-                                    client.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
-
-                                    // Note: only needed if the SMTP server requires authentication
-                                    client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
-
-                                    client.Send(message, cancellationToken: stoppingToken);
-                                    client.Disconnect(true, cancellationToken: stoppingToken);
+                                    EmailHelper.SendOnboardingEmail(discussionList, subscription.Contact, client, stoppingToken);
 
                                     subscription.Status = SubscriptionStatus.Inactive;
                                 }
@@ -77,6 +59,8 @@ namespace EasyMailDiscussion.Web.Worker
                                     logger.Error(e);
                                 }
                             }
+
+                            client.Disconnect(true, stoppingToken);
                         }
                     }
                     else

@@ -1,0 +1,75 @@
+﻿@model ArchivePageModel
+@{
+    ViewData["Title"] = string.Format("{0} Archive", Model?.DiscussionList?.Name);
+}
+
+<hgroup>
+    <h2>@Model?.DiscussionList?.Name Archive</h2>
+    <h3>Here you can view the archived messages sent on the '@Model?.DiscussionList?.Name' discussion list.</h3>
+</hgroup>
+
+<article>
+    @if (Model?.Messages?.Any() ?? false)
+    {
+        foreach (var message in Model.Messages)
+        {
+            <details>
+                <summary><i class="icofont-envelope"></i> SUBJECT: @message.Subject</summary>
+                <aside>
+                    <nav>
+                        <ul>
+                            <li><i class="icofont-ui-user"></i> <em>From: @message.OriginatorContact.Name</em></li>
+                            <li><i class="icofont-clock-time"></i> <em>Sent: @message.Recieved.ToLocalTime()</em></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <hr>
+                <article>
+                    <header>
+                        @message.Subject
+                    </header>
+                    @if (!string.IsNullOrWhiteSpace(message.BodyHTML))
+                    {
+                        @Html.Raw(message.BodyHTML)
+                    }
+                    else if (!string.IsNullOrWhiteSpace(message.BodyText))
+                    {
+                        <pre>@message.BodyText</pre>
+                    }
+                    else if (!string.IsNullOrWhiteSpace(message.BodyRaw))
+                    {
+                        <pre>@message.BodyRaw</pre>
+                    }
+                    else
+                    {
+                        <em>An error occurred while processing this message.</em>
+                    }
+                    @if (message.Children.Any())
+                    {
+                        <footer>
+                            <i class="icofont-mail"></i><i class="icofont-reply"></i> <strong>@message.Children.Count</strong> Children
+                        </footer>
+                    }
+                </article>
+            </details>
+        }
+        @if (Model?.TotalPages > 1)
+        {
+            <footer>
+                @if (Model?.PageNumber > 1)
+                {
+                    <a href="~/Archive/@Model?.DiscussionList?.ID/@(Model?.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                }
+                Page @Model?.PageNumber of @Model?.TotalPages
+                @if (Model?.PageNumber < Model?.TotalPages)
+                {
+                    <a href="~/Archive/@Model?.DiscussionList?.ID/@(Model?.PageNumber - 1)"><i class="icofont-caret-right"></i></a>
+                }
+            </footer>
+        }
+    }
+    else
+    {
+        <p>No messages have been sent yet. You can <a href="mailto:@(Model?.DiscussionList.BaseEmailAddress)">contribute to the discussion</a> now.</p>
+    }
+</article>

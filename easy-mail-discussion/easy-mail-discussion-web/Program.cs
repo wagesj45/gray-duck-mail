@@ -19,7 +19,7 @@ namespace EasyMailDiscussion.Web
         #region Members
 
         /// <summary> The logging conduit. </summary>
-        private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
@@ -29,6 +29,8 @@ namespace EasyMailDiscussion.Web
         /// <param name="args"> An array of command-line argument strings. </param>
         public static void Main(string[] args)
         {
+            logger.Info("Starting the main application.");
+
             CreateHostBuilder(args).Build().Run();
         }
 

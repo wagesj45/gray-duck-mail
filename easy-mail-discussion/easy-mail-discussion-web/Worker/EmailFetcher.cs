@@ -69,6 +69,8 @@ namespace EasyMailDiscussion.Web.Worker
                                 var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
                                 var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                                 var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
+                                var filteredBouncedToBounceAlias = FilterMessages(emailMessages, EmailAliasHelper.GetBounceAlias(discussionList));
+                                var filteredBouncedToBaseAddress = FilterBouncedMessages(emailMessages);
 
                                 // Subscription Confirmation Emails
                                 var subscriptionConfirmations = await filteredSubscribe;
@@ -88,16 +90,27 @@ namespace EasyMailDiscussion.Web.Worker
                                 var requests = await filteredRequest;
                                 foreach (var request in requests)
                                 {
-                                    ProcessRequests(database, discussionList, pop3Client, request);
+                                    ProcessRequests(discussionList, database, pop3Client, request);
+                                }
+
+                                // Bounced email messages.
+                                var bouncedToAlias = await filteredBouncedToBounceAlias;
+                                var bouncedToBaseAddress= await filteredBouncedToBaseAddress;
+                                var bouncedMessages = bouncedToAlias.Concat(bouncedToBaseAddress);
+                                foreach (var bounce in bouncedMessages)
+                                {
+                                    ProcessBounces(discussionList, database, pop3Client, bounce);
                                 }
 
                                 // Remaining messages can be assumed to be communications between discussion list members.
-                                var discussionMessages = emailMessages.Except(subscriptionConfirmations)
+                                var discussionMessages = emailMessages
+                                    .Except(subscriptionConfirmations)
                                     .Except(unsubscribeConfirmations)
-                                    .Except(requests);
+                                    .Except(requests)
+                                    .Except(bouncedMessages);
                                 foreach (var discussionMessage in discussionMessages)
                                 {
-                                    ProcessDiscussionMessages(database, discussionList, pop3Client, discussionMessage, stoppingToken);
+                                    ProcessDiscussionMessages(discussionList, discussionMessage, database, pop3Client, stoppingToken);
                                 }
                             }
                             else
@@ -129,10 +142,14 @@ namespace EasyMailDiscussion.Web.Worker
             return;
         }
 
+        /// <summary> Process the subscription confirmations for the <paramref name="discussionList">discussion list</paramref>. </summary>
+        /// <param name="discussionList">           Discussion List database object. </param>
+        /// <param name="pop3Client">               The POP3 client. </param>
+        /// <param name="subscriptionConfirmation"> The subscription confirmation. </param>
         private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, Pop3Client pop3Client, IndexedMimeMessage subscriptionConfirmation)
         {
             var from = subscriptionConfirmation.Message.Sender ?? subscriptionConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
             logger.Info("Processing subscription message from {0}.", subscription.Contact.Name);
 
@@ -149,10 +166,17 @@ namespace EasyMailDiscussion.Web.Worker
             pop3Client.DeleteMessage(subscriptionConfirmation.Index);
         }
 
+        /// <summary>
+        /// Process the unsubscribe confirmations for the <paramref name="discussionList">discussion
+        /// list</paramref>.
+        /// </summary>
+        /// <param name="discussionList">          Discussion List database object. </param>
+        /// <param name="pop3Client">              The POP3 client. </param>
+        /// <param name="unsubscribeConfirmation"> The unsubscribe confirmation. </param>
         private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
             logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
             subscription.Status = SubscriptionStatus.Unsubscribed;
@@ -161,10 +185,17 @@ namespace EasyMailDiscussion.Web.Worker
             pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
         }
 
-        private static void ProcessRequests(SqliteDatabase database, DiscussionList discussionList, Pop3Client pop3Client, IndexedMimeMessage request)
+        /// <summary>
+        /// Process the requests to join a the <paramref name="discussionList">discussion list</paramref>.
+        /// </summary>
+        /// <param name="discussionList"> Discussion List database object. </param>
+        /// <param name="database">       The database. </param>
+        /// <param name="pop3Client">     The POP3 client. </param>
+        /// <param name="request">        The request message. </param>
+        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
             if (subscription == null)
             {
@@ -204,14 +235,50 @@ namespace EasyMailDiscussion.Web.Worker
             pop3Client.DeleteMessage(request.Index);
         }
 
-        private static void ProcessDiscussionMessages(SqliteDatabase database, DiscussionList discussionList, Pop3Client pop3Client, IndexedMimeMessage discussionMessage, CancellationToken stoppingToken)
+        /// <summary> Process the bounced messages recieved from a contact. </summary>
+        /// <param name="discussionList"> Discussion List database object. </param>
+        /// <param name="database">       The database. </param>
+        /// <param name="pop3Client">     The POP3 client. </param>
+        /// <param name="bounce">         The bounced message. </param>
+        private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage bounce)
+        {
+            var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
+            var bouncedOriginallyTo = EmailHelper.GetBouncedMessageRecipient(bounce);
+            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(bouncedFrom.Address, StringComparison.OrdinalIgnoreCase) || subscription.Contact.Email.Equals(bouncedOriginallyTo, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+
+            if(subscription != null)
+            { 
+                logger.Info("The email address for {0} appears to no longer be active.", subscription.Contact.Name);
+                subscription.Status = SubscriptionStatus.Bounced;
+                subscription.Contact.Activated = false;
+            }
+            else
+            {
+                logger.Error("A bounced email was recieved for an address that is not subscribed to {0}. Ignoring this message.", discussionList.Name);
+            }
+
+            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", bounce.Message.MessageId, bounce.Index);
+            pop3Client.DeleteMessage(bounce.Index);
+        }
+
+        /// <summary> Process the non-command messages by relaying them to all subscribed members of the <paramref name="discussionList">discussion list</paramref>. </summary>
+        /// <param name="discussionList">    Discussion List database object. </param>
+        /// <param name="discussionMessage"> Message describing the discussion. </param>
+        /// <param name="database">          The database. </param>
+        /// <param name="pop3Client">        The POP3 client. </param>
+        /// <param name="stoppingToken">
+        ///     Triggered when
+        ///     <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" />
+        ///     is called.
+        /// </param>
+        private static void ProcessDiscussionMessages(DiscussionList discussionList, IndexedMimeMessage discussionMessage, SqliteDatabase database, Pop3Client pop3Client, CancellationToken stoppingToken)
         {
             logger.Debug(discussionMessage.ToString());
 
             var from = discussionMessage.Message.Sender ?? discussionMessage.Message.From.Mailboxes.SingleOrDefault();
-            var originatorSubscription = discussionList.Contacts.Where(l => l.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var originatorSubscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
-            if (originatorSubscription != null && EmailHelper.Authorized.Contains(originatorSubscription.Status))
+            if (originatorSubscription != null && EmailHelper.ContactAuthorizedStatuses.Contains(originatorSubscription.Status))
             {
                 var parentMessage = database.Messages.Where(message => message.EmailID.Equals(discussionMessage.Message.MessageId) || message.EmailID.Equals(discussionMessage.Message.InReplyTo)).SingleOrDefault();
                 if (parentMessage == null)
@@ -249,9 +316,10 @@ namespace EasyMailDiscussion.Web.Worker
                         var listParticipants = discussionList.Contacts
                             .Where(contact => contact.Status == SubscriptionStatus.Subscribed)
                             .Where(contact => contact.ID != originatorSubscription.ContactID);
+
                         foreach (var participant in listParticipants)
                         {
-                            EmailHelper.RelayEmail(database, discussionList, originatorSubscription, message, smtpClient, participant, stoppingToken);
+                            EmailHelper.RelayEmail(discussionList, participant.Contact, message, database, smtpClient, stoppingToken);
                         }
                     }
                     catch (Exception e)
@@ -279,11 +347,53 @@ namespace EasyMailDiscussion.Web.Worker
         /// </returns>
         private async Task<IEnumerable<IndexedMimeMessage>> FilterMessages(IEnumerable<IndexedMimeMessage> messages, string emailToAddress)
         {
+            logger.Debug("Filtering messages for {0}.", emailToAddress);
+
+            return await FilterMessages(messages, message =>
+            {
+                return message.Message.GetRecipients(true)
+                .Where(recipient => recipient.Address.Equals(emailToAddress, StringComparison.OrdinalIgnoreCase))
+                .Any();
+            });
+        }
+
+        private async Task<IEnumerable<IndexedMimeMessage>> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
+        {
+            logger.Debug("Filtering bounced messages.");
+
+            return await FilterMessages(messages, message =>
+            {
+                return EmailHelper.IsBouncedMessage(message);
+            });
+        }
+
+        /// <summary>
+        /// Filter messages based on the a user provided
+        /// <see cref="Func{IndexedMimeMessage, bool}">function</see></see>.
+        /// </summary>
+        /// <param name="messages"> The messages. </param>
+        /// <param name="filter">   Specifies the filter. </param>
+        /// <returns>
+        /// An enumerator that allows foreach to be used to process filter messages in this collection.
+        /// </returns>
+        private async Task<IEnumerable<IndexedMimeMessage>> FilterMessages(IEnumerable<IndexedMimeMessage> messages, Func<IndexedMimeMessage, bool> filter)
+        {
             return await Task.Run<IEnumerable<IndexedMimeMessage>>(() =>
             {
-                var filteredMessages = messages.Where(message => message.Message.GetRecipients(true).Any(recipient => recipient.Address.Equals(emailToAddress, StringComparison.OrdinalIgnoreCase)));
+                logger.Trace("Filtering {0} messages.", messages.Count());
 
-                return filteredMessages.ToArray();
+                var filteredMessages = new List<IndexedMimeMessage>();
+                foreach (var message in messages)
+                {
+                    logger.Trace("Filtering message {0}.", message.Index);
+                    if (filter(message))
+                    {
+                        logger.Trace("Message {0} matches the filter criteria.", message.Index);
+                        filteredMessages.Add(message);
+                    }
+                }
+
+                return filteredMessages;
             });
         }
     }

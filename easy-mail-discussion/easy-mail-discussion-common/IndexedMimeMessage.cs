@@ -50,10 +50,11 @@ namespace EasyMailDiscussion.Common
         /// <returns> An IndexedMimeMessage. </returns>
         public static IndexedMimeMessage IndexMimeMessage(int index, MimeMessage originalMessage)
         {
-            var indexedMimeMessage = new IndexedMimeMessage();
-
-            indexedMimeMessage.Index = index;
-            indexedMimeMessage.Message = originalMessage;
+            var indexedMimeMessage = new IndexedMimeMessage
+            {
+                Index = index,
+                Message = originalMessage
+            };
 
             return indexedMimeMessage;
         }
@@ -72,7 +73,9 @@ namespace EasyMailDiscussion.Common
             }
             else
             {
-                return ((IndexedMimeMessage)obj).Index == this.Index;
+                var message = (IndexedMimeMessage)obj;
+
+                return message.Index == this.Index;
             }
         }
 

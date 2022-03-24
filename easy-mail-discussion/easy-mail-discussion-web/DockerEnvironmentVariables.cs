@@ -2,6 +2,10 @@
 
 namespace EasyMailDiscussion.Web
 {
+    /// <summary>
+    /// A class that defines default values for environment variables passed in from Docker, as well
+    /// as accessors for those values.
+    /// </summary>
     public static class DockerEnvironmentVariables
     {
         #region Members
@@ -23,12 +27,25 @@ namespace EasyMailDiscussion.Web
         private static Lazy<string> envLogLevel = new Lazy<string>(() =>
         {
             var logLevel = Environment.GetEnvironmentVariable("LOG_LEVEL");
-            if(string.IsNullOrWhiteSpace(logLevel))
+            if(!string.IsNullOrWhiteSpace(logLevel))
             {
-                return "info";
+                return logLevel;
             }
 
-            return logLevel;
+            return "info";
+        });
+
+        /// <summary> Size of the environment variable for <see cref="PageSize"/>. </summary>
+        private static Lazy<int> envPageSize = new Lazy<int>(() =>
+        {
+            var pageSize = Environment.GetEnvironmentVariable("PAGE_SIZE");
+
+            if(int.TryParse(pageSize, out var page))
+            {
+                return page;
+            }
+
+            return 10;
         });
 
         #endregion
@@ -47,6 +64,13 @@ namespace EasyMailDiscussion.Web
         public static string LogLevel
         {
             get => envLogLevel.Value;
+        }
+
+        /// <summary> Gets the page size to use when paginating results. </summary>
+        /// <value> The size of the page. </value>
+        public static int PageSize
+        {
+            get => envPageSize.Value;
         }
 
         #endregion

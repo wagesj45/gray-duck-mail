@@ -5,6 +5,7 @@ WORKDIR /app
 EXPOSE 80
 ENV LOG_LEVEL="debug"
 ENV FETCH_TIME="00:05:00"
+ENV PAGE_SIZE="10"
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src

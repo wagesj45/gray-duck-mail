@@ -20,6 +20,11 @@ namespace EasyMailDiscussion.Common
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        public const string STATUS_GROUP_ACTION_FAILED = "failed";
+
+        /// <summary> (Immutable) The string denoting the status group action delayed. </summary>
+        public const string STATUS_GROUP_ACTION_DELAYED = "delayed";
+
         /// <summary> The main HTML email template. </summary>
         private static string mailEmailTemplate;
 
@@ -29,7 +34,7 @@ namespace EasyMailDiscussion.Common
 
         /// <summary> Gets the authorized subscription statuses. </summary>
         /// <value> The authorized statuses. </value>
-        public static IEnumerable<SubscriptionStatus> Authorized
+        public static IEnumerable<SubscriptionStatus> ContactAuthorizedStatuses
         {
             get
             {
@@ -40,13 +45,35 @@ namespace EasyMailDiscussion.Common
 
         /// <summary> Gets the associated subscription statuses. </summary>
         /// <value> The associated statuses. </value>
-        public static IEnumerable<SubscriptionStatus> Associated
+        public static IEnumerable<SubscriptionStatus> ContactAssociatedStatuses
         {
             get
             {
                 yield return SubscriptionStatus.Created;
                 yield return SubscriptionStatus.Inactive;
                 yield return SubscriptionStatus.Subscribed;
+            }
+        }
+
+        /// <summary> Gets the contact unassignable statuses. </summary>
+        /// <value> The contact unassignable statuses. </value>
+        public static IEnumerable<SubscriptionStatus> ContactUnassignableStatuses
+        {
+            get
+            {
+                yield return SubscriptionStatus.Unsubscribed;
+                yield return SubscriptionStatus.Bounced;
+            }
+        }
+
+        /// <summary> Gets the bounced email status group action values. </summary>
+        /// <value> The bounced email status group action values. </value>
+        public static IEnumerable<string> BouncedEmailStatusGroupActions
+        {
+            get
+            {
+                yield return STATUS_GROUP_ACTION_FAILED;
+                yield return STATUS_GROUP_ACTION_DELAYED;
             }
         }
 
@@ -116,42 +143,63 @@ namespace EasyMailDiscussion.Common
         /// <returns> True if authorized for mail distribution, false if not. </returns>
         public static bool IsAuthorizedForMailDistribution(DiscussionList discussionList, Contact contact)
         {
-            if(discussionList.Contacts == null || !discussionList.Contacts.Any())
+            if (discussionList.Contacts == null || !discussionList.Contacts.Any())
             {
                 logger.Error("The discussion list is empty.");
                 return false;
             }
-            return discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(contact.Email, StringComparison.OrdinalIgnoreCase) && Authorized.Contains(subscription.Status)).Any();
+            return contact.Activated && discussionList.Contacts.Where(subscription => subscription.Contact.ID == contact.ID && ContactAuthorizedStatuses.Contains(subscription.Status)).Any();
         }
 
-        public static void RelayEmail(SqliteDatabase database, DiscussionList discussionList, ContactSubscription subscription, Message message, SmtpClient smtpClient, ContactSubscription participant, CancellationToken stoppingToken = default(CancellationToken))
+        /// <summary> Query if a given user can be assigned to a discussion list. </summary>
+        /// <param name="discussionList"> the Discussion List database object. </param>
+        /// <param name="contact">        The contact. </param>
+        /// <returns> True if assignable, false if not. </returns>
+        public static bool IsAssignable(DiscussionList discussionList, Contact contact)
         {
-            logger.Debug("Relaying message to {0} ({1})", participant.Contact.Name, participant.Contact.Email);
-
-            var relay = new MimeMessage();
-            relay.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
-            relay.ReplyTo.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
-            relay.To.Add(new MailboxAddress(subscription.Contact.Name, subscription.Contact.Email));
-            relay.Subject = string.Format("{0} - Message from {1}", message.Subject.Replace(String.Format("Message from {0}", discussionList.Name), ""), discussionList.Name);
-            relay.Headers.Add(HeaderId.ReturnPath, EmailAliasHelper.GetBounceAlias(discussionList));
-
-            if (!string.IsNullOrWhiteSpace(message.BodyHTML))
+            if (discussionList.Contacts == null || !discussionList.Contacts.Any())
             {
-                logger.Debug("Mesasge body determined to contain HTML.");
-                relay.Body = new TextPart(TextFormat.Html)
-                {
-                    Text = message.BodyHTML
-                };
+                logger.Error("The discussion list is empty.");
+                return false;
             }
+            return discussionList.Contacts.Where(subscription => subscription.Contact.ID == contact.ID && !ContactUnassignableStatuses.Contains(subscription.Status)).Any();
+        }
 
-            if (!string.IsNullOrWhiteSpace(message.BodyText))
-            {
-                logger.Debug("Message body determined to contain plain text.");
-                relay.Body = new TextPart(TextFormat.Text)
+        public static void RelayEmail(DiscussionList discussionList, Contact recipient, Message message, SqliteDatabase database, SmtpClient client, CancellationToken stoppingToken = default)
+        {
+            logger.Debug("Relaying message to {0} ({1})", recipient.Name, recipient.Email);
+
+            var relay = SendEmail(discussionList,
+                recipient,
+                string.Format("{0} - Message from {1}", message.Subject.Replace(String.Format(" - Message from {0}", discussionList.Name), ""), discussionList.Name),
+                discussionList.BaseEmailAddress,
+                () =>
                 {
-                    Text = message.BodyText
-                };
-            }
+                    if (!string.IsNullOrWhiteSpace(message.BodyHTML))
+                    {
+                        logger.Debug("Mesasge body determined to contain HTML.");
+                        return new TextPart(TextFormat.Html)
+                        {
+                            Text = message.BodyHTML
+                        };
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(message.BodyText))
+                    {
+                        logger.Debug("Message body determined to contain plain text.");
+                        return new TextPart(TextFormat.Text)
+                        {
+                            Text = message.BodyText
+                        };
+                    }
+
+                    var formatException = new FormatException("Could not determine the formatting of the message.");
+
+                    throw formatException;
+                },
+                client,
+                stoppingToken
+                );
 
             var relayIdentifier = new RelayIdentifier()
             {
@@ -159,16 +207,124 @@ namespace EasyMailDiscussion.Common
                 RelayEmailID = relay.MessageId
             };
             database.RelayIdentifiers.Add(relayIdentifier);
-
-            smtpClient.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
-
-            // Note: only needed if the SMTP server requires authentication
-            smtpClient.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
-
-            smtpClient.Send(relay, cancellationToken: stoppingToken);
         }
 
+        public static void SendOnboardingEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
+        {
+            SendEmail(discussionList,
+                recipient,
+                string.Format("Subscribe to {0}", discussionList.Name),
+                EmailAliasHelper.GetSubscribeAlias(discussionList),
+                () =>
+                {
+                    return new TextPart(TextFormat.Html)
+                    {
+                        Text = EmailHelper.FillMainTemplate(
+                            "Welcome!",
+                            String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
+                            String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
+                            discussionList.Name,
+                            discussionList
+                            )
+                    };
+                },
+                client,
+                cancellationToken);
+        }
 
+        /// <summary> Sends an email. </summary>
+        /// <remarks>
+        /// The <paramref name="client"/> will connect to the SMTP server defined in
+        /// <paramref name="discussionList"/> if the client is disconnected. The client will not
+        /// disconnect at the end of this method.
+        /// </remarks>
+        /// <param name="discussionList">    The Discussion List database object. </param>
+        /// <param name="recipient">         The recipient. </param>
+        /// <param name="subject">           The subject. </param>
+        /// <param name="bodyGenerator">     The body generator function. </param>
+        /// <param name="client">            The SMTP client. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default)
+        {
+            logger.Debug("Generating an email.");
+
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
+            message.ReplyTo.Add(new MailboxAddress(discussionList.Name, replyTo));
+            message.To.Add(new MailboxAddress(recipient.Name, recipient.Email));
+            message.Subject = subject;
+            message.Headers.Insert(0, HeaderId.ReturnPath, string.Format("Bounces <{0}>","jordan@jordanwages.com"));
+
+            message.Body = bodyGenerator();
+
+            if (!client.IsConnected)
+            {
+                logger.Info("The SMTP client is not connected. Connecting now.");
+                client.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: cancellationToken);
+
+                // Note: only needed if the SMTP server requires authentication
+                client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
+            }
+
+            client.Send(message, cancellationToken: cancellationToken);
+
+            return message;
+        }
+
+        /// <summary> Query if a messaged is a bounced message by determining if there is an error action code per <see cref="GetBouncedMessageRecipient(IndexedMimeMessage)"/>. </summary>
+        /// <param name="message"> The message. </param>
+        /// <returns> True if the message is bounced, false if not. </returns>
+        public static bool IsBouncedMessage(IndexedMimeMessage message)
+        {
+            var bounced = !string.IsNullOrWhiteSpace(GetBouncedMessageRecipient(message));
+
+            return bounced;
+        }
+
+        /// <summary> Gets bounced message recipient from the message, if it exists. </summary>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when one or more required arguments are null.
+        /// </exception>
+        /// <param name="message"> The message. </param>
+        /// <returns> The bounced message recipient. </returns>
+        public static string GetBouncedMessageRecipient(IndexedMimeMessage message)
+        {
+            if(message == null)
+            {
+                var argumentException = new ArgumentNullException(nameof(message));
+                logger.Error(argumentException);
+
+                throw argumentException;
+            }
+
+            var multipartMessage = message.Message.Body as Multipart;
+
+            if(multipartMessage != null && multipartMessage.OfType<MessageDeliveryStatus>().Any())
+            {
+                logger.Debug("Message is a multipart message with at least one 'delivery-status' section.");
+                foreach(var deliveryStatus in multipartMessage.OfType<MessageDeliveryStatus>())
+                {
+                    foreach(var statusGroup in deliveryStatus.StatusGroups)
+                    {
+                        var action = statusGroup["Action"].ToLowerInvariant();
+
+                        if (BouncedEmailStatusGroupActions.Contains(action))
+                        {
+                            logger.Debug("A failed delivery was detected.");
+
+                            var recipient = statusGroup["Original-Recipient"];
+                            var address = recipient != null ? recipient.Split(';')[1] : string.Empty;
+
+                            return address.Trim().ToLowerInvariant();
+                        }
+                    }
+                }
+            }
+
+            return string.Empty;
+        }
 
         #endregion
     }
