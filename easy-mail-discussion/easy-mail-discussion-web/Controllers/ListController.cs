@@ -33,7 +33,7 @@ namespace EasyMailDiscussion.Web.Controllers
 
         public IActionResult New()
         {
-            return View("Edit");
+            return View("Edit", new EditDiscussionListModel());
         }
 
         public IActionResult Edit(int id)
@@ -195,7 +195,7 @@ namespace EasyMailDiscussion.Web.Controllers
                     }
                     else
                     {
-                        subscription.Status = SubscriptionStatus.Inactive;
+                        subscription.Status = SubscriptionStatus.AwaitingConfirmation;
                     }
                 }
                 else
@@ -240,6 +240,24 @@ namespace EasyMailDiscussion.Web.Controllers
             };
 
             return View("Archive", model);
+        }
+
+        public IActionResult Message(int id, int pageNumber = 1)
+        {
+            var message = this.SqliteDatabase.Messages
+                .Where(message => message.ID == id)
+                .Include(message => message.OriginatorContact)
+                .Include(message => message.DiscussionList)
+                .Include(message => message.Children)
+                .ThenInclude(message => message.OriginatorContact)
+                .SingleOrDefault();
+
+            var model = new MessagePageModel()
+            {
+                Message = message
+            };
+
+            return View("Message", model);
         }
 
         #endregion

@@ -45,7 +45,7 @@ namespace EasyMailDiscussion.Web.Worker
             logger.Info("Beginning email fetch loop.");
             while (!stoppingToken.IsCancellationRequested)
             {
-                var discussionLists = database.DiscussionLists.Include(list => list.Contacts).ThenInclude(list => list.Contact);
+                var discussionLists = database.DiscussionLists.Include(list => list.Subscriptions).ThenInclude(list => list.Contact);
 
                 foreach (var discussionList in discussionLists)
                 {
@@ -76,7 +76,7 @@ namespace EasyMailDiscussion.Web.Worker
                                 var subscriptionConfirmations = await filteredSubscribe;
                                 foreach (var subscriptionConfirmation in subscriptionConfirmations)
                                 {
-                                    ProcessSubscriptionConfirmations(discussionList, pop3Client, subscriptionConfirmation);
+                                    ProcessSubscriptionConfirmations(discussionList, database, pop3Client, subscriptionConfirmation, stoppingToken);
                                 }
 
                                 // Unsubscribe Confirmation Emails
@@ -95,7 +95,7 @@ namespace EasyMailDiscussion.Web.Worker
 
                                 // Bounced email messages.
                                 var bouncedToAlias = await filteredBouncedToBounceAlias;
-                                var bouncedToBaseAddress= await filteredBouncedToBaseAddress;
+                                var bouncedToBaseAddress = await filteredBouncedToBaseAddress;
                                 var bouncedMessages = bouncedToAlias.Concat(bouncedToBaseAddress);
                                 foreach (var bounce in bouncedMessages)
                                 {
@@ -142,14 +142,21 @@ namespace EasyMailDiscussion.Web.Worker
             return;
         }
 
-        /// <summary> Process the subscription confirmations for the <paramref name="discussionList">discussion list</paramref>. </summary>
+        /// <summary>
+        /// Process the subscription confirmations for the <paramref name="discussionList">discussion
+        /// list</paramref>.
+        /// </summary>
         /// <param name="discussionList">           Discussion List database object. </param>
+        /// <param name="database">                 The database. </param>
         /// <param name="pop3Client">               The POP3 client. </param>
         /// <param name="subscriptionConfirmation"> The subscription confirmation. </param>
-        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, Pop3Client pop3Client, IndexedMimeMessage subscriptionConfirmation)
+        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
         {
             var from = subscriptionConfirmation.Message.Sender ?? subscriptionConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
+                .Where(subscription => subscription.Contact.Email == from.Address)
+                .SingleOrDefault();
 
             logger.Info("Processing subscription message from {0}.", subscription.Contact.Name);
 
@@ -161,6 +168,13 @@ namespace EasyMailDiscussion.Web.Worker
 
             logger.Info("User {0} subscribing to {1}.", subscription.Contact.Name, discussionList.Name);
             subscription.Status = SubscriptionStatus.Subscribed;
+
+            using (var smtpClient = new SmtpClient())
+            {
+                EmailHelper.SendSubscriptionConfirmationEmail(discussionList, subscription.Contact, smtpClient, cancellationToken);
+
+                smtpClient.Disconnect(true, cancellationToken);
+            }
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index);
             pop3Client.DeleteMessage(subscriptionConfirmation.Index);
@@ -176,7 +190,7 @@ namespace EasyMailDiscussion.Web.Worker
         private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = discussionList.Subscriptions.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
             logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
             subscription.Status = SubscriptionStatus.Unsubscribed;
@@ -195,7 +209,7 @@ namespace EasyMailDiscussion.Web.Worker
         private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = discussionList.Subscriptions.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
             if (subscription == null)
             {
@@ -244,10 +258,13 @@ namespace EasyMailDiscussion.Web.Worker
         {
             var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
             var bouncedOriginallyTo = EmailHelper.GetBouncedMessageRecipient(bounce);
-            var subscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(bouncedFrom.Address, StringComparison.OrdinalIgnoreCase) || subscription.Contact.Email.Equals(bouncedOriginallyTo, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
+                .Where(subscription => subscription.Contact.Email == bouncedFrom.Address || subscription.Contact.Email == bouncedOriginallyTo)
+                .SingleOrDefault();
 
-            if(subscription != null)
-            { 
+            if (subscription != null)
+            {
                 logger.Info("The email address for {0} appears to no longer be active.", subscription.Contact.Name);
                 subscription.Status = SubscriptionStatus.Bounced;
                 subscription.Contact.Activated = false;
@@ -276,7 +293,7 @@ namespace EasyMailDiscussion.Web.Worker
             logger.Debug(discussionMessage.ToString());
 
             var from = discussionMessage.Message.Sender ?? discussionMessage.Message.From.Mailboxes.SingleOrDefault();
-            var originatorSubscription = discussionList.Contacts.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var originatorSubscription = discussionList.Subscriptions.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
 
             if (originatorSubscription != null && EmailHelper.ContactAuthorizedStatuses.Contains(originatorSubscription.Status))
             {
@@ -313,7 +330,7 @@ namespace EasyMailDiscussion.Web.Worker
 
                     try
                     {
-                        var listParticipants = discussionList.Contacts
+                        var listParticipants = discussionList.Subscriptions
                             .Where(contact => contact.Status == SubscriptionStatus.Subscribed)
                             .Where(contact => contact.ID != originatorSubscription.ContactID);
 

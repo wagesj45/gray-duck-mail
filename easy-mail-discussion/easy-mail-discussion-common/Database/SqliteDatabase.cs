@@ -153,7 +153,7 @@ namespace EasyMailDiscussion.Common.Database
                 .HasForeignKey(e => e.ContactID)
                 .IsRequired();
                 entity.HasOne(e => e.DiscussionList)
-                .WithMany(e => e.Contacts)
+                .WithMany(e => e.Subscriptions)
                 .HasForeignKey(e => e.DiscussionListID)
                 .IsRequired();
             });
@@ -163,7 +163,7 @@ namespace EasyMailDiscussion.Common.Database
             modelBuilder.Entity<DiscussionList>(entity => 
             {
                 entity.HasKey(e => e.ID);
-                entity.HasMany(e => e.Contacts)
+                entity.HasMany(e => e.Subscriptions)
                 .WithOne(e => e.DiscussionList)
                 .HasForeignKey(e => e.DiscussionListID);
                 entity.HasMany(e => e.Messages)

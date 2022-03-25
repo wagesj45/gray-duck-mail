@@ -52,7 +52,7 @@ namespace EasyMailDiscussion.Web.Worker
                                 {
                                     EmailHelper.SendOnboardingEmail(discussionList, subscription.Contact, client, stoppingToken);
 
-                                    subscription.Status = SubscriptionStatus.Inactive;
+                                    subscription.Status = SubscriptionStatus.AwaitingConfirmation;
                                 }
                                 catch (Exception e)
                                 {

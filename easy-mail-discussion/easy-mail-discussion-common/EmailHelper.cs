@@ -39,7 +39,7 @@ namespace EasyMailDiscussion.Common
             get
             {
                 yield return SubscriptionStatus.Subscribed;
-                yield return SubscriptionStatus.Inactive;
+                yield return SubscriptionStatus.AwaitingConfirmation;
             }
         }
 
@@ -50,7 +50,7 @@ namespace EasyMailDiscussion.Common
             get
             {
                 yield return SubscriptionStatus.Created;
-                yield return SubscriptionStatus.Inactive;
+                yield return SubscriptionStatus.AwaitingConfirmation;
                 yield return SubscriptionStatus.Subscribed;
             }
         }
@@ -143,12 +143,14 @@ namespace EasyMailDiscussion.Common
         /// <returns> True if authorized for mail distribution, false if not. </returns>
         public static bool IsAuthorizedForMailDistribution(DiscussionList discussionList, Contact contact)
         {
-            if (discussionList.Contacts == null || !discussionList.Contacts.Any())
+            if (discussionList.Subscriptions == null || !discussionList.Subscriptions.Any())
             {
                 logger.Error("The discussion list is empty.");
                 return false;
             }
-            return contact.Activated && discussionList.Contacts.Where(subscription => subscription.Contact.ID == contact.ID && ContactAuthorizedStatuses.Contains(subscription.Status)).Any();
+            var authorized = contact.Activated && discussionList.Subscriptions.Where(subscription => subscription.Contact.ID == contact.ID && ContactAuthorizedStatuses.Contains(subscription.Status)).Any();
+
+            return authorized;
         }
 
         /// <summary> Query if a given user can be assigned to a discussion list. </summary>
@@ -157,12 +159,14 @@ namespace EasyMailDiscussion.Common
         /// <returns> True if assignable, false if not. </returns>
         public static bool IsAssignable(DiscussionList discussionList, Contact contact)
         {
-            if (discussionList.Contacts == null || !discussionList.Contacts.Any())
+            if (discussionList.Subscriptions == null || !discussionList.Subscriptions.Any())
             {
                 logger.Error("The discussion list is empty.");
                 return false;
             }
-            return discussionList.Contacts.Where(subscription => subscription.Contact.ID == contact.ID && !ContactUnassignableStatuses.Contains(subscription.Status)).Any();
+            var assignable = discussionList.Subscriptions.Where(subscription => subscription.Contact.ID == contact.ID && !ContactUnassignableStatuses.Contains(subscription.Status)).Any();
+
+            return assignable;
         }
 
         public static void RelayEmail(DiscussionList discussionList, Contact recipient, Message message, SqliteDatabase database, SmtpClient client, CancellationToken stoppingToken = default)
@@ -211,6 +215,8 @@ namespace EasyMailDiscussion.Common
 
         public static void SendOnboardingEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
+            logger.Info("Sending onboarding email to {0} ({1}).", recipient.Name, recipient.Email);
+
             SendEmail(discussionList,
                 recipient,
                 string.Format("Subscribe to {0}", discussionList.Name),
@@ -223,6 +229,31 @@ namespace EasyMailDiscussion.Common
                             "Welcome!",
                             String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
+                            discussionList.Name,
+                            discussionList
+                            )
+                    };
+                },
+                client,
+                cancellationToken);
+        }
+
+        public static void SendSubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
+        {
+            logger.Info("Sending the subscription confirmation email to {0} ({1}).", recipient.Name, recipient.Email);
+
+            SendEmail(discussionList,
+                recipient,
+                string.Format("Welcome to {0}", discussionList.Name),
+                discussionList.BaseEmailAddress,
+                () =>
+                {
+                    return new TextPart(TextFormat.Html)
+                    {
+                        Text = EmailHelper.FillMainTemplate(
+                            "Thanks for subscribing!",
+                            String.Format("You've been subscribed to the '{0}' Email Discussion List", discussionList.Name),
+                            String.Format("Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.", discussionList.BaseEmailAddress),
                             discussionList.Name,
                             discussionList
                             )
@@ -255,7 +286,7 @@ namespace EasyMailDiscussion.Common
             message.ReplyTo.Add(new MailboxAddress(discussionList.Name, replyTo));
             message.To.Add(new MailboxAddress(recipient.Name, recipient.Email));
             message.Subject = subject;
-            message.Headers.Insert(0, HeaderId.ReturnPath, string.Format("Bounces <{0}>","jordan@jordanwages.com"));
+            message.Headers.Insert(0, HeaderId.ReturnPath, string.Format("Bounces <{0}>", "jordan@jordanwages.com"));
 
             message.Body = bodyGenerator();
 
@@ -291,7 +322,7 @@ namespace EasyMailDiscussion.Common
         /// <returns> The bounced message recipient. </returns>
         public static string GetBouncedMessageRecipient(IndexedMimeMessage message)
         {
-            if(message == null)
+            if (message == null)
             {
                 var argumentException = new ArgumentNullException(nameof(message));
                 logger.Error(argumentException);
@@ -301,12 +332,12 @@ namespace EasyMailDiscussion.Common
 
             var multipartMessage = message.Message.Body as Multipart;
 
-            if(multipartMessage != null && multipartMessage.OfType<MessageDeliveryStatus>().Any())
+            if (multipartMessage != null && multipartMessage.OfType<MessageDeliveryStatus>().Any())
             {
                 logger.Debug("Message is a multipart message with at least one 'delivery-status' section.");
-                foreach(var deliveryStatus in multipartMessage.OfType<MessageDeliveryStatus>())
+                foreach (var deliveryStatus in multipartMessage.OfType<MessageDeliveryStatus>())
                 {
-                    foreach(var statusGroup in deliveryStatus.StatusGroups)
+                    foreach (var statusGroup in deliveryStatus.StatusGroups)
                     {
                         var action = statusGroup["Action"].ToLowerInvariant();
 

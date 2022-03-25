@@ -1,15 +1,15 @@
 ﻿@model ArchivePageModel
 @{
-    ViewData["Title"] = string.Format("{0} Archive", Model?.DiscussionList?.Name);
+    ViewData["Title"] = string.Format("{0} Archive", Model.DiscussionList.Name);
 }
 
 <hgroup>
-    <h2>@Model?.DiscussionList?.Name Archive</h2>
-    <h3>Here you can view the archived messages sent on the '@Model?.DiscussionList?.Name' discussion list.</h3>
+    <h2>@Model.DiscussionList.Name Archive</h2>
+    <h3>Here you can view the archived messages sent on the '@Model.DiscussionList.Name' discussion list.</h3>
 </hgroup>
 
 <article>
-    @if (Model?.Messages?.Any() ?? false)
+    @if (Model.Messages.Any())
     {
         foreach (var message in Model.Messages)
         {
@@ -44,32 +44,48 @@
                     {
                         <em>An error occurred while processing this message.</em>
                     }
-                    @if (message.Children.Any())
-                    {
-                        <footer>
-                            <i class="icofont-mail"></i><i class="icofont-reply"></i> <strong>@message.Children.Count</strong> Children
-                        </footer>
-                    }
+                    <footer>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="~/List/Message/@message.ID" role="button">View Message</a>
+                                </li>
+                            </ul>
+                            @if (message.Children.Any())
+                            {
+                                <ul>
+                                    <li>
+                                        <a href="~/List/Message/@message.ID#children">
+                                            <i class="icofont-mail"></i>
+                                            <i class="icofont-reply"></i>
+                                            <strong>@message.Children.Count</strong> @(message.Children.Count == 1 ? "Reply" : "Replies")
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </nav>
+                    </footer>
+
                 </article>
             </details>
         }
-        @if (Model?.TotalPages > 1)
+        @if (Model.TotalPages > 1)
         {
             <footer>
-                @if (Model?.PageNumber > 1)
+                @if (Model.PageNumber > 1)
                 {
-                    <a href="~/Archive/@Model?.DiscussionList?.ID/@(Model?.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                    <a href="~/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
-                Page @Model?.PageNumber of @Model?.TotalPages
-                @if (Model?.PageNumber < Model?.TotalPages)
+                Page @Model.PageNumber of @Model.TotalPages
+                @if (Model.PageNumber < Model.TotalPages)
                 {
-                    <a href="~/Archive/@Model?.DiscussionList?.ID/@(Model?.PageNumber - 1)"><i class="icofont-caret-right"></i></a>
+                    <a href="~/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-right"></i></a>
                 }
             </footer>
         }
     }
     else
     {
-        <p>No messages have been sent yet. You can <a href="mailto:@(Model?.DiscussionList.BaseEmailAddress)">contribute to the discussion</a> now.</p>
+        <p>No messages have been sent yet. You can <a href="mailto:@(Model.DiscussionList.BaseEmailAddress)">contribute to the discussion</a> now.</p>
     }
 </article>

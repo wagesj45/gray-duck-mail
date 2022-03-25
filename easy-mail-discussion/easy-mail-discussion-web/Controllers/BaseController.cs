@@ -1,5 +1,6 @@
 ﻿using EasyMailDiscussion.Common.Database;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using NLog;
 using System;
 
@@ -28,6 +29,23 @@ namespace EasyMailDiscussion.Web.Controllers
         public SqliteDatabase SqliteDatabase
         {
             get => sqliteDatabase.Value;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary> Called before the action method is invoked. </summary>
+        /// <remarks>
+        /// This override provides logging on the path being processed by the
+        /// <see cref="Microsoft.AspNetCore.Http.HttpRequest">HTTP request</see>.
+        /// </remarks>
+        /// <param name="context"> The action executing context. </param>
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            logger.Info("Serving page '{0}'", context.HttpContext.Request.Path);
+
+            base.OnActionExecuting(context);
         } 
 
         #endregion

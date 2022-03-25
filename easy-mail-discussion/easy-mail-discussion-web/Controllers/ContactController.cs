@@ -32,7 +32,7 @@ namespace EasyMailDiscussion.Web.Controllers
 
         public IActionResult New()
         {
-            return View("Edit");
+            return View("Edit", new EditContactModel());
         }
 
         public IActionResult Edit(int id)

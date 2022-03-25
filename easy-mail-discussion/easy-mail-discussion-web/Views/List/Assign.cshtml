@@ -9,7 +9,18 @@
 <hgroup>
     <h1>Discussion List Assignment</h1>
     <h2>Assign contacts to <strong>@Model.DiscussionList.Name</strong> below.</h2>
+    @if (@Model.Subscriptions.Any(subscription => subscription.Status == SubscriptionStatus.Created))
+    {
+        <h3>
+            <mark>
+                There are some invitations still processing. Your server is configured to process new subscribers every @DockerEnvironmentVariables.FetchTime.TotalMinutes minutes. Please be patient.
+            </mark>
+
+        </h3>
+    }
 </hgroup>
+
+
 
 <form action="~/List/Assign" method="post">
     <input type="hidden" name="discussionListID" id="discussionListID" value="@Model.DiscussionList.ID" />
@@ -19,12 +30,39 @@
             <input type="hidden" name="contactID" id="contactID_@contact.ID" value="@contact.ID" />
             <label for="assigned">
                 <input type="checkbox"
-                name="assigned" 
-                id="assigned" 
-                @(EmailHelper.IsAuthorizedForMailDistribution(Model.DiscussionList, contact)) ? "checked" : "") 
-                @(EmailHelper.ContactUnassignableStatuses.Contains(Model.GetSubscription(contact.ID)) ? "disabled" : "")
-                value="@contact.ID"/>
+                   name="assigned"
+                   id="assigned"
+                   @(EmailHelper.IsAuthorizedForMailDistribution(Model.DiscussionList, contact) ? "checked" : "" )
+                   @(EmailHelper.ContactUnassignableStatuses.Contains(Model.GetSubscription(contact.ID)) ? "disabled" : "")
+                   value="@contact.ID" />
                 @contact.Name
+                @switch (Model.GetSubscription(contact.ID))
+                {
+                    case SubscriptionStatus.AwaitingConfirmation:
+                        <span data-tooltip="Awaiting Confirmation"><i class="icofont-hour-glass"></i></span>
+                        break;
+                    case SubscriptionStatus.Bounced:
+                        <span data-tooltip="@contact.Email has bounced."><i class="icofont-exclamation-circle"></i></span>
+                        break;
+                    case SubscriptionStatus.Created:
+                        <span data-tooltip="User will be invited soon."><i class="icofont-plus-circle"></i></span>
+                        break;
+                    case SubscriptionStatus.Denied:
+                        <span data-tooltip="You have denied this entry to this discussion group."><i class="icofont-not-allowed"></i></span>
+                        break;
+                    case SubscriptionStatus.Requested:
+                        <span data-tooltip="This user has asked to participate in this discussion group."><i class="icofont-question-circle"></i></span>
+                        break;
+                    case SubscriptionStatus.Subscribed:
+                        <span data-tooltip="This user is subscribed to this discussion list."><i class="icofont-check-circled"></i></span>
+                        break;
+                    case SubscriptionStatus.Unsubscribed:
+                        <span data-tooltip="This user has asked to participate in this discussion group."><i class="icofont-eye-blocked"></i></span>
+                        break;
+                    default:
+                        <!-- Unknown Subscription Status. --> 
+                        break;
+                }
             </label>
         }
     </fieldset>

@@ -18,7 +18,7 @@
     </ul>
 </nav>
     </header>
-    @if (Model?.DiscussionLists?.Any() ?? false)
+    @if (Model.DiscussionLists.Any())
     {
         foreach (var (discussionList, index) in Model.DiscussionLists.Select((discussionList, index) => ( discussionList, index )))
         {

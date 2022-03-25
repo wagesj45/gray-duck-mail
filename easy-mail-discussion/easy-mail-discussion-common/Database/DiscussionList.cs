@@ -40,7 +40,7 @@ namespace EasyMailDiscussion.Common.Database
 
         /// <summary> Gets or sets the contacts. </summary>
         /// <value> The contacts. </value>
-        public virtual ICollection<ContactSubscription> Contacts { get; set; }
+        public virtual ICollection<ContactSubscription> Subscriptions { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }
 
