@@ -83,7 +83,7 @@ namespace EasyMailDiscussion.Web.Worker
                                 var unsubscribeConfirmations = await filteredUnsubscribe;
                                 foreach (var unsubscribeConfirmation in unsubscribeConfirmations)
                                 {
-                                    ProcessUnsubscribeConfirmations(discussionList, pop3Client, unsubscribeConfirmation);
+                                    ProcessUnsubscribeConfirmations(discussionList, database, pop3Client, unsubscribeConfirmation);
                                 }
 
                                 // List Assignment Request Emails
@@ -187,16 +187,19 @@ namespace EasyMailDiscussion.Web.Worker
         /// <param name="discussionList">          Discussion List database object. </param>
         /// <param name="pop3Client">              The POP3 client. </param>
         /// <param name="unsubscribeConfirmation"> The unsubscribe confirmation. </param>
-        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
+        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Subscriptions.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
+                .Where(subscription => subscription.Contact.Email == from.Address)
+                .SingleOrDefault();
 
             logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
             subscription.Status = SubscriptionStatus.Unsubscribed;
 
-            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index);
-            pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
+            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index);
+            //pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
         }
 
         /// <summary>
