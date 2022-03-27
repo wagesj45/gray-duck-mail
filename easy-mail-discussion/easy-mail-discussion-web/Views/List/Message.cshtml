@@ -1,4 +1,5 @@
-﻿@model MessagePageModel
+﻿@using EasyMailDiscussion.Common
+@model MessagePageModel
 @{
     ViewData["Title"] = string.Format("Message from ", Model.Message.OriginatorContact.Name);
 }
@@ -29,7 +30,7 @@
             </header>
             @if (!string.IsNullOrWhiteSpace(Model.Message.BodyHTML))
             {
-                @Html.Raw(Model.Message.BodyHTML)
+                @Html.Raw(HTMLCleaner.RemoveInlineCSS(Model.Message.BodyHTML))
             }
             else if (!string.IsNullOrWhiteSpace(Model.Message.BodyText))
             {
@@ -43,12 +44,12 @@
             {
                 <em>An error occurred while processing this message.</em>
             }
-            @if (Model.Message.Children.Any())
+            @if (Model.Children.Any())
             {
                 <footer id="children">
-                    <i class="icofont-mail"></i><i class="icofont-reply"></i> <strong>@Model.Message.Children.Count</strong> @(Model.Message.Children.Count == 1 ? "Reply" : "Replies")
+                    <i class="icofont-mail"></i><i class="icofont-reply"></i> <strong>@Model.Children.Count()</strong> @(Model.Children.Count() == 1 ? "Reply" : "Replies")
                     <ul>
-                        @foreach (var child in Model.Message.Children)
+                        @foreach (var child in Model.Children)
                         {
                             <li><a href="~/List/Message/@child.ID">From @child.OriginatorContact.Name at @child.Recieved.ToLocalTime(): @child.Subject</a></li>
                         }
@@ -66,7 +67,7 @@
                 Page @Model.PageNumber of @Model.TotalPages
                 @if (Model.PageNumber < Model.TotalPages)
                 {
-                    <a href="~/List/Message/@Model.Message.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-right"></i></a>
+                    <a href="~/List/Message/@Model.Message.ID/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
                 }
             </footer>
         }

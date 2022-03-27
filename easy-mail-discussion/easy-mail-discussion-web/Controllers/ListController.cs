@@ -233,6 +233,7 @@ namespace EasyMailDiscussion.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("List/Archive/{id}/{pageNumber?}")]
         public IActionResult Archive(int id, int pageNumber = 1)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists
@@ -247,6 +248,7 @@ namespace EasyMailDiscussion.Web.Controllers
                 .ToArray();
             var pageCount = this.SqliteDatabase.Messages
                 .Where(message => message.DiscussionListID == id)
+                .Where(message => message.ParentID == null)
                 .PageCount(DockerEnvironmentVariables.PageSize);
 
             var model = new ArchivePageModel()
@@ -260,19 +262,32 @@ namespace EasyMailDiscussion.Web.Controllers
             return View("Archive", model);
         }
 
+        [Route("List/Message/{id}/{pageNumber?}")]
         public IActionResult Message(int id, int pageNumber = 1)
         {
             var message = this.SqliteDatabase.Messages
                 .Where(message => message.ID == id)
                 .Include(message => message.OriginatorContact)
                 .Include(message => message.DiscussionList)
-                .Include(message => message.Children)
-                .ThenInclude(message => message.OriginatorContact)
                 .SingleOrDefault();
+
+            var children = this.SqliteDatabase.Messages
+                .Where(message => message.ParentID == id)
+                .Include(message => message.OriginatorContact)
+                .Include(message => message.DiscussionList)
+                .Page(pageNumber, DockerEnvironmentVariables.PageSize);
+
+            var pageCount = this.SqliteDatabase.Messages
+                .Where(message => message.ParentID == id)
+                .PageCount(DockerEnvironmentVariables.PageSize);
+
 
             var model = new MessagePageModel()
             {
-                Message = message
+                Message = message,
+                Children = children,
+                PageNumber = pageNumber,
+                TotalPages = pageCount
             };
 
             return View("Message", model);

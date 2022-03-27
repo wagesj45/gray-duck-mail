@@ -187,7 +187,20 @@ namespace EasyMailDiscussion.Common
                         var html = new HtmlDocument();
                         html.LoadHtml(message.BodyHTML);
 
-                        var bodyNode = html.DocumentNode.SelectNodes("//body").SingleOrDefault();
+                        HtmlNode bodyNode = null;
+                        if(html.DocumentNode.SelectNodes("//body")?.Any() ?? false)
+                        {
+                            bodyNode = html.DocumentNode.SelectNodes("//body").FirstOrDefault();
+                        }
+
+                        if(bodyNode == null)
+                        {
+                            //If we couldn't find a <body> tag, let's assume it not a full html 
+                            // build and just attach to the document node directly.
+
+                            bodyNode = html.DocumentNode;
+                        }
+
                         var techHeader = html.CreateElement("mark");
                         techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to <a href='mailto:{1}'>{1}</a>", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                         bodyNode.AppendChild(techHeader);

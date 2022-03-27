@@ -332,8 +332,8 @@ namespace EasyMailDiscussion.Web.Worker
                     try
                     {
                         var listParticipants = discussionList.Subscriptions
-                            .Where(contact => contact.Status == SubscriptionStatus.Subscribed)
-                            .Where(contact => contact.ID != originatorSubscription.ContactID);
+                            .Where(subscription => subscription.Status == SubscriptionStatus.Subscribed)
+                            .Where(subscription => subscription.ContactID != originatorSubscription.ContactID);
 
                         foreach (var participant in listParticipants)
                         {

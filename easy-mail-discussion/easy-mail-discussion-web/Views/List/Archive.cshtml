@@ -1,4 +1,5 @@
-﻿@model ArchivePageModel
+﻿@using EasyMailDiscussion.Common
+@model ArchivePageModel
 @{
     ViewData["Title"] = string.Format("{0} Archive", Model.DiscussionList.Name);
 }
@@ -30,7 +31,7 @@
                     </header>
                     @if (!string.IsNullOrWhiteSpace(message.BodyHTML))
                     {
-                        @Html.Raw(message.BodyHTML)
+                        @Html.Raw(HTMLCleaner.RemoveInlineCSS(message.BodyHTML))
                     }
                     else if (!string.IsNullOrWhiteSpace(message.BodyText))
                     {
@@ -79,7 +80,7 @@
                 Page @Model.PageNumber of @Model.TotalPages
                 @if (Model.PageNumber < Model.TotalPages)
                 {
-                    <a href="~/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-right"></i></a>
+                    <a href="~/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
                 }
             </footer>
         }
