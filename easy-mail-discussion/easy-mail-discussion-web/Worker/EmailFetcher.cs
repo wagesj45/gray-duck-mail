@@ -199,7 +199,7 @@ namespace EasyMailDiscussion.Web.Worker
             subscription.Status = SubscriptionStatus.Unsubscribed;
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index);
-            //pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
+            pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
         }
 
         /// <summary>
@@ -398,12 +398,13 @@ namespace EasyMailDiscussion.Web.Worker
         /// </returns>
         private async Task<IEnumerable<IndexedMimeMessage>> FilterMessages(IEnumerable<IndexedMimeMessage> messages, Func<IndexedMimeMessage, bool> filter)
         {
+            var messageArray = messages.ToArray();
             return await Task.Run<IEnumerable<IndexedMimeMessage>>(() =>
             {
                 logger.Trace("Filtering {0} messages.", messages.Count());
 
                 var filteredMessages = new List<IndexedMimeMessage>();
-                foreach (var message in messages)
+                foreach (var message in messageArray)
                 {
                     logger.Trace("Filtering message {0}.", message.Index);
                     if (filter(message))

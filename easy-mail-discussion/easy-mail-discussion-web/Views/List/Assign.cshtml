@@ -24,18 +24,25 @@
 
 <form action="~/List/Assign" method="post">
     <input type="hidden" name="discussionListID" id="discussionListID" value="@Model.DiscussionList.ID" />
-    <fieldset>
-        @foreach (var contact in Model.Contacts)
-        {
-            <input type="hidden" name="contactID" id="contactID_@contact.ID" value="@contact.ID" />
-            <label for="assigned">
-                <input type="checkbox"
-                   name="assigned"
-                   id="assigned"
-                   @(EmailHelper.IsAuthorizedForMailDistribution(Model.DiscussionList, contact) ? "checked" : "" )
-                   @(EmailHelper.ContactUnassignableStatuses.Contains(Model.GetSubscription(contact.ID)) ? "disabled" : "")
-                   value="@contact.ID" />
-                @contact.Name
+
+    @foreach (var contact in Model.Contacts)
+    {
+        <div class="grid">
+            <div>
+                <fieldset>
+                    <input type="hidden" name="contactID" id="contactID_@contact.ID" value="@contact.ID" />
+                    <label for="assigned">
+                        <input type="checkbox"
+                           name="assigned"
+                           id="assigned"
+                           @(EmailHelper.IsAuthorizedForMailDistribution(Model.DiscussionList, contact) ? "checked" : "" )
+                           @(EmailHelper.ContactUnassignableStatuses.Contains(Model.GetSubscription(contact.ID)) ? "disabled" : "")
+                           value="@contact.ID" />
+                        @contact.Name
+                    </label>
+                </fieldset>
+            </div>
+            <div>
                 @switch (Model.GetSubscription(contact.ID))
                 {
                     case SubscriptionStatus.AwaitingConfirmation:
@@ -57,14 +64,14 @@
                         <span data-tooltip="This user is subscribed to this discussion list."><i class="icofont-check-circled"></i></span>
                         break;
                     case SubscriptionStatus.Unsubscribed:
-                        <span data-tooltip="This user has asked to participate in this discussion group."><i class="icofont-eye-blocked"></i></span>
+                        <span data-tooltip="This user has unsubscribed from this discussion group."><i class="icofont-eye-blocked"></i></span>
                         break;
                     default:
-                        <!-- Unknown Subscription Status. --> 
+                        <!-- Unknown Subscription Status. -->
                         break;
                 }
-            </label>
-        }
-    </fieldset>
+            </div>
+        </div>
+    }
     <button type="submit">Save Changes</button>
 </form>
