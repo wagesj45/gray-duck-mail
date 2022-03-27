@@ -1,13 +1,18 @@
-﻿@{
+﻿@model HomepageModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <hgroup>
     <h1>Welcome</h1>
-    <h2>Hello! Welcome to your email lists.</h2>
+    <h2>Hello! Welcome to your email discussion lists.</h2>
 </hgroup>
 
 <article>
-    <a role=button href="~/List"><i class="icofont-list"></i> Discussion Lists</a>
-    <a role=button href="~/Contact"><i class="icofont-ui-user-group"></i> Contacts</a>
+    <header>
+        <h1>At a glance...</h1>
+    </header>
+    <p>You have <strong>@Model.NumberOfDiscussionLists</strong> discussion @(Model.NumberOfDiscussionLists == 1 ? "list" : "lists").</p>
+    <p>You have a total of <strong>@Model.NumberOfMessages</strong> @(Model.NumberOfMessages == 1 ? "message" : "messages").</p>
+    <p>You have <strong>@Model.NumberOfContacts</strong> @(Model.NumberOfContacts == 1 ? "person" : "people") in your contact list.</p>
 </article>

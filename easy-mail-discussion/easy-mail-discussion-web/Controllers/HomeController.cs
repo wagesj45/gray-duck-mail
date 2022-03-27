@@ -22,12 +22,18 @@ namespace EasyMailDiscussion.Web.Controllers
         
         public IActionResult Index()
         {
-            return View();
-        }
+            var numberOfDiscussionLists = this.SqliteDatabase.DiscussionLists.Count();
+            var numberOfMessages = this.SqliteDatabase.Messages.Count();
+            var numberOfContacts = this.SqliteDatabase.Contacts.Count();
 
-        public IActionResult Privacy()
-        {
-            return View();
+            var model = new HomepageModel()
+            {
+                NumberOfDiscussionLists = numberOfDiscussionLists,
+                NumberOfMessages = numberOfMessages,
+                NumberOfContacts = numberOfContacts
+            };
+
+            return View("Index", model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
