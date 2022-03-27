@@ -96,7 +96,7 @@ namespace EasyMailDiscussion.Web.Controllers
 
         public IActionResult Remove(int id)
         {
-            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == id).FirstOrDefault();
+            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == id).SingleOrDefault();
 
             if (discussionList == null)
             {
@@ -104,12 +104,29 @@ namespace EasyMailDiscussion.Web.Controllers
                 return View("Error");
             }
 
-            var model = new EditDiscussionListModel()
+            var model = new RemoveDiscussionListModel()
             {
                 DiscussionList = discussionList
             };
 
             return View("Remove", model);
+        }
+
+        public IActionResult ConfirmRemove(int id)
+        {
+            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == id).SingleOrDefault();
+
+            if (discussionList == null)
+            {
+                logger.Error("Could not find discussion list with ID = {0}", id);
+                return View("Error");
+            }
+
+            this.SqliteDatabase.DiscussionLists.Remove(discussionList);
+
+            this.SqliteDatabase.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -193,18 +210,19 @@ namespace EasyMailDiscussion.Web.Controllers
                         };
                         this.SqliteDatabase.ContactSubscriptions.Add(subscription);
                     }
-                    else
+                    else if(!EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status))
                     {
+                        logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
                         subscription.Status = SubscriptionStatus.AwaitingConfirmation;
                     }
                 }
                 else
                 {
-                    if (subscription != null)
+                    if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status))
                     {
                         logger.Debug("Removing Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
 
-                        this.SqliteDatabase.ContactSubscriptions.Remove(subscription);
+                        subscription.Status = SubscriptionStatus.Denied;
                     }
                 }
             }

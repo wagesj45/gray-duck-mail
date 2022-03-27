@@ -1,4 +1,5 @@
 ﻿using EasyMailDiscussion.Common.Database;
+using HtmlAgilityPack;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MimeKit.Text;
@@ -43,7 +44,7 @@ namespace EasyMailDiscussion.Common
             }
         }
 
-        /// <summary> Gets the associated subscription statuses. </summary>
+        /// <summary> Gets the subscription statuses indicating that a contact is assigned to a discussion list. </summary>
         /// <value> The associated statuses. </value>
         public static IEnumerable<SubscriptionStatus> ContactAssociatedStatuses
         {
@@ -182,18 +183,35 @@ namespace EasyMailDiscussion.Common
                     if (!string.IsNullOrWhiteSpace(message.BodyHTML))
                     {
                         logger.Debug("Mesasge body determined to contain HTML.");
+
+                        var html = new HtmlDocument();
+                        html.LoadHtml(message.BodyHTML);
+
+                        var bodyNode = html.DocumentNode.SelectNodes("//body").SingleOrDefault();
+                        var techHeader = html.CreateElement("mark");
+                        techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to <a href='mailto:{1}'>{1}</a>", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        bodyNode.AppendChild(techHeader);
+
+                        var cleanedHtmlString = html.DocumentNode.InnerHtml.Replace(techHeader.InnerHtml, "");
+                        var modifiedHtml = html.DocumentNode.InnerHtml;
+
                         return new TextPart(TextFormat.Html)
                         {
-                            Text = message.BodyHTML
+                            Text = modifiedHtml
                         };
                     }
 
                     if (!string.IsNullOrWhiteSpace(message.BodyText))
                     {
                         logger.Debug("Message body determined to contain plain text.");
+
+                        var techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        var cleanedText = message.BodyText.Replace(techHeader, "");
+                        var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
+                        
                         return new TextPart(TextFormat.Text)
                         {
-                            Text = message.BodyText
+                            Text = modifiedText
                         };
                     }
 
@@ -254,6 +272,31 @@ namespace EasyMailDiscussion.Common
                             "Thanks for subscribing!",
                             String.Format("You've been subscribed to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.", discussionList.BaseEmailAddress),
+                            discussionList.Name,
+                            discussionList
+                            )
+                    };
+                },
+                client,
+                cancellationToken);
+        }
+
+        public static void SendUnsubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
+        {
+            logger.Info("Sending the subscription confirmation email to {0} ({1}).", recipient.Name, recipient.Email);
+
+            SendEmail(discussionList,
+                recipient,
+                string.Format("You have been unsubscribed from {0}.", discussionList.Name),
+                discussionList.BaseEmailAddress,
+                () =>
+                {
+                    return new TextPart(TextFormat.Html)
+                    {
+                        Text = EmailHelper.FillMainTemplate(
+                            "Sorry to see you go.",
+                            String.Format("You will no longer recieve messages from the '{0}' Email Discussion List", discussionList.Name),
+                            String.Format("You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to <a href='mailto:{0}'>{0}</a>.", EmailAliasHelper.GetRequestAlias(discussionList)),
                             discussionList.Name,
                             discussionList
                             )

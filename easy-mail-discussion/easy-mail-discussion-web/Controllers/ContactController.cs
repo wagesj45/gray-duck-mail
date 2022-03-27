@@ -88,7 +88,7 @@ namespace EasyMailDiscussion.Web.Controllers
 
         public IActionResult Remove(int id)
         {
-            var contact = this.SqliteDatabase.Contacts.Where(list => list.ID == id).FirstOrDefault();
+            var contact = this.SqliteDatabase.Contacts.Where(list => list.ID == id).SingleOrDefault();
 
             if (contact == null)
             {
@@ -96,12 +96,29 @@ namespace EasyMailDiscussion.Web.Controllers
                 return View("Error");
             }
 
-            var model = new EditContactModel()
+            var model = new RemoveContactModel()
             {
                 Contact = contact
             };
 
             return View("Remove", model);
+        }
+
+        public IActionResult ConfirmRemove(int id)
+        {
+            var contact = this.SqliteDatabase.Contacts.Where(contact => contact.ID == id).SingleOrDefault();
+
+            if (contact == null)
+            {
+                logger.Error("Could not find contact with ID = {0}", id);
+                return View("Error");
+            }
+
+            this.SqliteDatabase.Contacts.Remove(contact);
+
+            this.SqliteDatabase.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

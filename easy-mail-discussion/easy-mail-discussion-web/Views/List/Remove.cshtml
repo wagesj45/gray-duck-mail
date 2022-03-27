@@ -1,58 +1,20 @@
-﻿@model EditDiscussionListModel
+﻿@model RemoveDiscussionListModel
 @{
     ViewData["Title"] = "Remove Discussion List?";
 }
 
 <hgroup>
-    <h1>Remove Discussion List</h1>
-    <h2>Create a new discussion list below.</h2>
+    <h1>Removing @Model.DiscussionList.Name</h1>
+    <h2>Are you sure you want to remove this discussion list?</h2>
 </hgroup>
 
-<form action="~/List/@(Model.DiscussionList.ID > 0 ? "Edit" : "Create")" method="post">
-    <input type="hidden" id="id" name="id" value="@Model.DiscussionList.ID" />
-    <label for="name">
-        Name
-        <input type="text" id="name" name="name" value="@Model.DiscussionList.Name" />
-    </label>
-    <label for="description">
-        Description
-        <input type="text" id="description" name="description" value="@Model.DiscussionList.Description" />
-        <small>A short description of the discussion list.</small>
-    </label>
-    <label for="baseEmailAddress">
-        List Email Address
-        <input type="email" id="baseEmailAddress" name="baseEmailAddress" value="@Model.DiscussionList.BaseEmailAddress" />
-        <small><i class="icofont-info-square"></i> Automatic email aliases will be used, such as <kbd>bounce+list@example.com</kbd> and <kbd>unsubscribe+list@example.com</kbd>.</small>
-    </label>
-    <h3>Remote Email Configuration</h3>
-    <label for="userName">
-        User Name
-        <input type="text" id="userName" name="userName" value="@Model.DiscussionList.UserName" />
-    </label>
-    <label for="password">
-        Password
-        <input type="password" id="password" name="password" value="@Model.DiscussionList.Password" />
-        <small><i class="icofont-warning"></i> Passwords are not encrypted when stored. Always secure your server, and never expose Easy Mail Discussion to the public internet!</small>
-    </label>
-    <label for="incomingMailServer">
-        Incoming Mail Server
-        <input type="text" id="incomingMailServer" name="incomingMailServer" value="@Model.DiscussionList.IncomingMailServer" />
-    </label>
-    <label for="incomingMailPort">
-        Incoming Mail Server Port
-        <input type="number" id="incomingMailPort" name="incomingMailPort" value="@Model.DiscussionList.IncomingMailPort" />
-    </label>
-    <label for="outgoingMailServer">
-        Outgoing Mail Server
-        <input type="text" id="outgoingMailServer" name="outgoingMailServer" value="@Model.DiscussionList.OutgoingMailServer" />
-    </label>
-    <label for="outgoingMailPort">
-        Outgoing Mail Server Port
-        <input type="number" id="outgoingMailPort" name="outgoingMailPort" value="@Model.DiscussionList.OutgoingMailPort" />
-    </label>
-    <label for="useSSL">
-        <input type="checkbox" id="useSSL" name="useSSL" @((Model.DiscussionList.UseSSL) ? "checked" : "") />
-        Use SSL or TLS for a secure connection to the mail server.
-    </label>
-    <button type="submit">Create Discussion List</button>
-</form>
+<article>
+    <div class="grid">
+        <div>
+            <a href="~/List/ConfirmRemove/@Model.DiscussionList.ID" role="button" style="width:100%;"><i class="icofont-delete-alt"></i> Remove</a>
+        </div>
+        <div>
+            <a href="~/List" role="button" class="contrast" style="width:100%;"><i class="icofont-not-allowed"></i> Cancel</a>
+        </div>
+    </div>
+</article>

@@ -71,43 +71,38 @@ namespace EasyMailDiscussion.Web.Worker
                                 var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
                                 var filteredBouncedToBounceAlias = FilterMessages(emailMessages, EmailAliasHelper.GetBounceAlias(discussionList));
                                 var filteredBouncedToBaseAddress = FilterBouncedMessages(emailMessages);
+                                var filteredBounced = filteredBouncedToBounceAlias.Concat(filteredBouncedToBaseAddress);
 
                                 // Subscription Confirmation Emails
-                                var subscriptionConfirmations = await filteredSubscribe;
-                                foreach (var subscriptionConfirmation in subscriptionConfirmations)
+                                foreach (var subscriptionConfirmation in filteredSubscribe)
                                 {
                                     ProcessSubscriptionConfirmations(discussionList, database, pop3Client, subscriptionConfirmation, stoppingToken);
                                 }
 
                                 // Unsubscribe Confirmation Emails
-                                var unsubscribeConfirmations = await filteredUnsubscribe;
-                                foreach (var unsubscribeConfirmation in unsubscribeConfirmations)
+                                foreach (var unsubscribeConfirmation in filteredUnsubscribe)
                                 {
                                     ProcessUnsubscribeConfirmations(discussionList, database, pop3Client, unsubscribeConfirmation);
                                 }
 
                                 // List Assignment Request Emails
-                                var requests = await filteredRequest;
-                                foreach (var request in requests)
+                                foreach (var request in filteredRequest)
                                 {
                                     ProcessRequests(discussionList, database, pop3Client, request);
                                 }
 
                                 // Bounced email messages.
-                                var bouncedToAlias = await filteredBouncedToBounceAlias;
-                                var bouncedToBaseAddress = await filteredBouncedToBaseAddress;
-                                var bouncedMessages = bouncedToAlias.Concat(bouncedToBaseAddress);
-                                foreach (var bounce in bouncedMessages)
+                                foreach (var bounce in filteredBounced)
                                 {
                                     ProcessBounces(discussionList, database, pop3Client, bounce);
                                 }
 
                                 // Remaining messages can be assumed to be communications between discussion list members.
                                 var discussionMessages = emailMessages
-                                    .Except(subscriptionConfirmations)
-                                    .Except(unsubscribeConfirmations)
-                                    .Except(requests)
-                                    .Except(bouncedMessages);
+                                    .Except(filteredSubscribe)
+                                    .Except(filteredUnsubscribe)
+                                    .Except(filteredBounced)
+                                    .Except(filteredBounced);
                                 foreach (var discussionMessage in discussionMessages)
                                 {
                                     ProcessDiscussionMessages(discussionList, discussionMessage, database, pop3Client, stoppingToken);
@@ -212,7 +207,10 @@ namespace EasyMailDiscussion.Web.Worker
         private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = discussionList.Subscriptions.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
+                .Where(subscription => subscription.Contact.Email == from.Address)
+                .SingleOrDefault();
 
             if (subscription == null)
             {
@@ -365,26 +363,22 @@ namespace EasyMailDiscussion.Web.Worker
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
-        private async Task<IEnumerable<IndexedMimeMessage>> FilterMessages(IEnumerable<IndexedMimeMessage> messages, string emailToAddress)
+        private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, string emailToAddress)
         {
             logger.Debug("Filtering messages for {0}.", emailToAddress);
 
-            return await FilterMessages(messages, message =>
-            {
-                return message.Message.GetRecipients(true)
-                .Where(recipient => recipient.Address.Equals(emailToAddress, StringComparison.OrdinalIgnoreCase))
-                .Any();
-            });
+            var filteredMessages = messages.Select(message => (Message: message, Recipients: message.Message.GetRecipients(true)))
+            .Where(anon => anon.Recipients.Any(rec => rec.Address.Equals(emailToAddress, StringComparison.OrdinalIgnoreCase)))
+            .Select(anon => anon.Message);
+
+            return filteredMessages;
         }
 
-        private async Task<IEnumerable<IndexedMimeMessage>> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
+        private IEnumerable<IndexedMimeMessage> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
         {
             logger.Debug("Filtering bounced messages.");
 
-            return await FilterMessages(messages, message =>
-            {
-                return EmailHelper.IsBouncedMessage(message);
-            });
+            return FilterMessages(messages, message => EmailHelper.IsBouncedMessage(message));
         }
 
         /// <summary>
@@ -396,26 +390,22 @@ namespace EasyMailDiscussion.Web.Worker
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
-        private async Task<IEnumerable<IndexedMimeMessage>> FilterMessages(IEnumerable<IndexedMimeMessage> messages, Func<IndexedMimeMessage, bool> filter)
+        private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, Func<IndexedMimeMessage, bool> filter)
         {
-            var messageArray = messages.ToArray();
-            return await Task.Run<IEnumerable<IndexedMimeMessage>>(() =>
+            logger.Trace("Filtering {0} messages.", messages.Count());
+
+            var filteredMessages = new List<IndexedMimeMessage>();
+            foreach (var message in messages)
             {
-                logger.Trace("Filtering {0} messages.", messages.Count());
-
-                var filteredMessages = new List<IndexedMimeMessage>();
-                foreach (var message in messageArray)
+                logger.Trace("Filtering message {0}.", message.Index);
+                if (filter(message))
                 {
-                    logger.Trace("Filtering message {0}.", message.Index);
-                    if (filter(message))
-                    {
-                        logger.Trace("Message {0} matches the filter criteria.", message.Index);
-                        filteredMessages.Add(message);
-                    }
+                    logger.Trace("Message {0} matches the filter criteria.", message.Index);
+                    filteredMessages.Add(message);
                 }
+            }
 
-                return filteredMessages;
-            });
+            return filteredMessages;
         }
     }
 }
