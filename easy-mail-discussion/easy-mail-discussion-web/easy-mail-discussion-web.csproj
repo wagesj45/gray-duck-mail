@@ -1,30 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>EasyMailDiscussion.Web</RootNamespace>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>EasyMailDiscussion.Web</RootNamespace>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileTag>easy-mail-discussion</DockerfileTag>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="database.db-shm" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="database.db-shm" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\icofont\fonts\icofont.svg" />
-    <None Include="wwwroot\icofont\fonts\icofont.woff2" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="wwwroot\icofont\fonts\icofont.svg" />
+		<None Include="wwwroot\icofont\fonts\icofont.woff2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MailKit" Version="3.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-    <PackageReference Include="NLog" Version="4.7.14" />
-    <PackageReference Include="SQLite" Version="3.13.0" />
-    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.7" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MailKit" Version="3.1.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+		<PackageReference Include="NLog" Version="4.7.14" />
+		<PackageReference Include="SQLite" Version="3.13.0" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.7" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\easy-mail-discussion-common\easy-mail-discussion-common.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\easy-mail-discussion-common\easy-mail-discussion-common.csproj" />
+	</ItemGroup>
 
 </Project>

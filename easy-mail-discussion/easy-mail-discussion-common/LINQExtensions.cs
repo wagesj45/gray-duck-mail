@@ -6,6 +6,12 @@ using System.Text;
 
 namespace EasyMailDiscussion.Common
 {
+    /// <summary>
+    /// A helper class containing extensions for
+    /// <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</see>
+    /// operations.
+    /// </summary>
+    /// <seealso cref="System.Linq"/>
     public static class LINQExtensions
     {
         #region Members

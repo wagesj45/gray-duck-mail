@@ -9,12 +9,16 @@ using System.Text;
 
 namespace EasyMailDiscussion.Common
 {
-    /// <summary> A static class that retrieves the <see cref="LoggingConfiguration">NLog configuration</see>. </summary>
+    /// <summary> A static class that contains the <see cref="NLog.Config.LoggingConfiguration">NLog configuration</see>. </summary>
     public static class NLogConfiguration
     {
-        /// <summary> Gets the NLog configuration. </summary>
-        /// <param name="logLevel"> The log level. </param>
-        /// <returns> The configuration. </returns>
+        /// <summary>
+        /// Gets the NLog configuration configured to the given <paramref name="logLevel"/> and
+        /// <paramref name="logFilePath"/>.
+        /// </summary>
+        /// <param name="logLevel">    The log level. </param>
+        /// <param name="logFilePath"> Full pathname of the log file. </param>
+        /// <returns> The NLog configuration. </returns>
         public static LoggingConfiguration GetConfiguration(string logLevel, string logFilePath)
         {
             var configuration = new LoggingConfiguration();
@@ -24,8 +28,8 @@ namespace EasyMailDiscussion.Common
             consoleTarget.UseDefaultRowHighlightingRules = true;
             fileTarget.FileName = logFilePath;
 
-            configuration.AddRule(GetLogLevel(logLevel), LogLevel.Fatal, consoleTarget);
-            configuration.AddRule(GetLogLevel(logLevel), LogLevel.Fatal, fileTarget);
+            configuration.AddRule(ParseLogLevel(logLevel), LogLevel.Fatal, consoleTarget);
+            configuration.AddRule(ParseLogLevel(logLevel), LogLevel.Fatal, fileTarget);
 
             consoleTarget.Layout = "[${logger}] ${message} ${exception:format=tostring}";
 
@@ -73,28 +77,41 @@ namespace EasyMailDiscussion.Common
             return configuration;
         }
 
-        /// <summary> Gets log level. </summary>
-        /// <param name="logLevel"> The log level. </param>
+        /// <summary> Parses a string representation of a <see cref="LogLevel"/>. </summary>
+        /// <remarks>
+        /// If parsing fails, or an invalid value is given, a default value of
+        /// <see cref="LogLevel.Info"/> is returned.
+        /// </remarks>
+        /// <param name="logLevel"> The string representation of log level. </param>
         /// <returns> The log level. </returns>
-        private static LogLevel GetLogLevel(string logLevel)
+        private static LogLevel ParseLogLevel(string logLevel)
         {
             var result = LogLevel.Info;
 
+            if(!string.IsNullOrWhiteSpace(logLevel))
+            {
+                return result;
+            }
+
             switch (logLevel.ToLowerInvariant())
             {
+                case "all":
                 case "trace":
                     result = LogLevel.Trace;
                     break;
+                case "verbose":
                 case "debug":
                     result = LogLevel.Debug;
                     break;
                 case "info":
+                case "information":
                     result = LogLevel.Info;
                     break;
                 case "warn":
                 case "warning":
                     result = LogLevel.Warn;
                     break;
+                case "err":
                 case "error":
                     result = LogLevel.Error;
                     break;

@@ -14,6 +14,9 @@ using System.Threading;
 
 namespace EasyMailDiscussion.Common
 {
+    /// <summary>
+    /// A helper class that contains data and methods for manipulating and processing email data.
+    /// </summary>
     public static class EmailHelper
     {
         #region Members
@@ -21,19 +24,24 @@ namespace EasyMailDiscussion.Common
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary> (Immutable) The string denoting the MIME status for a failed email message. </summary>
         public const string STATUS_GROUP_ACTION_FAILED = "failed";
 
-        /// <summary> (Immutable) The string denoting the status group action delayed. </summary>
+        /// <summary> (Immutable) The string denoting the MIME status for a delayed email message. </summary>
         public const string STATUS_GROUP_ACTION_DELAYED = "delayed";
 
         /// <summary> The main HTML email template. </summary>
-        private static string mailEmailTemplate;
+        private static string defaultEmailTemplate;
 
         #endregion
 
         #region Properties
 
-        /// <summary> Gets the authorized subscription statuses. </summary>
+        /// <summary>
+        /// Gets the <see cref="SubscriptionStatus"/> values that indicate a <see cref="Contact"/> is
+        /// authorized to send <see cref="Message">messages</see> through the
+        /// <see cref="DiscussionList">discussion list</see>.
+        /// </summary>
         /// <value> The authorized statuses. </value>
         public static IEnumerable<SubscriptionStatus> ContactAuthorizedStatuses
         {
@@ -44,7 +52,11 @@ namespace EasyMailDiscussion.Common
             }
         }
 
-        /// <summary> Gets the subscription statuses indicating that a contact is assigned to a discussion list. </summary>
+        /// <summary>
+        /// Gets the <see cref="SubscriptionStatus"/> values that indicate that a <see cref="Contact"/>
+        /// is <see cref="ContactSubscription">assigned</see> to a <see cref="DiscussionList">discussion
+        /// list</see>.
+        /// </summary>
         /// <value> The associated statuses. </value>
         public static IEnumerable<SubscriptionStatus> ContactAssociatedStatuses
         {
@@ -56,7 +68,11 @@ namespace EasyMailDiscussion.Common
             }
         }
 
-        /// <summary> Gets the contact unassignable statuses. </summary>
+        /// <summary>
+        /// Gets the <see cref="SubscriptionStatus"/> values that indicate that a <see cref="Contact"/>
+        /// cannot be <see cref="ContactSubscription">assigned</see> to a
+        /// <see cref="DiscussionList">discussion list</see>.
+        /// </summary>
         /// <value> The contact unassignable statuses. </value>
         public static IEnumerable<SubscriptionStatus> ContactUnassignableStatuses
         {
@@ -67,8 +83,10 @@ namespace EasyMailDiscussion.Common
             }
         }
 
-        /// <summary> Gets the bounced email status group action values. </summary>
+        /// <summary> Gets the MIME values indicating a bounced email. </summary>
         /// <value> The bounced email status group action values. </value>
+        /// <seealso cref="STATUS_GROUP_ACTION_FAILED"/>
+        /// <seealso cref="STATUS_GROUP_ACTION_DELAYED"/>
         public static IEnumerable<string> BouncedEmailStatusGroupActions
         {
             get
@@ -78,13 +96,20 @@ namespace EasyMailDiscussion.Common
             }
         }
 
-        /// <summary> Gets the HTML email template. </summary>
+        /// <summary> Gets the default HTML email template. </summary>
+        /// <remarks>
+        /// This email template contains several replaceable notaions: <c>{header}</c>,
+        /// <c>{subheader}</c>, <c>{body}</c>, and <c>{footer}</c>. The <c>{unsubscribe}</c> notation
+        /// should always be a link to the
+        /// <see cref="EmailAliasHelper.GetUnsubscribeAlias(DiscussionList)">unsubscribe email
+        /// alias</see>.
+        /// </remarks>
         /// <value> The mail email template. </value>
-        public static string MailEmailTemplate
+        public static string DefaultEmailTemplate
         {
             get
             {
-                if (string.IsNullOrEmpty(mailEmailTemplate))
+                if (string.IsNullOrEmpty(defaultEmailTemplate))
                 {
                     logger.Info("Loading main HTML email template.");
 
@@ -101,14 +126,14 @@ namespace EasyMailDiscussion.Common
 
                     using (var reader = new StreamReader(stream))
                     {
-                        mailEmailTemplate = reader.ReadToEnd();
+                        defaultEmailTemplate = reader.ReadToEnd();
 
                         logger.Debug("Email template read into memory.");
-                        logger.Trace(mailEmailTemplate);
+                        logger.Trace(defaultEmailTemplate);
                     }
                 }
 
-                return mailEmailTemplate;
+                return defaultEmailTemplate;
             }
         }
 
@@ -116,16 +141,16 @@ namespace EasyMailDiscussion.Common
 
         #region Methods
 
-        /// <summary> Fill main HTML email template. </summary>
+        /// <summary> Fill the default HTML email template with values. </summary>
         /// <param name="heading">        The heading. </param>
         /// <param name="subheading">     The subheading. </param>
         /// <param name="body">           The body. </param>
         /// <param name="footer">         The footer. </param>
-        /// <param name="discussionList"> the Discussion List database object. </param>
+        /// <param name="discussionList"> The discussion list. </param>
         /// <returns> A string with a processed main email template. </returns>
-        public static string FillMainTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList)
+        public static string FillDefaultTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList)
         {
-            var result = MailEmailTemplate
+            var result = DefaultEmailTemplate
                 .Replace("{heading}", heading)
                 .Replace("{subheading}", subheading)
                 .Replace("{body}", body)
@@ -138,8 +163,10 @@ namespace EasyMailDiscussion.Common
             return result;
         }
 
-        /// <summary> Query if a given user is authorized for mail distribution on a given discussion list. </summary>
-        /// <param name="discussionList"> the Discussion List database object. </param>
+        /// <summary>
+        /// Query if a given user is authorized for mail distribution on a given discussion list.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
         /// <param name="contact">        The contact. </param>
         /// <returns> True if authorized for mail distribution, false if not. </returns>
         public static bool IsAuthorizedForMailDistribution(DiscussionList discussionList, Contact contact)
@@ -155,7 +182,7 @@ namespace EasyMailDiscussion.Common
         }
 
         /// <summary> Query if a given user can be assigned to a discussion list. </summary>
-        /// <param name="discussionList"> the Discussion List database object. </param>
+        /// <param name="discussionList"> The discussion list. </param>
         /// <param name="contact">        The contact. </param>
         /// <returns> True if assignable, false if not. </returns>
         public static bool IsAssignable(DiscussionList discussionList, Contact contact)
@@ -170,6 +197,23 @@ namespace EasyMailDiscussion.Common
             return assignable;
         }
 
+        /// <summary>
+        /// Relay an email to the <see cref="Contact">contacts</see>
+        /// <see cref="ContactSubscription">assigned</see> to a <see cref="DiscussionList">discussion
+        /// list</see>.
+        /// </summary>
+        /// <exception cref="FormatException">
+        ///     Thrown when the format of an input is incorrect.
+        /// </exception>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="recipient">      The recipient. </param>
+        /// <param name="message">        The message. </param>
+        /// <param name="database">       The database. </param>
+        /// <param name="client">         The SMTP client. </param>
+        /// <param name="stoppingToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void RelayEmail(DiscussionList discussionList, Contact recipient, Message message, SqliteDatabase database, SmtpClient client, CancellationToken stoppingToken = default)
         {
             logger.Debug("Relaying message to {0} ({1})", recipient.Name, recipient.Email);
@@ -244,6 +288,17 @@ namespace EasyMailDiscussion.Common
             database.RelayIdentifiers.Add(relayIdentifier);
         }
 
+        /// <summary>
+        /// Sends an onboarding email asking a <see cref="Contact">contact</see> to subscribe to a
+        /// <see cref="DiscussionList">discussion list</see>.
+        /// </summary>
+        /// <param name="discussionList">    The discussion list. </param>
+        /// <param name="recipient">         The recipient. </param>
+        /// <param name="client">            The SMTP client. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void SendOnboardingEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info("Sending onboarding email to {0} ({1}).", recipient.Name, recipient.Email);
@@ -256,7 +311,7 @@ namespace EasyMailDiscussion.Common
                 {
                     return new TextPart(TextFormat.Html)
                     {
-                        Text = EmailHelper.FillMainTemplate(
+                        Text = EmailHelper.FillDefaultTemplate(
                             "Welcome!",
                             String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
@@ -269,6 +324,17 @@ namespace EasyMailDiscussion.Common
                 cancellationToken);
         }
 
+        /// <summary>
+        /// Sends a subscription confirmation email to a <see cref="Contact">contact</see> that has
+        /// subscribed to a <see cref="DiscussionList">discussion list</see>.
+        /// </summary>
+        /// <param name="discussionList">    The discussion list. </param>
+        /// <param name="recipient">         The recipient. </param>
+        /// <param name="client">            The SMTP client. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void SendSubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info("Sending the subscription confirmation email to {0} ({1}).", recipient.Name, recipient.Email);
@@ -281,7 +347,7 @@ namespace EasyMailDiscussion.Common
                 {
                     return new TextPart(TextFormat.Html)
                     {
-                        Text = EmailHelper.FillMainTemplate(
+                        Text = EmailHelper.FillDefaultTemplate(
                             "Thanks for subscribing!",
                             String.Format("You've been subscribed to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.", discussionList.BaseEmailAddress),
@@ -294,6 +360,14 @@ namespace EasyMailDiscussion.Common
                 cancellationToken);
         }
 
+        /// <summary> Sends a confirmation email to a <see cref="Contact">contact</see> that has unsubscribed from a <see cref="DiscussionList">discussion list</see>. </summary>
+        /// <param name="discussionList">    The discussion list. </param>
+        /// <param name="recipient">         The recipient. </param>
+        /// <param name="client">            The SMTP client. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        /// <see cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void SendUnsubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info("Sending the subscription confirmation email to {0} ({1}).", recipient.Name, recipient.Email);
@@ -306,7 +380,7 @@ namespace EasyMailDiscussion.Common
                 {
                     return new TextPart(TextFormat.Html)
                     {
-                        Text = EmailHelper.FillMainTemplate(
+                        Text = EmailHelper.FillDefaultTemplate(
                             "Sorry to see you go.",
                             String.Format("You will no longer recieve messages from the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to <a href='mailto:{0}'>{0}</a>.", EmailAliasHelper.GetRequestAlias(discussionList)),
@@ -325,10 +399,10 @@ namespace EasyMailDiscussion.Common
         /// <paramref name="discussionList"/> if the client is disconnected. The client will not
         /// disconnect at the end of this method.
         /// </remarks>
-        /// <param name="discussionList">    The Discussion List database object. </param>
+        /// <param name="discussionList">    The discussion list. </param>
         /// <param name="recipient">         The recipient. </param>
         /// <param name="subject">           The subject. </param>
-        /// <param name="bodyGenerator">     The body generator function. </param>
+        /// <param name="bodyGenerator">     The <see cref="MimeEntity">body generator</see> function. </param>
         /// <param name="client">            The SMTP client. </param>
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
@@ -342,7 +416,7 @@ namespace EasyMailDiscussion.Common
             message.ReplyTo.Add(new MailboxAddress(discussionList.Name, replyTo));
             message.To.Add(new MailboxAddress(recipient.Name, recipient.Email));
             message.Subject = subject;
-            message.Headers.Insert(0, HeaderId.ReturnPath, string.Format("Bounces <{0}>", "jordan@jordanwages.com"));
+            message.Headers.Insert(0, HeaderId.ReturnPath, string.Format("Bounces <{0}>", EmailAliasHelper.GetBounceAlias(discussionList)));
 
             message.Body = bodyGenerator();
 
@@ -360,9 +434,13 @@ namespace EasyMailDiscussion.Common
             return message;
         }
 
-        /// <summary> Query if a messaged is a bounced message by determining if there is an error action code per <see cref="GetBouncedMessageRecipient(IndexedMimeMessage)"/>. </summary>
+        /// <summary>
+        /// Query if a messaged is a bounced message by determining if there is an error action code per
+        /// <see cref="GetBouncedMessageRecipient(IndexedMimeMessage)"/>.
+        /// </summary>
         /// <param name="message"> The message. </param>
         /// <returns> True if the message is bounced, false if not. </returns>
+        /// <seealso cref="GetBouncedMessageRecipient(IndexedMimeMessage)"/>
         public static bool IsBouncedMessage(IndexedMimeMessage message)
         {
             var bounced = !string.IsNullOrWhiteSpace(GetBouncedMessageRecipient(message));

@@ -1,0 +1,704 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Activated property">
+    <HelpKINode Title="Contact.Activated Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Activated.htm" />
+    <HelpKINode Title="ContactForm.Activated Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Activated.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ActivatedChecked property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_ActivatedChecked.htm" />
+  <HelpKINode Title="ApplicationSettings class">
+    <HelpKINode Title="ApplicationSettings Class" Url="html/T_EasyMailDiscussion_Web_ApplicationSettings.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_EasyMailDiscussion_Web_ApplicationSettings.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_ApplicationSettings.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ApplicationSettings.DatabaseFilePath property" Url="html/P_EasyMailDiscussion_Web_ApplicationSettings_DatabaseFilePath.htm" />
+  <HelpKINode Title="ApplicationSettings.DATABASE_PATH field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_DATABASE_PATH.htm" />
+  <HelpKINode Title="ApplicationSettings.LogFilePath property" Url="html/P_EasyMailDiscussion_Web_ApplicationSettings_LogFilePath.htm" />
+  <HelpKINode Title="ApplicationSettings.LOG_PATH field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_LOG_PATH.htm" />
+  <HelpKINode Title="ApplicationSettings.SECTION_DATABASE field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_SECTION_DATABASE.htm" />
+  <HelpKINode Title="ApplicationSettings.SECTION_LOG field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_SECTION_LOG.htm" />
+  <HelpKINode Title="Archive method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Archive.htm" />
+  <HelpKINode Title="ArchivePageModel class">
+    <HelpKINode Title="ArchivePageModel Class" Url="html/T_EasyMailDiscussion_Web_Models_ArchivePageModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_ArchivePageModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_ArchivePageModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_ArchivePageModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ArchivePageModel.ArchivePageModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_ArchivePageModel__ctor.htm" />
+  <HelpKINode Title="ArchivePageModel.DiscussionList property" Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_DiscussionList.htm" />
+  <HelpKINode Title="ArchivePageModel.Messages property" Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_Messages.htm" />
+  <HelpKINode Title="ArchivePageModel.PageNumber property" Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_PageNumber.htm" />
+  <HelpKINode Title="ArchivePageModel.TotalPages property" Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_TotalPages.htm" />
+  <HelpKINode Title="Assign method" Url="html/Overload_EasyMailDiscussion_Web_Controllers_ListController_Assign.htm" />
+  <HelpKINode Title="Assigned property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_Assigned.htm" />
+  <HelpKINode Title="Assignments property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_Assignments.htm" />
+  <HelpKINode Title="AwaitingConfirmation enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="BaseController class">
+    <HelpKINode Title="BaseController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_BaseController.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_BaseController__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_BaseController.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_BaseController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BaseController.BaseController constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_BaseController__ctor.htm" />
+  <HelpKINode Title="BaseController.OnActionExecuting method" Url="html/M_EasyMailDiscussion_Web_Controllers_BaseController_OnActionExecuting.htm" />
+  <HelpKINode Title="BaseController.SqliteDatabase property" Url="html/P_EasyMailDiscussion_Web_Controllers_BaseController_SqliteDatabase.htm" />
+  <HelpKINode Title="BaseEmailAddress property">
+    <HelpKINode Title="DiscussionList.BaseEmailAddress Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_BaseEmailAddress.htm" />
+    <HelpKINode Title="DiscussionListForm.BaseEmailAddress Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_BaseEmailAddress.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BodyHTML property" Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyHTML.htm" />
+  <HelpKINode Title="BodyRaw property" Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyRaw.htm" />
+  <HelpKINode Title="BodyText property" Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyText.htm" />
+  <HelpKINode Title="Bounced enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="BouncedEmailStatusGroupActions property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_BouncedEmailStatusGroupActions.htm" />
+  <HelpKINode Title="CHECKED_VALUE field" Url="html/F_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_CHECKED_VALUE.htm" />
+  <HelpKINode Title="Children property">
+    <HelpKINode Title="Message.Children Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_Children.htm" />
+    <HelpKINode Title="MessagePageModel.Children Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_Children.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Configuration property" Url="html/P_EasyMailDiscussion_Web_Startup_Configuration.htm" />
+  <HelpKINode Title="Configure method" Url="html/M_EasyMailDiscussion_Web_Startup_Configure.htm" />
+  <HelpKINode Title="ConfigureServices method" Url="html/M_EasyMailDiscussion_Web_Startup_ConfigureServices.htm" />
+  <HelpKINode Title="ConfirmRemove method">
+    <HelpKINode Title="ContactController.ConfirmRemove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_ConfirmRemove.htm" />
+    <HelpKINode Title="ListController.ConfirmRemove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_ConfirmRemove.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Contact class">
+    <HelpKINode Title="Contact Class" Url="html/T_EasyMailDiscussion_Common_Database_Contact.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Common_Database_Contact__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_Contact.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_Contact.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Contact property">
+    <HelpKINode Title="ContactSubscription.Contact Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_Contact.htm" />
+    <HelpKINode Title="EditContactModel.Contact Property " Url="html/P_EasyMailDiscussion_Web_Models_EditContactModel_Contact.htm" />
+    <HelpKINode Title="RemoveContactModel.Contact Property " Url="html/P_EasyMailDiscussion_Web_Models_RemoveContactModel_Contact.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Contact.Activated property" Url="html/P_EasyMailDiscussion_Common_Database_Contact_Activated.htm" />
+  <HelpKINode Title="Contact.Contact constructor" Url="html/M_EasyMailDiscussion_Common_Database_Contact__ctor.htm" />
+  <HelpKINode Title="Contact.ContactSubscriptions property" Url="html/P_EasyMailDiscussion_Common_Database_Contact_ContactSubscriptions.htm" />
+  <HelpKINode Title="Contact.Email property" Url="html/P_EasyMailDiscussion_Common_Database_Contact_Email.htm" />
+  <HelpKINode Title="Contact.ID property" Url="html/P_EasyMailDiscussion_Common_Database_Contact_ID.htm" />
+  <HelpKINode Title="Contact.Messages property" Url="html/P_EasyMailDiscussion_Common_Database_Contact_Messages.htm" />
+  <HelpKINode Title="Contact.Name property" Url="html/P_EasyMailDiscussion_Common_Database_Contact_Name.htm" />
+  <HelpKINode Title="ContactAssociatedStatuses property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactAssociatedStatuses.htm" />
+  <HelpKINode Title="ContactAuthorizedStatuses property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactAuthorizedStatuses.htm" />
+  <HelpKINode Title="ContactController class">
+    <HelpKINode Title="ContactController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_ContactController.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_ContactController.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_ContactController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ContactController.ConfirmRemove method" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_ConfirmRemove.htm" />
+  <HelpKINode Title="ContactController.ContactController constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController__ctor.htm" />
+  <HelpKINode Title="ContactController.Create method" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Create.htm" />
+  <HelpKINode Title="ContactController.Edit method" Url="html/Overload_EasyMailDiscussion_Web_Controllers_ContactController_Edit.htm" />
+  <HelpKINode Title="ContactController.Index method" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Index.htm" />
+  <HelpKINode Title="ContactController.New method" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_New.htm" />
+  <HelpKINode Title="ContactController.Remove method" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Remove.htm" />
+  <HelpKINode Title="ContactForm class">
+    <HelpKINode Title="ContactForm Class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_ContactForm.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_Forms_ContactForm__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_Forms_ContactForm.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_Forms_ContactForm.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ContactForm.Activated property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Activated.htm" />
+  <HelpKINode Title="ContactForm.ActivatedChecked property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_ActivatedChecked.htm" />
+  <HelpKINode Title="ContactForm.ContactForm constructor" Url="html/M_EasyMailDiscussion_Web_Models_Forms_ContactForm__ctor.htm" />
+  <HelpKINode Title="ContactForm.Email property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Email.htm" />
+  <HelpKINode Title="ContactForm.ID property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_ID.htm" />
+  <HelpKINode Title="ContactForm.Name property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Name.htm" />
+  <HelpKINode Title="ContactID property">
+    <HelpKINode Title="ContactSubscription.ContactID Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_ContactID.htm" />
+    <HelpKINode Title="DiscussionListAssignForm.ContactID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_ContactID.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Contacts property">
+    <HelpKINode Title="ContactsModel.Contacts Property " Url="html/P_EasyMailDiscussion_Web_Models_ContactsModel_Contacts.htm" />
+    <HelpKINode Title="DiscussionListAssignModel.Contacts Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_Contacts.htm" />
+    <HelpKINode Title="SqliteDatabase.Contacts Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_Contacts.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ContactsModel class">
+    <HelpKINode Title="ContactsModel Class" Url="html/T_EasyMailDiscussion_Web_Models_ContactsModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_ContactsModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_ContactsModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_ContactsModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ContactsModel.Contacts property" Url="html/P_EasyMailDiscussion_Web_Models_ContactsModel_Contacts.htm" />
+  <HelpKINode Title="ContactsModel.ContactsModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_ContactsModel__ctor.htm" />
+  <HelpKINode Title="ContactSubscription class">
+    <HelpKINode Title="ContactSubscription Class" Url="html/T_EasyMailDiscussion_Common_Database_ContactSubscription.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Common_Database_ContactSubscription__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_ContactSubscription.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_ContactSubscription.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ContactSubscription.Contact property" Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_Contact.htm" />
+  <HelpKINode Title="ContactSubscription.ContactID property" Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_ContactID.htm" />
+  <HelpKINode Title="ContactSubscription.ContactSubscription constructor" Url="html/M_EasyMailDiscussion_Common_Database_ContactSubscription__ctor.htm" />
+  <HelpKINode Title="ContactSubscription.DiscussionList property" Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_DiscussionList.htm" />
+  <HelpKINode Title="ContactSubscription.DiscussionListID property" Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_DiscussionListID.htm" />
+  <HelpKINode Title="ContactSubscription.ID property" Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_ID.htm" />
+  <HelpKINode Title="ContactSubscription.Status property" Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_Status.htm" />
+  <HelpKINode Title="ContactSubscriptions property">
+    <HelpKINode Title="Contact.ContactSubscriptions Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_ContactSubscriptions.htm" />
+    <HelpKINode Title="SqliteDatabase.ContactSubscriptions Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_ContactSubscriptions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ContactUnassignableStatuses property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactUnassignableStatuses.htm" />
+  <HelpKINode Title="Create method">
+    <HelpKINode Title="ContactController.Create Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Create.htm" />
+    <HelpKINode Title="ListController.Create Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Create.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Created enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="CreateHostBuilder method" Url="html/M_EasyMailDiscussion_Web_Program_CreateHostBuilder.htm" />
+  <HelpKINode Title="DatabaseFilePath property" Url="html/P_EasyMailDiscussion_Web_ApplicationSettings_DatabaseFilePath.htm" />
+  <HelpKINode Title="DATABASE_PATH field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_DATABASE_PATH.htm" />
+  <HelpKINode Title="DBPath property" Url="html/P_EasyMailDiscussion_Cli_Options_DBPath.htm" />
+  <HelpKINode Title="Denied enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="Description property">
+    <HelpKINode Title="DiscussionList.Description Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Description.htm" />
+    <HelpKINode Title="DiscussionListForm.Description Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Description.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionList class">
+    <HelpKINode Title="DiscussionList Class" Url="html/T_EasyMailDiscussion_Common_Database_DiscussionList.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Common_Database_DiscussionList__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_DiscussionList.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_DiscussionList.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionList property">
+    <HelpKINode Title="ArchivePageModel.DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_DiscussionList.htm" />
+    <HelpKINode Title="ContactSubscription.DiscussionList Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_DiscussionList.htm" />
+    <HelpKINode Title="DiscussionListAssignModel.DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_DiscussionList.htm" />
+    <HelpKINode Title="EditDiscussionListModel.DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_EditDiscussionListModel_DiscussionList.htm" />
+    <HelpKINode Title="Message.DiscussionList Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_DiscussionList.htm" />
+    <HelpKINode Title="RemoveDiscussionListModel.DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel_DiscussionList.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionList.BaseEmailAddress property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_BaseEmailAddress.htm" />
+  <HelpKINode Title="DiscussionList.Description property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Description.htm" />
+  <HelpKINode Title="DiscussionList.DiscussionList constructor" Url="html/M_EasyMailDiscussion_Common_Database_DiscussionList__ctor.htm" />
+  <HelpKINode Title="DiscussionList.ID property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_ID.htm" />
+  <HelpKINode Title="DiscussionList.IncomingMailPort property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_IncomingMailPort.htm" />
+  <HelpKINode Title="DiscussionList.IncomingMailServer property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_IncomingMailServer.htm" />
+  <HelpKINode Title="DiscussionList.Messages property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Messages.htm" />
+  <HelpKINode Title="DiscussionList.Name property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Name.htm" />
+  <HelpKINode Title="DiscussionList.OutgoingMailPort property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_OutgoingMailPort.htm" />
+  <HelpKINode Title="DiscussionList.OutgoingMailServer property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_OutgoingMailServer.htm" />
+  <HelpKINode Title="DiscussionList.Password property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Password.htm" />
+  <HelpKINode Title="DiscussionList.Subscriptions property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Subscriptions.htm" />
+  <HelpKINode Title="DiscussionList.UserName property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_UserName.htm" />
+  <HelpKINode Title="DiscussionList.UseSSL property" Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_UseSSL.htm" />
+  <HelpKINode Title="DiscussionListAssignForm class">
+    <HelpKINode Title="DiscussionListAssignForm Class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionListAssignForm.Assigned property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_Assigned.htm" />
+  <HelpKINode Title="DiscussionListAssignForm.Assignments property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_Assignments.htm" />
+  <HelpKINode Title="DiscussionListAssignForm.CHECKED_VALUE field" Url="html/F_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_CHECKED_VALUE.htm" />
+  <HelpKINode Title="DiscussionListAssignForm.ContactID property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_ContactID.htm" />
+  <HelpKINode Title="DiscussionListAssignForm.DiscussionListAssignForm constructor" Url="html/M_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm__ctor.htm" />
+  <HelpKINode Title="DiscussionListAssignForm.DiscussionListID property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_DiscussionListID.htm" />
+  <HelpKINode Title="DiscussionListAssignForm.UNCHECKED_VALUE field" Url="html/F_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_UNCHECKED_VALUE.htm" />
+  <HelpKINode Title="DiscussionListAssignModel class">
+    <HelpKINode Title="DiscussionListAssignModel Class" Url="html/T_EasyMailDiscussion_Web_Models_DiscussionListAssignModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_DiscussionListAssignModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_DiscussionListAssignModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionListAssignModel.Contacts property" Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_Contacts.htm" />
+  <HelpKINode Title="DiscussionListAssignModel.DiscussionList property" Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_DiscussionList.htm" />
+  <HelpKINode Title="DiscussionListAssignModel.DiscussionListAssignModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel__ctor.htm" />
+  <HelpKINode Title="DiscussionListAssignModel.GetSubscription method" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_GetSubscription.htm" />
+  <HelpKINode Title="DiscussionListAssignModel.HasSubscription method" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_HasSubscription.htm" />
+  <HelpKINode Title="DiscussionListAssignModel.Subscriptions property" Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_Subscriptions.htm" />
+  <HelpKINode Title="DiscussionListForm class">
+    <HelpKINode Title="DiscussionListForm Class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionListForm.BaseEmailAddress property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_BaseEmailAddress.htm" />
+  <HelpKINode Title="DiscussionListForm.Description property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Description.htm" />
+  <HelpKINode Title="DiscussionListForm.DiscussionListForm constructor" Url="html/M_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm__ctor.htm" />
+  <HelpKINode Title="DiscussionListForm.ID property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_ID.htm" />
+  <HelpKINode Title="DiscussionListForm.IncomingMailPort property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_IncomingMailPort.htm" />
+  <HelpKINode Title="DiscussionListForm.IncomingMailServer property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_IncomingMailServer.htm" />
+  <HelpKINode Title="DiscussionListForm.Name property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Name.htm" />
+  <HelpKINode Title="DiscussionListForm.OutgoingMailPort property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_OutgoingMailPort.htm" />
+  <HelpKINode Title="DiscussionListForm.OutgoingMailServer property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_OutgoingMailServer.htm" />
+  <HelpKINode Title="DiscussionListForm.Password property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Password.htm" />
+  <HelpKINode Title="DiscussionListForm.UserName property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UserName.htm" />
+  <HelpKINode Title="DiscussionListForm.UseSSL property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UseSSL.htm" />
+  <HelpKINode Title="DiscussionListForm.UseSSLChecked property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UseSSLChecked.htm" />
+  <HelpKINode Title="DiscussionListID property">
+    <HelpKINode Title="ContactSubscription.DiscussionListID Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_DiscussionListID.htm" />
+    <HelpKINode Title="DiscussionListAssignForm.DiscussionListID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_DiscussionListID.htm" />
+    <HelpKINode Title="Message.DiscussionListID Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_DiscussionListID.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionLists property">
+    <HelpKINode Title="DiscussionListsModel.DiscussionLists Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListsModel_DiscussionLists.htm" />
+    <HelpKINode Title="SqliteDatabase.DiscussionLists Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_DiscussionLists.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionListsModel class">
+    <HelpKINode Title="DiscussionListsModel Class" Url="html/T_EasyMailDiscussion_Web_Models_DiscussionListsModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListsModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_DiscussionListsModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_DiscussionListsModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DiscussionListsModel.DiscussionLists property" Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListsModel_DiscussionLists.htm" />
+  <HelpKINode Title="DiscussionListsModel.DiscussionListsModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListsModel__ctor.htm" />
+  <HelpKINode Title="DockerEnvironmentVariables class">
+    <HelpKINode Title="DockerEnvironmentVariables Class" Url="html/T_EasyMailDiscussion_Web_DockerEnvironmentVariables.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_DockerEnvironmentVariables.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DockerEnvironmentVariables.FetchTime property" Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_FetchTime.htm" />
+  <HelpKINode Title="DockerEnvironmentVariables.LogLevel property" Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_LogLevel.htm" />
+  <HelpKINode Title="DockerEnvironmentVariables.PageSize property" Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_PageSize.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Cli namespace" Url="html/N_EasyMailDiscussion_Cli.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Cli.Options class" Url="html/T_EasyMailDiscussion_Cli_Options.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common namespace" Url="html/N_EasyMailDiscussion_Common.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database namespace" Url="html/N_EasyMailDiscussion_Common_Database.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database.Contact class" Url="html/T_EasyMailDiscussion_Common_Database_Contact.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database.ContactSubscription class" Url="html/T_EasyMailDiscussion_Common_Database_ContactSubscription.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database.DiscussionList class" Url="html/T_EasyMailDiscussion_Common_Database_DiscussionList.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database.Message class" Url="html/T_EasyMailDiscussion_Common_Database_Message.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database.RelayIdentifier class" Url="html/T_EasyMailDiscussion_Common_Database_RelayIdentifier.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database.SqliteDatabase class" Url="html/T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.Database.SubscriptionStatus enumeration" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.EmailAliasHelper class" Url="html/T_EasyMailDiscussion_Common_EmailAliasHelper.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.EmailHelper class" Url="html/T_EasyMailDiscussion_Common_EmailHelper.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.HTMLCleaner class" Url="html/T_EasyMailDiscussion_Common_HTMLCleaner.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.IndexedMimeMessage class" Url="html/T_EasyMailDiscussion_Common_IndexedMimeMessage.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.LINQExtensions class" Url="html/T_EasyMailDiscussion_Common_LINQExtensions.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Common.NLogConfiguration class" Url="html/T_EasyMailDiscussion_Common_NLogConfiguration.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web namespace" Url="html/N_EasyMailDiscussion_Web.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.ApplicationSettings class" Url="html/T_EasyMailDiscussion_Web_ApplicationSettings.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Controllers namespace" Url="html/N_EasyMailDiscussion_Web_Controllers.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Controllers.BaseController class" Url="html/T_EasyMailDiscussion_Web_Controllers_BaseController.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Controllers.ContactController class" Url="html/T_EasyMailDiscussion_Web_Controllers_ContactController.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Controllers.HomeController class" Url="html/T_EasyMailDiscussion_Web_Controllers_HomeController.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Controllers.ListController class" Url="html/T_EasyMailDiscussion_Web_Controllers_ListController.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.DockerEnvironmentVariables class" Url="html/T_EasyMailDiscussion_Web_DockerEnvironmentVariables.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models namespace" Url="html/N_EasyMailDiscussion_Web_Models.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.ArchivePageModel class" Url="html/T_EasyMailDiscussion_Web_Models_ArchivePageModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.ContactsModel class" Url="html/T_EasyMailDiscussion_Web_Models_ContactsModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.DiscussionListAssignModel class" Url="html/T_EasyMailDiscussion_Web_Models_DiscussionListAssignModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.DiscussionListsModel class" Url="html/T_EasyMailDiscussion_Web_Models_DiscussionListsModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.EditContactModel class" Url="html/T_EasyMailDiscussion_Web_Models_EditContactModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.EditDiscussionListModel class" Url="html/T_EasyMailDiscussion_Web_Models_EditDiscussionListModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.ErrorViewModel class" Url="html/T_EasyMailDiscussion_Web_Models_ErrorViewModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.Forms namespace" Url="html/N_EasyMailDiscussion_Web_Models_Forms.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.Forms.ContactForm class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_ContactForm.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.Forms.DiscussionListForm class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.HomepageModel class" Url="html/T_EasyMailDiscussion_Web_Models_HomepageModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.MessagePageModel class" Url="html/T_EasyMailDiscussion_Web_Models_MessagePageModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.RemoveContactModel class" Url="html/T_EasyMailDiscussion_Web_Models_RemoveContactModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Models.RemoveDiscussionListModel class" Url="html/T_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Program class" Url="html/T_EasyMailDiscussion_Web_Program.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Startup class" Url="html/T_EasyMailDiscussion_Web_Startup.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Worker namespace" Url="html/N_EasyMailDiscussion_Web_Worker.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Worker.EmailFetcher class" Url="html/T_EasyMailDiscussion_Web_Worker_EmailFetcher.htm" />
+  <HelpKINode Title="EasyMailDiscussion.Web.Worker.Onboarder class" Url="html/T_EasyMailDiscussion_Web_Worker_Onboarder.htm" />
+  <HelpKINode Title="Edit method">
+    <HelpKINode Title="ContactController.Edit Method " Url="html/Overload_EasyMailDiscussion_Web_Controllers_ContactController_Edit.htm" />
+    <HelpKINode Title="ListController.Edit Method " Url="html/Overload_EasyMailDiscussion_Web_Controllers_ListController_Edit.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EditContactModel class">
+    <HelpKINode Title="EditContactModel Class" Url="html/T_EasyMailDiscussion_Web_Models_EditContactModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_EditContactModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_EditContactModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_EditContactModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EditContactModel.Contact property" Url="html/P_EasyMailDiscussion_Web_Models_EditContactModel_Contact.htm" />
+  <HelpKINode Title="EditContactModel.EditContactModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_EditContactModel__ctor.htm" />
+  <HelpKINode Title="EditDiscussionListModel class">
+    <HelpKINode Title="EditDiscussionListModel Class" Url="html/T_EasyMailDiscussion_Web_Models_EditDiscussionListModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_EditDiscussionListModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_EditDiscussionListModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_EditDiscussionListModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EditDiscussionListModel.DiscussionList property" Url="html/P_EasyMailDiscussion_Web_Models_EditDiscussionListModel_DiscussionList.htm" />
+  <HelpKINode Title="EditDiscussionListModel.EditDiscussionListModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_EditDiscussionListModel__ctor.htm" />
+  <HelpKINode Title="Email property">
+    <HelpKINode Title="Contact.Email Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Email.htm" />
+    <HelpKINode Title="ContactForm.Email Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Email.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EmailAliasHelper class">
+    <HelpKINode Title="EmailAliasHelper Class" Url="html/T_EasyMailDiscussion_Common_EmailAliasHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_EmailAliasHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EmailAliasHelper.GetBounceAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetBounceAlias.htm" />
+  <HelpKINode Title="EmailAliasHelper.GetOwnerAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetOwnerAlias.htm" />
+  <HelpKINode Title="EmailAliasHelper.GetRequestAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetRequestAlias.htm" />
+  <HelpKINode Title="EmailAliasHelper.GetSubscribeAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetSubscribeAlias.htm" />
+  <HelpKINode Title="EmailAliasHelper.GetUnsubscribeAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetUnsubscribeAlias.htm" />
+  <HelpKINode Title="EmailFetcher class">
+    <HelpKINode Title="EmailFetcher Class" Url="html/T_EasyMailDiscussion_Web_Worker_EmailFetcher.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Worker_EmailFetcher__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Worker_EmailFetcher.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EmailFetcher.EmailFetcher constructor" Url="html/M_EasyMailDiscussion_Web_Worker_EmailFetcher__ctor.htm" />
+  <HelpKINode Title="EmailFetcher.ExecuteAsync method" Url="html/M_EasyMailDiscussion_Web_Worker_EmailFetcher_ExecuteAsync.htm" />
+  <HelpKINode Title="EmailFetchTime property" Url="html/P_EasyMailDiscussion_Cli_Options_EmailFetchTime.htm" />
+  <HelpKINode Title="EmailHelper class">
+    <HelpKINode Title="EmailHelper Class" Url="html/T_EasyMailDiscussion_Common_EmailHelper.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_EasyMailDiscussion_Common_EmailHelper.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_EmailHelper.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_EmailHelper.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EmailHelper.BouncedEmailStatusGroupActions property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_BouncedEmailStatusGroupActions.htm" />
+  <HelpKINode Title="EmailHelper.ContactAssociatedStatuses property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactAssociatedStatuses.htm" />
+  <HelpKINode Title="EmailHelper.ContactAuthorizedStatuses property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactAuthorizedStatuses.htm" />
+  <HelpKINode Title="EmailHelper.ContactUnassignableStatuses property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactUnassignableStatuses.htm" />
+  <HelpKINode Title="EmailHelper.FillMainTemplate method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_FillMainTemplate.htm" />
+  <HelpKINode Title="EmailHelper.GetBouncedMessageRecipient method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_GetBouncedMessageRecipient.htm" />
+  <HelpKINode Title="EmailHelper.IsAssignable method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsAssignable.htm" />
+  <HelpKINode Title="EmailHelper.IsAuthorizedForMailDistribution method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsAuthorizedForMailDistribution.htm" />
+  <HelpKINode Title="EmailHelper.IsBouncedMessage method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsBouncedMessage.htm" />
+  <HelpKINode Title="EmailHelper.MailEmailTemplate property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_MailEmailTemplate.htm" />
+  <HelpKINode Title="EmailHelper.RelayEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_RelayEmail.htm" />
+  <HelpKINode Title="EmailHelper.SendEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendEmail.htm" />
+  <HelpKINode Title="EmailHelper.SendOnboardingEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendOnboardingEmail.htm" />
+  <HelpKINode Title="EmailHelper.SendSubscriptionConfirmationEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendSubscriptionConfirmationEmail.htm" />
+  <HelpKINode Title="EmailHelper.SendUnsubscriptionConfirmationEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendUnsubscriptionConfirmationEmail.htm" />
+  <HelpKINode Title="EmailHelper.STATUS_GROUP_ACTION_DELAYED field" Url="html/F_EasyMailDiscussion_Common_EmailHelper_STATUS_GROUP_ACTION_DELAYED.htm" />
+  <HelpKINode Title="EmailHelper.STATUS_GROUP_ACTION_FAILED field" Url="html/F_EasyMailDiscussion_Common_EmailHelper_STATUS_GROUP_ACTION_FAILED.htm" />
+  <HelpKINode Title="EmailID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_EmailID.htm" />
+  <HelpKINode Title="Equals method" Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_Equals.htm" />
+  <HelpKINode Title="Error method" Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController_Error.htm" />
+  <HelpKINode Title="ErrorViewModel class">
+    <HelpKINode Title="ErrorViewModel Class" Url="html/T_EasyMailDiscussion_Web_Models_ErrorViewModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_ErrorViewModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_ErrorViewModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_ErrorViewModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ErrorViewModel.ErrorViewModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_ErrorViewModel__ctor.htm" />
+  <HelpKINode Title="ErrorViewModel.RequestId property" Url="html/P_EasyMailDiscussion_Web_Models_ErrorViewModel_RequestId.htm" />
+  <HelpKINode Title="ErrorViewModel.ShowRequestId property" Url="html/P_EasyMailDiscussion_Web_Models_ErrorViewModel_ShowRequestId.htm" />
+  <HelpKINode Title="ExecuteAsync method">
+    <HelpKINode Title="EmailFetcher.ExecuteAsync Method " Url="html/M_EasyMailDiscussion_Web_Worker_EmailFetcher_ExecuteAsync.htm" />
+    <HelpKINode Title="Onboarder.ExecuteAsync Method " Url="html/M_EasyMailDiscussion_Web_Worker_Onboarder_ExecuteAsync.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FetchTime property" Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_FetchTime.htm" />
+  <HelpKINode Title="FillMainTemplate method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_FillMainTemplate.htm" />
+  <HelpKINode Title="GetBounceAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetBounceAlias.htm" />
+  <HelpKINode Title="GetBouncedMessageRecipient method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_GetBouncedMessageRecipient.htm" />
+  <HelpKINode Title="GetConfiguration method" Url="html/M_EasyMailDiscussion_Common_NLogConfiguration_GetConfiguration.htm" />
+  <HelpKINode Title="GetHashCode method" Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_GetHashCode.htm" />
+  <HelpKINode Title="GetOwnerAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetOwnerAlias.htm" />
+  <HelpKINode Title="GetRequestAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetRequestAlias.htm" />
+  <HelpKINode Title="GetSubscribeAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetSubscribeAlias.htm" />
+  <HelpKINode Title="GetSubscription method" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_GetSubscription.htm" />
+  <HelpKINode Title="GetUnsubscribeAlias method" Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetUnsubscribeAlias.htm" />
+  <HelpKINode Title="HasSubscription method" Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_HasSubscription.htm" />
+  <HelpKINode Title="HomeController class">
+    <HelpKINode Title="HomeController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_HomeController.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_HomeController.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_HomeController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HomeController.Error method" Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController_Error.htm" />
+  <HelpKINode Title="HomeController.HomeController constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController__ctor.htm" />
+  <HelpKINode Title="HomeController.Index method" Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController_Index.htm" />
+  <HelpKINode Title="HomepageModel class">
+    <HelpKINode Title="HomepageModel Class" Url="html/T_EasyMailDiscussion_Web_Models_HomepageModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_HomepageModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_HomepageModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_HomepageModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HomepageModel.HomepageModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_HomepageModel__ctor.htm" />
+  <HelpKINode Title="HomepageModel.NumberOfContacts property" Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfContacts.htm" />
+  <HelpKINode Title="HomepageModel.NumberOfDiscussionLists property" Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfDiscussionLists.htm" />
+  <HelpKINode Title="HomepageModel.NumberOfMessages property" Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfMessages.htm" />
+  <HelpKINode Title="HTMLCleaner class">
+    <HelpKINode Title="HTMLCleaner Class" Url="html/T_EasyMailDiscussion_Common_HTMLCleaner.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_HTMLCleaner.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HTMLCleaner.RemoveInlineCSS method" Url="html/M_EasyMailDiscussion_Common_HTMLCleaner_RemoveInlineCSS.htm" />
+  <HelpKINode Title="ID property">
+    <HelpKINode Title="Contact.ID Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_ID.htm" />
+    <HelpKINode Title="ContactForm.ID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_ID.htm" />
+    <HelpKINode Title="ContactSubscription.ID Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_ID.htm" />
+    <HelpKINode Title="DiscussionList.ID Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_ID.htm" />
+    <HelpKINode Title="DiscussionListForm.ID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_ID.htm" />
+    <HelpKINode Title="Message.ID Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_ID.htm" />
+    <HelpKINode Title="RelayIdentifier.ID Property " Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_ID.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IncomingMailPort property">
+    <HelpKINode Title="DiscussionList.IncomingMailPort Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_IncomingMailPort.htm" />
+    <HelpKINode Title="DiscussionListForm.IncomingMailPort Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_IncomingMailPort.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IncomingMailServer property">
+    <HelpKINode Title="DiscussionList.IncomingMailServer Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_IncomingMailServer.htm" />
+    <HelpKINode Title="DiscussionListForm.IncomingMailServer Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_IncomingMailServer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Index method">
+    <HelpKINode Title="ContactController.Index Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Index.htm" />
+    <HelpKINode Title="HomeController.Index Method " Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController_Index.htm" />
+    <HelpKINode Title="ListController.Index Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Index.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Index property" Url="html/P_EasyMailDiscussion_Common_IndexedMimeMessage_Index.htm" />
+  <HelpKINode Title="IndexedMimeMessage class">
+    <HelpKINode Title="IndexedMimeMessage Class" Url="html/T_EasyMailDiscussion_Common_IndexedMimeMessage.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_IndexedMimeMessage.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_IndexedMimeMessage.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IndexedMimeMessage.Equals method" Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_Equals.htm" />
+  <HelpKINode Title="IndexedMimeMessage.GetHashCode method" Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_GetHashCode.htm" />
+  <HelpKINode Title="IndexedMimeMessage.Index property" Url="html/P_EasyMailDiscussion_Common_IndexedMimeMessage_Index.htm" />
+  <HelpKINode Title="IndexedMimeMessage.IndexMimeMessage method" Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_IndexMimeMessage.htm" />
+  <HelpKINode Title="IndexedMimeMessage.Message property" Url="html/P_EasyMailDiscussion_Common_IndexedMimeMessage_Message.htm" />
+  <HelpKINode Title="IndexMimeMessage method" Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_IndexMimeMessage.htm" />
+  <HelpKINode Title="IsAssignable method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsAssignable.htm" />
+  <HelpKINode Title="IsAuthorizedForMailDistribution method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsAuthorizedForMailDistribution.htm" />
+  <HelpKINode Title="IsBouncedMessage method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsBouncedMessage.htm" />
+  <HelpKINode Title="LINQExtensions class">
+    <HelpKINode Title="LINQExtensions Class" Url="html/T_EasyMailDiscussion_Common_LINQExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_LINQExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LINQExtensions.Page method" Url="html/Overload_EasyMailDiscussion_Common_LINQExtensions_Page.htm" />
+  <HelpKINode Title="LINQExtensions.PageCount method" Url="html/Overload_EasyMailDiscussion_Common_LINQExtensions_PageCount.htm" />
+  <HelpKINode Title="ListController class">
+    <HelpKINode Title="ListController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_ListController.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_ListController.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_ListController.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ListController.Archive method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Archive.htm" />
+  <HelpKINode Title="ListController.Assign method" Url="html/Overload_EasyMailDiscussion_Web_Controllers_ListController_Assign.htm" />
+  <HelpKINode Title="ListController.ConfirmRemove method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_ConfirmRemove.htm" />
+  <HelpKINode Title="ListController.Create method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Create.htm" />
+  <HelpKINode Title="ListController.Edit method" Url="html/Overload_EasyMailDiscussion_Web_Controllers_ListController_Edit.htm" />
+  <HelpKINode Title="ListController.Index method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Index.htm" />
+  <HelpKINode Title="ListController.ListController constructor" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController__ctor.htm" />
+  <HelpKINode Title="ListController.Message method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Message.htm" />
+  <HelpKINode Title="ListController.New method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_New.htm" />
+  <HelpKINode Title="ListController.Remove method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Remove.htm" />
+  <HelpKINode Title="LogFilePath property" Url="html/P_EasyMailDiscussion_Web_ApplicationSettings_LogFilePath.htm" />
+  <HelpKINode Title="LogLevel property">
+    <HelpKINode Title="DockerEnvironmentVariables.LogLevel Property " Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_LogLevel.htm" />
+    <HelpKINode Title="Options.LogLevel Property " Url="html/P_EasyMailDiscussion_Cli_Options_LogLevel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LogPath property" Url="html/P_EasyMailDiscussion_Cli_Options_LogPath.htm" />
+  <HelpKINode Title="LOG_PATH field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_LOG_PATH.htm" />
+  <HelpKINode Title="MailEmailTemplate property" Url="html/P_EasyMailDiscussion_Common_EmailHelper_MailEmailTemplate.htm" />
+  <HelpKINode Title="Main method" Url="html/M_EasyMailDiscussion_Web_Program_Main.htm" />
+  <HelpKINode Title="Message class">
+    <HelpKINode Title="Message Class" Url="html/T_EasyMailDiscussion_Common_Database_Message.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Common_Database_Message__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_Message.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_Message.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Message method" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Message.htm" />
+  <HelpKINode Title="Message property">
+    <HelpKINode Title="IndexedMimeMessage.Message Property " Url="html/P_EasyMailDiscussion_Common_IndexedMimeMessage_Message.htm" />
+    <HelpKINode Title="MessagePageModel.Message Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_Message.htm" />
+    <HelpKINode Title="RelayIdentifier.Message Property " Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_Message.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Message.BodyHTML property" Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyHTML.htm" />
+  <HelpKINode Title="Message.BodyRaw property" Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyRaw.htm" />
+  <HelpKINode Title="Message.BodyText property" Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyText.htm" />
+  <HelpKINode Title="Message.Children property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Children.htm" />
+  <HelpKINode Title="Message.DiscussionList property" Url="html/P_EasyMailDiscussion_Common_Database_Message_DiscussionList.htm" />
+  <HelpKINode Title="Message.DiscussionListID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_DiscussionListID.htm" />
+  <HelpKINode Title="Message.EmailID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_EmailID.htm" />
+  <HelpKINode Title="Message.ID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_ID.htm" />
+  <HelpKINode Title="Message.Message constructor" Url="html/M_EasyMailDiscussion_Common_Database_Message__ctor.htm" />
+  <HelpKINode Title="Message.OriginatorContact property" Url="html/P_EasyMailDiscussion_Common_Database_Message_OriginatorContact.htm" />
+  <HelpKINode Title="Message.OriginatorContactID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_OriginatorContactID.htm" />
+  <HelpKINode Title="Message.Parent property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Parent.htm" />
+  <HelpKINode Title="Message.ParentID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_ParentID.htm" />
+  <HelpKINode Title="Message.Raw property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Raw.htm" />
+  <HelpKINode Title="Message.Recieved property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Recieved.htm" />
+  <HelpKINode Title="Message.RelayIdentifiers property" Url="html/P_EasyMailDiscussion_Common_Database_Message_RelayIdentifiers.htm" />
+  <HelpKINode Title="Message.Subject property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Subject.htm" />
+  <HelpKINode Title="MessageID property" Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_MessageID.htm" />
+  <HelpKINode Title="MessagePageModel class">
+    <HelpKINode Title="MessagePageModel Class" Url="html/T_EasyMailDiscussion_Web_Models_MessagePageModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_MessagePageModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_MessagePageModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_MessagePageModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessagePageModel.Children property" Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_Children.htm" />
+  <HelpKINode Title="MessagePageModel.Message property" Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_Message.htm" />
+  <HelpKINode Title="MessagePageModel.MessagePageModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_MessagePageModel__ctor.htm" />
+  <HelpKINode Title="MessagePageModel.PageNumber property" Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_PageNumber.htm" />
+  <HelpKINode Title="MessagePageModel.TotalPages property" Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_TotalPages.htm" />
+  <HelpKINode Title="Messages property">
+    <HelpKINode Title="ArchivePageModel.Messages Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_Messages.htm" />
+    <HelpKINode Title="Contact.Messages Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Messages.htm" />
+    <HelpKINode Title="DiscussionList.Messages Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Messages.htm" />
+    <HelpKINode Title="SqliteDatabase.Messages Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_Messages.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="Contact.Name Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Name.htm" />
+    <HelpKINode Title="ContactForm.Name Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Name.htm" />
+    <HelpKINode Title="DiscussionList.Name Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Name.htm" />
+    <HelpKINode Title="DiscussionListForm.Name Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Name.htm" />
+  </HelpKINode>
+  <HelpKINode Title="New method">
+    <HelpKINode Title="ContactController.New Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_New.htm" />
+    <HelpKINode Title="ListController.New Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_New.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NLogConfiguration class">
+    <HelpKINode Title="NLogConfiguration Class" Url="html/T_EasyMailDiscussion_Common_NLogConfiguration.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_NLogConfiguration.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NLogConfiguration.GetConfiguration method" Url="html/M_EasyMailDiscussion_Common_NLogConfiguration_GetConfiguration.htm" />
+  <HelpKINode Title="NumberOfContacts property" Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfContacts.htm" />
+  <HelpKINode Title="NumberOfDiscussionLists property" Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfDiscussionLists.htm" />
+  <HelpKINode Title="NumberOfMessages property" Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfMessages.htm" />
+  <HelpKINode Title="OnActionExecuting method" Url="html/M_EasyMailDiscussion_Web_Controllers_BaseController_OnActionExecuting.htm" />
+  <HelpKINode Title="Onboarder class">
+    <HelpKINode Title="Onboarder Class" Url="html/T_EasyMailDiscussion_Web_Worker_Onboarder.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Worker_Onboarder__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Worker_Onboarder.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Onboarder.ExecuteAsync method" Url="html/M_EasyMailDiscussion_Web_Worker_Onboarder_ExecuteAsync.htm" />
+  <HelpKINode Title="Onboarder.Onboarder constructor" Url="html/M_EasyMailDiscussion_Web_Worker_Onboarder__ctor.htm" />
+  <HelpKINode Title="OnConfiguring method" Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase_OnConfiguring.htm" />
+  <HelpKINode Title="OnModelCreating method" Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase_OnModelCreating.htm" />
+  <HelpKINode Title="Options class">
+    <HelpKINode Title="Options Class" Url="html/T_EasyMailDiscussion_Cli_Options.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Cli_Options__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Cli_Options.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Cli_Options.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Options.DBPath property" Url="html/P_EasyMailDiscussion_Cli_Options_DBPath.htm" />
+  <HelpKINode Title="Options.EmailFetchTime property" Url="html/P_EasyMailDiscussion_Cli_Options_EmailFetchTime.htm" />
+  <HelpKINode Title="Options.LogLevel property" Url="html/P_EasyMailDiscussion_Cli_Options_LogLevel.htm" />
+  <HelpKINode Title="Options.LogPath property" Url="html/P_EasyMailDiscussion_Cli_Options_LogPath.htm" />
+  <HelpKINode Title="Options.Options constructor" Url="html/M_EasyMailDiscussion_Cli_Options__ctor.htm" />
+  <HelpKINode Title="OriginatorContact property" Url="html/P_EasyMailDiscussion_Common_Database_Message_OriginatorContact.htm" />
+  <HelpKINode Title="OriginatorContactID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_OriginatorContactID.htm" />
+  <HelpKINode Title="OutgoingMailPort property">
+    <HelpKINode Title="DiscussionList.OutgoingMailPort Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_OutgoingMailPort.htm" />
+    <HelpKINode Title="DiscussionListForm.OutgoingMailPort Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_OutgoingMailPort.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OutgoingMailServer property">
+    <HelpKINode Title="DiscussionList.OutgoingMailServer Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_OutgoingMailServer.htm" />
+    <HelpKINode Title="DiscussionListForm.OutgoingMailServer Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_OutgoingMailServer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Page method" Url="html/Overload_EasyMailDiscussion_Common_LINQExtensions_Page.htm" />
+  <HelpKINode Title="PageCount method" Url="html/Overload_EasyMailDiscussion_Common_LINQExtensions_PageCount.htm" />
+  <HelpKINode Title="PageNumber property">
+    <HelpKINode Title="ArchivePageModel.PageNumber Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_PageNumber.htm" />
+    <HelpKINode Title="MessagePageModel.PageNumber Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_PageNumber.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PageSize property" Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_PageSize.htm" />
+  <HelpKINode Title="Parent property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Parent.htm" />
+  <HelpKINode Title="ParentID property" Url="html/P_EasyMailDiscussion_Common_Database_Message_ParentID.htm" />
+  <HelpKINode Title="Password property">
+    <HelpKINode Title="DiscussionList.Password Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Password.htm" />
+    <HelpKINode Title="DiscussionListForm.Password Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Password.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Program class">
+    <HelpKINode Title="Program Class" Url="html/T_EasyMailDiscussion_Web_Program.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Program__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Program.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Program.CreateHostBuilder method" Url="html/M_EasyMailDiscussion_Web_Program_CreateHostBuilder.htm" />
+  <HelpKINode Title="Program.Main method" Url="html/M_EasyMailDiscussion_Web_Program_Main.htm" />
+  <HelpKINode Title="Program.Program constructor" Url="html/M_EasyMailDiscussion_Web_Program__ctor.htm" />
+  <HelpKINode Title="Raw property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Raw.htm" />
+  <HelpKINode Title="Recieved property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Recieved.htm" />
+  <HelpKINode Title="RelayEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_RelayEmail.htm" />
+  <HelpKINode Title="RelayEmailID property" Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_RelayEmailID.htm" />
+  <HelpKINode Title="RelayIdentifier class">
+    <HelpKINode Title="RelayIdentifier Class" Url="html/T_EasyMailDiscussion_Common_Database_RelayIdentifier.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Common_Database_RelayIdentifier__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_RelayIdentifier.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_RelayIdentifier.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RelayIdentifier.ID property" Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_ID.htm" />
+  <HelpKINode Title="RelayIdentifier.Message property" Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_Message.htm" />
+  <HelpKINode Title="RelayIdentifier.MessageID property" Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_MessageID.htm" />
+  <HelpKINode Title="RelayIdentifier.RelayEmailID property" Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_RelayEmailID.htm" />
+  <HelpKINode Title="RelayIdentifier.RelayIdentifier constructor" Url="html/M_EasyMailDiscussion_Common_Database_RelayIdentifier__ctor.htm" />
+  <HelpKINode Title="RelayIdentifiers property">
+    <HelpKINode Title="Message.RelayIdentifiers Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_RelayIdentifiers.htm" />
+    <HelpKINode Title="SqliteDatabase.RelayIdentifiers Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_RelayIdentifiers.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Remove method">
+    <HelpKINode Title="ContactController.Remove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Remove.htm" />
+    <HelpKINode Title="ListController.Remove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Remove.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveContactModel class">
+    <HelpKINode Title="RemoveContactModel Class" Url="html/T_EasyMailDiscussion_Web_Models_RemoveContactModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_RemoveContactModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_RemoveContactModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_RemoveContactModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveContactModel.Contact property" Url="html/P_EasyMailDiscussion_Web_Models_RemoveContactModel_Contact.htm" />
+  <HelpKINode Title="RemoveContactModel.RemoveContactModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_RemoveContactModel__ctor.htm" />
+  <HelpKINode Title="RemoveDiscussionListModel class">
+    <HelpKINode Title="RemoveDiscussionListModel Class" Url="html/T_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveDiscussionListModel.DiscussionList property" Url="html/P_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel_DiscussionList.htm" />
+  <HelpKINode Title="RemoveDiscussionListModel.RemoveDiscussionListModel constructor" Url="html/M_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel__ctor.htm" />
+  <HelpKINode Title="RemoveInlineCSS method" Url="html/M_EasyMailDiscussion_Common_HTMLCleaner_RemoveInlineCSS.htm" />
+  <HelpKINode Title="Requested enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="RequestId property" Url="html/P_EasyMailDiscussion_Web_Models_ErrorViewModel_RequestId.htm" />
+  <HelpKINode Title="SECTION_DATABASE field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_SECTION_DATABASE.htm" />
+  <HelpKINode Title="SECTION_LOG field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_SECTION_LOG.htm" />
+  <HelpKINode Title="SendEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendEmail.htm" />
+  <HelpKINode Title="SendOnboardingEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendOnboardingEmail.htm" />
+  <HelpKINode Title="SendSubscriptionConfirmationEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendSubscriptionConfirmationEmail.htm" />
+  <HelpKINode Title="SendUnsubscriptionConfirmationEmail method" Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendUnsubscriptionConfirmationEmail.htm" />
+  <HelpKINode Title="ShowRequestId property" Url="html/P_EasyMailDiscussion_Web_Models_ErrorViewModel_ShowRequestId.htm" />
+  <HelpKINode Title="SqliteDatabase class">
+    <HelpKINode Title="SqliteDatabase Class" Url="html/T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SqliteDatabase property" Url="html/P_EasyMailDiscussion_Web_Controllers_BaseController_SqliteDatabase.htm" />
+  <HelpKINode Title="SqliteDatabase.Contacts property" Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_Contacts.htm" />
+  <HelpKINode Title="SqliteDatabase.ContactSubscriptions property" Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_ContactSubscriptions.htm" />
+  <HelpKINode Title="SqliteDatabase.DiscussionLists property" Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_DiscussionLists.htm" />
+  <HelpKINode Title="SqliteDatabase.Messages property" Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_Messages.htm" />
+  <HelpKINode Title="SqliteDatabase.OnConfiguring method" Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase_OnConfiguring.htm" />
+  <HelpKINode Title="SqliteDatabase.OnModelCreating method" Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase_OnModelCreating.htm" />
+  <HelpKINode Title="SqliteDatabase.RelayIdentifiers property" Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_RelayIdentifiers.htm" />
+  <HelpKINode Title="SqliteDatabase.SqliteDatabase constructor" Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase__ctor.htm" />
+  <HelpKINode Title="Startup class">
+    <HelpKINode Title="Startup Class" Url="html/T_EasyMailDiscussion_Web_Startup.htm" />
+    <HelpKINode Title="constructor" Url="html/M_EasyMailDiscussion_Web_Startup__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_EasyMailDiscussion_Web_Startup.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_EasyMailDiscussion_Web_Startup.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Startup.Configuration property" Url="html/P_EasyMailDiscussion_Web_Startup_Configuration.htm" />
+  <HelpKINode Title="Startup.Configure method" Url="html/M_EasyMailDiscussion_Web_Startup_Configure.htm" />
+  <HelpKINode Title="Startup.ConfigureServices method" Url="html/M_EasyMailDiscussion_Web_Startup_ConfigureServices.htm" />
+  <HelpKINode Title="Startup.Startup constructor" Url="html/M_EasyMailDiscussion_Web_Startup__ctor.htm" />
+  <HelpKINode Title="Status property" Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_Status.htm" />
+  <HelpKINode Title="STATUS_GROUP_ACTION_DELAYED field" Url="html/F_EasyMailDiscussion_Common_EmailHelper_STATUS_GROUP_ACTION_DELAYED.htm" />
+  <HelpKINode Title="STATUS_GROUP_ACTION_FAILED field" Url="html/F_EasyMailDiscussion_Common_EmailHelper_STATUS_GROUP_ACTION_FAILED.htm" />
+  <HelpKINode Title="Subject property" Url="html/P_EasyMailDiscussion_Common_Database_Message_Subject.htm" />
+  <HelpKINode Title="Subscribed enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="Subscriptions property">
+    <HelpKINode Title="DiscussionList.Subscriptions Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Subscriptions.htm" />
+    <HelpKINode Title="DiscussionListAssignModel.Subscriptions Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_Subscriptions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SubscriptionStatus enumeration" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="TotalPages property">
+    <HelpKINode Title="ArchivePageModel.TotalPages Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_TotalPages.htm" />
+    <HelpKINode Title="MessagePageModel.TotalPages Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_TotalPages.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UNCHECKED_VALUE field" Url="html/F_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_UNCHECKED_VALUE.htm" />
+  <HelpKINode Title="Unknown enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="Unsubscribed enumeration member" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+  <HelpKINode Title="UserName property">
+    <HelpKINode Title="DiscussionList.UserName Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_UserName.htm" />
+    <HelpKINode Title="DiscussionListForm.UserName Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UserName.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UseSSL property">
+    <HelpKINode Title="DiscussionList.UseSSL Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_UseSSL.htm" />
+    <HelpKINode Title="DiscussionListForm.UseSSL Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UseSSL.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UseSSLChecked property" Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UseSSLChecked.htm" />
+</HelpKI>

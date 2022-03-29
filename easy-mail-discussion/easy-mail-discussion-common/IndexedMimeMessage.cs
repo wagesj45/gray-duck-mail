@@ -7,6 +7,14 @@ using System.Text;
 namespace EasyMailDiscussion.Common
 {
     /// <summary> An indexed <see cref="MimeMessage"/>. </summary>
+    /// <remarks>
+    /// The <see cref="MailKit.Net.Pop3.Pop3Client"/> works using message indexes when communicating
+    /// with the remote server. Messages from
+    /// <see cref="MailKit.Net.Pop3.Pop3Client.GetMessages(int, int, System.Threading.CancellationToken, MailKit.ITransferProgress)"/>
+    /// do not include these indices so we must manually index them using a
+    /// <see cref="System.Linq.Enumerable.Select{TSource, TResult}(IEnumerable{TSource}, Func{TSource, int, TResult})"/>.
+    /// </remarks>
+    /// <seealso cref="MailKit.Net.Pop3.Pop3Client"/>
     public class IndexedMimeMessage
     {
         #region Members
@@ -47,9 +55,11 @@ namespace EasyMailDiscussion.Common
         /// </summary>
         /// <param name="index">           The index. </param>
         /// <param name="originalMessage"> The original message object. </param>
-        /// <returns> An IndexedMimeMessage. </returns>
+        /// <returns> An indexed message. </returns>
         public static IndexedMimeMessage IndexMimeMessage(int index, MimeMessage originalMessage)
         {
+            logger.Trace("Assigning index {0} to {1}.", index, originalMessage.MessageId);
+
             var indexedMimeMessage = new IndexedMimeMessage
             {
                 Index = index,

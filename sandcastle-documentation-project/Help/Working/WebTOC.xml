@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="3cc93146-d925-4f8f-98b7-73323333e20a" Title="Namespaces" Url="html/R_Project_Documentation.htm">
+    <HelpTOCNode Id="d97de9b6-46f1-4df6-8b3a-651dd25e0020" Title="EasyMailDiscussion.Cli" Url="html/N_EasyMailDiscussion_Cli.htm">
+      <HelpTOCNode Id="2ad318ae-1156-4d36-9f7b-d06f7e46d454" Title="Options Class" Url="html/T_EasyMailDiscussion_Cli_Options.htm">
+        <HelpTOCNode Title="Options Constructor " Url="html/M_EasyMailDiscussion_Cli_Options__ctor.htm" />
+        <HelpTOCNode Id="4946b3ea-b710-4213-bc71-0a9449c628f2" Title="Options Properties" Url="html/Properties_T_EasyMailDiscussion_Cli_Options.htm">
+          <HelpTOCNode Title="DBPath Property " Url="html/P_EasyMailDiscussion_Cli_Options_DBPath.htm" />
+          <HelpTOCNode Title="EmailFetchTime Property " Url="html/P_EasyMailDiscussion_Cli_Options_EmailFetchTime.htm" />
+          <HelpTOCNode Title="LogLevel Property " Url="html/P_EasyMailDiscussion_Cli_Options_LogLevel.htm" />
+          <HelpTOCNode Title="LogPath Property " Url="html/P_EasyMailDiscussion_Cli_Options_LogPath.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Options Methods" Url="html/Methods_T_EasyMailDiscussion_Cli_Options.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="918308c0-57bc-4c66-9fc3-29b9cb9a2304" Title="EasyMailDiscussion.Common" Url="html/N_EasyMailDiscussion_Common.htm">
+      <HelpTOCNode Id="cafa7a26-0a3c-4c5b-9ef3-0dcf333af6cb" Title="EmailAliasHelper Class" Url="html/T_EasyMailDiscussion_Common_EmailAliasHelper.htm">
+        <HelpTOCNode Id="c4a70372-dc9f-45f7-910d-f7185b142b4d" Title="EmailAliasHelper Methods" Url="html/Methods_T_EasyMailDiscussion_Common_EmailAliasHelper.htm">
+          <HelpTOCNode Id="6e7fbdf8-22bb-4d9c-9bf3-16399e3381e6" Title="GetBounceAlias Method " Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetBounceAlias.htm">
+            <HelpTOCNode Title="GetBounceAlias Method (DiscussionList)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetBounceAlias.htm" />
+            <HelpTOCNode Title="GetBounceAlias Method (String)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetBounceAlias_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="056e9812-c8ad-4e40-84e5-53b487bb0170" Title="GetOwnerAlias Method " Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetOwnerAlias.htm">
+            <HelpTOCNode Title="GetOwnerAlias Method (DiscussionList)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetOwnerAlias.htm" />
+            <HelpTOCNode Title="GetOwnerAlias Method (String)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetOwnerAlias_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="42759f3a-3e13-46fa-ab92-1a21b122a083" Title="GetRequestAlias Method " Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetRequestAlias.htm">
+            <HelpTOCNode Title="GetRequestAlias Method (DiscussionList)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetRequestAlias.htm" />
+            <HelpTOCNode Title="GetRequestAlias Method (String)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetRequestAlias_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="d7744097-9ac9-4357-baac-55d1499a2c2a" Title="GetSubscribeAlias Method " Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetSubscribeAlias.htm">
+            <HelpTOCNode Title="GetSubscribeAlias Method (DiscussionList)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetSubscribeAlias.htm" />
+            <HelpTOCNode Title="GetSubscribeAlias Method (String)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetSubscribeAlias_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="668fa467-6f43-4c7e-9a1f-4458547b2e85" Title="GetUnsubscribeAlias Method " Url="html/Overload_EasyMailDiscussion_Common_EmailAliasHelper_GetUnsubscribeAlias.htm">
+            <HelpTOCNode Title="GetUnsubscribeAlias Method (DiscussionList)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetUnsubscribeAlias.htm" />
+            <HelpTOCNode Title="GetUnsubscribeAlias Method (String)" Url="html/M_EasyMailDiscussion_Common_EmailAliasHelper_GetUnsubscribeAlias_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="d98b71bd-8092-4208-b510-f3cec4dde555" Title="EmailHelper Class" Url="html/T_EasyMailDiscussion_Common_EmailHelper.htm">
+        <HelpTOCNode Id="40b0ca5f-0a35-412d-a961-88e4e763faf4" Title="EmailHelper Properties" Url="html/Properties_T_EasyMailDiscussion_Common_EmailHelper.htm">
+          <HelpTOCNode Title="BouncedEmailStatusGroupActions Property " Url="html/P_EasyMailDiscussion_Common_EmailHelper_BouncedEmailStatusGroupActions.htm" />
+          <HelpTOCNode Title="ContactAssociatedStatuses Property " Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactAssociatedStatuses.htm" />
+          <HelpTOCNode Title="ContactAuthorizedStatuses Property " Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactAuthorizedStatuses.htm" />
+          <HelpTOCNode Title="ContactUnassignableStatuses Property " Url="html/P_EasyMailDiscussion_Common_EmailHelper_ContactUnassignableStatuses.htm" />
+          <HelpTOCNode Title="MailEmailTemplate Property " Url="html/P_EasyMailDiscussion_Common_EmailHelper_MailEmailTemplate.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="ee46f40e-fcde-4cba-a25e-d67579f170f1" Title="EmailHelper Methods" Url="html/Methods_T_EasyMailDiscussion_Common_EmailHelper.htm">
+          <HelpTOCNode Title="FillMainTemplate Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_FillMainTemplate.htm" />
+          <HelpTOCNode Title="GetBouncedMessageRecipient Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_GetBouncedMessageRecipient.htm" />
+          <HelpTOCNode Title="IsAssignable Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsAssignable.htm" />
+          <HelpTOCNode Title="IsAuthorizedForMailDistribution Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsAuthorizedForMailDistribution.htm" />
+          <HelpTOCNode Title="IsBouncedMessage Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_IsBouncedMessage.htm" />
+          <HelpTOCNode Title="RelayEmail Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_RelayEmail.htm" />
+          <HelpTOCNode Title="SendEmail Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendEmail.htm" />
+          <HelpTOCNode Title="SendOnboardingEmail Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendOnboardingEmail.htm" />
+          <HelpTOCNode Title="SendSubscriptionConfirmationEmail Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendSubscriptionConfirmationEmail.htm" />
+          <HelpTOCNode Title="SendUnsubscriptionConfirmationEmail Method " Url="html/M_EasyMailDiscussion_Common_EmailHelper_SendUnsubscriptionConfirmationEmail.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="595d361e-c50c-4b14-b52b-ec6cfd4e0463" Title="EmailHelper Fields" Url="html/Fields_T_EasyMailDiscussion_Common_EmailHelper.htm">
+          <HelpTOCNode Title="STATUS_GROUP_ACTION_DELAYED Field" Url="html/F_EasyMailDiscussion_Common_EmailHelper_STATUS_GROUP_ACTION_DELAYED.htm" />
+          <HelpTOCNode Title="STATUS_GROUP_ACTION_FAILED Field" Url="html/F_EasyMailDiscussion_Common_EmailHelper_STATUS_GROUP_ACTION_FAILED.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="db780113-ed3a-42b5-9bcd-14f5a60afff9" Title="HTMLCleaner Class" Url="html/T_EasyMailDiscussion_Common_HTMLCleaner.htm">
+        <HelpTOCNode Id="e4f82fce-2168-425b-a3fb-3f9e715202b0" Title="HTMLCleaner Methods" Url="html/Methods_T_EasyMailDiscussion_Common_HTMLCleaner.htm">
+          <HelpTOCNode Title="RemoveInlineCSS Method " Url="html/M_EasyMailDiscussion_Common_HTMLCleaner_RemoveInlineCSS.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="3851cb94-c6b7-4801-a815-31a7842ca53e" Title="IndexedMimeMessage Class" Url="html/T_EasyMailDiscussion_Common_IndexedMimeMessage.htm">
+        <HelpTOCNode Id="1e2652d8-b274-47bc-b096-dacfbfe76209" Title="IndexedMimeMessage Properties" Url="html/Properties_T_EasyMailDiscussion_Common_IndexedMimeMessage.htm">
+          <HelpTOCNode Title="Index Property " Url="html/P_EasyMailDiscussion_Common_IndexedMimeMessage_Index.htm" />
+          <HelpTOCNode Title="Message Property " Url="html/P_EasyMailDiscussion_Common_IndexedMimeMessage_Message.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="38160918-8ae8-421b-a01a-f947d94bf36d" Title="IndexedMimeMessage Methods" Url="html/Methods_T_EasyMailDiscussion_Common_IndexedMimeMessage.htm">
+          <HelpTOCNode Title="Equals Method " Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_Equals.htm" />
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_GetHashCode.htm" />
+          <HelpTOCNode Title="IndexMimeMessage Method " Url="html/M_EasyMailDiscussion_Common_IndexedMimeMessage_IndexMimeMessage.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="b2b21762-65e7-46f3-9688-7301d54e578f" Title="LINQExtensions Class" Url="html/T_EasyMailDiscussion_Common_LINQExtensions.htm">
+        <HelpTOCNode Id="b45c33ae-34fd-4e87-9b2d-a4404a4e478d" Title="LINQExtensions Methods" Url="html/Methods_T_EasyMailDiscussion_Common_LINQExtensions.htm">
+          <HelpTOCNode Id="163247fa-d83a-49a9-a609-ac067cb0d557" Title="Page Method " Url="html/Overload_EasyMailDiscussion_Common_LINQExtensions_Page.htm">
+            <HelpTOCNode Title="Page(T) Method (IEnumerable(T), Int32, Int32)" Url="html/M_EasyMailDiscussion_Common_LINQExtensions_Page__1.htm" />
+            <HelpTOCNode Title="Page(T) Method (IQueryable(T), Int32, Int32)" Url="html/M_EasyMailDiscussion_Common_LINQExtensions_Page__1_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="db9e3b07-091c-443d-805d-b170f062e420" Title="PageCount Method " Url="html/Overload_EasyMailDiscussion_Common_LINQExtensions_PageCount.htm">
+            <HelpTOCNode Title="PageCount(T) Method (IEnumerable(T), Int32)" Url="html/M_EasyMailDiscussion_Common_LINQExtensions_PageCount__1.htm" />
+            <HelpTOCNode Title="PageCount(T) Method (IQueryable(T), Int32)" Url="html/M_EasyMailDiscussion_Common_LINQExtensions_PageCount__1_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="313d7844-a5f1-46fa-9454-ab9817be73db" Title="NLogConfiguration Class" Url="html/T_EasyMailDiscussion_Common_NLogConfiguration.htm">
+        <HelpTOCNode Id="7e3ed38c-6bd9-4696-8485-3e0844f91bc9" Title="NLogConfiguration Methods" Url="html/Methods_T_EasyMailDiscussion_Common_NLogConfiguration.htm">
+          <HelpTOCNode Title="GetConfiguration Method " Url="html/M_EasyMailDiscussion_Common_NLogConfiguration_GetConfiguration.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2eda9bfd-251b-4d4f-b906-1438f87ca059" Title="EasyMailDiscussion.Common.Database" Url="html/N_EasyMailDiscussion_Common_Database.htm">
+      <HelpTOCNode Id="bece1adc-7133-41e4-9732-2cb181eca7b8" Title="Contact Class" Url="html/T_EasyMailDiscussion_Common_Database_Contact.htm">
+        <HelpTOCNode Title="Contact Constructor " Url="html/M_EasyMailDiscussion_Common_Database_Contact__ctor.htm" />
+        <HelpTOCNode Id="cb567f93-ef7a-4eb6-bd02-f8ab79179629" Title="Contact Properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_Contact.htm">
+          <HelpTOCNode Title="Activated Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Activated.htm" />
+          <HelpTOCNode Title="ContactSubscriptions Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_ContactSubscriptions.htm" />
+          <HelpTOCNode Title="Email Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Email.htm" />
+          <HelpTOCNode Title="ID Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_ID.htm" />
+          <HelpTOCNode Title="Messages Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Messages.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_EasyMailDiscussion_Common_Database_Contact_Name.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Contact Methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_Contact.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="f74e1575-a20d-4cba-a2f3-710066d86adb" Title="ContactSubscription Class" Url="html/T_EasyMailDiscussion_Common_Database_ContactSubscription.htm">
+        <HelpTOCNode Title="ContactSubscription Constructor " Url="html/M_EasyMailDiscussion_Common_Database_ContactSubscription__ctor.htm" />
+        <HelpTOCNode Id="f66291d0-121f-4199-ac3b-a53b9b5e44cb" Title="ContactSubscription Properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_ContactSubscription.htm">
+          <HelpTOCNode Title="Contact Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_Contact.htm" />
+          <HelpTOCNode Title="ContactID Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_ContactID.htm" />
+          <HelpTOCNode Title="DiscussionList Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_DiscussionList.htm" />
+          <HelpTOCNode Title="DiscussionListID Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_DiscussionListID.htm" />
+          <HelpTOCNode Title="ID Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_ID.htm" />
+          <HelpTOCNode Title="Status Property " Url="html/P_EasyMailDiscussion_Common_Database_ContactSubscription_Status.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ContactSubscription Methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_ContactSubscription.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="f7fee5f0-0275-48a6-a23f-b2567fbae49c" Title="DiscussionList Class" Url="html/T_EasyMailDiscussion_Common_Database_DiscussionList.htm">
+        <HelpTOCNode Title="DiscussionList Constructor " Url="html/M_EasyMailDiscussion_Common_Database_DiscussionList__ctor.htm" />
+        <HelpTOCNode Id="da1dd568-954c-4b60-85d8-2dc81cd29307" Title="DiscussionList Properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_DiscussionList.htm">
+          <HelpTOCNode Title="BaseEmailAddress Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_BaseEmailAddress.htm" />
+          <HelpTOCNode Title="Description Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Description.htm" />
+          <HelpTOCNode Title="ID Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_ID.htm" />
+          <HelpTOCNode Title="IncomingMailPort Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_IncomingMailPort.htm" />
+          <HelpTOCNode Title="IncomingMailServer Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_IncomingMailServer.htm" />
+          <HelpTOCNode Title="Messages Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Messages.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Name.htm" />
+          <HelpTOCNode Title="OutgoingMailPort Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_OutgoingMailPort.htm" />
+          <HelpTOCNode Title="OutgoingMailServer Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_OutgoingMailServer.htm" />
+          <HelpTOCNode Title="Password Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Password.htm" />
+          <HelpTOCNode Title="Subscriptions Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_Subscriptions.htm" />
+          <HelpTOCNode Title="UserName Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_UserName.htm" />
+          <HelpTOCNode Title="UseSSL Property " Url="html/P_EasyMailDiscussion_Common_Database_DiscussionList_UseSSL.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="DiscussionList Methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_DiscussionList.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="dbf36a45-f5d5-4f94-9bf6-d53efaaa7a5b" Title="Message Class" Url="html/T_EasyMailDiscussion_Common_Database_Message.htm">
+        <HelpTOCNode Title="Message Constructor " Url="html/M_EasyMailDiscussion_Common_Database_Message__ctor.htm" />
+        <HelpTOCNode Id="6df35c8d-3f56-4779-86a3-6676210a5adb" Title="Message Properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_Message.htm">
+          <HelpTOCNode Title="BodyHTML Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyHTML.htm" />
+          <HelpTOCNode Title="BodyRaw Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyRaw.htm" />
+          <HelpTOCNode Title="BodyText Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_BodyText.htm" />
+          <HelpTOCNode Title="Children Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_Children.htm" />
+          <HelpTOCNode Title="DiscussionList Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_DiscussionList.htm" />
+          <HelpTOCNode Title="DiscussionListID Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_DiscussionListID.htm" />
+          <HelpTOCNode Title="EmailID Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_EmailID.htm" />
+          <HelpTOCNode Title="ID Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_ID.htm" />
+          <HelpTOCNode Title="OriginatorContact Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_OriginatorContact.htm" />
+          <HelpTOCNode Title="OriginatorContactID Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_OriginatorContactID.htm" />
+          <HelpTOCNode Title="Parent Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_Parent.htm" />
+          <HelpTOCNode Title="ParentID Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_ParentID.htm" />
+          <HelpTOCNode Title="Raw Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_Raw.htm" />
+          <HelpTOCNode Title="Recieved Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_Recieved.htm" />
+          <HelpTOCNode Title="RelayIdentifiers Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_RelayIdentifiers.htm" />
+          <HelpTOCNode Title="Subject Property " Url="html/P_EasyMailDiscussion_Common_Database_Message_Subject.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Message Methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_Message.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="9a0d3e79-498b-47cb-85fd-c6d0a4c2e481" Title="RelayIdentifier Class" Url="html/T_EasyMailDiscussion_Common_Database_RelayIdentifier.htm">
+        <HelpTOCNode Title="RelayIdentifier Constructor " Url="html/M_EasyMailDiscussion_Common_Database_RelayIdentifier__ctor.htm" />
+        <HelpTOCNode Id="ea54dcb5-9aff-4116-8caf-24471b6ab5b6" Title="RelayIdentifier Properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_RelayIdentifier.htm">
+          <HelpTOCNode Title="ID Property " Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_ID.htm" />
+          <HelpTOCNode Title="Message Property " Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_Message.htm" />
+          <HelpTOCNode Title="MessageID Property " Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_MessageID.htm" />
+          <HelpTOCNode Title="RelayEmailID Property " Url="html/P_EasyMailDiscussion_Common_Database_RelayIdentifier_RelayEmailID.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="RelayIdentifier Methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_RelayIdentifier.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="96095aee-9af4-4db0-97e3-fba8647a8940" Title="SqliteDatabase Class" Url="html/T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm">
+        <HelpTOCNode Title="SqliteDatabase Constructor " Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase__ctor.htm" />
+        <HelpTOCNode Id="af13cdb5-d9f0-4d9a-83ba-bf46bcdd2117" Title="SqliteDatabase Properties" Url="html/Properties_T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm">
+          <HelpTOCNode Title="Contacts Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_Contacts.htm" />
+          <HelpTOCNode Title="ContactSubscriptions Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_ContactSubscriptions.htm" />
+          <HelpTOCNode Title="DiscussionLists Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_DiscussionLists.htm" />
+          <HelpTOCNode Title="Messages Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_Messages.htm" />
+          <HelpTOCNode Title="RelayIdentifiers Property " Url="html/P_EasyMailDiscussion_Common_Database_SqliteDatabase_RelayIdentifiers.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="b56eb552-9848-47e0-8022-d765d8256354" Title="SqliteDatabase Methods" Url="html/Methods_T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm">
+          <HelpTOCNode Title="OnConfiguring Method " Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase_OnConfiguring.htm" />
+          <HelpTOCNode Title="OnModelCreating Method " Url="html/M_EasyMailDiscussion_Common_Database_SqliteDatabase_OnModelCreating.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="SqliteDatabase Events" Url="html/Events_T_EasyMailDiscussion_Common_Database_SqliteDatabase.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="SubscriptionStatus Enumeration" Url="html/T_EasyMailDiscussion_Common_Database_SubscriptionStatus.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="4869e0d3-6e64-4d6c-b85b-25bde6ffc474" Title="EasyMailDiscussion.Web" Url="html/N_EasyMailDiscussion_Web.htm">
+      <HelpTOCNode Id="b5a31027-1653-4054-bfdc-83e652d29ea7" Title="ApplicationSettings Class" Url="html/T_EasyMailDiscussion_Web_ApplicationSettings.htm">
+        <HelpTOCNode Id="cc68e645-1f38-4d1e-9153-2d533f2d9fd7" Title="ApplicationSettings Properties" Url="html/Properties_T_EasyMailDiscussion_Web_ApplicationSettings.htm">
+          <HelpTOCNode Title="DatabaseFilePath Property " Url="html/P_EasyMailDiscussion_Web_ApplicationSettings_DatabaseFilePath.htm" />
+          <HelpTOCNode Title="LogFilePath Property " Url="html/P_EasyMailDiscussion_Web_ApplicationSettings_LogFilePath.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="c0d590fe-e108-46e4-9533-251a5575f8f8" Title="ApplicationSettings Fields" Url="html/Fields_T_EasyMailDiscussion_Web_ApplicationSettings.htm">
+          <HelpTOCNode Title="DATABASE_PATH Field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_DATABASE_PATH.htm" />
+          <HelpTOCNode Title="LOG_PATH Field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_LOG_PATH.htm" />
+          <HelpTOCNode Title="SECTION_DATABASE Field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_SECTION_DATABASE.htm" />
+          <HelpTOCNode Title="SECTION_LOG Field" Url="html/F_EasyMailDiscussion_Web_ApplicationSettings_SECTION_LOG.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="d3439c0a-343c-4cd2-b590-484b9bb8a281" Title="DockerEnvironmentVariables Class" Url="html/T_EasyMailDiscussion_Web_DockerEnvironmentVariables.htm">
+        <HelpTOCNode Id="84dd9384-47fa-4017-a7d4-be2024a0bf69" Title="DockerEnvironmentVariables Properties" Url="html/Properties_T_EasyMailDiscussion_Web_DockerEnvironmentVariables.htm">
+          <HelpTOCNode Title="FetchTime Property " Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_FetchTime.htm" />
+          <HelpTOCNode Title="LogLevel Property " Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_LogLevel.htm" />
+          <HelpTOCNode Title="PageSize Property " Url="html/P_EasyMailDiscussion_Web_DockerEnvironmentVariables_PageSize.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="08929267-5d02-4be3-91df-ba3ddd846efc" Title="Program Class" Url="html/T_EasyMailDiscussion_Web_Program.htm">
+        <HelpTOCNode Title="Program Constructor " Url="html/M_EasyMailDiscussion_Web_Program__ctor.htm" />
+        <HelpTOCNode Id="4dce0885-9041-4ea6-bf7d-f923e76911d9" Title="Program Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Program.htm">
+          <HelpTOCNode Title="CreateHostBuilder Method " Url="html/M_EasyMailDiscussion_Web_Program_CreateHostBuilder.htm" />
+          <HelpTOCNode Title="Main Method " Url="html/M_EasyMailDiscussion_Web_Program_Main.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="86d9c351-8fca-478c-aff0-fa3fe25587d4" Title="Startup Class" Url="html/T_EasyMailDiscussion_Web_Startup.htm">
+        <HelpTOCNode Title="Startup Constructor " Url="html/M_EasyMailDiscussion_Web_Startup__ctor.htm" />
+        <HelpTOCNode Id="996d9e01-00b7-4047-ba2c-3877e18409a9" Title="Startup Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Startup.htm">
+          <HelpTOCNode Title="Configuration Property " Url="html/P_EasyMailDiscussion_Web_Startup_Configuration.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="ef90749f-3170-4952-bc2d-e543d32ba0e2" Title="Startup Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Startup.htm">
+          <HelpTOCNode Title="Configure Method " Url="html/M_EasyMailDiscussion_Web_Startup_Configure.htm" />
+          <HelpTOCNode Title="ConfigureServices Method " Url="html/M_EasyMailDiscussion_Web_Startup_ConfigureServices.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="b0d1342d-9763-4883-b216-eeae02d89503" Title="EasyMailDiscussion.Web.Controllers" Url="html/N_EasyMailDiscussion_Web_Controllers.htm">
+      <HelpTOCNode Id="46ce6dea-acbc-4f67-8863-6ba2b7582026" Title="BaseController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_BaseController.htm">
+        <HelpTOCNode Title="BaseController Constructor " Url="html/M_EasyMailDiscussion_Web_Controllers_BaseController__ctor.htm" />
+        <HelpTOCNode Id="027835d1-a7b6-4416-911f-4b724b02614a" Title="BaseController Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_BaseController.htm">
+          <HelpTOCNode Title="SqliteDatabase Property " Url="html/P_EasyMailDiscussion_Web_Controllers_BaseController_SqliteDatabase.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="227d951e-47fb-4552-abaa-2f7ee3029bab" Title="BaseController Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_BaseController.htm">
+          <HelpTOCNode Title="OnActionExecuting Method " Url="html/M_EasyMailDiscussion_Web_Controllers_BaseController_OnActionExecuting.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="b5025fcb-e669-4802-8874-3e6f77c0b38a" Title="ContactController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_ContactController.htm">
+        <HelpTOCNode Title="ContactController Constructor " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController__ctor.htm" />
+        <HelpTOCNode Title="ContactController Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_ContactController.htm" />
+        <HelpTOCNode Id="cf163e9b-2364-4cbf-81c8-74093711b26c" Title="ContactController Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_ContactController.htm">
+          <HelpTOCNode Title="ConfirmRemove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_ConfirmRemove.htm" />
+          <HelpTOCNode Title="Create Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Create.htm" />
+          <HelpTOCNode Id="a68ea6f3-be8a-4dfe-b035-84837dcc7abb" Title="Edit Method " Url="html/Overload_EasyMailDiscussion_Web_Controllers_ContactController_Edit.htm">
+            <HelpTOCNode Title="Edit Method (ContactForm)" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Edit.htm" />
+            <HelpTOCNode Title="Edit Method (Int32)" Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Edit_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Index Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Index.htm" />
+          <HelpTOCNode Title="New Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_New.htm" />
+          <HelpTOCNode Title="Remove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ContactController_Remove.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="ca831e31-8f88-476d-b046-c6e96c093f8c" Title="HomeController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_HomeController.htm">
+        <HelpTOCNode Title="HomeController Constructor " Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController__ctor.htm" />
+        <HelpTOCNode Title="HomeController Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_HomeController.htm" />
+        <HelpTOCNode Id="a7fc7d52-6e3b-4223-b24b-1f3297b101d9" Title="HomeController Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_HomeController.htm">
+          <HelpTOCNode Title="Error Method " Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController_Error.htm" />
+          <HelpTOCNode Title="Index Method " Url="html/M_EasyMailDiscussion_Web_Controllers_HomeController_Index.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="c0a867e1-acf3-4039-89e5-8d7aa3904e7a" Title="ListController Class" Url="html/T_EasyMailDiscussion_Web_Controllers_ListController.htm">
+        <HelpTOCNode Title="ListController Constructor " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController__ctor.htm" />
+        <HelpTOCNode Title="ListController Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Controllers_ListController.htm" />
+        <HelpTOCNode Id="d760c2b4-54c0-4a1b-8d73-ce049d693105" Title="ListController Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Controllers_ListController.htm">
+          <HelpTOCNode Title="Archive Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Archive.htm" />
+          <HelpTOCNode Id="16cee8f8-8d02-4d70-a6ef-0bdd38ca9956" Title="Assign Method " Url="html/Overload_EasyMailDiscussion_Web_Controllers_ListController_Assign.htm">
+            <HelpTOCNode Title="Assign Method (DiscussionListAssignForm)" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Assign.htm" />
+            <HelpTOCNode Title="Assign Method (Int32)" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Assign_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="ConfirmRemove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_ConfirmRemove.htm" />
+          <HelpTOCNode Title="Create Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Create.htm" />
+          <HelpTOCNode Id="6811502f-15da-46f4-8c0d-54d742d69578" Title="Edit Method " Url="html/Overload_EasyMailDiscussion_Web_Controllers_ListController_Edit.htm">
+            <HelpTOCNode Title="Edit Method (DiscussionListForm)" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Edit.htm" />
+            <HelpTOCNode Title="Edit Method (Int32)" Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Edit_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Index Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Index.htm" />
+          <HelpTOCNode Title="Message Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Message.htm" />
+          <HelpTOCNode Title="New Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_New.htm" />
+          <HelpTOCNode Title="Remove Method " Url="html/M_EasyMailDiscussion_Web_Controllers_ListController_Remove.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="dc2fd8fd-9875-468a-bbb9-e492bb79cc90" Title="EasyMailDiscussion.Web.Models" Url="html/N_EasyMailDiscussion_Web_Models.htm">
+      <HelpTOCNode Id="6a849d73-f409-4bdb-8e31-4e070dc39344" Title="ArchivePageModel Class" Url="html/T_EasyMailDiscussion_Web_Models_ArchivePageModel.htm">
+        <HelpTOCNode Title="ArchivePageModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_ArchivePageModel__ctor.htm" />
+        <HelpTOCNode Id="760883d9-8b76-4120-b3ab-eefded0c63ee" Title="ArchivePageModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_ArchivePageModel.htm">
+          <HelpTOCNode Title="DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_DiscussionList.htm" />
+          <HelpTOCNode Title="Messages Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_Messages.htm" />
+          <HelpTOCNode Title="PageNumber Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_PageNumber.htm" />
+          <HelpTOCNode Title="TotalPages Property " Url="html/P_EasyMailDiscussion_Web_Models_ArchivePageModel_TotalPages.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ArchivePageModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_ArchivePageModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="b7e26b6a-4be9-4217-aac8-08838a162aac" Title="ContactsModel Class" Url="html/T_EasyMailDiscussion_Web_Models_ContactsModel.htm">
+        <HelpTOCNode Title="ContactsModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_ContactsModel__ctor.htm" />
+        <HelpTOCNode Id="a0103219-f9a9-4b8a-8a63-d59b56c72e53" Title="ContactsModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_ContactsModel.htm">
+          <HelpTOCNode Title="Contacts Property " Url="html/P_EasyMailDiscussion_Web_Models_ContactsModel_Contacts.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ContactsModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_ContactsModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="50a44e4d-2c46-41d8-9098-e385d4ed7c23" Title="DiscussionListAssignModel Class" Url="html/T_EasyMailDiscussion_Web_Models_DiscussionListAssignModel.htm">
+        <HelpTOCNode Title="DiscussionListAssignModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel__ctor.htm" />
+        <HelpTOCNode Id="69905153-3dd9-472b-8819-0e0e22454a77" Title="DiscussionListAssignModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_DiscussionListAssignModel.htm">
+          <HelpTOCNode Title="Contacts Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_Contacts.htm" />
+          <HelpTOCNode Title="DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_DiscussionList.htm" />
+          <HelpTOCNode Title="Subscriptions Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_Subscriptions.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="efbf6941-6121-4d37-b165-c7c47be7f41e" Title="DiscussionListAssignModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_DiscussionListAssignModel.htm">
+          <HelpTOCNode Title="GetSubscription Method " Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_GetSubscription.htm" />
+          <HelpTOCNode Title="HasSubscription Method " Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListAssignModel_HasSubscription.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="dc20f240-b21d-42c4-ba18-13913abadcd3" Title="DiscussionListsModel Class" Url="html/T_EasyMailDiscussion_Web_Models_DiscussionListsModel.htm">
+        <HelpTOCNode Title="DiscussionListsModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_DiscussionListsModel__ctor.htm" />
+        <HelpTOCNode Id="bf5571c5-de16-4877-9437-6cfe103a84bb" Title="DiscussionListsModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_DiscussionListsModel.htm">
+          <HelpTOCNode Title="DiscussionLists Property " Url="html/P_EasyMailDiscussion_Web_Models_DiscussionListsModel_DiscussionLists.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="DiscussionListsModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_DiscussionListsModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="06898a0f-80d4-43c2-b081-19c05bde126f" Title="EditContactModel Class" Url="html/T_EasyMailDiscussion_Web_Models_EditContactModel.htm">
+        <HelpTOCNode Title="EditContactModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_EditContactModel__ctor.htm" />
+        <HelpTOCNode Id="2794afd1-cd65-473b-82c1-af48b2a765af" Title="EditContactModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_EditContactModel.htm">
+          <HelpTOCNode Title="Contact Property " Url="html/P_EasyMailDiscussion_Web_Models_EditContactModel_Contact.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="EditContactModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_EditContactModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="22378c55-3dce-49a1-8fde-b16e12bb8268" Title="EditDiscussionListModel Class" Url="html/T_EasyMailDiscussion_Web_Models_EditDiscussionListModel.htm">
+        <HelpTOCNode Title="EditDiscussionListModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_EditDiscussionListModel__ctor.htm" />
+        <HelpTOCNode Id="869bdd1d-efb7-4dbc-8cb0-a1a8d9934068" Title="EditDiscussionListModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_EditDiscussionListModel.htm">
+          <HelpTOCNode Title="DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_EditDiscussionListModel_DiscussionList.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="EditDiscussionListModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_EditDiscussionListModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="f5639feb-8462-4dc5-ba36-52c5eb7554a6" Title="ErrorViewModel Class" Url="html/T_EasyMailDiscussion_Web_Models_ErrorViewModel.htm">
+        <HelpTOCNode Title="ErrorViewModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_ErrorViewModel__ctor.htm" />
+        <HelpTOCNode Id="f6e00c71-62bf-407a-a885-ba76246529dd" Title="ErrorViewModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_ErrorViewModel.htm">
+          <HelpTOCNode Title="RequestId Property " Url="html/P_EasyMailDiscussion_Web_Models_ErrorViewModel_RequestId.htm" />
+          <HelpTOCNode Title="ShowRequestId Property " Url="html/P_EasyMailDiscussion_Web_Models_ErrorViewModel_ShowRequestId.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ErrorViewModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_ErrorViewModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="f238ef9b-99bd-4be6-b2ca-888e112df61c" Title="HomepageModel Class" Url="html/T_EasyMailDiscussion_Web_Models_HomepageModel.htm">
+        <HelpTOCNode Title="HomepageModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_HomepageModel__ctor.htm" />
+        <HelpTOCNode Id="f5bd06d4-c276-4aa1-a261-0f8656a05d61" Title="HomepageModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_HomepageModel.htm">
+          <HelpTOCNode Title="NumberOfContacts Property " Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfContacts.htm" />
+          <HelpTOCNode Title="NumberOfDiscussionLists Property " Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfDiscussionLists.htm" />
+          <HelpTOCNode Title="NumberOfMessages Property " Url="html/P_EasyMailDiscussion_Web_Models_HomepageModel_NumberOfMessages.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="HomepageModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_HomepageModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="501e57cd-284f-40fe-b7c2-73515d177b26" Title="MessagePageModel Class" Url="html/T_EasyMailDiscussion_Web_Models_MessagePageModel.htm">
+        <HelpTOCNode Title="MessagePageModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_MessagePageModel__ctor.htm" />
+        <HelpTOCNode Id="12c96dde-9494-47bf-a3cd-d25c248128c2" Title="MessagePageModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_MessagePageModel.htm">
+          <HelpTOCNode Title="Children Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_Children.htm" />
+          <HelpTOCNode Title="Message Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_Message.htm" />
+          <HelpTOCNode Title="PageNumber Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_PageNumber.htm" />
+          <HelpTOCNode Title="TotalPages Property " Url="html/P_EasyMailDiscussion_Web_Models_MessagePageModel_TotalPages.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="MessagePageModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_MessagePageModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="ad1fa59b-655c-4b76-9e6b-707003988c35" Title="RemoveContactModel Class" Url="html/T_EasyMailDiscussion_Web_Models_RemoveContactModel.htm">
+        <HelpTOCNode Title="RemoveContactModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_RemoveContactModel__ctor.htm" />
+        <HelpTOCNode Id="7cd07880-7ab1-41d7-8cf6-73c45061b327" Title="RemoveContactModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_RemoveContactModel.htm">
+          <HelpTOCNode Title="Contact Property " Url="html/P_EasyMailDiscussion_Web_Models_RemoveContactModel_Contact.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="RemoveContactModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_RemoveContactModel.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="26b6f76d-7545-4578-afb5-93c6bc40971d" Title="RemoveDiscussionListModel Class" Url="html/T_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel.htm">
+        <HelpTOCNode Title="RemoveDiscussionListModel Constructor " Url="html/M_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel__ctor.htm" />
+        <HelpTOCNode Id="ba138d75-21b0-4798-b1eb-f48b18e48432" Title="RemoveDiscussionListModel Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel.htm">
+          <HelpTOCNode Title="DiscussionList Property " Url="html/P_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel_DiscussionList.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="RemoveDiscussionListModel Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_RemoveDiscussionListModel.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="916f3770-8723-4083-bede-e36a9678f9b9" Title="EasyMailDiscussion.Web.Models.Forms" Url="html/N_EasyMailDiscussion_Web_Models_Forms.htm">
+      <HelpTOCNode Id="fdedae97-b924-40be-940d-562eb1b1a665" Title="ContactForm Class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_ContactForm.htm">
+        <HelpTOCNode Title="ContactForm Constructor " Url="html/M_EasyMailDiscussion_Web_Models_Forms_ContactForm__ctor.htm" />
+        <HelpTOCNode Id="029e22e5-48d6-4442-bf9c-79f614270a00" Title="ContactForm Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_Forms_ContactForm.htm">
+          <HelpTOCNode Title="Activated Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Activated.htm" />
+          <HelpTOCNode Title="ActivatedChecked Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_ActivatedChecked.htm" />
+          <HelpTOCNode Title="Email Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Email.htm" />
+          <HelpTOCNode Title="ID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_ID.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_ContactForm_Name.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ContactForm Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_Forms_ContactForm.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="1cc04b23-a910-4968-8d11-3a6863c5b96a" Title="DiscussionListAssignForm Class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm">
+        <HelpTOCNode Title="DiscussionListAssignForm Constructor " Url="html/M_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm__ctor.htm" />
+        <HelpTOCNode Id="88322c82-423f-45f5-81fb-900fbebf5d0b" Title="DiscussionListAssignForm Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm">
+          <HelpTOCNode Title="Assigned Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_Assigned.htm" />
+          <HelpTOCNode Title="Assignments Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_Assignments.htm" />
+          <HelpTOCNode Title="ContactID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_ContactID.htm" />
+          <HelpTOCNode Title="DiscussionListID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_DiscussionListID.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="DiscussionListAssignForm Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm" />
+        <HelpTOCNode Id="fc1defdc-17fb-4f40-bc37-445f15cb7b30" Title="DiscussionListAssignForm Fields" Url="html/Fields_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm.htm">
+          <HelpTOCNode Title="CHECKED_VALUE Field" Url="html/F_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_CHECKED_VALUE.htm" />
+          <HelpTOCNode Title="UNCHECKED_VALUE Field" Url="html/F_EasyMailDiscussion_Web_Models_Forms_DiscussionListAssignForm_UNCHECKED_VALUE.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="2f68eeac-8933-407b-a534-3014ba6c06c3" Title="DiscussionListForm Class" Url="html/T_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm.htm">
+        <HelpTOCNode Title="DiscussionListForm Constructor " Url="html/M_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm__ctor.htm" />
+        <HelpTOCNode Id="4af38617-6b8a-43fe-9b2e-f213eb823559" Title="DiscussionListForm Properties" Url="html/Properties_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm.htm">
+          <HelpTOCNode Title="BaseEmailAddress Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_BaseEmailAddress.htm" />
+          <HelpTOCNode Title="Description Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Description.htm" />
+          <HelpTOCNode Title="ID Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_ID.htm" />
+          <HelpTOCNode Title="IncomingMailPort Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_IncomingMailPort.htm" />
+          <HelpTOCNode Title="IncomingMailServer Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_IncomingMailServer.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Name.htm" />
+          <HelpTOCNode Title="OutgoingMailPort Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_OutgoingMailPort.htm" />
+          <HelpTOCNode Title="OutgoingMailServer Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_OutgoingMailServer.htm" />
+          <HelpTOCNode Title="Password Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_Password.htm" />
+          <HelpTOCNode Title="UserName Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UserName.htm" />
+          <HelpTOCNode Title="UseSSL Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UseSSL.htm" />
+          <HelpTOCNode Title="UseSSLChecked Property " Url="html/P_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm_UseSSLChecked.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="DiscussionListForm Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Models_Forms_DiscussionListForm.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="ca3cdebd-d0ac-478c-80fb-a6f86c140738" Title="EasyMailDiscussion.Web.Worker" Url="html/N_EasyMailDiscussion_Web_Worker.htm">
+      <HelpTOCNode Id="4de0be75-02e8-4045-a1cf-82a1b8e655df" Title="EmailFetcher Class" Url="html/T_EasyMailDiscussion_Web_Worker_EmailFetcher.htm">
+        <HelpTOCNode Title="EmailFetcher Constructor " Url="html/M_EasyMailDiscussion_Web_Worker_EmailFetcher__ctor.htm" />
+        <HelpTOCNode Id="5865af70-b920-41fe-9d9d-d754cbf35ba9" Title="EmailFetcher Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Worker_EmailFetcher.htm">
+          <HelpTOCNode Title="ExecuteAsync Method " Url="html/M_EasyMailDiscussion_Web_Worker_EmailFetcher_ExecuteAsync.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="02fb7bef-eebd-4aeb-a9be-fcb88ddf4101" Title="Onboarder Class" Url="html/T_EasyMailDiscussion_Web_Worker_Onboarder.htm">
+        <HelpTOCNode Title="Onboarder Constructor " Url="html/M_EasyMailDiscussion_Web_Worker_Onboarder__ctor.htm" />
+        <HelpTOCNode Id="6b8c3f24-cf89-4462-aa30-98288a9302b3" Title="Onboarder Methods" Url="html/Methods_T_EasyMailDiscussion_Web_Worker_Onboarder.htm">
+          <HelpTOCNode Title="ExecuteAsync Method " Url="html/M_EasyMailDiscussion_Web_Worker_Onboarder_ExecuteAsync.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

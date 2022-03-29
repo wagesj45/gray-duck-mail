@@ -6,6 +6,15 @@ using System.Reflection;
 
 namespace EasyMailDiscussion.Common.Database
 {
+    /// <summary>
+    /// The SQLite database is defined and managed by this class. This uses
+    /// <see cref="https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application">Entity
+    /// Framework Code First</see> method for defining a database and uses
+    /// <see cref="https://sqlite.org/index.html">SQLite</see> to store data in a local database file,
+    /// without the need for any external database system.
+    /// </summary>
+    /// <seealso cref="DbContext"/>
+    /// <seealso cref="DbSet{TEntity}"/>
     public class SqliteDatabase : DbContext
     {
         #region Members
@@ -20,10 +29,24 @@ namespace EasyMailDiscussion.Common.Database
 
         #region Properties
 
+        /// <summary> Gets or sets the <see cref="DiscussionList"/> table. </summary>
+        /// <value> The <see cref="DiscussionList"/> table. </value>
         public DbSet<DiscussionList> DiscussionLists { get; set; }
+
+        /// <summary> Gets or sets the <see cref="Contact"/> table. </summary>
+        /// <value> The <see cref="Contact"/> table. </value>
         public DbSet<Contact> Contacts { get; set; }
+
+        /// <summary> Gets or sets the <see cref="ContactSubscription"/> table. </summary>
+        /// <value> The <see cref="ContactSubscription"/> table. </value>
         public DbSet<ContactSubscription> ContactSubscriptions {get; set;}
+
+        /// <summary> Gets or sets the <see cref="Message"/> table. </summary>
+        /// <value> The <see cref="Message"/> table. </value>
         public DbSet<Message> Messages { get; set; }
+
+        /// <summary> Gets or sets the <see cref="RelayIdentifier"/> table. </summary>
+        /// <value> The <see cref="RelayIdentifier"/> table. </value>
         public DbSet<RelayIdentifier> RelayIdentifiers { get; set; }
 
         #endregion
@@ -33,6 +56,9 @@ namespace EasyMailDiscussion.Common.Database
         /// <summary>
         /// Constructor that prevents a default instance of this class from being created.
         /// </summary>
+        /// <remarks>
+        /// This constructor is only used internally in the <see cref="EnsureDatabaseFile(Uri)"/> method.
+        /// </remarks>
         private SqliteDatabase()
         {
             //
@@ -121,7 +147,7 @@ namespace EasyMailDiscussion.Common.Database
         /// </summary>
         /// <remarks>
         /// If a model is explicitly set on the options for this context (via
-        /// <see cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />)
+        /// <see href="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />)
         /// then this method will not be run.
         /// </remarks>
         /// <param name="modelBuilder">

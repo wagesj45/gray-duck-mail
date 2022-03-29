@@ -1,0 +1,39 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<!-- Sandcastle Tools MSBuild Tasks.  https://GitHub.com/EWSoftware/SHFB -->
+	<PropertyGroup>
+		<SHFBTaskFolder Condition=" '$(MSBuildRuntimeType)' != 'Core' ">net472\</SHFBTaskFolder>
+		<SHFBTaskFolder Condition=" '$(MSBuildRuntimeType)' == 'Core' ">netcoreapp3.1\</SHFBTaskFolder>
+	</PropertyGroup>
+	<UsingTask TaskName="Sandcastle.Tools.MSBuild.BuildAssembler"
+    AssemblyFile="C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\$(SHFBTaskFolder)BuildAssembler.dll" />
+
+	<!-- Task properties -->
+	<PropertyGroup>
+		<ConfigurationFile>sandcastle.config</ConfigurationFile>
+		<ManifestFile>manifest.xml</ManifestFile>
+		<WorkingFolder>C:\Users\Jordan\Documents\Gitea\easy-mail-discussion\sandcastle-documentation-project\Help\Working\</WorkingFolder>
+	</PropertyGroup>
+
+	<!-- This defines the dependencies for the Build target -->
+	<PropertyGroup>
+		<BuildDependsOn>
+			BeforeBuildTopics;
+			BuildTopics;
+			AfterBuildTopics
+		</BuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
+
+	<!-- The Build Conceptual Topics target -->
+	<Target Name="BuildTopics">
+		<Sandcastle.Tools.MSBuild.BuildAssembler
+      WorkingFolder="$(WorkingFolder)"
+      ConfigurationFile="$(ConfigurationFile)"
+      ManifestFile="$(ManifestFile)" />
+	</Target>
+
+	<!-- The following targets may be overridden or replaced to perform additional processing -->
+	<Target Name="BeforeBuildTopics" />
+	<Target Name="AfterBuildTopics" />
+</Project>

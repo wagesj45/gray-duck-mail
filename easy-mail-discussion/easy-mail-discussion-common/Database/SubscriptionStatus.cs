@@ -5,6 +5,7 @@ using System.Text;
 namespace EasyMailDiscussion.Common.Database
 {
     /// <summary> Values that represent subscription status of a contact in a discussion list. </summary>
+    /// <remarks> These  </remarks>
     public enum SubscriptionStatus
     {
         /// <summary> No assignment can be determined. </summary>

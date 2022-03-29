@@ -6,13 +6,14 @@ using System.Text;
 
 namespace EasyMailDiscussion.Common
 {
+    /// <summary> A helper class for cleaning HTML strings. </summary>
     public static class HTMLCleaner
     {
         #region Methods
 
         /// <summary> Removes the inline CSS described in an HTML string. </summary>
         /// <param name="html"> The HTML string. </param>
-        /// <returns> A string of HTML with no inline script or styles.. </returns>
+        /// <returns> A string of HTML with no inline script or styles. </returns>
         public static string RemoveInlineCSS(string html)
         {
             var htmlDocument = new HtmlDocument();

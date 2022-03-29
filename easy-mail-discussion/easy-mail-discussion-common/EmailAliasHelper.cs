@@ -5,6 +5,14 @@ using System.Text;
 
 namespace EasyMailDiscussion.Common
 {
+    /// <summary>
+    /// A helper class generating alias names based on the
+    /// <see cref="DiscussionList.BaseEmailAddress"/>.
+    /// </summary>
+    /// <remarks>
+    /// The aliases described by this class are required for functional emails processed by the
+    /// system.
+    /// </remarks>
     public static class EmailAliasHelper
     {
         #region Methods
@@ -73,15 +81,15 @@ namespace EasyMailDiscussion.Common
             return string.Format("owner-{0}", baseEmailAddress);
         }
 
-        /// <summary> Gets bounce alias. </summary>
+        /// <summary> Gets the bounce address alias. </summary>
         /// <param name="discussionList"> The discussion list database object. </param>
-        /// <returns> The bounce alias. </returns>
+        /// <returns> The bounce address alias. </returns>
         public static string GetBounceAlias(DiscussionList discussionList)
         {
             return GetBounceAlias(discussionList.BaseEmailAddress);
         }
 
-        /// <summary> Gets bounce alias. </summary>
+        /// <summary> Gets the bounce address alias. </summary>
         /// <param name="baseEmailAddress"> The base email address. </param>
         /// <returns> The bounce alias. </returns>
         public static string GetBounceAlias(string baseEmailAddress)
