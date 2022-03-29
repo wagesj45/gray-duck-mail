@@ -27,9 +27,10 @@ The **HomeController** type exposes the following members.
 Constructors
 ------------
 
-|                  | Name                | Description                                                |
-| ---------------- | ------------------- | ---------------------------------------------------------- |
-| ![Public method] | [HomeController][4] | Initializes a new instance of the **HomeController** class |
+|                                   | Name                | Description                                                |
+| --------------------------------- | ------------------- | ---------------------------------------------------------- |
+| ![Private method]![Static member] | [HomeController][4] |                                                            |
+| ![Public method]                  | [HomeController][5] | Initializes a new instance of the **HomeController** class |
 
 
 Properties
@@ -37,7 +38,7 @@ Properties
 
 |                    | Name                | Description                                                             |
 | ------------------ | ------------------- | ----------------------------------------------------------------------- |
-| ![Public property] | [SqliteDatabase][5] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
+| ![Public property] | [SqliteDatabase][6] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
 
 
 Methods
@@ -45,9 +46,9 @@ Methods
 
 |                  | Name                   | Description                                                                       |
 | ---------------- | ---------------------- | --------------------------------------------------------------------------------- |
-| ![Public method] | [Error][6]             |                                                                                   |
-| ![Public method] | [Index][7]             |                                                                                   |
-| ![Public method] | [OnActionExecuting][8] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
+| ![Public method] | [Error][7]             |                                                                                   |
+| ![Public method] | [Index][8]             |                                                                                   |
+| ![Public method] | [OnActionExecuting][9] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
 
 
 See Also
@@ -59,10 +60,13 @@ See Also
 [1]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.controller
 [2]: ../BaseController/README.md
 [3]: ../README.md
-[4]: _ctor.md
-[5]: ../BaseController/SqliteDatabase.md
-[6]: Error.md
-[7]: Index.md
-[8]: ../BaseController/OnActionExecuting.md
+[4]: _cctor.md
+[5]: _ctor.md
+[6]: ../BaseController/SqliteDatabase.md
+[7]: Error.md
+[8]: Index.md
+[9]: ../BaseController/OnActionExecuting.md
+[Private method]: ../../icons/privmethod.gif "Private method"
+[Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

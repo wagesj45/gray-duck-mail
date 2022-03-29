@@ -49,19 +49,6 @@ Properties
 | ![Public property] | [UseSSL][17]             | Gets or sets a value indicating whether the [IncomingMailServer][9] and [OutgoingMailServer][13] connection connect with SSL encryption.                 |
 
 
-Methods
--------
-
-|                     | Name                  | Description                                                                                                                                                |
-| ------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Public method]    | [Equals][18]          | Determines whether the specified object is equal to the current object. (Inherited from [Object][1].)                                                      |
-| ![Protected method] | [Finalize][19]        | Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection. (Inherited from [Object][1].) |
-| ![Public method]    | [GetHashCode][20]     | Serves as the default hash function. (Inherited from [Object][1].)                                                                                         |
-| ![Public method]    | [GetType][21]         | Gets the [Type][22] of the current instance. (Inherited from [Object][1].)                                                                                 |
-| ![Protected method] | [MemberwiseClone][23] | Creates a shallow copy of the current [Object][1]. (Inherited from [Object][1].)                                                                           |
-| ![Public method]    | [ToString][24]        | Returns a string that represents the current object. (Inherited from [Object][1].)                                                                         |
-
-
 See Also
 --------
 
@@ -85,13 +72,5 @@ See Also
 [15]: Subscriptions.md
 [16]: UserName.md
 [17]: UseSSL.md
-[18]: https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
-[19]: https://docs.microsoft.com/dotnet/api/system.object.finalize#system-object-finalize
-[20]: https://docs.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode
-[21]: https://docs.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype
-[22]: https://docs.microsoft.com/dotnet/api/system.type
-[23]: https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone
-[24]: https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"
-[Protected method]: ../../icons/protmethod.svg "Protected method"

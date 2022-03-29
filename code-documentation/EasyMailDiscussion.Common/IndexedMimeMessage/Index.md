@@ -9,7 +9,7 @@ Syntax
 ------
 
 ```csharp
-public int Index { get; }
+public int Index { get; private set; }
 ```
 
 #### Property Value

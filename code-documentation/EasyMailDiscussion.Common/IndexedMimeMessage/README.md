@@ -21,32 +21,37 @@ public class IndexedMimeMessage
 The **IndexedMimeMessage** type exposes the following members.
 
 
+Constructors
+------------
+
+|                                   | Name                    | Description                                                                    |
+| --------------------------------- | ----------------------- | ------------------------------------------------------------------------------ |
+| ![Private method]![Static member] | [IndexedMimeMessage][3] |                                                                                |
+| ![Private method]                 | [IndexedMimeMessage][4] | Constructor that prevents a default instance of this class from being created. |
+
+
 Properties
 ----------
 
 |                    | Name         | Description                                       |
 | ------------------ | ------------ | ------------------------------------------------- |
-| ![Public property] | [Index][3]   | Gets or sets the zero-based index of this object. |
-| ![Public property] | [Message][4] | Gets or sets the message.                         |
+| ![Public property] | [Index][5]   | Gets or sets the zero-based index of this object. |
+| ![Public property] | [Message][6] | Gets or sets the message.                         |
 
 
 Methods
 -------
 
-|                                  | Name                   | Description                                                                                                                                                |
-| -------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Public method]                 | [Equals][5]            | Tests if this object is considered equal to another. (Overrides [Object.Equals(Object)][6].)                                                               |
-| ![Protected method]              | [Finalize][7]          | Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection. (Inherited from [Object][1].) |
-| ![Public method]                 | [GetHashCode][8]       | Serves as the default hash function. (Overrides [Object.GetHashCode()][9].)                                                                                |
-| ![Public method]                 | [GetType][10]          | Gets the [Type][11] of the current instance. (Inherited from [Object][1].)                                                                                 |
-| ![Public method]![Static member] | [IndexMimeMessage][12] | Indexes a MimeMessage into an **IndexedMimeMessage**.                                                                                                      |
-| ![Protected method]              | [MemberwiseClone][13]  | Creates a shallow copy of the current [Object][1]. (Inherited from [Object][1].)                                                                           |
-| ![Public method]                 | [ToString][14]         | Returns a string that represents the current object. (Inherited from [Object][1].)                                                                         |
+|                                  | Name                   | Description                                                                                  |
+| -------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------- |
+| ![Public method]                 | [Equals][7]            | Tests if this object is considered equal to another. (Overrides [Object.Equals(Object)][8].) |
+| ![Public method]                 | [GetHashCode][9]       | Serves as the default hash function. (Overrides [Object.GetHashCode()][10].)                 |
+| ![Public method]![Static member] | [IndexMimeMessage][11] | Indexes a MimeMessage into an **IndexedMimeMessage**.                                        |
 
 
 Remarks
 -------
- The Pop3Client works using message indexes when communicating with the remote server. Messages from GetMessages(Int32, Int32, CancellationToken, ITransferProgress) do not include these indices so we must manually index them using a [Select&lt;TSource, TResult>(IEnumerable&lt;TSource>, Func&lt;TSource, Int32, TResult>)][15]. 
+ The Pop3Client works using message indexes when communicating with the remote server. Messages from GetMessages(Int32, Int32, CancellationToken, ITransferProgress) do not include these indices so we must manually index them using a [Select&lt;TSource, TResult>(IEnumerable&lt;TSource>, Func&lt;TSource, Int32, TResult>)][12]. 
 
 See Also
 --------
@@ -57,20 +62,17 @@ Pop3Client
 
 [1]: https://docs.microsoft.com/dotnet/api/system.object
 [2]: ../README.md
-[3]: Index.md
-[4]: Message.md
-[5]: Equals.md
-[6]: https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
-[7]: https://docs.microsoft.com/dotnet/api/system.object.finalize#system-object-finalize
-[8]: GetHashCode.md
-[9]: https://docs.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode
-[10]: https://docs.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype
-[11]: https://docs.microsoft.com/dotnet/api/system.type
-[12]: IndexMimeMessage.md
-[13]: https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone
-[14]: https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString
-[15]: https://docs.microsoft.com/dotnet/api/system.linq.enumerable.select#system-linq-enumerable-select-2(system-collections-generic-ienumerable((-0))-system-func((-0-system-int32-1)))
+[3]: _cctor.md
+[4]: _ctor.md
+[5]: Index.md
+[6]: Message.md
+[7]: Equals.md
+[8]: https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+[9]: GetHashCode.md
+[10]: https://docs.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode
+[11]: IndexMimeMessage.md
+[12]: https://docs.microsoft.com/dotnet/api/system.linq.enumerable.select#system-linq-enumerable-select-2(system-collections-generic-ienumerable((-0))-system-func((-0-system-int32-1)))
+[Private method]: ../../icons/privmethod.gif "Private method"
+[Static member]: ../../icons/static.gif "Static member"
 [Public property]: ../../icons/pubproperty.svg "Public property"
 [Public method]: ../../icons/pubmethod.svg "Public method"
-[Protected method]: ../../icons/protmethod.svg "Protected method"
-[Static member]: ../../icons/static.gif "Static member"

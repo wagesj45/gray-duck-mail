@@ -27,9 +27,10 @@ The **BaseController** type exposes the following members.
 Constructors
 ------------
 
-|                  | Name                | Description                                                |
-| ---------------- | ------------------- | ---------------------------------------------------------- |
-| ![Public method] | [BaseController][7] | Initializes a new instance of the **BaseController** class |
+|                                   | Name                | Description                                                |
+| --------------------------------- | ------------------- | ---------------------------------------------------------- |
+| ![Private method]![Static member] | [BaseController][7] |                                                            |
+| ![Public method]                  | [BaseController][8] | Initializes a new instance of the **BaseController** class |
 
 
 Properties
@@ -37,15 +38,15 @@ Properties
 
 |                    | Name                | Description                       |
 | ------------------ | ------------------- | --------------------------------- |
-| ![Public property] | [SqliteDatabase][8] | Gets the SQLite database context. |
+| ![Public property] | [SqliteDatabase][9] | Gets the SQLite database context. |
 
 
 Methods
 -------
 
-|                  | Name                   | Description                                 |
-| ---------------- | ---------------------- | ------------------------------------------- |
-| ![Public method] | [OnActionExecuting][9] | Called before the action method is invoked. |
+|                  | Name                    | Description                                 |
+| ---------------- | ----------------------- | ------------------------------------------- |
+| ![Public method] | [OnActionExecuting][10] | Called before the action method is invoked. |
 
 
 See Also
@@ -60,8 +61,11 @@ See Also
 [4]: ../HomeController/README.md
 [5]: ../ListController/README.md
 [6]: ../README.md
-[7]: _ctor.md
-[8]: SqliteDatabase.md
-[9]: OnActionExecuting.md
+[7]: _cctor.md
+[8]: _ctor.md
+[9]: SqliteDatabase.md
+[10]: OnActionExecuting.md
+[Private method]: ../../icons/privmethod.gif "Private method"
+[Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

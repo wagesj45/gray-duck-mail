@@ -1,6 +1,6 @@
 SqliteDatabase Constructor
 ==========================
-Constructor.
+Constructor that prevents a default instance of this class from being created.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -9,17 +9,13 @@ Syntax
 ------
 
 ```csharp
-public SqliteDatabase(
-	string databaseFilePath
-)
+private SqliteDatabase()
 ```
 
-#### Parameters
 
-##### *databaseFilePath*
-Type: [System.String][2]  
- Full pathname of the database file.
-
+Remarks
+-------
+ This constructor is only used internally in the [EnsureDatabaseFile(Uri)][2] method. 
 
 See Also
 --------
@@ -29,5 +25,5 @@ See Also
 [EasyMailDiscussion.Common.Database Namespace][1]  
 
 [1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.string
+[2]: EnsureDatabaseFile.md
 [3]: README.md

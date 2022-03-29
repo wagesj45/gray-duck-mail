@@ -27,9 +27,10 @@ The **ListController** type exposes the following members.
 Constructors
 ------------
 
-|                  | Name                | Description                                                |
-| ---------------- | ------------------- | ---------------------------------------------------------- |
-| ![Public method] | [ListController][4] | Initializes a new instance of the **ListController** class |
+|                                   | Name                | Description                                                |
+| --------------------------------- | ------------------- | ---------------------------------------------------------- |
+| ![Private method]![Static member] | [ListController][4] |                                                            |
+| ![Public method]                  | [ListController][5] | Initializes a new instance of the **ListController** class |
 
 
 Properties
@@ -37,7 +38,7 @@ Properties
 
 |                    | Name                | Description                                                             |
 | ------------------ | ------------------- | ----------------------------------------------------------------------- |
-| ![Public property] | [SqliteDatabase][5] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
+| ![Public property] | [SqliteDatabase][6] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
 
 
 Methods
@@ -45,18 +46,18 @@ Methods
 
 |                  | Name                                  | Description                                                                       |
 | ---------------- | ------------------------------------- | --------------------------------------------------------------------------------- |
-| ![Public method] | [Archive][6]                          |                                                                                   |
-| ![Public method] | [Assign(DiscussionListAssignForm)][7] |                                                                                   |
-| ![Public method] | [Assign(Int32)][8]                    |                                                                                   |
-| ![Public method] | [ConfirmRemove][9]                    |                                                                                   |
-| ![Public method] | [Create][10]                          |                                                                                   |
-| ![Public method] | [Edit(DiscussionListForm)][11]        |                                                                                   |
-| ![Public method] | [Edit(Int32)][12]                     |                                                                                   |
-| ![Public method] | [Index][13]                           |                                                                                   |
-| ![Public method] | [Message][14]                         |                                                                                   |
-| ![Public method] | [New][15]                             |                                                                                   |
-| ![Public method] | [OnActionExecuting][16]               | Called before the action method is invoked. (Inherited from [BaseController][2].) |
-| ![Public method] | [Remove][17]                          |                                                                                   |
+| ![Public method] | [Archive][7]                          |                                                                                   |
+| ![Public method] | [Assign(DiscussionListAssignForm)][8] |                                                                                   |
+| ![Public method] | [Assign(Int32)][9]                    |                                                                                   |
+| ![Public method] | [ConfirmRemove][10]                   |                                                                                   |
+| ![Public method] | [Create][11]                          |                                                                                   |
+| ![Public method] | [Edit(DiscussionListForm)][12]        |                                                                                   |
+| ![Public method] | [Edit(Int32)][13]                     |                                                                                   |
+| ![Public method] | [Index][14]                           |                                                                                   |
+| ![Public method] | [Message][15]                         |                                                                                   |
+| ![Public method] | [New][16]                             |                                                                                   |
+| ![Public method] | [OnActionExecuting][17]               | Called before the action method is invoked. (Inherited from [BaseController][2].) |
+| ![Public method] | [Remove][18]                          |                                                                                   |
 
 
 See Also
@@ -68,19 +69,22 @@ See Also
 [1]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.controller
 [2]: ../BaseController/README.md
 [3]: ../README.md
-[4]: _ctor.md
-[5]: ../BaseController/SqliteDatabase.md
-[6]: Archive.md
-[7]: Assign.md
-[8]: Assign_1.md
-[9]: ConfirmRemove.md
-[10]: Create.md
-[11]: Edit.md
-[12]: Edit_1.md
-[13]: Index.md
-[14]: Message.md
-[15]: New.md
-[16]: ../BaseController/OnActionExecuting.md
-[17]: Remove.md
+[4]: _cctor.md
+[5]: _ctor.md
+[6]: ../BaseController/SqliteDatabase.md
+[7]: Archive.md
+[8]: Assign.md
+[9]: Assign_1.md
+[10]: ConfirmRemove.md
+[11]: Create.md
+[12]: Edit.md
+[13]: Edit_1.md
+[14]: Index.md
+[15]: Message.md
+[16]: New.md
+[17]: ../BaseController/OnActionExecuting.md
+[18]: Remove.md
+[Private method]: ../../icons/privmethod.gif "Private method"
+[Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

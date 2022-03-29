@@ -27,9 +27,10 @@ The **ContactController** type exposes the following members.
 Constructors
 ------------
 
-|                  | Name                   | Description                                                   |
-| ---------------- | ---------------------- | ------------------------------------------------------------- |
-| ![Public method] | [ContactController][4] | Initializes a new instance of the **ContactController** class |
+|                                   | Name                   | Description                                                   |
+| --------------------------------- | ---------------------- | ------------------------------------------------------------- |
+| ![Private method]![Static member] | [ContactController][4] |                                                               |
+| ![Public method]                  | [ContactController][5] | Initializes a new instance of the **ContactController** class |
 
 
 Properties
@@ -37,7 +38,7 @@ Properties
 
 |                    | Name                | Description                                                             |
 | ------------------ | ------------------- | ----------------------------------------------------------------------- |
-| ![Public property] | [SqliteDatabase][5] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
+| ![Public property] | [SqliteDatabase][6] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
 
 
 Methods
@@ -45,14 +46,14 @@ Methods
 
 |                  | Name                    | Description                                                                       |
 | ---------------- | ----------------------- | --------------------------------------------------------------------------------- |
-| ![Public method] | [ConfirmRemove][6]      |                                                                                   |
-| ![Public method] | [Create][7]             |                                                                                   |
-| ![Public method] | [Edit(ContactForm)][8]  |                                                                                   |
-| ![Public method] | [Edit(Int32)][9]        |                                                                                   |
-| ![Public method] | [Index][10]             |                                                                                   |
-| ![Public method] | [New][11]               |                                                                                   |
-| ![Public method] | [OnActionExecuting][12] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
-| ![Public method] | [Remove][13]            |                                                                                   |
+| ![Public method] | [ConfirmRemove][7]      |                                                                                   |
+| ![Public method] | [Create][8]             |                                                                                   |
+| ![Public method] | [Edit(ContactForm)][9]  |                                                                                   |
+| ![Public method] | [Edit(Int32)][10]       |                                                                                   |
+| ![Public method] | [Index][11]             |                                                                                   |
+| ![Public method] | [New][12]               |                                                                                   |
+| ![Public method] | [OnActionExecuting][13] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
+| ![Public method] | [Remove][14]            |                                                                                   |
 
 
 See Also
@@ -64,15 +65,18 @@ See Also
 [1]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.controller
 [2]: ../BaseController/README.md
 [3]: ../README.md
-[4]: _ctor.md
-[5]: ../BaseController/SqliteDatabase.md
-[6]: ConfirmRemove.md
-[7]: Create.md
-[8]: Edit.md
-[9]: Edit_1.md
-[10]: Index.md
-[11]: New.md
-[12]: ../BaseController/OnActionExecuting.md
-[13]: Remove.md
+[4]: _cctor.md
+[5]: _ctor.md
+[6]: ../BaseController/SqliteDatabase.md
+[7]: ConfirmRemove.md
+[8]: Create.md
+[9]: Edit.md
+[10]: Edit_1.md
+[11]: Index.md
+[12]: New.md
+[13]: ../BaseController/OnActionExecuting.md
+[14]: Remove.md
+[Private method]: ../../icons/privmethod.gif "Private method"
+[Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

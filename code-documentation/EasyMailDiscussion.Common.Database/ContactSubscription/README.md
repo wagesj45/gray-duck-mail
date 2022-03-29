@@ -42,19 +42,6 @@ Properties
 | ![Public property] | [Status][9]           | Gets or sets the subscription status of the [Contact][1] for the given [DiscussionList][2].  |
 
 
-Methods
--------
-
-|                     | Name                  | Description                                                                                                                                                |
-| ------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Public method]    | [Equals][10]          | Determines whether the specified object is equal to the current object. (Inherited from [Object][3].)                                                      |
-| ![Protected method] | [Finalize][11]        | Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection. (Inherited from [Object][3].) |
-| ![Public method]    | [GetHashCode][12]     | Serves as the default hash function. (Inherited from [Object][3].)                                                                                         |
-| ![Public method]    | [GetType][13]         | Gets the [Type][14] of the current instance. (Inherited from [Object][3].)                                                                                 |
-| ![Protected method] | [MemberwiseClone][15] | Creates a shallow copy of the current [Object][3]. (Inherited from [Object][3].)                                                                           |
-| ![Public method]    | [ToString][16]        | Returns a string that represents the current object. (Inherited from [Object][3].)                                                                         |
-
-
 See Also
 --------
 
@@ -70,13 +57,5 @@ See Also
 [7]: DiscussionListID.md
 [8]: ID.md
 [9]: Status.md
-[10]: https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
-[11]: https://docs.microsoft.com/dotnet/api/system.object.finalize#system-object-finalize
-[12]: https://docs.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode
-[13]: https://docs.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype
-[14]: https://docs.microsoft.com/dotnet/api/system.type
-[15]: https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone
-[16]: https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"
-[Protected method]: ../../icons/protmethod.svg "Protected method"

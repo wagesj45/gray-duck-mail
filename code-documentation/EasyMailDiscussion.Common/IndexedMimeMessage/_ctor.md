@@ -1,6 +1,6 @@
-IndexedMimeMessage.Message Property
-===================================
-Gets or sets the message.
+IndexedMimeMessage Constructor
+==============================
+Constructor that prevents a default instance of this class from being created.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -9,12 +9,9 @@ Syntax
 ------
 
 ```csharp
-public MimeMessage Message { get; private set; }
+private IndexedMimeMessage()
 ```
 
-#### Property Value
-Type: MimeMessage  
- The message. 
 
 See Also
 --------

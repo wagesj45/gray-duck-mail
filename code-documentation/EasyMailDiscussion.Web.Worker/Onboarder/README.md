@@ -26,9 +26,10 @@ The **Onboarder** type exposes the following members.
 Constructors
 ------------
 
-|                  | Name           | Description                                           |
-| ---------------- | -------------- | ----------------------------------------------------- |
-| ![Public method] | [Onboarder][3] | Initializes a new instance of the **Onboarder** class |
+|                                   | Name           | Description                                           |
+| --------------------------------- | -------------- | ----------------------------------------------------- |
+| ![Private method]![Static member] | [Onboarder][3] |                                                       |
+| ![Public method]                  | [Onboarder][4] | Initializes a new instance of the **Onboarder** class |
 
 
 Methods
@@ -36,7 +37,7 @@ Methods
 
 |                     | Name              | Description |
 | ------------------- | ----------------- | ----------- |
-| ![Protected method] | [ExecuteAsync][4] |             |
+| ![Protected method] | [ExecuteAsync][5] |             |
 
 
 See Also
@@ -47,7 +48,10 @@ See Also
 
 [1]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.backgroundservice
 [2]: ../README.md
-[3]: _ctor.md
-[4]: ExecuteAsync.md
+[3]: _cctor.md
+[4]: _ctor.md
+[5]: ExecuteAsync.md
+[Private method]: ../../icons/privmethod.gif "Private method"
+[Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Protected method]: ../../icons/protmethod.svg "Protected method"
