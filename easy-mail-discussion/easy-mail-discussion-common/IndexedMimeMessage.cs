@@ -69,7 +69,12 @@ namespace EasyMailDiscussion.Common
             return indexedMimeMessage;
         }
 
-        /// <inheritdoc/>
+        /// <summary> Tests if this object is considered equal to another. </summary>
+        /// <param name="obj"> The object to compare with the current object. </param>
+        /// <returns>
+        /// <see langword="true" /> if the specified object  is equal to the current object; otherwise,
+        /// <see langword="false" />.
+        /// </returns>
         public override bool Equals(object obj)
         {
             if (!(obj is IndexedMimeMessage))
@@ -84,7 +89,8 @@ namespace EasyMailDiscussion.Common
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary> Serves as the default hash function. </summary>
+        /// <returns> A hash code for the current object. </returns>
         public override int GetHashCode()
         {
             return this.Index;

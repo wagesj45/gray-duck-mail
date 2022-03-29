@@ -108,7 +108,13 @@ namespace EasyMailDiscussion.Common.Database
 
         #region Overrides
 
-        /// <inheritdoc/>
+        /// <summary> Executing when configuring the model. </summary>
+        /// <param name="optionsBuilder">
+        ///     A builder used to create or modify options for this context. Databases (and other
+        ///     extensions)
+        ///     typically define extension methods on this object that allow you to configure the context.
+        /// </param>
+        /// <seealso cref="DbContext.OnConfiguring(DbContextOptionsBuilder)"/>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var databaseFileNameFormat = string.Format("Filename={0}", this.databaseFilePath.AbsolutePath);
@@ -120,7 +126,13 @@ namespace EasyMailDiscussion.Common.Database
             base.OnConfiguring(optionsBuilder);
         }
 
-        /// <inheritdoc/>
+        /// <summary> Executed when creating the model. </summary>
+        /// <param name="modelBuilder">
+        ///     The builder being used to construct the model for this context. Databases (and other
+        ///     extensions) typically define extension methods on this object that allow you to configure
+        ///     aspects of the model that are specific to a given database.
+        /// </param>
+        /// <seealso cref="DbContext.OnModelCreating(ModelBuilder)"/>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Describe the Contacts table.
