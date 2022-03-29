@@ -5,6 +5,7 @@
 		<RootNamespace>EasyMailDiscussion.Web</RootNamespace>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileTag>easy-mail-discussion</DockerfileTag>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -390,3 +390,6 @@ FodyWeavers.xsd
 
 # Generated database file when debugging with Docker
 database.db*
+
+#Sandcastle output
+sandcastle-documentation-project/Help*

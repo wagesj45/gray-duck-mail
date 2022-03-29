@@ -6,7 +6,9 @@ using System;
 
 namespace EasyMailDiscussion.Web.Controllers
 {
-    /// <summary> A controller used as a base class in the <see cref="EasyMailDiscussion.Web"/> project.. </summary>
+    /// <summary>
+    /// A controller used as a base class in the <see cref="EasyMailDiscussion.Web"/> project.
+    /// </summary>
     public class BaseController : Controller
     {
         #region Members
