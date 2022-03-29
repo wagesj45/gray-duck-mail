@@ -1,8 +1,6 @@
 EasyMailDiscussion.Common.Database Namespace
 ============================================
-
-[Missing &lt;summary> documentation for "N:EasyMailDiscussion.Common.Database"]
-
+A collection of objects defining and manipulating the database structure used by the Easy Mail Discussions system.
 
 
 Classes

@@ -1,8 +1,6 @@
 EasyMailDiscussion.Web.Controllers Namespace
 ============================================
-
-[Missing &lt;summary> documentation for "N:EasyMailDiscussion.Web.Controllers"]
-
+A collection of MVC web controllers that accept and process web requests.
 
 
 Classes

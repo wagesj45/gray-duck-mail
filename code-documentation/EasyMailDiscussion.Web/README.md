@@ -1,8 +1,6 @@
 EasyMailDiscussion.Web Namespace
 ================================
-
-[Missing &lt;summary> documentation for "N:EasyMailDiscussion.Web"]
-
+The web server and message processing applications that power Easy Mail Discussions.
 
 
 Classes

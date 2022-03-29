@@ -1,8 +1,6 @@
 EasyMailDiscussion.Web.Worker Namespace
 =======================================
-
-[Missing &lt;summary> documentation for "N:EasyMailDiscussion.Web.Worker"]
-
+A collection of asyncronous worker threads that power the automated features of Easy Mail Discussions.
 
 
 Classes

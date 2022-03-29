@@ -1,8 +1,6 @@
 EasyMailDiscussion.Cli Namespace
 ================================
-
-[Missing &lt;summary> documentation for "N:EasyMailDiscussion.Cli"]
-
+A command line interface for interacting with the Easy Mail Discussions system.
 
 
 Classes

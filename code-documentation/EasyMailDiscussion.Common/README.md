@@ -1,8 +1,6 @@
 EasyMailDiscussion.Common Namespace
 ===================================
-
-[Missing &lt;summary> documentation for "N:EasyMailDiscussion.Common"]
-
+A collection of shared classes and structures used across the components that make up the Easy Mail Discussion system.
 
 
 Classes

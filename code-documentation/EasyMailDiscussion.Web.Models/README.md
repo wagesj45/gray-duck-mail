@@ -1,8 +1,6 @@
 EasyMailDiscussion.Web.Models Namespace
 =======================================
-
-[Missing &lt;summary> documentation for "N:EasyMailDiscussion.Web.Models"]
-
+A collection of MVC model calsses that describe data transactions between MVC controllers and MVC views.
 
 
 Classes
