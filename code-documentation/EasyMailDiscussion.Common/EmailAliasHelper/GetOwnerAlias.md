@@ -1,8 +1,6 @@
 EmailAliasHelper.GetOwnerAlias Method (DiscussionList)
 ======================================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetOwnerAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+Gets the owner address alias.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public static string GetOwnerAlias(
 
 ##### *discussionList*
 Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]  
-
-[Missing &lt;param name="discussionList"/> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetOwnerAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The discussion list database object.
 
 #### Return Value
 Type: [String][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetOwnerAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The owner address alias. 
 
 See Also
 --------

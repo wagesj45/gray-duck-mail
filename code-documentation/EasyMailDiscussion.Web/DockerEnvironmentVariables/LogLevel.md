@@ -1,8 +1,6 @@
 DockerEnvironmentVariables.LogLevel Property
 ============================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.DockerEnvironmentVariables.LogLevel"]
-
+Gets the verbosity level with which to log application events.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public static string LogLevel { get; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The log level. 
 
 See Also
 --------

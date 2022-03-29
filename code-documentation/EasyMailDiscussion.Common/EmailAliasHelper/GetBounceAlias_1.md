@@ -1,8 +1,6 @@
 EmailAliasHelper.GetBounceAlias Method (String)
 ===============================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetBounceAlias(System.String)"]
-
+Gets the bounce address alias.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public static string GetBounceAlias(
 
 ##### *baseEmailAddress*
 Type: [System.String][2]  
-
-[Missing &lt;param name="baseEmailAddress"/> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetBounceAlias(System.String)"]
-
+ The base email address.
 
 #### Return Value
 Type: [String][2]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetBounceAlias(System.String)"]
-
+ The bounce alias. 
 
 See Also
 --------

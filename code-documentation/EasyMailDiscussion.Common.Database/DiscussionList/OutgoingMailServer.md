@@ -1,8 +1,6 @@
 DiscussionList.OutgoingMailServer Property
 ==========================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.DiscussionList.OutgoingMailServer"]
-
+Gets or sets the web address of the outgoing SMTP server.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string OutgoingMailServer { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The outgoing mail server. 
 
 See Also
 --------

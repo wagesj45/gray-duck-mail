@@ -1,8 +1,6 @@
 EmailHelper.IsAssignable Method
 ===============================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailHelper.IsAssignable(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact)"]
-
+Query if a given user can be assigned to a discussion list.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -21,21 +19,15 @@ public static bool IsAssignable(
 
 ##### *discussionList*
 Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]  
-
-[Missing &lt;param name="discussionList"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.IsAssignable(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact)"]
-
+ The discussion list.
 
 ##### *contact*
 Type: [EasyMailDiscussion.Common.Database.Contact][3]  
-
-[Missing &lt;param name="contact"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.IsAssignable(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact)"]
-
+ The contact.
 
 #### Return Value
 Type: [Boolean][4]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailHelper.IsAssignable(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact)"]
-
+ True if assignable, false if not. 
 
 See Also
 --------

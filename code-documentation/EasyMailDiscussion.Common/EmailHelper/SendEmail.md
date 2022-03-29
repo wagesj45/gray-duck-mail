@@ -1,8 +1,6 @@
 EmailHelper.SendEmail Method
 ============================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+Sends an email.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -26,21 +24,15 @@ public static MimeMessage SendEmail(
 
 ##### *discussionList*
 Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]  
-
-[Missing &lt;param name="discussionList"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ The discussion list.
 
 ##### *recipient*
 Type: [EasyMailDiscussion.Common.Database.Contact][3]  
-
-[Missing &lt;param name="recipient"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ The recipient.
 
 ##### *subject*
 Type: [System.String][4]  
-
-[Missing &lt;param name="subject"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ The subject.
 
 ##### *replyTo*
 Type: [System.String][4]  
@@ -50,27 +42,25 @@ Type: [System.String][4]
 
 ##### *bodyGenerator*
 Type: [System.Func][5]&lt;MimeEntity>  
-
-[Missing &lt;param name="bodyGenerator"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ The body generator function.
 
 ##### *client*
 Type: SmtpClient  
-
-[Missing &lt;param name="client"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ The SMTP client.
 
 ##### *cancellationToken* (Optional)
 Type: [System.Threading.CancellationToken][6]  
-
-[Missing &lt;param name="cancellationToken"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ (Optional) A token that allows processing to be cancelled.
 
 #### Return Value
 Type: MimeMessage  
 
 [Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailHelper.SendEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
 
+
+Remarks
+-------
+ The *client* will connect to the SMTP server defined in *discussionList* if the client is disconnected. The client will not disconnect at the end of this method. 
 
 See Also
 --------

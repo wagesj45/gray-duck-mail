@@ -1,8 +1,6 @@
 Message.Children Property
 =========================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.Children"]
-
+Gets or sets the messages sent in response to this message, if any exist.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public virtual ICollection<Message> Children { get; set; }
 ```
 
 #### Property Value
-Type: [ICollection][2]&lt;[Message][3]>
+Type: [ICollection][2]&lt;[Message][3]>  
+ The children. 
 
 See Also
 --------

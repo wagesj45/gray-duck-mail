@@ -1,8 +1,6 @@
 DockerEnvironmentVariables Class
 ================================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.DockerEnvironmentVariables"]
-
+A class that defines default values for environment variables passed in from Docker, as well as accessors for those values.
 
 
 Inheritance Hierarchy
@@ -26,11 +24,11 @@ The **DockerEnvironmentVariables** type exposes the following members.
 Properties
 ----------
 
-|                                    | Name           | Description |
-| ---------------------------------- | -------------- | ----------- |
-| ![Public property]![Static member] | [FetchTime][3] |             |
-| ![Public property]![Static member] | [LogLevel][4]  |             |
-| ![Public property]![Static member] | [PageSize][5]  |             |
+|                                    | Name           | Description                                                    |
+| ---------------------------------- | -------------- | -------------------------------------------------------------- |
+| ![Public property]![Static member] | [FetchTime][3] | Gets the time between fetching email from the remote server.   |
+| ![Public property]![Static member] | [LogLevel][4]  | Gets the verbosity level with which to log application events. |
+| ![Public property]![Static member] | [PageSize][5]  | Gets the page size to use when paginating results.             |
 
 
 See Also

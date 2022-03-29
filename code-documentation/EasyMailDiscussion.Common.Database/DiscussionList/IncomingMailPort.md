@@ -1,8 +1,6 @@
 DiscussionList.IncomingMailPort Property
 ========================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.DiscussionList.IncomingMailPort"]
-
+Gets or sets the port number of incoming mail server.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public int IncomingMailPort { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The incoming mail port. 
 
 See Also
 --------

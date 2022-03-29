@@ -35,28 +35,28 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description                           |
-| ------------------ | ------------------- | ------------------------------------- |
-| ![Public property] | [SqliteDatabase][5] | (Inherited from [BaseController][2].) |
+|                    | Name                | Description                                                             |
+| ------------------ | ------------------- | ----------------------------------------------------------------------- |
+| ![Public property] | [SqliteDatabase][5] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
 
 
 Methods
 -------
 
-|                  | Name                                  | Description                           |
-| ---------------- | ------------------------------------- | ------------------------------------- |
-| ![Public method] | [Archive][6]                          |                                       |
-| ![Public method] | [Assign(DiscussionListAssignForm)][7] |                                       |
-| ![Public method] | [Assign(Int32)][8]                    |                                       |
-| ![Public method] | [ConfirmRemove][9]                    |                                       |
-| ![Public method] | [Create][10]                          |                                       |
-| ![Public method] | [Edit(DiscussionListForm)][11]        |                                       |
-| ![Public method] | [Edit(Int32)][12]                     |                                       |
-| ![Public method] | [Index][13]                           |                                       |
-| ![Public method] | [Message][14]                         |                                       |
-| ![Public method] | [New][15]                             |                                       |
-| ![Public method] | [OnActionExecuting][16]               | (Inherited from [BaseController][2].) |
-| ![Public method] | [Remove][17]                          |                                       |
+|                  | Name                                  | Description                                                                       |
+| ---------------- | ------------------------------------- | --------------------------------------------------------------------------------- |
+| ![Public method] | [Archive][6]                          |                                                                                   |
+| ![Public method] | [Assign(DiscussionListAssignForm)][7] |                                                                                   |
+| ![Public method] | [Assign(Int32)][8]                    |                                                                                   |
+| ![Public method] | [ConfirmRemove][9]                    |                                                                                   |
+| ![Public method] | [Create][10]                          |                                                                                   |
+| ![Public method] | [Edit(DiscussionListForm)][11]        |                                                                                   |
+| ![Public method] | [Edit(Int32)][12]                     |                                                                                   |
+| ![Public method] | [Index][13]                           |                                                                                   |
+| ![Public method] | [Message][14]                         |                                                                                   |
+| ![Public method] | [New][15]                             |                                                                                   |
+| ![Public method] | [OnActionExecuting][16]               | Called before the action method is invoked. (Inherited from [BaseController][2].) |
+| ![Public method] | [Remove][17]                          |                                                                                   |
 
 
 See Also

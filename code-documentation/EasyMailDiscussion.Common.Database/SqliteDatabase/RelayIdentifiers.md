@@ -1,10 +1,8 @@
 SqliteDatabase.RelayIdentifiers Property
 ========================================
+Gets or sets the [RelayIdentifier][1] table.
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.SqliteDatabase.RelayIdentifiers"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,16 +13,17 @@ public DbSet<RelayIdentifier> RelayIdentifiers { get; set; }
 ```
 
 #### Property Value
-Type: [DbSet][2]&lt;[RelayIdentifier][3]>
+Type: [DbSet][3]&lt;[RelayIdentifier][1]>  
+ The [RelayIdentifier][1] table. 
 
 See Also
 --------
 
 #### Reference
 [SqliteDatabase Class][4]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[EasyMailDiscussion.Common.Database Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1
-[3]: ../RelayIdentifier/README.md
+[1]: ../RelayIdentifier/README.md
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1
 [4]: README.md

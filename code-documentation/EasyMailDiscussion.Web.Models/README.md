@@ -8,19 +8,19 @@ EasyMailDiscussion.Web.Models Namespace
 Classes
 -------
 
-|                 | Class                           | Description |
-| --------------- | ------------------------------- | ----------- |
-| ![Public class] | [ArchivePageModel][1]           |             |
-| ![Public class] | [ContactsModel][2]              |             |
-| ![Public class] | [DiscussionListAssignModel][3]  |             |
-| ![Public class] | [DiscussionListsModel][4]       |             |
-| ![Public class] | [EditContactModel][5]           |             |
-| ![Public class] | [EditDiscussionListModel][6]    |             |
-| ![Public class] | [ErrorViewModel][7]             |             |
-| ![Public class] | [HomepageModel][8]              |             |
-| ![Public class] | [MessagePageModel][9]           |             |
-| ![Public class] | [RemoveContactModel][10]        |             |
-| ![Public class] | [RemoveDiscussionListModel][11] |             |
+|                 | Class                           | Description                         |
+| --------------- | ------------------------------- | ----------------------------------- |
+| ![Public class] | [ArchivePageModel][1]           | A data model for the archive page.  |
+| ![Public class] | [ContactsModel][2]              | A data model for the contacts page. |
+| ![Public class] | [DiscussionListAssignModel][3]  |                                     |
+| ![Public class] | [DiscussionListsModel][4]       |                                     |
+| ![Public class] | [EditContactModel][5]           |                                     |
+| ![Public class] | [EditDiscussionListModel][6]    |                                     |
+| ![Public class] | [ErrorViewModel][7]             |                                     |
+| ![Public class] | [HomepageModel][8]              | A data model for the contacts page. |
+| ![Public class] | [MessagePageModel][9]           | A data model for the message page.  |
+| ![Public class] | [RemoveContactModel][10]        |                                     |
+| ![Public class] | [RemoveDiscussionListModel][11] |                                     |
 
 [1]: ArchivePageModel/README.md
 [2]: ContactsModel/README.md

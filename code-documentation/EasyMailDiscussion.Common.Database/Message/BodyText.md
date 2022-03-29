@@ -1,8 +1,6 @@
 Message.BodyText Property
 =========================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.BodyText"]
-
+Gets or sets the plain text, if present, in the original email as provided by TextBody.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string BodyText { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The text of the body. 
 
 See Also
 --------

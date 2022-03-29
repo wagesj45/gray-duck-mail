@@ -1,8 +1,6 @@
 IndexedMimeMessage.Index Property
 =================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.IndexedMimeMessage.Index"]
-
+Gets or sets the zero-based index of this object.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public int Index { get; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The index. 
 
 See Also
 --------

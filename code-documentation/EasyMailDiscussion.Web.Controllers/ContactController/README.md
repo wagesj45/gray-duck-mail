@@ -35,24 +35,24 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description                           |
-| ------------------ | ------------------- | ------------------------------------- |
-| ![Public property] | [SqliteDatabase][5] | (Inherited from [BaseController][2].) |
+|                    | Name                | Description                                                             |
+| ------------------ | ------------------- | ----------------------------------------------------------------------- |
+| ![Public property] | [SqliteDatabase][5] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
 
 
 Methods
 -------
 
-|                  | Name                    | Description                           |
-| ---------------- | ----------------------- | ------------------------------------- |
-| ![Public method] | [ConfirmRemove][6]      |                                       |
-| ![Public method] | [Create][7]             |                                       |
-| ![Public method] | [Edit(ContactForm)][8]  |                                       |
-| ![Public method] | [Edit(Int32)][9]        |                                       |
-| ![Public method] | [Index][10]             |                                       |
-| ![Public method] | [New][11]               |                                       |
-| ![Public method] | [OnActionExecuting][12] | (Inherited from [BaseController][2].) |
-| ![Public method] | [Remove][13]            |                                       |
+|                  | Name                    | Description                                                                       |
+| ---------------- | ----------------------- | --------------------------------------------------------------------------------- |
+| ![Public method] | [ConfirmRemove][6]      |                                                                                   |
+| ![Public method] | [Create][7]             |                                                                                   |
+| ![Public method] | [Edit(ContactForm)][8]  |                                                                                   |
+| ![Public method] | [Edit(Int32)][9]        |                                                                                   |
+| ![Public method] | [Index][10]             |                                                                                   |
+| ![Public method] | [New][11]               |                                                                                   |
+| ![Public method] | [OnActionExecuting][12] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
+| ![Public method] | [Remove][13]            |                                                                                   |
 
 
 See Also

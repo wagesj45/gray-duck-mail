@@ -1,8 +1,6 @@
 EmailHelper.STATUS_GROUP_ACTION_DELAYED Field
 =============================================
-
-[Missing &lt;summary> documentation for "F:EasyMailDiscussion.Common.EmailHelper.STATUS_GROUP_ACTION_DELAYED"]
-
+(Immutable) The string denoting the MIME status for a delayed email message.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll

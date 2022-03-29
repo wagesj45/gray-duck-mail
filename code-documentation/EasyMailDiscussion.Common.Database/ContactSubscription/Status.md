@@ -1,10 +1,8 @@
 ContactSubscription.Status Property
 ===================================
+Gets or sets the subscription status of the [Contact][1] for the given [DiscussionList][2].
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.ContactSubscription.Status"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][3]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,18 @@ public SubscriptionStatus Status { get; set; }
 ```
 
 #### Property Value
-Type: [SubscriptionStatus][2]
+Type: [SubscriptionStatus][4]  
+ The subscription status. 
 
 See Also
 --------
 
 #### Reference
-[ContactSubscription Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[ContactSubscription Class][5]  
+[EasyMailDiscussion.Common.Database Namespace][3]  
 
-[1]: ../README.md
-[2]: ../SubscriptionStatus/README.md
-[3]: README.md
+[1]: Contact.md
+[2]: DiscussionList.md
+[3]: ../README.md
+[4]: ../SubscriptionStatus/README.md
+[5]: README.md

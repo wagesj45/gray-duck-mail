@@ -1,8 +1,6 @@
 EmailAliasHelper.GetSubscribeAlias Method (String)
 ==================================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetSubscribeAlias(System.String)"]
-
+Gets the subscription confirmation address alias.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public static string GetSubscribeAlias(
 
 ##### *baseEmailAddress*
 Type: [System.String][2]  
-
-[Missing &lt;param name="baseEmailAddress"/> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetSubscribeAlias(System.String)"]
-
+ The base email address.
 
 #### Return Value
 Type: [String][2]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetSubscribeAlias(System.String)"]
-
+ The subscription confirmation address alias. 
 
 See Also
 --------

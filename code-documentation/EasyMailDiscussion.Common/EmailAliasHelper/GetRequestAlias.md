@@ -1,8 +1,6 @@
 EmailAliasHelper.GetRequestAlias Method (DiscussionList)
 ========================================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetRequestAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+Gets the request address alias.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public static string GetRequestAlias(
 
 ##### *discussionList*
 Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]  
-
-[Missing &lt;param name="discussionList"/> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetRequestAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The discussion list database object.
 
 #### Return Value
 Type: [String][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetRequestAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The request address alias. 
 
 See Also
 --------

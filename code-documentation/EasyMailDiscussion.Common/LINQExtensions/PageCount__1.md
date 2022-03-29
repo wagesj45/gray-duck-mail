@@ -1,8 +1,6 @@
 LINQExtensions.PageCount&lt;T> Method (IEnumerable&lt;T>, Int32)
 ================================================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.LINQExtensions.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32)"]
-
+The number of pages of *pageSize* size in the given collection.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -22,36 +20,36 @@ public static int PageCount<T>(
 
 ##### *source*
 Type: [System.Collections.Generic.IEnumerable][2]&lt;**T**>  
-
-[Missing &lt;param name="source"/> documentation for "M:EasyMailDiscussion.Common.LINQExtensions.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32)"]
-
+ The source to act on.
 
 ##### *pageSize*
 Type: [System.Int32][3]  
-
-[Missing &lt;param name="pageSize"/> documentation for "M:EasyMailDiscussion.Common.LINQExtensions.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32)"]
-
+ Size of the page.
 
 #### Type Parameters
 
 ##### *T*
-
-[Missing &lt;typeparam name="T"/> documentation for "M:EasyMailDiscussion.Common.LINQExtensions.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32)"]
-
+Generic type parameter.
 
 #### Return Value
 Type: [Int32][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.LINQExtensions.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32)"]
-
+ An int. 
 #### Usage Note
 In Visual Basic and C#, you can call this method as an instance method on any object of type [IEnumerable][2]&lt;**T**>. When you use instance method syntax to call this method, omit the first parameter. For more information, see [Extension Methods (Visual Basic)][4] or [Extension Methods (C# Programming Guide)][5].
+
+Exceptions
+----------
+
+| Exception                        | Condition                                |
+| -------------------------------- | ---------------------------------------- |
+| [ArgumentOutOfRangeException][6] | Thrown when *pageSize* is less than `1`. |
+
 
 See Also
 --------
 
 #### Reference
-[LINQExtensions Class][6]  
+[LINQExtensions Class][7]  
 [EasyMailDiscussion.Common Namespace][1]  
 
 [1]: ../README.md
@@ -59,4 +57,5 @@ See Also
 [3]: https://docs.microsoft.com/dotnet/api/system.int32
 [4]: https://docs.microsoft.com/dotnet/visual-basic/programming-guide/language-features/procedures/extension-methods
 [5]: https://docs.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods
-[6]: README.md
+[6]: https://docs.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+[7]: README.md

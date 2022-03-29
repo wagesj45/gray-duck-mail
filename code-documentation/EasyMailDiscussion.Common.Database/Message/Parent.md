@@ -1,8 +1,6 @@
 Message.Parent Property
 =======================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.Parent"]
-
+Gets or sets the message that this message was a response to, if it exists. If this is the first message in a chain, the parent will be null.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public virtual Message Parent { get; set; }
 ```
 
 #### Property Value
-Type: [Message][2]
+Type: [Message][2]  
+ The parent message. 
 
 See Also
 --------

@@ -1,8 +1,6 @@
 Message.BodyRaw Property
 ========================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.BodyRaw"]
-
+Gets or sets the raw contents of the original email body as provided by Body.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string BodyRaw { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The email body. 
 
 See Also
 --------

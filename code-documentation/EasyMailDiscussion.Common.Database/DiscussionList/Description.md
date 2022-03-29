@@ -1,8 +1,6 @@
 DiscussionList.Description Property
 ===================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.DiscussionList.Description"]
-
+Gets or sets the description of the discussion list and its purpose.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string Description { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The description. 
 
 See Also
 --------

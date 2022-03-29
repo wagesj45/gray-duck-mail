@@ -1,10 +1,8 @@
 ContactSubscription.DiscussionListID Property
 =============================================
+Gets or sets the identifier of the [DiscussionList][1] that the [Contact][2] is assigned to.
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.ContactSubscription.DiscussionListID"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][3]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,18 @@ public int DiscussionListID { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][4]  
+ The identifier of the discussion list. 
 
 See Also
 --------
 
 #### Reference
-[ContactSubscription Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[ContactSubscription Class][5]  
+[EasyMailDiscussion.Common.Database Namespace][3]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.int32
-[3]: README.md
+[1]: DiscussionList.md
+[2]: Contact.md
+[3]: ../README.md
+[4]: https://docs.microsoft.com/dotnet/api/system.int32
+[5]: README.md

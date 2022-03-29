@@ -1,8 +1,6 @@
 ContactsModel Class
 ===================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.ContactsModel"]
-
+A data model for the contacts page.
 
 
 Inheritance Hierarchy
@@ -34,9 +32,9 @@ Constructors
 Properties
 ----------
 
-|                    | Name          | Description |
-| ------------------ | ------------- | ----------- |
-| ![Public property] | [Contacts][4] |             |
+|                    | Name          | Description                |
+| ------------------ | ------------- | -------------------------- |
+| ![Public property] | [Contacts][4] | Gets or sets the contacts. |
 
 
 Methods

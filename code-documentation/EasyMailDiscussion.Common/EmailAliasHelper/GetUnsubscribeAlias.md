@@ -1,8 +1,6 @@
 EmailAliasHelper.GetUnsubscribeAlias Method (DiscussionList)
 ============================================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetUnsubscribeAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+Gets the unsubscribe confirmation address alias.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public static string GetUnsubscribeAlias(
 
 ##### *discussionList*
 Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]  
-
-[Missing &lt;param name="discussionList"/> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetUnsubscribeAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The discussion list database object.
 
 #### Return Value
 Type: [String][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetUnsubscribeAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The unsubscribe confirmation address alias. 
 
 See Also
 --------

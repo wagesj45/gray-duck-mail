@@ -1,8 +1,6 @@
 NLogConfiguration Class
 =======================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Common.NLogConfiguration"]
-
+A static class that contains the NLog configuration.
 
 
 Inheritance Hierarchy
@@ -26,9 +24,9 @@ The **NLogConfiguration** type exposes the following members.
 Methods
 -------
 
-|                                  | Name                  | Description |
-| -------------------------------- | --------------------- | ----------- |
-| ![Public method]![Static member] | [GetConfiguration][3] |             |
+|                                  | Name                  | Description                                                                       |
+| -------------------------------- | --------------------- | --------------------------------------------------------------------------------- |
+| ![Public method]![Static member] | [GetConfiguration][3] | Gets the NLog configuration configured to the given *logLevel* and *logFilePath*. |
 
 
 See Also

@@ -1,8 +1,6 @@
 Contact.Name Property
 =====================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Contact.Name"]
-
+Gets or sets the name of the person.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string Name { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The name. 
 
 See Also
 --------

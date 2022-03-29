@@ -1,8 +1,6 @@
 Program.CreateHostBuilder Method
 ================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Program.CreateHostBuilder(System.String[])"]
-
+Creates host builder.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,15 +18,11 @@ public static IHostBuilder CreateHostBuilder(
 
 ##### *args*
 Type: [System.String][2][]  
-
-[Missing &lt;param name="args"/> documentation for "M:EasyMailDiscussion.Web.Program.CreateHostBuilder(System.String[])"]
-
+ An array of command-line argument strings.
 
 #### Return Value
 Type: [IHostBuilder][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Program.CreateHostBuilder(System.String[])"]
-
+ The new host builder. 
 
 See Also
 --------

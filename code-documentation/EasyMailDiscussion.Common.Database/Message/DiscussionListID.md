@@ -1,10 +1,8 @@
 Message.DiscussionListID Property
 =================================
+Gets or sets the identifier of the [DiscussionList][1] this message was relayed to.
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.DiscussionListID"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,17 @@ public int DiscussionListID { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][3]  
+ The identifier of the discussion list. 
 
 See Also
 --------
 
 #### Reference
-[Message Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[Message Class][4]  
+[EasyMailDiscussion.Common.Database Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.int32
-[3]: README.md
+[1]: DiscussionList.md
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.int32
+[4]: README.md

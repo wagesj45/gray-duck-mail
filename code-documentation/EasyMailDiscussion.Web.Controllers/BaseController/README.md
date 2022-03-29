@@ -1,19 +1,17 @@
 BaseController Class
 ====================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Controllers.BaseController"]
-
+A controller used as a base class in the [EasyMailDiscussion.Web][1] project.
 
 
 Inheritance Hierarchy
 ---------------------
-[Microsoft.AspNetCore.Mvc.Controller][1]  
+[Microsoft.AspNetCore.Mvc.Controller][2]  
   **EasyMailDiscussion.Web.Controllers.BaseController**  
-    [EasyMailDiscussion.Web.Controllers.ContactController][2]  
-    [EasyMailDiscussion.Web.Controllers.HomeController][3]  
-    [EasyMailDiscussion.Web.Controllers.ListController][4]  
+    [EasyMailDiscussion.Web.Controllers.ContactController][3]  
+    [EasyMailDiscussion.Web.Controllers.HomeController][4]  
+    [EasyMailDiscussion.Web.Controllers.ListController][5]  
 
-  **Namespace:**  [EasyMailDiscussion.Web.Controllers][5]  
+  **Namespace:**  [EasyMailDiscussion.Web.Controllers][6]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
@@ -31,38 +29,39 @@ Constructors
 
 |                  | Name                | Description                                                |
 | ---------------- | ------------------- | ---------------------------------------------------------- |
-| ![Public method] | [BaseController][6] | Initializes a new instance of the **BaseController** class |
+| ![Public method] | [BaseController][7] | Initializes a new instance of the **BaseController** class |
 
 
 Properties
 ----------
 
-|                    | Name                | Description |
-| ------------------ | ------------------- | ----------- |
-| ![Public property] | [SqliteDatabase][7] |             |
+|                    | Name                | Description                       |
+| ------------------ | ------------------- | --------------------------------- |
+| ![Public property] | [SqliteDatabase][8] | Gets the SQLite database context. |
 
 
 Methods
 -------
 
-|                  | Name                   | Description |
-| ---------------- | ---------------------- | ----------- |
-| ![Public method] | [OnActionExecuting][8] |             |
+|                  | Name                   | Description                                 |
+| ---------------- | ---------------------- | ------------------------------------------- |
+| ![Public method] | [OnActionExecuting][9] | Called before the action method is invoked. |
 
 
 See Also
 --------
 
 #### Reference
-[EasyMailDiscussion.Web.Controllers Namespace][5]  
+[EasyMailDiscussion.Web.Controllers Namespace][6]  
 
-[1]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.controller
-[2]: ../ContactController/README.md
-[3]: ../HomeController/README.md
-[4]: ../ListController/README.md
-[5]: ../README.md
-[6]: _ctor.md
-[7]: SqliteDatabase.md
-[8]: OnActionExecuting.md
+[1]: ../../EasyMailDiscussion.Web/README.md
+[2]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.controller
+[3]: ../ContactController/README.md
+[4]: ../HomeController/README.md
+[5]: ../ListController/README.md
+[6]: ../README.md
+[7]: _ctor.md
+[8]: SqliteDatabase.md
+[9]: OnActionExecuting.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

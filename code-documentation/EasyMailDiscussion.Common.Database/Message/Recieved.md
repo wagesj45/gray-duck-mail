@@ -1,10 +1,8 @@
 Message.Recieved Property
 =========================
+Gets or sets the [date and time][1] the message was recieved and processed by the system.
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.Recieved"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,16 @@ public DateTime Recieved { get; set; }
 ```
 
 #### Property Value
-Type: [DateTime][2]
+Type: [DateTime][1]  
+ The time the message was recieved. 
 
 See Also
 --------
 
 #### Reference
 [Message Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[EasyMailDiscussion.Common.Database Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.datetime
+[1]: https://docs.microsoft.com/dotnet/api/system.datetime
+[2]: ../README.md
 [3]: README.md

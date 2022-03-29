@@ -1,10 +1,8 @@
 RelayIdentifier.Message Property
 ================================
+Gets or sets the message that was relayed to a [DiscussionList][1].
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.RelayIdentifier.Message"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,17 @@ public virtual Message Message { get; set; }
 ```
 
 #### Property Value
-Type: [Message][2]
+Type: [Message][3]  
+ The message. 
 
 See Also
 --------
 
 #### Reference
-[RelayIdentifier Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[RelayIdentifier Class][4]  
+[EasyMailDiscussion.Common.Database Namespace][2]  
 
-[1]: ../README.md
-[2]: ../Message/README.md
-[3]: README.md
+[1]: ../DiscussionList/README.md
+[2]: ../README.md
+[3]: ../Message/README.md
+[4]: README.md

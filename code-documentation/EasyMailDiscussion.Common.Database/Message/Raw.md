@@ -1,8 +1,6 @@
 Message.Raw Property
 ====================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.Raw"]
-
+Gets or sets the raw MIME text content of the original MimeMessage.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string Raw { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The raw message content. 
 
 See Also
 --------

@@ -1,8 +1,6 @@
 Message.ParentID Property
 =========================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.ParentID"]
-
+Gets or sets the identifier of the parent message if this message was sent as a reply.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public int? ParentID { get; set; }
 ```
 
 #### Property Value
-Type: [Nullable][2]&lt;[Int32][3]>
+Type: [Nullable][2]&lt;[Int32][3]>  
+ The identifier of the parent message. 
 
 See Also
 --------

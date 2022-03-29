@@ -1,8 +1,6 @@
 Message.EmailID Property
 ========================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.EmailID"]
-
+Gets or sets the identifier of the email as provided by MessageId.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string EmailID { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The identifier of the email as provided by MessageId. 
 
 See Also
 --------

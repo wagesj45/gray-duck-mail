@@ -1,8 +1,6 @@
 ApplicationSettings.SECTION_LOG Field
 =====================================
-
-[Missing &lt;summary> documentation for "F:EasyMailDiscussion.Web.ApplicationSettings.SECTION_LOG"]
-
+(Immutable) The log section name.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe

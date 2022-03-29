@@ -1,10 +1,8 @@
 RelayIdentifier.MessageID Property
 ==================================
+Gets or sets the identifier of the [Message][1] relayed to a [DiscussionList][2].
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.RelayIdentifier.MessageID"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][3]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,18 @@ public int MessageID { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][4]  
+ The identifier of the message. 
 
 See Also
 --------
 
 #### Reference
-[RelayIdentifier Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[RelayIdentifier Class][5]  
+[EasyMailDiscussion.Common.Database Namespace][3]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.int32
-[3]: README.md
+[1]: Message.md
+[2]: ../DiscussionList/README.md
+[3]: ../README.md
+[4]: https://docs.microsoft.com/dotnet/api/system.int32
+[5]: README.md

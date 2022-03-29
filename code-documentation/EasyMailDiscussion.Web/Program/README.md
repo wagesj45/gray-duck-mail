@@ -36,12 +36,12 @@ Methods
 
 |                                  | Name                   | Description                                                                                                                                                |
 | -------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Public method]![Static member] | [CreateHostBuilder][4] |                                                                                                                                                            |
+| ![Public method]![Static member] | [CreateHostBuilder][4] | Creates host builder.                                                                                                                                      |
 | ![Public method]                 | [Equals][5]            | Determines whether the specified object is equal to the current object. (Inherited from [Object][1].)                                                      |
 | ![Protected method]              | [Finalize][6]          | Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection. (Inherited from [Object][1].) |
 | ![Public method]                 | [GetHashCode][7]       | Serves as the default hash function. (Inherited from [Object][1].)                                                                                         |
 | ![Public method]                 | [GetType][8]           | Gets the [Type][9] of the current instance. (Inherited from [Object][1].)                                                                                  |
-| ![Public method]![Static member] | [Main][10]             |                                                                                                                                                            |
+| ![Public method]![Static member] | [Main][10]             | Main entry-point for this application.                                                                                                                     |
 | ![Protected method]              | [MemberwiseClone][11]  | Creates a shallow copy of the current [Object][1]. (Inherited from [Object][1].)                                                                           |
 | ![Public method]                 | [ToString][12]         | Returns a string that represents the current object. (Inherited from [Object][1].)                                                                         |
 

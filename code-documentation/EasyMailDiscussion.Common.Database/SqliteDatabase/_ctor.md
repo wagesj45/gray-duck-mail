@@ -1,8 +1,8 @@
 SqliteDatabase Constructor
 ==========================
-Initializes a new instance of the [SqliteDatabase][1] class
+Constructor.
 
-  **Namespace:**  [EasyMailDiscussion.Common.Database][2]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -17,19 +17,17 @@ public SqliteDatabase(
 #### Parameters
 
 ##### *databaseFilePath*
-Type: [System.String][3]  
-
-[Missing &lt;param name="databaseFilePath"/> documentation for "M:EasyMailDiscussion.Common.Database.SqliteDatabase.#ctor(System.String)"]
-
+Type: [System.String][2]  
+ Full pathname of the database file.
 
 
 See Also
 --------
 
 #### Reference
-[SqliteDatabase Class][1]  
-[EasyMailDiscussion.Common.Database Namespace][2]  
+[SqliteDatabase Class][3]  
+[EasyMailDiscussion.Common.Database Namespace][1]  
 
-[1]: README.md
-[2]: ../README.md
-[3]: https://docs.microsoft.com/dotnet/api/system.string
+[1]: ../README.md
+[2]: https://docs.microsoft.com/dotnet/api/system.string
+[3]: README.md

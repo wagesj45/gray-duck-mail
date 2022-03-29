@@ -1,8 +1,6 @@
 Message.BodyHTML Property
 =========================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.BodyHTML"]
-
+Gets or sets the HTML code, if present, in the original email as provided by HtmlBody.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public string BodyHTML { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The HTML code of the body. 
 
 See Also
 --------

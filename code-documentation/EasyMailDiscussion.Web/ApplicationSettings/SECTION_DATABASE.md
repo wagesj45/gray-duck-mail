@@ -1,8 +1,6 @@
 ApplicationSettings.SECTION_DATABASE Field
 ==========================================
-
-[Missing &lt;summary> documentation for "F:EasyMailDiscussion.Web.ApplicationSettings.SECTION_DATABASE"]
-
+(Immutable) The database section name.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe

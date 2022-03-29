@@ -57,10 +57,10 @@
                    file="EasyMailDiscussion.Common/EmailHelper/ContactAuthorizedStatuses.md"/>
             <topic id="P:EasyMailDiscussion.Common.EmailHelper.ContactUnassignableStatuses"
                    file="EasyMailDiscussion.Common/EmailHelper/ContactUnassignableStatuses.md"/>
-            <topic id="P:EasyMailDiscussion.Common.EmailHelper.MailEmailTemplate"
-                   file="EasyMailDiscussion.Common/EmailHelper/MailEmailTemplate.md"/>
-            <topic id="M:EasyMailDiscussion.Common.EmailHelper.FillMainTemplate(System.String,System.String,System.String,System.String,EasyMailDiscussion.Common.Database.DiscussionList)"
-                   file="EasyMailDiscussion.Common/EmailHelper/FillMainTemplate.md"/>
+            <topic id="P:EasyMailDiscussion.Common.EmailHelper.DefaultEmailTemplate"
+                   file="EasyMailDiscussion.Common/EmailHelper/DefaultEmailTemplate.md"/>
+            <topic id="M:EasyMailDiscussion.Common.EmailHelper.FillDefaultTemplate(System.String,System.String,System.String,System.String,EasyMailDiscussion.Common.Database.DiscussionList)"
+                   file="EasyMailDiscussion.Common/EmailHelper/FillDefaultTemplate.md"/>
             <topic id="M:EasyMailDiscussion.Common.EmailHelper.GetBouncedMessageRecipient(EasyMailDiscussion.Common.IndexedMimeMessage)"
                    file="EasyMailDiscussion.Common/EmailHelper/GetBouncedMessageRecipient.md"/>
             <topic id="M:EasyMailDiscussion.Common.EmailHelper.IsAssignable(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact)"

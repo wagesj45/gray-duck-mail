@@ -1,8 +1,6 @@
 ApplicationSettings.DATABASE_PATH Field
 =======================================
-
-[Missing &lt;summary> documentation for "F:EasyMailDiscussion.Web.ApplicationSettings.DATABASE_PATH"]
-
+(Immutable) The database path key name.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe

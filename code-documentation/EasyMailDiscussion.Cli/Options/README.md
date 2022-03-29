@@ -26,20 +26,20 @@ The **Options** type exposes the following members.
 Constructors
 ------------
 
-|                  | Name         | Description                                         |
-| ---------------- | ------------ | --------------------------------------------------- |
-| ![Public method] | [Options][3] | Initializes a new instance of the **Options** class |
+|                  | Name         | Description          |
+| ---------------- | ------------ | -------------------- |
+| ![Public method] | [Options][3] | Default constructor. |
 
 
 Properties
 ----------
 
-|                    | Name                | Description |
-| ------------------ | ------------------- | ----------- |
-| ![Public property] | [DBPath][4]         |             |
-| ![Public property] | [EmailFetchTime][5] |             |
-| ![Public property] | [LogLevel][6]       |             |
-| ![Public property] | [LogPath][7]        |             |
+|                    | Name                | Description                                          |
+| ------------------ | ------------------- | ---------------------------------------------------- |
+| ![Public property] | [DBPath][4]         | Gets or sets the full pathname of the database file. |
+| ![Public property] | [EmailFetchTime][5] |                                                      |
+| ![Public property] | [LogLevel][6]       |                                                      |
+| ![Public property] | [LogPath][7]        |                                                      |
 
 
 Methods

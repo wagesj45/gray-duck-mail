@@ -1,8 +1,6 @@
 IndexedMimeMessage.GetHashCode Method
 =====================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.GetHashCode"]
-
+Serves as the default hash function.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -16,9 +14,7 @@ public override int GetHashCode()
 
 #### Return Value
 Type: [Int32][2]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.GetHashCode"]
-
+ A hash code for the current object. 
 
 See Also
 --------

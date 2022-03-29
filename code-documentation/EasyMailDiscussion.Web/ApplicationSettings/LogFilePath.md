@@ -1,8 +1,6 @@
 ApplicationSettings.LogFilePath Property
 ========================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.ApplicationSettings.LogFilePath"]
-
+Gets or sets the full pathname of the log file.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public static Uri LogFilePath { get; set; }
 ```
 
 #### Property Value
-Type: [Uri][2]
+Type: [Uri][2]  
+ The full pathname of the log file. 
 
 See Also
 --------

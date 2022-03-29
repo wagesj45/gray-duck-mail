@@ -1,10 +1,8 @@
 DiscussionList.Password Property
 ================================
+Gets or sets the password used when connecting to the remote [IncomingMailServer][1] and the [OutgoingMailServer][2].
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.DiscussionList.Password"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][3]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,18 @@ public string Password { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][4]  
+ The password. 
 
 See Also
 --------
 
 #### Reference
-[DiscussionList Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[DiscussionList Class][5]  
+[EasyMailDiscussion.Common.Database Namespace][3]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.string
-[3]: README.md
+[1]: IncomingMailServer.md
+[2]: OutgoingMailServer.md
+[3]: ../README.md
+[4]: https://docs.microsoft.com/dotnet/api/system.string
+[5]: README.md

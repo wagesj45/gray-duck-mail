@@ -1,8 +1,6 @@
 HomepageModel Class
 ===================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.HomepageModel"]
-
+A data model for the contacts page.
 
 
 Inheritance Hierarchy
@@ -34,11 +32,11 @@ Constructors
 Properties
 ----------
 
-|                    | Name                         | Description |
-| ------------------ | ---------------------------- | ----------- |
-| ![Public property] | [NumberOfContacts][4]        |             |
-| ![Public property] | [NumberOfDiscussionLists][5] |             |
-| ![Public property] | [NumberOfMessages][6]        |             |
+|                    | Name                         | Description                                        |
+| ------------------ | ---------------------------- | -------------------------------------------------- |
+| ![Public property] | [NumberOfContacts][4]        | Gets or sets the total number of contacts.         |
+| ![Public property] | [NumberOfDiscussionLists][5] | Gets or sets the total number of discussion lists. |
+| ![Public property] | [NumberOfMessages][6]        | Gets or sets the total number of messages.         |
 
 
 Methods

@@ -1,10 +1,8 @@
 ContactSubscription.DiscussionList Property
 ===========================================
+Gets or sets a **DiscussionList** that the [Contact][1] is assigned to.
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.ContactSubscription.DiscussionList"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,17 @@ public virtual DiscussionList DiscussionList { get; set; }
 ```
 
 #### Property Value
-Type: [DiscussionList][2]
+Type: [DiscussionList][3]  
+ A discussion list. 
 
 See Also
 --------
 
 #### Reference
-[ContactSubscription Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[ContactSubscription Class][4]  
+[EasyMailDiscussion.Common.Database Namespace][2]  
 
-[1]: ../README.md
-[2]: ../DiscussionList/README.md
-[3]: README.md
+[1]: Contact.md
+[2]: ../README.md
+[3]: ../DiscussionList/README.md
+[4]: README.md

@@ -1,8 +1,6 @@
 HTMLCleaner.RemoveInlineCSS Method
 ==================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.HTMLCleaner.RemoveInlineCSS(System.String)"]
-
+Removes the inline CSS described in an HTML string.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public static string RemoveInlineCSS(
 
 ##### *html*
 Type: [System.String][2]  
-
-[Missing &lt;param name="html"/> documentation for "M:EasyMailDiscussion.Common.HTMLCleaner.RemoveInlineCSS(System.String)"]
-
+ The HTML string.
 
 #### Return Value
 Type: [String][2]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.HTMLCleaner.RemoveInlineCSS(System.String)"]
-
+ A string of HTML with no inline script or styles. 
 
 See Also
 --------

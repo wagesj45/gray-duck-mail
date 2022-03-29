@@ -1,8 +1,6 @@
 Contact.ContactSubscriptions Property
 =====================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Contact.ContactSubscriptions"]
-
+Gets or sets the subscriptions to various discussion lists.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public virtual ICollection<ContactSubscription> ContactSubscriptions { get; set;
 ```
 
 #### Property Value
-Type: [ICollection][2]&lt;[ContactSubscription][3]>
+Type: [ICollection][2]&lt;[ContactSubscription][3]>  
+ The contact subscriptions. 
 
 See Also
 --------

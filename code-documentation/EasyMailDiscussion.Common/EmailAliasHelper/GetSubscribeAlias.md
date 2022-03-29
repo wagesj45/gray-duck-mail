@@ -1,8 +1,6 @@
 EmailAliasHelper.GetSubscribeAlias Method (DiscussionList)
 ==========================================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetSubscribeAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+Gets the subscription confirmation address alias.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public static string GetSubscribeAlias(
 
 ##### *discussionList*
 Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]  
-
-[Missing &lt;param name="discussionList"/> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetSubscribeAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The discussion list database object.
 
 #### Return Value
 Type: [String][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailAliasHelper.GetSubscribeAlias(EasyMailDiscussion.Common.Database.DiscussionList)"]
-
+ The subscription confirmation address alias. 
 
 See Also
 --------

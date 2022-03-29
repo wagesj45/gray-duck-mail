@@ -1,10 +1,8 @@
 IndexedMimeMessage.IndexMimeMessage Method
 ==========================================
+Indexes a MimeMessage into an [IndexedMimeMessage][1].
 
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.IndexMimeMessage(System.Int32,MimeKit.MimeMessage)"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common][1]  
+  **Namespace:**  [EasyMailDiscussion.Common][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -20,30 +18,24 @@ public static IndexedMimeMessage IndexMimeMessage(
 #### Parameters
 
 ##### *index*
-Type: [System.Int32][2]  
-
-[Missing &lt;param name="index"/> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.IndexMimeMessage(System.Int32,MimeKit.MimeMessage)"]
-
+Type: [System.Int32][3]  
+ The index.
 
 ##### *originalMessage*
 Type: MimeMessage  
-
-[Missing &lt;param name="originalMessage"/> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.IndexMimeMessage(System.Int32,MimeKit.MimeMessage)"]
-
+ The original message object.
 
 #### Return Value
-Type: [IndexedMimeMessage][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.IndexMimeMessage(System.Int32,MimeKit.MimeMessage)"]
-
+Type: [IndexedMimeMessage][1]  
+ An indexed message. 
 
 See Also
 --------
 
 #### Reference
-[IndexedMimeMessage Class][3]  
-[EasyMailDiscussion.Common Namespace][1]  
+[IndexedMimeMessage Class][1]  
+[EasyMailDiscussion.Common Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.int32
-[3]: README.md
+[1]: README.md
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.int32

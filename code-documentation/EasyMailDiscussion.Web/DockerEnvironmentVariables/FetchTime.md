@@ -1,8 +1,6 @@
 DockerEnvironmentVariables.FetchTime Property
 =============================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.DockerEnvironmentVariables.FetchTime"]
-
+Gets the time between fetching email from the remote server.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public static TimeSpan FetchTime { get; }
 ```
 
 #### Property Value
-Type: [TimeSpan][2]
+Type: [TimeSpan][2]  
+ The fetch time. 
 
 See Also
 --------

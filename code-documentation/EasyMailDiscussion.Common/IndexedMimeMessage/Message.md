@@ -1,8 +1,6 @@
 IndexedMimeMessage.Message Property
 ===================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.IndexedMimeMessage.Message"]
-
+Gets or sets the message.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public MimeMessage Message { get; }
 ```
 
 #### Property Value
-Type: MimeMessage
+Type: MimeMessage  
+ The message. 
 
 See Also
 --------

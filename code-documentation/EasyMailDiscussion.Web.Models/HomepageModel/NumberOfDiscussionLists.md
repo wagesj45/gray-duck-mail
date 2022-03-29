@@ -1,8 +1,6 @@
 HomepageModel.NumberOfDiscussionLists Property
 ==============================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.HomepageModel.NumberOfDiscussionLists"]
-
+Gets or sets the total number of discussion lists.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public int NumberOfDiscussionLists { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The total number of discussion lists. 
 
 See Also
 --------

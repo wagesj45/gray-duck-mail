@@ -1,8 +1,6 @@
 DockerEnvironmentVariables.PageSize Property
 ============================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.DockerEnvironmentVariables.PageSize"]
-
+Gets the page size to use when paginating results.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public static int PageSize { get; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The size of the page. 
 
 See Also
 --------

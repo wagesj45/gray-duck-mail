@@ -1,16 +1,14 @@
 EmailAliasHelper Class
 ======================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Common.EmailAliasHelper"]
-
+A helper class generating alias names based on the [BaseEmailAddress][1].
 
 
 Inheritance Hierarchy
 ---------------------
-[System.Object][1]  
+[System.Object][2]  
   **EasyMailDiscussion.Common.EmailAliasHelper**  
 
-  **Namespace:**  [EasyMailDiscussion.Common][2]  
+  **Namespace:**  [EasyMailDiscussion.Common][3]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -24,37 +22,42 @@ public static class EmailAliasHelper
 Methods
 -------
 
-|                                  | Name                                      | Description |
-| -------------------------------- | ----------------------------------------- | ----------- |
-| ![Public method]![Static member] | [GetBounceAlias(DiscussionList)][3]       |             |
-| ![Public method]![Static member] | [GetBounceAlias(String)][4]               |             |
-| ![Public method]![Static member] | [GetOwnerAlias(DiscussionList)][5]        |             |
-| ![Public method]![Static member] | [GetOwnerAlias(String)][6]                |             |
-| ![Public method]![Static member] | [GetRequestAlias(DiscussionList)][7]      |             |
-| ![Public method]![Static member] | [GetRequestAlias(String)][8]              |             |
-| ![Public method]![Static member] | [GetSubscribeAlias(DiscussionList)][9]    |             |
-| ![Public method]![Static member] | [GetSubscribeAlias(String)][10]           |             |
-| ![Public method]![Static member] | [GetUnsubscribeAlias(DiscussionList)][11] |             |
-| ![Public method]![Static member] | [GetUnsubscribeAlias(String)][12]         |             |
+|                                  | Name                                      | Description                                       |
+| -------------------------------- | ----------------------------------------- | ------------------------------------------------- |
+| ![Public method]![Static member] | [GetBounceAlias(DiscussionList)][4]       | Gets the bounce address alias.                    |
+| ![Public method]![Static member] | [GetBounceAlias(String)][5]               | Gets the bounce address alias.                    |
+| ![Public method]![Static member] | [GetOwnerAlias(DiscussionList)][6]        | Gets the owner address alias.                     |
+| ![Public method]![Static member] | [GetOwnerAlias(String)][7]                | Gets the owner address alias.                     |
+| ![Public method]![Static member] | [GetRequestAlias(DiscussionList)][8]      | Gets the request address alias.                   |
+| ![Public method]![Static member] | [GetRequestAlias(String)][9]              | Gets the request address alias.                   |
+| ![Public method]![Static member] | [GetSubscribeAlias(DiscussionList)][10]   | Gets the subscription confirmation address alias. |
+| ![Public method]![Static member] | [GetSubscribeAlias(String)][11]           | Gets the subscription confirmation address alias. |
+| ![Public method]![Static member] | [GetUnsubscribeAlias(DiscussionList)][12] | Gets the unsubscribe confirmation address alias.  |
+| ![Public method]![Static member] | [GetUnsubscribeAlias(String)][13]         | Gets the unsubscribe confirmation address alias.  |
 
+
+Remarks
+-------
+ The aliases described by this class are required for functional emails processed by the system. 
 
 See Also
 --------
 
 #### Reference
-[EasyMailDiscussion.Common Namespace][2]  
+[EasyMailDiscussion.Common Namespace][3]  
 
-[1]: https://docs.microsoft.com/dotnet/api/system.object
-[2]: ../README.md
-[3]: GetBounceAlias.md
-[4]: GetBounceAlias_1.md
-[5]: GetOwnerAlias.md
-[6]: GetOwnerAlias_1.md
-[7]: GetRequestAlias.md
-[8]: GetRequestAlias_1.md
-[9]: GetSubscribeAlias.md
-[10]: GetSubscribeAlias_1.md
-[11]: GetUnsubscribeAlias.md
-[12]: GetUnsubscribeAlias_1.md
+[1]: ../../EasyMailDiscussion.Common.Database/DiscussionList/BaseEmailAddress.md
+[2]: https://docs.microsoft.com/dotnet/api/system.object
+[3]: ../README.md
+[4]: GetBounceAlias.md
+[5]: GetBounceAlias_1.md
+[6]: GetOwnerAlias.md
+[7]: GetOwnerAlias_1.md
+[8]: GetRequestAlias.md
+[9]: GetRequestAlias_1.md
+[10]: GetSubscribeAlias.md
+[11]: GetSubscribeAlias_1.md
+[12]: GetUnsubscribeAlias.md
+[13]: GetUnsubscribeAlias_1.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Static member]: ../../icons/static.gif "Static member"

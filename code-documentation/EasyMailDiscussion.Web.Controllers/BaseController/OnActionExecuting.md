@@ -1,8 +1,6 @@
 BaseController.OnActionExecuting Method
 =======================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.BaseController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)"]
-
+Called before the action method is invoked.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,18 +18,21 @@ public virtual void OnActionExecuting(
 
 ##### *context*
 Type: [Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext][2]  
+ The action executing context.
 
-[Missing &lt;param name="context"/> documentation for "M:EasyMailDiscussion.Web.Controllers.BaseController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)"]
 
-
+Remarks
+-------
+ This override provides logging on the path being processed by the [HTTP request][3]. 
 
 See Also
 --------
 
 #### Reference
-[BaseController Class][3]  
+[BaseController Class][4]  
 [EasyMailDiscussion.Web.Controllers Namespace][1]  
 
 [1]: ../README.md
 [2]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.actionexecutingcontext
-[3]: README.md
+[3]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.http.httprequest
+[4]: README.md

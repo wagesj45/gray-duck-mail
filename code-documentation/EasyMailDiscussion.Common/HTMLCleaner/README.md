@@ -1,8 +1,6 @@
 HTMLCleaner Class
 =================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Common.HTMLCleaner"]
-
+A helper class for cleaning HTML strings.
 
 
 Inheritance Hierarchy
@@ -26,9 +24,9 @@ The **HTMLCleaner** type exposes the following members.
 Methods
 -------
 
-|                                  | Name                 | Description |
-| -------------------------------- | -------------------- | ----------- |
-| ![Public method]![Static member] | [RemoveInlineCSS][3] |             |
+|                                  | Name                 | Description                                         |
+| -------------------------------- | -------------------- | --------------------------------------------------- |
+| ![Public method]![Static member] | [RemoveInlineCSS][3] | Removes the inline CSS described in an HTML string. |
 
 
 See Also

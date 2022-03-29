@@ -1,10 +1,8 @@
 EmailHelper.IsBouncedMessage Method
 ===================================
+Query if a messaged is a bounced message by determining if there is an error action code per [GetBouncedMessageRecipient(IndexedMimeMessage)][1].
 
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailHelper.IsBouncedMessage(EasyMailDiscussion.Common.IndexedMimeMessage)"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common][1]  
+  **Namespace:**  [EasyMailDiscussion.Common][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -19,25 +17,23 @@ public static bool IsBouncedMessage(
 #### Parameters
 
 ##### *message*
-Type: [EasyMailDiscussion.Common.IndexedMimeMessage][2]  
-
-[Missing &lt;param name="message"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.IsBouncedMessage(EasyMailDiscussion.Common.IndexedMimeMessage)"]
-
+Type: [EasyMailDiscussion.Common.IndexedMimeMessage][3]  
+ The message.
 
 #### Return Value
-Type: [Boolean][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailHelper.IsBouncedMessage(EasyMailDiscussion.Common.IndexedMimeMessage)"]
-
+Type: [Boolean][4]  
+ True if the message is bounced, false if not. 
 
 See Also
 --------
 
 #### Reference
-[EmailHelper Class][4]  
-[EasyMailDiscussion.Common Namespace][1]  
+[EmailHelper Class][5]  
+[EasyMailDiscussion.Common Namespace][2]  
+[EmailHelper.GetBouncedMessageRecipient(IndexedMimeMessage)][1]  
 
-[1]: ../README.md
-[2]: ../IndexedMimeMessage/README.md
-[3]: https://docs.microsoft.com/dotnet/api/system.boolean
-[4]: README.md
+[1]: GetBouncedMessageRecipient.md
+[2]: ../README.md
+[3]: ../IndexedMimeMessage/README.md
+[4]: https://docs.microsoft.com/dotnet/api/system.boolean
+[5]: README.md

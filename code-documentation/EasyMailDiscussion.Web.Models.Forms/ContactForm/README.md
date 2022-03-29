@@ -1,8 +1,6 @@
 ContactForm Class
 =================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.Forms.ContactForm"]
-
+Model for the form input creating or modifying discussion list..
 
 
 Inheritance Hierarchy

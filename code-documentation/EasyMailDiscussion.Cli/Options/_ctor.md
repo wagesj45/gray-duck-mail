@@ -1,8 +1,8 @@
 Options Constructor
 ===================
-Initializes a new instance of the [Options][1] class
+Default constructor.
 
-  **Namespace:**  [EasyMailDiscussion.Cli][2]  
+  **Namespace:**  [EasyMailDiscussion.Cli][1]  
   **Assembly:** easy-mail-discussion-cli.exe
 
 Syntax
@@ -13,12 +13,16 @@ public Options()
 ```
 
 
+Remarks
+-------
+ This constructor initializes some default values that must be evaluated at runtime, since CommandLineParser decorators can only generate static default values. 
+
 See Also
 --------
 
 #### Reference
-[Options Class][1]  
-[EasyMailDiscussion.Cli Namespace][2]  
+[Options Class][2]  
+[EasyMailDiscussion.Cli Namespace][1]  
 
-[1]: README.md
-[2]: ../README.md
+[1]: ../README.md
+[2]: README.md

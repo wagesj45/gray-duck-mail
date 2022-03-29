@@ -1,8 +1,6 @@
 NLogConfiguration.GetConfiguration Method
 =========================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.NLogConfiguration.GetConfiguration(System.String,System.String)"]
-
+Gets the NLog configuration configured to the given *logLevel* and *logFilePath*.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -21,21 +19,15 @@ public static LoggingConfiguration GetConfiguration(
 
 ##### *logLevel*
 Type: [System.String][2]  
-
-[Missing &lt;param name="logLevel"/> documentation for "M:EasyMailDiscussion.Common.NLogConfiguration.GetConfiguration(System.String,System.String)"]
-
+ The log level.
 
 ##### *logFilePath*
 Type: [System.String][2]  
-
-[Missing &lt;param name="logFilePath"/> documentation for "M:EasyMailDiscussion.Common.NLogConfiguration.GetConfiguration(System.String,System.String)"]
-
+ Full pathname of the log file.
 
 #### Return Value
 Type: LoggingConfiguration  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.NLogConfiguration.GetConfiguration(System.String,System.String)"]
-
+ The NLog configuration. 
 
 See Also
 --------

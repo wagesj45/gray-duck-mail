@@ -1,10 +1,8 @@
 EmailFetcher.ExecuteAsync Method
 ================================
+This method is called when the [IHostedService][1] starts. The implementation should return a task that represents the lifetime of the long running operation(s) being performed.
 
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.ExecuteAsync(System.Threading.CancellationToken)"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Web.Worker][1]  
+  **Namespace:**  [EasyMailDiscussion.Web.Worker][2]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
@@ -19,25 +17,23 @@ protected virtual Task ExecuteAsync(
 #### Parameters
 
 ##### *stoppingToken*
-Type: [System.Threading.CancellationToken][2]  
-
-[Missing &lt;param name="stoppingToken"/> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.ExecuteAsync(System.Threading.CancellationToken)"]
-
+Type: [System.Threading.CancellationToken][3]  
+ Triggered when [StopAsync(CancellationToken)][4] is called.
 
 #### Return Value
-Type: [Task][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.ExecuteAsync(System.Threading.CancellationToken)"]
-
+Type: [Task][5]  
+ A [Task][5] that represents the long running operations. 
 
 See Also
 --------
 
 #### Reference
-[EmailFetcher Class][4]  
-[EasyMailDiscussion.Web.Worker Namespace][1]  
+[EmailFetcher Class][6]  
+[EasyMailDiscussion.Web.Worker Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
-[3]: https://docs.microsoft.com/dotnet/api/system.threading.tasks.task
-[4]: README.md
+[1]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
+[4]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice.stopasync#microsoft-extensions-hosting-ihostedservice-stopasync(system-threading-cancellationtoken)
+[5]: https://docs.microsoft.com/dotnet/api/system.threading.tasks.task
+[6]: README.md

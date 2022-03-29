@@ -1,10 +1,8 @@
 Message.OriginatorContact Property
 ==================================
+Gets or sets the [Contact][1] that sent this message to the [DiscussionList][2].
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.OriginatorContact"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][3]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,15 +13,17 @@ public virtual Contact OriginatorContact { get; set; }
 ```
 
 #### Property Value
-Type: [Contact][2]
+Type: [Contact][1]  
+ The original sender. 
 
 See Also
 --------
 
 #### Reference
-[Message Class][3]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[Message Class][4]  
+[EasyMailDiscussion.Common.Database Namespace][3]  
 
-[1]: ../README.md
-[2]: ../Contact/README.md
-[3]: README.md
+[1]: ../Contact/README.md
+[2]: DiscussionList.md
+[3]: ../README.md
+[4]: README.md

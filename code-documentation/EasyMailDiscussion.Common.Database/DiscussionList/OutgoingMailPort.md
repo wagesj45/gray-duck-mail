@@ -1,8 +1,6 @@
 DiscussionList.OutgoingMailPort Property
 ========================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.DiscussionList.OutgoingMailPort"]
-
+Gets or sets the port number of the outgoing SMTP server.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public int OutgoingMailPort { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The outgoing mail port. 
 
 See Also
 --------

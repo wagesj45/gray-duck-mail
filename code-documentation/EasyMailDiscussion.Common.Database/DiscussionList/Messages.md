@@ -1,8 +1,6 @@
 DiscussionList.Messages Property
 ================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.DiscussionList.Messages"]
-
+Gets or sets the messages that people associated with this list have sent.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public virtual ICollection<Message> Messages { get; set; }
 ```
 
 #### Property Value
-Type: [ICollection][2]&lt;[Message][3]>
+Type: [ICollection][2]&lt;[Message][3]>  
+ The messages. 
 
 See Also
 --------

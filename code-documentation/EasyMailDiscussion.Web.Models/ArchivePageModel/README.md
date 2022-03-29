@@ -1,8 +1,6 @@
 ArchivePageModel Class
 ======================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.ArchivePageModel"]
-
+A data model for the archive page.
 
 
 Inheritance Hierarchy

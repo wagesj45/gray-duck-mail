@@ -1,8 +1,6 @@
 Options.DBPath Property
 =======================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Cli.Options.DBPath"]
-
+Gets or sets the full pathname of the database file.
 
   **Namespace:**  [EasyMailDiscussion.Cli][1]  
   **Assembly:** easy-mail-discussion-cli.exe
@@ -15,7 +13,8 @@ public Uri DBPath { get; set; }
 ```
 
 #### Property Value
-Type: [Uri][2]
+Type: [Uri][2]  
+ The full pathname of the database file. 
 
 See Also
 --------

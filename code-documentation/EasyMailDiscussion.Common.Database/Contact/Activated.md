@@ -1,8 +1,6 @@
 Contact.Activated Property
 ==========================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Contact.Activated"]
-
+Gets or sets a value indicating whether the contact is activated in the system. Deactivated users can no longer recieve mailings, but remain for archival purposes.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public bool Activated { get; set; }
 ```
 
 #### Property Value
-Type: [Boolean][2]
+Type: [Boolean][2]  
+ True if activated, false if not. 
 
 See Also
 --------

@@ -1,8 +1,6 @@
 BaseController.SqliteDatabase Property
 ======================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Controllers.BaseController.SqliteDatabase"]
-
+Gets the SQLite database context.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public SqliteDatabase SqliteDatabase { get; }
 ```
 
 #### Property Value
-Type: [SqliteDatabase][2]
+Type: [SqliteDatabase][2]  
+ The sqlite database. 
 
 See Also
 --------

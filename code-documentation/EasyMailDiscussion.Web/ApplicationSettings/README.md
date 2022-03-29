@@ -1,8 +1,6 @@
 ApplicationSettings Class
 =========================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.ApplicationSettings"]
-
+Contains globally accessable application settings ready from appsettings.json.
 
 
 Inheritance Hierarchy
@@ -26,21 +24,21 @@ The **ApplicationSettings** type exposes the following members.
 Properties
 ----------
 
-|                                    | Name                  | Description |
-| ---------------------------------- | --------------------- | ----------- |
-| ![Public property]![Static member] | [DatabaseFilePath][3] |             |
-| ![Public property]![Static member] | [LogFilePath][4]      |             |
+|                                    | Name                  | Description                                          |
+| ---------------------------------- | --------------------- | ---------------------------------------------------- |
+| ![Public property]![Static member] | [DatabaseFilePath][3] | Gets or sets the full pathname of the database file. |
+| ![Public property]![Static member] | [LogFilePath][4]      | Gets or sets the full pathname of the log file.      |
 
 
 Fields
 ------
 
-|                                 | Name                  | Description |
-| ------------------------------- | --------------------- | ----------- |
-| ![Public field]![Static member] | [DATABASE_PATH][5]    |             |
-| ![Public field]![Static member] | [LOG_PATH][6]         |             |
-| ![Public field]![Static member] | [SECTION_DATABASE][7] |             |
-| ![Public field]![Static member] | [SECTION_LOG][8]      |             |
+|                                 | Name                  | Description                             |
+| ------------------------------- | --------------------- | --------------------------------------- |
+| ![Public field]![Static member] | [DATABASE_PATH][5]    | (Immutable) The database path key name. |
+| ![Public field]![Static member] | [LOG_PATH][6]         | (Immutable) The log path key name.      |
+| ![Public field]![Static member] | [SECTION_DATABASE][7] | (Immutable) The database section name.  |
+| ![Public field]![Static member] | [SECTION_LOG][8]      | (Immutable) The log section name.       |
 
 
 See Also

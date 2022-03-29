@@ -8,15 +8,16 @@ EasyMailDiscussion.Web.Controllers Namespace
 Classes
 -------
 
-|                 | Class                  | Description |
-| --------------- | ---------------------- | ----------- |
-| ![Public class] | [BaseController][1]    |             |
-| ![Public class] | [ContactController][2] |             |
-| ![Public class] | [HomeController][3]    |             |
-| ![Public class] | [ListController][4]    |             |
+|                 | Class                  | Description                                                                   |
+| --------------- | ---------------------- | ----------------------------------------------------------------------------- |
+| ![Public class] | [BaseController][1]    | A controller used as a base class in the [EasyMailDiscussion.Web][2] project. |
+| ![Public class] | [ContactController][3] |                                                                               |
+| ![Public class] | [HomeController][4]    |                                                                               |
+| ![Public class] | [ListController][5]    |                                                                               |
 
 [1]: BaseController/README.md
-[2]: ContactController/README.md
-[3]: HomeController/README.md
-[4]: ListController/README.md
+[2]: ../EasyMailDiscussion.Web/README.md
+[3]: ContactController/README.md
+[4]: HomeController/README.md
+[5]: ListController/README.md
 [Public class]: ../icons/pubclass.svg "Public class"

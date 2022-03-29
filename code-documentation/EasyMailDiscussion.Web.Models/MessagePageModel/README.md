@@ -1,8 +1,6 @@
 MessagePageModel Class
 ======================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.MessagePageModel"]
-
+A data model for the message page.
 
 
 Inheritance Hierarchy

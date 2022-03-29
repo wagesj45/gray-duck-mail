@@ -1,8 +1,6 @@
 Program.Main Method
 ===================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Program.Main(System.String[])"]
-
+Main entry-point for this application.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,9 +18,7 @@ public static void Main(
 
 ##### *args*
 Type: [System.String][2][]  
-
-[Missing &lt;param name="args"/> documentation for "M:EasyMailDiscussion.Web.Program.Main(System.String[])"]
-
+ An array of command-line argument strings.
 
 
 See Also

@@ -35,19 +35,19 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description                           |
-| ------------------ | ------------------- | ------------------------------------- |
-| ![Public property] | [SqliteDatabase][5] | (Inherited from [BaseController][2].) |
+|                    | Name                | Description                                                             |
+| ------------------ | ------------------- | ----------------------------------------------------------------------- |
+| ![Public property] | [SqliteDatabase][5] | Gets the SQLite database context. (Inherited from [BaseController][2].) |
 
 
 Methods
 -------
 
-|                  | Name                   | Description                           |
-| ---------------- | ---------------------- | ------------------------------------- |
-| ![Public method] | [Error][6]             |                                       |
-| ![Public method] | [Index][7]             |                                       |
-| ![Public method] | [OnActionExecuting][8] | (Inherited from [BaseController][2].) |
+|                  | Name                   | Description                                                                       |
+| ---------------- | ---------------------- | --------------------------------------------------------------------------------- |
+| ![Public method] | [Error][6]             |                                                                                   |
+| ![Public method] | [Index][7]             |                                                                                   |
+| ![Public method] | [OnActionExecuting][8] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
 
 
 See Also

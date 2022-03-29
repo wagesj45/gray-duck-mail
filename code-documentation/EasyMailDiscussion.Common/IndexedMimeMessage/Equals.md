@@ -1,8 +1,6 @@
 IndexedMimeMessage.Equals Method
 ================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.Equals(System.Object)"]
-
+Determines whether the specified object is equal to the current object.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,15 +18,11 @@ public override bool Equals(
 
 ##### *obj*
 Type: [System.Object][2]  
-
-[Missing &lt;param name="obj"/> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.Equals(System.Object)"]
-
+ The object to compare with the current object.
 
 #### Return Value
 Type: [Boolean][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.IndexedMimeMessage.Equals(System.Object)"]
-
+true if the specified object is equal to the current object; otherwise, false. 
 
 See Also
 --------

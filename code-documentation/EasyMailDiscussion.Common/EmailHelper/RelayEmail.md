@@ -1,10 +1,8 @@
 EmailHelper.RelayEmail Method
 =============================
+Relay an email to the [contacts][1][assigned][2] to a [discussion list][3].
 
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailHelper.RelayEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,EasyMailDiscussion.Common.Database.Message,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common][1]  
+  **Namespace:**  [EasyMailDiscussion.Common][4]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -24,53 +22,53 @@ public static void RelayEmail(
 #### Parameters
 
 ##### *discussionList*
-Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]  
-
-[Missing &lt;param name="discussionList"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.RelayEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,EasyMailDiscussion.Common.Database.Message,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+Type: [EasyMailDiscussion.Common.Database.DiscussionList][3]  
+ The discussion list.
 
 ##### *recipient*
-Type: [EasyMailDiscussion.Common.Database.Contact][3]  
-
-[Missing &lt;param name="recipient"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.RelayEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,EasyMailDiscussion.Common.Database.Message,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+Type: [EasyMailDiscussion.Common.Database.Contact][1]  
+ The recipient.
 
 ##### *message*
-Type: [EasyMailDiscussion.Common.Database.Message][4]  
-
-[Missing &lt;param name="message"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.RelayEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,EasyMailDiscussion.Common.Database.Message,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+Type: [EasyMailDiscussion.Common.Database.Message][5]  
+ The message.
 
 ##### *database*
-Type: [EasyMailDiscussion.Common.Database.SqliteDatabase][5]  
-
-[Missing &lt;param name="database"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.RelayEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,EasyMailDiscussion.Common.Database.Message,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+Type: [EasyMailDiscussion.Common.Database.SqliteDatabase][6]  
+ The database.
 
 ##### *client*
 Type: SmtpClient  
-
-[Missing &lt;param name="client"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.RelayEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,EasyMailDiscussion.Common.Database.Message,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ The SMTP client.
 
 ##### *stoppingToken* (Optional)
-Type: [System.Threading.CancellationToken][6]  
+Type: [System.Threading.CancellationToken][7]  
+ (Optional) A token that allows processing to be cancelled.
 
-[Missing &lt;param name="stoppingToken"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.RelayEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,EasyMailDiscussion.Common.Database.Message,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
 
+Exceptions
+----------
+
+| Exception            | Condition                                        |
+| -------------------- | ------------------------------------------------ |
+| [FormatException][8] | Thrown when the format of an input is incorrect. |
 
 
 See Also
 --------
 
 #### Reference
-[EmailHelper Class][7]  
-[EasyMailDiscussion.Common Namespace][1]  
+[EmailHelper Class][9]  
+[EasyMailDiscussion.Common Namespace][4]  
+[EmailHelper.SendEmail(DiscussionList, Contact, String, String, Func&lt;MimeEntity>, SmtpClient, CancellationToken)][10]  
 
-[1]: ../README.md
-[2]: ../../EasyMailDiscussion.Common.Database/DiscussionList/README.md
-[3]: ../../EasyMailDiscussion.Common.Database/Contact/README.md
-[4]: ../../EasyMailDiscussion.Common.Database/Message/README.md
-[5]: ../../EasyMailDiscussion.Common.Database/SqliteDatabase/README.md
-[6]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
-[7]: README.md
+[1]: ../../EasyMailDiscussion.Common.Database/Contact/README.md
+[2]: ../../EasyMailDiscussion.Common.Database/ContactSubscription/README.md
+[3]: ../../EasyMailDiscussion.Common.Database/DiscussionList/README.md
+[4]: ../README.md
+[5]: ../../EasyMailDiscussion.Common.Database/Message/README.md
+[6]: ../../EasyMailDiscussion.Common.Database/SqliteDatabase/README.md
+[7]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
+[8]: https://docs.microsoft.com/dotnet/api/system.formatexception
+[9]: README.md
+[10]: SendEmail.md

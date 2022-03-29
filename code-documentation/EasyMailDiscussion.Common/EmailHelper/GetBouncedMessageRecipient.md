@@ -1,8 +1,6 @@
 EmailHelper.GetBouncedMessageRecipient Method
 =============================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Common.EmailHelper.GetBouncedMessageRecipient(EasyMailDiscussion.Common.IndexedMimeMessage)"]
-
+Gets bounced message recipient from the message, if it exists.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -20,24 +18,29 @@ public static string GetBouncedMessageRecipient(
 
 ##### *message*
 Type: [EasyMailDiscussion.Common.IndexedMimeMessage][2]  
-
-[Missing &lt;param name="message"/> documentation for "M:EasyMailDiscussion.Common.EmailHelper.GetBouncedMessageRecipient(EasyMailDiscussion.Common.IndexedMimeMessage)"]
-
+ The message.
 
 #### Return Value
 Type: [String][3]  
+ The bounced message recipient. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Common.EmailHelper.GetBouncedMessageRecipient(EasyMailDiscussion.Common.IndexedMimeMessage)"]
+Exceptions
+----------
+
+| Exception                  | Condition                                            |
+| -------------------------- | ---------------------------------------------------- |
+| [ArgumentNullException][4] | Thrown when one or more required arguments are null. |
 
 
 See Also
 --------
 
 #### Reference
-[EmailHelper Class][4]  
+[EmailHelper Class][5]  
 [EasyMailDiscussion.Common Namespace][1]  
 
 [1]: ../README.md
 [2]: ../IndexedMimeMessage/README.md
 [3]: https://docs.microsoft.com/dotnet/api/system.string
-[4]: README.md
+[4]: https://docs.microsoft.com/dotnet/api/system.argumentnullexception
+[5]: README.md

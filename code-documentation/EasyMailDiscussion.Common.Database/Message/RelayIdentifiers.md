@@ -1,10 +1,8 @@
 Message.RelayIdentifiers Property
 =================================
+Gets or sets a list of identifiers of the [relay identifiers][1].
 
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.Message.RelayIdentifiers"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
+  **Namespace:**  [EasyMailDiscussion.Common.Database][2]  
   **Assembly:** easy-mail-discussion-common.dll
 
 Syntax
@@ -15,16 +13,17 @@ public virtual ICollection<RelayIdentifier> RelayIdentifiers { get; set; }
 ```
 
 #### Property Value
-Type: [ICollection][2]&lt;[RelayIdentifier][3]>
+Type: [ICollection][3]&lt;[RelayIdentifier][1]>  
+ A list of relay identifiers. 
 
 See Also
 --------
 
 #### Reference
 [Message Class][4]  
-[EasyMailDiscussion.Common.Database Namespace][1]  
+[EasyMailDiscussion.Common.Database Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1
-[3]: ../RelayIdentifier/README.md
+[1]: ../RelayIdentifier/README.md
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1
 [4]: README.md

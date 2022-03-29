@@ -1,8 +1,6 @@
 ContactSubscription.ID Property
 ===============================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Common.Database.ContactSubscription.ID"]
-
+Gets or sets the identifier.
 
   **Namespace:**  [EasyMailDiscussion.Common.Database][1]  
   **Assembly:** easy-mail-discussion-common.dll
@@ -15,7 +13,8 @@ public int ID { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The identifier. 
 
 See Also
 --------

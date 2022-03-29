@@ -34,9 +34,9 @@ Constructors
 Methods
 -------
 
-|                     | Name              | Description |
-| ------------------- | ----------------- | ----------- |
-| ![Protected method] | [ExecuteAsync][4] |             |
+|                     | Name              | Description                                                                                                                                                                       |
+| ------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Protected method] | [ExecuteAsync][4] | This method is called when the [IHostedService][5] starts. The implementation should return a task that represents the lifetime of the long running operation(s) being performed. |
 
 
 See Also
@@ -49,5 +49,6 @@ See Also
 [2]: ../README.md
 [3]: _ctor.md
 [4]: ExecuteAsync.md
+[5]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Protected method]: ../../icons/protmethod.svg "Protected method"
