@@ -35,7 +35,7 @@ Methods
 
 |                                  | Name                   | Description                                                                                                                                                |
 | -------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Public method]                 | [Equals][5]            | Determines whether the specified object is equal to the current object. (Overrides [Object.Equals(Object)][6].)                                            |
+| ![Public method]                 | [Equals][5]            | Tests if this object is considered equal to another. (Overrides [Object.Equals(Object)][6].)                                                               |
 | ![Protected method]              | [Finalize][7]          | Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection. (Inherited from [Object][1].) |
 | ![Public method]                 | [GetHashCode][8]       | Serves as the default hash function. (Overrides [Object.GetHashCode()][9].)                                                                                |
 | ![Public method]                 | [GetType][10]          | Gets the [Type][11] of the current instance. (Inherited from [Object][1].)                                                                                 |

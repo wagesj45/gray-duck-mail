@@ -1,6 +1,6 @@
 IndexedMimeMessage.Equals Method
 ================================
-Determines whether the specified object is equal to the current object.
+Tests if this object is considered equal to another.
 
   **Namespace:**  [EasyMailDiscussion.Common][1]  
   **Assembly:** easy-mail-discussion-common.dll
