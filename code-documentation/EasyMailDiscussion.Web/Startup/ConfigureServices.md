@@ -1,8 +1,6 @@
 Startup.ConfigureServices Method
 ================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"]
-
+This method gets called by the runtime. Use this method to add services to the container.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,9 +18,7 @@ public void ConfigureServices(
 
 ##### *services*
 Type: [Microsoft.Extensions.DependencyInjection.IServiceCollection][2]  
-
-[Missing &lt;param name="services"/> documentation for "M:EasyMailDiscussion.Web.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"]
-
+ The service collection interface.
 
 
 See Also

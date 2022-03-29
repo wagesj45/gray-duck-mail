@@ -1,8 +1,6 @@
 EmailFetcher Class
 ==================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Worker.EmailFetcher"]
-
+An asyncronous background service that retrieves email messages and processes them.
 
 
 Inheritance Hierarchy
@@ -35,17 +33,17 @@ Constructors
 Methods
 -------
 
-|                                   | Name                                                                                          | Description                                                                                                                                                                       |
-| --------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Protected method]               | [ExecuteAsync][5]                                                                             | This method is called when the [IHostedService][6] starts. The implementation should return a task that represents the lifetime of the long running operation(s) being performed. |
-| ![Private method]                 | [FilterBouncedMessages][7]                                                                    |                                                                                                                                                                                   |
-| ![Private method]                 | [FilterMessages(IEnumerable&lt;IndexedMimeMessage>, Func&lt;IndexedMimeMessage, Boolean>)][8] |                                                                                                                                                                                   |
-| ![Private method]                 | [FilterMessages(IEnumerable&lt;IndexedMimeMessage>, String)][9]                               | Filter messages based on the MailboxAddress located in "TO" addresses.                                                                                                            |
-| ![Private method]![Static member] | [ProcessBounces][10]                                                                          | Process the bounced messages recieved from a contact.                                                                                                                             |
-| ![Private method]![Static member] | [ProcessDiscussionMessages][11]                                                               | Process the non-command messages by relaying them to all subscribed members of the *discussionList*.                                                                              |
-| ![Private method]![Static member] | [ProcessRequests][12]                                                                         | Process the requests to join a the *discussionList*.                                                                                                                              |
-| ![Private method]![Static member] | [ProcessSubscriptionConfirmations][13]                                                        | Process the subscription confirmations for the *discussionList*.                                                                                                                  |
-| ![Private method]![Static member] | [ProcessUnsubscribeConfirmations][14]                                                         | Process the unsubscribe confirmations for the *discussionList*.                                                                                                                   |
+|                                   | Name                                                                                          | Description                                                                                                   |
+| --------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| ![Protected method]               | [ExecuteAsync][5]                                                                             | This method is called when the [IHostedService][6] starts. This is the main processing thread of the service. |
+| ![Private method]                 | [FilterBouncedMessages][7]                                                                    | Filters messages based on their delivery status.                                                              |
+| ![Private method]                 | [FilterMessages(IEnumerable&lt;IndexedMimeMessage>, Func&lt;IndexedMimeMessage, Boolean>)][8] | Filter messages based on the a user provided [function][9].                                                   |
+| ![Private method]                 | [FilterMessages(IEnumerable&lt;IndexedMimeMessage>, String)][10]                              | Filter messages based on the MailboxAddress located in "TO" addresses.                                        |
+| ![Private method]![Static member] | [ProcessBounces][11]                                                                          | Process the bounced messages recieved from a contact.                                                         |
+| ![Private method]![Static member] | [ProcessDiscussionMessages][12]                                                               | Process the non-command messages by relaying them to all subscribed members of the *discussionList*.          |
+| ![Private method]![Static member] | [ProcessRequests][13]                                                                         | Process the requests to join a the *discussionList*.                                                          |
+| ![Private method]![Static member] | [ProcessSubscriptionConfirmations][14]                                                        | Process the subscription confirmations for the *discussionList*.                                              |
+| ![Private method]![Static member] | [ProcessUnsubscribeConfirmations][15]                                                         | Process the unsubscribe confirmations for the *discussionList*.                                               |
 
 
 See Also
@@ -62,12 +60,13 @@ See Also
 [6]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice
 [7]: FilterBouncedMessages.md
 [8]: FilterMessages.md
-[9]: FilterMessages_1.md
-[10]: ProcessBounces.md
-[11]: ProcessDiscussionMessages.md
-[12]: ProcessRequests.md
-[13]: ProcessSubscriptionConfirmations.md
-[14]: ProcessUnsubscribeConfirmations.md
+[9]: https://docs.microsoft.com/dotnet/api/system.func-2
+[10]: FilterMessages_1.md
+[11]: ProcessBounces.md
+[12]: ProcessDiscussionMessages.md
+[13]: ProcessRequests.md
+[14]: ProcessSubscriptionConfirmations.md
+[15]: ProcessUnsubscribeConfirmations.md
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"

@@ -1,6 +1,6 @@
 ContactsModel.Contacts Property
 ===============================
-Gets or sets the contacts.
+Gets or sets the contacts to display on the page.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe

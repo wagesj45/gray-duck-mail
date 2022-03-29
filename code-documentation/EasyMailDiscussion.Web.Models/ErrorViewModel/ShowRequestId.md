@@ -1,8 +1,6 @@
 ErrorViewModel.ShowRequestId Property
 =====================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.ErrorViewModel.ShowRequestId"]
-
+Gets a value indicating whether the request identifier is shown.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public bool ShowRequestId { get; }
 ```
 
 #### Property Value
-Type: [Boolean][2]
+Type: [Boolean][2]  
+ True if show request identifier, false if not. 
 
 See Also
 --------

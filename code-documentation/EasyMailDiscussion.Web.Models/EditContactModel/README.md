@@ -1,8 +1,6 @@
 EditContactModel Class
 ======================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.EditContactModel"]
-
+A data model for the edit contact page.
 
 
 Inheritance Hierarchy
@@ -34,9 +32,9 @@ Constructors
 Properties
 ----------
 
-|                    | Name         | Description |
-| ------------------ | ------------ | ----------- |
-| ![Public property] | [Contact][4] |             |
+|                    | Name         | Description               |
+| ------------------ | ------------ | ------------------------- |
+| ![Public property] | [Contact][4] | Gets or sets the contact. |
 
 
 See Also

@@ -6,19 +6,19 @@ A collection of MVC model calsses that describe data transactions between MVC co
 Classes
 -------
 
-|                 | Class                           | Description                         |
-| --------------- | ------------------------------- | ----------------------------------- |
-| ![Public class] | [ArchivePageModel][1]           | A data model for the archive page.  |
-| ![Public class] | [ContactsModel][2]              | A data model for the contacts page. |
-| ![Public class] | [DiscussionListAssignModel][3]  |                                     |
-| ![Public class] | [DiscussionListsModel][4]       |                                     |
-| ![Public class] | [EditContactModel][5]           |                                     |
-| ![Public class] | [EditDiscussionListModel][6]    |                                     |
-| ![Public class] | [ErrorViewModel][7]             |                                     |
-| ![Public class] | [HomepageModel][8]              | A data model for the contacts page. |
-| ![Public class] | [MessagePageModel][9]           | A data model for the message page.  |
-| ![Public class] | [RemoveContactModel][10]        |                                     |
-| ![Public class] | [RemoveDiscussionListModel][11] |                                     |
+|                 | Class                           | Description                                           |
+| --------------- | ------------------------------- | ----------------------------------------------------- |
+| ![Public class] | [ArchivePageModel][1]           | A data model for the archive page.                    |
+| ![Public class] | [ContactsModel][2]              | A data model for the contacts page.                   |
+| ![Public class] | [DiscussionListAssignModel][3]  | A data model for the discussion list assignment page. |
+| ![Public class] | [DiscussionListsModel][4]       | A data model for the discussion list page.            |
+| ![Public class] | [EditContactModel][5]           | A data model for the edit contact page.               |
+| ![Public class] | [EditDiscussionListModel][6]    | A data model for the edit discussion list page.       |
+| ![Public class] | [ErrorViewModel][7]             | A data model for the error page.                      |
+| ![Public class] | [HomepageModel][8]              | A data model for the landing page.                    |
+| ![Public class] | [MessagePageModel][9]           | A data model for the message page.                    |
+| ![Public class] | [RemoveContactModel][10]        | A data model for the contact removal page.            |
+| ![Public class] | [RemoveDiscussionListModel][11] | A data model for the discussion list removal page.    |
 
 [1]: ArchivePageModel/README.md
 [2]: ContactsModel/README.md

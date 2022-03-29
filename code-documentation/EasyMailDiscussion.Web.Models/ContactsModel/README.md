@@ -32,9 +32,9 @@ Constructors
 Properties
 ----------
 
-|                    | Name          | Description                |
-| ------------------ | ------------- | -------------------------- |
-| ![Public property] | [Contacts][4] | Gets or sets the contacts. |
+|                    | Name          | Description                                       |
+| ------------------ | ------------- | ------------------------------------------------- |
+| ![Public property] | [Contacts][4] | Gets or sets the contacts to display on the page. |
 
 
 See Also

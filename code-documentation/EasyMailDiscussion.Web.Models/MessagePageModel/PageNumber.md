@@ -1,8 +1,6 @@
 MessagePageModel.PageNumber Property
 ====================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.MessagePageModel.PageNumber"]
-
+Gets or sets the page number.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public int PageNumber { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The page number. 
 
 See Also
 --------

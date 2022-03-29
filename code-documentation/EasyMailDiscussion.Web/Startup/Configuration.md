@@ -1,8 +1,6 @@
 Startup.Configuration Property
 ==============================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Startup.Configuration"]
-
+Gets the configuration interface.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public IConfiguration Configuration { get; }
 ```
 
 #### Property Value
-Type: [IConfiguration][2]
+Type: [IConfiguration][2]  
+ The configuration interface. 
 
 See Also
 --------

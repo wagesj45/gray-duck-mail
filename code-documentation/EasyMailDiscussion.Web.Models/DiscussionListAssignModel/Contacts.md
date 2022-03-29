@@ -1,8 +1,6 @@
 DiscussionListAssignModel.Contacts Property
 ===========================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.Contacts"]
-
+Gets or sets the contacts to display on the page.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public IEnumerable<Contact> Contacts { get; set; }
 ```
 
 #### Property Value
-Type: [IEnumerable][2]&lt;[Contact][3]>
+Type: [IEnumerable][2]&lt;[Contact][3]>  
+ The contacts. 
 
 See Also
 --------

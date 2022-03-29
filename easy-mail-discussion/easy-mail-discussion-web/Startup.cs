@@ -13,8 +13,22 @@ using System.Threading.Tasks;
 
 namespace EasyMailDiscussion.Web
 {
+    /// <summary> Manages the start up routine for the application. </summary>
     public class Startup
     {
+        #region Properties
+
+        /// <summary> Gets the configuration interface. </summary>
+        /// <value> The configuration interface. </value>
+        public IConfiguration Configuration { get; }
+
+        #endregion
+
+
+        #region Contructors
+        
+        /// <summary> Constructor. </summary>
+        /// <param name="configuration"> The configuration interface. </param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,15 +48,25 @@ namespace EasyMailDiscussion.Web
             LogManager.Configuration = NLogConfiguration.GetConfiguration(DockerEnvironmentVariables.LogLevel, fullLogFile);
         }
 
-        public IConfiguration Configuration { get; }
+        #endregion
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        #region Methods
+        
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"> The service collection interface. </param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request
+        /// pipeline.
+        /// </summary>
+        /// <param name="app"> The application builder interface. </param>
+        /// <param name="env"> The web host environment interface. </param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -65,6 +89,8 @@ namespace EasyMailDiscussion.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+        } 
+
+        #endregion
     }
 }

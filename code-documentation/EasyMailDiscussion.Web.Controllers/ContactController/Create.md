@@ -1,8 +1,6 @@
 ContactController.Create Method
 ===============================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.Create(EasyMailDiscussion.Web.Models.Forms.ContactForm)"]
-
+Processes the contact creation form submission.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,15 +18,15 @@ public IActionResult Create(
 
 ##### *formInput*
 Type: [EasyMailDiscussion.Web.Models.Forms.ContactForm][2]  
-
-[Missing &lt;param name="formInput"/> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.Create(EasyMailDiscussion.Web.Models.Forms.ContactForm)"]
-
+ The form input.
 
 #### Return Value
 Type: [IActionResult][3]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.Create(EasyMailDiscussion.Web.Models.Forms.ContactForm)"]
-
+Remarks
+-------
+ Fulfills the `/Contact/Create` post request. 
 
 See Also
 --------

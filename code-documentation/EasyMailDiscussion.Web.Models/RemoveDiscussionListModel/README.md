@@ -1,8 +1,6 @@
 RemoveDiscussionListModel Class
 ===============================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.RemoveDiscussionListModel"]
-
+A data model for the discussion list removal page.
 
 
 Inheritance Hierarchy
@@ -34,9 +32,9 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description |
-| ------------------ | ------------------- | ----------- |
-| ![Public property] | [DiscussionList][4] |             |
+|                    | Name                | Description                     |
+| ------------------ | ------------------- | ------------------------------- |
+| ![Public property] | [DiscussionList][4] | Gets or sets a discussion list. |
 
 
 See Also

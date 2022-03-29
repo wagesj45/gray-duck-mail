@@ -45,12 +45,16 @@ See Also
 #### Reference
 [EasyMailDiscussion.Web Namespace][2]  
 
+#### Other Resources
+[https://docs.docker.com/compose/environment-variables/][7]  
+
 [1]: https://docs.microsoft.com/dotnet/api/system.object
 [2]: ../README.md
 [3]: _cctor.md
 [4]: FetchTime.md
 [5]: LogLevel.md
 [6]: PageSize.md
+[7]: https://docs.docker.com/compose/environment-variables/
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public property]: ../../icons/pubproperty.svg "Public property"

@@ -1,10 +1,8 @@
 DiscussionListAssignModel.GetSubscription Method
 ================================================
+Gets a subscription status for a [Contact][1].
 
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.GetSubscription(System.Int32)"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
+  **Namespace:**  [EasyMailDiscussion.Web.Models][2]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
@@ -19,25 +17,22 @@ public SubscriptionStatus GetSubscription(
 #### Parameters
 
 ##### *contactID*
-Type: [System.Int32][2]  
-
-[Missing &lt;param name="contactID"/> documentation for "M:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.GetSubscription(System.Int32)"]
-
+Type: [System.Int32][3]  
+ Identifier for the contact.
 
 #### Return Value
-Type: [SubscriptionStatus][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.GetSubscription(System.Int32)"]
-
+Type: [SubscriptionStatus][4]  
+ The subscription. 
 
 See Also
 --------
 
 #### Reference
-[DiscussionListAssignModel Class][4]  
-[EasyMailDiscussion.Web.Models Namespace][1]  
+[DiscussionListAssignModel Class][5]  
+[EasyMailDiscussion.Web.Models Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.int32
-[3]: ../../EasyMailDiscussion.Common.Database/SubscriptionStatus/README.md
-[4]: README.md
+[1]: ../../EasyMailDiscussion.Common.Database/Contact/README.md
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.int32
+[4]: ../../EasyMailDiscussion.Common.Database/SubscriptionStatus/README.md
+[5]: README.md

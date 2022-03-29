@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace EasyMailDiscussion.Web.Models
 {
-    /// <summary> A data model for the contacts page. </summary>
+    /// <summary> A data model for the landing page. </summary>
     public class HomepageModel
     {
-        #region Properties
+        #region Properties 
 
         /// <summary> Gets or sets the total number of discussion lists. </summary>
         /// <value> The total number of discussion lists. </value>

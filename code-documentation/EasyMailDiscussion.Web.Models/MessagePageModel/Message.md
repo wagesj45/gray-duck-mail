@@ -1,8 +1,6 @@
 MessagePageModel.Message Property
 =================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.MessagePageModel.Message"]
-
+Gets or sets the message.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public Message Message { get; set; }
 ```
 
 #### Property Value
-Type: [Message][2]
+Type: [Message][2]  
+ The message. 
 
 See Also
 --------

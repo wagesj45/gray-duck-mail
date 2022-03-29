@@ -44,6 +44,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <see cref="Microsoft.AspNetCore.Http.HttpRequest">HTTP request</see>.
         /// </remarks>
         /// <param name="context"> The action executing context. </param>
+        /// <seealso cref="Controller.onac"/>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             logger.Info("Serving page '{0}'", context.HttpContext.Request.Path);

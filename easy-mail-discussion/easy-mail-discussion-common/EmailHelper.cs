@@ -98,11 +98,16 @@ namespace EasyMailDiscussion.Common
 
         /// <summary> Gets the default HTML email template. </summary>
         /// <remarks>
+        /// <para>
         /// This email template contains several replaceable notaions: <c>{header}</c>,
         /// <c>{subheader}</c>, <c>{body}</c>, and <c>{footer}</c>. The <c>{unsubscribe}</c> notation
         /// should always be a link to the
         /// <see cref="EmailAliasHelper.GetUnsubscribeAlias(DiscussionList)">unsubscribe email
         /// alias</see>.
+        /// </para>
+        /// <para>
+        /// This file is read into memory upon its first access.
+        /// </para>
         /// </remarks>
         /// <value> The mail email template. </value>
         public static string DefaultEmailTemplate
@@ -232,12 +237,12 @@ namespace EasyMailDiscussion.Common
                         html.LoadHtml(message.BodyHTML);
 
                         HtmlNode bodyNode = null;
-                        if(html.DocumentNode.SelectNodes("//body")?.Any() ?? false)
+                        if (html.DocumentNode.SelectNodes("//body")?.Any() ?? false)
                         {
                             bodyNode = html.DocumentNode.SelectNodes("//body").FirstOrDefault();
                         }
 
-                        if(bodyNode == null)
+                        if (bodyNode == null)
                         {
                             //If we couldn't find a <body> tag, let's assume it not a full html 
                             // build and just attach to the document node directly.
@@ -265,7 +270,7 @@ namespace EasyMailDiscussion.Common
                         var techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                         var cleanedText = message.BodyText.Replace(techHeader, "");
                         var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
-                        
+
                         return new TextPart(TextFormat.Text)
                         {
                             Text = modifiedText

@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace EasyMailDiscussion.Web.Worker
 {
+    /// <summary>
+    /// An asyncronous background service that retrieves email messages and processes them.
+    /// </summary>
     public class EmailFetcher : BackgroundService
     {
         #region Members
@@ -24,10 +27,11 @@ namespace EasyMailDiscussion.Web.Worker
 
         #endregion
 
+        #region Methods
+
         /// <summary>
         /// This method is called when the <see cref="T:Microsoft.Extensions.Hosting.IHostedService" />
-        /// starts. The implementation should return a task that represents the lifetime of the long
-        /// running operation(s) being performed.
+        /// starts. This is the main processing thread of the service.
         /// </summary>
         /// <param name="stoppingToken">
         ///     Triggered when
@@ -145,6 +149,9 @@ namespace EasyMailDiscussion.Web.Worker
         /// <param name="database">                 The database. </param>
         /// <param name="pop3Client">               The POP3 client. </param>
         /// <param name="subscriptionConfirmation"> The subscription confirmation. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
         {
             var from = subscriptionConfirmation.Message.Sender ?? subscriptionConfirmation.Message.From.Mailboxes.SingleOrDefault();
@@ -180,6 +187,7 @@ namespace EasyMailDiscussion.Web.Worker
         /// list</paramref>.
         /// </summary>
         /// <param name="discussionList">          Discussion List database object. </param>
+        /// <param name="database">                The database. </param>
         /// <param name="pop3Client">              The POP3 client. </param>
         /// <param name="unsubscribeConfirmation"> The unsubscribe confirmation. </param>
         private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
@@ -279,7 +287,10 @@ namespace EasyMailDiscussion.Web.Worker
             pop3Client.DeleteMessage(bounce.Index);
         }
 
-        /// <summary> Process the non-command messages by relaying them to all subscribed members of the <paramref name="discussionList">discussion list</paramref>. </summary>
+        /// <summary>
+        /// Process the non-command messages by relaying them to all subscribed members of the
+        /// <paramref name="discussionList">discussion list</paramref>.
+        /// </summary>
         /// <param name="discussionList">    Discussion List database object. </param>
         /// <param name="discussionMessage"> Message describing the discussion. </param>
         /// <param name="database">          The database. </param>
@@ -357,7 +368,10 @@ namespace EasyMailDiscussion.Web.Worker
             pop3Client.DeleteMessage(discussionMessage.Index);
         }
 
-        /// <summary> Filter messages based on the <see cref="MailboxAddress"/> located in <see cref="MimeKit.MimeMessage.To">"TO" addresses</see>. </summary>
+        /// <summary>
+        /// Filter messages based on the <see cref="MailboxAddress"/> located in
+        /// <see cref="MimeKit.MimeMessage.To">"TO" addresses</see>.
+        /// </summary>
         /// <param name="messages">       The messages. </param>
         /// <param name="emailToAddress"> The email to address. </param>
         /// <returns>
@@ -374,6 +388,12 @@ namespace EasyMailDiscussion.Web.Worker
             return filteredMessages;
         }
 
+        /// <summary> Filters messages based on their delivery status. </summary>
+        /// <param name="messages"> The messages. </param>
+        /// <returns>
+        /// An enumerator that allows foreach to be used to process filter bounced messages in this
+        /// collection.
+        /// </returns>
         private IEnumerable<IndexedMimeMessage> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
         {
             logger.Debug("Filtering bounced messages.");
@@ -383,10 +403,10 @@ namespace EasyMailDiscussion.Web.Worker
 
         /// <summary>
         /// Filter messages based on the a user provided
-        /// <see cref="Func{IndexedMimeMessage, bool}">function</see></see>.
+        /// <see cref="Func{IndexedMimeMessage, Bool}">function</see>.
         /// </summary>
         /// <param name="messages"> The messages. </param>
-        /// <param name="filter">   Specifies the filter. </param>
+        /// <param name="filter">   Specifies the filtering function. </param>
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
@@ -406,6 +426,8 @@ namespace EasyMailDiscussion.Web.Worker
             }
 
             return filteredMessages;
-        }
+        } 
+
+        #endregion
     }
 }

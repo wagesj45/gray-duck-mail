@@ -1,8 +1,6 @@
 ArchivePageModel.Messages Property
 ==================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.ArchivePageModel.Messages"]
-
+Gets or sets the messages to display on the page.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public IEnumerable<Message> Messages { get; set; }
 ```
 
 #### Property Value
-Type: [IEnumerable][2]&lt;[Message][3]>
+Type: [IEnumerable][2]&lt;[Message][3]>  
+ The messages. 
 
 See Also
 --------

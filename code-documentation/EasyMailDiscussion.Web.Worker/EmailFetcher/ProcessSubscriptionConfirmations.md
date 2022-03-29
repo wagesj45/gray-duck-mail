@@ -38,9 +38,7 @@ Type: [EasyMailDiscussion.Common.IndexedMimeMessage][4]
 
 ##### *cancellationToken* (Optional)
 Type: [System.Threading.CancellationToken][5]  
-
-[Missing &lt;param name="cancellationToken"/> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.ProcessSubscriptionConfirmations(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,EasyMailDiscussion.Common.IndexedMimeMessage,System.Threading.CancellationToken)"]
-
+ (Optional) A token that allows processing to be cancelled.
 
 
 See Also

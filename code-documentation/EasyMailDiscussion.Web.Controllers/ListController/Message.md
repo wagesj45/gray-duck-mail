@@ -1,8 +1,6 @@
 ListController.Message Method
 =============================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Message(System.Int32,System.Int32)"]
-
+Gets the message request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -12,30 +10,28 @@ Syntax
 
 ```csharp
 public IActionResult Message(
-	int id,
+	int messageID,
 	int pageNumber = 1
 )
 ```
 
 #### Parameters
 
-##### *id*
+##### *messageID*
 Type: [System.Int32][2]  
-
-[Missing &lt;param name="id"/> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Message(System.Int32,System.Int32)"]
-
+ Identifier for the message.
 
 ##### *pageNumber* (Optional)
 Type: [System.Int32][2]  
-
-[Missing &lt;param name="pageNumber"/> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Message(System.Int32,System.Int32)"]
-
+ (Optional) The page number.
 
 #### Return Value
 Type: [IActionResult][3]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Message(System.Int32,System.Int32)"]
-
+Remarks
+-------
+ Fulfills the `/List/Message` request. 
 
 See Also
 --------

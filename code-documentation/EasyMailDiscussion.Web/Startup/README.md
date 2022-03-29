@@ -1,8 +1,6 @@
 Startup Class
 =============
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Startup"]
-
+Manages the start up routine for the application.
 
 
 Inheritance Hierarchy
@@ -26,26 +24,26 @@ The **Startup** type exposes the following members.
 Constructors
 ------------
 
-|                  | Name         | Description                                         |
-| ---------------- | ------------ | --------------------------------------------------- |
-| ![Public method] | [Startup][3] | Initializes a new instance of the **Startup** class |
+|                  | Name         | Description  |
+| ---------------- | ------------ | ------------ |
+| ![Public method] | [Startup][3] | Constructor. |
 
 
 Properties
 ----------
 
-|                    | Name               | Description |
-| ------------------ | ------------------ | ----------- |
-| ![Public property] | [Configuration][4] |             |
+|                    | Name               | Description                       |
+| ------------------ | ------------------ | --------------------------------- |
+| ![Public property] | [Configuration][4] | Gets the configuration interface. |
 
 
 Methods
 -------
 
-|                  | Name                   | Description |
-| ---------------- | ---------------------- | ----------- |
-| ![Public method] | [Configure][5]         |             |
-| ![Public method] | [ConfigureServices][6] |             |
+|                  | Name                   | Description                                                                                     |
+| ---------------- | ---------------------- | ----------------------------------------------------------------------------------------------- |
+| ![Public method] | [Configure][5]         | This method gets called by the runtime. Use this method to configure the HTTP request pipeline. |
+| ![Public method] | [ConfigureServices][6] | This method gets called by the runtime. Use this method to add services to the container.       |
 
 
 See Also

@@ -1,8 +1,6 @@
 RemoveContactModel Class
 ========================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.RemoveContactModel"]
-
+A data model for the contact removal page.
 
 
 Inheritance Hierarchy
@@ -34,9 +32,9 @@ Constructors
 Properties
 ----------
 
-|                    | Name         | Description |
-| ------------------ | ------------ | ----------- |
-| ![Public property] | [Contact][4] |             |
+|                    | Name         | Description               |
+| ------------------ | ------------ | ------------------------- |
+| ![Public property] | [Contact][4] | Gets or sets the contact. |
 
 
 See Also

@@ -1,8 +1,6 @@
 ContactController.ConfirmRemove Method
 ======================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.ConfirmRemove(System.Int32)"]
-
+Processes the contact removal request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -12,23 +10,23 @@ Syntax
 
 ```csharp
 public IActionResult ConfirmRemove(
-	int id
+	int contactID
 )
 ```
 
 #### Parameters
 
-##### *id*
+##### *contactID*
 Type: [System.Int32][2]  
-
-[Missing &lt;param name="id"/> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.ConfirmRemove(System.Int32)"]
-
+ Identifier for the contact.
 
 #### Return Value
 Type: [IActionResult][3]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.ConfirmRemove(System.Int32)"]
-
+Remarks
+-------
+ Fulfills the `/Contact/ConfirmRemove` request. 
 
 See Also
 --------

@@ -1,8 +1,6 @@
 HomeController.Index Method
 ===========================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.HomeController.Index"]
-
+Gets the index or default request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -16,8 +14,14 @@ public IActionResult Index()
 
 #### Return Value
 Type: [IActionResult][2]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.HomeController.Index"]
+Remarks
+-------
+
+Fulfills the `/` request.
+
+This is the main landing page for the application.
 
 
 See Also

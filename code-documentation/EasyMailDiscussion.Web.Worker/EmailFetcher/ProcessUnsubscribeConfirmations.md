@@ -25,9 +25,7 @@ Type: [EasyMailDiscussion.Common.Database.DiscussionList][2]
 
 ##### *database*
 Type: [EasyMailDiscussion.Common.Database.SqliteDatabase][3]  
-
-[Missing &lt;param name="database"/> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.ProcessUnsubscribeConfirmations(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,EasyMailDiscussion.Common.IndexedMimeMessage)"]
-
+ The database.
 
 ##### *pop3Client*
 Type: Pop3Client  

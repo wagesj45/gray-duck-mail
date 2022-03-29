@@ -32,12 +32,12 @@ Constructors
 Properties
 ----------
 
-|                    | Name            | Description |
-| ------------------ | --------------- | ----------- |
-| ![Public property] | [Children][4]   |             |
-| ![Public property] | [Message][5]    |             |
-| ![Public property] | [PageNumber][6] |             |
-| ![Public property] | [TotalPages][7] |             |
+|                    | Name            | Description                                              |
+| ------------------ | --------------- | -------------------------------------------------------- |
+| ![Public property] | [Children][4]   | Gets or sets the messages sent in reply to [Message][5]. |
+| ![Public property] | [Message][5]    | Gets or sets the message.                                |
+| ![Public property] | [PageNumber][6] | Gets or sets the page number.                            |
+| ![Public property] | [TotalPages][7] | Gets or sets the total number of pages.                  |
 
 
 See Also

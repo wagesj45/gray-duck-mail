@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace EasyMailDiscussion.Web.Controllers
 {
+    /// <summary> Handles web requests for the default landing pages. </summary>
     public class HomeController : BaseController
     {
         #region Members
@@ -19,7 +20,17 @@ namespace EasyMailDiscussion.Web.Controllers
         #endregion
 
         #region Methods
-        
+
+        /// <summary> Gets the index or default request. </summary>
+        /// <remarks>
+        /// <para>
+        /// Fulfills the <c>/</c> request.
+        /// </para>
+        /// <para>
+        /// This is the main landing page for the application.
+        /// </para>
+        /// </remarks>
+        /// <returns> A response to return to the caller. </returns>
         public IActionResult Index()
         {
             var numberOfDiscussionLists = this.SqliteDatabase.DiscussionLists.Count();
@@ -36,6 +47,8 @@ namespace EasyMailDiscussion.Web.Controllers
             return View("Index", model);
         }
 
+        /// <summary> Gets the error page. </summary>
+        /// <returns> A response to return to the caller. </returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

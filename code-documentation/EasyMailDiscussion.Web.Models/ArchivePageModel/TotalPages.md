@@ -1,8 +1,6 @@
 ArchivePageModel.TotalPages Property
 ====================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.ArchivePageModel.TotalPages"]
-
+Gets or sets the total number of pages.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public int TotalPages { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The total number of pages. 
 
 See Also
 --------

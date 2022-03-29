@@ -1,8 +1,6 @@
 DiscussionListAssignModel.DiscussionList Property
 =================================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.DiscussionList"]
-
+Gets or sets a discussion list .
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public DiscussionList DiscussionList { get; set; }
 ```
 
 #### Property Value
-Type: [DiscussionList][2]
+Type: [DiscussionList][2]  
+ A list of discussions. 
 
 See Also
 --------

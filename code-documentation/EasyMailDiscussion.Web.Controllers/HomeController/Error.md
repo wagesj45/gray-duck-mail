@@ -1,8 +1,6 @@
 HomeController.Error Method
 ===========================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.HomeController.Error"]
-
+Gets the error page.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -16,9 +14,7 @@ public IActionResult Error()
 
 #### Return Value
 Type: [IActionResult][2]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.HomeController.Error"]
-
+ A response to return to the caller. 
 
 See Also
 --------

@@ -1,8 +1,6 @@
 DiscussionListAssignModel.Subscriptions Property
 ================================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.Subscriptions"]
-
+Gets or sets the subscription statuses to display on the page.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public IEnumerable<ContactSubscription> Subscriptions { get; set; }
 ```
 
 #### Property Value
-Type: [IEnumerable][2]&lt;[ContactSubscription][3]>
+Type: [IEnumerable][2]&lt;[ContactSubscription][3]>  
+ The subscriptions. 
 
 See Also
 --------

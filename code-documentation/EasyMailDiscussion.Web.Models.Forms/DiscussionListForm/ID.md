@@ -1,8 +1,6 @@
 DiscussionListForm.ID Property
 ==============================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.Forms.DiscussionListForm.ID"]
-
+Gets or sets the identifier.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -11,20 +9,22 @@ Syntax
 ------
 
 ```csharp
-public int? ID { get; set; }
+public int ID { get; set; }
 ```
 
 #### Property Value
-Type: [Nullable][2]&lt;[Int32][3]>
+Type: [Int32][2]  
+ The identifier. 
 
 See Also
 --------
 
 #### Reference
-[DiscussionListForm Class][4]  
+[DiscussionListForm Class][3]  
 [EasyMailDiscussion.Web.Models.Forms Namespace][1]  
+[DiscussionList.ID][4]  
 
 [1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.nullable-1
-[3]: https://docs.microsoft.com/dotnet/api/system.int32
-[4]: README.md
+[2]: https://docs.microsoft.com/dotnet/api/system.int32
+[3]: README.md
+[4]: ../../EasyMailDiscussion.Common.Database/DiscussionList/ID.md

@@ -572,10 +572,6 @@
                    file="EasyMailDiscussion.Web.Models.Forms/DiscussionListAssignForm/ContactID.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm.DiscussionListID"
                    file="EasyMailDiscussion.Web.Models.Forms/DiscussionListAssignForm/DiscussionListID.md"/>
-            <topic id="F:EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm.CHECKED_VALUE"
-                   file="EasyMailDiscussion.Web.Models.Forms/DiscussionListAssignForm/CHECKED_VALUE.md"/>
-            <topic id="F:EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm.UNCHECKED_VALUE"
-                   file="EasyMailDiscussion.Web.Models.Forms/DiscussionListAssignForm/UNCHECKED_VALUE.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.Forms.DiscussionListForm"
                 file="EasyMailDiscussion.Web.Models.Forms/DiscussionListForm/README.md"

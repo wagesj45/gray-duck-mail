@@ -1,8 +1,6 @@
 ErrorViewModel.RequestId Property
 =================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.ErrorViewModel.RequestId"]
-
+Gets or sets the identifier of the request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public string RequestId { get; set; }
 ```
 
 #### Property Value
-Type: [String][2]
+Type: [String][2]  
+ The identifier of the request. 
 
 See Also
 --------

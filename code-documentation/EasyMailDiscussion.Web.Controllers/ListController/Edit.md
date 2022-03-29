@@ -1,8 +1,6 @@
 ListController.Edit Method (DiscussionListForm)
 ===============================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Edit(EasyMailDiscussion.Web.Models.Forms.DiscussionListForm)"]
-
+Processes the discussion list editing form submission.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,15 +18,15 @@ public IActionResult Edit(
 
 ##### *formInput*
 Type: [EasyMailDiscussion.Web.Models.Forms.DiscussionListForm][2]  
-
-[Missing &lt;param name="formInput"/> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Edit(EasyMailDiscussion.Web.Models.Forms.DiscussionListForm)"]
-
+ The form input.
 
 #### Return Value
 Type: [IActionResult][3]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Edit(EasyMailDiscussion.Web.Models.Forms.DiscussionListForm)"]
-
+Remarks
+-------
+ Fulfills the `/List/Edit` post request. 
 
 See Also
 --------

@@ -1,8 +1,6 @@
 DiscussionListForm.IncomingMailPort Property
 ============================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.Forms.DiscussionListForm.IncomingMailPort"]
-
+Gets or sets the incoming mail server port.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public int IncomingMailPort { get; set; }
 ```
 
 #### Property Value
-Type: [Int32][2]
+Type: [Int32][2]  
+ The incoming mail port. 
 
 See Also
 --------
@@ -23,7 +22,9 @@ See Also
 #### Reference
 [DiscussionListForm Class][3]  
 [EasyMailDiscussion.Web.Models.Forms Namespace][1]  
+[DiscussionList.IncomingMailPort][4]  
 
 [1]: ../README.md
 [2]: https://docs.microsoft.com/dotnet/api/system.int32
 [3]: README.md
+[4]: ../../EasyMailDiscussion.Common.Database/DiscussionList/IncomingMailPort.md

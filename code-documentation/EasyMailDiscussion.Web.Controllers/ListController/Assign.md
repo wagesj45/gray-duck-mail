@@ -1,8 +1,6 @@
 ListController.Assign Method (DiscussionListAssignForm)
 =======================================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Assign(EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm)"]
-
+Processes the discussion list contact assignment form submission.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,15 +18,15 @@ public IActionResult Assign(
 
 ##### *formInput*
 Type: [EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm][2]  
-
-[Missing &lt;param name="formInput"/> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Assign(EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm)"]
-
+ The form input.
 
 #### Return Value
 Type: [IActionResult][3]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Assign(EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm)"]
-
+Remarks
+-------
+ Fulfills the `/List/Assign` post request. 
 
 See Also
 --------

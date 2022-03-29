@@ -1,6 +1,6 @@
 EmailFetcher.ExecuteAsync Method
 ================================
-This method is called when the [IHostedService][1] starts. The implementation should return a task that represents the lifetime of the long running operation(s) being performed.
+This method is called when the [IHostedService][1] starts. This is the main processing thread of the service.
 
   **Namespace:**  [EasyMailDiscussion.Web.Worker][2]  
   **Assembly:** easy-mail-discussion-web.exe

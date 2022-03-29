@@ -1,8 +1,6 @@
 DiscussionListsModel.DiscussionLists Property
 =============================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.DiscussionListsModel.DiscussionLists"]
-
+Gets or sets the discussion lists to display on the page.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public IEnumerable<DiscussionList> DiscussionLists { get; set; }
 ```
 
 #### Property Value
-Type: [IEnumerable][2]&lt;[DiscussionList][3]>
+Type: [IEnumerable][2]&lt;[DiscussionList][3]>  
+ The discussion lists. 
 
 See Also
 --------

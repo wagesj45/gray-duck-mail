@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace EasyMailDiscussion.Web
 {
+    /// <summary> The root program class for the application. </summary>
     public class Program
     {
         #region Members
@@ -34,9 +35,9 @@ namespace EasyMailDiscussion.Web
             CreateHostBuilder(args).Build().Run();
         }
 
-        /// <summary> Creates host builder. </summary>
+        /// <summary> Creates the host builder configuration interface. </summary>
         /// <param name="args"> An array of command-line argument strings. </param>
-        /// <returns> The new host builder. </returns>
+        /// <returns> The host builder configuration interface. </returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>

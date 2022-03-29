@@ -1,8 +1,6 @@
 ContactController.New Method
 ============================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.New"]
-
+Gets the new contact creation form request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -16,9 +14,11 @@ public IActionResult New()
 
 #### Return Value
 Type: [IActionResult][2]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.New"]
-
+Remarks
+-------
+ Fulfills the `/Contact/New` request. 
 
 See Also
 --------

@@ -1,10 +1,8 @@
 EmailFetcher.FilterMessages Method (IEnumerable&lt;IndexedMimeMessage>, Func&lt;IndexedMimeMessage, Boolean>)
 =============================================================================================================
+Filter messages based on the a user provided [function][1].
 
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.FilterMessages(System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.IndexedMimeMessage},System.Func{EasyMailDiscussion.Common.IndexedMimeMessage,System.Boolean})"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Web.Worker][1]  
+  **Namespace:**  [EasyMailDiscussion.Web.Worker][2]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
@@ -20,33 +18,27 @@ private IEnumerable<IndexedMimeMessage> FilterMessages(
 #### Parameters
 
 ##### *messages*
-Type: [System.Collections.Generic.IEnumerable][2]&lt;[IndexedMimeMessage][3]>  
-
-[Missing &lt;param name="messages"/> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.FilterMessages(System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.IndexedMimeMessage},System.Func{EasyMailDiscussion.Common.IndexedMimeMessage,System.Boolean})"]
-
+Type: [System.Collections.Generic.IEnumerable][3]&lt;[IndexedMimeMessage][4]>  
+ The messages.
 
 ##### *filter*
-Type: [System.Func][4]&lt;[IndexedMimeMessage][3], [Boolean][5]>  
-
-[Missing &lt;param name="filter"/> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.FilterMessages(System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.IndexedMimeMessage},System.Func{EasyMailDiscussion.Common.IndexedMimeMessage,System.Boolean})"]
-
+Type: [System.Func][1]&lt;[IndexedMimeMessage][4], [Boolean][5]>  
+ Specifies the filtering function.
 
 #### Return Value
-Type: [IEnumerable][2]&lt;[IndexedMimeMessage][3]>  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.FilterMessages(System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.IndexedMimeMessage},System.Func{EasyMailDiscussion.Common.IndexedMimeMessage,System.Boolean})"]
-
+Type: [IEnumerable][3]&lt;[IndexedMimeMessage][4]>  
+ An enumerator that allows foreach to be used to process filter messages in this collection. 
 
 See Also
 --------
 
 #### Reference
 [EmailFetcher Class][6]  
-[EasyMailDiscussion.Web.Worker Namespace][1]  
+[EasyMailDiscussion.Web.Worker Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
-[3]: ../../EasyMailDiscussion.Common/IndexedMimeMessage/README.md
-[4]: https://docs.microsoft.com/dotnet/api/system.func-2
+[1]: https://docs.microsoft.com/dotnet/api/system.func-2
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+[4]: ../../EasyMailDiscussion.Common/IndexedMimeMessage/README.md
 [5]: https://docs.microsoft.com/dotnet/api/system.boolean
 [6]: README.md

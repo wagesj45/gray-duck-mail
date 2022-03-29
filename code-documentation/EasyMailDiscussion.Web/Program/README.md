@@ -1,8 +1,6 @@
 Program Class
 =============
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Program"]
-
+The root program class for the application.
 
 
 Inheritance Hierarchy
@@ -35,10 +33,10 @@ Constructors
 Methods
 -------
 
-|                                  | Name                   | Description                            |
-| -------------------------------- | ---------------------- | -------------------------------------- |
-| ![Public method]![Static member] | [CreateHostBuilder][5] | Creates host builder.                  |
-| ![Public method]![Static member] | [Main][6]              | Main entry-point for this application. |
+|                                  | Name                   | Description                                       |
+| -------------------------------- | ---------------------- | ------------------------------------------------- |
+| ![Public method]![Static member] | [CreateHostBuilder][5] | Creates the host builder configuration interface. |
+| ![Public method]![Static member] | [Main][6]              | Main entry-point for this application.            |
 
 
 See Also

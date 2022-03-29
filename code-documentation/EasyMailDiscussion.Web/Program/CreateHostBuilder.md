@@ -1,6 +1,6 @@
 Program.CreateHostBuilder Method
 ================================
-Creates host builder.
+Creates the host builder configuration interface.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -22,7 +22,7 @@ Type: [System.String][2][]
 
 #### Return Value
 Type: [IHostBuilder][3]  
- The new host builder. 
+ The host builder configuration interface. 
 
 See Also
 --------

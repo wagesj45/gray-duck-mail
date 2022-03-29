@@ -1,8 +1,6 @@
 ErrorViewModel Class
 ====================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.ErrorViewModel"]
-
+A data model for the error page.
 
 
 Inheritance Hierarchy
@@ -34,10 +32,10 @@ Constructors
 Properties
 ----------
 
-|                    | Name               | Description |
-| ------------------ | ------------------ | ----------- |
-| ![Public property] | [RequestId][4]     |             |
-| ![Public property] | [ShowRequestId][5] |             |
+|                    | Name               | Description                                                      |
+| ------------------ | ------------------ | ---------------------------------------------------------------- |
+| ![Public property] | [RequestId][4]     | Gets or sets the identifier of the request.                      |
+| ![Public property] | [ShowRequestId][5] | Gets a value indicating whether the request identifier is shown. |
 
 
 See Also

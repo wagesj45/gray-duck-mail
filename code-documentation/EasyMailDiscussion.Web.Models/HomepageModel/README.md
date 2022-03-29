@@ -1,6 +1,6 @@
 HomepageModel Class
 ===================
-A data model for the contacts page.
+A data model for the landing page.
 
 
 Inheritance Hierarchy

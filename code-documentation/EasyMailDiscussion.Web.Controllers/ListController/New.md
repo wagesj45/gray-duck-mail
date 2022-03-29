@@ -1,8 +1,6 @@
 ListController.New Method
 =========================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.New"]
-
+Gets the new discussion list creation form request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -16,9 +14,11 @@ public IActionResult New()
 
 #### Return Value
 Type: [IActionResult][2]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.New"]
-
+Remarks
+-------
+ Fulfills the `/List/New` request. 
 
 See Also
 --------

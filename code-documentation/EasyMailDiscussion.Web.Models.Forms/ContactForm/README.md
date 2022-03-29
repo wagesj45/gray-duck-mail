@@ -1,14 +1,14 @@
 ContactForm Class
 =================
-Model for the form input creating or modifying discussion list..
+Model for the form input creating or modifying a [Contact][1].
 
 
 Inheritance Hierarchy
 ---------------------
-[System.Object][1]  
+[System.Object][2]  
   **EasyMailDiscussion.Web.Models.Forms.ContactForm**  
 
-  **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][2]  
+  **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][3]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
@@ -26,34 +26,35 @@ Constructors
 
 |                  | Name             | Description                                             |
 | ---------------- | ---------------- | ------------------------------------------------------- |
-| ![Public method] | [ContactForm][3] | Initializes a new instance of the **ContactForm** class |
+| ![Public method] | [ContactForm][4] | Initializes a new instance of the **ContactForm** class |
 
 
 Properties
 ----------
 
-|                    | Name                  | Description |
-| ------------------ | --------------------- | ----------- |
-| ![Public property] | [Activated][4]        |             |
-| ![Public property] | [ActivatedChecked][5] |             |
-| ![Public property] | [Email][6]            |             |
-| ![Public property] | [ID][7]               |             |
-| ![Public property] | [Name][8]             |             |
+|                    | Name                  | Description                                                                        |
+| ------------------ | --------------------- | ---------------------------------------------------------------------------------- |
+| ![Public property] | [Activated][5]        | Gets or sets a value indicating if the contact's email address has been confirmed. |
+| ![Public property] | [ActivatedChecked][6] | Gets a value indicating if the contact's email address has been confirmed.         |
+| ![Public property] | [Email][7]            | Gets or sets the email address of the contact.                                     |
+| ![Public property] | [ID][8]               | Gets or sets the identifier.                                                       |
+| ![Public property] | [Name][9]             | Gets or sets the name of the contact.                                              |
 
 
 See Also
 --------
 
 #### Reference
-[EasyMailDiscussion.Web.Models.Forms Namespace][2]  
+[EasyMailDiscussion.Web.Models.Forms Namespace][3]  
 
-[1]: https://docs.microsoft.com/dotnet/api/system.object
-[2]: ../README.md
-[3]: _ctor.md
-[4]: Activated.md
-[5]: ActivatedChecked.md
-[6]: Email.md
-[7]: ID.md
-[8]: Name.md
+[1]: ../../EasyMailDiscussion.Common.Database/Contact/README.md
+[2]: https://docs.microsoft.com/dotnet/api/system.object
+[3]: ../README.md
+[4]: _ctor.md
+[5]: Activated.md
+[6]: ActivatedChecked.md
+[7]: Email.md
+[8]: ID.md
+[9]: Name.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

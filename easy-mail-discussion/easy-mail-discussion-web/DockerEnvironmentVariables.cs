@@ -6,6 +6,7 @@ namespace EasyMailDiscussion.Web
     /// A class that defines default values for environment variables passed in from Docker, as well
     /// as accessors for those values.
     /// </summary>
+    /// <seealso href="https://docs.docker.com/compose/environment-variables/"/>
     public static class DockerEnvironmentVariables
     {
         #region Members

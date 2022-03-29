@@ -1,8 +1,6 @@
 DiscussionListsModel Class
 ==========================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.DiscussionListsModel"]
-
+A data model for the discussion list page.
 
 
 Inheritance Hierarchy
@@ -34,9 +32,9 @@ Constructors
 Properties
 ----------
 
-|                    | Name                 | Description |
-| ------------------ | -------------------- | ----------- |
-| ![Public property] | [DiscussionLists][4] |             |
+|                    | Name                 | Description                                               |
+| ------------------ | -------------------- | --------------------------------------------------------- |
+| ![Public property] | [DiscussionLists][4] | Gets or sets the discussion lists to display on the page. |
 
 
 See Also

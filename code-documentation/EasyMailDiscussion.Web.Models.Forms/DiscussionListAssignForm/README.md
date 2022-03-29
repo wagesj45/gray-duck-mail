@@ -1,14 +1,14 @@
 DiscussionListAssignForm Class
 ==============================
-Model for the form input creating or modifying discussion list assignments.
+Model for the form input creating or modifying [discussion list assignments][1].
 
 
 Inheritance Hierarchy
 ---------------------
-[System.Object][1]  
+[System.Object][2]  
   **EasyMailDiscussion.Web.Models.Forms.DiscussionListAssignForm**  
 
-  **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][2]  
+  **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][3]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
@@ -26,45 +26,33 @@ Constructors
 
 |                  | Name                          | Description                                                          |
 | ---------------- | ----------------------------- | -------------------------------------------------------------------- |
-| ![Public method] | [DiscussionListAssignForm][3] | Initializes a new instance of the **DiscussionListAssignForm** class |
+| ![Public method] | [DiscussionListAssignForm][4] | Initializes a new instance of the **DiscussionListAssignForm** class |
 
 
 Properties
 ----------
 
-|                    | Name                  | Description |
-| ------------------ | --------------------- | ----------- |
-| ![Public property] | [Assigned][4]         |             |
-| ![Public property] | [Assignments][5]      |             |
-| ![Public property] | [ContactID][6]        |             |
-| ![Public property] | [DiscussionListID][7] |             |
-
-
-Fields
-------
-
-|                                 | Name                 | Description |
-| ------------------------------- | -------------------- | ----------- |
-| ![Public field]![Static member] | [CHECKED_VALUE][8]   |             |
-| ![Public field]![Static member] | [UNCHECKED_VALUE][9] |             |
+|                    | Name                  | Description                                                                        |
+| ------------------ | --------------------- | ---------------------------------------------------------------------------------- |
+| ![Public property] | [Assigned][5]         | Gets or sets the assignments connecting [contacts][6] to the [discussion list][7]. |
+| ![Public property] | [Assignments][8]      | Gets the assignments connecting [contacts][6] to the [discussion list][7].         |
+| ![Public property] | [ContactID][6]        | Gets or sets an array of identifiers of the contacts being assigned or unassigned. |
+| ![Public property] | [DiscussionListID][7] | Gets or sets the identifier of the discussion list.                                |
 
 
 See Also
 --------
 
 #### Reference
-[EasyMailDiscussion.Web.Models.Forms Namespace][2]  
+[EasyMailDiscussion.Web.Models.Forms Namespace][3]  
 
-[1]: https://docs.microsoft.com/dotnet/api/system.object
-[2]: ../README.md
-[3]: _ctor.md
-[4]: Assigned.md
-[5]: Assignments.md
+[1]: ../../EasyMailDiscussion.Common.Database/ContactSubscription/README.md
+[2]: https://docs.microsoft.com/dotnet/api/system.object
+[3]: ../README.md
+[4]: _ctor.md
+[5]: Assigned.md
 [6]: ContactID.md
 [7]: DiscussionListID.md
-[8]: CHECKED_VALUE.md
-[9]: UNCHECKED_VALUE.md
+[8]: Assignments.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"
-[Public field]: ../../icons/pubfield.svg "Public field"
-[Static member]: ../../icons/static.gif "Static member"

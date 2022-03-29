@@ -1,8 +1,6 @@
 Startup.Configure Method
 ========================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)"]
-
+This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 
   **Namespace:**  [EasyMailDiscussion.Web][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -21,15 +19,11 @@ public void Configure(
 
 ##### *app*
 Type: [Microsoft.AspNetCore.Builder.IApplicationBuilder][2]  
-
-[Missing &lt;param name="app"/> documentation for "M:EasyMailDiscussion.Web.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)"]
-
+ The application builder interface.
 
 ##### *env*
 Type: [Microsoft.AspNetCore.Hosting.IWebHostEnvironment][3]  
-
-[Missing &lt;param name="env"/> documentation for "M:EasyMailDiscussion.Web.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)"]
-
+ The web host environment interface.
 
 
 See Also

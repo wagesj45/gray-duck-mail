@@ -1,8 +1,6 @@
 ContactController.Index Method
 ==============================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.Index"]
-
+Gets the index or default request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -16,9 +14,11 @@ public IActionResult Index()
 
 #### Return Value
 Type: [IActionResult][2]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ContactController.Index"]
-
+Remarks
+-------
+ Fulfills the `/Contact` request. 
 
 See Also
 --------

@@ -18,7 +18,11 @@ Type: [String][2]
 
 Remarks
 -------
- This email template contains several replaceable notaions: `{header}`, `{subheader}`, `{body}`, and `{footer}`. The `{unsubscribe}` notation should always be a link to the [unsubscribe email alias][3]. 
+
+This email template contains several replaceable notaions: `{header}`, `{subheader}`, `{body}`, and `{footer}`. The `{unsubscribe}` notation should always be a link to the [unsubscribe email alias][3].
+
+This file is read into memory upon its first access.
+
 
 See Also
 --------

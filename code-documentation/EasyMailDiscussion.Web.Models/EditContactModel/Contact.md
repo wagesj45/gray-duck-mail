@@ -1,8 +1,6 @@
 EditContactModel.Contact Property
 =================================
-
-[Missing &lt;summary> documentation for "P:EasyMailDiscussion.Web.Models.EditContactModel.Contact"]
-
+Gets or sets the contact.
 
   **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -15,7 +13,8 @@ public Contact Contact { get; set; }
 ```
 
 #### Property Value
-Type: [Contact][2]
+Type: [Contact][2]  
+ The contact. 
 
 See Also
 --------

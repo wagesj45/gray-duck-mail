@@ -1,8 +1,6 @@
 EditDiscussionListModel Class
 =============================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.EditDiscussionListModel"]
-
+A data model for the edit discussion list page.
 
 
 Inheritance Hierarchy
@@ -34,9 +32,9 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description |
-| ------------------ | ------------------- | ----------- |
-| ![Public property] | [DiscussionList][4] |             |
+|                    | Name                | Description                     |
+| ------------------ | ------------------- | ------------------------------- |
+| ![Public property] | [DiscussionList][4] | Gets or sets a discussion list. |
 
 
 See Also

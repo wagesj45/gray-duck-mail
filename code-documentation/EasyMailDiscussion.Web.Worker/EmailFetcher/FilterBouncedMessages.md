@@ -1,8 +1,6 @@
 EmailFetcher.FilterBouncedMessages Method
 =========================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.FilterBouncedMessages(System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.IndexedMimeMessage})"]
-
+Filters messages based on their delivery status.
 
   **Namespace:**  [EasyMailDiscussion.Web.Worker][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -20,15 +18,11 @@ private IEnumerable<IndexedMimeMessage> FilterBouncedMessages(
 
 ##### *messages*
 Type: [System.Collections.Generic.IEnumerable][2]&lt;[IndexedMimeMessage][3]>  
-
-[Missing &lt;param name="messages"/> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.FilterBouncedMessages(System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.IndexedMimeMessage})"]
-
+ The messages.
 
 #### Return Value
 Type: [IEnumerable][2]&lt;[IndexedMimeMessage][3]>  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Worker.EmailFetcher.FilterBouncedMessages(System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.IndexedMimeMessage})"]
-
+ An enumerator that allows foreach to be used to process filter bounced messages in this collection. 
 
 See Also
 --------

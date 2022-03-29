@@ -1,8 +1,6 @@
 DiscussionListAssignModel Class
 ===============================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Models.DiscussionListAssignModel"]
-
+A data model for the discussion list assignment page.
 
 
 Inheritance Hierarchy
@@ -34,20 +32,20 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description |
-| ------------------ | ------------------- | ----------- |
-| ![Public property] | [Contacts][4]       |             |
-| ![Public property] | [DiscussionList][5] |             |
-| ![Public property] | [Subscriptions][6]  |             |
+|                    | Name                | Description                                                    |
+| ------------------ | ------------------- | -------------------------------------------------------------- |
+| ![Public property] | [Contacts][4]       | Gets or sets the contacts to display on the page.              |
+| ![Public property] | [DiscussionList][5] | Gets or sets a discussion list .                               |
+| ![Public property] | [Subscriptions][6]  | Gets or sets the subscription statuses to display on the page. |
 
 
 Methods
 -------
 
-|                  | Name                 | Description |
-| ---------------- | -------------------- | ----------- |
-| ![Public method] | [GetSubscription][7] |             |
-| ![Public method] | [HasSubscription][8] |             |
+|                  | Name                 | Description                                                     |
+| ---------------- | -------------------- | --------------------------------------------------------------- |
+| ![Public method] | [GetSubscription][7] | Gets a subscription status for a [Contact][8].                  |
+| ![Public method] | [HasSubscription][9] | Query if a [Contact][8] has an established subscription status. |
 
 
 See Also
@@ -63,6 +61,7 @@ See Also
 [5]: DiscussionList.md
 [6]: Subscriptions.md
 [7]: GetSubscription.md
-[8]: HasSubscription.md
+[8]: ../../EasyMailDiscussion.Common.Database/Contact/README.md
+[9]: HasSubscription.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

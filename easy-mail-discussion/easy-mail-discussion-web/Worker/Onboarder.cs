@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace EasyMailDiscussion.Web.Worker
 {
+    /// <summary>
+    /// An asyncronous background service that initiates the onboarding process for new contacts.
+    /// </summary>
     public class Onboarder : BackgroundService
     {
         #region Members
@@ -22,6 +25,18 @@ namespace EasyMailDiscussion.Web.Worker
 
         #endregion
 
+        /// <summary>
+        /// This method is called when the <see cref="T:Microsoft.Extensions.Hosting.IHostedService" />
+        /// starts. This is the main processing thread of the service.
+        /// </summary>
+        /// <param name="stoppingToken">
+        ///     Triggered when
+        ///     <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" />
+        ///     is called.
+        /// </param>
+        /// <returns>
+        /// A <see cref="T:System.Threading.Tasks.Task" /> that represents the long running operations.
+        /// </returns>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);

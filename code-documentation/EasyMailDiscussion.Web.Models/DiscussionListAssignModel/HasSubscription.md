@@ -1,10 +1,8 @@
 DiscussionListAssignModel.HasSubscription Method
 ================================================
+Query if a [Contact][1] has an established subscription status.
 
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.HasSubscription(System.Int32)"]
-
-
-  **Namespace:**  [EasyMailDiscussion.Web.Models][1]  
+  **Namespace:**  [EasyMailDiscussion.Web.Models][2]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
@@ -19,25 +17,22 @@ public bool HasSubscription(
 #### Parameters
 
 ##### *contactID*
-Type: [System.Int32][2]  
-
-[Missing &lt;param name="contactID"/> documentation for "M:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.HasSubscription(System.Int32)"]
-
+Type: [System.Int32][3]  
+ Identifier for the contact.
 
 #### Return Value
-Type: [Boolean][3]  
-
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Models.DiscussionListAssignModel.HasSubscription(System.Int32)"]
-
+Type: [Boolean][4]  
+ True if the [Contact][1] has an established subscription status, false if not. 
 
 See Also
 --------
 
 #### Reference
-[DiscussionListAssignModel Class][4]  
-[EasyMailDiscussion.Web.Models Namespace][1]  
+[DiscussionListAssignModel Class][5]  
+[EasyMailDiscussion.Web.Models Namespace][2]  
 
-[1]: ../README.md
-[2]: https://docs.microsoft.com/dotnet/api/system.int32
-[3]: https://docs.microsoft.com/dotnet/api/system.boolean
-[4]: README.md
+[1]: ../../EasyMailDiscussion.Common.Database/Contact/README.md
+[2]: ../README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.int32
+[4]: https://docs.microsoft.com/dotnet/api/system.boolean
+[5]: README.md

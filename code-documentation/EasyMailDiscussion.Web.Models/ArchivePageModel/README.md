@@ -32,12 +32,12 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description |
-| ------------------ | ------------------- | ----------- |
-| ![Public property] | [DiscussionList][4] |             |
-| ![Public property] | [Messages][5]       |             |
-| ![Public property] | [PageNumber][6]     |             |
-| ![Public property] | [TotalPages][7]     |             |
+|                    | Name                | Description                                       |
+| ------------------ | ------------------- | ------------------------------------------------- |
+| ![Public property] | [DiscussionList][4] | Gets or sets a discussion list.                   |
+| ![Public property] | [Messages][5]       | Gets or sets the messages to display on the page. |
+| ![Public property] | [PageNumber][6]     | Gets or sets the selected page number.            |
+| ![Public property] | [TotalPages][7]     | Gets or sets the total number of pages.           |
 
 
 See Also

@@ -1,8 +1,6 @@
 Onboarder Class
 ===============
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Worker.Onboarder"]
-
+An asyncronous background service that initiates the onboarding process for new contacts.
 
 
 Inheritance Hierarchy
@@ -35,9 +33,9 @@ Constructors
 Methods
 -------
 
-|                     | Name              | Description |
-| ------------------- | ----------------- | ----------- |
-| ![Protected method] | [ExecuteAsync][5] |             |
+|                     | Name              | Description                                                                                                   |
+| ------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------- |
+| ![Protected method] | [ExecuteAsync][5] | This method is called when the [IHostedService][6] starts. This is the main processing thread of the service. |
 
 
 See Also
@@ -51,6 +49,7 @@ See Also
 [3]: _cctor.md
 [4]: _ctor.md
 [5]: ExecuteAsync.md
+[6]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"

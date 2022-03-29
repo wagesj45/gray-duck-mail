@@ -1,8 +1,6 @@
 HomeController Class
 ====================
-
-[Missing &lt;summary> documentation for "T:EasyMailDiscussion.Web.Controllers.HomeController"]
-
+Handles web requests for the default landing pages.
 
 
 Inheritance Hierarchy
@@ -46,8 +44,8 @@ Methods
 
 |                  | Name                   | Description                                                                       |
 | ---------------- | ---------------------- | --------------------------------------------------------------------------------- |
-| ![Public method] | [Error][7]             |                                                                                   |
-| ![Public method] | [Index][8]             |                                                                                   |
+| ![Public method] | [Error][7]             | Gets the error page.                                                              |
+| ![Public method] | [Index][8]             | Gets the index or default request.                                                |
 | ![Public method] | [OnActionExecuting][9] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
 
 

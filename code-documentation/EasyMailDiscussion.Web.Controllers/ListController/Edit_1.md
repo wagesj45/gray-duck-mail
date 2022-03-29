@@ -1,8 +1,6 @@
 ListController.Edit Method (Int32)
 ==================================
-
-[Missing &lt;summary> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Edit(System.Int32)"]
-
+Gets the edit list form request.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
@@ -12,23 +10,23 @@ Syntax
 
 ```csharp
 public IActionResult Edit(
-	int id
+	int discussionListID
 )
 ```
 
 #### Parameters
 
-##### *id*
+##### *discussionListID*
 Type: [System.Int32][2]  
-
-[Missing &lt;param name="id"/> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Edit(System.Int32)"]
-
+ Identifier for the discussion list.
 
 #### Return Value
 Type: [IActionResult][3]  
+ A response to return to the caller. 
 
-[Missing &lt;returns> documentation for "M:EasyMailDiscussion.Web.Controllers.ListController.Edit(System.Int32)"]
-
+Remarks
+-------
+ Fulfills the `/List/Edit` request. 
 
 See Also
 --------
