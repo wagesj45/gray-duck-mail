@@ -47,8 +47,8 @@ namespace EasyMailDiscussion.Web.Controllers
         }
 
         /// <summary> Exports the database as a downloadable file. </summary>
-        /// <returns> A file stream to return to the caller. </returns>
         /// <remarks> Fulfills the <c>/Admin/ExportDatabase</c> request. </remarks>
+        /// <returns> A file stream to return to the caller. </returns>
         public FileResult ExportDatabase()
         {
             var database = System.IO.File.ReadAllBytes(SqliteDatabase.DatabaseFilePath.AbsolutePath);
@@ -70,6 +70,10 @@ namespace EasyMailDiscussion.Web.Controllers
             }
         }
 
+        /// <summary> (An Action that handles HTTP POST requests) import database. </summary>
+        /// <param name="formInput"> The form input. </param>
+        /// <returns> A response to return to the caller. </returns>
+        /// <remarks> Fulfills the <c>/Admin/ImportDatabase</c> post request. </remarks>
         [HttpPost]
         public IActionResult ImportDatabase(ImportDatabaseForm formInput)
         {
