@@ -1,24 +1,33 @@
 ListController Constructor
 ==========================
-Initializes a new instance of the [ListController][1] class
+Constructor.
 
-  **Namespace:**  [EasyMailDiscussion.Web.Controllers][2]  
+  **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
 ------
 
 ```csharp
-public ListController()
+public ListController(
+	IHostApplicationLifetime lifetime
+)
 ```
+
+#### Parameters
+
+##### *lifetime*
+Type: [Microsoft.Extensions.Hosting.IHostApplicationLifetime][2]  
+ The application lifetime interface.
 
 
 See Also
 --------
 
 #### Reference
-[ListController Class][1]  
-[EasyMailDiscussion.Web.Controllers Namespace][2]  
+[ListController Class][3]  
+[EasyMailDiscussion.Web.Controllers Namespace][1]  
 
-[1]: README.md
-[2]: ../README.md
+[1]: ../README.md
+[2]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostapplicationlifetime
+[3]: README.md

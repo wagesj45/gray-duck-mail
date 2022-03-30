@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace EasyMailDiscussion.Web
@@ -33,7 +34,7 @@ namespace EasyMailDiscussion.Web
 
 
         #region Contructors
-        
+
         /// <summary> Constructor. </summary>
         /// <param name="configuration"> The configuration interface. </param>
         public Startup(IConfiguration configuration)
@@ -44,9 +45,42 @@ namespace EasyMailDiscussion.Web
             var sectionDatabase = Configuration.GetSection(ApplicationSettings.SECTION_DATABASE);
             var sectionLog = Configuration.GetSection(ApplicationSettings.SECTION_LOG);
 
+            ConfigureNLog(sectionDatabase, sectionLog);
+
+            ConfigureDatabase();
+        }
+
+        /// <summary>
+        /// Replaces the existing database file with an imported database file, if one exists.
+        /// </summary>
+        /// <seealso cref="Controllers.AdminController.ImportDatabase(Models.Forms.ImportDatabaseForm)"/>
+        /// <seealso cref="Common.Database.SqliteDatabase.ImportedDatabaseFilePath"/>
+        private static void ConfigureDatabase()
+        {
+            // Replace the database, if it exists, with an imported database, if it exists.
+            var importedDatabases = Directory.GetFiles("/app").Where(path => path.EndsWith(Common.Database.SqliteDatabase.TEMP_DATABASE_FILE_EXTENSION));
+
+            // Technically this could be multiple files if they're somehow injected into the 
+            foreach (var file in importedDatabases)
+            {
+                // If the original database still exists, remove it.
+                if (File.Exists(ApplicationSettings.DatabaseFilePath.AbsolutePath))
+                {
+                    // Delete the old file.
+                    File.Delete(ApplicationSettings.DatabaseFilePath.AbsolutePath);
+                }
+
+                File.Move(file, ApplicationSettings.DatabaseFilePath.AbsolutePath);
+            }
+        }
+
+        /// <summary> Configures NLog for this application. </summary>
+        /// <param name="sectionDatabase"> The database section of the <c>appsettings.json</c> file. </param>
+        /// <param name="sectionLog">      The log section of the <c>appsettings.json</c> file. </param>
+        private static void ConfigureNLog(IConfigurationSection sectionDatabase, IConfigurationSection sectionLog)
+        {
             ApplicationSettings.DatabaseFilePath = new Uri(sectionDatabase.GetValue<string>(ApplicationSettings.DATABASE_PATH));
             ApplicationSettings.LogFilePath = new Uri(sectionLog.GetValue<string>(ApplicationSettings.LOG_PATH));
-
 
             // Set up the log configuration.
             var logFileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".log";
@@ -58,7 +92,7 @@ namespace EasyMailDiscussion.Web
         #endregion
 
         #region Methods
-        
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
@@ -113,7 +147,7 @@ namespace EasyMailDiscussion.Web
             {
                 logger.Info("Application stopped.");
             });
-        } 
+        }
 
         #endregion
     }

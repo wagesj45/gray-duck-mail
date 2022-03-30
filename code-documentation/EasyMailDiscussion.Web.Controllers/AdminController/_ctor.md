@@ -1,5 +1,5 @@
-HomeController Constructor
-==========================
+AdminController Constructor
+===========================
 Constructor.
 
   **Namespace:**  [EasyMailDiscussion.Web.Controllers][1]  
@@ -9,7 +9,7 @@ Syntax
 ------
 
 ```csharp
-public HomeController(
+public AdminController(
 	IHostApplicationLifetime lifetime
 )
 ```
@@ -18,14 +18,14 @@ public HomeController(
 
 ##### *lifetime*
 Type: [Microsoft.Extensions.Hosting.IHostApplicationLifetime][2]  
- The application lifetime interface.
+ The lifetime.
 
 
 See Also
 --------
 
 #### Reference
-[HomeController Class][3]  
+[AdminController Class][3]  
 [EasyMailDiscussion.Web.Controllers Namespace][1]  
 
 [1]: ../README.md

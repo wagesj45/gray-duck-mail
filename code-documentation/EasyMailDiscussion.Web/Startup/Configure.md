@@ -11,7 +11,8 @@ Syntax
 ```csharp
 public void Configure(
 	IApplicationBuilder app,
-	IWebHostEnvironment env
+	IWebHostEnvironment env,
+	IHostApplicationLifetime lifetime
 )
 ```
 
@@ -25,15 +26,20 @@ Type: [Microsoft.AspNetCore.Builder.IApplicationBuilder][2]
 Type: [Microsoft.AspNetCore.Hosting.IWebHostEnvironment][3]  
  The web host environment interface.
 
+##### *lifetime*
+Type: [Microsoft.Extensions.Hosting.IHostApplicationLifetime][4]  
+ The application lifetime management interface.
+
 
 See Also
 --------
 
 #### Reference
-[Startup Class][4]  
+[Startup Class][5]  
 [EasyMailDiscussion.Web Namespace][1]  
 
 [1]: ../README.md
 [2]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder
 [3]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.hosting.iwebhostenvironment
-[4]: README.md
+[4]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostapplicationlifetime
+[5]: README.md

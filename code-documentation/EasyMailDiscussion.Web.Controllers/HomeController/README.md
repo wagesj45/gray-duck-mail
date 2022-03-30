@@ -25,10 +25,10 @@ The **HomeController** type exposes the following members.
 Constructors
 ------------
 
-|                                   | Name                | Description                                                |
-| --------------------------------- | ------------------- | ---------------------------------------------------------- |
-| ![Private method]![Static member] | [HomeController][4] |                                                            |
-| ![Public method]                  | [HomeController][5] | Initializes a new instance of the **HomeController** class |
+|                                   | Name                | Description  |
+| --------------------------------- | ------------------- | ------------ |
+| ![Private method]![Static member] | [HomeController][4] |              |
+| ![Public method]                  | [HomeController][5] | Constructor. |
 
 
 Properties

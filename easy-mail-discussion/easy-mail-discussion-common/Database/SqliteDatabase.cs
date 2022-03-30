@@ -1,16 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace EasyMailDiscussion.Common.Database
 {
     /// <summary>
     /// The SQLite database is defined and managed by this class. This uses
-    /// <see cref="https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application">Entity
+    /// <see href="https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application">Entity
     /// Framework Code First</see> method for defining a database and uses
-    /// <see cref="https://sqlite.org/index.html">SQLite</see> to store data in a local database file,
+    /// <see href="https://sqlite.org/index.html">SQLite</see> to store data in a local database file,
     /// without the need for any external database system.
     /// </summary>
     /// <seealso cref="DbContext"/>
@@ -22,6 +24,18 @@ namespace EasyMailDiscussion.Common.Database
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary> (Immutable) The temporary database file extension. </summary>
+        public const string TEMP_DATABASE_FILE_EXTENSION = ".newdb";
+
+        /// <summary> (Immutable) The defined content-type value of theSQLite3 file format. </summary>
+        public const string SQLITE_FILE_CONTENT_TYPE = "application/vnd.sqlite3";
+
+        /// <summary> (Immutable) The generic binary file content-type provided by most browsers. </summary>
+        public const string GENERIC_BINARY_FILE_CONTENT_TYPE = "application/octet-stream";
+
+        /// <summary> Full pathname of an imported database file. </summary>
+        private Uri importedDatabaseFilePath = default;
+
         #endregion
 
         #region Properties
@@ -29,6 +43,44 @@ namespace EasyMailDiscussion.Common.Database
         /// <summary> Gets or sets the full pathname of the database file. </summary>
         /// <value> The database fileath. </value>
         public Uri DatabaseFilePath { get; private set; }
+
+        /// <summary> Gets the full pathname of an imported database file. </summary>
+        /// <remarks>
+        /// This property relies on <see cref="DatabaseFilePath"/> and will mirror it with a minor
+        /// alteration to the file name.
+        /// </remarks>
+        /// <value> The full pathname of an imported database file. </value>
+        public Uri ImportedDatabaseFilePath
+        {
+            get
+            {
+                if (this.DatabaseFilePath == default)
+                {
+                    return default;
+                }
+
+                if (this.importedDatabaseFilePath == null)
+                {
+                    this.importedDatabaseFilePath = new Uri(this.DatabaseFilePath.AbsolutePath + TEMP_DATABASE_FILE_EXTENSION);
+                }
+
+                return this.importedDatabaseFilePath;
+            }
+        }
+
+        /// <summary>
+        /// Gets a collection of types of that are recognized as valid file content-types representing a
+        /// SQLite database file.
+        /// </summary>
+        /// <value> A list of valid file content-types. </value>
+        public static IEnumerable<string> ValidFileContentTypes
+        {
+            get
+            {
+                yield return GENERIC_BINARY_FILE_CONTENT_TYPE;
+                yield return SQLITE_FILE_CONTENT_TYPE;
+            }
+        }
 
         /// <summary> Gets or sets the <see cref="DiscussionList"/> table. </summary>
         /// <value> The <see cref="DiscussionList"/> table. </value>
@@ -40,7 +92,7 @@ namespace EasyMailDiscussion.Common.Database
 
         /// <summary> Gets or sets the <see cref="ContactSubscription"/> table. </summary>
         /// <value> The <see cref="ContactSubscription"/> table. </value>
-        public DbSet<ContactSubscription> ContactSubscriptions {get; set;}
+        public DbSet<ContactSubscription> ContactSubscriptions { get; set; }
 
         /// <summary> Gets or sets the <see cref="Message"/> table. </summary>
         /// <value> The <see cref="Message"/> table. </value>
@@ -105,6 +157,20 @@ namespace EasyMailDiscussion.Common.Database
             }
         }
 
+        /// <summary>
+        /// Query if a givent file content-type value is a valid content-type for a SQLite datbase file.
+        /// </summary>
+        /// <param name="contentType">
+        ///     The file content-type as provided by a browser or file system.
+        /// </param>
+        /// <returns> True if valid content-type, false if not. </returns>
+        public bool IsValidContentType(string contentType)
+        {
+            return ValidFileContentTypes
+                .Where(validContentType => validContentType.Equals(contentType, StringComparison.OrdinalIgnoreCase))
+                .Any();
+        }
+
         #endregion
 
         #region Overrides
@@ -165,7 +231,7 @@ namespace EasyMailDiscussion.Common.Database
 
             //Describe the DiscussionList table.
             modelBuilder.Entity<DiscussionList>().ToTable("DiscussionList");
-            modelBuilder.Entity<DiscussionList>(entity => 
+            modelBuilder.Entity<DiscussionList>(entity =>
             {
                 entity.HasKey(e => e.ID);
                 entity.HasMany(e => e.Subscriptions)

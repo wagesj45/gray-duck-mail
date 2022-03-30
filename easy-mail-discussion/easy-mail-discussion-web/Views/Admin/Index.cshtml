@@ -17,7 +17,7 @@
     <header>
         <h3>Import Database</h3>
     </header>
-    <form action="~/Admin/ImportDatabase" method="post">
+    <form action="~/Admin/ImportDatabase" method="post" enctype="multipart/form-data">
         <label for="databaseFile">
             Choose a SQLite database file to import
             <input type="file" id="databaseFileUpldate" name="databaseFile">

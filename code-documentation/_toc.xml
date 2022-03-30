@@ -269,18 +269,32 @@
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/Contacts.md"/>
             <topic id="P:EasyMailDiscussion.Common.Database.SqliteDatabase.ContactSubscriptions"
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/ContactSubscriptions.md"/>
+            <topic id="P:EasyMailDiscussion.Common.Database.SqliteDatabase.DatabaseFilePath"
+                   file="EasyMailDiscussion.Common.Database/SqliteDatabase/DatabaseFilePath.md"/>
             <topic id="P:EasyMailDiscussion.Common.Database.SqliteDatabase.DiscussionLists"
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/DiscussionLists.md"/>
+            <topic id="P:EasyMailDiscussion.Common.Database.SqliteDatabase.ImportedDatabaseFilePath"
+                   file="EasyMailDiscussion.Common.Database/SqliteDatabase/ImportedDatabaseFilePath.md"/>
             <topic id="P:EasyMailDiscussion.Common.Database.SqliteDatabase.Messages"
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/Messages.md"/>
             <topic id="P:EasyMailDiscussion.Common.Database.SqliteDatabase.RelayIdentifiers"
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/RelayIdentifiers.md"/>
+            <topic id="P:EasyMailDiscussion.Common.Database.SqliteDatabase.ValidFileContentTypes"
+                   file="EasyMailDiscussion.Common.Database/SqliteDatabase/ValidFileContentTypes.md"/>
             <topic id="M:EasyMailDiscussion.Common.Database.SqliteDatabase.EnsureDatabaseFile(System.Uri)"
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/EnsureDatabaseFile.md"/>
+            <topic id="M:EasyMailDiscussion.Common.Database.SqliteDatabase.IsValidContentType(System.String)"
+                   file="EasyMailDiscussion.Common.Database/SqliteDatabase/IsValidContentType.md"/>
             <topic id="M:EasyMailDiscussion.Common.Database.SqliteDatabase.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)"
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/OnConfiguring.md"/>
             <topic id="M:EasyMailDiscussion.Common.Database.SqliteDatabase.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)"
                    file="EasyMailDiscussion.Common.Database/SqliteDatabase/OnModelCreating.md"/>
+            <topic id="F:EasyMailDiscussion.Common.Database.SqliteDatabase.GENERIC_BINARY_FILE_CONTENT_TYPE"
+                   file="EasyMailDiscussion.Common.Database/SqliteDatabase/GENERIC_BINARY_FILE_CONTENT_TYPE.md"/>
+            <topic id="F:EasyMailDiscussion.Common.Database.SqliteDatabase.SQLITE_FILE_CONTENT_TYPE"
+                   file="EasyMailDiscussion.Common.Database/SqliteDatabase/SQLITE_FILE_CONTENT_TYPE.md"/>
+            <topic id="F:EasyMailDiscussion.Common.Database.SqliteDatabase.TEMP_DATABASE_FILE_EXTENSION"
+                   file="EasyMailDiscussion.Common.Database/SqliteDatabase/TEMP_DATABASE_FILE_EXTENSION.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Common.Database.SubscriptionStatus"
                 file="EasyMailDiscussion.Common.Database/SubscriptionStatus/README.md"
@@ -332,12 +346,18 @@
          <topic id="T:EasyMailDiscussion.Web.Startup"
                 file="EasyMailDiscussion.Web/Startup/README.md"
                 title="Startup">
+            <topic id="M:EasyMailDiscussion.Web.Startup.#cctor"
+                   file="EasyMailDiscussion.Web/Startup/_cctor.md"/>
             <topic id="M:EasyMailDiscussion.Web.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)"
                    file="EasyMailDiscussion.Web/Startup/_ctor.md"/>
             <topic id="P:EasyMailDiscussion.Web.Startup.Configuration"
                    file="EasyMailDiscussion.Web/Startup/Configuration.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)"
+            <topic id="M:EasyMailDiscussion.Web.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
                    file="EasyMailDiscussion.Web/Startup/Configure.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Startup.ConfigureDatabase"
+                   file="EasyMailDiscussion.Web/Startup/ConfigureDatabase.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Startup.ConfigureNLog(Microsoft.Extensions.Configuration.IConfigurationSection,Microsoft.Extensions.Configuration.IConfigurationSection)"
+                   file="EasyMailDiscussion.Web/Startup/ConfigureNLog.md"/>
             <topic id="M:EasyMailDiscussion.Web.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"
                    file="EasyMailDiscussion.Web/Startup/ConfigureServices.md"/>
          </topic>
@@ -345,12 +365,26 @@
       <topic id="N:EasyMailDiscussion.Web.Controllers"
              file="EasyMailDiscussion.Web.Controllers/README.md"
              title="EasyMailDiscussion.Web.Controllers">
+         <topic id="T:EasyMailDiscussion.Web.Controllers.AdminController"
+                file="EasyMailDiscussion.Web.Controllers/AdminController/README.md"
+                title="AdminController">
+            <topic id="M:EasyMailDiscussion.Web.Controllers.AdminController.#cctor"
+                   file="EasyMailDiscussion.Web.Controllers/AdminController/_cctor.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.AdminController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
+                   file="EasyMailDiscussion.Web.Controllers/AdminController/_ctor.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.AdminController.ExportDatabase"
+                   file="EasyMailDiscussion.Web.Controllers/AdminController/ExportDatabase.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.AdminController.ImportDatabase(EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm)"
+                   file="EasyMailDiscussion.Web.Controllers/AdminController/ImportDatabase.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.AdminController.Index"
+                   file="EasyMailDiscussion.Web.Controllers/AdminController/Index.md"/>
+         </topic>
          <topic id="T:EasyMailDiscussion.Web.Controllers.BaseController"
                 file="EasyMailDiscussion.Web.Controllers/BaseController/README.md"
                 title="BaseController">
             <topic id="M:EasyMailDiscussion.Web.Controllers.BaseController.#cctor"
                    file="EasyMailDiscussion.Web.Controllers/BaseController/_cctor.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Controllers.BaseController.#ctor"
+            <topic id="M:EasyMailDiscussion.Web.Controllers.BaseController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
                    file="EasyMailDiscussion.Web.Controllers/BaseController/_ctor.md"/>
             <topic id="P:EasyMailDiscussion.Web.Controllers.BaseController.SqliteDatabase"
                    file="EasyMailDiscussion.Web.Controllers/BaseController/SqliteDatabase.md"/>
@@ -362,7 +396,7 @@
                 title="ContactController">
             <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.#cctor"
                    file="EasyMailDiscussion.Web.Controllers/ContactController/_cctor.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.#ctor"
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
                    file="EasyMailDiscussion.Web.Controllers/ContactController/_ctor.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.ConfirmRemove(System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ContactController/ConfirmRemove.md"/>
@@ -384,7 +418,7 @@
                 title="HomeController">
             <topic id="M:EasyMailDiscussion.Web.Controllers.HomeController.#cctor"
                    file="EasyMailDiscussion.Web.Controllers/HomeController/_cctor.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Controllers.HomeController.#ctor"
+            <topic id="M:EasyMailDiscussion.Web.Controllers.HomeController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
                    file="EasyMailDiscussion.Web.Controllers/HomeController/_ctor.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.HomeController.Error"
                    file="EasyMailDiscussion.Web.Controllers/HomeController/Error.md"/>
@@ -396,7 +430,7 @@
                 title="ListController">
             <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.#cctor"
                    file="EasyMailDiscussion.Web.Controllers/ListController/_cctor.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.#ctor"
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
                    file="EasyMailDiscussion.Web.Controllers/ListController/_ctor.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Archive(System.Int32,System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ListController/Archive.md"/>
@@ -602,6 +636,14 @@
                    file="EasyMailDiscussion.Web.Models.Forms/DiscussionListForm/UseSSL.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.Forms.DiscussionListForm.UseSSLChecked"
                    file="EasyMailDiscussion.Web.Models.Forms/DiscussionListForm/UseSSLChecked.md"/>
+         </topic>
+         <topic id="T:EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm"
+                file="EasyMailDiscussion.Web.Models.Forms/ImportDatabaseForm/README.md"
+                title="ImportDatabaseForm">
+            <topic id="M:EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm.#ctor"
+                   file="EasyMailDiscussion.Web.Models.Forms/ImportDatabaseForm/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm.DatabaseFile"
+                   file="EasyMailDiscussion.Web.Models.Forms/ImportDatabaseForm/DatabaseFile.md"/>
          </topic>
       </topic>
       <topic id="N:EasyMailDiscussion.Web.Worker"

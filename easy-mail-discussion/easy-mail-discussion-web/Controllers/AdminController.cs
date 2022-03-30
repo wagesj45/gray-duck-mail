@@ -2,6 +2,7 @@
 using EasyMailDiscussion.Web.Models;
 using EasyMailDiscussion.Web.Models.Forms;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -70,18 +71,54 @@ namespace EasyMailDiscussion.Web.Controllers
             }
         }
 
-        /// <summary> (An Action that handles HTTP POST requests) import database. </summary>
-        /// <param name="formInput"> The form input. </param>
+        /// <summary> Imports a SQLite database file and replaces the existing database file. </summary>
+        /// <remarks>
+        /// <para>
+        /// Fulfills the <c>/Admin/ImportDatabase</c> post request.
+        /// </para>
+        /// <para>
+        /// This method will initiate an application shut down. This is necessary because multiple
+        /// service worker threads access the database file and we can never be sure that it is not being
+        /// accessed except at application
+        /// <see cref="Startup.Startup(Microsoft.Extensions.Configuration.IConfiguration)">start up</see>.
+        /// </para>
+        /// </remarks>
+        /// <exception cref="FormatException">
+        ///     Thrown when the format of an input is incorrect.
+        /// </exception>
+        /// <param name="databaseFile"> The database file. </param>
         /// <returns> A response to return to the caller. </returns>
-        /// <remarks> Fulfills the <c>/Admin/ImportDatabase</c> post request. </remarks>
+        /// <seealso cref="Program.Main(string[])"/>
+        /// <seealso cref="Startup.Startup(Microsoft.Extensions.Configuration.IConfiguration)"/>
+        /// <seealso cref="Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder, Microsoft.AspNetCore.Hosting.IWebHostEnvironment, IHostApplicationLifetime)"/>
+        /// <seealso cref="Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/>
         [HttpPost]
         public IActionResult ImportDatabase(ImportDatabaseForm formInput)
         {
-            var stream = formInput.DatabaseFile.OpenReadStream();
-            System.IO.File.Delete(this.SqliteDatabase.DatabaseFilePath.AbsolutePath);
-            using(var newstream = System.IO.File.Create(this.SqliteDatabase.DatabaseFilePath.AbsolutePath+".new"))
+            if(formInput.DatabaseFile == null)
             {
-                formInput.DatabaseFile.CopyTo(newstream);
+                var nullException = new ArgumentException("The file uploaded is missing or was malformed.", nameof(formInput));
+            }
+
+            if (!SqliteDatabase.IsValidContentType(formInput.DatabaseFile.ContentType))
+            {
+                var formatException = new FormatException("The file upload was not in the corref SQLite file format.");
+                logger.Error(formatException);
+
+                throw formatException;
+            }
+
+            using (var stream = formInput.DatabaseFile.OpenReadStream())
+            {
+                using (var importedDatabaseStream = System.IO.File.Create(this.SqliteDatabase.ImportedDatabaseFilePath.AbsolutePath))
+                {
+                    // Write the imported database to the file system with a temporary file name.
+                    formInput.DatabaseFile.CopyTo(importedDatabaseStream);
+                }
+
+                // Stop the ASP application so that the database file will be released by all contexts.
+                // This will allow us to replace it at start up.
+                this.applicationLifetime.StopApplication();
             }
 
             return RedirectToAction("Index");

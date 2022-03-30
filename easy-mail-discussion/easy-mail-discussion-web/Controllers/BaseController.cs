@@ -17,7 +17,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        private IHostApplicationLifetime applicationLifetime = default;
+        internal IHostApplicationLifetime applicationLifetime = default;
 
         /// <summary> A lazily initialized SQLite database context. </summary>
         private Lazy<SqliteDatabase> sqliteDatabase = new Lazy<SqliteDatabase>(() =>

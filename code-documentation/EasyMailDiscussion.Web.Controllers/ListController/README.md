@@ -25,10 +25,10 @@ The **ListController** type exposes the following members.
 Constructors
 ------------
 
-|                                   | Name                | Description                                                |
-| --------------------------------- | ------------------- | ---------------------------------------------------------- |
-| ![Private method]![Static member] | [ListController][5] |                                                            |
-| ![Public method]                  | [ListController][6] | Initializes a new instance of the **ListController** class |
+|                                   | Name                | Description  |
+| --------------------------------- | ------------------- | ------------ |
+| ![Private method]![Static member] | [ListController][5] |              |
+| ![Public method]                  | [ListController][6] | Constructor. |
 
 
 Properties

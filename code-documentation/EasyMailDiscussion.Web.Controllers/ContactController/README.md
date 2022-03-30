@@ -25,10 +25,10 @@ The **ContactController** type exposes the following members.
 Constructors
 ------------
 
-|                                   | Name                   | Description                                                   |
-| --------------------------------- | ---------------------- | ------------------------------------------------------------- |
-| ![Private method]![Static member] | [ContactController][5] |                                                               |
-| ![Public method]                  | [ContactController][6] | Initializes a new instance of the **ContactController** class |
+|                                   | Name                   | Description  |
+| --------------------------------- | ---------------------- | ------------ |
+| ![Private method]![Static member] | [ContactController][5] |              |
+| ![Public method]                  | [ContactController][6] | Constructor. |
 
 
 Properties
