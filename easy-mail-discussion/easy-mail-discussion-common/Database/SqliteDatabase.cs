@@ -22,12 +22,13 @@ namespace EasyMailDiscussion.Common.Database
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary> Full pathname of the database file. </summary>
-        private Uri databaseFilePath;
-
         #endregion
 
         #region Properties
+
+        /// <summary> Gets or sets the full pathname of the database file. </summary>
+        /// <value> The database fileath. </value>
+        public Uri DatabaseFilePath { get; private set; }
 
         /// <summary> Gets or sets the <see cref="DiscussionList"/> table. </summary>
         /// <value> The <see cref="DiscussionList"/> table. </value>
@@ -68,8 +69,8 @@ namespace EasyMailDiscussion.Common.Database
         /// <param name="databaseFilePath"> Full pathname of the database file. </param>
         public SqliteDatabase(string databaseFilePath)
         {
-            this.databaseFilePath = new Uri(databaseFilePath);
-            EnsureDatabaseFile(this.databaseFilePath);
+            this.DatabaseFilePath = new Uri(databaseFilePath);
+            EnsureDatabaseFile(this.DatabaseFilePath);
         }
 
         #endregion
@@ -83,12 +84,12 @@ namespace EasyMailDiscussion.Common.Database
         /// <param name="databaseFilePath"> Full pathname of the database file. </param>
         private void EnsureDatabaseFile(Uri databaseFilePath)
         {
-            if (!File.Exists(this.databaseFilePath.AbsolutePath))
+            if (!File.Exists(this.DatabaseFilePath.AbsolutePath))
             {
                 logger.Debug("Creating db file at {0}.", databaseFilePath.AbsolutePath);
                 using (var _db = new SqliteDatabase())
                 {
-                    _db.databaseFilePath = databaseFilePath;
+                    _db.DatabaseFilePath = databaseFilePath;
                     _db.Database.EnsureCreated();
                     _db.SaveChanges();
                 }
@@ -117,7 +118,7 @@ namespace EasyMailDiscussion.Common.Database
         /// <seealso cref="DbContext.OnConfiguring(DbContextOptionsBuilder)"/>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var databaseFileNameFormat = string.Format("Filename={0}", this.databaseFilePath.AbsolutePath);
+            var databaseFileNameFormat = string.Format("Filename={0}", this.DatabaseFilePath.AbsolutePath);
             optionsBuilder.UseSqlite(databaseFileNameFormat, options =>
             {
                 options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);

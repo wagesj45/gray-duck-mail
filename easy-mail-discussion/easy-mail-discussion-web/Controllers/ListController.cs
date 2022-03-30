@@ -4,6 +4,7 @@ using EasyMailDiscussion.Web.Models;
 using EasyMailDiscussion.Web.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
 using System.Linq;
@@ -22,11 +23,24 @@ namespace EasyMailDiscussion.Web.Controllers
 
         #endregion
 
+        #region Constructors
+        
+        /// <summary> Constructor. </summary>
+        /// <param name="lifetime"> The application lifetime interface. </param>
+        public ListController(IHostApplicationLifetime lifetime)
+            : base(lifetime)
+        {
+            //
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary> Gets the index or default request. </summary>
         /// <remarks> Fulfills the <c>/List</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
+        [Route("List")]
         public IActionResult Index()
         {
             var model = new DiscussionListsModel()
@@ -40,6 +54,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <summary> Gets the new discussion list creation form request. </summary>
         /// <returns> A response to return to the caller. </returns>
         /// <remarks> Fulfills the <c>/List/New</c> request. </remarks>
+        [Route("List/New")]
         public IActionResult New()
         {
             return View("Edit", new EditDiscussionListModel());
@@ -49,6 +64,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/List/Edit</c> request. </remarks>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
+        [Route("List/Message/{discussionListID}")]
         public IActionResult Edit(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).FirstOrDefault();
@@ -108,6 +124,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/List/Remove</c> request. </remarks>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
+        [Route("List/Remove/{discussionListID}")]
         public IActionResult Remove(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).SingleOrDefault();
@@ -130,6 +147,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/List/ConfirmRemove</c> request. </remarks>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
+        [Route("List/ConfirmRemove/{discussionListID}")]
         public IActionResult ConfirmRemove(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).SingleOrDefault();
@@ -185,6 +203,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/List/Assign</c> request. </remarks>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
+        [Route("List/Assign/{discussionListID}")]
         public IActionResult Assign(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).FirstOrDefault();

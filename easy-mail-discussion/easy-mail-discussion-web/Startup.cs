@@ -16,6 +16,13 @@ namespace EasyMailDiscussion.Web
     /// <summary> Manages the start up routine for the application. </summary>
     public class Startup
     {
+        #region Members
+
+        /// <summary> The logging conduit. </summary>
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         #region Properties
 
         /// <summary> Gets the configuration interface. </summary>
@@ -65,9 +72,10 @@ namespace EasyMailDiscussion.Web
         /// This method gets called by the runtime. Use this method to configure the HTTP request
         /// pipeline.
         /// </summary>
-        /// <param name="app"> The application builder interface. </param>
-        /// <param name="env"> The web host environment interface. </param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        /// <param name="app">      The application builder interface. </param>
+        /// <param name="env">      The web host environment interface. </param>
+        /// <param name="lifetime"> The application lifetime management interface. </param>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -77,6 +85,7 @@ namespace EasyMailDiscussion.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -88,6 +97,21 @@ namespace EasyMailDiscussion.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            lifetime.ApplicationStarted.Register(() =>
+            {
+                logger.Info("Running application.");
+            });
+
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                logger.Info("Stopping the application.");
+            });
+
+            lifetime.ApplicationStopped.Register(() =>
+            {
+                logger.Info("Application stopped.");
             });
         } 
 

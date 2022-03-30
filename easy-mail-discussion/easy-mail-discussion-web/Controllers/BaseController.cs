@@ -1,6 +1,7 @@
 ﻿using EasyMailDiscussion.Common.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
 
@@ -9,12 +10,14 @@ namespace EasyMailDiscussion.Web.Controllers
     /// <summary>
     /// A controller used as a base class in the <see cref="EasyMailDiscussion.Web"/> project.
     /// </summary>
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         #region Members
 
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        private IHostApplicationLifetime applicationLifetime = default;
 
         /// <summary> A lazily initialized SQLite database context. </summary>
         private Lazy<SqliteDatabase> sqliteDatabase = new Lazy<SqliteDatabase>(() =>
@@ -25,8 +28,19 @@ namespace EasyMailDiscussion.Web.Controllers
 
         #endregion
 
+        #region Constructors
+
+        /// <summary> Constructor. </summary>
+        /// <param name="lifetime"> The application lifetime interface. </param>
+        public BaseController(IHostApplicationLifetime lifetime)
+        {
+            this.applicationLifetime = lifetime;
+        }
+
+        #endregion
+
         #region Properties
-        
+
         /// <summary> Gets the SQLite database context. </summary>
         /// <value> The sqlite database. </value>
         public SqliteDatabase SqliteDatabase

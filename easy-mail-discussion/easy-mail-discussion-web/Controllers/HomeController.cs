@@ -1,5 +1,6 @@
 ﻿using EasyMailDiscussion.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,18 @@ namespace EasyMailDiscussion.Web.Controllers
 
         #endregion
 
+        #region Constructors
+        
+        /// <summary> Constructor. </summary>
+        /// <param name="lifetime"> The application lifetime interface. </param>
+        public HomeController(IHostApplicationLifetime lifetime)
+            : base(lifetime)
+        {
+            //
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary> Gets the index or default request. </summary>
@@ -31,6 +44,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// </para>
         /// </remarks>
         /// <returns> A response to return to the caller. </returns>
+        [Route("/")]
         public IActionResult Index()
         {
             var numberOfDiscussionLists = this.SqliteDatabase.DiscussionLists.Count();
@@ -50,6 +64,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <summary> Gets the error page. </summary>
         /// <returns> A response to return to the caller. </returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [Route("/Error")]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

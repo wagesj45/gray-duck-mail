@@ -3,6 +3,7 @@ using EasyMailDiscussion.Web.Models;
 using EasyMailDiscussion.Web.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
 using System.Linq;
@@ -19,11 +20,24 @@ namespace EasyMailDiscussion.Web.Controllers
 
         #endregion
 
+        #region Constructors
+
+        /// <summary> Constructor. </summary>
+        /// <param name="lifetime"> The application lifetime interface. </param>
+        public ContactController(IHostApplicationLifetime lifetime)
+            : base(lifetime)
+        {
+            //
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary> Gets the index or default request. </summary>
         /// <remarks> Fulfills the <c>/Contact</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
+        [Route("Contact")]
         public IActionResult Index()
         {
             var model = new ContactsModel()
@@ -31,12 +45,13 @@ namespace EasyMailDiscussion.Web.Controllers
                 Contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions).ToArray()
             };
 
-            return View(model);
+            return View("Index", model);
         }
 
         /// <summary> Gets the new contact creation form request. </summary>
         /// <remarks> Fulfills the <c>/Contact/New</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
+        [Route("Contact/New")]
         public IActionResult New()
         {
             return View("Edit", new EditContactModel());
@@ -46,6 +61,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/Contact/Edit</c> request. </remarks>
         /// <param name="contactID"> Identifier for the contact. </param>
         /// <returns> A response to return to the caller. </returns>
+        [Route("Contact/Edit/{contactID}")]
         public IActionResult Edit(int contactID)
         {
             var contact = this.SqliteDatabase.Contacts.Where(contact => contact.ID == contactID).FirstOrDefault();
@@ -98,6 +114,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/Contact/Remove</c> request. </remarks>
         /// <param name="contactID"> Identifier for the contact. </param>
         /// <returns> A response to return to the caller. </returns>
+        [Route("Contact/Remove/{contactID}")]
         public IActionResult Remove(int contactID)
         {
             var contact = this.SqliteDatabase.Contacts.Where(list => list.ID == contactID).SingleOrDefault();
@@ -120,6 +137,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/Contact/ConfirmRemove</c> request. </remarks>
         /// <param name="contactID"> Identifier for the contact. </param>
         /// <returns> A response to return to the caller. </returns>
+        [Route("Contact/ConfirmRemove/{contactID}")]
         public IActionResult ConfirmRemove(int contactID)
         {
             var contact = this.SqliteDatabase.Contacts.Where(contact => contact.ID == contactID).SingleOrDefault();

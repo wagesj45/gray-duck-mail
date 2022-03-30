@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Administration";
+}
+
+<hgroup>
+    <h1>Administration</h1>
+    <h2>Perform specialized tasks to manage and maintain your service here.</h2>
+</hgroup>
+
+<article>
+    <header>
+        <h3>Export Database</h3>
+    </header>
+    <a href="~/Admin/ExportDatabase" role="button"><i></i> Export</a>
+</article>
+<article>
+    <header>
+        <h3>Import Database</h3>
+    </header>
+    <form action="~/Admin/ImportDatabase" method="post">
+        <label for="databaseFile">
+            Choose a SQLite database file to import
+            <input type="file" id="databaseFileUpldate" name="databaseFile">
+        </label>
+        <button type="submit"><i class="icofont-upload"></i> Import</button>
+    </form>
+    <p>
+        <i class="icofont-warning"></i> <mark><strong>WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding.</strong></mark>
+    </p>
+</article>
