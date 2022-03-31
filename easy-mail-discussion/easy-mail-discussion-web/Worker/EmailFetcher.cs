@@ -43,93 +43,101 @@ namespace EasyMailDiscussion.Web.Worker
         /// </returns>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
-            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
-
             logger.Info("Beginning email fetch loop.");
             while (!stoppingToken.IsCancellationRequested)
             {
-                var discussionLists = database.DiscussionLists.Include(list => list.Subscriptions).ThenInclude(list => list.Contact);
-
-                foreach (var discussionList in discussionLists)
+                try
                 {
-                    logger.Debug("Processing list {0}", discussionList.Name);
+                    logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
+                    var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
 
-                    using (var pop3Client = new Pop3Client())
+                    var discussionLists = database.DiscussionLists.Include(list => list.Subscriptions).ThenInclude(list => list.Contact);
+
+                    foreach (var discussionList in discussionLists)
                     {
-                        try
+                        logger.Debug("Processing list {0}", discussionList.Name);
+
+                        using (var pop3Client = new Pop3Client())
                         {
-                            logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
-                            pop3Client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
-
-                            logger.Debug("Authenticating as {0}", discussionList.UserName);
-                            pop3Client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
-
-                            if (pop3Client.Count > 0)
+                            try
                             {
-                                logger.Info("Processing {0} messages.", pop3Client.Count);
+                                logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
+                                pop3Client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
 
-                                var emailMessages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: stoppingToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
-                                var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
-                                var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
-                                var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
-                                var filteredBouncedToBounceAlias = FilterMessages(emailMessages, EmailAliasHelper.GetBounceAlias(discussionList));
-                                var filteredBouncedToBaseAddress = FilterBouncedMessages(emailMessages);
-                                var filteredBounced = filteredBouncedToBounceAlias.Concat(filteredBouncedToBaseAddress);
+                                logger.Debug("Authenticating as {0}", discussionList.UserName);
+                                pop3Client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
 
-                                // Subscription Confirmation Emails
-                                foreach (var subscriptionConfirmation in filteredSubscribe)
+                                if (pop3Client.Count > 0)
                                 {
-                                    ProcessSubscriptionConfirmations(discussionList, database, pop3Client, subscriptionConfirmation, stoppingToken);
+                                    logger.Info("Processing {0} messages.", pop3Client.Count);
+
+                                    var emailMessages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: stoppingToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
+                                    var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
+                                    var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                                    var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
+                                    var filteredBouncedToBounceAlias = FilterMessages(emailMessages, EmailAliasHelper.GetBounceAlias(discussionList));
+                                    var filteredBouncedToBaseAddress = FilterBouncedMessages(emailMessages);
+                                    var filteredBounced = filteredBouncedToBounceAlias.Concat(filteredBouncedToBaseAddress);
+
+                                    // Subscription Confirmation Emails
+                                    foreach (var subscriptionConfirmation in filteredSubscribe)
+                                    {
+                                        ProcessSubscriptionConfirmations(discussionList, database, pop3Client, subscriptionConfirmation, stoppingToken);
+                                    }
+
+                                    // Unsubscribe Confirmation Emails
+                                    foreach (var unsubscribeConfirmation in filteredUnsubscribe)
+                                    {
+                                        ProcessUnsubscribeConfirmations(discussionList, database, pop3Client, unsubscribeConfirmation);
+                                    }
+
+                                    // List Assignment Request Emails
+                                    foreach (var request in filteredRequest)
+                                    {
+                                        ProcessRequests(discussionList, database, pop3Client, request, stoppingToken);
+                                    }
+
+                                    // Bounced email messages.
+                                    foreach (var bounce in filteredBounced)
+                                    {
+                                        ProcessBounces(discussionList, database, pop3Client, bounce);
+                                    }
+
+                                    // Remaining messages can be assumed to be communications between discussion list members.
+                                    var discussionMessages = emailMessages
+                                        .Except(filteredSubscribe)
+                                        .Except(filteredUnsubscribe)
+                                        .Except(filteredRequest)
+                                        .Except(filteredBounced);
+                                    foreach (var discussionMessage in discussionMessages)
+                                    {
+                                        ProcessDiscussionMessages(discussionList, discussionMessage, database, pop3Client, stoppingToken);
+                                    }
                                 }
-
-                                // Unsubscribe Confirmation Emails
-                                foreach (var unsubscribeConfirmation in filteredUnsubscribe)
+                                else
                                 {
-                                    ProcessUnsubscribeConfirmations(discussionList, database, pop3Client, unsubscribeConfirmation);
-                                }
-
-                                // List Assignment Request Emails
-                                foreach (var request in filteredRequest)
-                                {
-                                    ProcessRequests(discussionList, database, pop3Client, request);
-                                }
-
-                                // Bounced email messages.
-                                foreach (var bounce in filteredBounced)
-                                {
-                                    ProcessBounces(discussionList, database, pop3Client, bounce);
-                                }
-
-                                // Remaining messages can be assumed to be communications between discussion list members.
-                                var discussionMessages = emailMessages
-                                    .Except(filteredSubscribe)
-                                    .Except(filteredUnsubscribe)
-                                    .Except(filteredBounced)
-                                    .Except(filteredBounced);
-                                foreach (var discussionMessage in discussionMessages)
-                                {
-                                    ProcessDiscussionMessages(discussionList, discussionMessage, database, pop3Client, stoppingToken);
+                                    logger.Debug("No messages found.");
                                 }
                             }
-                            else
+                            catch (Exception e)
                             {
-                                logger.Debug("No messages found.");
+                                logger.Error(e);
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            logger.Error(e);
-                        }
 
-                        pop3Client.Disconnect(true, stoppingToken);
+                            pop3Client.Disconnect(true, stoppingToken);
+                        }
+                    }
+
+                    if (database.ChangeTracker.HasChanges())
+                    {
+                        logger.Info("Committing changes to database.");
+                        database.SaveChanges();
                     }
                 }
-
-                if (database.ChangeTracker.HasChanges())
+                catch(Exception e)
                 {
-                    logger.Info("Committing changes to database.");
-                    database.SaveChanges();
+                    //We want to catch any potential exception so that the loop can continue in case of failure.
+                    logger.Error(e);
                 }
 
                 // End the loop and wait the alloted time.
@@ -208,15 +216,19 @@ namespace EasyMailDiscussion.Web.Worker
         /// <summary>
         /// Process the requests to join a the <paramref name="discussionList">discussion list</paramref>.
         /// </summary>
-        /// <param name="discussionList"> Discussion List database object. </param>
-        /// <param name="database">       The database. </param>
-        /// <param name="pop3Client">     The POP3 client. </param>
-        /// <param name="request">        The request message. </param>
-        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request)
+        /// <param name="discussionList">    Discussion List database object. </param>
+        /// <param name="database">          The database. </param>
+        /// <param name="pop3Client">        The POP3 client. </param>
+        /// <param name="request">           The request message. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request, CancellationToken cancellationToken = default)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
             var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
                 .SelectMany(_discussionList => _discussionList.Subscriptions)
+                .Include(subscription => subscription.Contact)
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
@@ -240,13 +252,29 @@ namespace EasyMailDiscussion.Web.Worker
 
                 database.Contacts.Add(newContact);
                 database.ContactSubscriptions.Add(subscription);
+
+                using (var smtpClient = new SmtpClient())
+                {
+                    EmailHelper.SendRequestOwnerNotificationEmail(discussionList, newContact, smtpClient, cancellationToken);
+                    smtpClient.Disconnect(true, cancellationToken);
+                }
             }
             else
             {
-                if (subscription.Status != SubscriptionStatus.Denied)
+                if(subscription.Status == SubscriptionStatus.Subscribed)
+                {
+                    logger.Error("{0}, who is already subscribed to {1}, has requested access again. Ignoring this message.", subscription.Contact.Name, discussionList.Name);
+                }
+                else if (subscription.Status != SubscriptionStatus.Denied)
                 {
                     logger.Info("{0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed.", subscription.Contact.Name, discussionList.Name);
                     subscription.Status = SubscriptionStatus.Subscribed;
+
+                    using (var smtpClient = new SmtpClient())
+                    {
+                        EmailHelper.SendSubscriptionConfirmationEmail(discussionList, subscription.Contact, smtpClient, cancellationToken);
+                        smtpClient.Disconnect(true, cancellationToken);
+                    }
                 }
                 else
                 {
@@ -362,6 +390,12 @@ namespace EasyMailDiscussion.Web.Worker
             else
             {
                 logger.Error("The sender is unrecognized or unauthorized to participate in {0}. We'll log it and let the message be deleted.", discussionList.Name);
+                logger.Error("From: {0} ({1})", from.Name, from.Address);
+                logger.Error("Encoding: {0}", from.Encoding.EncodingName);
+                foreach(var domain in from.Route)
+                {
+                    logger.Error("-- {0}", domain);
+                }
             }
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", discussionMessage.Message.MessageId, discussionMessage.Index);

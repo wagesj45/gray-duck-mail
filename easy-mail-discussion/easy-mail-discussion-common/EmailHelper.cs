@@ -330,6 +330,42 @@ namespace EasyMailDiscussion.Common
         }
 
         /// <summary>
+        /// Sends a notification to the
+        /// <see cref="EmailAliasHelper.GetOwnerAlias(DiscussionList)">owner</see> that a request to join
+        /// the mailing list has been issued.
+        /// </summary>
+        /// <param name="discussionList">    The discussion list. </param>
+        /// <param name="requester">         The requester. </param>
+        /// <param name="client">            The SMTP client. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        public static void SendRequestOwnerNotificationEmail(DiscussionList discussionList, Contact requester, SmtpClient client, CancellationToken cancellationToken = default)
+        {
+            logger.Info("Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}.", requester.Name, requester.Email, discussionList.Name);
+
+            SendEmail(discussionList,
+                new Contact() { Name = "Owner", Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true },
+                string.Format("Request to join {0}", discussionList.Name),
+                EmailAliasHelper.GetSubscribeAlias(discussionList),
+                () =>
+                {
+                    return new TextPart(TextFormat.Html)
+                    {
+                        Text = EmailHelper.FillDefaultTemplate(
+                            "Discussion List Access Request",
+                            String.Format("{0} has requested access to the '{0}' Email Discussion List", requester.Name, discussionList.Name),
+                            "Please visit the the web administration interface to process this request.",
+                            discussionList.Name,
+                            discussionList
+                            )
+                    };
+                },
+                client,
+                cancellationToken);
+        }
+
+        /// <summary>
         /// Sends a subscription confirmation email to a <see cref="Contact">contact</see> that has
         /// subscribed to a <see cref="DiscussionList">discussion list</see>.
         /// </summary>
@@ -372,7 +408,7 @@ namespace EasyMailDiscussion.Common
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        /// <see cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void SendUnsubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info("Sending the subscription confirmation email to {0} ({1}).", recipient.Name, recipient.Email);

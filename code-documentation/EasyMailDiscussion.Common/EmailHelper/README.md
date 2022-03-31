@@ -54,8 +54,9 @@ Methods
 | ![Public method]![Static member] | [RelayEmail][19]                          | Relay an email to the [contacts][7][assigned][8] to a [discussion list][9].                                                                        |
 | ![Public method]![Static member] | [SendEmail][20]                           | Sends an email.                                                                                                                                    |
 | ![Public method]![Static member] | [SendOnboardingEmail][21]                 | Sends an onboarding email asking a [contact][7] to subscribe to a [discussion list][9].                                                            |
-| ![Public method]![Static member] | [SendSubscriptionConfirmationEmail][22]   | Sends a subscription confirmation email to a [contact][7] that has subscribed to a [discussion list][9].                                           |
-| ![Public method]![Static member] | [SendUnsubscriptionConfirmationEmail][23] | Sends a confirmation email to a [contact][7] that has unsubscribed from a [discussion list][9].                                                    |
+| ![Public method]![Static member] | [SendRequestOwnerNotificationEmail][22]   | Sends a notification to the [owner][23] that a request to join the mailing list has been issued.                                                   |
+| ![Public method]![Static member] | [SendSubscriptionConfirmationEmail][24]   | Sends a subscription confirmation email to a [contact][7] that has subscribed to a [discussion list][9].                                           |
+| ![Public method]![Static member] | [SendUnsubscriptionConfirmationEmail][25] | Sends a confirmation email to a [contact][7] that has unsubscribed from a [discussion list][9].                                                    |
 
 
 Fields
@@ -63,8 +64,8 @@ Fields
 
 |                                 | Name                              | Description                                                                  |
 | ------------------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
-| ![Public field]![Static member] | [STATUS_GROUP_ACTION_DELAYED][24] | (Immutable) The string denoting the MIME status for a delayed email message. |
-| ![Public field]![Static member] | [STATUS_GROUP_ACTION_FAILED][25]  | (Immutable) The string denoting the MIME status for a failed email message.  |
+| ![Public field]![Static member] | [STATUS_GROUP_ACTION_DELAYED][26] | (Immutable) The string denoting the MIME status for a delayed email message. |
+| ![Public field]![Static member] | [STATUS_GROUP_ACTION_FAILED][27]  | (Immutable) The string denoting the MIME status for a failed email message.  |
 
 
 See Also
@@ -94,10 +95,12 @@ See Also
 [19]: RelayEmail.md
 [20]: SendEmail.md
 [21]: SendOnboardingEmail.md
-[22]: SendSubscriptionConfirmationEmail.md
-[23]: SendUnsubscriptionConfirmationEmail.md
-[24]: STATUS_GROUP_ACTION_DELAYED.md
-[25]: STATUS_GROUP_ACTION_FAILED.md
+[22]: SendRequestOwnerNotificationEmail.md
+[23]: ../EmailAliasHelper/GetOwnerAlias.md
+[24]: SendSubscriptionConfirmationEmail.md
+[25]: SendUnsubscriptionConfirmationEmail.md
+[26]: STATUS_GROUP_ACTION_DELAYED.md
+[27]: STATUS_GROUP_ACTION_FAILED.md
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public property]: ../../icons/pubproperty.svg "Public property"

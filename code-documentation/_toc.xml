@@ -77,6 +77,8 @@
                    file="EasyMailDiscussion.Common/EmailHelper/SendEmail.md"/>
             <topic id="M:EasyMailDiscussion.Common.EmailHelper.SendOnboardingEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
                    file="EasyMailDiscussion.Common/EmailHelper/SendOnboardingEmail.md"/>
+            <topic id="M:EasyMailDiscussion.Common.EmailHelper.SendRequestOwnerNotificationEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
+                   file="EasyMailDiscussion.Common/EmailHelper/SendRequestOwnerNotificationEmail.md"/>
             <topic id="M:EasyMailDiscussion.Common.EmailHelper.SendSubscriptionConfirmationEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
                    file="EasyMailDiscussion.Common/EmailHelper/SendSubscriptionConfirmationEmail.md"/>
             <topic id="M:EasyMailDiscussion.Common.EmailHelper.SendUnsubscriptionConfirmationEmail(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.Contact,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
@@ -668,7 +670,7 @@
                    file="EasyMailDiscussion.Web.Worker/EmailFetcher/ProcessBounces.md"/>
             <topic id="M:EasyMailDiscussion.Web.Worker.EmailFetcher.ProcessDiscussionMessages(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.IndexedMimeMessage,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,System.Threading.CancellationToken)"
                    file="EasyMailDiscussion.Web.Worker/EmailFetcher/ProcessDiscussionMessages.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Worker.EmailFetcher.ProcessRequests(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,EasyMailDiscussion.Common.IndexedMimeMessage)"
+            <topic id="M:EasyMailDiscussion.Web.Worker.EmailFetcher.ProcessRequests(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,EasyMailDiscussion.Common.IndexedMimeMessage,System.Threading.CancellationToken)"
                    file="EasyMailDiscussion.Web.Worker/EmailFetcher/ProcessRequests.md"/>
             <topic id="M:EasyMailDiscussion.Web.Worker.EmailFetcher.ProcessSubscriptionConfirmations(EasyMailDiscussion.Common.Database.DiscussionList,EasyMailDiscussion.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,EasyMailDiscussion.Common.IndexedMimeMessage,System.Threading.CancellationToken)"
                    file="EasyMailDiscussion.Web.Worker/EmailFetcher/ProcessSubscriptionConfirmations.md"/>

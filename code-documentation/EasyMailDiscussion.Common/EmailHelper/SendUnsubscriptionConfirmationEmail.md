@@ -42,9 +42,11 @@ See Also
 #### Reference
 [EmailHelper Class][5]  
 [EasyMailDiscussion.Common Namespace][3]  
+[EmailHelper.SendEmail(DiscussionList, Contact, String, String, Func&lt;MimeEntity>, SmtpClient, CancellationToken)][6]  
 
 [1]: ../../EasyMailDiscussion.Common.Database/Contact/README.md
 [2]: ../../EasyMailDiscussion.Common.Database/DiscussionList/README.md
 [3]: ../README.md
 [4]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
 [5]: README.md
+[6]: SendEmail.md

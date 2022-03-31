@@ -13,7 +13,8 @@ private static void ProcessRequests(
 	DiscussionList discussionList,
 	SqliteDatabase database,
 	Pop3Client pop3Client,
-	IndexedMimeMessage request
+	IndexedMimeMessage request,
+	CancellationToken cancellationToken = default
 )
 ```
 
@@ -35,16 +36,21 @@ Type: Pop3Client
 Type: [EasyMailDiscussion.Common.IndexedMimeMessage][4]  
  The request message.
 
+##### *cancellationToken* (Optional)
+Type: [System.Threading.CancellationToken][5]  
+ (Optional) A token that allows processing to be cancelled.
+
 
 See Also
 --------
 
 #### Reference
-[EmailFetcher Class][5]  
+[EmailFetcher Class][6]  
 [EasyMailDiscussion.Web.Worker Namespace][1]  
 
 [1]: ../README.md
 [2]: ../../EasyMailDiscussion.Common.Database/DiscussionList/README.md
 [3]: ../../EasyMailDiscussion.Common.Database/SqliteDatabase/README.md
 [4]: ../../EasyMailDiscussion.Common/IndexedMimeMessage/README.md
-[5]: README.md
+[5]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
+[6]: README.md

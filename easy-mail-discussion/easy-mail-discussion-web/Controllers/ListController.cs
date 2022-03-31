@@ -64,7 +64,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <remarks> Fulfills the <c>/List/Edit</c> request. </remarks>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
-        [Route("List/Message/{discussionListID}")]
+        [Route("List/Edit/{discussionListID}")]
         public IActionResult Edit(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).FirstOrDefault();
@@ -253,10 +253,15 @@ namespace EasyMailDiscussion.Web.Controllers
                         };
                         this.SqliteDatabase.ContactSubscriptions.Add(subscription);
                     }
-                    else if(!EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status))
+                    if(subscription.Status == SubscriptionStatus.Requested)
                     {
                         logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
-                        subscription.Status = SubscriptionStatus.AwaitingConfirmation;
+                        subscription.Status = SubscriptionStatus.Subscribed;
+                    }
+                    else if(subscription.Status == SubscriptionStatus.Denied)
+                    {
+                        logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
+                        subscription.Status = SubscriptionStatus.Subscribed;
                     }
                 }
                 else

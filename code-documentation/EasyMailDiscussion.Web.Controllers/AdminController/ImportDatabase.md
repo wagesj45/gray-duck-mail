@@ -18,9 +18,7 @@ public IActionResult ImportDatabase(
 
 ##### *formInput*
 Type: [EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm][2]  
-
-[Missing &lt;param name="formInput"/> documentation for "M:EasyMailDiscussion.Web.Controllers.AdminController.ImportDatabase(EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm)"]
-
+ The form input.
 
 #### Return Value
 Type: [IActionResult][3]  

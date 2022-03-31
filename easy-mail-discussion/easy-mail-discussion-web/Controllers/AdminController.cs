@@ -86,7 +86,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <exception cref="FormatException">
         ///     Thrown when the format of an input is incorrect.
         /// </exception>
-        /// <param name="databaseFile"> The database file. </param>
+        /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         /// <seealso cref="Program.Main(string[])"/>
         /// <seealso cref="Startup.Startup(Microsoft.Extensions.Configuration.IConfiguration)"/>
