@@ -80,6 +80,8 @@ namespace EasyMailDiscussion.Common
             {
                 yield return SubscriptionStatus.Unsubscribed;
                 yield return SubscriptionStatus.Bounced;
+                yield return SubscriptionStatus.Created;
+                yield return SubscriptionStatus.AwaitingConfirmation;
             }
         }
 
@@ -181,7 +183,7 @@ namespace EasyMailDiscussion.Common
                 logger.Error("The discussion list is empty.");
                 return false;
             }
-            var authorized = contact.Activated && discussionList.Subscriptions.Where(subscription => subscription.Contact.ID == contact.ID && ContactAuthorizedStatuses.Contains(subscription.Status)).Any();
+            var authorized = discussionList.Subscriptions.Where(subscription => subscription.Contact.ID == contact.ID && ContactAssociatedStatuses.Contains(subscription.Status)).Any();
 
             return authorized;
         }

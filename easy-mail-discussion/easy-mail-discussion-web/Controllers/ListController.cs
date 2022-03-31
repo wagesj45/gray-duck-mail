@@ -238,7 +238,10 @@ namespace EasyMailDiscussion.Web.Controllers
         {
             foreach (var assignment in formInput.Assignments)
             {
-                var subscription = this.SqliteDatabase.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == formInput.DiscussionListID && subscription.ContactID == assignment.ContactID).FirstOrDefault();
+                var subscription = this.SqliteDatabase.ContactSubscriptions
+                    .Where(subscription => subscription.DiscussionListID == formInput.DiscussionListID && subscription.ContactID == assignment.ContactID)
+                    .Include(subscription => subscription.Contact)
+                    .FirstOrDefault();
 
                 if (assignment.IsAssigned)
                 {
@@ -266,7 +269,7 @@ namespace EasyMailDiscussion.Web.Controllers
                 }
                 else
                 {
-                    if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status))
+                    if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status) && subscription.Contact.Activated)
                     {
                         logger.Debug("Removing Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
 

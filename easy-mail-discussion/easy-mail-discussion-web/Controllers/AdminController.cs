@@ -25,7 +25,7 @@ namespace EasyMailDiscussion.Web.Controllers
         #endregion
 
         #region Constructors
-        
+
         /// <summary> Constructor. </summary>
         /// <param name="lifetime"> The lifetime. </param>
         public AdminController(IHostApplicationLifetime lifetime)
@@ -53,22 +53,9 @@ namespace EasyMailDiscussion.Web.Controllers
         public FileResult ExportDatabase()
         {
             var database = System.IO.File.ReadAllBytes(SqliteDatabase.DatabaseFilePath.AbsolutePath);
-            var filename = string.Format("easy-mail-discussions-{0}.db.zip", DateTime.Now.ToString("yyyy-MM-dd-HH-mm"));
-            var contentType = "application/zip";
+            var filename = string.Format("easy-mail-discussions-{0}.db", DateTime.Now.ToString("yyyy-MM-dd-HH-mm"));
 
-            using (var memoryStream = new MemoryStream())
-            {
-                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
-                {
-                    var entry = archive.CreateEntry(filename, CompressionLevel.Optimal);
-                    using (var zipStream = entry.Open())
-                    {
-                        zipStream.Write(database, 0, database.Length);
-                    }
-                }
-
-                return File(memoryStream.ToArray(), contentType, filename, false);
-            }
+            return File(database, SqliteDatabase.SQLITE_FILE_CONTENT_TYPE, filename, false);
         }
 
         /// <summary> Imports a SQLite database file and replaces the existing database file. </summary>
@@ -95,7 +82,7 @@ namespace EasyMailDiscussion.Web.Controllers
         [HttpPost]
         public IActionResult ImportDatabase(ImportDatabaseForm formInput)
         {
-            if(formInput.DatabaseFile == null)
+            if (formInput.DatabaseFile == null)
             {
                 var nullException = new ArgumentException("The file uploaded is missing or was malformed.", nameof(formInput));
             }
