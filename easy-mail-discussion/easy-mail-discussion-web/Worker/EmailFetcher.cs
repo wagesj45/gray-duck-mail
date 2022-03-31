@@ -333,7 +333,9 @@ namespace EasyMailDiscussion.Web.Worker
             logger.Debug(discussionMessage.ToString());
 
             var from = discussionMessage.Message.Sender ?? discussionMessage.Message.From.Mailboxes.SingleOrDefault();
-            var originatorSubscription = discussionList.Subscriptions.Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase)).SingleOrDefault();
+            var originatorSubscription = discussionList.Subscriptions
+                .Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase))
+                .SingleOrDefault();
 
             if (originatorSubscription != null && EmailHelper.ContactAuthorizedStatuses.Contains(originatorSubscription.Status))
             {

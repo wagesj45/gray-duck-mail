@@ -88,7 +88,7 @@ namespace EasyMailDiscussion.Common
         {
             var result = LogLevel.Info;
 
-            if(!string.IsNullOrWhiteSpace(logLevel))
+            if(string.IsNullOrWhiteSpace(logLevel))
             {
                 return result;
             }

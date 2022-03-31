@@ -516,16 +516,19 @@ namespace EasyMailDiscussion.Common
                 {
                     foreach (var statusGroup in deliveryStatus.StatusGroups)
                     {
-                        var action = statusGroup["Action"].ToLowerInvariant();
+                        var action = statusGroup["Action"];
 
-                        if (BouncedEmailStatusGroupActions.Contains(action))
+                        if(action != null)
                         {
-                            logger.Debug("A failed delivery was detected.");
+                            if (BouncedEmailStatusGroupActions.Contains(action.ToLowerInvariant()))
+                            {
+                                logger.Debug("A failed delivery was detected.");
 
-                            var recipient = statusGroup["Original-Recipient"];
-                            var address = recipient != null ? recipient.Split(';')[1] : string.Empty;
+                                var recipient = statusGroup["Original-Recipient"];
+                                var address = recipient != null ? recipient.Split(';')[1] : string.Empty;
 
-                            return address.Trim().ToLowerInvariant();
+                                return address.Trim().ToLowerInvariant();
+                            }
                         }
                     }
                 }

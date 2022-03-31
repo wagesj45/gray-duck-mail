@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Reflection
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -43,6 +44,10 @@
                 <li><a href="https://www.icofont.com">Icofont</a></li>
             </ul>
         </nav>
+        <br />
+        <small>
+            Version @ApplicationSettings.ApplicationVersion
+        </small>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

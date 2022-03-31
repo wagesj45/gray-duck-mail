@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace EasyMailDiscussion.Web
 {
@@ -14,7 +15,13 @@ namespace EasyMailDiscussion.Web
         /// <summary> (Immutable) The log section name. </summary>
         public const string SECTION_LOG = "Log";
         /// <summary> (Immutable) The log path key name. </summary>
-        public const string LOG_PATH = "Path"; 
+        public const string LOG_PATH = "Path";
+
+        /// <summary> The lazily loaded application version. </summary>
+        private static Lazy<string> applicationVersion = new Lazy<string>(() =>
+        {
+            return Assembly.GetEntryAssembly().GetName().Version.ToString();
+        });
 
         #endregion
 
@@ -27,6 +34,16 @@ namespace EasyMailDiscussion.Web
         /// <summary> Gets or sets the full pathname of the log file. </summary>
         /// <value> The full pathname of the log file. </value>
         public static Uri LogFilePath { get; set; } 
+
+        /// <summary> Gets the application version as a string. </summary>
+        /// <value> The application version. </value>
+        public static string ApplicationVersion
+        {
+            get
+            {
+                return applicationVersion.Value;
+            }
+        }
 
         #endregion
     }
