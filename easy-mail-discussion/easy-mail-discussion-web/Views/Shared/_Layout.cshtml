@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="~/css/pico.min.css" />
     <link rel="stylesheet" href="~/icofont/icofont.min.css" />
 </head>
-<body>
-    <header class="container">
+<body class="container">
+    <header>
         <nav>
             <ul>
                 <li><strong>Easy Mail Discussion</strong></li>
@@ -22,19 +22,16 @@
                 <li>
                     <a href="~/Contact"><i class="icofont-ui-user-group"></i> Contacts</a>
                 </li>
-                 <li>
+                <li>
                     <a href="~/Admin"><i class="icofont-dashboard-web"></i> Administration</a>
                 </li>
             </ul>
         </nav>
     </header>
-    <div class="container">
-        <main class="container">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="container">
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
         Find this project to be useful? Please consider <a href="https://support.jordanwages.com/">donating</a>!
         <br />
         <nav>
@@ -49,7 +46,6 @@
             Version @ApplicationSettings.ApplicationVersion
         </small>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

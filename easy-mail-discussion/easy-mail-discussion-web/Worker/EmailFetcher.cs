@@ -400,7 +400,7 @@ namespace EasyMailDiscussion.Web.Worker
                 }
             }
 
-            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", discussionMessage.Message.MessageId, discussionMessage.Index);
+            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", discussionMessage.Message.MessageId, discussionMessage.Index);
             pop3Client.DeleteMessage(discussionMessage.Index);
         }
 

@@ -524,8 +524,23 @@ namespace EasyMailDiscussion.Common
                             {
                                 logger.Debug("A failed delivery was detected.");
 
-                                var recipient = statusGroup["Original-Recipient"];
+                                var recipient = statusGroup["Original-Recipient"] 
+                                    ?? statusGroup["Failed-Recipient"]
+                                    ?? statusGroup["Final-Recipient"];
+                                
                                 var address = recipient != null ? recipient.Split(';')[1] : string.Empty;
+
+                                if(string.IsNullOrWhiteSpace(address))
+                                {
+                                    logger.Error("The bounced email contains a failure report, but an unknown recipient status group.");
+
+                                    foreach(var group in statusGroup)
+                                    {
+                                        logger.Debug(string.Format("-- {0}: {1}", group.Field, group.Value));
+                                    }
+
+                                    return "UNKNOWN_ADDRESS";
+                                }
 
                                 return address.Trim().ToLowerInvariant();
                             }
