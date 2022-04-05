@@ -42,8 +42,8 @@ namespace EasyMailDiscussion.Web
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<EmailFetcher>();
-                    services.AddHostedService<Onboarder>();
+                    //services.AddHostedService<EmailFetcher>();
+                    //services.AddHostedService<Onboarder>();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
