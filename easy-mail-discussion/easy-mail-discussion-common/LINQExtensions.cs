@@ -218,18 +218,18 @@ namespace EasyMailDiscussion.Common
         /// <remarks> This method is extremely resource intensive. </remarks>
         /// <typeparam name="T"> Generic type parameter. </typeparam>
         /// <param name="source">     The source to act on. </param>
-        /// <param name="accessor">   The accessor that returns a string to search. </param>
+        /// <param name="accessors">   The accessors that returns a string to search. </param>
         /// <param name="searchTerm"> The search term. </param>
         /// <returns>
         /// An enumerator that allows foreach to be used to process the fuzzies in this collection.
         /// </returns>
         /// <seealso cref="Levenshtein"/>
         /// <seealso cref="Levenshtein.Distance(string, string)"/>
-        public static IEnumerable<SearchResult<T>> FuzzySearch<T>(this IEnumerable<T> source, Func<T, string> accessor, string searchTerm)
+        public static IEnumerable<SearchResult<T>> FuzzySearch<T>(this IEnumerable<T> source, string searchTerm, params Func<T, string>[] accessors)
         {
             var levenshteinProcessor = new Levenshtein(searchTerm);
 
-            return source.Select(item => new { Item = item, Words = accessor(item).Split(' ', StringSplitOptions.RemoveEmptyEntries) })
+            return source.Select(item => new { Item = item, Words = string.Concat(accessors.Select(accessor => accessor(item) + " ")).Split(' ', StringSplitOptions.RemoveEmptyEntries) })
                 .Select(anon => new
                 {
                     Item = anon.Item,

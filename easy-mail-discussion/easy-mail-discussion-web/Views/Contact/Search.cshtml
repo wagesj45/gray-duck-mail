@@ -40,6 +40,10 @@
                     <th scope="col">Email</th>
                     <th scope="col">Number of Discussion Lists</th>
                     <th scope="col">Activated</th>
+                    @if (Model.IsFuzzySearch)
+                    {
+                        <th scope="col">Score</th>
+                    }
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -51,7 +55,7 @@
                         <td>@contact.Item.Email</td>
                         <td>@contact.Item.ContactSubscriptions.Count</td>
                         <td>
-                            @if(contact.Item.Activated)
+                            @if (contact.Item.Activated)
                             {
                                 <i class=icofont-check-circled></i>
                             }
@@ -60,6 +64,10 @@
                                 <i class=icofont-close-circled></i>
                             }
                         </td>
+                        @if (Model.IsFuzzySearch)
+                        {
+                            <td>@contact.Score</td>
+                        }
                         <td>
                             <a href="~/Contact/Edit/@contact.Item.ID" data-tooltip="Edit"><i class="icofont-edit-alt"></i></a>
                             <a href="~/Contact/Remove/@contact.Item.ID" data-tooltip="Remove"><i class="icofont-delete-alt"></i></a>

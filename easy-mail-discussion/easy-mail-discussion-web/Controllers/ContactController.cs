@@ -227,12 +227,9 @@ namespace EasyMailDiscussion.Web.Controllers
             {
                 logger.Debug("Loading search cache with term '{0}'.", searchTerm);
 
-                var contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions)
-                .Search(contact => contact.Name, searchTerm)
-                .Search(contact => contact.Email, searchTerm)
-                .Select(contact => new SearchResult<Contact>(contact, 0))
-                .Page(pageNumber, DockerEnvironmentVariables.PageSize)
-                .AsEnumerable();
+                var contacts = this.SqliteDatabase.Contacts
+                    .Include(contact => contact.ContactSubscriptions)
+                    .FuzzySearch(searchTerm, contact => contact.Name, contact => contact.Email);
 
                 logger.Debug("Caching search result.");
                 searchCache = new SearchCache<Contact>(searchTerm, contacts.ToArray());
