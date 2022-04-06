@@ -36,7 +36,7 @@ namespace EasyMailDiscussion.Common
         public SearchCache(string searchTerm, IEnumerable<SearchResult<T>> searchResults)
         {
             this.SearchTerm = searchTerm;
-            this.Cache = searchResults.OrderBy(searchResult => searchResult.Score).ToArray();
+            this.Cache = searchResults.ToArray();
         }
 
         #endregion

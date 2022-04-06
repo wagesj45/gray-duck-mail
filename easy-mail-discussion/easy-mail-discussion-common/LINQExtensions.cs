@@ -157,7 +157,7 @@ namespace EasyMailDiscussion.Common
         /// <returns> An enumerator that allows foreach to be used to process the matched items. </returns>
         public static IEnumerable<T> Search<T>(this IEnumerable<T> source, Func<T, string> propertySelector, string searchTerm)
         {
-            return source.Where(item => propertySelector(item).Contains(searchTerm));
+            return source.Where(item => propertySelector(item).Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
@@ -236,16 +236,10 @@ namespace EasyMailDiscussion.Common
                     Words = anon.Words,
                     ExactMatch = anon.Words.Count(word => word.Equals(searchTerm)),
                     IgnoreCaseMatch = anon.Words.Count(word => word.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)),
+                    SubstringMatch = anon.Words.Count(word => word.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)),
+                    LevenshteinScore = anon.Words.Min(word => levenshteinProcessor.DistanceFrom(word))
                 })
-                .Select(anon => new
-                {
-                    Item = anon.Item,
-                    Words = anon.Words,
-                    ExactMatch = anon.ExactMatch,
-                    IgnoreCaseMatch = anon.IgnoreCaseMatch,
-                    LevenshteinScore = (anon.ExactMatch > 0 || anon.IgnoreCaseMatch > 0) ? 0 : anon.Words.Min(word => levenshteinProcessor.DistanceFrom(word)),
-                })
-                .Select(anon => new SearchResult<T>(anon.Item, (anon.ExactMatch * 1.1f) + (anon.IgnoreCaseMatch * 1.0f) + (1 / (anon.LevenshteinScore + 1))));
+                .Select(anon => new SearchResult<T>(anon.Item, (anon.ExactMatch * 1.1f) + (anon.IgnoreCaseMatch * 1.0f) + (anon.SubstringMatch * 0.9f) + (1.0f / (anon.LevenshteinScore + 1.0f))));
 
         }
 

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using System;
+using System.Linq;
+using System.Text.Json;
 
 namespace EasyMailDiscussion.Web.Controllers
 {
@@ -17,6 +19,12 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary> (Immutable) The cookie name for the fuzzy search option. </summary>
+        private const string COOKIE_USE_FUZZY_SEARCH = "UseFuzzySearch";
+
+        private const string COOKIE_PAGE_SIZE = "PageSize";
+
+        /// <summary> The application lifetime interface. </summary>
         internal IHostApplicationLifetime applicationLifetime = default;
 
         /// <summary> A lazily initialized SQLite database context. </summary>
@@ -48,6 +56,50 @@ namespace EasyMailDiscussion.Web.Controllers
             get => sqliteDatabase.Value;
         }
 
+        /// <summary> Gets or sets a value indicating whether search functions will employ fuzzy search. </summary>
+        /// <value> True if use fuzzy search, false if not. </value>
+        public bool UseFuzzySearch
+        {
+            get
+            {
+                if(CookieExists(COOKIE_USE_FUZZY_SEARCH))
+                {
+                    return GetCookie<bool>(COOKIE_USE_FUZZY_SEARCH);
+                }
+                else
+                {
+                    SetCookie(COOKIE_USE_FUZZY_SEARCH, false);
+                    return false;
+                }
+            }
+            set
+            {
+                SetCookie(COOKIE_USE_FUZZY_SEARCH, value);
+            }
+        }
+
+        /// <summary> Gets or sets the number of items to display on a page. </summary>
+        /// <value> The number of items on the page. </value>
+        public int PageSize
+        {
+            get
+            {
+                if (CookieExists(COOKIE_PAGE_SIZE))
+                {
+                    return GetCookie<int>(COOKIE_PAGE_SIZE);
+                }
+                else
+                {
+                    SetCookie(COOKIE_PAGE_SIZE, 10);
+                    return 10;
+                }
+            }
+            set
+            {
+                SetCookie(COOKIE_PAGE_SIZE, value);
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -64,7 +116,67 @@ namespace EasyMailDiscussion.Web.Controllers
             logger.Info("Serving page '{0}'", context.HttpContext.Request.Path);
 
             base.OnActionExecuting(context);
-        } 
+        }
+
+        /// <summary> Sets a cookie. </summary>
+        /// <param name="cookieName"> Name of the cookie. </param>
+        /// <param name="value">      The value. </param>
+        internal void SetCookie(string cookieName, object value)
+        {
+            var stringValue = string.Empty;
+
+            if (value.GetType().IsEnum)
+            {
+                stringValue = Enum.GetName(value.GetType(), value);
+            }
+            else
+            {
+                stringValue = JsonSerializer.Serialize(value);
+            }
+            Response.Cookies.Append(cookieName, stringValue);
+        }
+
+        /// <summary>
+        /// Gets a cookie. If the cookie has been set in order to be returned to the client, the Response
+        /// version of the cookie is returned, otherwise the client version of the cookie is returned.
+        /// </summary>
+        /// <typeparam name="T"> Generic type parameter. </typeparam>
+        /// <param name="cookieName"> Name of the cookie. </param>
+        /// <returns> The cookie&lt; t&gt; </returns>
+        internal T GetCookie<T>(string cookieName)
+        {
+            var cookie = Request.Cookies[cookieName];
+
+            if (!string.IsNullOrWhiteSpace(cookie))
+            {
+                var cookieValue = cookie;
+
+                if (typeof(T).IsEnum)
+                {
+                    if (Enum.TryParse(typeof(T), cookieValue, out var t))
+                    {
+                        return (T)t;
+                    }
+                }
+                else
+                {
+                    return JsonSerializer.Deserialize<T>(cookieValue);
+                }
+            }
+
+            return default(T);
+        }
+
+        /// <summary>
+        /// Queries if a given cookie exists in the <see cref="Microsoft.AspNetCore.Http.HttpRequest">
+        /// request</see>.
+        /// </summary>
+        /// <param name="cookieName"> Name of the cookie. </param>
+        /// <returns> True if it succeeds, false if it fails. </returns>
+        internal bool CookieExists(string cookieName)
+        {
+            return Request.Cookies.ContainsKey(cookieName);
+        }
 
         #endregion
     }

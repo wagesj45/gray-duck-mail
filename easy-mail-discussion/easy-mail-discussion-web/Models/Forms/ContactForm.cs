@@ -4,7 +4,7 @@
     /// Model for the form input creating or modifying a
     /// <see cref="Common.Database.Contact"/>.
     /// </summary>
-    public class ContactForm
+    public class ContactForm : BaseFormInput<ContactForm>
     {
         #region Properties
 
@@ -29,23 +29,6 @@
         /// <value> The activated. </value>
         /// <seealso cref="Common.Database.Contact.Activated"/>
         public string Activated { get; set; }
-
-        /// <summary>
-        /// Gets a value indicating if the contact's email address has been confirmed.
-        /// </summary>
-        /// <remarks>
-        /// This is a helper property that processes the string value sent from the HTTP form for
-        /// <see cref="Activated"/>.
-        /// </remarks>
-        /// <value> True if <see cref="Activated"/> is checked, false if not. </value>
-        /// <seealso cref="Common.Database.Contact.Activated"/>
-        public bool ActivatedChecked
-        {
-            get
-            {
-                return (!string.IsNullOrWhiteSpace(this.Activated));
-            }
-        }
 
         #endregion
     }

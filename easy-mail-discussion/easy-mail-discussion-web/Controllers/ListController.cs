@@ -40,12 +40,16 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <summary> Gets the index or default request. </summary>
         /// <remarks> Fulfills the <c>/List</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
-        [Route("List")]
-        public IActionResult Index()
+        [Route("List/{pageNumber?}")]
+        public IActionResult Index(int pageNumber = 1)
         {
+            var discussionLists = this.SqliteDatabase.DiscussionLists;
+
             var model = new DiscussionListsModel()
             {
-                DiscussionLists = this.SqliteDatabase.DiscussionLists.ToArray()
+                DiscussionLists = discussionLists.Page(pageNumber, this.PageSize),
+                PageNumber = pageNumber,
+                TotalPages = discussionLists.PageCount(this.PageSize)
             };
 
             return View(model);
@@ -113,7 +117,7 @@ namespace EasyMailDiscussion.Web.Controllers
             discussionList.IncomingMailPort = formInput.IncomingMailPort;
             discussionList.OutgoingMailServer = formInput.OutgoingMailServer;
             discussionList.OutgoingMailPort = formInput.OutgoingMailPort;
-            discussionList.UseSSL = formInput.UseSSLChecked;
+            discussionList.UseSSL = formInput.IsChecked(f => f.UseSSL);
 
             this.SqliteDatabase.SaveChanges();
 
@@ -189,7 +193,7 @@ namespace EasyMailDiscussion.Web.Controllers
                 IncomingMailPort = formInput.IncomingMailPort,
                 OutgoingMailServer = formInput.OutgoingMailServer,
                 OutgoingMailPort = formInput.OutgoingMailPort,
-                UseSSL = formInput.UseSSLChecked
+                UseSSL = formInput.IsChecked(f => f.UseSSL)
             };
 
             this.SqliteDatabase.DiscussionLists.Add(discussionList);
@@ -300,12 +304,12 @@ namespace EasyMailDiscussion.Web.Controllers
                 .Where(message => message.ParentID == null)
                 .Include(message => message.OriginatorContact)
                 .Include(message => message.Children)
-                .Page(pageNumber, DockerEnvironmentVariables.PageSize)
+                .Page(pageNumber, this.PageSize)
                 .ToArray();
             var pageCount = this.SqliteDatabase.Messages
                 .Where(message => message.DiscussionListID == discussionListID)
                 .Where(message => message.ParentID == null)
-                .PageCount(DockerEnvironmentVariables.PageSize);
+                .PageCount(this.PageSize);
 
             var model = new ArchivePageModel()
             {
@@ -336,11 +340,11 @@ namespace EasyMailDiscussion.Web.Controllers
                 .Where(message => message.ParentID == messageID)
                 .Include(message => message.OriginatorContact)
                 .Include(message => message.DiscussionList)
-                .Page(pageNumber, DockerEnvironmentVariables.PageSize);
+                .Page(pageNumber, this.PageSize);
 
             var pageCount = this.SqliteDatabase.Messages
                 .Where(message => message.ParentID == messageID)
-                .PageCount(DockerEnvironmentVariables.PageSize);
+                .PageCount(this.PageSize);
 
 
             var model = new MessagePageModel()

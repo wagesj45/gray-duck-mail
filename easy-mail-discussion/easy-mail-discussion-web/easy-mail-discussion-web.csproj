@@ -6,7 +6,7 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileTag>easy-mail-discussion</DockerfileTag>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Version>0.9.2</Version>
+		<Version>0.9.3</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

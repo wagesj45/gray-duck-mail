@@ -2,10 +2,8 @@
 
 namespace EasyMailDiscussion.Web.Models.Forms
 {
-    /// <summary>
-    /// Model for the form input importing a SQLite database file.
-    /// </summary>
-    public class ImportDatabaseForm
+    /// <summary> Model for the form input importing a SQLite database file. </summary>
+    public class ImportDatabaseForm : BaseFormInput<ImportDatabaseForm>
     {
         #region Properties
 

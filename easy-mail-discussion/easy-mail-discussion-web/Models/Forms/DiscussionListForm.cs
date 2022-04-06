@@ -4,7 +4,7 @@
     /// Model for the form input creating or modifying
     /// <see cref="Common.Database.DiscussionList"/>.
     /// </summary>
-    public class DiscussionListForm
+    public class DiscussionListForm : BaseFormInput<DiscussionListForm>
     {
         #region Properties
 
@@ -65,20 +65,6 @@
         /// <value> The SSL value. </value>
         /// <seealso cref="Common.Database.DiscussionList.UseSSL"/>
         public string UseSSL { get; set; }
-
-        /// <summary>
-        /// Gets a value describing if the connection to the <see cref="IncomingMailServer"/> and
-        /// <see cref="OutgoingMailServer"/> use an encrypted connection.
-        /// </summary>
-        /// <value> True if <see cref="UseSSL"/> is checked, false if not. </value>
-        /// <seealso cref="Common.Database.DiscussionList.UseSSL"/>
-        public bool UseSSLChecked
-        {
-            get
-            {
-                return (!string.IsNullOrWhiteSpace(this.UseSSL));
-            }
-        }
 
         #endregion
     }

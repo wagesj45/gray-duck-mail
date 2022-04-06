@@ -44,12 +44,19 @@ namespace EasyMailDiscussion.Web.Controllers
         [Route("Admin")]
         public IActionResult Index()
         {
-            return View("Index");
+            var model = new AdminModel()
+            {
+                UseFuzzySearch = this.UseFuzzySearch,
+                PageSize = this.PageSize
+            };
+
+            return View("Index", model);
         }
 
         /// <summary> Exports the database as a downloadable file. </summary>
         /// <remarks> Fulfills the <c>/Admin/ExportDatabase</c> request. </remarks>
         /// <returns> A file stream to return to the caller. </returns>
+        [Route("Admin/ExportDatabase")]
         public FileResult ExportDatabase()
         {
             var database = System.IO.File.ReadAllBytes(SqliteDatabase.DatabaseFilePath.AbsolutePath);
@@ -107,6 +114,18 @@ namespace EasyMailDiscussion.Web.Controllers
                 // This will allow us to replace it at start up.
                 this.applicationLifetime.StopApplication();
             }
+
+            return RedirectToAction("Index");
+        }
+
+        /// <summary> Saves web administration settings. </summary>
+        /// <param name="formInput"> The form input. </param>
+        /// <returns> A response to return to the caller. </returns>
+        [HttpPost]
+        public IActionResult SaveSettings(AdminSettingsForm formInput)
+        {
+            this.UseFuzzySearch = formInput.IsChecked(f => f.UseFuzzySearch);
+            this.PageSize = formInput.PageSize;
 
             return RedirectToAction("Index");
         }

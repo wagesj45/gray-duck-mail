@@ -61,16 +61,21 @@
                     </tr>
                 }
             </tbody>
-            <tfoot>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Total</th>
-                    <th scope="col"><strong>@Model.Contacts.Count()</strong></th>
-                </tr>
-            </tfoot>
         </table>
+        @if (Model.TotalPages > 1)
+        {
+            <footer>
+                @if (Model.PageNumber > 1)
+                {
+                    <a href="~/Contact/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                }
+                Page @Model.PageNumber of @Model.TotalPages
+                @if (Model.PageNumber < Model.TotalPages)
+                {
+                    <a href="~/Contact/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                }
+            </footer>
+        }
     }
     else
     {

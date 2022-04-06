@@ -8,7 +8,7 @@ namespace EasyMailDiscussion.Web.Models.Forms
     /// <see cref="Common.Database.ContactSubscription">discussion list
     /// assignments</see>.
     /// </summary>
-    public class DiscussionListAssignForm
+    public class DiscussionListAssignForm : BaseFormInput<DiscussionListAssignForm>
     {
         #region Properties
 

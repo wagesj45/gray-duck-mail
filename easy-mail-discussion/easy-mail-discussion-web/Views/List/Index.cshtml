@@ -48,6 +48,20 @@
                 </nav>
             </details>
         }
+        @if (Model.TotalPages > 1)
+        {
+            <footer>
+                @if (Model.PageNumber > 1)
+                {
+                    <a href="~/List/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                }
+                Page @Model.PageNumber of @Model.TotalPages
+                @if (Model.PageNumber < Model.TotalPages)
+                {
+                    <a href="~/List/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                }
+            </footer>
+        }
     }
     else
     {

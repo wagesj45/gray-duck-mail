@@ -36,17 +36,24 @@ namespace EasyMailDiscussion.Web
             return "info";
         });
 
-        /// <summary> Size of the environment variable for <see cref="PageSize"/>. </summary>
-        private static Lazy<int> envPageSize = new Lazy<int>(() =>
+        /// <summary>
+        /// If set, only the web interface will be initialized. <see cref="Microsoft.Extensions.Hosting.BackgroundService">
+        /// Background worker threads</see> will not be initialized.
+        /// </summary>
+        private static Lazy<bool> envWebOnly = new Lazy<bool>(() =>
         {
-            var pageSize = Environment.GetEnvironmentVariable("PAGE_SIZE");
+            var webOnly = Environment.GetEnvironmentVariable("WEB_ONLY");
 
-            if(int.TryParse(pageSize, out var page))
+            if(bool.TryParse(webOnly, out var parsedBool))
             {
-                return page;
+                return parsedBool;
+            }
+            else if(int.TryParse(webOnly, out var parsedInt))
+            {
+                return parsedInt != 0;
             }
 
-            return 10;
+            return false;
         });
 
         #endregion
@@ -67,11 +74,17 @@ namespace EasyMailDiscussion.Web
             get => envLogLevel.Value;
         }
 
-        /// <summary> Gets the page size to use when paginating results. </summary>
-        /// <value> The size of the page. </value>
-        public static int PageSize
+        /// <summary>
+        /// Gets a value that if set, only the web interface will be initialized. <see cref="Microsoft.Extensions.Hosting.BackgroundService">
+        /// Background worker threads</see> will not be initialized.
+        /// </summary>
+        /// <value>
+        /// True if only the web interface will be initialized, false if <see cref="Microsoft.Extensions.Hosting.BackgroundService">
+        /// background service threads</see> will also be initialized.
+        /// </value>
+        public static bool WebOnly
         {
-            get => envPageSize.Value;
+            get => envWebOnly.Value;
         }
 
         #endregion

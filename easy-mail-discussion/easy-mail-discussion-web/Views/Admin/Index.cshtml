@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AdminModel
+@{
     ViewData["Title"] = "Administration";
 }
 
@@ -9,22 +10,55 @@
 
 <article>
     <header>
+        <h3>
+            Web Settings
+        </h3>
+    </header>
+    <form id="webSettings" action="~/Admin/SaveSettings" method="post">
+        <fieldset>
+            <label for="useFuzzySearch">
+                <input type="checkbox" role="switch" id="useFuzzySearch" name="useFuzzySearch" @((Model.UseFuzzySearch) ? "checked" : "") />
+                Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms.
+            </label>
+            <mark><i class="icofont-warning"></i> Fuzzy search can give you better search results, but can be very slow.</mark>
+        </fieldset>
+        <label>
+            Number of items per page
+            <input type="number" id="pageSize" name="pageSize" value="@Model.PageSize" />
+        </label>
+    </form>
+    <footer>
+            <button type="submit" form="webSettings"><i class="icofont-save"></i> Save Settings</button>
+    </footer>
+</article>
+<article>
+    <header>
         <h3>Export Database</h3>
     </header>
-    <a href="~/Admin/ExportDatabase" role="button"><i></i> Export</a>
+    <p>
+        Save a copy of your database, including contacts, discussion lists, and messages.
+    </p>
+    <footer>
+        <a href="~/Admin/ExportDatabase" role="button"><i class="icofont-download"></i> Export</a>
+    </footer>
 </article>
 <article>
     <header>
         <h3>Import Database</h3>
     </header>
-    <form action="~/Admin/ImportDatabase" method="post" enctype="multipart/form-data">
+    <p>
+        Import a database file to transfer contacts, discussion lists, and messages.
+    </p>
+    <form id="importDatabase" action="~/Admin/ImportDatabase" method="post" enctype="multipart/form-data">
         <label for="databaseFile">
             Choose a SQLite database file to import
             <input type="file" id="databaseFileUpldate" name="databaseFile">
         </label>
-        <button type="submit"><i class="icofont-upload"></i> Import</button>
     </form>
     <p>
-        <i class="icofont-warning"></i> <mark><strong>WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding.</strong></mark>
+        <mark><i class="icofont-warning"></i> <strong>WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding.</strong></mark>
     </p>
+    <footer>
+        <button type="submit" form="importDatabase"><i class="icofont-upload"></i> Import</button>
+    </footer>
 </article>

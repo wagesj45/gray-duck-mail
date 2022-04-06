@@ -25,12 +25,6 @@
             </ul>
         </nav>
     </header>
-    <details>
-        <summary>
-            Didn't find what you need?
-        </summary>
-        <a href="~/Contact/FuzzySearch/@Model.Contacts.SearchTerm">Do a fuzzy search</a>
-    </details>
     @if (Model.Contacts.Cache.Any())
     {
         <table>
@@ -40,10 +34,6 @@
                     <th scope="col">Email</th>
                     <th scope="col">Number of Discussion Lists</th>
                     <th scope="col">Activated</th>
-                    @if (Model.IsFuzzySearch)
-                    {
-                        <th scope="col">Score</th>
-                    }
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -64,10 +54,6 @@
                                 <i class=icofont-close-circled></i>
                             }
                         </td>
-                        @if (Model.IsFuzzySearch)
-                        {
-                            <td>@contact.Score</td>
-                        }
                         <td>
                             <a href="~/Contact/Edit/@contact.Item.ID" data-tooltip="Edit"><i class="icofont-edit-alt"></i></a>
                             <a href="~/Contact/Remove/@contact.Item.ID" data-tooltip="Remove"><i class="icofont-delete-alt"></i></a>
@@ -75,19 +61,24 @@
                     </tr>
                 }
             </tbody>
-            <tfoot>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Total</th>
-                    <th scope="col"><strong>@Model.Contacts.Cache.Count()</strong></th>
-                </tr>
-            </tfoot>
         </table>
+        @if (Model.TotalPages > 1)
+        {
+            <footer>
+                @if (Model.PageNumber > 1)
+                {
+                    <a href="~/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                }
+                Page @Model.PageNumber of @Model.TotalPages
+                @if (Model.PageNumber < Model.TotalPages)
+                {
+                    <a href="~/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                }
+            </footer>
+        }
     }
     else
     {
-        <p>No contacts could be found. Try a more <a href="~/Contact/FuzzySearch/@Model.Contacts.SearchTerm">comprehensive search</a>.</p>
+        <p>No contacts could be found. Try a more enabling <em data-tooltip="Find's simliar and mispelled search terms.">Use Fuzzy Search</em> in the Administration settings..</p>
     }
 </article>

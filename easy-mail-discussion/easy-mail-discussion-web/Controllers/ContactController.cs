@@ -41,12 +41,16 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <summary> Gets the index or default request. </summary>
         /// <remarks> Fulfills the <c>/Contact</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
-        [Route("Contact")]
-        public IActionResult Index()
+        [Route("Contact/{pageNumber?}")]
+        public IActionResult Index(int pageNumber = 1)
         {
+            var contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions);
+
             var model = new ContactsModel()
             {
-                Contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions).ToArray()
+                Contacts = contacts.Page(pageNumber, this.PageSize),
+                PageNumber = pageNumber,
+                TotalPages = contacts.PageCount(this.PageSize)
             };
 
             return View("Index", model);
@@ -107,7 +111,7 @@ namespace EasyMailDiscussion.Web.Controllers
 
             contact.Name = formInput.Name;
             contact.Email = formInput.Email;
-            contact.Activated = formInput.ActivatedChecked;
+            contact.Activated = formInput.IsChecked(f => f.Activated);
 
             this.SqliteDatabase.SaveChanges();
 
@@ -176,7 +180,7 @@ namespace EasyMailDiscussion.Web.Controllers
             {
                 Name = formInput.Name,
                 Email = formInput.Email,
-                Activated = formInput.ActivatedChecked
+                Activated = formInput.IsChecked(f => f.Activated)
             };
 
             this.SqliteDatabase.Contacts.Add(contact);
@@ -186,6 +190,13 @@ namespace EasyMailDiscussion.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Searches for the <see cref="Contact">contacts</see> with a matching <see cref="Contact.Name">
+        /// name</see> or <see cref="Contact.Email">email address</see>.
+        /// </summary>
+        /// <remarks> Fulfills the <c>/Contact/Search</c> post request. </remarks>
+        /// <param name="searchTerm"> The search term. </param>
+        /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         public IActionResult Search(string searchTerm)
         {
@@ -193,54 +204,49 @@ namespace EasyMailDiscussion.Web.Controllers
         }
 
         /// <summary>
-        /// (An Action that handles HTTP GET requests) searches for the first match.
+        /// Searches for the <see cref="Contact">contacts</see> with a matching <see cref="Contact.Name">
+        /// name</see> or <see cref="Contact.Email">email address</see>.
         /// </summary>
+        /// <remarks> Fulfills the <c>/Contact/Search</c> request. </remarks>
         /// <param name="searchTerm"> The search term. </param>
-        /// <param name="pageNumber"> The page number. </param>
+        /// <param name="pageNumber"> (Optional) The page number. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpGet]
-        [Route("Contact/Search/{searchTerm}/{pageNumber}")]
+        [Route("Contact/Search/{searchTerm}/{pageNumber?}")]
         public IActionResult Search(string searchTerm, int pageNumber = 1)
-        {
-            var contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions)
-                .Search(contact => contact.Name, searchTerm)
-                .Search(contact => contact.Email, searchTerm)
-                .Select(contact => new SearchResult<Contact>(contact, 0))
-                .Page(pageNumber, DockerEnvironmentVariables.PageSize)
-                .AsEnumerable();
-
-            var model = new ContactSearchModel()
-            {
-                PageNumber = pageNumber,
-                TotalPages = contacts.PageCount(DockerEnvironmentVariables.PageSize),
-                IsFuzzySearch = false,
-                Contacts = new SearchCache<Contact>(searchTerm, contacts.Page(pageNumber, DockerEnvironmentVariables.PageSize))
-            };
-
-            return View("Search", model);
-        }
-
-        [Route("Contact/FuzzySearch/{searchTerm}/{pageNumber?}")]
-        public IActionResult FuzzySearch(string searchTerm, int pageNumber = 1)
         {
             if (searchCache.SearchTerm != searchTerm)
             {
-                logger.Debug("Loading search cache with term '{0}'.", searchTerm);
+                var contacts = Enumerable.Empty<SearchResult<Contact>>();
 
-                var contacts = this.SqliteDatabase.Contacts
-                    .Include(contact => contact.ContactSubscriptions)
-                    .FuzzySearch(searchTerm, contact => contact.Name, contact => contact.Email);
+                if (this.UseFuzzySearch)
+                {
+                    logger.Info("Performing fuzzy search: {0}", searchTerm);
 
-                logger.Debug("Caching search result.");
-                searchCache = new SearchCache<Contact>(searchTerm, contacts.ToArray());
+                    contacts = this.SqliteDatabase.Contacts
+                        .Include(contact => contact.ContactSubscriptions)
+                        .FuzzySearch(searchTerm, contact => contact.Name, contact => contact.Email)
+                        .OrderByDescending(searchResult => searchResult.Score);
+                }
+                else
+                {
+                    contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions)
+                        .Search(contact => contact.Name, searchTerm)
+                        .Search(contact => contact.Email, searchTerm)
+                        .Select(contact => new SearchResult<Contact>(contact, 0))
+                        .OrderByDescending(searchResult => searchResult.Score)
+                        .AsEnumerable();
+                }
+
+                searchCache = new SearchCache<Contact>(searchTerm, contacts);
             }
 
             var model = new ContactSearchModel()
             {
                 PageNumber = pageNumber,
-                TotalPages = searchCache.Cache.PageCount(DockerEnvironmentVariables.PageSize),
-                IsFuzzySearch = true,
-                Contacts = new SearchCache<Contact>(searchTerm, searchCache.Cache.Page(pageNumber, DockerEnvironmentVariables.PageSize))
+                TotalPages = searchCache.Cache.PageCount(this.PageSize),
+                IsFuzzySearch = this.UseFuzzySearch,
+                Contacts = new SearchCache<Contact>(searchTerm, searchCache.Cache.Page(pageNumber, this.PageSize))
             };
 
             return View("Search", model);
