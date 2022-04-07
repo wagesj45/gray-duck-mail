@@ -165,6 +165,8 @@
          <topic id="T:EasyMailDiscussion.Common.Tree`1"
                 file="EasyMailDiscussion.Common/Tree_1/README.md"
                 title="Tree&lt;T&gt;">
+            <topic id="M:EasyMailDiscussion.Common.Tree`1.#cctor"
+                   file="EasyMailDiscussion.Common/Tree_1/_cctor.md"/>
             <topic id="M:EasyMailDiscussion.Common.Tree`1.#ctor(`0,System.Collections.Generic.IEnumerable{`0},System.Func{`0,System.Collections.Generic.IEnumerable{`0}})"
                    file="EasyMailDiscussion.Common/Tree_1/_ctor.md"/>
             <topic id="P:EasyMailDiscussion.Common.Tree`1.Branches"

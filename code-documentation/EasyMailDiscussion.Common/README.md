@@ -16,7 +16,7 @@ Classes
 | ![Public class] | [NLogConfiguration][8]   | A static class that contains the NLog configuration.                                      |
 | ![Public class] | [SearchCache&lt;T>][9]   | A cache of search results.                                                                |
 | ![Public class] | [SearchResult&lt;T>][10] | Encapsulates the result of a search on a given T.                                         |
-| ![Public class] | [Tree&lt;T>][11]         |                                                                                           |
+| ![Public class] | [Tree&lt;T>][11]         | A branching tree structure that can recursively populate child nodes.                     |
 
 [1]: EmailAliasHelper/README.md
 [2]: ../EasyMailDiscussion.Common.Database/DiscussionList/BaseEmailAddress.md
