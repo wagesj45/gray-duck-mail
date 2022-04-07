@@ -117,6 +117,8 @@
                 title="LINQExtensions">
             <topic id="M:EasyMailDiscussion.Common.LINQExtensions.#cctor"
                    file="EasyMailDiscussion.Common/LINQExtensions/_cctor.md"/>
+            <topic id="M:EasyMailDiscussion.Common.LINQExtensions.FuzzySearch``1(System.Collections.Generic.IEnumerable{``0},System.String,System.Func{``0,System.String}[])"
+                   file="EasyMailDiscussion.Common/LINQExtensions/FuzzySearch__1.md"/>
             <topic id="M:EasyMailDiscussion.Common.LINQExtensions.Page``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)"
                    file="EasyMailDiscussion.Common/LINQExtensions/Page__1.md"/>
             <topic id="M:EasyMailDiscussion.Common.LINQExtensions.Page``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)"
@@ -125,6 +127,10 @@
                    file="EasyMailDiscussion.Common/LINQExtensions/PageCount__1.md"/>
             <topic id="M:EasyMailDiscussion.Common.LINQExtensions.PageCount``1(System.Linq.IQueryable{``0},System.Int32)"
                    file="EasyMailDiscussion.Common/LINQExtensions/PageCount__1_1.md"/>
+            <topic id="M:EasyMailDiscussion.Common.LINQExtensions.Search``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.String)"
+                   file="EasyMailDiscussion.Common/LINQExtensions/Search__1.md"/>
+            <topic id="M:EasyMailDiscussion.Common.LINQExtensions.Search``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.String)"
+                   file="EasyMailDiscussion.Common/LINQExtensions/Search__1_1.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Common.NLogConfiguration"
                 file="EasyMailDiscussion.Common/NLogConfiguration/README.md"
@@ -133,6 +139,42 @@
                    file="EasyMailDiscussion.Common/NLogConfiguration/GetConfiguration.md"/>
             <topic id="M:EasyMailDiscussion.Common.NLogConfiguration.ParseLogLevel(System.String)"
                    file="EasyMailDiscussion.Common/NLogConfiguration/ParseLogLevel.md"/>
+         </topic>
+         <topic id="T:EasyMailDiscussion.Common.SearchCache`1"
+                file="EasyMailDiscussion.Common/SearchCache_1/README.md"
+                title="SearchCache&lt;T&gt;">
+            <topic id="M:EasyMailDiscussion.Common.SearchCache`1.#ctor"
+                   file="EasyMailDiscussion.Common/SearchCache_1/_ctor.md"/>
+            <topic id="M:EasyMailDiscussion.Common.SearchCache`1.#ctor(System.String,System.Collections.Generic.IEnumerable{EasyMailDiscussion.Common.SearchResult{`0}})"
+                   file="EasyMailDiscussion.Common/SearchCache_1/_ctor_1.md"/>
+            <topic id="P:EasyMailDiscussion.Common.SearchCache`1.Cache"
+                   file="EasyMailDiscussion.Common/SearchCache_1/Cache.md"/>
+            <topic id="P:EasyMailDiscussion.Common.SearchCache`1.SearchTerm"
+                   file="EasyMailDiscussion.Common/SearchCache_1/SearchTerm.md"/>
+         </topic>
+         <topic id="T:EasyMailDiscussion.Common.SearchResult`1"
+                file="EasyMailDiscussion.Common/SearchResult_1/README.md"
+                title="SearchResult&lt;T&gt;">
+            <topic id="M:EasyMailDiscussion.Common.SearchResult`1.#ctor(`0,System.Single)"
+                   file="EasyMailDiscussion.Common/SearchResult_1/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Common.SearchResult`1.Item"
+                   file="EasyMailDiscussion.Common/SearchResult_1/Item.md"/>
+            <topic id="P:EasyMailDiscussion.Common.SearchResult`1.Score"
+                   file="EasyMailDiscussion.Common/SearchResult_1/Score.md"/>
+         </topic>
+         <topic id="T:EasyMailDiscussion.Common.Tree`1"
+                file="EasyMailDiscussion.Common/Tree_1/README.md"
+                title="Tree&lt;T&gt;">
+            <topic id="M:EasyMailDiscussion.Common.Tree`1.#ctor(`0,System.Collections.Generic.IEnumerable{`0},System.Func{`0,System.Collections.Generic.IEnumerable{`0}})"
+                   file="EasyMailDiscussion.Common/Tree_1/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Common.Tree`1.Branches"
+                   file="EasyMailDiscussion.Common/Tree_1/Branches.md"/>
+            <topic id="P:EasyMailDiscussion.Common.Tree`1.IsBase"
+                   file="EasyMailDiscussion.Common/Tree_1/IsBase.md"/>
+            <topic id="P:EasyMailDiscussion.Common.Tree`1.Parent"
+                   file="EasyMailDiscussion.Common/Tree_1/Parent.md"/>
+            <topic id="P:EasyMailDiscussion.Common.Tree`1.Value"
+                   file="EasyMailDiscussion.Common/Tree_1/Value.md"/>
          </topic>
       </topic>
       <topic id="N:EasyMailDiscussion.Common.Database"
@@ -308,6 +350,10 @@
          <topic id="T:EasyMailDiscussion.Web.ApplicationSettings"
                 file="EasyMailDiscussion.Web/ApplicationSettings/README.md"
                 title="ApplicationSettings">
+            <topic id="M:EasyMailDiscussion.Web.ApplicationSettings.#cctor"
+                   file="EasyMailDiscussion.Web/ApplicationSettings/_cctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.ApplicationSettings.ApplicationVersion"
+                   file="EasyMailDiscussion.Web/ApplicationSettings/ApplicationVersion.md"/>
             <topic id="P:EasyMailDiscussion.Web.ApplicationSettings.DatabaseFilePath"
                    file="EasyMailDiscussion.Web/ApplicationSettings/DatabaseFilePath.md"/>
             <topic id="P:EasyMailDiscussion.Web.ApplicationSettings.LogFilePath"
@@ -330,8 +376,8 @@
                    file="EasyMailDiscussion.Web/DockerEnvironmentVariables/FetchTime.md"/>
             <topic id="P:EasyMailDiscussion.Web.DockerEnvironmentVariables.LogLevel"
                    file="EasyMailDiscussion.Web/DockerEnvironmentVariables/LogLevel.md"/>
-            <topic id="P:EasyMailDiscussion.Web.DockerEnvironmentVariables.PageSize"
-                   file="EasyMailDiscussion.Web/DockerEnvironmentVariables/PageSize.md"/>
+            <topic id="P:EasyMailDiscussion.Web.DockerEnvironmentVariables.WebOnly"
+                   file="EasyMailDiscussion.Web/DockerEnvironmentVariables/WebOnly.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Program"
                 file="EasyMailDiscussion.Web/Program/README.md"
@@ -380,6 +426,8 @@
                    file="EasyMailDiscussion.Web.Controllers/AdminController/ImportDatabase.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.AdminController.Index"
                    file="EasyMailDiscussion.Web.Controllers/AdminController/Index.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.AdminController.SaveSettings(EasyMailDiscussion.Web.Models.Forms.AdminSettingsForm)"
+                   file="EasyMailDiscussion.Web.Controllers/AdminController/SaveSettings.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Controllers.BaseController"
                 file="EasyMailDiscussion.Web.Controllers/BaseController/README.md"
@@ -388,8 +436,12 @@
                    file="EasyMailDiscussion.Web.Controllers/BaseController/_cctor.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.BaseController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
                    file="EasyMailDiscussion.Web.Controllers/BaseController/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Controllers.BaseController.PageSize"
+                   file="EasyMailDiscussion.Web.Controllers/BaseController/PageSize.md"/>
             <topic id="P:EasyMailDiscussion.Web.Controllers.BaseController.SqliteDatabase"
                    file="EasyMailDiscussion.Web.Controllers/BaseController/SqliteDatabase.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Controllers.BaseController.UseFuzzySearch"
+                   file="EasyMailDiscussion.Web.Controllers/BaseController/UseFuzzySearch.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.BaseController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)"
                    file="EasyMailDiscussion.Web.Controllers/BaseController/OnActionExecuting.md"/>
          </topic>
@@ -408,12 +460,16 @@
                    file="EasyMailDiscussion.Web.Controllers/ContactController/Edit.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.Edit(System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ContactController/Edit_1.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.Index"
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.Index(System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ContactController/Index.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.New"
                    file="EasyMailDiscussion.Web.Controllers/ContactController/New.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.Remove(System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ContactController/Remove.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.Search(System.String)"
+                   file="EasyMailDiscussion.Web.Controllers/ContactController/Search.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ContactController.Search(System.String,System.Int32)"
+                   file="EasyMailDiscussion.Web.Controllers/ContactController/Search_1.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Controllers.HomeController"
                 file="EasyMailDiscussion.Web.Controllers/HomeController/README.md"
@@ -448,7 +504,7 @@
                    file="EasyMailDiscussion.Web.Controllers/ListController/Edit.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Edit(System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ListController/Edit_1.md"/>
-            <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Index"
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Index(System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ListController/Index.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Message(System.Int32,System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ListController/Message.md"/>
@@ -461,6 +517,16 @@
       <topic id="N:EasyMailDiscussion.Web.Models"
              file="EasyMailDiscussion.Web.Models/README.md"
              title="EasyMailDiscussion.Web.Models">
+         <topic id="T:EasyMailDiscussion.Web.Models.AdminModel"
+                file="EasyMailDiscussion.Web.Models/AdminModel/README.md"
+                title="AdminModel">
+            <topic id="M:EasyMailDiscussion.Web.Models.AdminModel.#ctor"
+                   file="EasyMailDiscussion.Web.Models/AdminModel/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.AdminModel.PageSize"
+                   file="EasyMailDiscussion.Web.Models/AdminModel/PageSize.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.AdminModel.UseFuzzySearch"
+                   file="EasyMailDiscussion.Web.Models/AdminModel/UseFuzzySearch.md"/>
+         </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.ArchivePageModel"
                 file="EasyMailDiscussion.Web.Models/ArchivePageModel/README.md"
                 title="ArchivePageModel">
@@ -475,6 +541,20 @@
             <topic id="P:EasyMailDiscussion.Web.Models.ArchivePageModel.TotalPages"
                    file="EasyMailDiscussion.Web.Models/ArchivePageModel/TotalPages.md"/>
          </topic>
+         <topic id="T:EasyMailDiscussion.Web.Models.ContactSearchModel"
+                file="EasyMailDiscussion.Web.Models/ContactSearchModel/README.md"
+                title="ContactSearchModel">
+            <topic id="M:EasyMailDiscussion.Web.Models.ContactSearchModel.#ctor"
+                   file="EasyMailDiscussion.Web.Models/ContactSearchModel/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ContactSearchModel.Contacts"
+                   file="EasyMailDiscussion.Web.Models/ContactSearchModel/Contacts.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ContactSearchModel.IsFuzzySearch"
+                   file="EasyMailDiscussion.Web.Models/ContactSearchModel/IsFuzzySearch.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ContactSearchModel.PageNumber"
+                   file="EasyMailDiscussion.Web.Models/ContactSearchModel/PageNumber.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ContactSearchModel.TotalPages"
+                   file="EasyMailDiscussion.Web.Models/ContactSearchModel/TotalPages.md"/>
+         </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.ContactsModel"
                 file="EasyMailDiscussion.Web.Models/ContactsModel/README.md"
                 title="ContactsModel">
@@ -482,6 +562,10 @@
                    file="EasyMailDiscussion.Web.Models/ContactsModel/_ctor.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.ContactsModel.Contacts"
                    file="EasyMailDiscussion.Web.Models/ContactsModel/Contacts.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ContactsModel.PageNumber"
+                   file="EasyMailDiscussion.Web.Models/ContactsModel/PageNumber.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ContactsModel.TotalPages"
+                   file="EasyMailDiscussion.Web.Models/ContactsModel/TotalPages.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.DiscussionListAssignModel"
                 file="EasyMailDiscussion.Web.Models/DiscussionListAssignModel/README.md"
@@ -506,6 +590,10 @@
                    file="EasyMailDiscussion.Web.Models/DiscussionListsModel/_ctor.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.DiscussionListsModel.DiscussionLists"
                    file="EasyMailDiscussion.Web.Models/DiscussionListsModel/DiscussionLists.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.DiscussionListsModel.PageNumber"
+                   file="EasyMailDiscussion.Web.Models/DiscussionListsModel/PageNumber.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.DiscussionListsModel.TotalPages"
+                   file="EasyMailDiscussion.Web.Models/DiscussionListsModel/TotalPages.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.EditContactModel"
                 file="EasyMailDiscussion.Web.Models/EditContactModel/README.md"
@@ -579,6 +667,30 @@
       <topic id="N:EasyMailDiscussion.Web.Models.Forms"
              file="EasyMailDiscussion.Web.Models.Forms/README.md"
              title="EasyMailDiscussion.Web.Models.Forms">
+         <topic id="T:EasyMailDiscussion.Web.Models.Forms.AdminSettingsForm"
+                file="EasyMailDiscussion.Web.Models.Forms/AdminSettingsForm/README.md"
+                title="AdminSettingsForm">
+            <topic id="M:EasyMailDiscussion.Web.Models.Forms.AdminSettingsForm.#ctor"
+                   file="EasyMailDiscussion.Web.Models.Forms/AdminSettingsForm/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.Forms.AdminSettingsForm.PageSize"
+                   file="EasyMailDiscussion.Web.Models.Forms/AdminSettingsForm/PageSize.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.Forms.AdminSettingsForm.UseFuzzySearch"
+                   file="EasyMailDiscussion.Web.Models.Forms/AdminSettingsForm/UseFuzzySearch.md"/>
+         </topic>
+         <topic id="T:EasyMailDiscussion.Web.Models.Forms.BaseFormInput"
+                file="EasyMailDiscussion.Web.Models.Forms/BaseFormInput/README.md"
+                title="BaseFormInput">
+            <topic id="M:EasyMailDiscussion.Web.Models.Forms.BaseFormInput.#ctor"
+                   file="EasyMailDiscussion.Web.Models.Forms/BaseFormInput/_ctor.md"/>
+         </topic>
+         <topic id="T:EasyMailDiscussion.Web.Models.Forms.BaseFormInput`1"
+                file="EasyMailDiscussion.Web.Models.Forms/BaseFormInput_1/README.md"
+                title="BaseFormInput&lt;T&gt;">
+            <topic id="M:EasyMailDiscussion.Web.Models.Forms.BaseFormInput`1.#ctor"
+                   file="EasyMailDiscussion.Web.Models.Forms/BaseFormInput_1/_ctor.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Models.Forms.BaseFormInput`1.IsChecked(System.Func{`0,System.String})"
+                   file="EasyMailDiscussion.Web.Models.Forms/BaseFormInput_1/IsChecked.md"/>
+         </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.Forms.ContactForm"
                 file="EasyMailDiscussion.Web.Models.Forms/ContactForm/README.md"
                 title="ContactForm">
@@ -586,8 +698,6 @@
                    file="EasyMailDiscussion.Web.Models.Forms/ContactForm/_ctor.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.Forms.ContactForm.Activated"
                    file="EasyMailDiscussion.Web.Models.Forms/ContactForm/Activated.md"/>
-            <topic id="P:EasyMailDiscussion.Web.Models.Forms.ContactForm.ActivatedChecked"
-                   file="EasyMailDiscussion.Web.Models.Forms/ContactForm/ActivatedChecked.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.Forms.ContactForm.Email"
                    file="EasyMailDiscussion.Web.Models.Forms/ContactForm/Email.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.Forms.ContactForm.ID"
@@ -636,8 +746,6 @@
                    file="EasyMailDiscussion.Web.Models.Forms/DiscussionListForm/UserName.md"/>
             <topic id="P:EasyMailDiscussion.Web.Models.Forms.DiscussionListForm.UseSSL"
                    file="EasyMailDiscussion.Web.Models.Forms/DiscussionListForm/UseSSL.md"/>
-            <topic id="P:EasyMailDiscussion.Web.Models.Forms.DiscussionListForm.UseSSLChecked"
-                   file="EasyMailDiscussion.Web.Models.Forms/DiscussionListForm/UseSSLChecked.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm"
                 file="EasyMailDiscussion.Web.Models.Forms/ImportDatabaseForm/README.md"

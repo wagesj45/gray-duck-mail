@@ -1,12 +1,22 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace EasyMailDiscussion.Common
 {
+    /// <summary> A branching tree structure that can recursively populate child nodes. </summary>
+    /// <typeparam name="T"> Generic type parameter. </typeparam>
     public class Tree<T>
     {
+        #region Members
+
+        /// <summary> The logging conduit. </summary>
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         #region Properties
 
         /// <summary> Gets or sets a value indicating whether this object is the base of the <see cref="Tree{T}"/>. </summary>
@@ -29,12 +39,18 @@ namespace EasyMailDiscussion.Common
 
         #region Constructors
 
+        /// <summary> Constructor. </summary>
+        /// <param name="value">           The value. </param>
+        /// <param name="branchValues">    The branch values. </param>
+        /// <param name="branchPopulator"> The recursive branch populator function. </param>
         public Tree(T value, IEnumerable<T> branchValues, Func<T, IEnumerable<T>> branchPopulator)
         {
             this.Value = value;
 
             if(branchValues.Any())
             {
+                logger.Trace("Populating branches for {0}", typeof(T).Name);
+
                 var branches = branchValues.Select(branch => new Tree<T>(branch, branchPopulator(branch), branchPopulator));
                 this.Branches = branches;
             }

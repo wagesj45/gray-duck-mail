@@ -32,11 +32,11 @@ Constructors
 Properties
 ----------
 
-|                                    | Name           | Description                                                    |
-| ---------------------------------- | -------------- | -------------------------------------------------------------- |
-| ![Public property]![Static member] | [FetchTime][4] | Gets the time between fetching email from the remote server.   |
-| ![Public property]![Static member] | [LogLevel][5]  | Gets the verbosity level with which to log application events. |
-| ![Public property]![Static member] | [PageSize][6]  | Gets the page size to use when paginating results.             |
+|                                    | Name           | Description                                                                                                                   |
+| ---------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| ![Public property]![Static member] | [FetchTime][4] | Gets the time between fetching email from the remote server.                                                                  |
+| ![Public property]![Static member] | [LogLevel][5]  | Gets the verbosity level with which to log application events.                                                                |
+| ![Public property]![Static member] | [WebOnly][6]   | Gets a value that if set, only the web interface will be initialized. [Background worker threads][7] will not be initialized. |
 
 
 See Also
@@ -46,15 +46,16 @@ See Also
 [EasyMailDiscussion.Web Namespace][2]  
 
 #### Other Resources
-[https://docs.docker.com/compose/environment-variables/][7]  
+[https://docs.docker.com/compose/environment-variables/][8]  
 
 [1]: https://docs.microsoft.com/dotnet/api/system.object
 [2]: ../README.md
 [3]: _cctor.md
 [4]: FetchTime.md
 [5]: LogLevel.md
-[6]: PageSize.md
-[7]: https://docs.docker.com/compose/environment-variables/
+[6]: WebOnly.md
+[7]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.backgroundservice
+[8]: https://docs.docker.com/compose/environment-variables/
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public property]: ../../icons/pubproperty.svg "Public property"

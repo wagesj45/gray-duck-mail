@@ -35,6 +35,8 @@ Properties
 |                    | Name                 | Description                                               |
 | ------------------ | -------------------- | --------------------------------------------------------- |
 | ![Public property] | [DiscussionLists][4] | Gets or sets the discussion lists to display on the page. |
+| ![Public property] | [PageNumber][5]      | Gets or sets the page number.                             |
+| ![Public property] | [TotalPages][6]      | Gets or sets the total number of pages.                   |
 
 
 See Also
@@ -47,5 +49,7 @@ See Also
 [2]: ../README.md
 [3]: _ctor.md
 [4]: DiscussionLists.md
+[5]: PageNumber.md
+[6]: TotalPages.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

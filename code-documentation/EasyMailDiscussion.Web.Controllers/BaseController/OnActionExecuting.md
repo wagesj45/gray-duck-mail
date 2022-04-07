@@ -31,9 +31,10 @@ See Also
 #### Reference
 [BaseController Class][4]  
 [EasyMailDiscussion.Web.Controllers Namespace][1]  
-[!:Controller.onac]  
+[Controller.OnActionExecuting(ActionExecutingContext)][5]  
 
 [1]: ../README.md
 [2]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.actionexecutingcontext
 [3]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.http.httprequest
 [4]: README.md
+[5]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.controller.onactionexecuting#microsoft-aspnetcore-mvc-controller-onactionexecuting(microsoft-aspnetcore-mvc-filters-actionexecutingcontext)

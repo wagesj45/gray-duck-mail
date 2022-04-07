@@ -6,16 +6,18 @@ Model for the form input importing a SQLite database file.
 Inheritance Hierarchy
 ---------------------
 [System.Object][1]  
-  **EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm**  
+  [EasyMailDiscussion.Web.Models.Forms.BaseFormInput][2]  
+    [EasyMailDiscussion.Web.Models.Forms.BaseFormInput][3]&lt;**ImportDatabaseForm**>  
+      **EasyMailDiscussion.Web.Models.Forms.ImportDatabaseForm**  
 
-  **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][2]  
+  **Namespace:**  [EasyMailDiscussion.Web.Models.Forms][4]  
   **Assembly:** easy-mail-discussion-web.exe
 
 Syntax
 ------
 
 ```csharp
-public class ImportDatabaseForm
+public class ImportDatabaseForm : BaseFormInput<ImportDatabaseForm>
 ```
 
 The **ImportDatabaseForm** type exposes the following members.
@@ -26,7 +28,7 @@ Constructors
 
 |                  | Name                    | Description                                                    |
 | ---------------- | ----------------------- | -------------------------------------------------------------- |
-| ![Public method] | [ImportDatabaseForm][3] | Initializes a new instance of the **ImportDatabaseForm** class |
+| ![Public method] | [ImportDatabaseForm][5] | Initializes a new instance of the **ImportDatabaseForm** class |
 
 
 Properties
@@ -34,18 +36,29 @@ Properties
 
 |                    | Name              | Description                     |
 | ------------------ | ----------------- | ------------------------------- |
-| ![Public property] | [DatabaseFile][4] | Gets or sets the database file. |
+| ![Public property] | [DatabaseFile][6] | Gets or sets the database file. |
+
+
+Methods
+-------
+
+|                  | Name           | Description                                                                                                                                            |
+| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![Public method] | [IsChecked][7] | Determine if a property of a derived class represents an HTML form value coresponding to a marked checkbox. (Inherited from [BaseFormInput&lt;T>][3].) |
 
 
 See Also
 --------
 
 #### Reference
-[EasyMailDiscussion.Web.Models.Forms Namespace][2]  
+[EasyMailDiscussion.Web.Models.Forms Namespace][4]  
 
 [1]: https://docs.microsoft.com/dotnet/api/system.object
-[2]: ../README.md
-[3]: _ctor.md
-[4]: DatabaseFile.md
+[2]: ../BaseFormInput/README.md
+[3]: ../BaseFormInput_1/README.md
+[4]: ../README.md
+[5]: _ctor.md
+[6]: DatabaseFile.md
+[7]: ../BaseFormInput_1/IsChecked.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

@@ -32,9 +32,11 @@ Constructors
 Properties
 ----------
 
-|                    | Name          | Description                                       |
-| ------------------ | ------------- | ------------------------------------------------- |
-| ![Public property] | [Contacts][4] | Gets or sets the contacts to display on the page. |
+|                    | Name            | Description                                       |
+| ------------------ | --------------- | ------------------------------------------------- |
+| ![Public property] | [Contacts][4]   | Gets or sets the contacts to display on the page. |
+| ![Public property] | [PageNumber][5] | Gets or sets the page number.                     |
+| ![Public property] | [TotalPages][6] | Gets or sets the total number of pages.           |
 
 
 See Also
@@ -47,5 +49,7 @@ See Also
 [2]: ../README.md
 [3]: _ctor.md
 [4]: Contacts.md
+[5]: PageNumber.md
+[6]: TotalPages.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"
