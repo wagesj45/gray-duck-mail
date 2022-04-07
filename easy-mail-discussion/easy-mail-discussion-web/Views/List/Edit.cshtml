@@ -20,7 +20,7 @@
     <header>
         <h3>Discussion List Details</h3>
     </header>
-    <form id="discussionListDetails" action="~/List/@(Model.DiscussionList?.ID > 0 ? "Edit" : "Create")" method="post">
+    <form id="discussionListDetails" action="/List/@(Model.DiscussionList?.ID > 0 ? "Edit" : "Create")" method="post">
         <input type="hidden" id="id" name="id" value="@Model.DiscussionList?.ID" />
         <label for="name">
             Name

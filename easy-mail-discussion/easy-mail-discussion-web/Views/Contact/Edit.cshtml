@@ -20,7 +20,7 @@
     <header>
         <h3>Contact Details</h3>
     </header>
-    <form id="contactDetails" action="~/Contact/@(Model.Contact?.ID > 0 ? "Edit" : "Create")" method="post">
+    <form id="contactDetails" action="/Contact/@(Model.Contact?.ID > 0 ? "Edit" : "Create")" method="post">
         <input type="hidden" id="id" name="id" value="@Model.Contact?.ID" />
         <label for="name">
             Name

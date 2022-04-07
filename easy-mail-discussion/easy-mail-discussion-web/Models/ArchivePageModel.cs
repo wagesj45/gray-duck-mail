@@ -1,4 +1,5 @@
-﻿using EasyMailDiscussion.Common.Database;
+﻿using EasyMailDiscussion.Common;
+using EasyMailDiscussion.Common.Database;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,9 +22,9 @@ namespace EasyMailDiscussion.Web.Models
         /// <value> The total number of pages. </value>
         public int TotalPages { get; set; }
 
-        /// <summary> Gets or sets the messages to display on the page. </summary>
+        /// <summary> Gets or sets the top level messages to display on the page. </summary>
         /// <value> The messages. </value>
-        public IEnumerable<Message> Messages { get; set; } = Enumerable.Empty<Message>(); 
+        public IEnumerable<Tree<Message>> Messages { get; set; } = Enumerable.Empty<Tree<Message>>(); 
 
         #endregion
     }

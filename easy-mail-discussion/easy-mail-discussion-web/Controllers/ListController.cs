@@ -24,7 +24,7 @@ namespace EasyMailDiscussion.Web.Controllers
         #endregion
 
         #region Constructors
-        
+
         /// <summary> Constructor. </summary>
         /// <param name="lifetime"> The application lifetime interface. </param>
         public ListController(IHostApplicationLifetime lifetime)
@@ -260,12 +260,12 @@ namespace EasyMailDiscussion.Web.Controllers
                         };
                         this.SqliteDatabase.ContactSubscriptions.Add(subscription);
                     }
-                    if(subscription.Status == SubscriptionStatus.Requested)
+                    if (subscription.Status == SubscriptionStatus.Requested)
                     {
                         logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
                         subscription.Status = SubscriptionStatus.Subscribed;
                     }
-                    else if(subscription.Status == SubscriptionStatus.Denied)
+                    else if (subscription.Status == SubscriptionStatus.Denied)
                     {
                         logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
                         subscription.Status = SubscriptionStatus.Subscribed;
@@ -304,6 +304,7 @@ namespace EasyMailDiscussion.Web.Controllers
                 .Where(message => message.ParentID == null)
                 .Include(message => message.OriginatorContact)
                 .Include(message => message.Children)
+                .ThenInclude(child => child.OriginatorContact)
                 .Page(pageNumber, this.PageSize)
                 .ToArray();
             var pageCount = this.SqliteDatabase.Messages
@@ -311,12 +312,18 @@ namespace EasyMailDiscussion.Web.Controllers
                 .Where(message => message.ParentID == null)
                 .PageCount(this.PageSize);
 
+            var messageTree = messages.Select(message => new Tree<Message>(message,
+                message.Children,
+                (branch) => this.SqliteDatabase.Messages
+                .Include(child => child.OriginatorContact)
+                .Where(child => child.ParentID == branch.ID)));
+
             var model = new ArchivePageModel()
             {
                 DiscussionList = discussionList,
                 PageNumber = pageNumber,
                 TotalPages = pageCount,
-                Messages = messages
+                Messages = messageTree
             };
 
             return View("Archive", model);

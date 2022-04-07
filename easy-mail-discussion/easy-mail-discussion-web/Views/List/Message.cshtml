@@ -51,7 +51,7 @@
                     <ul>
                         @foreach (var child in Model.Children)
                         {
-                            <li><a href="~/List/Message/@child.ID">From @child.OriginatorContact.Name at @child.Recieved.ToLocalTime(): @child.Subject</a></li>
+                            <li><a href="/List/Message/@child.ID">From @child.OriginatorContact.Name at @child.Recieved.ToLocalTime(): @child.Subject</a></li>
                         }
                     </ul>
                 </footer>
@@ -62,12 +62,12 @@
             <footer>
                 @if (Model.PageNumber > 1)
                 {
-                    <a href="~/List/Message/@Model.Message.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                    <a href="/List/Message/@Model.Message.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
                 Page @Model.PageNumber of @Model.TotalPages
                 @if (Model.PageNumber < Model.TotalPages)
                 {
-                    <a href="~/List/Message/@Model.Message.ID/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                    <a href="/List/Message/@Model.Message.ID/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
                 }
             </footer>
         }

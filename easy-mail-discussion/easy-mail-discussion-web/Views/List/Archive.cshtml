@@ -1,7 +1,36 @@
 ﻿@using EasyMailDiscussion.Common
+@using EasyMailDiscussion.Common.Database
 @model ArchivePageModel
+
 @{
     ViewData["Title"] = string.Format("{0} Archive", Model.DiscussionList.Name);
+}
+
+@functions
+{
+    void RenderTreeView(params Tree<Message>[] messages)
+    {
+        @foreach (var message in messages)
+        {
+            <li class="message">
+                <a href="/List/Message/@message.Value.ID" class="contrast"><strong><i class="icofont-mail"></i> @message.Value.Subject</strong></a>
+                <hr />
+                <small><i class="icofont-ui-user"></i> @message.Value.OriginatorContact.Name</small>
+                <br />
+                <small><i class="icofont-clock-time"></i> Sent: @message.Value.Recieved.ToLocalTime()</small>
+                @if (message.Branches.Any())
+                {
+                    <aside>
+                        <ul>
+                            @{
+                                RenderTreeView(message.Branches.ToArray());
+                            }
+                        </ul>
+                    </aside>
+                }
+            </li>
+        }
+    }
 }
 
 <hgroup>
@@ -10,77 +39,43 @@
 </hgroup>
 
 <article>
+    <header>
+        <nav>
+            <ul>
+            </ul>
+            <ul>
+                <li>
+                    <form action="/List/Search" method="post">
+                    <input type="hidden" id="discussionListID" name="discussionListID" value="@Model.DiscussionList.ID" />
+                        <input type="search" id="searchTerm" name="searchTerm" placeholder="Search">
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
     @if (Model.Messages.Any())
     {
         foreach (var message in Model.Messages)
         {
-            <details>
-                <summary><i class="icofont-envelope"></i> SUBJECT: @message.Subject</summary>
-                <aside>
-                    <nav>
-                        <ul>
-                            <li><i class="icofont-ui-user"></i> <em>From: @message.OriginatorContact.Name</em></li>
-                            <li><i class="icofont-clock-time"></i> <em>Sent: @message.Recieved.ToLocalTime()</em></li>
-                        </ul>
-                    </nav>
-                </aside>
-                <hr>
-                <article>
-                    <header>
-                        @message.Subject
-                    </header>
-                    @if (!string.IsNullOrWhiteSpace(message.BodyHTML))
-                    {
-                        @Html.Raw(HTMLCleaner.RemoveInlineCSS(message.BodyHTML))
+            <aside>
+                <ul>
+                    @{
+                        RenderTreeView(message);
                     }
-                    else if (!string.IsNullOrWhiteSpace(message.BodyText))
-                    {
-                        <pre>@message.BodyText</pre>
-                    }
-                    else if (!string.IsNullOrWhiteSpace(message.BodyRaw))
-                    {
-                        <pre>@message.BodyRaw</pre>
-                    }
-                    else
-                    {
-                        <em>An error occurred while processing this message.</em>
-                    }
-                    <footer>
-                        <nav>
-                            <ul>
-                                <li>
-                                    <a href="~/List/Message/@message.ID" role="button">View Message</a>
-                                </li>
-                            </ul>
-                            @if (message.Children.Any())
-                            {
-                                <ul>
-                                    <li>
-                                        <a href="~/List/Message/@message.ID#children">
-                                            <i class="icofont-mail"></i>
-                                            <i class="icofont-reply"></i>
-                                            <strong>@message.Children.Count</strong> @(message.Children.Count == 1 ? "Reply" : "Replies")
-                                        </a>
-                                    </li>
-                                </ul>
-                            }
-                        </nav>
-                    </footer>
-
-                </article>
-            </details>
+                </ul>
+            </aside>
         }
         @if (Model.TotalPages > 1)
         {
             <footer>
                 @if (Model.PageNumber > 1)
                 {
-                    <a href="~/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                    <a href="/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
                 Page @Model.PageNumber of @Model.TotalPages
                 @if (Model.PageNumber < Model.TotalPages)
                 {
-                    <a href="~/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                    <a href="/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
                 }
             </footer>
         }

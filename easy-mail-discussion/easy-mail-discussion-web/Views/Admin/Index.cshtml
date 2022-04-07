@@ -14,7 +14,7 @@
             Web Settings
         </h3>
     </header>
-    <form id="webSettings" action="~/Admin/SaveSettings" method="post">
+    <form id="webSettings" action="/Admin/SaveSettings" method="post">
         <fieldset>
             <label for="useFuzzySearch">
                 <input type="checkbox" role="switch" id="useFuzzySearch" name="useFuzzySearch" @((Model.UseFuzzySearch) ? "checked" : "") />
@@ -39,7 +39,7 @@
         Save a copy of your database, including contacts, discussion lists, and messages.
     </p>
     <footer>
-        <a href="~/Admin/ExportDatabase" role="button"><i class="icofont-download"></i> Export</a>
+        <a href="/Admin/ExportDatabase" role="button" style="width: 100%"><i class="icofont-download"></i> Export</a>
     </footer>
 </article>
 <article>
@@ -49,7 +49,7 @@
     <p>
         Import a database file to transfer contacts, discussion lists, and messages.
     </p>
-    <form id="importDatabase" action="~/Admin/ImportDatabase" method="post" enctype="multipart/form-data">
+    <form id="importDatabase" action="/Admin/ImportDatabase" method="post" enctype="multipart/form-data">
         <label for="databaseFile">
             Choose a SQLite database file to import
             <input type="file" id="databaseFileUpldate" name="databaseFile">

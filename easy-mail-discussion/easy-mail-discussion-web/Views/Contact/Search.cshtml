@@ -13,12 +13,12 @@
         <nav>
             <ul>
                 <li>
-                    <a href="~/Contact/New"><i class="icofont-ui-add"></i> Create New Contact</a>
+                    <a href="/Contact/New"><i class="icofont-ui-add"></i> Create New Contact</a>
                 </li>
             </ul>
             <ul>
                 <li>
-                    <form action="~/Contact/Search" method="post">
+                    <form action="/Contact/Search" method="post">
                         <input type="search" id="searchTerm" name="searchTerm" placeholder="Search" value="@Model.Contacts.SearchTerm">
                     </form>
                 </li>
@@ -55,8 +55,8 @@
                             }
                         </td>
                         <td>
-                            <a href="~/Contact/Edit/@contact.Item.ID" data-tooltip="Edit"><i class="icofont-edit-alt"></i></a>
-                            <a href="~/Contact/Remove/@contact.Item.ID" data-tooltip="Remove"><i class="icofont-delete-alt"></i></a>
+                            <a href="/Contact/Edit/@contact.Item.ID" data-tooltip="Edit"><i class="icofont-edit-alt"></i></a>
+                            <a href="/Contact/Remove/@contact.Item.ID" data-tooltip="Remove"><i class="icofont-delete-alt"></i></a>
                         </td>
                     </tr>
                 }
@@ -67,12 +67,12 @@
             <footer>
                 @if (Model.PageNumber > 1)
                 {
-                    <a href="~/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                    <a href="/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
                 Page @Model.PageNumber of @Model.TotalPages
                 @if (Model.PageNumber < Model.TotalPages)
                 {
-                    <a href="~/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                    <a href="/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
                 }
             </footer>
         }

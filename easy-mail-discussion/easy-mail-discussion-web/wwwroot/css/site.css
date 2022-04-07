@@ -1,1 +1,11 @@
 ﻿/* Any custom CSS will go here. */
+.message {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 1em;
+    -webkit-box-shadow: 3px 3px 4px 0 rgba(0,0,0,0.4);
+    box-shadow: 3px 3px 4px 0 rgba(0,0,0,0.4);
+    border-style: solid;
+    border-color: var(--primary);
+}

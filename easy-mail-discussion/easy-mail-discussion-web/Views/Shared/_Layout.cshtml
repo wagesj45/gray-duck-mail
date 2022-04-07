@@ -5,9 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Easy Mail Discussion - @ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/pico.min.css" />
-    <link rel="stylesheet" href="~/icofont/icofont.min.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/pico.min.css" />
+    <link rel="stylesheet" href="/icofont/icofont.min.css" />
 </head>
 <body class="container">
     <header>
@@ -17,13 +17,13 @@
             </ul>
             <ul>
                 <li>
-                    <a href="~/List"><i class="icofont-list"></i> Discussion Lists</a>
+                    <a href="/List"><i class="icofont-list"></i> Discussion Lists</a>
                 </li>
                 <li>
-                    <a href="~/Contact"><i class="icofont-ui-user-group"></i> Contacts</a>
+                    <a href="/Contact"><i class="icofont-ui-user-group"></i> Contacts</a>
                 </li>
                 <li>
-                    <a href="~/Admin"><i class="icofont-dashboard-web"></i> Administration</a>
+                    <a href="/Admin"><i class="icofont-dashboard-web"></i> Administration</a>
                 </li>
             </ul>
         </nav>
@@ -46,7 +46,7 @@
             Version @ApplicationSettings.ApplicationVersion
         </small>
     </footer>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

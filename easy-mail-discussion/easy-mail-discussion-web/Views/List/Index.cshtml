@@ -13,7 +13,7 @@
         <nav>
     <ul>
         <li>
-            <a href="~/List/New"><i class="icofont-ui-add"></i> Create New Discussion List</a>
+            <a href="/List/New"><i class="icofont-ui-add"></i> Create New Discussion List</a>
         </li>
     </ul>
 </nav>
@@ -53,18 +53,18 @@
             <footer>
                 @if (Model.PageNumber > 1)
                 {
-                    <a href="~/List/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                    <a href="/List/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
                 Page @Model.PageNumber of @Model.TotalPages
                 @if (Model.PageNumber < Model.TotalPages)
                 {
-                    <a href="~/List/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                    <a href="/List/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
                 }
             </footer>
         }
     }
     else
     {
-        <p>No discussion lists have been set up yet. You can <a href="~/List/New">create a new discussion list</a> now.</p>
+        <p>No discussion lists have been set up yet. You can <a href="/List/New">create a new discussion list</a> now.</p>
     }
 </article>
