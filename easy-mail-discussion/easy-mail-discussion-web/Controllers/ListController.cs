@@ -21,6 +21,9 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary> The search cache used for <see cref="Message">messages</see>. </summary>
+        private static SearchCache<Message> searchCache = new SearchCache<Message>();
+
         #endregion
 
         #region Constructors
@@ -92,6 +95,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
+        [Route("List/Edit")]
         public IActionResult Edit(DiscussionListForm formInput)
         {
             if (formInput == null)
@@ -174,6 +178,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
+        [Route("List/Create")]
         public IActionResult Create(DiscussionListForm formInput)
         {
             if (formInput == null)
@@ -238,6 +243,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
+        [Route("List/Assign")]
         public IActionResult Assign(DiscussionListAssignForm formInput)
         {
             foreach (var assignment in formInput.Assignments)
@@ -304,7 +310,6 @@ namespace EasyMailDiscussion.Web.Controllers
                 .Where(message => message.ParentID == null)
                 .Include(message => message.OriginatorContact)
                 .Include(message => message.Children)
-                .ThenInclude(child => child.OriginatorContact)
                 .Page(pageNumber, this.PageSize)
                 .ToArray();
             var pageCount = this.SqliteDatabase.Messages
@@ -313,12 +318,11 @@ namespace EasyMailDiscussion.Web.Controllers
                 .PageCount(this.PageSize);
 
             var messageTree = messages.Select(message => new Tree<Message>(message,
-                message.Children,
                 (branch) => this.SqliteDatabase.Messages
                 .Include(child => child.OriginatorContact)
                 .Where(child => child.ParentID == branch.ID)));
 
-            var model = new ArchivePageModel()
+            var model = new ArchiveModel()
             {
                 DiscussionList = discussionList,
                 PageNumber = pageNumber,
@@ -327,6 +331,91 @@ namespace EasyMailDiscussion.Web.Controllers
             };
 
             return View("Archive", model);
+        }
+
+        /// <summary>
+        /// Searches for the <see cref="Message">messages</see> with a matching <see cref="Message.Subject">
+        /// subject</see>, <see cref="Message.BodyText">body text</see>, <see cref="Message.BodyHTML">body HTML</see>, or
+        /// <see cref="Message.OriginatorContact">contact</see>.
+        /// </summary>
+        /// <remarks> Fulfills the <c>/List/Search</c> post request. </remarks>
+        /// <param name="discussionListID"> Identifier for the discussion list. </param>
+        /// <param name="searchTerm">       The search term. </param>
+        /// <returns> A response to return to the caller. </returns>
+        /// <seealso cref="ContactController.Search(string)"/>
+        [HttpPost]
+        [Route("List/Search")]
+        public IActionResult Search(string searchTerm, int discussionListID)
+        {
+            return Search(discussionListID, searchTerm, 1);
+        }
+
+        /// <summary>
+        /// Searches for the <see cref="Message">messages</see> with a matching <see cref="Message.Subject">
+        /// subject</see>, <see cref="Message.BodyText">body text</see>, <see cref="Message.BodyHTML">
+        /// body HTML</see>, or
+        /// <see cref="Message.OriginatorContact">contact</see>.
+        /// </summary>
+        /// <remarks> Fulfills the <c>/List/Search</c> post request. </remarks>
+        /// <param name="discussionListID"> Identifier for the discussion list. </param>
+        /// <param name="searchTerm">       The search term. </param>
+        /// <param name="pageNumber">       (Optional) The page number. </param>
+        /// <returns> A response to return to the caller. </returns>
+        [HttpGet]
+        [Route("List/Search/{discussionListID}/{searchTerm}/{pageNumber?}")]
+        public IActionResult Search(int discussionListID, string searchTerm, int pageNumber = 1)
+        {
+            var discussionList = this.SqliteDatabase.DiscussionLists
+                .Where(discussionList => discussionList.ID == discussionListID)
+                .SingleOrDefault();
+
+            if (searchCache.SearchTerm != searchTerm)
+            {
+                var messages = Enumerable.Empty<SearchResult<Message>>();
+
+                if (this.UseFuzzySearch)
+                {
+                    logger.Info("Performing fuzzy search: {0}", searchTerm);
+
+                    messages = this.SqliteDatabase.Messages
+                    .Where(message => message.DiscussionListID == discussionListID)
+                    .Include(message => message.OriginatorContact)
+                    .FuzzySearch(searchTerm,
+                    message => message.Subject,
+                    message => message.BodyText,
+                    message => message.BodyHTML,
+                    message => message.OriginatorContact.Name,
+                    message => message.OriginatorContact.Email)
+                        .OrderByDescending(searchResult => searchResult.Score);
+                }
+                else
+                {
+                    messages = this.SqliteDatabase.Messages
+                        .Where(message => message.DiscussionListID == discussionListID)
+                        .Include(message => message.OriginatorContact)
+                        .Search(message => message.Subject, searchTerm)
+                        .Search(message => message.BodyText, searchTerm)
+                        .Search(message => message.BodyHTML, searchTerm)
+                        .Search(message => message.OriginatorContact.Name, searchTerm)
+                        .Search(message => message.OriginatorContact.Email, searchTerm)
+                        .Select(message => new SearchResult<Message>(message, 0))
+                        .OrderByDescending(searchResult => searchResult.Score)
+                        .AsEnumerable();
+                }
+
+                searchCache = new SearchCache<Message>(searchTerm, messages);
+            }
+
+            var model = new ArchiveSearchModel()
+            {
+                PageNumber = pageNumber,
+                TotalPages = searchCache.Cache.PageCount(this.PageSize),
+                IsFuzzySearch = this.UseFuzzySearch,
+                DiscussionList = discussionList,
+                Messages = new SearchCache<Message>(searchTerm, searchCache.Cache.Page(pageNumber, this.PageSize))
+            };
+
+            return View("ArchiveSearch", model);
         }
 
         /// <summary> Gets the message request. </summary>

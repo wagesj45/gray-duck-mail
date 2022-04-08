@@ -167,7 +167,7 @@
                 title="Tree&lt;T&gt;">
             <topic id="M:EasyMailDiscussion.Common.Tree`1.#cctor"
                    file="EasyMailDiscussion.Common/Tree_1/_cctor.md"/>
-            <topic id="M:EasyMailDiscussion.Common.Tree`1.#ctor(`0,System.Collections.Generic.IEnumerable{`0},System.Func{`0,System.Collections.Generic.IEnumerable{`0}})"
+            <topic id="M:EasyMailDiscussion.Common.Tree`1.#ctor(`0,System.Func{`0,System.Collections.Generic.IEnumerable{`0}})"
                    file="EasyMailDiscussion.Common/Tree_1/_ctor.md"/>
             <topic id="P:EasyMailDiscussion.Common.Tree`1.Branches"
                    file="EasyMailDiscussion.Common/Tree_1/Branches.md"/>
@@ -514,6 +514,10 @@
                    file="EasyMailDiscussion.Web.Controllers/ListController/New.md"/>
             <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Remove(System.Int32)"
                    file="EasyMailDiscussion.Web.Controllers/ListController/Remove.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Search(System.String,System.Int32)"
+                   file="EasyMailDiscussion.Web.Controllers/ListController/Search_1.md"/>
+            <topic id="M:EasyMailDiscussion.Web.Controllers.ListController.Search(System.Int32,System.String,System.Int32)"
+                   file="EasyMailDiscussion.Web.Controllers/ListController/Search.md"/>
          </topic>
       </topic>
       <topic id="N:EasyMailDiscussion.Web.Models"
@@ -529,19 +533,35 @@
             <topic id="P:EasyMailDiscussion.Web.Models.AdminModel.UseFuzzySearch"
                    file="EasyMailDiscussion.Web.Models/AdminModel/UseFuzzySearch.md"/>
          </topic>
-         <topic id="T:EasyMailDiscussion.Web.Models.ArchivePageModel"
-                file="EasyMailDiscussion.Web.Models/ArchivePageModel/README.md"
-                title="ArchivePageModel">
-            <topic id="M:EasyMailDiscussion.Web.Models.ArchivePageModel.#ctor"
-                   file="EasyMailDiscussion.Web.Models/ArchivePageModel/_ctor.md"/>
-            <topic id="P:EasyMailDiscussion.Web.Models.ArchivePageModel.DiscussionList"
-                   file="EasyMailDiscussion.Web.Models/ArchivePageModel/DiscussionList.md"/>
-            <topic id="P:EasyMailDiscussion.Web.Models.ArchivePageModel.Messages"
-                   file="EasyMailDiscussion.Web.Models/ArchivePageModel/Messages.md"/>
-            <topic id="P:EasyMailDiscussion.Web.Models.ArchivePageModel.PageNumber"
-                   file="EasyMailDiscussion.Web.Models/ArchivePageModel/PageNumber.md"/>
-            <topic id="P:EasyMailDiscussion.Web.Models.ArchivePageModel.TotalPages"
-                   file="EasyMailDiscussion.Web.Models/ArchivePageModel/TotalPages.md"/>
+         <topic id="T:EasyMailDiscussion.Web.Models.ArchiveModel"
+                file="EasyMailDiscussion.Web.Models/ArchiveModel/README.md"
+                title="ArchiveModel">
+            <topic id="M:EasyMailDiscussion.Web.Models.ArchiveModel.#ctor"
+                   file="EasyMailDiscussion.Web.Models/ArchiveModel/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveModel.DiscussionList"
+                   file="EasyMailDiscussion.Web.Models/ArchiveModel/DiscussionList.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveModel.Messages"
+                   file="EasyMailDiscussion.Web.Models/ArchiveModel/Messages.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveModel.PageNumber"
+                   file="EasyMailDiscussion.Web.Models/ArchiveModel/PageNumber.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveModel.TotalPages"
+                   file="EasyMailDiscussion.Web.Models/ArchiveModel/TotalPages.md"/>
+         </topic>
+         <topic id="T:EasyMailDiscussion.Web.Models.ArchiveSearchModel"
+                file="EasyMailDiscussion.Web.Models/ArchiveSearchModel/README.md"
+                title="ArchiveSearchModel">
+            <topic id="M:EasyMailDiscussion.Web.Models.ArchiveSearchModel.#ctor"
+                   file="EasyMailDiscussion.Web.Models/ArchiveSearchModel/_ctor.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveSearchModel.DiscussionList"
+                   file="EasyMailDiscussion.Web.Models/ArchiveSearchModel/DiscussionList.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveSearchModel.IsFuzzySearch"
+                   file="EasyMailDiscussion.Web.Models/ArchiveSearchModel/IsFuzzySearch.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveSearchModel.Messages"
+                   file="EasyMailDiscussion.Web.Models/ArchiveSearchModel/Messages.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveSearchModel.PageNumber"
+                   file="EasyMailDiscussion.Web.Models/ArchiveSearchModel/PageNumber.md"/>
+            <topic id="P:EasyMailDiscussion.Web.Models.ArchiveSearchModel.TotalPages"
+                   file="EasyMailDiscussion.Web.Models/ArchiveSearchModel/TotalPages.md"/>
          </topic>
          <topic id="T:EasyMailDiscussion.Web.Models.ContactSearchModel"
                 file="EasyMailDiscussion.Web.Models/ContactSearchModel/README.md"

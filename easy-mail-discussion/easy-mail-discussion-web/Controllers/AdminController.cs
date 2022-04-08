@@ -87,6 +87,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <seealso cref="Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder, Microsoft.AspNetCore.Hosting.IWebHostEnvironment, IHostApplicationLifetime)"/>
         /// <seealso cref="Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/>
         [HttpPost]
+        [Route("Admin/ImportDatabase")]
         public IActionResult ImportDatabase(ImportDatabaseForm formInput)
         {
             if (formInput.DatabaseFile == null)
@@ -122,6 +123,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
+        [Route("Admin/SaveSettings")]
         public IActionResult SaveSettings(AdminSettingsForm formInput)
         {
             this.UseFuzzySearch = formInput.IsChecked(f => f.UseFuzzySearch);

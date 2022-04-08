@@ -93,6 +93,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
+        [Route("Contact/Edit")]
         public IActionResult Edit(ContactForm formInput)
         {
             if (formInput == null)
@@ -168,6 +169,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
+        [Route("List/Create")]
         public IActionResult Create(ContactForm formInput)
         {
             if (formInput == null)
@@ -198,6 +200,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="searchTerm"> The search term. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
+        [Route("Contact/Search")]
         public IActionResult Search(string searchTerm)
         {
             return Search(searchTerm, 1);

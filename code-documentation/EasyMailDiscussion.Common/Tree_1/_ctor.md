@@ -11,7 +11,6 @@ Syntax
 ```csharp
 public Tree(
 	T value,
-	IEnumerable<T> branchValues,
 	Func<T, IEnumerable<T>> branchPopulator
 )
 ```
@@ -22,12 +21,8 @@ public Tree(
 Type: [T][2]  
  The value.
 
-##### *branchValues*
-Type: [System.Collections.Generic.IEnumerable][3]&lt;[T][2]>  
- The branch values.
-
 ##### *branchPopulator*
-Type: [System.Func][4]&lt;[T][2], [IEnumerable][3]&lt;[T][2]>>  
+Type: [System.Func][3]&lt;[T][2], [IEnumerable][4]&lt;[T][2]>>  
  The recursive branch populator function.
 
 
@@ -40,5 +35,5 @@ See Also
 
 [1]: ../README.md
 [2]: README.md
-[3]: https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
-[4]: https://docs.microsoft.com/dotnet/api/system.func-2
+[3]: https://docs.microsoft.com/dotnet/api/system.func-2
+[4]: https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1

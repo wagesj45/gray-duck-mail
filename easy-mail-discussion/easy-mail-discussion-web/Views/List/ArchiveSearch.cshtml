@@ -1,41 +1,14 @@
 ﻿@using EasyMailDiscussion.Common
 @using EasyMailDiscussion.Common.Database
-@model ArchiveModel
+@model ArchiveSearchModel
 
 @{
-    ViewData["Title"] = string.Format("{0} Archive", Model.DiscussionList.Name);
-}
-
-@functions
-{
-    void RenderTreeView(params Tree<Message>[] messages)
-    {
-        @foreach (var message in messages)
-        {
-            <li class="message">
-                <a href="/List/Message/@message.Value.ID" class="contrast"><strong>Subject: </strong>@message.Value.Subject</a>
-                <hr />
-                <small><i class="icofont-ui-user"></i> @message.Value.OriginatorContact.Name</small>
-                <br />
-                <small><i class="icofont-clock-time"></i> Sent: @message.Value.Recieved.ToLocalTime()</small>
-                @if (message.Branches.Any())
-                {
-                    <aside>
-                        <ul>
-                            @{
-                                RenderTreeView(message.Branches.ToArray());
-                            }
-                        </ul>
-                    </aside>
-                }
-            </li>
-        }
-    }
+    ViewData["Title"] = string.Format("{0} Archive Search", Model.DiscussionList.Name);
 }
 
 <hgroup>
     <h2>@Model.DiscussionList.Name Archive</h2>
-    <h3>Here you can view the archived messages sent on the '@Model.DiscussionList.Name' discussion list.</h3>
+    <h3>Search for <em>@Model.Messages.SearchTerm</em></h3>
 </hgroup>
 
 <article>
@@ -53,18 +26,22 @@
             </ul>
         </nav>
     </header>
-    @if (Model.Messages.Any())
+    @if (Model.Messages.Cache.Any())
     {
-        foreach (var message in Model.Messages)
-        {
-            <aside>
-                <ul>
-                    @{
-                        RenderTreeView(message);
-                    }
-                </ul>
-            </aside>
-        }
+        <aside>
+            <ul>
+                @foreach (var message in Model.Messages.Cache)
+                {
+                    <li class="message">
+                        <a href="/List/Message/@message.Item.ID" class="contrast"><strong>Subject: </strong>@message.Item.Subject</a>
+                        <hr />
+                        <small><i class="icofont-ui-user"></i> @message.Item.OriginatorContact.Name</small>
+                        <br />
+                        <small><i class="icofont-clock-time"></i> Sent: @message.Item.Recieved.ToLocalTime()</small>
+                    </li>
+                }
+            </ul>
+        </aside>
         @if (Model.TotalPages > 1)
         {
             <footer>
