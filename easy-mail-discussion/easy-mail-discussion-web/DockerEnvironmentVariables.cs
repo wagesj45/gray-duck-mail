@@ -36,6 +36,18 @@ namespace EasyMailDiscussion.Web
             return "info";
         });
 
+        /// <summary> The docker environment variable the minimum viable search score. </summary>
+        private static Lazy<float> envMinSearchScore = new Lazy<float>(() =>
+        {
+            var minSearchScore = Environment.GetEnvironmentVariable("MIN_SEARCH_SCORE");
+            if (!string.IsNullOrWhiteSpace(minSearchScore) && float.TryParse(minSearchScore, out var value))
+            {
+                return value;
+            }
+
+            return 0.2f;
+        });
+
         /// <summary>
         /// If set, only the web interface will be initialized. <see cref="Microsoft.Extensions.Hosting.BackgroundService">
         /// Background worker threads</see> will not be initialized.
@@ -72,6 +84,13 @@ namespace EasyMailDiscussion.Web
         public static string LogLevel
         {
             get => envLogLevel.Value;
+        }
+
+        /// <summary> Gets the minimum viable search score. </summary>
+        /// <value> The minimum viable search score. </value>
+        public static float MinimumSearchScore
+        {
+            get => envMinSearchScore.Value;
         }
 
         /// <summary>

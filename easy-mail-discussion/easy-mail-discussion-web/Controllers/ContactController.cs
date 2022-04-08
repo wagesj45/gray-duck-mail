@@ -241,7 +241,7 @@ namespace EasyMailDiscussion.Web.Controllers
                         .AsEnumerable();
                 }
 
-                searchCache = new SearchCache<Contact>(searchTerm, contacts);
+                searchCache = new SearchCache<Contact>(searchTerm, contacts.Where(contact => contact.Score >= DockerEnvironmentVariables.MinimumSearchScore));
             }
 
             var model = new ContactSearchModel()

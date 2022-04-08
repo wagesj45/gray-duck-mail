@@ -403,7 +403,7 @@ namespace EasyMailDiscussion.Web.Controllers
                         .AsEnumerable();
                 }
 
-                searchCache = new SearchCache<Message>(searchTerm, messages);
+                searchCache = new SearchCache<Message>(searchTerm, messages.Where(message => message.Score >= DockerEnvironmentVariables.MinimumSearchScore));
             }
 
             var model = new ArchiveSearchModel()
