@@ -378,6 +378,8 @@
                    file="EasyMailDiscussion.Web/DockerEnvironmentVariables/FetchTime.md"/>
             <topic id="P:EasyMailDiscussion.Web.DockerEnvironmentVariables.LogLevel"
                    file="EasyMailDiscussion.Web/DockerEnvironmentVariables/LogLevel.md"/>
+            <topic id="P:EasyMailDiscussion.Web.DockerEnvironmentVariables.MinimumSearchScore"
+                   file="EasyMailDiscussion.Web/DockerEnvironmentVariables/MinimumSearchScore.md"/>
             <topic id="P:EasyMailDiscussion.Web.DockerEnvironmentVariables.WebOnly"
                    file="EasyMailDiscussion.Web/DockerEnvironmentVariables/WebOnly.md"/>
          </topic>

@@ -74,6 +74,7 @@ namespace EasyMailDiscussion.Web
 
         /// <summary> Gets the time between fetching email from the remote server. </summary>
         /// <value> The fetch time. </value>
+        /// <remarks> The default value is <c>5:00</c>. </remarks>
         public static TimeSpan FetchTime
         {
             get => envFetchTime.Value;
@@ -81,6 +82,9 @@ namespace EasyMailDiscussion.Web
 
         /// <summary> Gets the verbosity level with which to log application events. </summary>
         /// <value> The log level. </value>
+        /// <remarks> The default value is <c>info</c>. </remarks>
+        /// <seealso cref="NLog.LogLevel"/>
+        /// <seealso cref="Common.NLogConfiguration"/>
         public static string LogLevel
         {
             get => envLogLevel.Value;
@@ -88,6 +92,9 @@ namespace EasyMailDiscussion.Web
 
         /// <summary> Gets the minimum viable search score. </summary>
         /// <value> The minimum viable search score. </value>
+        /// <remarks> The default value is <c>0.2f</c>. </remarks>
+        /// <seealso cref="Common.SearchResult{T}"/>
+        /// <seealso cref="Common.SearchCache{T}"/>
         public static float MinimumSearchScore
         {
             get => envMinSearchScore.Value;
@@ -101,6 +108,7 @@ namespace EasyMailDiscussion.Web
         /// True if only the web interface will be initialized, false if <see cref="Microsoft.Extensions.Hosting.BackgroundService">
         /// background service threads</see> will also be initialized.
         /// </value>
+        /// <remarks> The default value is <see langword="false"/>. </remarks>
         public static bool WebOnly
         {
             get => envWebOnly.Value;

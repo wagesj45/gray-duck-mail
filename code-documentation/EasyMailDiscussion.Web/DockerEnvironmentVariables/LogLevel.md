@@ -16,13 +16,20 @@ public static string LogLevel { get; }
 Type: [String][2]  
  The log level. 
 
+Remarks
+-------
+ The default value is `info`. 
+
 See Also
 --------
 
 #### Reference
 [DockerEnvironmentVariables Class][3]  
 [EasyMailDiscussion.Web Namespace][1]  
+LogLevel  
+[EasyMailDiscussion.Common.NLogConfiguration][4]  
 
 [1]: ../README.md
 [2]: https://docs.microsoft.com/dotnet/api/system.string
 [3]: README.md
+[4]: ../../EasyMailDiscussion.Common/NLogConfiguration/README.md

@@ -16,6 +16,10 @@ public static TimeSpan FetchTime { get; }
 Type: [TimeSpan][2]  
  The fetch time. 
 
+Remarks
+-------
+ The default value is `5:00`. 
+
 See Also
 --------
 

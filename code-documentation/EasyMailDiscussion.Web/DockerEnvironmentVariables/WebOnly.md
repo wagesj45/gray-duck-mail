@@ -16,6 +16,10 @@ public static bool WebOnly { get; }
 Type: [Boolean][3]  
  True if only the web interface will be initialized, false if [background service threads][1] will also be initialized. 
 
+Remarks
+-------
+ The default value is false. 
+
 See Also
 --------
 
