@@ -169,7 +169,7 @@ namespace EasyMailDiscussion.Web.Controllers
         /// <param name="formInput"> The form input. </param>
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
-        [Route("List/Create")]
+        [Route("Contact/Create")]
         public IActionResult Create(ContactForm formInput)
         {
             if (formInput == null)

@@ -58,11 +58,15 @@ namespace EasyMailDiscussion.Web
         private static void ConfigureDatabase()
         {
             // Replace the database, if it exists, with an imported database, if it exists.
-            var importedDatabases = Directory.GetFiles("/app").Where(path => path.EndsWith(Common.Database.SqliteDatabase.TEMP_DATABASE_FILE_EXTENSION));
+            var databaseDirectory = Path.GetDirectoryName(ApplicationSettings.DatabaseFilePath.AbsolutePath);
+            var importedDatabases = Directory.GetFiles(databaseDirectory)
+                .Where(path => path.EndsWith(Common.Database.SqliteDatabase.TEMP_DATABASE_FILE_EXTENSION));
 
             // Technically this could be multiple files if they're somehow injected into the 
             foreach (var file in importedDatabases)
             {
+                logger.Info("Importing exisiting database {0}", file);
+
                 // If the original database still exists, remove it.
                 if (File.Exists(ApplicationSettings.DatabaseFilePath.AbsolutePath))
                 {

@@ -7,6 +7,7 @@ ENV LOG_LEVEL="debug"
 ENV FETCH_TIME="00:05:00"
 ENV WEB_ONLY="1"
 ENV MIN_SEARCH_SCORE="0.2"
+VOLUME /database
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
