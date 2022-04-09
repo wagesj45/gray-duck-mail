@@ -1,0 +1,87 @@
+﻿@using GrayDuckMail.Common
+@using GrayDuckMail.Common.Database
+@model ArchiveModel
+
+@{
+    ViewData["Title"] = string.Format("{0} Archive", Model.DiscussionList.Name);
+}
+
+@functions
+{
+    void RenderTreeView(params Tree<Message>[] messages)
+    {
+        @foreach (var message in messages)
+        {
+            <li class="message">
+                <a href="/List/Message/@message.Value.ID" class="contrast"><strong>Subject: </strong>@message.Value.Subject</a>
+                <hr />
+                <small><i class="icofont-ui-user"></i> @message.Value.OriginatorContact.Name</small>
+                <br />
+                <small><i class="icofont-clock-time"></i> Sent: @message.Value.Recieved.ToLocalTime()</small>
+                @if (message.Branches.Any())
+                {
+                    <aside>
+                        <ul>
+                            @{
+                                RenderTreeView(message.Branches.ToArray());
+                            }
+                        </ul>
+                    </aside>
+                }
+            </li>
+        }
+    }
+}
+
+<hgroup>
+    <h2>@Model.DiscussionList.Name Archive</h2>
+    <h3>Here you can view the archived messages sent on the '@Model.DiscussionList.Name' discussion list.</h3>
+</hgroup>
+
+<article>
+    <header>
+        <nav>
+            <ul>
+            </ul>
+            <ul>
+                <li>
+                    <form action="/List/Search" method="post">
+                        <input type="hidden" id="discussionListID" name="discussionListID" value="@Model.DiscussionList.ID" />
+                        <input type="search" id="searchTerm" name="searchTerm" placeholder="Search">
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    @if (Model.Messages.Any())
+    {
+        foreach (var message in Model.Messages)
+        {
+            <aside>
+                <ul>
+                    @{
+                        RenderTreeView(message);
+                    }
+                </ul>
+            </aside>
+        }
+        @if (Model.TotalPages > 1)
+        {
+            <footer>
+                @if (Model.PageNumber > 1)
+                {
+                    <a href="/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
+                }
+                Page @Model.PageNumber of @Model.TotalPages
+                @if (Model.PageNumber < Model.TotalPages)
+                {
+                    <a href="/List/Archive/@Model.DiscussionList.ID/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
+                }
+            </footer>
+        }
+    }
+    else
+    {
+        <p>No messages have been sent yet. You can <a href="mailto:@(Model.DiscussionList.BaseEmailAddress)">contribute to the discussion</a> now.</p>
+    }
+</article>

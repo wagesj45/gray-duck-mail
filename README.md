@@ -1,3 +1,3 @@
-# easy-mail-discussion
+# Gray Duck Mail
 
-Modern group email discussion
+Modern group email discussion lists.
