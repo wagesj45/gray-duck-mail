@@ -1,8 +1,6 @@
 GrayDuckMail.Cli Namespace
 ==========================
-
-[Missing &lt;summary> documentation for "N:GrayDuckMail.Cli"]
-
+A command line interface for interacting with the Gray Duck Mail system.
 
 
 Classes

@@ -1,8 +1,6 @@
 GrayDuckMail.Common.Database Namespace
 ======================================
-
-[Missing &lt;summary> documentation for "N:GrayDuckMail.Common.Database"]
-
+A collection of objects defining and manipulating the database structure used by the Gray Duck Mail system.
 
 
 Classes

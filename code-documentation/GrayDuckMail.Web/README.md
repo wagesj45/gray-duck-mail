@@ -1,8 +1,6 @@
 GrayDuckMail.Web Namespace
 ==========================
-
-[Missing &lt;summary> documentation for "N:GrayDuckMail.Web"]
-
+The web server and message processing applications that power Gray Duck Mail.
 
 
 Classes

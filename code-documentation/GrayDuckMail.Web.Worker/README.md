@@ -1,8 +1,6 @@
 GrayDuckMail.Web.Worker Namespace
 =================================
-
-[Missing &lt;summary> documentation for "N:GrayDuckMail.Web.Worker"]
-
+A collection of asyncronous worker threads that power the automated features of Gray Duck Mail.
 
 
 Classes

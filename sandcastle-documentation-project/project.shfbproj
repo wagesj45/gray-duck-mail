@@ -30,7 +30,7 @@
     <IndentHtml>False</IndentHtml>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-    <HelpTitle>Easy Mail Discussions Code Documentation</HelpTitle>
+    <HelpTitle>Gray Duck Mail Code Documentation</HelpTitle>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
     <NamingMethod>MemberName</NamingMethod>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
@@ -42,17 +42,25 @@
     <PlugInConfigurations />
     <RootNamespaceTitle>Easy Mail Discussions Code Documentation</RootNamespaceTitle>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Cli" isDocumented="True">A command line interface for interacting with the Easy Mail Discussions system.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Common" isDocumented="True">A collection of shared classes and structures used across the components that make up the Easy Mail Discussion system.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="(global)" isDocumented="True">The collective Easy Mail Discussions system.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Common.Database" isDocumented="True">A collection of objects defining and manipulating the database structure used by the Easy Mail Discussions system.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Web" isDocumented="True">The web server and message processing applications that power Easy Mail Discussions.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Web.Controllers" isDocumented="True">A collection of MVC web controllers that accept and process web requests.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Web.Models" isDocumented="True">A collection of MVC model calsses that describe data transactions between MVC controllers and MVC views.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Web.Models.Forms" isDocumented="True">A collection of MVC model calsses that represent incoming HTML forms input.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="EasyMailDiscussion.Web.Worker" isDocumented="True">A collection of asyncronous worker threads that power the automated features of Easy Mail Discussions.</NamespaceSummaryItem>
-    </NamespaceSummaries>
+      <NamespaceSummaryItem name="EasyMailDiscussion.Cli" isDocumented="False">A command line interface for interacting with the Easy Mail Discussions system.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="EasyMailDiscussion.Common" isDocumented="False">A collection of shared classes and structures used across the components that make up the Easy Mail Discussion system.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="(global)" isDocumented="False">The collective Easy Mail Discussions system.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="EasyMailDiscussion.Common.Database" isDocumented="False">A collection of objects defining and manipulating the database structure used by the Easy Mail Discussions system.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="EasyMailDiscussion.Web" isDocumented="False">The web server and message processing applications that power Easy Mail Discussions.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="EasyMailDiscussion.Web.Controllers" isDocumented="False">A collection of MVC web controllers that accept and process web requests.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="EasyMailDiscussion.Web.Models" isDocumented="False">A collection of MVC model calsses that describe data transactions between MVC controllers and MVC views.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="EasyMailDiscussion.Web.Models.Forms" isDocumented="False">A collection of MVC model calsses that represent incoming HTML forms input.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="EasyMailDiscussion.Web.Worker" isDocumented="False">A collection of asyncronous worker threads that power the automated features of Easy Mail Discussions.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Cli" isDocumented="True">A command line interface for interacting with the Gray Duck Mail system.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Common" isDocumented="True">A collection of shared classes and structures used across the components that make up the Gray Duck Mail system.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Common.Database" isDocumented="True">A collection of objects defining and manipulating the database structure used by the Gray Duck Mail system.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Web" isDocumented="True">The web server and message processing applications that power Gray Duck Mail.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Web.Controllers" isDocumented="True">A collection of MVC web controllers that accept and process web requests.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Web.Models" isDocumented="True">A collection of MVC model calsses that describe data transactions between MVC controllers and MVC views.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Web.Models.Forms" isDocumented="True">A collection of MVC model calsses that represent incoming HTML forms input.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Web.Worker" isDocumented="True">A collection of asyncronous worker threads that power the automated features of Gray Duck Mail.</NamespaceSummaryItem></NamespaceSummaries>
     <VisibleItems>InheritedMembers, Privates, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
+    <ProjectSummary>This documentation provides detailed information on the architecture and code powering Gray Duck Mail.</ProjectSummary>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

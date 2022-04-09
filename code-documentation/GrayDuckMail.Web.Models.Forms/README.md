@@ -1,8 +1,6 @@
 GrayDuckMail.Web.Models.Forms Namespace
 =======================================
-
-[Missing &lt;summary> documentation for "N:GrayDuckMail.Web.Models.Forms"]
-
+A collection of MVC model calsses that represent incoming HTML forms input.
 
 
 Classes

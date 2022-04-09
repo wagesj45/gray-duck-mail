@@ -1,8 +1,6 @@
 GrayDuckMail.Common Namespace
 =============================
-
-[Missing &lt;summary> documentation for "N:GrayDuckMail.Common"]
-
+A collection of shared classes and structures used across the components that make up the Gray Duck Mail system.
 
 
 Classes
