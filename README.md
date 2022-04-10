@@ -1,4 +1,4 @@
-# Gray Duck Mail
+# ![Gray Duck Logo](/assets/logo-32.png) Gray Duck Mail
 
 Modern group email discussion lists.
 
