@@ -5,3 +5,4 @@
 - Light Slate Gray `#778899`
 - Gray X 11 Gray `#BEBEBE`
 - Peach Puff `#F9DBBD`
+- Jade `#26A96C`
