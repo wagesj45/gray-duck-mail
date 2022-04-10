@@ -48,7 +48,7 @@ The docker image requires an HTTP port exposed and mapped to port **80** on the 
 
 ### Volumes
 
-A single volume mounted to `/databases` is required. This volume will store the local [SQLite3](https://sqlite.org/index.html) database file is stored. This volume provides non-volitile storage so that data is not lost between docker image upgrades.
+A single volume mounted to `/database` is required. This volume will store the local [SQLite3](https://sqlite.org/index.html) database file is stored. This volume provides non-volitile storage so that data is not lost between docker image upgrades.
 
 ### Environment Variables
 
