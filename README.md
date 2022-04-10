@@ -126,7 +126,7 @@ Discussion lists represent a group of contacts that can relay messages to other 
 
 ### Configuration
 
-Gray Duck Mail requires an external email account and a few [definied aliases](#Aliases) in order to function. A discussion list functions by monitoring a given POP3 email account and processing each email by either relaying it to the discussion list members, or by analyzing a message's MIME headers and performing a moderation task.
+Gray Duck Mail requires an external email account and a few [defined aliases](#aliases) in order to function. A discussion list functions by monitoring a given POP3 email account and processing each email by either relaying it to the discussion list members, or by analyzing a message's MIME headers and performing a moderation task.
 
 #### Base Email Account
 
