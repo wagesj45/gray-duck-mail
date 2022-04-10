@@ -90,7 +90,7 @@ Gray Duck Mail stores email login credentials in a local database. These credent
 
 Gray Duck Mail should ideally be placed behind a firewall with no external HTTP access. If exposed to the public internet, Gray Duck Mail should be served behind a [reverse proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) serving [SSL content](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/) paired with [HTTP basic authentication](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/).
 
-The database files used by Gray Duck Mail are not encrypted and store all data in plain text. When making backups of the `/database` docker volume or exporting copies of the database.
+The database files used by Gray Duck Mail are not encrypted and store all data in plain text. When making backups of the `/database` docker volume or exporting copies of the database, care should be taken to ensure that file access is restricted.
 
 ## Web Interface
 
