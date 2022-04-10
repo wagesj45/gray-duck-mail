@@ -5,7 +5,7 @@ using System.Linq;
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the message page. </summary>
-    public class MessagePageModel
+    public class MessagePageModel : BasePageModel
     {
         #region Properties
         

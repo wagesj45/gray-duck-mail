@@ -47,7 +47,8 @@ namespace GrayDuckMail.Web.Controllers
             var model = new AdminModel()
             {
                 UseFuzzySearch = this.UseFuzzySearch,
-                PageSize = this.PageSize
+                PageSize = this.PageSize,
+                Theme = this.Theme
             };
 
             return View("Index", model);
@@ -128,6 +129,7 @@ namespace GrayDuckMail.Web.Controllers
         {
             this.UseFuzzySearch = formInput.IsChecked(f => f.UseFuzzySearch);
             this.PageSize = formInput.PageSize;
+            this.Theme = formInput.Theme;
 
             return RedirectToAction("Index");
         }

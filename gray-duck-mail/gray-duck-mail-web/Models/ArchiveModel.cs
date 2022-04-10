@@ -6,7 +6,7 @@ using System.Linq;
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the archive page. </summary>
-    public class ArchiveModel
+    public class ArchiveModel : BasePageModel
     {
         #region Properties
         

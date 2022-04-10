@@ -3,7 +3,7 @@
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the discussion list removal page. </summary>
-    public class RemoveDiscussionListModel
+    public class RemoveDiscussionListModel : BasePageModel
     {
         #region Properties
         

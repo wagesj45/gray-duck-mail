@@ -24,6 +24,8 @@ namespace GrayDuckMail.Web.Controllers
 
         private const string COOKIE_PAGE_SIZE = "PageSize";
 
+        private const string COOKIE_THEME = "Theme";
+
         /// <summary> The application lifetime interface. </summary>
         internal IHostApplicationLifetime applicationLifetime = default;
 
@@ -97,6 +99,38 @@ namespace GrayDuckMail.Web.Controllers
             set
             {
                 SetCookie(COOKIE_PAGE_SIZE, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the theme used by
+        /// <see href="https://picocss.com/docs/themes.html">Pico.css</see>.
+        /// </summary>
+        /// <value> The Pico.css theme. </value>
+        public string Theme
+        {
+            get
+            {
+                if (CookieExists(COOKIE_THEME))
+                {
+                    return GetCookie<string>(COOKIE_THEME);
+                }
+                else
+                {
+                    SetCookie(COOKIE_THEME, ThemeHelper.DefaultTheme);
+                    return string.Empty;
+                }
+            }
+            set
+            {
+                if(ThemeHelper.Themes.Contains(value))
+                {
+                    SetCookie(COOKIE_THEME, value);
+                }
+                else
+                {
+                    SetCookie(COOKIE_THEME, ThemeHelper.DefaultTheme);
+                }
             }
         }
 

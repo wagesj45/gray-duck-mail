@@ -3,7 +3,7 @@
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the edit discussion list page. </summary>
-    public class EditDiscussionListModel
+    public class EditDiscussionListModel : BasePageModel
     {
         #region Properties
         

@@ -1,6 +1,7 @@
 ﻿@using System.Reflection
+@model BasePageModel
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="@Model?.Theme?.ToLowerInvariant()">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="/css/pico.min.css" />
     <link rel="stylesheet" href="/icofont/icofont.min.css" />
 </head>
-<body class="container">
+<body class="container" >
     <header>
         <nav>
             <ul>

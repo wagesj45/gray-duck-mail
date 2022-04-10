@@ -5,7 +5,7 @@ using System.Linq;
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the discussion list assignment page. </summary>
-    public class DiscussionListAssignModel
+    public class DiscussionListAssignModel : BasePageModel
     {
         #region Properties
         

@@ -445,11 +445,11 @@ namespace GrayDuckMail.Common
         /// <param name="discussionList">    The discussion list. </param>
         /// <param name="recipient">         The recipient. </param>
         /// <param name="subject">           The subject. </param>
+        /// <param name="replyTo">           The reply to. </param>
         /// <param name="bodyGenerator">     The <see cref="MimeEntity">body generator</see> function. </param>
         /// <param name="client">            The SMTP client. </param>
-        /// <param name="cancellationToken">
-        ///     (Optional) A token that allows processing to be cancelled.
-        /// </param>
+        /// <param name="cancellationToken"> (Optional) A token that allows processing to be cancelled. </param>
+        /// <returns> A MimeMessage. </returns>
         public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Debug("Generating an email.");

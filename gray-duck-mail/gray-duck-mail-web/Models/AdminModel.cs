@@ -1,7 +1,7 @@
 ﻿namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the administration page. </summary>
-    public class AdminModel
+    public class AdminModel : BasePageModel
     {
         #region Properties
 

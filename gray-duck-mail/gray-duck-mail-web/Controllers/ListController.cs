@@ -52,7 +52,8 @@ namespace GrayDuckMail.Web.Controllers
             {
                 DiscussionLists = discussionLists.Page(pageNumber, this.PageSize),
                 PageNumber = pageNumber,
-                TotalPages = discussionLists.PageCount(this.PageSize)
+                TotalPages = discussionLists.PageCount(this.PageSize),
+                Theme = this.Theme
             };
 
             return View(model);
@@ -64,7 +65,7 @@ namespace GrayDuckMail.Web.Controllers
         [Route("List/New")]
         public IActionResult New()
         {
-            return View("Edit", new EditDiscussionListModel());
+            return View("Edit", new EditDiscussionListModel() { Theme = this.Theme });
         }
 
         /// <summary> Gets the edit list form request. </summary>
@@ -84,7 +85,8 @@ namespace GrayDuckMail.Web.Controllers
 
             var model = new EditDiscussionListModel()
             {
-                DiscussionList = discussionList
+                DiscussionList = discussionList,
+                Theme = this.Theme
             };
 
             return View("Edit", model);
@@ -145,7 +147,8 @@ namespace GrayDuckMail.Web.Controllers
 
             var model = new RemoveDiscussionListModel()
             {
-                DiscussionList = discussionList
+                DiscussionList = discussionList,
+                Theme = this.Theme
             };
 
             return View("Remove", model);
@@ -232,7 +235,8 @@ namespace GrayDuckMail.Web.Controllers
             {
                 DiscussionList = discussionList,
                 Contacts = contacts,
-                Subscriptions = subscriptions
+                Subscriptions = subscriptions,
+                Theme = this.Theme
             };
 
             return View("Assign", model);
@@ -327,7 +331,8 @@ namespace GrayDuckMail.Web.Controllers
                 DiscussionList = discussionList,
                 PageNumber = pageNumber,
                 TotalPages = pageCount,
-                Messages = messageTree
+                Messages = messageTree,
+                Theme = this.Theme
             };
 
             return View("Archive", model);
@@ -412,7 +417,8 @@ namespace GrayDuckMail.Web.Controllers
                 TotalPages = searchCache.Cache.PageCount(this.PageSize),
                 IsFuzzySearch = this.UseFuzzySearch,
                 DiscussionList = discussionList,
-                Messages = new SearchCache<Message>(searchTerm, searchCache.Cache.Page(pageNumber, this.PageSize))
+                Messages = new SearchCache<Message>(searchTerm, searchCache.Cache.Page(pageNumber, this.PageSize)),
+                Theme = this.Theme
             };
 
             return View("ArchiveSearch", model);
@@ -448,7 +454,8 @@ namespace GrayDuckMail.Web.Controllers
                 Message = message,
                 Children = children,
                 PageNumber = pageNumber,
-                TotalPages = pageCount
+                TotalPages = pageCount,
+                Theme = this.Theme
             };
 
             return View("Message", model);

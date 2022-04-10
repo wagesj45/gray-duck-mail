@@ -3,7 +3,7 @@
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the contact removal page. </summary>
-    public class RemoveContactModel
+    public class RemoveContactModel : BasePageModel
     {
         #region Properties
         

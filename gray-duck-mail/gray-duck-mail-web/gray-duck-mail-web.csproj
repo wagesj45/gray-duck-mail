@@ -6,7 +6,7 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileTag>gray-duck-mail</DockerfileTag>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Version>0.9.6</Version>
+		<Version>0.9.7</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

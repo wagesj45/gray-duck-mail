@@ -3,7 +3,7 @@ using System;
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the error page. </summary>
-    public class ErrorViewModel
+    public class ErrorViewModel : BasePageModel
     {
         #region Properties
         

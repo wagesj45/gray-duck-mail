@@ -50,7 +50,8 @@ namespace GrayDuckMail.Web.Controllers
             {
                 Contacts = contacts.Page(pageNumber, this.PageSize),
                 PageNumber = pageNumber,
-                TotalPages = contacts.PageCount(this.PageSize)
+                TotalPages = contacts.PageCount(this.PageSize),
+                Theme = this.Theme
             };
 
             return View("Index", model);
@@ -62,7 +63,7 @@ namespace GrayDuckMail.Web.Controllers
         [Route("Contact/New")]
         public IActionResult New()
         {
-            return View("Edit", new EditContactModel());
+            return View("Edit", new EditContactModel() { Theme = this.Theme });
         }
 
         /// <summary> Gets the edit contact form request. </summary>
@@ -82,7 +83,8 @@ namespace GrayDuckMail.Web.Controllers
 
             var model = new EditContactModel()
             {
-                Contact = contact
+                Contact = contact,
+                Theme = this.Theme
             };
 
             return View("Edit", model);
@@ -136,7 +138,8 @@ namespace GrayDuckMail.Web.Controllers
 
             var model = new RemoveContactModel()
             {
-                Contact = contact
+                Contact = contact,
+                Theme = this.Theme
             };
 
             return View("Remove", model);
@@ -249,7 +252,8 @@ namespace GrayDuckMail.Web.Controllers
                 PageNumber = pageNumber,
                 TotalPages = searchCache.Cache.PageCount(this.PageSize),
                 IsFuzzySearch = this.UseFuzzySearch,
-                Contacts = new SearchCache<Contact>(searchTerm, searchCache.Cache.Page(pageNumber, this.PageSize))
+                Contacts = new SearchCache<Contact>(searchTerm, searchCache.Cache.Page(pageNumber, this.PageSize)),
+                Theme = this.Theme
             };
 
             return View("Search", model);

@@ -6,7 +6,7 @@ using System.Linq;
 namespace GrayDuckMail.Web.Models
 {
     /// <summary> A data model for the contacts page. </summary>
-    public class ContactSearchModel
+    public class ContactSearchModel : BasePageModel
     {
         #region Properties
 

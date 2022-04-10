@@ -26,9 +26,18 @@
             Number of items per page
             <input type="number" id="pageSize" name="pageSize" value="@Model.PageSize" />
         </label>
+        <label for="theme">Site Theme</label>
+        <select id="theme" name=theme>
+            @foreach (var theme in ThemeHelper.Themes)
+            {
+                <!option value="@theme" @(Model.Theme.Equals(theme, StringComparison.OrdinalIgnoreCase) ? "selected" : string.Empty)>
+                    @(string.IsNullOrWhiteSpace(theme) ? "System Theme" : theme)
+                </!option>
+            }
+        </select>
     </form>
     <footer>
-            <button type="submit" form="webSettings"><i class="icofont-save"></i> Save Settings</button>
+        <button type="submit" form="webSettings"><i class="icofont-save"></i> Save Settings</button>
     </footer>
 </article>
 <article>
