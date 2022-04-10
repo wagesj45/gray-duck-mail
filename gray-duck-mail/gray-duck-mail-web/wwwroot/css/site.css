@@ -9,3 +9,53 @@
     border-style: solid;
     border-color: var(--primary);
 }
+
+/* Light Theme */
+/* Can be forced with data-theme="light" */
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+    --primary: #A3320B;
+    --primary-hover: #C23A0D;
+    --background-color: #BEBEBE;
+    --color: 221B22;
+    --muted-color: #3A2E39;
+    --muted-border-color: #778899;
+    --h1-color: #221B22;
+    --h2-color: #251D24;
+    --h3-color: #281F27;
+    --h4-color: #2B222A;
+    --h5-color: #2E242D;
+    --h6-color: #312630;
+    --secondary: #EA841D;
+    --secondary-hover: #EE9A45;
+    --contrast: green;
+    --contrast-hover: #000;
+}
+
+/* Dark Theme */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --primary: #A3320B;
+        --primary-hover: #C23A0D;
+        --primary-focus: rgba(117, 117, 117, 0.25);
+        --primary-inverse: #FFF;
+    }
+}
+
+/* Dark Theme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme="dark"] {
+    --primary: #A3320B;
+    --primary-hover: #C23A0D;
+    --primary-focus: rgba(117, 117, 117, 0.25);
+    --primary-inverse: #FFF;
+}
+
+/* Common styles */
+:root {
+    --form-element-active-border-color: var(--primary);
+    --form-element-focus-color: var(--primary-focus);
+    --switch-color: var(--primary-inverse);
+    --switch-checked-background-color: var(--primary);
+}
