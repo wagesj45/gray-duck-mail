@@ -112,7 +112,7 @@ Searching through contacts and message archives will by default perform exact se
 
 This action allows you to import an existing SQLite3 database file. When importing a database, the web server must restart. You can simply reload the web interface to see the new changes.
 
-### Datbase Export
+### Database Export
 
 This action allows you to export a copy of the SQLite3 database file. This file can be imported into another instance of Gray Duck Mail or viewed in an external application such as [DB Browser for SQLite](https://sqlitebrowser.org/)
 
