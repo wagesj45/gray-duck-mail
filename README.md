@@ -94,7 +94,7 @@ The database files used by Gray Duck Mail are not encrypted and store all data i
 
 ## Web Interface
 
-Gray Duck Mail provides a web administration interface for basic system interaction. The web interface allows an administrator to create and remove distribution lists, create and remove list contacts, browse message archives, and access basic adminstration actions like importing and [exporting copies of the local database](#Database-Export), care should be taken to make sure those files are not accessable to the public.
+Gray Duck Mail provides a web administration interface for basic system interaction. The web interface allows an administrator to create and remove distribution lists, create and remove list contacts, browse message archives, and access basic adminstration actions like [importing](#database-import) and [exporting copies of the local database](#database-export), care should be taken to make sure those files are not accessable to the public.
 
 ### Settings
 
