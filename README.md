@@ -118,7 +118,7 @@ This action allows you to export a copy of the SQLite3 database file. This file 
 
 ## Contacts
 
-Contacts represent individual users that can send and recieve messages to a discussion list. New contacts can be added through the [web interface](#Web-Interface) or are added automatically when a previously unknown email address sends a message to `request` email alias for a discussion list.
+Contacts represent individual users that can send and recieve messages to a discussion list. New contacts can be added through the [web interface](#web-interface) or are added automatically when a previously unknown email address sends a message to `request` email alias for a discussion list.
 
 ## Discussion Lists
 
