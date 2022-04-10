@@ -4,11 +4,37 @@ Modern group email discussion lists.
 
 ---
 
-Gray Duck Mail is an alternative to email discussion group software such as [Mailman](https://docs.mailman3.org/en/latest/) and [Sympa](https://www.sympa.org/). Gray Duck Mail monitors a remote mail server for messages and processes them by relaying the message to all list members. Gray Duck Mail also automatically handles user subscriptions, unsubscription requests, and email bounces. Gray Duck Mail works with any external email host that allows for POP3/SMTP connections and message forwarding or aliasing.
+Gray Duck Mail is an alternative to email discussion group software such as [Mailman](https://docs.mailman3.org/en/latest/) and [Sympa](https://www.sympa.org/) designed to be **easy to set up** and **easy to manage**. Gray Duck Mail monitors a remote mail server for messages and processes them by relaying the message to all list members. Gray Duck Mail also automatically handles user subscriptions, unsubscription requests, and email bounces. Gray Duck Mail works with any external email host that allows for POP3/SMTP connections and message forwarding or aliasing. Gray Duck Mail relies totally on an external mail provider, allowing you to use an existing web host or email account.
 
 Gray Duck Mail is written in C# and is powered by [ASP.NET Core 3.1 MVC](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-3.1).
 
+## Table of Contents
 
+1. [Installation](#installation)
+   1. [Ports](#ports)
+   2. [Volumes](#volumes)
+   3. [Environment Variables](#environment-variables)
+      - [`FETCH_TIME`](#fetch_time)
+      - [`LOG_LEVEL`](#log_level)
+      - [`MIN_SEARCH_SCORE`](#min_search_score)
+      - [`WEB_ONLY`](#web_only)
+   4. [Security Considerations](#security-considerations)
+2. [Web Interface](#web-interface)
+   1. [Settings](#settings)
+      1. [Items Per Page](#items-per-page)
+      2. [Fuzzy Search](#fuzzy-search)
+   2. [Database Import](#database-import)
+   3. [Datbase Export](#datbase-export)
+3. [Contacts](#contacts)
+4. [Discussion Lists](#discussion-lists)
+   1. [Configuration](#configuration)
+      1. [Base Email Account](#base-email-account)
+      2. [Aliases](#aliases)
+         - [`request`](#request)
+         - [`subscribe`](#subscribe)
+         - [`unsubscribe`](#unsubscribe)
+         - [`bounce`](#bounce)
+         - [`owner`](#owner)
 
 ## Installation
 
@@ -66,27 +92,27 @@ Gray Duck Mail should ideally be placed behind a firewall with no external HTTP 
 
 The database files used by Gray Duck Mail are not encrypted and store all data in plain text. When making backups of the `/database` docker volume or exporting copies of the database.
 
-### Web Interface
+## Web Interface
 
 Gray Duck Mail provides a web administration interface for basic system interaction. The web interface allows an administrator to create and remove distribution lists, create and remove list contacts, browse message archives, and access basic adminstration actions like importing and [exporting copies of the local database](#Database-Export), care should be taken to make sure those files are not accessable to the public.
 
-#### Settings
+### Settings
 
 The web adminstration settings control the presentation of data *in* the web interface, so are stored as cookies in the user's browser. These settings have no influence on the system's discussion list email processing functionality.
 
-##### Items Per Page
+#### Items Per Page
 
 This setting  controls the number of top level items displayed on a page, such as contacts or archived messages.
 
-##### Fuzzy Search
+#### Fuzzy Search
 
 Searching through contacts and message archives will by default perform exact searches. Results will contain the search term exactly as presented. If enabled, this option will allow the search engine to engage [fuzzy searching](https://en.wikipedia.org/wiki/Fuzzy_logic), using the [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) to find results that closely match a given search term. This can result in better search results, but **is computationally heavy** as all items being searched must be loaded into memory from the database. When searching large message archives or large contact lists, this could result in time-out errors from the web server.
 
-#### Database Import
+### Database Import
 
 This action allows you to import an existing SQLite3 database file. When importing a database, the web server must restart. You can simply reload the web interface to see the new changes.
 
-#### Datbase Export
+### Datbase Export
 
 This action allows you to export a copy of the SQLite3 database file. This file can be imported into another instance of Gray Duck Mail or viewed in an external application such as [DB Browser for SQLite](https://sqlitebrowser.org/)
 
@@ -96,7 +122,7 @@ Contacts represent individual users that can send and recieve messages to a disc
 
 ## Discussion Lists
 
-Discussion lists represent a group of contacts that can relay messages to other users via a single designated email address. Limited automated moderation can be performed by sending messages to specific [email aliases](#Aliases).
+Discussion lists represent a group of contacts that can relay messages to other users via a single designated email address. Limited automated moderation can be performed by sending messages to specific [email aliases](#aliases).
 
 ### Configuration
 
