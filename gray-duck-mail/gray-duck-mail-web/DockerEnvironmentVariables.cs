@@ -48,10 +48,7 @@ namespace GrayDuckMail.Web
             return 0.2f;
         });
 
-        /// <summary>
-        /// If set, only the web interface will be initialized. <see cref="Microsoft.Extensions.Hosting.BackgroundService">
-        /// Background worker threads</see> will not be initialized.
-        /// </summary>
+        /// <summary> The docker environment variable for <see cref="WebOnly"/>. </summary>
         private static Lazy<bool> envWebOnly = new Lazy<bool>(() =>
         {
             var webOnly = Environment.GetEnvironmentVariable("WEB_ONLY");
