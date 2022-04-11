@@ -16,6 +16,7 @@
 :root:not([data-theme="dark"]) {
     --primary: #A3320B;
     --primary-hover: #C23A0D;
+    --primary-focus: rgba(163, 50, 11, 0.25);
     --background-color: #BEBEBE;
     --color: 221B22;
     --muted-color: #3A2E39;
@@ -28,8 +29,72 @@
     --h6-color: #312630;
     --secondary: #EA841D;
     --secondary-hover: #EE9A45;
-    --contrast: green;
+    --secondary-focus: rgba(234, 132, 29, 0.125);
+    --secondary-inverse: #fff;
+    --contrast: #778899;
     --contrast-hover: #000;
+    --contrast-focus: rgba(119, 136, 153, 0.125);
+    --contrast-inverse: #fff;
+    --mark-background-color: #F9DBBD;
+    --mark-color: #A3320B;
+    --ins-color: #46515C;
+    --del-color: #611D07;
+    --blockquote-border-color: var(--muted-border-color);
+    --blockquote-footer-color: var(--muted-color);
+    --button-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    --button-hover-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    --form-element-background-color: #DCE0E5;
+    --form-element-border-color: #778899;
+    --form-element-color: var(--color);
+    --form-element-placeholder-color: var(--muted-color);
+    --form-element-active-background-color: #F5F5F5;
+    --form-element-active-border-color: var(--primary);
+    --form-element-focus-color: var(--primary-focus);
+    --form-element-disabled-background-color: #8B99A7;
+    --form-element-disabled-border-color: var(--form-element-border-color);
+    --form-element-disabled-opacity: 0.5;
+    --form-element-invalid-border-color: #D13F0F;
+    --form-element-invalid-active-border-color: #B2360C;
+    --form-element-invalid-focus-color: rgba(209, 63, 15, 0.125);
+    --form-element-valid-border-color: #26A96C;
+    --form-element-valid-active-border-color: #37D28A;
+    --form-element-valid-focus-color: rgba(38, 169, 108, 0.125);
+    --switch-background-color: #778899;
+    --switch-color: var(--primary-inverse);
+    --switch-checked-background-color: var(--primary);
+    --range-border-color: #778899;
+    --range-active-border-color: #A3320B;
+    --range-thumb-border-color: var(--background-color);
+    --range-thumb-color: var(--secondary);
+    --range-thumb-hover-color: var(--secondary-hover);
+    --range-thumb-active-color: var(--primary);
+    --table-border-color: var(--muted-border-color);
+    --table-row-stripped-background-color: #F3F5F6;
+    --code-background-color: #3A2E39;
+    --code-color: #F5F5F5;
+    --code-kbd-background-color: var(--contrast);
+    --code-kbd-color: var(--contrast-inverse);
+    --code-tag-color: var(--primary);
+    --code-property-color: var(--secondary);
+    --code-value-color: var(--primary);
+    --code-comment-color: var(--muted-color);
+    --accordion-border-color: var(--muted-border-color);
+    --accordion-close-summary-color: var(--muted-color);
+    --accordion-open-summary-color: var(--primary);
+    --card-background-color: #FDF5EC;
+    --card-border-color: var(--muted-border-color);
+    --card-box-shadow: 0 0.125rem 1rem rgba(27, 40, 50, 0.04), 0 0.125rem 2rem rgba(27, 40, 50, 0.08), 0 0 0 0.0625rem rgba(27, 40, 50, 0.024);
+    --card-sectionning-background-color: #F5F5F5;
+    --dropdown-background-color: var(--muted-color);
+    --dropdown-border-color: var(--muted-border-color);
+    --dropdown-box-shadow: var(--card-box-shadow);
+    --dropdown-color: var(--color);
+    --dropdown-hover-background-color: var(--secondary-hover);
+    --progress-background-color: #778899;
+    --progress-color: var(--primary);
+    --loading-spinner-opacity: 0.5;
+    --tooltip-background-color: #3A2E39;
+    --tooltip-color: var(--contrast-inverse);
 }
 
 /* Dark Theme */
@@ -38,7 +103,7 @@
     :root:not([data-theme="light"]) {
         --primary: #A3320B;
         --primary-hover: #C23A0D;
-        --primary-focus: rgba(117, 117, 117, 0.25);
+        --primary-focus: rgba(163, 50, 11, 0.25);
         --primary-inverse: #FFF;
     }
 }
@@ -48,7 +113,7 @@
 [data-theme="dark"] {
     --primary: #A3320B;
     --primary-hover: #C23A0D;
-    --primary-focus: rgba(117, 117, 117, 0.25);
+    --primary-focus: rgba(163, 50, 11, 0.25);
     --primary-inverse: #FFF;
 }
 
