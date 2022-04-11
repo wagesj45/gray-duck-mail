@@ -9,6 +9,53 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gray-duck-mail-cli", "gray-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gray-duck-mail-common", "gray-duck-mail-common\gray-duck-mail-common.csproj", "{459F0277-18A6-477B-874C-0EAF66EF16EA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project-website", "project-website", "{24BE41B3-0CC5-45B4-B39D-A2EC6C48B5F5}"
+	ProjectSection(SolutionItems) = preProject
+		..\project-website\gray-duck.jpg = ..\project-website\gray-duck.jpg
+		..\project-website\index.html = ..\project-website\index.html
+		..\project-website\site.css = ..\project-website\site.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wwwroot", "wwwroot", "{E4D070E5-404D-47B6-8E8C-D2320404B414}"
+	ProjectSection(SolutionItems) = preProject
+		gray-duck-mail-web\wwwroot\android-chrome-192x192.png = gray-duck-mail-web\wwwroot\android-chrome-192x192.png
+		gray-duck-mail-web\wwwroot\android-chrome-512x512.png = gray-duck-mail-web\wwwroot\android-chrome-512x512.png
+		gray-duck-mail-web\wwwroot\apple-touch-icon.png = gray-duck-mail-web\wwwroot\apple-touch-icon.png
+		gray-duck-mail-web\wwwroot\favicon-16x16.png = gray-duck-mail-web\wwwroot\favicon-16x16.png
+		gray-duck-mail-web\wwwroot\favicon-32x32.png = gray-duck-mail-web\wwwroot\favicon-32x32.png
+		gray-duck-mail-web\wwwroot\favicon.ico = gray-duck-mail-web\wwwroot\favicon.ico
+		gray-duck-mail-web\wwwroot\site.webmanifest = gray-duck-mail-web\wwwroot\site.webmanifest
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{A8112D99-03B2-401C-9320-A0828EDB6C7B}"
+	ProjectSection(SolutionItems) = preProject
+		gray-duck-mail-web\wwwroot\css\pico.min.css = gray-duck-mail-web\wwwroot\css\pico.min.css
+		gray-duck-mail-web\wwwroot\css\pico.min.css.map = gray-duck-mail-web\wwwroot\css\pico.min.css.map
+		gray-duck-mail-web\wwwroot\css\site.css = gray-duck-mail-web\wwwroot\css\site.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "icofont", "icofont", "{D7A7A6EF-1305-4AD9-9EC8-35648EE52D29}"
+	ProjectSection(SolutionItems) = preProject
+		gray-duck-mail-web\wwwroot\icofont\icofont.min.css = gray-duck-mail-web\wwwroot\icofont\icofont.min.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{18699BD2-C713-4293-9244-BEA0088BEBB2}"
+	ProjectSection(SolutionItems) = preProject
+		gray-duck-mail-web\wwwroot\img\gray-duck.jpg = gray-duck-mail-web\wwwroot\img\gray-duck.jpg
+		gray-duck-mail-web\wwwroot\img\logo-64.png = gray-duck-mail-web\wwwroot\img\logo-64.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{E283E1AE-9549-4305-86E4-F328C93C24FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{6A3D1461-7CD5-460F-9B5E-9DC95B776ABD}"
+	ProjectSection(SolutionItems) = preProject
+		gray-duck-mail-web\wwwroot\icofont\fonts\icofont.eot = gray-duck-mail-web\wwwroot\icofont\fonts\icofont.eot
+		gray-duck-mail-web\wwwroot\icofont\fonts\icofont.svg = gray-duck-mail-web\wwwroot\icofont\fonts\icofont.svg
+		gray-duck-mail-web\wwwroot\icofont\fonts\icofont.ttf = gray-duck-mail-web\wwwroot\icofont\fonts\icofont.ttf
+		gray-duck-mail-web\wwwroot\icofont\fonts\icofont.woff = gray-duck-mail-web\wwwroot\icofont\fonts\icofont.woff
+		gray-duck-mail-web\wwwroot\icofont\fonts\icofont.woff2 = gray-duck-mail-web\wwwroot\icofont\fonts\icofont.woff2
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +77,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4D070E5-404D-47B6-8E8C-D2320404B414} = {24BE41B3-0CC5-45B4-B39D-A2EC6C48B5F5}
+		{A8112D99-03B2-401C-9320-A0828EDB6C7B} = {E4D070E5-404D-47B6-8E8C-D2320404B414}
+		{D7A7A6EF-1305-4AD9-9EC8-35648EE52D29} = {E4D070E5-404D-47B6-8E8C-D2320404B414}
+		{18699BD2-C713-4293-9244-BEA0088BEBB2} = {E4D070E5-404D-47B6-8E8C-D2320404B414}
+		{E283E1AE-9549-4305-86E4-F328C93C24FC} = {E4D070E5-404D-47B6-8E8C-D2320404B414}
+		{6A3D1461-7CD5-460F-9B5E-9DC95B776ABD} = {D7A7A6EF-1305-4AD9-9EC8-35648EE52D29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D57210-A88A-4A83-B04E-8916DC6829C5}
