@@ -36,9 +36,7 @@ Type: [System.String][4]
 
 ##### *replyTo*
 Type: [System.String][4]  
-
-[Missing &lt;param name="replyTo"/> documentation for "M:GrayDuckMail.Common.EmailHelper.SendEmail(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ The reply to.
 
 ##### *bodyGenerator*
 Type: [System.Func][5]&lt;MimeEntity>  
@@ -54,9 +52,7 @@ Type: [System.Threading.CancellationToken][6]
 
 #### Return Value
 Type: MimeMessage  
-
-[Missing &lt;returns> documentation for "M:GrayDuckMail.Common.EmailHelper.SendEmail(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"]
-
+ A MimeMessage. 
 
 Remarks
 -------

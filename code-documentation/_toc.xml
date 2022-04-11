@@ -413,6 +413,14 @@
             <topic id="M:GrayDuckMail.Web.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"
                    file="GrayDuckMail.Web/Startup/ConfigureServices.md"/>
          </topic>
+         <topic id="T:GrayDuckMail.Web.ThemeHelper"
+                file="GrayDuckMail.Web/ThemeHelper/README.md"
+                title="ThemeHelper">
+            <topic id="P:GrayDuckMail.Web.ThemeHelper.DefaultTheme"
+                   file="GrayDuckMail.Web/ThemeHelper/DefaultTheme.md"/>
+            <topic id="P:GrayDuckMail.Web.ThemeHelper.Themes"
+                   file="GrayDuckMail.Web/ThemeHelper/Themes.md"/>
+         </topic>
       </topic>
       <topic id="N:GrayDuckMail.Web.Controllers"
              file="GrayDuckMail.Web.Controllers/README.md"
@@ -444,6 +452,8 @@
                    file="GrayDuckMail.Web.Controllers/BaseController/PageSize.md"/>
             <topic id="P:GrayDuckMail.Web.Controllers.BaseController.SqliteDatabase"
                    file="GrayDuckMail.Web.Controllers/BaseController/SqliteDatabase.md"/>
+            <topic id="P:GrayDuckMail.Web.Controllers.BaseController.Theme"
+                   file="GrayDuckMail.Web.Controllers/BaseController/Theme.md"/>
             <topic id="P:GrayDuckMail.Web.Controllers.BaseController.UseFuzzySearch"
                    file="GrayDuckMail.Web.Controllers/BaseController/UseFuzzySearch.md"/>
             <topic id="M:GrayDuckMail.Web.Controllers.BaseController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)"
@@ -564,6 +574,14 @@
                    file="GrayDuckMail.Web.Models/ArchiveSearchModel/PageNumber.md"/>
             <topic id="P:GrayDuckMail.Web.Models.ArchiveSearchModel.TotalPages"
                    file="GrayDuckMail.Web.Models/ArchiveSearchModel/TotalPages.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Web.Models.BasePageModel"
+                file="GrayDuckMail.Web.Models/BasePageModel/README.md"
+                title="BasePageModel">
+            <topic id="M:GrayDuckMail.Web.Models.BasePageModel.#ctor"
+                   file="GrayDuckMail.Web.Models/BasePageModel/_ctor.md"/>
+            <topic id="P:GrayDuckMail.Web.Models.BasePageModel.Theme"
+                   file="GrayDuckMail.Web.Models/BasePageModel/Theme.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Web.Models.ContactSearchModel"
                 file="GrayDuckMail.Web.Models/ContactSearchModel/README.md"
@@ -698,6 +716,8 @@
                    file="GrayDuckMail.Web.Models.Forms/AdminSettingsForm/_ctor.md"/>
             <topic id="P:GrayDuckMail.Web.Models.Forms.AdminSettingsForm.PageSize"
                    file="GrayDuckMail.Web.Models.Forms/AdminSettingsForm/PageSize.md"/>
+            <topic id="P:GrayDuckMail.Web.Models.Forms.AdminSettingsForm.Theme"
+                   file="GrayDuckMail.Web.Models.Forms/AdminSettingsForm/Theme.md"/>
             <topic id="P:GrayDuckMail.Web.Models.Forms.AdminSettingsForm.UseFuzzySearch"
                    file="GrayDuckMail.Web.Models.Forms/AdminSettingsForm/UseFuzzySearch.md"/>
          </topic>
