@@ -49,7 +49,9 @@ namespace GrayDuckMail.Web.Worker
                 {
                     logger.Debug("Processing list {0}", discussionList.Name);
 
-                    var createdSubscriptions = database.ContactSubscriptions.Include(subscription => subscription.Contact).Where(subscription => subscription.Status == SubscriptionStatus.Created);
+                    var createdSubscriptions = database.ContactSubscriptions
+                        .Include(subscription => subscription.Contact)
+                        .Where(subscription => subscription.Status == SubscriptionStatus.Created && subscription.DiscussionListID == discussionList.ID);
 
                     if (createdSubscriptions.Any())
                     {
