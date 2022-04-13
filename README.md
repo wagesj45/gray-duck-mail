@@ -174,7 +174,7 @@ The owner alias should forward to a non-discussion-list address, such as the adm
 
 ## Contributing
 
-Contibutions are welcome. The code is fully documented (via [Sandcastle project](/sandcastle-documentation-project/README.md)) and can be [viewed in browser](/code-documentation/README.md).
+Contibutions are welcome. The code is fully documented (via [Sandcastle project](https://github.com/EWSoftware/SHFB)) and can be [viewed in browser](code-documentation/README.md).
 
 ## Support
 
