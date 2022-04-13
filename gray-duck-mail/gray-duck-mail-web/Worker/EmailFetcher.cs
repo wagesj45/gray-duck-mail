@@ -163,27 +163,34 @@ namespace GrayDuckMail.Web.Worker
         private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
         {
             var from = subscriptionConfirmation.Message.Sender ?? subscriptionConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
+
+            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
-            logger.Info("Processing subscription message from {0}.", subscription.Contact.Name);
-
-            if (!subscription.Contact.Activated)
+            if (subscription != null)
             {
-                logger.Info("Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.", subscription.Contact.Name, subscription.Contact.ID);
-                subscription.Contact.Activated = true;
+                logger.Info("Processing subscription message from {0}.", subscription.Contact.Name);
+
+                if (!subscription.Contact.Activated)
+                {
+                    logger.Info("Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.", subscription.Contact.Name, subscription.Contact.ID);
+                    subscription.Contact.Activated = true;
+                }
+
+                logger.Info("User {0} subscribing to {1}.", subscription.Contact.Name, discussionList.Name);
+                subscription.Status = SubscriptionStatus.Subscribed;
+
+                using (var smtpClient = new SmtpClient())
+                {
+                    EmailHelper.SendSubscriptionConfirmationEmail(discussionList, subscription.Contact, smtpClient, cancellationToken);
+
+                    smtpClient.Disconnect(true, cancellationToken);
+                }
             }
-
-            logger.Info("User {0} subscribing to {1}.", subscription.Contact.Name, discussionList.Name);
-            subscription.Status = SubscriptionStatus.Subscribed;
-
-            using (var smtpClient = new SmtpClient())
+            else
             {
-                EmailHelper.SendSubscriptionConfirmationEmail(discussionList, subscription.Contact, smtpClient, cancellationToken);
-
-                smtpClient.Disconnect(true, cancellationToken);
+                logger.Error("Recieved an unsolicited subscription confirmation from {0} for {1}.", from.Address, discussionList.Name);
             }
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index);
@@ -201,13 +208,19 @@ namespace GrayDuckMail.Web.Worker
         private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
+            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
-            logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
-            subscription.Status = SubscriptionStatus.Unsubscribed;
+            if (subscription != null)
+            {
+                logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
+                subscription.Status = SubscriptionStatus.Unsubscribed;
+            }
+            else
+            {
+                logger.Error("Recieved an unsolicited unsubscription request from {0} for {1}.", from.Address, discussionList.Name);
+            }
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index);
             pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
@@ -226,9 +239,7 @@ namespace GrayDuckMail.Web.Worker
         private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request, CancellationToken cancellationToken = default)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
-                .Include(subscription => subscription.Contact)
+            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
@@ -295,8 +306,7 @@ namespace GrayDuckMail.Web.Worker
         {
             var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
             var bouncedOriginallyTo = EmailHelper.GetBouncedMessageRecipient(bounce);
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
+            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
                 .Where(subscription => subscription.Contact.Email == bouncedFrom.Address || subscription.Contact.Email == bouncedOriginallyTo)
                 .SingleOrDefault();
 

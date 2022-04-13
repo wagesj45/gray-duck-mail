@@ -18,3 +18,141 @@
     transform: translate(-50%, -50%);
     color: white;
 }
+
+button.compact {
+    padding: 0px;
+    border: 0px;
+    width: 1.5em;
+    height: 1.5em;
+    display: inherit;
+    margin: 0px;
+}
+
+button.transparent {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+
+
+.warning {
+    -webkit-animation: alert 2s linear 0s 1 normal;
+    -moz-animation: alert 2s linear 0s 1 normal;
+    -ms-animation: alert 2s linear 0s 1 normal;
+    animation: alert 2s linear 0s 1 normal;
+}
+
+@-webkit-keyframes alert {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    5% {
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    10% {
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    15% {
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    20% {
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    25% {
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    30% {
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    35% {
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    40% {
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    45% {
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    50% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes alert {
+    0% {
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    5% {
+        -ms-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    10% {
+        -ms-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    15% {
+        -ms-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    20% {
+        -ms-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    25% {
+        -ms-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    30% {
+        -ms-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    35% {
+        -ms-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    40% {
+        -ms-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    45% {
+        -ms-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    50% {
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
