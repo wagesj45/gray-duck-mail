@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace GrayDuckMail.Common
@@ -29,6 +30,31 @@ namespace GrayDuckMail.Common
 
         /// <summary> (Immutable) The string denoting the MIME status for a delayed email message. </summary>
         public const string STATUS_GROUP_ACTION_DELAYED = "delayed";
+
+        /// <summary> (Immutable) A regex string matching <see cref="FOOTER_FORMAT"/>. </summary>
+        public const string FOOTER_REGEX = @"This message was sent by .* and is part of the '.*' discussion list. You can unsubscribe by sending any message to .*\.";
+
+        /// <summary> (Immutable) The relay footer message format. </summary>
+        /// <remarks>
+        /// <para> Contains the following variable components </para>
+        /// <list type="number">
+        /// <item> sender </item>
+        /// <item> discussion list name </item>
+        /// <item> unsubscribe alias</item>
+        /// </list>
+        /// </remarks>
+        public const string FOOTER_FORMAT = "This message was sent by {0} and is part of the '{1}' discussion list. You can unsubscribe by sending any message to {2}.";
+
+        /// <summary> (Immutable) A unique identifier for the footer of relayed messages. </summary>
+        /// <remarks>
+        /// This value allows for easier removal of excess footer messages from relayed emails.
+        /// </remarks>
+        /// <seealso cref="FOOTER_XPATH"/>
+        /// <seealso cref="RelayEmail(DiscussionList, Contact, Message, SqliteDatabase, SmtpClient, CancellationToken)"/>
+        public const string FOOTER_GUID_ID = "GRAYDUCKMAIL-7ECCFC70-CFD2-429B-9D35-212287B05C3F";
+
+        /// <summary> (Immutable) The XPath search value for the footer div element. </summary>
+        public static readonly string FOOTER_XPATH = string.Format("//div[@id='{0}']", FOOTER_GUID_ID);
 
         /// <summary> The main HTML email template. </summary>
         private static string defaultEmailTemplate;
@@ -204,6 +230,28 @@ namespace GrayDuckMail.Common
             return assignable;
         }
 
+        /// <summary> Gets the message attached as a footer to relayed messages. </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="sender">         The sender. </param>
+        /// <returns> The footer. </returns>
+        public static string GetRelayFooter(DiscussionList discussionList, Contact sender)
+        {
+            var footer = string.Format(FOOTER_FORMAT, sender.Name, discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+
+            return footer;
+        }
+
+        /// <summary> Removes the footer message if present in the given text. </summary>
+        /// <param name="fullText"> The full text. </param>
+        /// <returns> A string. </returns>
+        public static string RemoveTextFooter(string fullText)
+        {
+            var regex = new Regex(FOOTER_REGEX);
+            var clean = regex.Replace(fullText, string.Empty);
+
+            return clean;
+        }
+
         /// <summary>
         /// Relay an email to the <see cref="Contact">contacts</see>
         /// <see cref="ContactSubscription">assigned</see> to a <see cref="DiscussionList">discussion
@@ -225,9 +273,12 @@ namespace GrayDuckMail.Common
         {
             logger.Debug("Relaying message to {0} ({1})", recipient.Name, recipient.Email);
 
+            var sender = database.Contacts.Where(contact => contact.ID == message.OriginatorContactID).SingleOrDefault();
+            var cleanSubject = (!string.IsNullOrWhiteSpace(message.Subject) ? message.Subject : string.Empty).Replace(string.Format(" - Message from {0}", discussionList.Name), "");
+            
             var relay = SendEmail(discussionList,
                 recipient,
-                string.Format("{0} - Message from {1}", message.Subject.Replace(String.Format(" - Message from {0}", discussionList.Name), ""), discussionList.Name),
+                string.Format("{0} - Message from {1}", cleanSubject, discussionList.Name),
                 discussionList.BaseEmailAddress,
                 () =>
                 {
@@ -235,48 +286,14 @@ namespace GrayDuckMail.Common
                     {
                         logger.Debug("Mesasge body determined to contain HTML.");
 
-                        var html = new HtmlDocument();
-                        html.LoadHtml(message.BodyHTML);
-
-                        HtmlNode bodyNode = null;
-                        if (html.DocumentNode.SelectNodes("//body")?.Any() ?? false)
-                        {
-                            bodyNode = html.DocumentNode.SelectNodes("//body").FirstOrDefault();
-                        }
-
-                        if (bodyNode == null)
-                        {
-                            //If we couldn't find a <body> tag, let's assume it not a full html 
-                            // build and just attach to the document node directly.
-
-                            bodyNode = html.DocumentNode;
-                        }
-
-                        var techHeader = html.CreateElement("mark");
-                        techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to <a href='mailto:{1}'>{1}</a>", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
-                        bodyNode.AppendChild(techHeader);
-
-                        var cleanedHtmlString = html.DocumentNode.InnerHtml.Replace(techHeader.InnerHtml, "");
-                        var modifiedHtml = html.DocumentNode.InnerHtml;
-
-                        return new TextPart(TextFormat.Html)
-                        {
-                            Text = modifiedHtml
-                        };
+                        return ProcessHTMLRelay(discussionList, message, sender);
                     }
 
                     if (!string.IsNullOrWhiteSpace(message.BodyText))
                     {
                         logger.Debug("Message body determined to contain plain text.");
 
-                        var techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
-                        var cleanedText = message.BodyText.Replace(techHeader, "");
-                        var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
-
-                        return new TextPart(TextFormat.Text)
-                        {
-                            Text = modifiedText
-                        };
+                        return ProcessTextRelay(discussionList, message, sender);
                     }
 
                     var formatException = new FormatException("Could not determine the formatting of the message.");
@@ -293,6 +310,74 @@ namespace GrayDuckMail.Common
                 RelayEmailID = relay.MessageId
             };
             database.RelayIdentifiers.Add(relayIdentifier);
+        }
+
+        /// <summary> Process the text body of a relayed message. </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="message">        The message. </param>
+        /// <param name="sender">         The sender. </param>
+        /// <returns> A MimeEntity. </returns>
+        private static MimeEntity ProcessTextRelay(DiscussionList discussionList, Message message, Contact sender)
+        {
+            var cleanedText = RemoveTextFooter(message.BodyText);
+            var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, GetRelayFooter(discussionList, sender));
+
+            return new TextPart(TextFormat.Text)
+            {
+                Text = modifiedText
+            };
+        }
+
+        /// <summary> Process the HTML body of a relayed message. </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="message">        The message. </param>
+        /// <param name="sender">         The sender. </param>
+        /// <returns> A MimeEntity. </returns>
+        private static MimeEntity ProcessHTMLRelay(DiscussionList discussionList, Message message, Contact sender)
+        {
+            var html = new HtmlDocument();
+            html.LoadHtml(message.BodyHTML);
+
+            HtmlNode bodyNode = null;
+            if (html.DocumentNode.SelectNodes("//body")?.Any() ?? false)
+            {
+                bodyNode = html.DocumentNode.SelectNodes("//body").FirstOrDefault();
+            }
+
+            if (bodyNode == null)
+            {
+                // If we couldn't find a <body> tag, let's assume it not a full html 
+                // build and just attach to the document node directly.
+
+                bodyNode = html.DocumentNode;
+            }
+
+            logger.Trace("Removing old footer.");
+
+            var oldFooterDivs = bodyNode.SelectNodes(FOOTER_XPATH);
+            if (oldFooterDivs != null)
+            {
+                foreach (var node in oldFooterDivs)
+                {
+                    node.Remove();
+                }
+            }
+
+            var footerDiv = html.CreateElement("div");
+            var mark = html.CreateElement("mark");
+
+            footerDiv.Id = FOOTER_GUID_ID;
+            mark.InnerHtml = GetRelayFooter(discussionList, sender);
+
+            footerDiv.AppendChild(mark);
+            bodyNode.AppendChild(footerDiv);
+
+            var modifiedHtml = html.DocumentNode.InnerHtml;
+
+            return new TextPart(TextFormat.Html)
+            {
+                Text = modifiedHtml
+            };
         }
 
         /// <summary>
@@ -518,23 +603,23 @@ namespace GrayDuckMail.Common
                     {
                         var action = statusGroup["Action"];
 
-                        if(action != null)
+                        if (action != null)
                         {
                             if (BouncedEmailStatusGroupActions.Contains(action.ToLowerInvariant()))
                             {
                                 logger.Debug("A failed delivery was detected.");
 
-                                var recipient = statusGroup["Original-Recipient"] 
+                                var recipient = statusGroup["Original-Recipient"]
                                     ?? statusGroup["Failed-Recipient"]
                                     ?? statusGroup["Final-Recipient"];
-                                
+
                                 var address = recipient != null ? recipient.Split(';')[1] : string.Empty;
 
-                                if(string.IsNullOrWhiteSpace(address))
+                                if (string.IsNullOrWhiteSpace(address))
                                 {
                                     logger.Error("The bounced email contains a failure report, but an unknown recipient status group.");
 
-                                    foreach(var group in statusGroup)
+                                    foreach (var group in statusGroup)
                                     {
                                         logger.Debug(string.Format("-- {0}: {1}", group.Field, group.Value));
                                     }

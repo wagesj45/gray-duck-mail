@@ -44,19 +44,23 @@ Properties
 Methods
 -------
 
-|                                  | Name                                      | Description                                                                                                                                        |
-| -------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Public method]![Static member] | [FillDefaultTemplate][14]                 | Fill the default HTML email template with values.                                                                                                  |
-| ![Public method]![Static member] | [GetBouncedMessageRecipient][15]          | Gets bounced message recipient from the message, if it exists.                                                                                     |
-| ![Public method]![Static member] | [IsAssignable][16]                        | Query if a given user can be assigned to a discussion list.                                                                                        |
-| ![Public method]![Static member] | [IsAuthorizedForMailDistribution][17]     | Query if a given user is authorized for mail distribution on a given discussion list.                                                              |
-| ![Public method]![Static member] | [IsBouncedMessage][18]                    | Query if a messaged is a bounced message by determining if there is an error action code per [GetBouncedMessageRecipient(IndexedMimeMessage)][15]. |
-| ![Public method]![Static member] | [RelayEmail][19]                          | Relay an email to the [contacts][7][assigned][8] to a [discussion list][9].                                                                        |
-| ![Public method]![Static member] | [SendEmail][20]                           | Sends an email.                                                                                                                                    |
-| ![Public method]![Static member] | [SendOnboardingEmail][21]                 | Sends an onboarding email asking a [contact][7] to subscribe to a [discussion list][9].                                                            |
-| ![Public method]![Static member] | [SendRequestOwnerNotificationEmail][22]   | Sends a notification to the [owner][23] that a request to join the mailing list has been issued.                                                   |
-| ![Public method]![Static member] | [SendSubscriptionConfirmationEmail][24]   | Sends a subscription confirmation email to a [contact][7] that has subscribed to a [discussion list][9].                                           |
-| ![Public method]![Static member] | [SendUnsubscriptionConfirmationEmail][25] | Sends a confirmation email to a [contact][7] that has unsubscribed from a [discussion list][9].                                                    |
+|                                   | Name                                      | Description                                                                                                                                        |
+| --------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Public method]![Static member]  | [FillDefaultTemplate][14]                 | Fill the default HTML email template with values.                                                                                                  |
+| ![Public method]![Static member]  | [GetBouncedMessageRecipient][15]          | Gets bounced message recipient from the message, if it exists.                                                                                     |
+| ![Public method]![Static member]  | [GetRelayFooter][16]                      | Gets the message attached as a footer to relayed messages.                                                                                         |
+| ![Public method]![Static member]  | [IsAssignable][17]                        | Query if a given user can be assigned to a discussion list.                                                                                        |
+| ![Public method]![Static member]  | [IsAuthorizedForMailDistribution][18]     | Query if a given user is authorized for mail distribution on a given discussion list.                                                              |
+| ![Public method]![Static member]  | [IsBouncedMessage][19]                    | Query if a messaged is a bounced message by determining if there is an error action code per [GetBouncedMessageRecipient(IndexedMimeMessage)][15]. |
+| ![Private method]![Static member] | [ProcessHTMLRelay][20]                    | Process the HTML body of a relayed message.                                                                                                        |
+| ![Private method]![Static member] | [ProcessTextRelay][21]                    | Process the text body of a relayed message.                                                                                                        |
+| ![Public method]![Static member]  | [RelayEmail][22]                          | Relay an email to the [contacts][7][assigned][8] to a [discussion list][9].                                                                        |
+| ![Public method]![Static member]  | [RemoveTextFooter][23]                    | Removes the footer message if present in the given text.                                                                                           |
+| ![Public method]![Static member]  | [SendEmail][24]                           | Sends an email.                                                                                                                                    |
+| ![Public method]![Static member]  | [SendOnboardingEmail][25]                 | Sends an onboarding email asking a [contact][7] to subscribe to a [discussion list][9].                                                            |
+| ![Public method]![Static member]  | [SendRequestOwnerNotificationEmail][26]   | Sends a notification to the [owner][27] that a request to join the mailing list has been issued.                                                   |
+| ![Public method]![Static member]  | [SendSubscriptionConfirmationEmail][28]   | Sends a subscription confirmation email to a [contact][7] that has subscribed to a [discussion list][9].                                           |
+| ![Public method]![Static member]  | [SendUnsubscriptionConfirmationEmail][29] | Sends a confirmation email to a [contact][7] that has unsubscribed from a [discussion list][9].                                                    |
 
 
 Fields
@@ -64,8 +68,12 @@ Fields
 
 |                                 | Name                              | Description                                                                  |
 | ------------------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
-| ![Public field]![Static member] | [STATUS_GROUP_ACTION_DELAYED][26] | (Immutable) The string denoting the MIME status for a delayed email message. |
-| ![Public field]![Static member] | [STATUS_GROUP_ACTION_FAILED][27]  | (Immutable) The string denoting the MIME status for a failed email message.  |
+| ![Public field]![Static member] | [FOOTER_FORMAT][30]               | (Immutable) The relay footer message format.                                 |
+| ![Public field]![Static member] | [FOOTER_GUID_ID][31]              | (Immutable) A unique identifier for the footer of relayed messages.          |
+| ![Public field]![Static member] | [FOOTER_REGEX][32]                | (Immutable) A regex string matching [FOOTER_FORMAT][30].                     |
+| ![Public field]![Static member] | [FOOTER_XPATH][33]                | (Immutable) The XPath search value for the footer div element.               |
+| ![Public field]![Static member] | [STATUS_GROUP_ACTION_DELAYED][34] | (Immutable) The string denoting the MIME status for a delayed email message. |
+| ![Public field]![Static member] | [STATUS_GROUP_ACTION_FAILED][35]  | (Immutable) The string denoting the MIME status for a failed email message.  |
 
 
 See Also
@@ -89,18 +97,26 @@ See Also
 [13]: DefaultEmailTemplate.md
 [14]: FillDefaultTemplate.md
 [15]: GetBouncedMessageRecipient.md
-[16]: IsAssignable.md
-[17]: IsAuthorizedForMailDistribution.md
-[18]: IsBouncedMessage.md
-[19]: RelayEmail.md
-[20]: SendEmail.md
-[21]: SendOnboardingEmail.md
-[22]: SendRequestOwnerNotificationEmail.md
-[23]: ../EmailAliasHelper/GetOwnerAlias.md
-[24]: SendSubscriptionConfirmationEmail.md
-[25]: SendUnsubscriptionConfirmationEmail.md
-[26]: STATUS_GROUP_ACTION_DELAYED.md
-[27]: STATUS_GROUP_ACTION_FAILED.md
+[16]: GetRelayFooter.md
+[17]: IsAssignable.md
+[18]: IsAuthorizedForMailDistribution.md
+[19]: IsBouncedMessage.md
+[20]: ProcessHTMLRelay.md
+[21]: ProcessTextRelay.md
+[22]: RelayEmail.md
+[23]: RemoveTextFooter.md
+[24]: SendEmail.md
+[25]: SendOnboardingEmail.md
+[26]: SendRequestOwnerNotificationEmail.md
+[27]: ../EmailAliasHelper/GetOwnerAlias.md
+[28]: SendSubscriptionConfirmationEmail.md
+[29]: SendUnsubscriptionConfirmationEmail.md
+[30]: FOOTER_FORMAT.md
+[31]: FOOTER_GUID_ID.md
+[32]: FOOTER_REGEX.md
+[33]: FOOTER_XPATH.md
+[34]: STATUS_GROUP_ACTION_DELAYED.md
+[35]: STATUS_GROUP_ACTION_FAILED.md
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public property]: ../../icons/pubproperty.svg "Public property"
