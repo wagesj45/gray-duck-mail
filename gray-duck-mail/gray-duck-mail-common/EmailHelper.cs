@@ -127,8 +127,8 @@ namespace GrayDuckMail.Common
         /// <summary> Gets the default HTML email template. </summary>
         /// <remarks>
         /// <para>
-        /// This email template contains several replaceable notaions: <c>{header}</c>,
-        /// <c>{subheader}</c>, <c>{body}</c>, and <c>{footer}</c>. The <c>{unsubscribe}</c> notation
+        /// This email template contains several replaceable notaions: <c>{heading}</c>,
+        /// <c>{subheading}</c>, <c>{body}</c>, and <c>{footer}</c>. The <c>{unsubscribe}</c> notation
         /// should always be a link to the
         /// <see cref="EmailAliasHelper.GetUnsubscribeAlias(DiscussionList)">unsubscribe email
         /// alias</see>.
