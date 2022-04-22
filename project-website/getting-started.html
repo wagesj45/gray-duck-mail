@@ -131,7 +131,7 @@
             <strong>Using the Discussion List</strong>
         </header>
         <p>
-            Gray Duck Mail's primary function is to relay email from one discussion list member to all the others. Email messages recieved at the <a href="#base-email-address">base email address</a> are forwarded to all eligable group members. Replies are similarly routed to the entire group. An archive of the message is added to the arhive and available for viewing in the <a href="#administration">web interface</a>. 
+            Gray Duck Mail's primary function is to relay email from one discussion list member to all the others. Email messages recieved at the <a href="#base-email-address">base email address</a> are forwarded to all eligable group members. Replies are similarly routed to the entire group. An archive of the message is added to the arhive and available for viewing in the <a href="#administration">web interface</a>.
         </p>
         <h5>Administrative Email</h5>
         <p>
@@ -188,10 +188,21 @@
             </ul>
         </nav>
     </footer>
+    <!-- Matomo -->
     <script>
-        function CopyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-        }
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//t.thebreadsticks.com/";
+            _paq.push(['setTrackerUrl', u + 'js/']);
+            _paq.push(['setSiteId', '9']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = u + 'js/'; s.parentNode.insertBefore(g, s);
+        })();
     </script>
+    <noscript><p><img src="https://t.thebreadsticks.com/js?idsite=9&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Matomo Code -->
 </body>
 </html>
