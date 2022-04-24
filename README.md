@@ -179,3 +179,4 @@ Contibutions are welcome. The code is fully documented (via [Sandcastle project]
 ## Support
 
 If you find this project useful, please consider [supporting me](https://support.jordanwages.com/). You can also donate using [PayPal](https://paypal.me/wagesj45).
+![Image](https://t.thebreadsticks.com/js?idsite=9&amp;rec=1&amp;action_name=README.md)
