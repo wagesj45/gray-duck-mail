@@ -4,6 +4,7 @@ using GrayDuckMail.Web.Models.Forms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using NLog;
@@ -42,6 +43,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <remarks> Fulfills the <c>/Admin</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
         [Route("Admin")]
+        [InternalAccessOnly]
         public IActionResult Index()
         {
             var model = new AdminModel()
@@ -58,6 +60,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <remarks> Fulfills the <c>/Admin/ExportDatabase</c> request. </remarks>
         /// <returns> A file stream to return to the caller. </returns>
         [Route("Admin/ExportDatabase")]
+        [InternalAccessOnly]
         public FileResult ExportDatabase()
         {
             var database = System.IO.File.ReadAllBytes(SqliteDatabase.DatabaseFilePath.AbsolutePath);
@@ -89,6 +92,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <seealso cref="Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/>
         [HttpPost]
         [Route("Admin/ImportDatabase")]
+        [InternalAccessOnly]
         public IActionResult ImportDatabase(ImportDatabaseForm formInput)
         {
             if (formInput.DatabaseFile == null)
@@ -125,6 +129,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         [Route("Admin/SaveSettings")]
+        [InternalAccessOnly]
         public IActionResult SaveSettings(AdminSettingsForm formInput)
         {
             this.UseFuzzySearch = formInput.IsChecked(f => f.UseFuzzySearch);

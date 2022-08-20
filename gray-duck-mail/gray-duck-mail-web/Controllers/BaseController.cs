@@ -19,11 +19,19 @@ namespace GrayDuckMail.Web.Controllers
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary> (Immutable) The port designated for internal requests. </summary>
+        internal const int INTERNAL_PORT = 80;
+
+        /// <summary> (Immutable) The port designated for external requests. </summary>
+        internal const int EXTERNAL_PORT = 5000;
+
         /// <summary> (Immutable) The cookie name for the fuzzy search option. </summary>
         private const string COOKIE_USE_FUZZY_SEARCH = "UseFuzzySearch";
 
+        /// <summary> (Immutable) size of the cookie page. </summary>
         private const string COOKIE_PAGE_SIZE = "PageSize";
 
+        /// <summary> (Immutable) the cookie theme. </summary>
         private const string COOKIE_THEME = "Theme";
 
         /// <summary> The application lifetime interface. </summary>
@@ -64,7 +72,7 @@ namespace GrayDuckMail.Web.Controllers
         {
             get
             {
-                if(CookieExists(COOKIE_USE_FUZZY_SEARCH))
+                if (CookieExists(COOKIE_USE_FUZZY_SEARCH))
                 {
                     return GetCookie<bool>(COOKIE_USE_FUZZY_SEARCH);
                 }
@@ -123,7 +131,7 @@ namespace GrayDuckMail.Web.Controllers
             }
             set
             {
-                if(ThemeHelper.Themes.Contains(value))
+                if (ThemeHelper.Themes.Contains(value))
                 {
                     SetCookie(COOKIE_THEME, value);
                 }
@@ -133,6 +141,12 @@ namespace GrayDuckMail.Web.Controllers
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the current request comes from the designated external port.
+        /// </summary>
+        /// <value> True if request comes from the external port, false if not. </value>
+        public bool RequestFromExternalPort { get; set; }
 
         #endregion
 

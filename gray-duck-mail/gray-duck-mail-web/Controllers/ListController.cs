@@ -44,6 +44,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <remarks> Fulfills the <c>/List</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
         [Route("List/{pageNumber?}")]
+        [InternalAccessOnly]
         public IActionResult Index(int pageNumber = 1)
         {
             var discussionLists = this.SqliteDatabase.DiscussionLists;
@@ -63,6 +64,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         /// <remarks> Fulfills the <c>/List/New</c> request. </remarks>
         [Route("List/New")]
+        [InternalAccessOnly]
         public IActionResult New()
         {
             return View("Edit", new EditDiscussionListModel() { Theme = this.Theme });
@@ -73,6 +75,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
         [Route("List/Edit/{discussionListID}")]
+        [InternalAccessOnly]
         public IActionResult Edit(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).FirstOrDefault();
@@ -98,6 +101,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         [Route("List/Edit")]
+        [InternalAccessOnly]
         public IActionResult Edit(DiscussionListForm formInput)
         {
             if (formInput == null)
@@ -135,6 +139,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
         [Route("List/Remove/{discussionListID}")]
+        [InternalAccessOnly]
         public IActionResult Remove(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).SingleOrDefault();
@@ -159,6 +164,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
         [Route("List/ConfirmRemove/{discussionListID}")]
+        [InternalAccessOnly]
         public IActionResult ConfirmRemove(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).SingleOrDefault();
@@ -182,6 +188,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         [Route("List/Create")]
+        [InternalAccessOnly]
         public IActionResult Create(DiscussionListForm formInput)
         {
             if (formInput == null)
@@ -216,6 +223,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
         [Route("List/Assign/{discussionListID}")]
+        [InternalAccessOnly]
         public IActionResult Assign(int discussionListID)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).FirstOrDefault();
@@ -248,6 +256,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         [Route("List/Assign")]
+        [InternalAccessOnly]
         public IActionResult Assign(DiscussionListAssignForm formInput)
         {
             foreach (var assignment in formInput.Assignments)
@@ -304,6 +313,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         /// <remarks> Fulfills the <c>/List/Archive</c> request. </remarks>
         [Route("List/Archive/{discussionListID}/{pageNumber?}")]
+        [InternalAccessOnly]
         public IActionResult Archive(int discussionListID, int pageNumber = 1)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists
@@ -350,6 +360,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <seealso cref="ContactController.Search(string)"/>
         [HttpPost]
         [Route("List/Search")]
+        [InternalAccessOnly]
         public IActionResult Search(string searchTerm, int discussionListID)
         {
             return Search(discussionListID, searchTerm, 1);
@@ -368,6 +379,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpGet]
         [Route("List/Search/{discussionListID}/{searchTerm}/{pageNumber?}")]
+        [InternalAccessOnly]
         public IActionResult Search(int discussionListID, string searchTerm, int pageNumber = 1)
         {
             var discussionList = this.SqliteDatabase.DiscussionLists
@@ -430,6 +442,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         /// <remarks> Fulfills the <c>/List/Message</c> request. </remarks>
         [Route("List/Message/{messageID}/{pageNumber?}")]
+        [InternalAccessOnly]
         public IActionResult Message(int messageID, int pageNumber = 1)
         {
             var message = this.SqliteDatabase.Messages
