@@ -6,6 +6,7 @@ using MimeKit.Text;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -31,11 +32,24 @@ namespace GrayDuckMail.Common
         public const string STATUS_GROUP_ACTION_DELAYED = "delayed";
 
         /// <summary> The main HTML email template. </summary>
-        private static string defaultEmailTemplate;
+        private static string defaultEmailTemplate = string.Empty;
+
+        /// <summary> Describes if the email helper is using a URL for unsubscribing. </summary>
+        private static bool usingUnsubscribeUri = false;
+
+        /// <summary> The base URL to use when constructing externally accessable unsubscribe links. </summary>
+        private static Uri unsubscribeUri;
 
         #endregion
 
         #region Properties
+
+        /// <summary> Gets a value indicating whether the using unsubscribe URI. </summary>
+        /// <value> True if using unsubscribe uri, false if not. </value>
+        public static bool UsingUnsubscribeUri
+        {
+            get => usingUnsubscribeUri;
+        }
 
         /// <summary>
         /// Gets the <see cref="SubscriptionStatus"/> values that indicate a <see cref="Contact"/> is
@@ -148,6 +162,19 @@ namespace GrayDuckMail.Common
 
         #region Methods
 
+        /// <summary> Configures an externally accessible unsubscribe link. </summary>
+        /// <param name="baseUrl"> The base URL. </param>
+        /// <param name="secure">  True if using HTTPS, false if not. </param>
+        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure)
+        {
+            var builder = new UriBuilder();
+            builder.Scheme = secure ? "https" : "http";
+            builder.Host = baseUrl;
+           
+            unsubscribeUri = builder.Uri;
+            usingUnsubscribeUri = true;           
+        }
+
         /// <summary> Fill the default HTML email template with values. </summary>
         /// <param name="heading">        The heading. </param>
         /// <param name="subheading">     The subheading. </param>
@@ -155,14 +182,30 @@ namespace GrayDuckMail.Common
         /// <param name="footer">         The footer. </param>
         /// <param name="discussionList"> The discussion list. </param>
         /// <returns> A string with a processed main email template. </returns>
-        public static string FillDefaultTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList)
+        public static string FillDefaultTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList, Contact contact)
         {
+            var unsubscribe = string.Empty;
+
+            if (unsubscribeUri != null)
+            {
+                //Use an unsubscribe link that points to an externally accesible URL.
+                var customized = new UriBuilder(unsubscribeUri);
+                customized.Path = string.Format("Unsubscribe/{0}/{1}", contact.ID, discussionList.ID);
+
+                unsubscribe = customized.Uri.AbsoluteUri;
+            }
+            else
+            {
+                //Create a fallback link to the unsubscribe email alias.
+                unsubscribe = string.Format("mailto:{0}?subject=Unsubscribing", EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+            }
+
             var result = DefaultEmailTemplate
                 .Replace("{heading}", heading)
                 .Replace("{subheading}", subheading)
                 .Replace("{body}", body)
                 .Replace("{footer}", footer)
-                .Replace("{unsubscribe}", string.Format("mailto:{0}?subject=Unsubscribing", EmailAliasHelper.GetUnsubscribeAlias(discussionList)));
+                .Replace("{unsubscribe}", unsubscribe);
 
             logger.Debug("Email template processed: {0}");
             logger.Trace(result);
@@ -323,7 +366,8 @@ namespace GrayDuckMail.Common
                             String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            recipient
                             )
                     };
                 },
@@ -345,9 +389,10 @@ namespace GrayDuckMail.Common
         public static void SendRequestOwnerNotificationEmail(DiscussionList discussionList, Contact requester, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info("Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}.", requester.Name, requester.Email, discussionList.Name);
+            var ownerContact = new Contact() { Name = "Owner", Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true };
 
             SendEmail(discussionList,
-                new Contact() { Name = "Owner", Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true },
+                ownerContact,
                 string.Format("Request to join {0}", discussionList.Name),
                 EmailAliasHelper.GetSubscribeAlias(discussionList),
                 () =>
@@ -359,7 +404,8 @@ namespace GrayDuckMail.Common
                             String.Format("{0} has requested access to the '{0}' Email Discussion List", requester.Name, discussionList.Name),
                             "Please visit the the web administration interface to process this request.",
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            ownerContact
                             )
                     };
                 },
@@ -395,7 +441,8 @@ namespace GrayDuckMail.Common
                             String.Format("You've been subscribed to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.", discussionList.BaseEmailAddress),
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            recipient
                             )
                     };
                 },
@@ -428,7 +475,8 @@ namespace GrayDuckMail.Common
                             String.Format("You will no longer recieve messages from the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to <a href='mailto:{0}'>{0}</a>.", EmailAliasHelper.GetRequestAlias(discussionList)),
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            recipient
                             )
                     };
                 },
@@ -518,23 +566,23 @@ namespace GrayDuckMail.Common
                     {
                         var action = statusGroup["Action"];
 
-                        if(action != null)
+                        if (action != null)
                         {
                             if (BouncedEmailStatusGroupActions.Contains(action.ToLowerInvariant()))
                             {
                                 logger.Debug("A failed delivery was detected.");
 
-                                var recipient = statusGroup["Original-Recipient"] 
+                                var recipient = statusGroup["Original-Recipient"]
                                     ?? statusGroup["Failed-Recipient"]
                                     ?? statusGroup["Final-Recipient"];
-                                
+
                                 var address = recipient != null ? recipient.Split(';')[1] : string.Empty;
 
-                                if(string.IsNullOrWhiteSpace(address))
+                                if (string.IsNullOrWhiteSpace(address))
                                 {
                                     logger.Error("The bounced email contains a failure report, but an unknown recipient status group.");
 
-                                    foreach(var group in statusGroup)
+                                    foreach (var group in statusGroup)
                                     {
                                         logger.Debug(string.Format("-- {0}: {1}", group.Field, group.Value));
                                     }

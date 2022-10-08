@@ -45,7 +45,6 @@ namespace GrayDuckMail.Web.Controllers
         /// </remarks>
         /// <returns> A response to return to the caller. </returns>
         [Route("/")]
-        [InternalAccessOnly]
         public IActionResult Index()
         {
             var numberOfDiscussionLists = this.SqliteDatabase.DiscussionLists.Count();

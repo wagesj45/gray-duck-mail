@@ -163,7 +163,42 @@ namespace GrayDuckMail.Web.Controllers
         {
             logger.Info("Serving page '{0}'", context.HttpContext.Request.Path);
 
+            if(!IsAccessAllowed(context))
+            {
+                context.Result = new ContentResult() { StatusCode = 403 };    
+            }
+            
             base.OnActionExecuting(context);
+        }
+
+        /// <summary> Query if access from a given port is allowed for the current <paramref name="context"/>. </summary>
+        /// <param name="context"> The action executing context. </param>
+        /// <returns> True if access allowed, false if not. </returns>
+        internal bool IsAccessAllowed(ActionExecutingContext context)
+        {
+            var localPort = context.HttpContext.Connection.LocalPort;
+
+            if (localPort == BaseController.INTERNAL_PORT)
+            {
+                logger.Debug("The request is being processed from the designated internal port.");
+                return true;
+            }
+            else if (localPort == BaseController.EXTERNAL_PORT)
+            {
+                logger.Info("The request is being processed from the designated external port. Request Origin: {0}", context.HttpContext.Connection.RemoteIpAddress);
+                var externalAccessAttributes = context.ActionDescriptor.FilterDescriptors.Where(f => f.Filter.ToString().Equals("GrayDuckMail.Web.ExternalAccessAttribute"));
+                
+                if (externalAccessAttributes.Any())
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                logger.Error("The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1}", localPort, context.HttpContext.Connection.RemoteIpAddress);
+            }
+
+            return false;
         }
 
         /// <summary> Sets a cookie. </summary>

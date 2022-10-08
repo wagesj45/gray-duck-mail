@@ -40,19 +40,64 @@ namespace GrayDuckMail.Web.Controllers
         #region Methods
 
         /// <summary> Gets the index or default request. </summary>
-        /// <remarks> Fulfills the <c>/Admin</c> request. </remarks>
+        /// <remarks>
+        /// Fulfills the <c>/Unsubscribe</c> request.
+        /// 
+        /// Because this method may be accessed externally, all input must be validated and checked.
+        /// </remarks>
+        /// <param name="contactID">        Identifier for the contact. </param>
+        /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <returns> A response to return to the caller. </returns>
-        [Route("/Unsubscribe")]
-        public IActionResult Unsubscribe()
+        [Route("/Unsubscribe/{contactID}/{discussionListID}")]
+        [ExternalAccess]
+        [ViewLayout("_BlankLayout")]
+        public IActionResult Unsubscribe(int contactID, int discussionListID)
         {
-            var model = new AdminModel()
+            var success = false;
+            var discussionList = this.SqliteDatabase.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionListID).SingleOrDefault();
+            var contact = this.SqliteDatabase.Contacts.Where(_contact => _contact.ID == contactID).SingleOrDefault();
+            var subscription = this.SqliteDatabase.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionListID)
+            .SelectMany(_discussionList => _discussionList.Subscriptions)
+            .Where(subscription => subscription.Contact.ID == contactID)
+            .SingleOrDefault();
+
+            if (discussionList == null)
             {
-                UseFuzzySearch = this.UseFuzzySearch,
-                PageSize = this.PageSize,
-                Theme = this.Theme
+                logger.Error("Invalid unsubscription request for non-existant discussion list with ID {0}.", discussionListID);
+            }
+
+            if (contact == null)
+            {
+                logger.Error("Invalid unsubscription request for non-existant contact with ID {0}.", contactID);
+            }
+
+            if (subscription == null)
+            {
+                logger.Error("Invalid unsubscription request. No subscription status found.");
+            }
+            else if (subscription.Status != SubscriptionStatus.Subscribed)
+            {
+                logger.Error("Invalid unsubscription status for contact with ID {0} and discussion list {1} due to subscription status {2}.", contactID, discussionListID, subscription.Status);
+            }
+
+            if (discussionList != null && contact != null && subscription.Status == SubscriptionStatus.Subscribed)
+            {
+                logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
+                subscription.Status = SubscriptionStatus.Unsubscribed;
+
+                this.SqliteDatabase.SaveChanges();
+
+                success = true;
+            }
+
+            var model = new UnsubscribeModel()
+            {
+                DiscussionList = discussionList,
+                UserEmail = contact?.Email,
+                Successful = success
             };
 
-            return View("Index", model);
+            return View("Unsubscribe", model);
         }
 
         #endregion

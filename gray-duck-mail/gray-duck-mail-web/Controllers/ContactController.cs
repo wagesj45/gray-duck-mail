@@ -42,7 +42,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <remarks> Fulfills the <c>/Contact</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
         [Route("Contact/{pageNumber?}")]
-        [InternalAccessOnly]
         public IActionResult Index(int pageNumber = 1)
         {
             var contacts = this.SqliteDatabase.Contacts.Include(contact => contact.ContactSubscriptions);
@@ -62,7 +61,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <remarks> Fulfills the <c>/Contact/New</c> request. </remarks>
         /// <returns> A response to return to the caller. </returns>
         [Route("Contact/New")]
-        [InternalAccessOnly]
         public IActionResult New()
         {
             return View("Edit", new EditContactModel() { Theme = this.Theme });
@@ -73,7 +71,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <param name="contactID"> Identifier for the contact. </param>
         /// <returns> A response to return to the caller. </returns>
         [Route("Contact/Edit/{contactID}")]
-        [InternalAccessOnly]
         public IActionResult Edit(int contactID)
         {
             var contact = this.SqliteDatabase.Contacts.Where(contact => contact.ID == contactID).FirstOrDefault();
@@ -99,7 +96,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         [Route("Contact/Edit")]
-        [InternalAccessOnly]
         public IActionResult Edit(ContactForm formInput)
         {
             if (formInput == null)
@@ -130,7 +126,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <param name="contactID"> Identifier for the contact. </param>
         /// <returns> A response to return to the caller. </returns>
         [Route("Contact/Remove/{contactID}")]
-        [InternalAccessOnly]
         public IActionResult Remove(int contactID)
         {
             var contact = this.SqliteDatabase.Contacts.Where(list => list.ID == contactID).SingleOrDefault();
@@ -155,7 +150,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <param name="contactID"> Identifier for the contact. </param>
         /// <returns> A response to return to the caller. </returns>
         [Route("Contact/ConfirmRemove/{contactID}")]
-        [InternalAccessOnly]
         public IActionResult ConfirmRemove(int contactID)
         {
             var contact = this.SqliteDatabase.Contacts.Where(contact => contact.ID == contactID).SingleOrDefault();
@@ -179,7 +173,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         [Route("Contact/Create")]
-        [InternalAccessOnly]
         public IActionResult Create(ContactForm formInput)
         {
             if (formInput == null)
@@ -211,7 +204,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpPost]
         [Route("Contact/Search")]
-        [InternalAccessOnly]
         public IActionResult Search(string searchTerm)
         {
             return Search(searchTerm, 1);
@@ -227,7 +219,6 @@ namespace GrayDuckMail.Web.Controllers
         /// <returns> A response to return to the caller. </returns>
         [HttpGet]
         [Route("Contact/Search/{searchTerm}/{pageNumber?}")]
-        [InternalAccessOnly]
         public IActionResult Search(string searchTerm, int pageNumber = 1)
         {
             if (searchCache.SearchTerm != searchTerm)
