@@ -106,7 +106,7 @@ namespace GrayDuckMail.Web.Worker
                         }
                     }
                     // End the loop and wait the alloted time.
-                    logger.Debug("Fetch loop complete. Waiting {0}", DockerEnvironmentVariables.RateLimitRoundWaitTime);
+                    logger.Debug("Fetch send complete. Waiting {0}", DockerEnvironmentVariables.RateLimitRoundWaitTime);
                     await Task.Delay(DockerEnvironmentVariables.RateLimitRoundWaitTime, cancellationToken);
                 }
                 catch (Exception e)
@@ -115,7 +115,7 @@ namespace GrayDuckMail.Web.Worker
                     logger.Error(e);
                 }
 
-                logger.Info("Email fetcher shutting down.");
+                logger.Info("Email sender shutting down.");
                 return;
             }
         }

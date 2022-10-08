@@ -96,6 +96,7 @@ namespace GrayDuckMail.Common
                 DiscussionList = discussionList,
                 Contact = contact,
                 Message = message,
+                Type = EmailDefinitionType.Relay
             };
         }
 

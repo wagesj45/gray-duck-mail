@@ -186,7 +186,7 @@ namespace GrayDuckMail.Common
         {
             var unsubscribe = string.Empty;
 
-            if (unsubscribeUri != null)
+            if (UsingUnsubscribeUri)
             {
                 //Use an unsubscribe link that points to an externally accesible URL.
                 var customized = new UriBuilder(unsubscribeUri);
@@ -296,7 +296,19 @@ namespace GrayDuckMail.Common
                         }
 
                         var techHeader = html.CreateElement("mark");
-                        techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to <a href='mailto:{1}'>{1}</a>", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        if (UsingUnsubscribeUri)
+                        {
+                            //Use an unsubscribe link that points to an externally accesible URL.
+                            var customized = new UriBuilder(unsubscribeUri);
+                            customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
+
+                            techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: <a href='{1}'>{1}</a>", discussionList.Name, customized.Uri.AbsoluteUri);
+                        }
+                        else
+                        {
+                            //Create a fallback link to the unsubscribe email alias.
+                            techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to <a href='mailto:{1}'>{1}</a>", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        }
                         bodyNode.AppendChild(techHeader);
 
                         var cleanedHtmlString = html.DocumentNode.InnerHtml.Replace(techHeader.InnerHtml, "");
