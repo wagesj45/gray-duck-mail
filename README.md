@@ -11,14 +11,21 @@ Gray Duck Mail is written in C# and is powered by [ASP.NET Core 3.1 MVC](https:/
 ## Table of Contents
 
 1. [Installation](#installation)
-   1. [Ports](#ports)
-   2. [Volumes](#volumes)
-   3. [Environment Variables](#environment-variables)
+   1. [Tags](#tags)
+   2. [Ports](#ports)
+   3. [Volumes](#volumes)
+   4. [Environment Variables](#environment-variables)
+      - [`RATE_LIMIT_PER_ROUND_COUNT`](#rate_limit_per_round_count)
+      - [`RATE_LIMIT_ROUND_WAIT_TIME`](#rate_limit_round_wait_time)
       - [`FETCH_TIME`](#fetch_time)
       - [`LOG_LEVEL`](#log_level)
       - [`MIN_SEARCH_SCORE`](#min_search_score)
       - [`WEB_ONLY`](#web_only)
-   4. [Security Considerations](#security-considerations)
+      - [`WEB_UNSUBSCRIBE`](#web_unsubscribe)
+      - [`WEB_USE_HTTPS`](#web_use_https)
+      - [`WEB_EXTERNAL_URL`](#web_external_url)
+      - [`ASPNETCORE_URLS`](#aspnetcore_urls)
+   5. [Security Considerations](#security-considerations)
 2. [Web Interface](#web-interface)
    1. [Settings](#settings)
       1. [Items Per Page](#items-per-page)
@@ -42,9 +49,13 @@ Gray Duck Mail is provided as a [docker image](https://hub.docker.com/r/wagesj45
 
 `docker pull wagesj45/gray-duck-mail`
 
+### Tags
+
+You will find two tags utilized at [Docker Hub](https://hub.docker.com/r/wagesj45/gray-duck-mail): `testing` and `latest`. The `testing` tag is just that; an unstable image used for testing and debugging purposes. Unless you're actively working on development of Gray Duck Mail, only use the `latest` tag when pulling images and creating containers.
+
 ### Ports
 
-The docker image requires an HTTP port exposed and mapped to port **80** on the container.
+The docker image requires an HTTP port exposed and mapped to port **80** on the container. An optional port can be exposed and mapped to port **5000** that will accept external unsubscribe requests.
 
 ### Volumes
 
@@ -53,6 +64,14 @@ A single volume mounted to `/database` is required. This volume will store the l
 ### Environment Variables
 
 The docker image exposes the following environment variables that control the system.
+
+#### `RATE_LIMIT_PER_ROUND_COUNT`
+
+The number of emails that can be sent before a defined time-out period. This is useful for email providers that place restrictions on the number of emails that can be sent. The default value is a [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32?view=netcore-3.1) set to `00:05:00`.
+
+#### `RATE_LIMIT_ROUND_WAIT_TIME`
+
+The time between sending groups of emails from the queue. After a given round of emails sent, the system will wait this amount of time before continuing from the email the queue. The default value is a [System.TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=netcore-3.1) set to `00:05:00`.
 
 #### `FETCH_TIME`
 
@@ -84,11 +103,43 @@ The following values are supported:
 - `True` | `1`
 - `False` | `0`
 
+#### `WEB_UNSUBSCRIBE`
+
+If set, an unsubscribe link will be generated and used in system and relayed messages. If unset, a link to the unsubscribe alias will be generated. The default value is a [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean?view=netcore-3.1) set to `1`.
+
+The following values are supported:
+
+- `True` | `1`
+- `False` | `0`
+
+#### `WEB_USE_HTTPS`
+
+If set, the URL generated for a externally accessible unsubscribe link will be generated using `HTTPS`. Otherwise, it will generated using `HTTP`. The default value is a [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean?view=netcore-3.1) set to `1`.
+
+The following values are supported:
+
+- `True` | `1`
+- `False` | `0`
+
+#### `WEB_EXTERNAL_URL`
+
+The host name used when generating an externally accessible unsubscribe link. The default value is a [System.String](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1) set to `example.com`.
+
+#### `ASPNETCORE_URLS`
+
+The URLs monitored by the ASP.Net server runtime. The default value is a [System.String](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1) set to `http://+:5000;http://+:80`. You can learn more [here](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-6.0), but unless you're an advanced user modifying the Gray Duck Mail Docker image, you should leave this value at its default and ensure poth ports **80** and **5000** are configured. When configuring your Docker container, only port **80** is required for normal functioning.
+
 ### Security Considerations
 
-Gray Duck Mail stores email login credentials in a local database. These credentials **are not** encrypted. Additionally, the web administration interface has no concept of users or content segmentation. This means that anyone with access to the web interface will have access to the login credentials of each email discussion list, as well as the list users' contact information (name and email address) and message archive list (sender and message contents).
+Gray Duck Mail segments its web interface between two ports, one internal and one external. The Docker image utilizes port **80** as its designated *internal* point of ingress, and port **5000** as its designated *external* point of ingress. This means that care should be taken to expose only port **5000** of the docker container to the public internet.
 
-Gray Duck Mail should ideally be placed behind a firewall with no external HTTP access. If exposed to the public internet, Gray Duck Mail should be served behind a [reverse proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) serving [SSL content](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/) paired with [HTTP basic authentication](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/).
+Utilizing the external port allows utilization of a "one click" unsubscribe link. The unsubscribe link takes the form of `http[s]://hostname/Unsubscribe/{contactID}/{discussionListID}`. This might look like `https://example.com/Unsubscribe/529/187`, assuming a user with the internal identifier `529` is unsubscribing from discussion list with internal identifier `187`, utilizing `HTTPS` through the hostname `example.com`.
+
+The unsubscribe link is the only externally accessible route in Gray Duck Mail. Attempting to load any other route from port **5000** will result in a [`403 Forbidden`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) access error.
+
+Gray Duck Mail should ideally be placed behind a reverse proxy forwarding web traffic **only** to port **5000** (or the port being forwarded to the external ingress port in the Docker container). It is highly recommended to utilize a [reverse proxy such as nginx](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) serving [SSL content](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/). While not recommended, it might be possible to pair the secure ingress port with [HTTP basic authentication](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/).
+
+Gray Duck Mail stores email login credentials in a local database. These credentials **are not** encrypted. Additionally, the web administration interface has no concept of users or content segmentation beyond its *internal* and *external* designations. This means that anyone with access to the **internal** web interface through port **80** will have access to the login credentials of each email discussion list, as well as the list users' contact information (name and email address) and message archive list (sender and message contents).
 
 The database files used by Gray Duck Mail are not encrypted and store all data in plain text. When making backups of the `/database` docker volume or exporting copies of the database, care should be taken to ensure that file access is restricted.
 
