@@ -6,12 +6,8 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileTag>gray-duck-mail</DockerfileTag>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Version>0.9.7.2</Version>
+		<Version>0.9.8</Version>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Content Remove="wwwroot\img\gray-duck.jpg" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="wwwroot\icofont\fonts\icofont.svg" />
@@ -28,6 +24,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\gray-duck-mail-common\gray-duck-mail-common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\lib\" />
 	</ItemGroup>
 
 </Project>

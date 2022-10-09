@@ -298,6 +298,43 @@ namespace GrayDuckMail.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary> Queues a test message in the form of an Owner Requst notification. </summary>
+        /// <remarks> Fulfills the <c>/List/Test</c> request. </remarks>
+        /// <param name="discussionListID"> Identifier for the discussion list. </param>
+        /// <returns> A response to return to the caller. </returns>
+        /// <seealso cref="EmailDefinitionType.RequestOwnerNotification"/>
+        /// <seealso cref="EmailHelper.SendRequestOwnerNotificationEmail(DiscussionList, Contact, MailKit.Net.Smtp.SmtpClient, System.Threading.CancellationToken)"/>
+        [Route("List/Test/{discussionListID}")]
+        public IActionResult Test(int discussionListID)
+        {
+            var discussionList = this.SqliteDatabase.DiscussionLists
+                .Where(discussionList => discussionList.ID == discussionListID)
+                .SingleOrDefault();
+            var ownerContact = new Contact() { Name = "Server Test", Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true };
+
+            if(discussionList != null)
+            {
+                logger.Info("Sending a test Owner Notification email to discussion list {0}.", discussionList.Name);
+
+                SharedMemory.AddEmail(EmailDefinition.CreateOwnerNotification(discussionList, ownerContact));
+                
+                if(DockerEnvironmentVariables.WebOnly)
+                {
+                    // If the email sending services are not running, send the email here
+                    // instead to make sure it is sent.
+                    var emailDefinition = SharedMemory.PopEmail();
+
+                    using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
+                    {
+                        EmailHelper.SendRequestOwnerNotificationEmail(emailDefinition.DiscussionList, emailDefinition.Contact, smtpClient);
+                        smtpClient.Disconnect(true);
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
         /// <summary> Gets the message archive request. </summary>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
         /// <param name="pageNumber">       (Optional) The page number. </param>

@@ -71,3 +71,63 @@
         <button type="submit" form="importDatabase"><i class="icofont-upload"></i> Import</button>
     </footer>
 </article>
+<article>
+    <header>
+        <h3>System</h3>
+    </header>
+    <p>
+        @{
+            var maxPerHour = Convert.ToInt32((60 * 60 / DockerEnvironmentVariables.RateLimitRoundWaitTime.TotalSeconds) * DockerEnvironmentVariables.RateLimitPerRoundCount);
+        }
+        Your system is currently configured to send <strong>@DockerEnvironmentVariables.RateLimitPerRoundCount</strong> emails at once, with a maximum of <strong>@maxPerHour</strong> emails sent per hour.
+    </p>
+    <p>
+        Docker environment variable runtime values.
+    </p>
+    <table role="grid" ">
+        <thead>
+            <tr>
+                <th scope="col">ENV</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">LOG_LEVEL</th>
+                <td>@DockerEnvironmentVariables.LogLevel</td>
+            </tr>
+            <tr>
+                <th scope="row">FETCH_TIME</th>
+                <td>@DockerEnvironmentVariables.FetchTime</td>
+            </tr>
+            <tr>
+                <th scope="row">RATE_LIMIT_PER_ROUND_COUNT</th>
+                <td>@DockerEnvironmentVariables.RateLimitPerRoundCount</td>
+            </tr>
+            <tr>
+                <th scope="row">RATE_LIMIT_ROUND_WAIT_TIME</th>
+                <td>@DockerEnvironmentVariables.RateLimitRoundWaitTime</td>
+            </tr>
+            <tr>
+                <th scope="row">WEB_ONLY</th>
+                <td>@DockerEnvironmentVariables.WebOnly</td>
+            </tr>
+            <tr>
+                <th scope="row">WEB_UNSUBSCRIBE</th>
+                <td>@DockerEnvironmentVariables.WebUnsubscribe</td>
+            </tr>
+            <tr>
+                <th scope="row">WEB_USE_HTTPS</th>
+                <td>@DockerEnvironmentVariables.WebUseHTTPS</td>
+            </tr>
+            <tr>
+                <th scope="row">WEB_EXTERNAL_URL</th>
+                <td>@DockerEnvironmentVariables.WebExternalURL</td>
+            </tr>
+            <tr>
+                <th scope="row">MIN_SEARCH_SCORE</th>
+                <td>@DockerEnvironmentVariables.MinimumSearchScore</td>
+            </tr>
+        </tbody>
+    </table>
+</article>

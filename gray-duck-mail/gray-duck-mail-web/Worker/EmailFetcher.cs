@@ -1,7 +1,6 @@
 ﻿using GrayDuckMail.Common;
 using GrayDuckMail.Common.Database;
 using MailKit.Net.Pop3;
-using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MimeKit;
@@ -33,7 +32,7 @@ namespace GrayDuckMail.Web.Worker
         /// This method is called when the <see cref="T:Microsoft.Extensions.Hosting.IHostedService" />
         /// starts. This is the main processing thread of the service.
         /// </summary>
-        /// <param name="stoppingToken">
+        /// <param name="cancellationToken">
         ///     Triggered when
         ///     <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" />
         ///     is called.
@@ -41,16 +40,17 @@ namespace GrayDuckMail.Web.Worker
         /// <returns>
         /// A <see cref="T:System.Threading.Tasks.Task" /> that represents the long running operations.
         /// </returns>
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             logger.Info("Beginning email fetch loop.");
-            while (!stoppingToken.IsCancellationRequested)
+
+            logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
+            var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
+
+            while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
-                    var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
-
                     var discussionLists = database.DiscussionLists.Include(list => list.Subscriptions).ThenInclude(list => list.Contact);
 
                     foreach (var discussionList in discussionLists)
@@ -62,16 +62,16 @@ namespace GrayDuckMail.Web.Worker
                             try
                             {
                                 logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
-                                pop3Client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
+                                pop3Client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: cancellationToken);
 
                                 logger.Debug("Authenticating as {0}", discussionList.UserName);
-                                pop3Client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
+                                pop3Client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
 
                                 if (pop3Client.Count > 0)
                                 {
                                     logger.Info("Processing {0} messages.", pop3Client.Count);
 
-                                    var emailMessages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: stoppingToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
+                                    var emailMessages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: cancellationToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
                                     var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
                                     var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                                     var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
@@ -82,7 +82,7 @@ namespace GrayDuckMail.Web.Worker
                                     // Subscription Confirmation Emails
                                     foreach (var subscriptionConfirmation in filteredSubscribe)
                                     {
-                                        ProcessSubscriptionConfirmations(discussionList, database, pop3Client, subscriptionConfirmation, stoppingToken);
+                                        ProcessSubscriptionConfirmations(discussionList, database, pop3Client, subscriptionConfirmation, cancellationToken);
                                     }
 
                                     // Unsubscribe Confirmation Emails
@@ -94,7 +94,7 @@ namespace GrayDuckMail.Web.Worker
                                     // List Assignment Request Emails
                                     foreach (var request in filteredRequest)
                                     {
-                                        ProcessRequests(discussionList, database, pop3Client, request, stoppingToken);
+                                        ProcessRequests(discussionList, database, pop3Client, request, cancellationToken);
                                     }
 
                                     // Bounced email messages.
@@ -111,7 +111,7 @@ namespace GrayDuckMail.Web.Worker
                                         .Except(filteredBounced);
                                     foreach (var discussionMessage in discussionMessages)
                                     {
-                                        ProcessDiscussionMessages(discussionList, discussionMessage, database, pop3Client, stoppingToken);
+                                        ProcessDiscussionMessages(discussionList, discussionMessage, database, pop3Client, cancellationToken);
                                     }
                                 }
                                 else
@@ -124,7 +124,7 @@ namespace GrayDuckMail.Web.Worker
                                 logger.Error(e);
                             }
 
-                            pop3Client.Disconnect(true, stoppingToken);
+                            pop3Client.Disconnect(true, cancellationToken);
                         }
                     }
 
@@ -134,7 +134,7 @@ namespace GrayDuckMail.Web.Worker
                         database.SaveChanges();
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     //We want to catch any potential exception so that the loop can continue in case of failure.
                     logger.Error(e);
@@ -142,7 +142,7 @@ namespace GrayDuckMail.Web.Worker
 
                 // End the loop and wait the alloted time.
                 logger.Debug("Fetch loop complete. Waiting {0}", DockerEnvironmentVariables.FetchTime);
-                await Task.Delay(DockerEnvironmentVariables.FetchTime, stoppingToken);
+                await Task.Delay(DockerEnvironmentVariables.FetchTime, cancellationToken);
             }
 
             logger.Info("Email fetcher shutting down.");
@@ -163,35 +163,23 @@ namespace GrayDuckMail.Web.Worker
         private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
         {
             var from = subscriptionConfirmation.Message.Sender ?? subscriptionConfirmation.Message.From.Mailboxes.SingleOrDefault();
-
-            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
-            if (subscription != null)
+            logger.Info("Processing subscription message from {0}.", subscription.Contact.Name);
+
+            if (!subscription.Contact.Activated)
             {
-                logger.Info("Processing subscription message from {0}.", subscription.Contact.Name);
-
-                if (!subscription.Contact.Activated)
-                {
-                    logger.Info("Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.", subscription.Contact.Name, subscription.Contact.ID);
-                    subscription.Contact.Activated = true;
-                }
-
-                logger.Info("User {0} subscribing to {1}.", subscription.Contact.Name, discussionList.Name);
-                subscription.Status = SubscriptionStatus.Subscribed;
-
-                using (var smtpClient = new SmtpClient())
-                {
-                    EmailHelper.SendSubscriptionConfirmationEmail(discussionList, subscription.Contact, smtpClient, cancellationToken);
-
-                    smtpClient.Disconnect(true, cancellationToken);
-                }
+                logger.Info("Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.", subscription.Contact.Name, subscription.Contact.ID);
+                subscription.Contact.Activated = true;
             }
-            else
-            {
-                logger.Error("Recieved an unsolicited subscription confirmation from {0} for {1}.", from.Address, discussionList.Name);
-            }
+
+            logger.Info("User {0} subscribing to {1}.", subscription.Contact.Name, discussionList.Name);
+            subscription.Status = SubscriptionStatus.Subscribed;
+
+            SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index);
             pop3Client.DeleteMessage(subscriptionConfirmation.Index);
@@ -208,19 +196,15 @@ namespace GrayDuckMail.Web.Worker
         private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
-            if (subscription != null)
-            {
-                logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
-                subscription.Status = SubscriptionStatus.Unsubscribed;
-            }
-            else
-            {
-                logger.Error("Recieved an unsolicited unsubscription request from {0} for {1}.", from.Address, discussionList.Name);
-            }
+            logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
+            subscription.Status = SubscriptionStatus.Unsubscribed;
+
+            SharedMemory.AddEmail(EmailDefinition.CreateUnsubscriptionConfirmation(discussionList, subscription.Contact));
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index);
             pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
@@ -239,7 +223,9 @@ namespace GrayDuckMail.Web.Worker
         private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request, CancellationToken cancellationToken = default)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
+                .Include(subscription => subscription.Contact)
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
@@ -264,15 +250,11 @@ namespace GrayDuckMail.Web.Worker
                 database.Contacts.Add(newContact);
                 database.ContactSubscriptions.Add(subscription);
 
-                using (var smtpClient = new SmtpClient())
-                {
-                    EmailHelper.SendRequestOwnerNotificationEmail(discussionList, newContact, smtpClient, cancellationToken);
-                    smtpClient.Disconnect(true, cancellationToken);
-                }
+                SharedMemory.AddEmail(EmailDefinition.CreateOwnerNotification(discussionList, newContact));
             }
             else
             {
-                if(subscription.Status == SubscriptionStatus.Subscribed)
+                if (subscription.Status == SubscriptionStatus.Subscribed)
                 {
                     logger.Error("{0}, who is already subscribed to {1}, has requested access again. Ignoring this message.", subscription.Contact.Name, discussionList.Name);
                 }
@@ -281,11 +263,7 @@ namespace GrayDuckMail.Web.Worker
                     logger.Info("{0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed.", subscription.Contact.Name, discussionList.Name);
                     subscription.Status = SubscriptionStatus.Subscribed;
 
-                    using (var smtpClient = new SmtpClient())
-                    {
-                        EmailHelper.SendSubscriptionConfirmationEmail(discussionList, subscription.Contact, smtpClient, cancellationToken);
-                        smtpClient.Disconnect(true, cancellationToken);
-                    }
+                    SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
                 }
                 else
                 {
@@ -306,7 +284,8 @@ namespace GrayDuckMail.Web.Worker
         {
             var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
             var bouncedOriginallyTo = EmailHelper.GetBouncedMessageRecipient(bounce);
-            var subscription = database.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionList.ID)
+            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
+                .SelectMany(_discussionList => _discussionList.Subscriptions)
                 .Where(subscription => subscription.Contact.Email == bouncedFrom.Address || subscription.Contact.Email == bouncedOriginallyTo)
                 .SingleOrDefault();
 
@@ -376,27 +355,14 @@ namespace GrayDuckMail.Web.Worker
                 {
                     message.ParentID = parentMessage.ID;
                 }
+                
+                var listParticipants = discussionList.Subscriptions
+                        .Where(subscription => subscription.Status == SubscriptionStatus.Subscribed)
+                        .Where(subscription => subscription.ContactID != originatorSubscription.ContactID);
 
-                using (var smtpClient = new SmtpClient())
+                foreach (var participant in listParticipants)
                 {
-
-                    try
-                    {
-                        var listParticipants = discussionList.Subscriptions
-                            .Where(subscription => subscription.Status == SubscriptionStatus.Subscribed)
-                            .Where(subscription => subscription.ContactID != originatorSubscription.ContactID);
-
-                        foreach (var participant in listParticipants)
-                        {
-                            EmailHelper.RelayEmail(discussionList, participant.Contact, message, database, smtpClient, stoppingToken);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        logger.Error(e);
-                    }
-
-                    smtpClient.Disconnect(true, cancellationToken: stoppingToken);
+                    SharedMemory.AddEmail(EmailDefinition.CreateRelay(discussionList, participant.Contact, message));
                 }
             }
             else
@@ -404,7 +370,7 @@ namespace GrayDuckMail.Web.Worker
                 logger.Error("The sender is unrecognized or unauthorized to participate in {0}. We'll log it and let the message be deleted.", discussionList.Name);
                 logger.Error("From: {0} ({1})", from.Name, from.Address);
                 logger.Error("Encoding: {0}", from.Encoding.EncodingName);
-                foreach(var domain in from.Route)
+                foreach (var domain in from.Route)
                 {
                     logger.Error("-- {0}", domain);
                 }
@@ -472,7 +438,7 @@ namespace GrayDuckMail.Web.Worker
             }
 
             return filteredMessages;
-        } 
+        }
 
         #endregion
     }

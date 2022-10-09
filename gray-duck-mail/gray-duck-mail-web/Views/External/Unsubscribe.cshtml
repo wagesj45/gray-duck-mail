@@ -1,0 +1,19 @@
+﻿@model UnsubscribeModel
+@{
+    ViewData["Title"] = "Unsubscribe";
+}
+
+<hgroup>
+    <h1>Unsubscribe</h1>
+</hgroup>
+
+<article>
+    @if(Model.Successful)
+    {
+        <p>@Model.UserEmail has been unsubscribed from @Model.DiscussionList.Name.</p>
+    }
+    else
+    {
+        <p>There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed.</p>
+    }
+</article>

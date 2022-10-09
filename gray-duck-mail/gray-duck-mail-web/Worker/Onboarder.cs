@@ -55,29 +55,18 @@ namespace GrayDuckMail.Web.Worker
 
                     if (createdSubscriptions.Any())
                     {
-                        using (var client = new SmtpClient())
+                        foreach (var subscription in createdSubscriptions)
                         {
-                            logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
-                            client.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: stoppingToken);
-
-                            logger.Debug("Authenticating as {0}", discussionList.UserName);
-                            client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: stoppingToken);
-
-                            foreach (var subscription in createdSubscriptions)
+                            try
                             {
-                                try
-                                {
-                                    EmailHelper.SendOnboardingEmail(discussionList, subscription.Contact, client, stoppingToken);
+                                SharedMemory.AddEmail(EmailDefinition.CreateOnboarding(discussionList, subscription.Contact));
 
-                                    subscription.Status = SubscriptionStatus.AwaitingConfirmation;
-                                }
-                                catch (Exception e)
-                                {
-                                    logger.Error(e);
-                                }
+                                subscription.Status = SubscriptionStatus.AwaitingConfirmation;
                             }
-
-                            client.Disconnect(true, stoppingToken);
+                            catch (Exception e)
+                            {
+                                logger.Error(e);
+                            }
                         }
                     }
                     else

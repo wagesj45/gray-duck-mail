@@ -6,11 +6,11 @@ using MimeKit.Text;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace GrayDuckMail.Common
@@ -31,37 +31,25 @@ namespace GrayDuckMail.Common
         /// <summary> (Immutable) The string denoting the MIME status for a delayed email message. </summary>
         public const string STATUS_GROUP_ACTION_DELAYED = "delayed";
 
-        /// <summary> (Immutable) A regex string matching <see cref="FOOTER_FORMAT"/>. </summary>
-        public const string FOOTER_REGEX = @"This message was sent by .* and is part of the '.*' discussion list. You can unsubscribe by sending any message to .*\.";
-
-        /// <summary> (Immutable) The relay footer message format. </summary>
-        /// <remarks>
-        /// <para> Contains the following variable components </para>
-        /// <list type="number">
-        /// <item> sender </item>
-        /// <item> discussion list name </item>
-        /// <item> unsubscribe alias</item>
-        /// </list>
-        /// </remarks>
-        public const string FOOTER_FORMAT = "This message was sent by {0} and is part of the '{1}' discussion list. You can unsubscribe by sending any message to {2}.";
-
-        /// <summary> (Immutable) A unique identifier for the footer of relayed messages. </summary>
-        /// <remarks>
-        /// This value allows for easier removal of excess footer messages from relayed emails.
-        /// </remarks>
-        /// <seealso cref="FOOTER_XPATH"/>
-        /// <seealso cref="RelayEmail(DiscussionList, Contact, Message, SqliteDatabase, SmtpClient, CancellationToken)"/>
-        public const string FOOTER_GUID_ID = "GRAYDUCKMAIL-7ECCFC70-CFD2-429B-9D35-212287B05C3F";
-
-        /// <summary> (Immutable) The XPath search value for the footer div element. </summary>
-        public static readonly string FOOTER_XPATH = string.Format("//div[@id='{0}']", FOOTER_GUID_ID);
-
         /// <summary> The main HTML email template. </summary>
-        private static string defaultEmailTemplate;
+        private static string defaultEmailTemplate = string.Empty;
+
+        /// <summary> Describes if the email helper is using a URL for unsubscribing. </summary>
+        private static bool usingUnsubscribeUri = false;
+
+        /// <summary> The base URL to use when constructing externally accessable unsubscribe links. </summary>
+        private static Uri unsubscribeUri;
 
         #endregion
 
         #region Properties
+
+        /// <summary> Gets a value indicating whether the using unsubscribe URI. </summary>
+        /// <value> True if using unsubscribe uri, false if not. </value>
+        public static bool UsingUnsubscribeUri
+        {
+            get => usingUnsubscribeUri;
+        }
 
         /// <summary>
         /// Gets the <see cref="SubscriptionStatus"/> values that indicate a <see cref="Contact"/> is
@@ -127,8 +115,8 @@ namespace GrayDuckMail.Common
         /// <summary> Gets the default HTML email template. </summary>
         /// <remarks>
         /// <para>
-        /// This email template contains several replaceable notaions: <c>{heading}</c>,
-        /// <c>{subheading}</c>, <c>{body}</c>, and <c>{footer}</c>. The <c>{unsubscribe}</c> notation
+        /// This email template contains several replaceable notaions: <c>{header}</c>,
+        /// <c>{subheader}</c>, <c>{body}</c>, and <c>{footer}</c>. The <c>{unsubscribe}</c> notation
         /// should always be a link to the
         /// <see cref="EmailAliasHelper.GetUnsubscribeAlias(DiscussionList)">unsubscribe email
         /// alias</see>.
@@ -174,6 +162,19 @@ namespace GrayDuckMail.Common
 
         #region Methods
 
+        /// <summary> Configures an externally accessible unsubscribe link. </summary>
+        /// <param name="baseUrl"> The base URL. </param>
+        /// <param name="secure">  True if using HTTPS, false if not. </param>
+        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure)
+        {
+            var builder = new UriBuilder();
+            builder.Scheme = secure ? "https" : "http";
+            builder.Host = baseUrl;
+           
+            unsubscribeUri = builder.Uri;
+            usingUnsubscribeUri = true;           
+        }
+
         /// <summary> Fill the default HTML email template with values. </summary>
         /// <param name="heading">        The heading. </param>
         /// <param name="subheading">     The subheading. </param>
@@ -181,14 +182,30 @@ namespace GrayDuckMail.Common
         /// <param name="footer">         The footer. </param>
         /// <param name="discussionList"> The discussion list. </param>
         /// <returns> A string with a processed main email template. </returns>
-        public static string FillDefaultTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList)
+        public static string FillDefaultTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList, Contact contact)
         {
+            var unsubscribe = string.Empty;
+
+            if (UsingUnsubscribeUri)
+            {
+                //Use an unsubscribe link that points to an externally accesible URL.
+                var customized = new UriBuilder(unsubscribeUri);
+                customized.Path = string.Format("Unsubscribe/{0}/{1}", contact.ID, discussionList.ID);
+
+                unsubscribe = customized.Uri.AbsoluteUri;
+            }
+            else
+            {
+                //Create a fallback link to the unsubscribe email alias.
+                unsubscribe = string.Format("mailto:{0}?subject=Unsubscribing", EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+            }
+
             var result = DefaultEmailTemplate
                 .Replace("{heading}", heading)
                 .Replace("{subheading}", subheading)
                 .Replace("{body}", body)
                 .Replace("{footer}", footer)
-                .Replace("{unsubscribe}", string.Format("mailto:{0}?subject=Unsubscribing", EmailAliasHelper.GetUnsubscribeAlias(discussionList)));
+                .Replace("{unsubscribe}", unsubscribe);
 
             logger.Debug("Email template processed: {0}");
             logger.Trace(result);
@@ -230,28 +247,6 @@ namespace GrayDuckMail.Common
             return assignable;
         }
 
-        /// <summary> Gets the message attached as a footer to relayed messages. </summary>
-        /// <param name="discussionList"> The discussion list. </param>
-        /// <param name="sender">         The sender. </param>
-        /// <returns> The footer. </returns>
-        public static string GetRelayFooter(DiscussionList discussionList, Contact sender)
-        {
-            var footer = string.Format(FOOTER_FORMAT, sender.Name, discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
-
-            return footer;
-        }
-
-        /// <summary> Removes the footer message if present in the given text. </summary>
-        /// <param name="fullText"> The full text. </param>
-        /// <returns> A string. </returns>
-        public static string RemoveTextFooter(string fullText)
-        {
-            var regex = new Regex(FOOTER_REGEX);
-            var clean = regex.Replace(fullText, string.Empty);
-
-            return clean;
-        }
-
         /// <summary>
         /// Relay an email to the <see cref="Contact">contacts</see>
         /// <see cref="ContactSubscription">assigned</see> to a <see cref="DiscussionList">discussion
@@ -273,12 +268,9 @@ namespace GrayDuckMail.Common
         {
             logger.Debug("Relaying message to {0} ({1})", recipient.Name, recipient.Email);
 
-            var sender = database.Contacts.Where(contact => contact.ID == message.OriginatorContactID).SingleOrDefault();
-            var cleanSubject = (!string.IsNullOrWhiteSpace(message.Subject) ? message.Subject : string.Empty).Replace(string.Format(" - Message from {0}", discussionList.Name), "");
-            
             var relay = SendEmail(discussionList,
                 recipient,
-                string.Format("{0} - Message from {1}", cleanSubject, discussionList.Name),
+                string.Format("{0} - Message from {1}", message.Subject.Replace(String.Format(" - Message from {0}", discussionList.Name), ""), discussionList.Name),
                 discussionList.BaseEmailAddress,
                 () =>
                 {
@@ -286,14 +278,60 @@ namespace GrayDuckMail.Common
                     {
                         logger.Debug("Mesasge body determined to contain HTML.");
 
-                        return ProcessHTMLRelay(discussionList, message, sender);
+                        var html = new HtmlDocument();
+                        html.LoadHtml(message.BodyHTML);
+
+                        HtmlNode bodyNode = null;
+                        if (html.DocumentNode.SelectNodes("//body")?.Any() ?? false)
+                        {
+                            bodyNode = html.DocumentNode.SelectNodes("//body").FirstOrDefault();
+                        }
+
+                        if (bodyNode == null)
+                        {
+                            //If we couldn't find a <body> tag, let's assume it not a full html 
+                            // build and just attach to the document node directly.
+
+                            bodyNode = html.DocumentNode;
+                        }
+
+                        var techHeader = html.CreateElement("mark");
+                        if (UsingUnsubscribeUri)
+                        {
+                            //Use an unsubscribe link that points to an externally accesible URL.
+                            var customized = new UriBuilder(unsubscribeUri);
+                            customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
+
+                            techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: <a href='{1}'>{1}</a>", discussionList.Name, customized.Uri.AbsoluteUri);
+                        }
+                        else
+                        {
+                            //Create a fallback link to the unsubscribe email alias.
+                            techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to <a href='mailto:{1}'>{1}</a>", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        }
+                        bodyNode.AppendChild(techHeader);
+
+                        var cleanedHtmlString = html.DocumentNode.InnerHtml.Replace(techHeader.InnerHtml, "");
+                        var modifiedHtml = html.DocumentNode.InnerHtml;
+
+                        return new TextPart(TextFormat.Html)
+                        {
+                            Text = modifiedHtml
+                        };
                     }
 
                     if (!string.IsNullOrWhiteSpace(message.BodyText))
                     {
                         logger.Debug("Message body determined to contain plain text.");
 
-                        return ProcessTextRelay(discussionList, message, sender);
+                        var techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        var cleanedText = message.BodyText.Replace(techHeader, "");
+                        var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
+
+                        return new TextPart(TextFormat.Text)
+                        {
+                            Text = modifiedText
+                        };
                     }
 
                     var formatException = new FormatException("Could not determine the formatting of the message.");
@@ -310,74 +348,6 @@ namespace GrayDuckMail.Common
                 RelayEmailID = relay.MessageId
             };
             database.RelayIdentifiers.Add(relayIdentifier);
-        }
-
-        /// <summary> Process the text body of a relayed message. </summary>
-        /// <param name="discussionList"> The discussion list. </param>
-        /// <param name="message">        The message. </param>
-        /// <param name="sender">         The sender. </param>
-        /// <returns> A MimeEntity. </returns>
-        private static MimeEntity ProcessTextRelay(DiscussionList discussionList, Message message, Contact sender)
-        {
-            var cleanedText = RemoveTextFooter(message.BodyText);
-            var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, GetRelayFooter(discussionList, sender));
-
-            return new TextPart(TextFormat.Text)
-            {
-                Text = modifiedText
-            };
-        }
-
-        /// <summary> Process the HTML body of a relayed message. </summary>
-        /// <param name="discussionList"> The discussion list. </param>
-        /// <param name="message">        The message. </param>
-        /// <param name="sender">         The sender. </param>
-        /// <returns> A MimeEntity. </returns>
-        private static MimeEntity ProcessHTMLRelay(DiscussionList discussionList, Message message, Contact sender)
-        {
-            var html = new HtmlDocument();
-            html.LoadHtml(message.BodyHTML);
-
-            HtmlNode bodyNode = null;
-            if (html.DocumentNode.SelectNodes("//body")?.Any() ?? false)
-            {
-                bodyNode = html.DocumentNode.SelectNodes("//body").FirstOrDefault();
-            }
-
-            if (bodyNode == null)
-            {
-                // If we couldn't find a <body> tag, let's assume it not a full html 
-                // build and just attach to the document node directly.
-
-                bodyNode = html.DocumentNode;
-            }
-
-            logger.Trace("Removing old footer.");
-
-            var oldFooterDivs = bodyNode.SelectNodes(FOOTER_XPATH);
-            if (oldFooterDivs != null)
-            {
-                foreach (var node in oldFooterDivs)
-                {
-                    node.Remove();
-                }
-            }
-
-            var footerDiv = html.CreateElement("div");
-            var mark = html.CreateElement("mark");
-
-            footerDiv.Id = FOOTER_GUID_ID;
-            mark.InnerHtml = GetRelayFooter(discussionList, sender);
-
-            footerDiv.AppendChild(mark);
-            bodyNode.AppendChild(footerDiv);
-
-            var modifiedHtml = html.DocumentNode.InnerHtml;
-
-            return new TextPart(TextFormat.Html)
-            {
-                Text = modifiedHtml
-            };
         }
 
         /// <summary>
@@ -408,7 +378,8 @@ namespace GrayDuckMail.Common
                             String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            recipient
                             )
                     };
                 },
@@ -430,9 +401,10 @@ namespace GrayDuckMail.Common
         public static void SendRequestOwnerNotificationEmail(DiscussionList discussionList, Contact requester, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info("Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}.", requester.Name, requester.Email, discussionList.Name);
+            var ownerContact = new Contact() { Name = "Owner", Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true };
 
             SendEmail(discussionList,
-                new Contact() { Name = "Owner", Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true },
+                ownerContact,
                 string.Format("Request to join {0}", discussionList.Name),
                 EmailAliasHelper.GetSubscribeAlias(discussionList),
                 () =>
@@ -444,7 +416,8 @@ namespace GrayDuckMail.Common
                             String.Format("{0} has requested access to the '{0}' Email Discussion List", requester.Name, discussionList.Name),
                             "Please visit the the web administration interface to process this request.",
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            ownerContact
                             )
                     };
                 },
@@ -480,7 +453,8 @@ namespace GrayDuckMail.Common
                             String.Format("You've been subscribed to the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.", discussionList.BaseEmailAddress),
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            recipient
                             )
                     };
                 },
@@ -513,7 +487,8 @@ namespace GrayDuckMail.Common
                             String.Format("You will no longer recieve messages from the '{0}' Email Discussion List", discussionList.Name),
                             String.Format("You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to <a href='mailto:{0}'>{0}</a>.", EmailAliasHelper.GetRequestAlias(discussionList)),
                             discussionList.Name,
-                            discussionList
+                            discussionList,
+                            recipient
                             )
                     };
                 },

@@ -44,7 +44,9 @@ namespace GrayDuckMail.Web
                 {
                     if (!DockerEnvironmentVariables.WebOnly)
                     {
+                        logger.Info("Registering service workers.");
                         services.AddHostedService<EmailFetcher>();
+                        services.AddHostedService<EmailSender>();
                         services.AddHostedService<Onboarder>();
                     }
                 })
