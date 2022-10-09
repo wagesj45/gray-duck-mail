@@ -45,9 +45,9 @@ namespace GrayDuckMail.Web.Worker
             logger.Info("Beginning email sender loop.");
             while (!cancellationToken.IsCancellationRequested)
             {
-                try
+                for (int i = 0; i < DockerEnvironmentVariables.RateLimitPerRoundCount; i++)
                 {
-                    for (int i = 0; i < DockerEnvironmentVariables.RateLimitPerRoundCount; i++)
+                    try
                     {
                         var emailDefinition = SharedMemory.PopEmail();
 
@@ -105,19 +105,20 @@ namespace GrayDuckMail.Web.Worker
                             break;
                         }
                     }
-                    // End the loop and wait the alloted time.
-                    logger.Debug("Fetch send complete. Waiting {0}", DockerEnvironmentVariables.RateLimitRoundWaitTime);
-                    await Task.Delay(DockerEnvironmentVariables.RateLimitRoundWaitTime, cancellationToken);
-                }
-                catch (Exception e)
-                {
-                    //We want to catch any potential exception so that the loop can continue in case of failure.
-                    logger.Error(e);
+                    catch (Exception e)
+                    {
+                        //We want to catch any potential exception so that the loop can continue in case of failure.
+                        logger.Error(e);
+                    }
                 }
 
-                logger.Info("Email sender shutting down.");
-                return;
+                // End the loop and wait the alloted time.
+                logger.Debug("Fetch send complete. Waiting {0}", DockerEnvironmentVariables.RateLimitRoundWaitTime);
+                await Task.Delay(DockerEnvironmentVariables.RateLimitRoundWaitTime, cancellationToken);
             }
+
+            logger.Info("Email sender shutting down.");
+            return;
         }
     }
 }
