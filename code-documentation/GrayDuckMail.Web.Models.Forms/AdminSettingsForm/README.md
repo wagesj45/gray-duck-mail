@@ -37,15 +37,16 @@ Properties
 |                    | Name                | Description                                                                        |
 | ------------------ | ------------------- | ---------------------------------------------------------------------------------- |
 | ![Public property] | [PageSize][6]       | Gets or sets the number of items to display on a page.                             |
-| ![Public property] | [UseFuzzySearch][7] | Gets or sets a value indicating whether search functions will employ fuzzy search. |
+| ![Public property] | [Theme][7]          | Gets or sets the theme used by [Pico.css][8].                                      |
+| ![Public property] | [UseFuzzySearch][9] | Gets or sets a value indicating whether search functions will employ fuzzy search. |
 
 
 Methods
 -------
 
-|                  | Name           | Description                                                                                                                                            |
-| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ![Public method] | [IsChecked][8] | Determine if a property of a derived class represents an HTML form value coresponding to a marked checkbox. (Inherited from [BaseFormInput&lt;T>][3].) |
+|                  | Name            | Description                                                                                                                                            |
+| ---------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![Public method] | [IsChecked][10] | Determine if a property of a derived class represents an HTML form value coresponding to a marked checkbox. (Inherited from [BaseFormInput&lt;T>][3].) |
 
 
 See Also
@@ -60,7 +61,9 @@ See Also
 [4]: ../README.md
 [5]: _ctor.md
 [6]: PageSize.md
-[7]: UseFuzzySearch.md
-[8]: ../BaseFormInput_1/IsChecked.md
+[7]: Theme.md
+[8]: https://picocss.com/docs/themes.html
+[9]: UseFuzzySearch.md
+[10]: ../BaseFormInput_1/IsChecked.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

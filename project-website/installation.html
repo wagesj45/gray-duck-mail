@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Gray Duck Mail - Installation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- /wwwroot is a symlink to ../gray-duck-mail-web/wwwroot -->
+    <link rel="stylesheet" href="./wwwroot/css/pico.min.css" />
+    <link rel="stylesheet" href="./wwwroot/css/site.css" />
+    <link rel="stylesheet" href="./wwwroot/icofont/icofont.min.css" />
+
+    <link rel="stylesheet" href="./site.css" />
+    <link rel="icon" href="./wwwroot/favicon.ico" type="image/x-icon">
+</head>
+<body class="container">
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">
+                        <img src="./wwwroot/img/logo-64.png" style="margin-right: 1em; width: 2em" />
+                        <strong>Gray Duck Mail</strong>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li><a href="./index.html"><i class="icofont-duck-tracks"></i> What is Gray Duck Mail?</a></li>
+                <li><a href="./index.html#getting-started"><i class="icofont-rocket"></i> Getting Started</a></li>
+                <li><a href="./index.html#source-code"><i class="icofont-terminal"></i> Source Code</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hgroup>
+        <h1>Gray Duck Mail</h1>
+        <h2>Easy to use email discussion lists</h2>
+    </hgroup>
+    <article class="hero">
+        <div class="hero-content">
+            <hgroup>
+                <h3>
+                    Quick and Easy Installation
+                </h3>
+                <h4>You'll be up and running in no time.</h4>
+            </hgroup>
+        </div>
+    </article>
+    <a href="./security.html" role="button" class="warning" style="width: 100%"><i class="icofont-warning"></i> Important Security Information</a>
+    <article id="main">
+        <header>
+            <strong>Running Gray Duck Mail</strong>
+        </header>
+        <p>
+            Gray Duck Mail is provided as a <a href="https://hub.docker.com/r/wagesj45/gray-duck-mail">docker image</a>.
+        </p>
+        <p>
+            <code id="docker-pull">
+                docker pull wagesj45/gray-duck-mail
+                <button href="" onclick="CopyToClipboard('docker pull wagesj45/gray-duck-mail')" class="compact transparent"><i class="icofont-ui-copy"></i></button>
+            </code>
+        </p>
+        <h5 id="configuration">Configuration</h5>
+        <p>
+            Gray Duck Mail requires a minimum amount of set up and has sane defaults set up to get your discussion list up and running quickly.
+        </p>
+        <h6 id="ports">Ports</h6>
+        <p>
+            The docker image requires an HTTP port exposed and mapped to port 80 on the container.
+        </p>
+        <h6 id="volumes">Volumes</h6>
+        <p>
+            A single volume mounted to <code>/database</code> is required. This volume will store the local <a href="https://sqlite.org/index.html">SQLite3</a> database file is stored. This volume provides non-volitile storage so that data is not lost between docker image upgrades.
+        </p>
+        <h6 id="environment-variables">Environment Variables</h6>
+        <ul>
+            <li>
+                <code>FETCH_TIME</code>
+                <p>
+                    The time between fetching email from the remote server. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=netcore-3.1">System.TimeSpan</a> set to <em>00:05:00</em>.
+                </p>
+            </li>
+            <li>
+                <code>LOG_LEVEL</code>
+                <p>
+                    The verbosity level with which to log application events. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1">System.String</a> set to <em>info</em>.
+                </p>
+                <p>The following values are supported:</p>
+                <p>
+                    <em>trace</em>, <em>all</em><br />
+                    <em>debug</em>, <em>verbose</em><br />
+                    <em>info</em>, <em>information</em><br />
+                    <em>warn</em>, <em>warning</em><br />
+                    <em>err</em>, <em>error</em><br />
+                    <em>fatal</em>
+                </p>
+            </li>
+            <li>
+                <code>MIN_SEARCH_SCORE</code>
+                <p>
+                    The minimum viable search score when performing fuzzy searches. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.single?view=netcore-3.1">System.Single (float)</a> set to <em>0.2</em>. When using fuzzy searches, fractional scores between 1 and 0 are generated. Results approach zero as search results stray from an exact match.
+                </p>
+            </li>
+            <li>
+                <code>WEB_ONLY</code>
+                <p>
+                    If set, only the web interface will be initialized. <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-3.1&tabs=visual-studio">Background worker threads</a> will not be initialized. This is useful for running the web administration interface without the risk of background service workers modifying the remote mail server. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.boolean?view=netcore-3.1">System.Boolean</a> set to <em>0</em>.
+                </p>
+                <p>
+                    The following values are supported:
+                </p>
+                <p>
+                    <em>True</em>, <em>1</em><br />
+                    <em>False</em>, <em>0</em><br />
+                </p>
+            </li>
+        </ul>
+    </article>
+    <footer>
+        Find this project to be useful? Please consider <a href="https://support.jordanwages.com/">donating</a>!
+        <br />
+        <a href="https://git.jordanwages.com/wagesj45/gray-duck-mail">Source code</a> licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>. Gray Duck Photo by <a href="https://unsplash.com/@trebron?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Norbert Kundrak</a> on <a href="https://unsplash.com/s/photos/gray-duck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        <br />
+        <nav>
+            <ul>
+                <li><a href="https://picocss.com">Pico CSS</a></li>
+                <li><a href="https://www.icofont.com">Icofont</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script>
+        function CopyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+        }
+    </script>
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//t.thebreadsticks.com/";
+            _paq.push(['setTrackerUrl', u + 'js/']);
+            _paq.push(['setSiteId', '9']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = u + 'js/'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <noscript><p><img src="https://t.thebreadsticks.com/js?idsite=9&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Matomo Code -->
+</body>
+</html>

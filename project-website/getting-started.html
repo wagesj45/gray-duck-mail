@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Gray Duck Mail - Getting Started</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- /wwwroot is a symlink to ../gray-duck-mail-web/wwwroot -->
+    <link rel="stylesheet" href="./wwwroot/css/pico.min.css" />
+    <link rel="stylesheet" href="./wwwroot/css/site.css" />
+    <link rel="stylesheet" href="./wwwroot/icofont/icofont.min.css" />
+
+    <link rel="stylesheet" href="./site.css" />
+    <link rel="icon" href="./wwwroot/favicon.ico" type="image/x-icon">
+</head>
+<body class="container">
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">
+                        <img src="./wwwroot/img/logo-64.png" style="margin-right: 1em; width: 2em" />
+                        <strong>Gray Duck Mail</strong>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li><a href="./index.html"><i class="icofont-duck-tracks"></i> What is Gray Duck Mail?</a></li>
+                <li><a href="./index.html#installation"><i class="icofont-micro-chip"></i> Installation</a></li>
+                <li><a href="./index.html#source-code"><i class="icofont-terminal"></i> Source Code</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hgroup>
+        <h1>Gray Duck Mail</h1>
+        <h2>Easy to use email discussion lists</h2>
+    </hgroup>
+    <article class="hero">
+        <div class="hero-content">
+            <hgroup>
+                <h3>
+                    Bring Your Flock Together
+                </h3>
+                <h4>No one flies alone.</h4>
+            </hgroup>
+        </div>
+    </article>
+    <a href="./security.html" role="button" class="warning" style="width: 100%"><i class="icofont-warning"></i> Important Security Information</a>
+    <article id="main">
+        <header>
+            <strong>Your Gray Duck</strong>
+        </header>
+        <p>
+            Discussion lists are easy to manage in Gray Duck Mail. The following sections will help you understand what Gray Duck Mail does and how it operates. You'll learn about <a href="#contacts">contacts</a>, <a href="#discussion-lists">discussion lists</a>, and <a href="#using">how to use it</a>.
+        </p>
+    </article>
+    <article id="contacts">
+        <header>
+            <strong>Contacts</strong>
+        </header>
+        <p>
+            Contacts represent individual users that can send and recieve messages to a discussion list. New contacts can be added through the <a href="#administration">web interface</a> or are added automatically when a previously unknown email address sends a message to request email alias for a discussion list.
+        </p>
+    </article>
+    <article id="discussion-lists">
+        <header>
+            <strong>Discussion Lists</strong>
+        </header>
+        <p>
+            Discussion lists represent a group of contacts that can relay messages to other users via a single designated email address. Limited automated moderation can be performed by sending messages to specific <a href="#aliases">email aliases</a>.
+        </p>
+        <h5>Configuration</h5>
+        <p>
+            Gray Duck Mail requires an external email account and a few defined aliases in order to function. A discussion list functions by monitoring a given POP3 email account and processing each email by either relaying it to the discussion list members, or by analyzing a message's MIME headers and performing a moderation task.
+        </p>
+        <h6 id="base-email-address">Base Email Account</h6>
+        <p>
+            The base email account is the actual email account provided to you by an external email provider, such as your web host.
+        </p>
+        <h6 id="aliases">Aliases</h6>
+        <p>
+            In order to process operational emails, Gray Duck Mail expects certain email aliases to be configured. This configuration may be refered to by your email provider as "forwards". All email aliases except for the <a href="#alias-owner">owner alias</a> should forward to the <a href="#base-email-address">base email address</a>. These aliases should be structured so that the command name precedes the base email address with a hyphen separating them.
+        </p>
+        <p>
+            For example: <code>subscribe-base.email.address@example.com</code>
+        </p>
+        <p>
+            The following email aliases are expected to exist for automatic moderation:
+        </p>
+        <ul>
+            <li><code>request-base.email.address@example.com</code></li>
+            <li><code>subscribe-base.email.address@example.com</code></li>
+            <li><code>unsubscribe-base.email.address@example.com</code></li>
+            <li><code>bounce-base.email.address@example.com</code></li>
+            <li><code>owner-base.email.address@example.com</code></li>
+        </ul>
+        <dl>
+            <dt id="request-alias">
+                <code>request</code>
+            </dt>
+            <dd>
+                The request alias is used to process requests to join a discussion list by new users.
+            </dd>
+            <dt id="subscribe-alias">
+                <code>subscribe</code>
+            </dt>
+            <dd>
+                The subscription alias is used by known users who have been invited to participate in a discussion list to confirm their willingness to participate.
+            </dd>
+            <dt id="unsubscribe-alias">
+                <code>unsubscribe</code>
+            </dt>
+            <dd>
+                The unsubscription alias is used by known users who have been invited to participate in a discussion list to revoke their consent to recieve emails associated with a given discussion list.
+            </dd>
+            <dt id="bounce-alias">
+                <code>bounce</code>
+            </dt>
+            <dd>
+                The bounce alias is inserted into the <code><a href="https://en.wikipedia.org/wiki/Variable_envelope_return_path">return-path</a></code> MIME header for all system delievered messages. Some email servers rely on this <code>return-path</code> value to notify senders of non-deliverable messages or invalid mail boxes.
+            </dd>
+            <dt id="owner-alias">
+                <code>owner</code>
+            </dt>
+            <dd>
+                The owner alias should forward to a non-discussion-list address, such as the administrators personal email account. The system sends alert messages to this address when external moderation is necessary, such as when a previously unknown user requests access to a discussion list.
+            </dd>
+        </dl>
+    </article>
+    <article id="using">
+        <header>
+            <strong>Using the Discussion List</strong>
+        </header>
+        <p>
+            Gray Duck Mail's primary function is to relay email from one discussion list member to all the others. Email messages recieved at the <a href="#base-email-address">base email address</a> are forwarded to all eligable group members. Replies are similarly routed to the entire group. An archive of the message is added to the arhive and available for viewing in the <a href="#administration">web interface</a>.
+        </p>
+        <h5>Administrative Email</h5>
+        <p>
+            There are a few <a href="#aliases">special email addresses</a> that group members and send messages to that perform special administrative functions. For example, you can send a message to <code>unsubscribe-base.email.address@example.com</code> and the system will automatically mark that member as unsubscribed and they will no longer recieve messages from that discussion list.
+        </p>
+        <p>
+            The content of messages sent to these special addresses is ignored. The system will only take into consideration the discussion list being referenced and which contact initiated the message.
+        </p>
+        <p>
+            <em>Sending blank messages works just fine!</em>
+        </p>
+    </article>
+    <article id="administration">
+        <header>
+            <strong>Administration</strong>
+        </header>
+        <p>
+            Gray Duck Mail provides a web administration interface for basic system interaction. The web interface allows an administrator to create and remove distribution lists, create and remove list contacts, browse message archives, and access basic adminstration actions like importing and exporting copies of the local database.
+        </p>
+        <h5 id="settings">Settings</h5>
+        <p>
+            The web adminstration settings control the presentation of data in the web interface, so are stored as cookies in the user's browser. These settings have no influence on the system's discussion list email processing functionality.
+        </p>
+        <h6 id="items-per-page">Items Per Page</h6>
+        <p>
+            This setting controls the number of top level items displayed on a page, such as contacts or archived messages.
+        </p>
+        <h6 id="fuzzy-search">Fuzzy Search</h6>
+        <p>
+            Searching through contacts and message archives will by default perform exact searches. Results will contain the search term exactly as presented. If enabled, this option will allow the search engine to engage <a href="https://en.wikipedia.org/wiki/Fuzzy_logic">fuzzy searching</a>, using the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> to find results that closely match a given search term. This can result in better search results, but is <em>computationally heavy</em> as all items being searched must be loaded into memory from the database. When searching large message archives or large contact lists, this could result in time-out errors from the web server.
+        </p>
+        <h6 id="theme">Theme</h6>
+        <p>
+            Allows a user to manually select either the <code>Light</code> theme for the web interface or the <code>Dark</code> theme. Pico.css will attempt to automatically choose the theme that matches the device theme.
+        </p>
+        <h5 id="database-import">Database Import</h5>
+        <p>
+            This action allows you to import an existing SQLite3 database file. When importing a database, the web server must restart. You can simply reload the web interface to see the new changes.
+        </p>
+        <h5 id="database-export">Database Export</h5>
+        <p>
+            This action allows you to export a copy of the SQLite3 database file. This file can be imported into another instance of Gray Duck Mail or viewed in an external application such as <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a>.
+        </p>
+    </article>
+    <footer>
+        Find this project to be useful? Please consider <a href="https://support.jordanwages.com/">donating</a>!
+        <br />
+        <a href="https://git.jordanwages.com/wagesj45/gray-duck-mail">Source code</a> licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>. Gray Duck Photo by <a href="https://unsplash.com/@trebron?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Norbert Kundrak</a> on <a href="https://unsplash.com/s/photos/gray-duck?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        <br />
+        <nav>
+            <ul>
+                <li><a href="https://picocss.com">Pico CSS</a></li>
+                <li><a href="https://www.icofont.com">Icofont</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//t.thebreadsticks.com/";
+            _paq.push(['setTrackerUrl', u + 'js/']);
+            _paq.push(['setSiteId', '9']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = u + 'js/'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <noscript><p><img src="https://t.thebreadsticks.com/js?idsite=9&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Matomo Code -->
+</body>
+</html>

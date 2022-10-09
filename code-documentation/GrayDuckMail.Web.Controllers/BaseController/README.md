@@ -41,7 +41,8 @@ Properties
 | ------------------ | -------------------- | ---------------------------------------------------------------------------------- |
 | ![Public property] | [PageSize][10]       | Gets or sets the number of items to display on a page.                             |
 | ![Public property] | [SqliteDatabase][11] | Gets the SQLite database context.                                                  |
-| ![Public property] | [UseFuzzySearch][12] | Gets or sets a value indicating whether search functions will employ fuzzy search. |
+| ![Public property] | [Theme][12]          | Gets or sets the theme used by [Pico.css][13].                                     |
+| ![Public property] | [UseFuzzySearch][14] | Gets or sets a value indicating whether search functions will employ fuzzy search. |
 
 
 Methods
@@ -49,7 +50,7 @@ Methods
 
 |                  | Name                    | Description                                 |
 | ---------------- | ----------------------- | ------------------------------------------- |
-| ![Public method] | [OnActionExecuting][13] | Called before the action method is invoked. |
+| ![Public method] | [OnActionExecuting][15] | Called before the action method is invoked. |
 
 
 See Also
@@ -69,8 +70,10 @@ See Also
 [9]: _ctor.md
 [10]: PageSize.md
 [11]: SqliteDatabase.md
-[12]: UseFuzzySearch.md
-[13]: OnActionExecuting.md
+[12]: Theme.md
+[13]: https://picocss.com/docs/themes.html
+[14]: UseFuzzySearch.md
+[15]: OnActionExecuting.md
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"

@@ -34,11 +34,12 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description                                                                                                              |
-| ------------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| ![Public property] | [PageSize][7]       | Gets or sets the number of items to display on a page. (Inherited from [BaseController][3].)                             |
-| ![Public property] | [SqliteDatabase][8] | Gets the SQLite database context. (Inherited from [BaseController][3].)                                                  |
-| ![Public property] | [UseFuzzySearch][9] | Gets or sets a value indicating whether search functions will employ fuzzy search. (Inherited from [BaseController][3].) |
+|                    | Name                 | Description                                                                                                              |
+| ------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| ![Public property] | [PageSize][7]        | Gets or sets the number of items to display on a page. (Inherited from [BaseController][3].)                             |
+| ![Public property] | [SqliteDatabase][8]  | Gets the SQLite database context. (Inherited from [BaseController][3].)                                                  |
+| ![Public property] | [Theme][9]           | Gets or sets the theme used by [Pico.css][10]. (Inherited from [BaseController][3].)                                     |
+| ![Public property] | [UseFuzzySearch][11] | Gets or sets a value indicating whether search functions will employ fuzzy search. (Inherited from [BaseController][3].) |
 
 
 Methods
@@ -46,11 +47,11 @@ Methods
 
 |                  | Name                    | Description                                                                       |
 | ---------------- | ----------------------- | --------------------------------------------------------------------------------- |
-| ![Public method] | [ExportDatabase][10]    | Exports the database as a downloadable file.                                      |
-| ![Public method] | [ImportDatabase][11]    | Imports a SQLite database file and replaces the existing database file.           |
-| ![Public method] | [Index][12]             | Gets the index or default request.                                                |
-| ![Public method] | [OnActionExecuting][13] | Called before the action method is invoked. (Inherited from [BaseController][3].) |
-| ![Public method] | [SaveSettings][14]      | Saves web administration settings.                                                |
+| ![Public method] | [ExportDatabase][12]    | Exports the database as a downloadable file.                                      |
+| ![Public method] | [ImportDatabase][13]    | Imports a SQLite database file and replaces the existing database file.           |
+| ![Public method] | [Index][14]             | Gets the index or default request.                                                |
+| ![Public method] | [OnActionExecuting][15] | Called before the action method is invoked. (Inherited from [BaseController][3].) |
+| ![Public method] | [SaveSettings][16]      | Saves web administration settings.                                                |
 
 
 See Also
@@ -67,12 +68,14 @@ See Also
 [6]: _ctor.md
 [7]: ../BaseController/PageSize.md
 [8]: ../BaseController/SqliteDatabase.md
-[9]: ../BaseController/UseFuzzySearch.md
-[10]: ExportDatabase.md
-[11]: ImportDatabase.md
-[12]: Index.md
-[13]: ../BaseController/OnActionExecuting.md
-[14]: SaveSettings.md
+[9]: ../BaseController/Theme.md
+[10]: https://picocss.com/docs/themes.html
+[11]: ../BaseController/UseFuzzySearch.md
+[12]: ExportDatabase.md
+[13]: ImportDatabase.md
+[14]: Index.md
+[15]: ../BaseController/OnActionExecuting.md
+[16]: SaveSettings.md
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"

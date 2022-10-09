@@ -34,11 +34,12 @@ Constructors
 Properties
 ----------
 
-|                    | Name                | Description                                                                                                              |
-| ------------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| ![Public property] | [PageSize][7]       | Gets or sets the number of items to display on a page. (Inherited from [BaseController][3].)                             |
-| ![Public property] | [SqliteDatabase][8] | Gets the SQLite database context. (Inherited from [BaseController][3].)                                                  |
-| ![Public property] | [UseFuzzySearch][9] | Gets or sets a value indicating whether search functions will employ fuzzy search. (Inherited from [BaseController][3].) |
+|                    | Name                 | Description                                                                                                              |
+| ------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| ![Public property] | [PageSize][7]        | Gets or sets the number of items to display on a page. (Inherited from [BaseController][3].)                             |
+| ![Public property] | [SqliteDatabase][8]  | Gets the SQLite database context. (Inherited from [BaseController][3].)                                                  |
+| ![Public property] | [Theme][9]           | Gets or sets the theme used by [Pico.css][10]. (Inherited from [BaseController][3].)                                     |
+| ![Public property] | [UseFuzzySearch][11] | Gets or sets a value indicating whether search functions will employ fuzzy search. (Inherited from [BaseController][3].) |
 
 
 Methods
@@ -46,16 +47,16 @@ Methods
 
 |                  | Name                        | Description                                                                       |
 | ---------------- | --------------------------- | --------------------------------------------------------------------------------- |
-| ![Public method] | [ConfirmRemove][10]         | Processes the contact removal request.                                            |
-| ![Public method] | [Create][11]                | Processes the contact creation form submission.                                   |
-| ![Public method] | [Edit(ContactForm)][12]     | Processes the contact editing form submission.                                    |
-| ![Public method] | [Edit(Int32)][13]           | Gets the edit contact form request.                                               |
-| ![Public method] | [Index][14]                 | Gets the index or default request.                                                |
-| ![Public method] | [New][15]                   | Gets the new contact creation form request.                                       |
-| ![Public method] | [OnActionExecuting][16]     | Called before the action method is invoked. (Inherited from [BaseController][3].) |
-| ![Public method] | [Remove][17]                | Gets the contact removal form request.                                            |
-| ![Public method] | [Search(String)][18]        | Searches for the [contacts][1] with a matching [name][19] or [email address][20]. |
-| ![Public method] | [Search(String, Int32)][21] | Searches for the [contacts][1] with a matching [name][19] or [email address][20]. |
+| ![Public method] | [ConfirmRemove][12]         | Processes the contact removal request.                                            |
+| ![Public method] | [Create][13]                | Processes the contact creation form submission.                                   |
+| ![Public method] | [Edit(ContactForm)][14]     | Processes the contact editing form submission.                                    |
+| ![Public method] | [Edit(Int32)][15]           | Gets the edit contact form request.                                               |
+| ![Public method] | [Index][16]                 | Gets the index or default request.                                                |
+| ![Public method] | [New][17]                   | Gets the new contact creation form request.                                       |
+| ![Public method] | [OnActionExecuting][18]     | Called before the action method is invoked. (Inherited from [BaseController][3].) |
+| ![Public method] | [Remove][19]                | Gets the contact removal form request.                                            |
+| ![Public method] | [Search(String)][20]        | Searches for the [contacts][1] with a matching [name][21] or [email address][22]. |
+| ![Public method] | [Search(String, Int32)][23] | Searches for the [contacts][1] with a matching [name][21] or [email address][22]. |
 
 
 See Also
@@ -72,19 +73,21 @@ See Also
 [6]: _ctor.md
 [7]: ../BaseController/PageSize.md
 [8]: ../BaseController/SqliteDatabase.md
-[9]: ../BaseController/UseFuzzySearch.md
-[10]: ConfirmRemove.md
-[11]: Create.md
-[12]: Edit.md
-[13]: Edit_1.md
-[14]: Index.md
-[15]: New.md
-[16]: ../BaseController/OnActionExecuting.md
-[17]: Remove.md
-[18]: Search.md
-[19]: ../../GrayDuckMail.Common.Database/Contact/Name.md
-[20]: ../../GrayDuckMail.Common.Database/Contact/Email.md
-[21]: Search_1.md
+[9]: ../BaseController/Theme.md
+[10]: https://picocss.com/docs/themes.html
+[11]: ../BaseController/UseFuzzySearch.md
+[12]: ConfirmRemove.md
+[13]: Create.md
+[14]: Edit.md
+[15]: Edit_1.md
+[16]: Index.md
+[17]: New.md
+[18]: ../BaseController/OnActionExecuting.md
+[19]: Remove.md
+[20]: Search.md
+[21]: ../../GrayDuckMail.Common.Database/Contact/Name.md
+[22]: ../../GrayDuckMail.Common.Database/Contact/Email.md
+[23]: Search_1.md
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"
