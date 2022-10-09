@@ -23,6 +23,7 @@ Classes
 | ![Public class] | [MessagePageModel][13]          | A data model for the message page.                        |
 | ![Public class] | [RemoveContactModel][14]        | A data model for the contact removal page.                |
 | ![Public class] | [RemoveDiscussionListModel][15] | A data model for the discussion list removal page.        |
+| ![Public class] | [UnsubscribeModel][16]          | A data model for the external unsubscription page.        |
 
 [1]: AdminModel/README.md
 [2]: ArchiveModel/README.md
@@ -39,4 +40,5 @@ Classes
 [13]: MessagePageModel/README.md
 [14]: RemoveContactModel/README.md
 [15]: RemoveDiscussionListModel/README.md
+[16]: UnsubscribeModel/README.md
 [Public class]: ../icons/pubclass.svg "Public class"

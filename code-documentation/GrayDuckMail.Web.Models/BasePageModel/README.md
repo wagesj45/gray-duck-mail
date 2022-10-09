@@ -67,6 +67,7 @@ Inheritance Hierarchy (Continued)
     [GrayDuckMail.Web.Models.MessagePageModel][18]  
     [GrayDuckMail.Web.Models.RemoveContactModel][19]  
     [GrayDuckMail.Web.Models.RemoveDiscussionListModel][20]  
+    [GrayDuckMail.Web.Models.UnsubscribeModel][21]  
 
 [1]: https://docs.microsoft.com/dotnet/api/system.object
 [2]: #inheritance-hierarchy-continued
@@ -88,5 +89,6 @@ Inheritance Hierarchy (Continued)
 [18]: ../MessagePageModel/README.md
 [19]: ../RemoveContactModel/README.md
 [20]: ../RemoveDiscussionListModel/README.md
+[21]: ../UnsubscribeModel/README.md
 [Public method]: ../../icons/pubmethod.svg "Public method"
 [Public property]: ../../icons/pubproperty.svg "Public property"

@@ -46,6 +46,37 @@
             <topic id="M:GrayDuckMail.Common.EmailAliasHelper.GetUnsubscribeAlias(System.String)"
                    file="GrayDuckMail.Common/EmailAliasHelper/GetUnsubscribeAlias_1.md"/>
          </topic>
+         <topic id="T:GrayDuckMail.Common.EmailDefinition"
+                file="GrayDuckMail.Common/EmailDefinition/README.md"
+                title="EmailDefinition">
+            <topic id="M:GrayDuckMail.Common.EmailDefinition.#ctor"
+                   file="GrayDuckMail.Common/EmailDefinition/_ctor.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailDefinition.Body"
+                   file="GrayDuckMail.Common/EmailDefinition/Body.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailDefinition.Contact"
+                   file="GrayDuckMail.Common/EmailDefinition/Contact.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailDefinition.DiscussionList"
+                   file="GrayDuckMail.Common/EmailDefinition/DiscussionList.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailDefinition.Message"
+                   file="GrayDuckMail.Common/EmailDefinition/Message.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailDefinition.Subject"
+                   file="GrayDuckMail.Common/EmailDefinition/Subject.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailDefinition.Type"
+                   file="GrayDuckMail.Common/EmailDefinition/Type.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailDefinition.CreateOnboarding(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
+                   file="GrayDuckMail.Common/EmailDefinition/CreateOnboarding.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailDefinition.CreateOwnerNotification(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
+                   file="GrayDuckMail.Common/EmailDefinition/CreateOwnerNotification.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailDefinition.CreateRelay(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact,GrayDuckMail.Common.Database.Message)"
+                   file="GrayDuckMail.Common/EmailDefinition/CreateRelay.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailDefinition.CreateSubscriptionConfirmation(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
+                   file="GrayDuckMail.Common/EmailDefinition/CreateSubscriptionConfirmation.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailDefinition.CreateUnsubscriptionConfirmation(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
+                   file="GrayDuckMail.Common/EmailDefinition/CreateUnsubscriptionConfirmation.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Common.EmailDefinitionType"
+                file="GrayDuckMail.Common/EmailDefinitionType/README.md"
+                title="EmailDefinitionType"/>
          <topic id="T:GrayDuckMail.Common.EmailHelper"
                 file="GrayDuckMail.Common/EmailHelper/README.md"
                 title="EmailHelper">
@@ -61,26 +92,22 @@
                    file="GrayDuckMail.Common/EmailHelper/ContactUnassignableStatuses.md"/>
             <topic id="P:GrayDuckMail.Common.EmailHelper.DefaultEmailTemplate"
                    file="GrayDuckMail.Common/EmailHelper/DefaultEmailTemplate.md"/>
-            <topic id="M:GrayDuckMail.Common.EmailHelper.FillDefaultTemplate(System.String,System.String,System.String,System.String,GrayDuckMail.Common.Database.DiscussionList)"
+            <topic id="P:GrayDuckMail.Common.EmailHelper.UsingUnsubscribeUri"
+                   file="GrayDuckMail.Common/EmailHelper/UsingUnsubscribeUri.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailHelper.ConfigureUnsubscribeLink(System.String,System.Boolean)"
+                   file="GrayDuckMail.Common/EmailHelper/ConfigureUnsubscribeLink.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailHelper.FillDefaultTemplate(System.String,System.String,System.String,System.String,GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
                    file="GrayDuckMail.Common/EmailHelper/FillDefaultTemplate.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.GetBouncedMessageRecipient(GrayDuckMail.Common.IndexedMimeMessage)"
                    file="GrayDuckMail.Common/EmailHelper/GetBouncedMessageRecipient.md"/>
-            <topic id="M:GrayDuckMail.Common.EmailHelper.GetRelayFooter(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
-                   file="GrayDuckMail.Common/EmailHelper/GetRelayFooter.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.IsAssignable(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
                    file="GrayDuckMail.Common/EmailHelper/IsAssignable.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.IsAuthorizedForMailDistribution(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
                    file="GrayDuckMail.Common/EmailHelper/IsAuthorizedForMailDistribution.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.IsBouncedMessage(GrayDuckMail.Common.IndexedMimeMessage)"
                    file="GrayDuckMail.Common/EmailHelper/IsBouncedMessage.md"/>
-            <topic id="M:GrayDuckMail.Common.EmailHelper.ProcessHTMLRelay(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Message,GrayDuckMail.Common.Database.Contact)"
-                   file="GrayDuckMail.Common/EmailHelper/ProcessHTMLRelay.md"/>
-            <topic id="M:GrayDuckMail.Common.EmailHelper.ProcessTextRelay(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Message,GrayDuckMail.Common.Database.Contact)"
-                   file="GrayDuckMail.Common/EmailHelper/ProcessTextRelay.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.RelayEmail(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact,GrayDuckMail.Common.Database.Message,GrayDuckMail.Common.Database.SqliteDatabase,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
                    file="GrayDuckMail.Common/EmailHelper/RelayEmail.md"/>
-            <topic id="M:GrayDuckMail.Common.EmailHelper.RemoveTextFooter(System.String)"
-                   file="GrayDuckMail.Common/EmailHelper/RemoveTextFooter.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.SendEmail(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact,System.String,System.String,System.Func{MimeKit.MimeEntity},MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
                    file="GrayDuckMail.Common/EmailHelper/SendEmail.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.SendOnboardingEmail(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
@@ -91,14 +118,6 @@
                    file="GrayDuckMail.Common/EmailHelper/SendSubscriptionConfirmationEmail.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.SendUnsubscriptionConfirmationEmail(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact,MailKit.Net.Smtp.SmtpClient,System.Threading.CancellationToken)"
                    file="GrayDuckMail.Common/EmailHelper/SendUnsubscriptionConfirmationEmail.md"/>
-            <topic id="F:GrayDuckMail.Common.EmailHelper.FOOTER_FORMAT"
-                   file="GrayDuckMail.Common/EmailHelper/FOOTER_FORMAT.md"/>
-            <topic id="F:GrayDuckMail.Common.EmailHelper.FOOTER_GUID_ID"
-                   file="GrayDuckMail.Common/EmailHelper/FOOTER_GUID_ID.md"/>
-            <topic id="F:GrayDuckMail.Common.EmailHelper.FOOTER_REGEX"
-                   file="GrayDuckMail.Common/EmailHelper/FOOTER_REGEX.md"/>
-            <topic id="F:GrayDuckMail.Common.EmailHelper.FOOTER_XPATH"
-                   file="GrayDuckMail.Common/EmailHelper/FOOTER_XPATH.md"/>
             <topic id="F:GrayDuckMail.Common.EmailHelper.STATUS_GROUP_ACTION_DELAYED"
                    file="GrayDuckMail.Common/EmailHelper/STATUS_GROUP_ACTION_DELAYED.md"/>
             <topic id="F:GrayDuckMail.Common.EmailHelper.STATUS_GROUP_ACTION_FAILED"
@@ -396,8 +415,28 @@
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/LogLevel.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.MinimumSearchScore"
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/MinimumSearchScore.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.RateLimitPerRoundCount"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/RateLimitPerRoundCount.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.RateLimitRoundWaitTime"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/RateLimitRoundWaitTime.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebExternalURL"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/WebExternalURL.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebOnly"
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/WebOnly.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebUnsubscribe"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/WebUnsubscribe.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebUseHTTPS"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/WebUseHTTPS.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Web.ExternalAccessAttribute"
+                file="GrayDuckMail.Web/ExternalAccessAttribute/README.md"
+                title="ExternalAccessAttribute">
+            <topic id="M:GrayDuckMail.Web.ExternalAccessAttribute.#cctor"
+                   file="GrayDuckMail.Web/ExternalAccessAttribute/_cctor.md"/>
+            <topic id="M:GrayDuckMail.Web.ExternalAccessAttribute.#ctor"
+                   file="GrayDuckMail.Web/ExternalAccessAttribute/_ctor.md"/>
+            <topic id="M:GrayDuckMail.Web.ExternalAccessAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)"
+                   file="GrayDuckMail.Web/ExternalAccessAttribute/OnActionExecuting.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Web.Program"
                 file="GrayDuckMail.Web/Program/README.md"
@@ -410,6 +449,16 @@
                    file="GrayDuckMail.Web/Program/CreateHostBuilder.md"/>
             <topic id="M:GrayDuckMail.Web.Program.Main(System.String[])"
                    file="GrayDuckMail.Web/Program/Main.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Web.SharedMemory"
+                file="GrayDuckMail.Web/SharedMemory/README.md"
+                title="SharedMemory">
+            <topic id="M:GrayDuckMail.Web.SharedMemory.#cctor"
+                   file="GrayDuckMail.Web/SharedMemory/_cctor.md"/>
+            <topic id="M:GrayDuckMail.Web.SharedMemory.AddEmail(GrayDuckMail.Common.EmailDefinition)"
+                   file="GrayDuckMail.Web/SharedMemory/AddEmail.md"/>
+            <topic id="M:GrayDuckMail.Web.SharedMemory.PopEmail"
+                   file="GrayDuckMail.Web/SharedMemory/PopEmail.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Web.Startup"
                 file="GrayDuckMail.Web/Startup/README.md"
@@ -436,6 +485,16 @@
                    file="GrayDuckMail.Web/ThemeHelper/DefaultTheme.md"/>
             <topic id="P:GrayDuckMail.Web.ThemeHelper.Themes"
                    file="GrayDuckMail.Web/ThemeHelper/Themes.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Web.ViewLayoutAttribute"
+                file="GrayDuckMail.Web/ViewLayoutAttribute/README.md"
+                title="ViewLayoutAttribute">
+            <topic id="M:GrayDuckMail.Web.ViewLayoutAttribute.#cctor"
+                   file="GrayDuckMail.Web/ViewLayoutAttribute/_cctor.md"/>
+            <topic id="M:GrayDuckMail.Web.ViewLayoutAttribute.#ctor(System.String)"
+                   file="GrayDuckMail.Web/ViewLayoutAttribute/_ctor.md"/>
+            <topic id="M:GrayDuckMail.Web.ViewLayoutAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)"
+                   file="GrayDuckMail.Web/ViewLayoutAttribute/OnResultExecuting.md"/>
          </topic>
       </topic>
       <topic id="N:GrayDuckMail.Web.Controllers"
@@ -466,6 +525,8 @@
                    file="GrayDuckMail.Web.Controllers/BaseController/_ctor.md"/>
             <topic id="P:GrayDuckMail.Web.Controllers.BaseController.PageSize"
                    file="GrayDuckMail.Web.Controllers/BaseController/PageSize.md"/>
+            <topic id="P:GrayDuckMail.Web.Controllers.BaseController.RequestFromExternalPort"
+                   file="GrayDuckMail.Web.Controllers/BaseController/RequestFromExternalPort.md"/>
             <topic id="P:GrayDuckMail.Web.Controllers.BaseController.SqliteDatabase"
                    file="GrayDuckMail.Web.Controllers/BaseController/SqliteDatabase.md"/>
             <topic id="P:GrayDuckMail.Web.Controllers.BaseController.Theme"
@@ -500,6 +561,16 @@
                    file="GrayDuckMail.Web.Controllers/ContactController/Search.md"/>
             <topic id="M:GrayDuckMail.Web.Controllers.ContactController.Search(System.String,System.Int32)"
                    file="GrayDuckMail.Web.Controllers/ContactController/Search_1.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Web.Controllers.ExternalController"
+                file="GrayDuckMail.Web.Controllers/ExternalController/README.md"
+                title="ExternalController">
+            <topic id="M:GrayDuckMail.Web.Controllers.ExternalController.#cctor"
+                   file="GrayDuckMail.Web.Controllers/ExternalController/_cctor.md"/>
+            <topic id="M:GrayDuckMail.Web.Controllers.ExternalController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
+                   file="GrayDuckMail.Web.Controllers/ExternalController/_ctor.md"/>
+            <topic id="M:GrayDuckMail.Web.Controllers.ExternalController.Unsubscribe(System.Int32,System.Int32)"
+                   file="GrayDuckMail.Web.Controllers/ExternalController/Unsubscribe.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Web.Controllers.HomeController"
                 file="GrayDuckMail.Web.Controllers/HomeController/README.md"
@@ -546,6 +617,8 @@
                    file="GrayDuckMail.Web.Controllers/ListController/Search_1.md"/>
             <topic id="M:GrayDuckMail.Web.Controllers.ListController.Search(System.Int32,System.String,System.Int32)"
                    file="GrayDuckMail.Web.Controllers/ListController/Search.md"/>
+            <topic id="M:GrayDuckMail.Web.Controllers.ListController.Test(System.Int32)"
+                   file="GrayDuckMail.Web.Controllers/ListController/Test.md"/>
          </topic>
       </topic>
       <topic id="N:GrayDuckMail.Web.Models"
@@ -721,6 +794,18 @@
             <topic id="P:GrayDuckMail.Web.Models.RemoveDiscussionListModel.DiscussionList"
                    file="GrayDuckMail.Web.Models/RemoveDiscussionListModel/DiscussionList.md"/>
          </topic>
+         <topic id="T:GrayDuckMail.Web.Models.UnsubscribeModel"
+                file="GrayDuckMail.Web.Models/UnsubscribeModel/README.md"
+                title="UnsubscribeModel">
+            <topic id="M:GrayDuckMail.Web.Models.UnsubscribeModel.#ctor"
+                   file="GrayDuckMail.Web.Models/UnsubscribeModel/_ctor.md"/>
+            <topic id="P:GrayDuckMail.Web.Models.UnsubscribeModel.DiscussionList"
+                   file="GrayDuckMail.Web.Models/UnsubscribeModel/DiscussionList.md"/>
+            <topic id="P:GrayDuckMail.Web.Models.UnsubscribeModel.Successful"
+                   file="GrayDuckMail.Web.Models/UnsubscribeModel/Successful.md"/>
+            <topic id="P:GrayDuckMail.Web.Models.UnsubscribeModel.UserEmail"
+                   file="GrayDuckMail.Web.Models/UnsubscribeModel/UserEmail.md"/>
+         </topic>
       </topic>
       <topic id="N:GrayDuckMail.Web.Models.Forms"
              file="GrayDuckMail.Web.Models.Forms/README.md"
@@ -844,6 +929,16 @@
                    file="GrayDuckMail.Web.Worker/EmailFetcher/ProcessSubscriptionConfirmations.md"/>
             <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessUnsubscribeConfirmations(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,GrayDuckMail.Common.IndexedMimeMessage)"
                    file="GrayDuckMail.Web.Worker/EmailFetcher/ProcessUnsubscribeConfirmations.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Web.Worker.EmailSender"
+                file="GrayDuckMail.Web.Worker/EmailSender/README.md"
+                title="EmailSender">
+            <topic id="M:GrayDuckMail.Web.Worker.EmailSender.#cctor"
+                   file="GrayDuckMail.Web.Worker/EmailSender/_cctor.md"/>
+            <topic id="M:GrayDuckMail.Web.Worker.EmailSender.#ctor"
+                   file="GrayDuckMail.Web.Worker/EmailSender/_ctor.md"/>
+            <topic id="M:GrayDuckMail.Web.Worker.EmailSender.ExecuteAsync(System.Threading.CancellationToken)"
+                   file="GrayDuckMail.Web.Worker/EmailSender/ExecuteAsync.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Web.Worker.Onboarder"
                 file="GrayDuckMail.Web.Worker/Onboarder/README.md"

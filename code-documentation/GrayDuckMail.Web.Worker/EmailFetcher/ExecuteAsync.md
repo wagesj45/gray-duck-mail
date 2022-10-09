@@ -10,13 +10,13 @@ Syntax
 
 ```csharp
 protected virtual Task ExecuteAsync(
-	CancellationToken stoppingToken
+	CancellationToken cancellationToken
 )
 ```
 
 #### Parameters
 
-##### *stoppingToken*
+##### *cancellationToken*
 Type: [System.Threading.CancellationToken][3]  
  Triggered when [StopAsync(CancellationToken)][4] is called.
 

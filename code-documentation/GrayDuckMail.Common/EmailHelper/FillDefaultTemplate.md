@@ -14,7 +14,8 @@ public static string FillDefaultTemplate(
 	string subheading,
 	string body,
 	string footer,
-	DiscussionList discussionList
+	DiscussionList discussionList,
+	Contact contact
 )
 ```
 
@@ -40,6 +41,12 @@ Type: [System.String][2]
 Type: [GrayDuckMail.Common.Database.DiscussionList][3]  
  The discussion list.
 
+##### *contact*
+Type: [GrayDuckMail.Common.Database.Contact][4]  
+
+[Missing &lt;param name="contact"/> documentation for "M:GrayDuckMail.Common.EmailHelper.FillDefaultTemplate(System.String,System.String,System.String,System.String,GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"]
+
+
 #### Return Value
 Type: [String][2]  
  A string with a processed main email template. 
@@ -48,10 +55,11 @@ See Also
 --------
 
 #### Reference
-[EmailHelper Class][4]  
+[EmailHelper Class][5]  
 [GrayDuckMail.Common Namespace][1]  
 
 [1]: ../README.md
 [2]: https://docs.microsoft.com/dotnet/api/system.string
 [3]: ../../GrayDuckMail.Common.Database/DiscussionList/README.md
-[4]: README.md
+[4]: ../../GrayDuckMail.Common.Database/Contact/README.md
+[5]: README.md

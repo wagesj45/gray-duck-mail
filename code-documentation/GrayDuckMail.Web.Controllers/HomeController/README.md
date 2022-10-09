@@ -34,12 +34,13 @@ Constructors
 Properties
 ----------
 
-|                    | Name                 | Description                                                                                                              |
-| ------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| ![Public property] | [PageSize][6]        | Gets or sets the number of items to display on a page. (Inherited from [BaseController][2].)                             |
-| ![Public property] | [SqliteDatabase][7]  | Gets the SQLite database context. (Inherited from [BaseController][2].)                                                  |
-| ![Public property] | [Theme][8]           | Gets or sets the theme used by [Pico.css][9]. (Inherited from [BaseController][2].)                                      |
-| ![Public property] | [UseFuzzySearch][10] | Gets or sets a value indicating whether search functions will employ fuzzy search. (Inherited from [BaseController][2].) |
+|                    | Name                         | Description                                                                                                                                |
+| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![Public property] | [PageSize][6]                | Gets or sets the number of items to display on a page. (Inherited from [BaseController][2].)                                               |
+| ![Public property] | [RequestFromExternalPort][7] | Gets or sets a value indicating whether the current request comes from the designated external port. (Inherited from [BaseController][2].) |
+| ![Public property] | [SqliteDatabase][8]          | Gets the SQLite database context. (Inherited from [BaseController][2].)                                                                    |
+| ![Public property] | [Theme][9]                   | Gets or sets the theme used by [Pico.css][10]. (Inherited from [BaseController][2].)                                                       |
+| ![Public property] | [UseFuzzySearch][11]         | Gets or sets a value indicating whether search functions will employ fuzzy search. (Inherited from [BaseController][2].)                   |
 
 
 Methods
@@ -47,9 +48,9 @@ Methods
 
 |                  | Name                    | Description                                                                       |
 | ---------------- | ----------------------- | --------------------------------------------------------------------------------- |
-| ![Public method] | [Error][11]             | Gets the error page.                                                              |
-| ![Public method] | [Index][12]             | Gets the index or default request.                                                |
-| ![Public method] | [OnActionExecuting][13] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
+| ![Public method] | [Error][12]             | Gets the error page.                                                              |
+| ![Public method] | [Index][13]             | Gets the index or default request.                                                |
+| ![Public method] | [OnActionExecuting][14] | Called before the action method is invoked. (Inherited from [BaseController][2].) |
 
 
 See Also
@@ -64,13 +65,14 @@ See Also
 [4]: _cctor.md
 [5]: _ctor.md
 [6]: ../BaseController/PageSize.md
-[7]: ../BaseController/SqliteDatabase.md
-[8]: ../BaseController/Theme.md
-[9]: https://picocss.com/docs/themes.html
-[10]: ../BaseController/UseFuzzySearch.md
-[11]: Error.md
-[12]: Index.md
-[13]: ../BaseController/OnActionExecuting.md
+[7]: ../BaseController/RequestFromExternalPort.md
+[8]: ../BaseController/SqliteDatabase.md
+[9]: ../BaseController/Theme.md
+[10]: https://picocss.com/docs/themes.html
+[11]: ../BaseController/UseFuzzySearch.md
+[12]: Error.md
+[13]: Index.md
+[14]: ../BaseController/OnActionExecuting.md
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public method]: ../../icons/pubmethod.svg "Public method"

@@ -55,7 +55,7 @@
         <p>
             <code id="docker-pull">
                 docker pull wagesj45/gray-duck-mail
-                <button href="" onclick="CopyToClipboard('docker pull wagesj45/gray-duck-mail')" class="compact transparent"><i class="icofont-ui-copy"></i></button>
+                <button href="" onclick="CopyToClipboard('docker pull wagesj45/gray-duck-mail:latest')" class="compact transparent"><i class="icofont-ui-copy"></i></button>
             </code>
         </p>
         <h5 id="configuration">Configuration</h5>
@@ -64,7 +64,7 @@
         </p>
         <h6 id="ports">Ports</h6>
         <p>
-            The docker image requires an HTTP port exposed and mapped to port 80 on the container.
+            The docker image requires an HTTP port exposed and mapped to port 80 on the container. An optional HTTP port mapped to port 5000 on the container can accept externally accessible unsubscribe requests.
         </p>
         <h6 id="volumes">Volumes</h6>
         <p>
@@ -72,6 +72,17 @@
         </p>
         <h6 id="environment-variables">Environment Variables</h6>
         <ul>
+            <li>
+                <code>RATE_LIMIT_PER_ROUND_COUNT</code>
+                <p>
+                    The number of emails that can be sent before a defined time-out period. This is useful for email providers that place restrictions on the number of emails that can be sent. The default value is a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.int32?view=netcore-3.1">System.Int32</a> set to <em>20</em>.
+            </li>
+            <li>
+                <code>RATE_LIMIT_ROUND_WAIT_TIME</code>
+                <p>
+                    The time between sending groups of emails from the queue. After a given round of emails sent, the system will wait this amount of time before continuing from the email the queue. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=netcore-3.1">System.TimeSpan</a> set to <em>00:05:00</em>.
+                </p>
+            </li>
             <li>
                 <code>FETCH_TIME</code>
                 <p>
@@ -110,6 +121,44 @@
                 <p>
                     <em>True</em>, <em>1</em><br />
                     <em>False</em>, <em>0</em><br />
+                </p>
+            </li>
+            <li>
+                <code>WEB_UNSUBSCRIBE</code>
+                <p>
+                    If set, an unsubscribe link will be generated and used in system and relayed messages. If unset, a link to the unsubscribe alias will be generated. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.boolean?view=netcore-3.1">System.Boolean</a> set to <em>1</em>.
+                </p>
+                <p>
+                    The following values are supported:
+                </p>
+                <p>
+                    <em>True</em>, <em>1</em><br />
+                    <em>False</em>, <em>0</em><br />
+                </p>
+            </li>
+            <li>
+                <code>WEB_USE_HTTPS</code>
+                <p>
+                    If set, the URL generated for a externally accessible unsubscribe link will be generated using <em>HTTPS</em>. Otherwise, it will generated using <em>HTTP</em>. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.boolean?view=netcore-3.1">System.Boolean</a> set to <em>1</em>.
+                </p>
+                <p>
+                    The following values are supported:
+                </p>
+                <p>
+                    <em>True</em>, <em>1</em><br />
+                    <em>False</em>, <em>0</em><br />
+                </p>
+            </li>
+            <li>
+                <code>WEB_EXTERNAL_URL</code>
+                <p>
+                    The host name used when generating an externally accessible unsubscribe link. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1">System.String</a> set to <em>example.com</em>.
+                </p>
+            </li>
+            <li>
+                <code>ASPNETCORE_URLS</code>
+                <p>
+                    The URLs monitored by the ASP.Net server runtime. The default value is a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1">System.String</a> set to <em>http://+:5000;http://+:80</em>. You can learn more <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-6.0"></a>, but unless you're an advanced user modifying the Gray Duck Mail Docker image, you should leave this value at its default and ensure poth ports 80 and 5000 are configured. When configuring your Docker container, only port 80 is required for normal functioning.
                 </p>
             </li>
         </ul>

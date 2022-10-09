@@ -49,6 +49,16 @@
         <p>Gray Duck Mail is an alternative to email discussion group software such as <a href="https://docs.mailman3.org/en/latest/">Mailman</a> and <a href="https://www.sympa.org/">Sympa</a> designed to be <strong>easy to set up</strong> and <strong>easy to manage</strong>. Gray Duck Mail makes running an email discussion list effortless.</p>
         <p>Gray Duck Mail is written in C# and is powered by <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-3.1">ASP.NET Core 3.1 MVC</a> running in <a href="https://www.docker.com/">Docker</a>.</p>
     </article>
+    <article>
+        <header>
+            <strong style="color:var(--primary)">
+                Breaking Changes in version 0.9.8
+            </strong>
+        </header>
+        <p>
+            Version 0.9.8 introduces "one click" unsubscribe links. This feature requires an externally facing port to be served. For security, a designated port is monitored for these unsubscribe "one click" links. This new port requires a change to the <code>ASPNETCORE_URLS</code> Docker environment variable. For more information, see the <a href="./installation.html">installation guide</a> and <a href="./security.html">security considerations.</a>
+        </p>
+    </article>
     <article id="whats-gray-duck-mail-do">
         <header>
             <strong>What's Gray Duck Mail Do?</strong>
