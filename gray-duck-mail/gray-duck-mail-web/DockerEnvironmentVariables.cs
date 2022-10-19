@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrayDuckMail.Common;
+using System;
 
 namespace GrayDuckMail.Web
 {
@@ -46,6 +47,29 @@ namespace GrayDuckMail.Web
             }
 
             return 20;
+        });
+
+        /// <summary> The docker environment variable for <see cref=""/>. </summary>
+        private static Lazy<EmailProtocol> envEmailProtocol = new Lazy<EmailProtocol>(() =>
+        {
+            var emailProtocol = Environment.GetEnvironmentVariable("EMAIL_PROTOCOL");
+            if (!Enum.TryParse<EmailProtocol>(emailProtocol, out var protocol))
+            {
+                return protocol;
+            }
+
+            return EmailProtocol.POP3;
+        });
+
+        /// <summary> The docker environment variable for <see cref=""/>. </summary>
+        private static Lazy<string> envIMAPFolder = new Lazy<string>(() => {
+            var folder = Environment.GetEnvironmentVariable("IMAP_FOLDER");
+            if(!string.IsNullOrWhiteSpace(folder))
+            {
+                return folder;
+            }
+
+            return "INBOX";
         });
 
         /// <summary> The docker environment variable for <see cref="LogLevel"/>. </summary>
@@ -141,32 +165,51 @@ namespace GrayDuckMail.Web
         #region Properties
 
         /// <summary> Gets the time between fetching email from the remote server. </summary>
-        /// <value> The fetch time. </value>
         /// <remarks> The default value is <c>5:00</c>. </remarks>
+        /// <value> The fetch time. </value>
         public static TimeSpan FetchTime
         {
             get => envFetchTime.Value;
         }
 
         /// <summary> Gets the time between rounds sending email messages. </summary>
-        /// <value> The wait time between rounds. </value>
         /// <remarks> The default value is <c>5:00</c>. </remarks>
+        /// <value> The wait time between rounds. </value>
         public static TimeSpan RateLimitRoundWaitTime
         {
             get => envRateLimitRoundWait.Value;
         }
 
         /// <summary> Gets the of queued emails that can be sent in one round. </summary>
-        /// <value> The number of emails to be sent per round. </value>
         /// <remarks> The default value is <c>20</c>. </remarks>
+        /// <value> The number of emails to be sent per round. </value>
         public static int RateLimitPerRoundCount
         {
             get => envRateLimitPerRoundCount.Value;
         }
 
+        /// <summary> Gets the email protocol to be used by <see cref="EmailClientWrapper"/>. </summary>
+        /// <remarks> The default value is <c>POP3</c>. </remarks>
+        /// <value> The email protocol. </value>
+        public static EmailProtocol EmailProtocol
+        {
+            get => envEmailProtocol.Value;
+        }
+
+        /// <summary>
+        /// Gets the pathname of the IMAP folder used by the <see cref="EmailClientWrapper"/> when <see cref="EmailProtocol"/>
+        /// is <see cref="EmailProtocol.IMAP"/>.
+        /// </summary>
+        /// <remarks> The default value is <c>INBOX</c>. </remarks>
+        /// <value> The pathname of the IMAP folder. </value>
+        public static string IMAPFolder
+        {
+            get => envIMAPFolder.Value;
+        }
+
         /// <summary> Gets the verbosity level with which to log application events. </summary>
-        /// <value> The log level. </value>
         /// <remarks> The default value is <c>info</c>. </remarks>
+        /// <value> The log level. </value>
         /// <seealso cref="NLog.LogLevel"/>
         /// <seealso cref="Common.NLogConfiguration"/>
         public static string LogLevel
@@ -175,8 +218,8 @@ namespace GrayDuckMail.Web
         }
 
         /// <summary> Gets the minimum viable search score. </summary>
-        /// <value> The minimum viable search score. </value>
         /// <remarks> The default value is <c>0.2f</c>. </remarks>
+        /// <value> The minimum viable search score. </value>
         /// <seealso cref="Common.SearchResult{T}"/>
         /// <seealso cref="Common.SearchCache{T}"/>
         public static float MinimumSearchScore
@@ -188,11 +231,11 @@ namespace GrayDuckMail.Web
         /// Gets a value that if set, only the web interface will be initialized. <see cref="Microsoft.Extensions.Hosting.BackgroundService">
         /// Background worker threads</see> will not be initialized.
         /// </summary>
+        /// <remarks> The default value is <see langword="false"/>. </remarks>
         /// <value>
         /// True if only the web interface will be initialized, false if <see cref="Microsoft.Extensions.Hosting.BackgroundService">
         /// background service threads</see> will also be initialized.
         /// </value>
-        /// <remarks> The default value is <see langword="false"/>. </remarks>
         public static bool WebOnly
         {
             get => envWebOnly.Value;
