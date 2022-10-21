@@ -47,6 +47,8 @@ namespace GrayDuckMail.Common
         /// </param>
         public EmailClientWrapper(EmailProtocol emailClientType, string imapFolderName = default)
         {
+            logger.Debug("Creating email wrapper object.");
+
             this.emailClientType = emailClientType;
             this.imapFolderName = imapFolderName;
         }
@@ -115,10 +117,14 @@ namespace GrayDuckMail.Common
                     break;
                 case EmailProtocol.IMAP:
                     logger.Debug("Using IMAP client.");
-                    var folder = imapClient.GetFolder(this.imapFolderName);
-                    folder.Open(FolderAccess.ReadWrite);
+                    var folder = default(IMailFolder);
+                    if(this.IMAPClient.IsConnected && this.IMAPClient.IsAuthenticated)
+                    {
+                        folder = this.IMAPClient.GetFolder(this.imapFolderName);
+                        folder.Open(FolderAccess.ReadWrite);
+                    }
                     imapMethod(this.IMAPClient, folder);
-                    if (folder.IsOpen)
+                    if (folder != default(IMailFolder) && folder.IsOpen)
                     {
                         // We check in case the client disconnects.
                         folder.Close(true);
@@ -145,10 +151,14 @@ namespace GrayDuckMail.Common
                     return pop3Method(this.POP3Client);
                 case EmailProtocol.IMAP:
                     logger.Debug("Using IMAP client.");
-                    var folder = imapClient.GetFolder(this.imapFolderName);
-                    folder.Open(FolderAccess.ReadWrite);
+                    var folder = default(IMailFolder);
+                    if (this.IMAPClient.IsConnected && this.IMAPClient.IsAuthenticated)
+                    {
+                        folder = this.IMAPClient.GetFolder(this.imapFolderName);
+                        folder.Open(FolderAccess.ReadWrite);
+                    }
                     var result = imapMethod(this.IMAPClient, folder);
-                    if(folder.IsOpen)
+                    if (folder != default(IMailFolder) && folder.IsOpen)
                     {
                         // We check in case the client disconnects.
                         folder.Close(true);
@@ -172,6 +182,8 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Connect(string host, int port, bool useSSL, CancellationToken cancellationToken = default)
         {
+            logger.Debug("Connecting to {0}:{1}.", host, port);
+
             PerformClientMethod(
                 pop3Client => pop3Client.Connect(host, port, useSSL, cancellationToken: cancellationToken),
                 (imapClient, imapFolder) => imapClient.Connect(host, port, useSSL, cancellationToken: cancellationToken)
@@ -186,6 +198,8 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Authenticate(string userName, string password, CancellationToken cancellationToken = default)
         {
+            logger.Debug("Authenticating with {0}:{1}.", userName, password);
+
             PerformClientMethod(
                 pop3Client => pop3Client.Authenticate(userName, password, cancellationToken: cancellationToken),
                 (imapClient, imapFolder) => imapClient.Authenticate(userName, password, cancellationToken: cancellationToken)
@@ -199,12 +213,28 @@ namespace GrayDuckMail.Common
         /// <returns> The messages. </returns>
         public IList<MimeMessage> GetMessages(CancellationToken cancellationToken = default)
         {
+            logger.Debug("Getting messages.");
+
             return PerformClientMethod(
-            pop3Client => pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: cancellationToken),
+            pop3Client =>
+            {
+                if(pop3Client.Count > 0)
+                {
+                    var messages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: cancellationToken);
+                    return messages;
+                }
+
+                return Enumerable.Empty<MimeMessage>().ToList();
+            },
             (imapClient, imapFolder) =>
             {
-                var messages = Enumerable.Range(0, imapFolder.Count).Select(i => imapFolder.GetMessage(i)).ToList();
-                return messages;
+                if(imapFolder.Count > 0)
+                {
+                    var messages = Enumerable.Range(0, imapFolder.Count).Select(i => imapFolder.GetMessage(i)).ToList();
+                    return messages;
+                }
+
+                return Enumerable.Empty<MimeMessage>().ToList();
             }
             );
         }
@@ -216,6 +246,8 @@ namespace GrayDuckMail.Common
         /// </param>
         public void DeleteMessage(int index, CancellationToken cancellationToken = default)
         {
+            logger.Debug("Deleting message {0}.", index);
+
             PerformClientMethod(
             pop3Client => pop3Client.DeleteMessage(index),
             (imapClient, imapFolder) =>
@@ -235,6 +267,8 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Disconnect(bool quit, CancellationToken cancellationToken = default)
         {
+            logger.Debug("Disconnecting.");
+
             PerformClientMethod(
                 pop3Client => pop3Client.Disconnect(quit, cancellationToken),
                 (imapClient, imapFolder) =>
@@ -254,6 +288,8 @@ namespace GrayDuckMail.Common
             // Don't use the properties here, because they'll instantiate the clients if
             // they don't exist. Since we're already disposing of the wrapper, that's wasted
             // effort.
+
+            logger.Debug("Disposing of the client wrapper object.");
 
             if (this.pop3Client != null)
             {

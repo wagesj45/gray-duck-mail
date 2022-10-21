@@ -57,7 +57,7 @@ namespace GrayDuckMail.Web.Worker
                     {
                         logger.Debug("Processing list {0}", discussionList.Name);
 
-                        using (var client = new EmailClientWrapper(DockerEnvironmentVariables.EmailProtocol))
+                        using (var client = new EmailClientWrapper(DockerEnvironmentVariables.EmailProtocol, DockerEnvironmentVariables.IMAPFolder))
                         {
                             try
                             {

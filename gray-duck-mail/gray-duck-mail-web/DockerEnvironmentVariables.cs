@@ -53,7 +53,7 @@ namespace GrayDuckMail.Web
         private static Lazy<EmailProtocol> envEmailProtocol = new Lazy<EmailProtocol>(() =>
         {
             var emailProtocol = Environment.GetEnvironmentVariable("EMAIL_PROTOCOL");
-            if (!Enum.TryParse<EmailProtocol>(emailProtocol, out var protocol))
+            if (Enum.TryParse<EmailProtocol>(emailProtocol, out var protocol))
             {
                 return protocol;
             }
