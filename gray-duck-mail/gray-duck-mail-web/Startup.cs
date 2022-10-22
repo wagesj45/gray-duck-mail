@@ -150,12 +150,6 @@ namespace GrayDuckMail.Web
             {
                 logger.Info("Application stopped.");
             });
-
-            //Configure Email Unsubscribe Link
-            if (DockerEnvironmentVariables.WebUnsubscribe)
-            {
-                EmailHelper.ConfigureUnsubscribeLink(DockerEnvironmentVariables.WebExternalURL, DockerEnvironmentVariables.WebUseHTTPS);
-            }
         }
 
         #endregion
