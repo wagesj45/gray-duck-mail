@@ -46,6 +46,36 @@
             <topic id="M:GrayDuckMail.Common.EmailAliasHelper.GetUnsubscribeAlias(System.String)"
                    file="GrayDuckMail.Common/EmailAliasHelper/GetUnsubscribeAlias_1.md"/>
          </topic>
+         <topic id="T:GrayDuckMail.Common.EmailClientWrapper"
+                file="GrayDuckMail.Common/EmailClientWrapper/README.md"
+                title="EmailClientWrapper">
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.#cctor"
+                   file="GrayDuckMail.Common/EmailClientWrapper/_cctor.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.#ctor(GrayDuckMail.Common.EmailProtocol,System.String)"
+                   file="GrayDuckMail.Common/EmailClientWrapper/_ctor.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailClientWrapper.EmailClientType"
+                   file="GrayDuckMail.Common/EmailClientWrapper/EmailClientType.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailClientWrapper.IMAPClient"
+                   file="GrayDuckMail.Common/EmailClientWrapper/IMAPClient.md"/>
+            <topic id="P:GrayDuckMail.Common.EmailClientWrapper.POP3Client"
+                   file="GrayDuckMail.Common/EmailClientWrapper/POP3Client.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.Authenticate(System.String,System.String,System.Threading.CancellationToken)"
+                   file="GrayDuckMail.Common/EmailClientWrapper/Authenticate.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.Connect(System.String,System.Int32,System.Boolean,System.Threading.CancellationToken)"
+                   file="GrayDuckMail.Common/EmailClientWrapper/Connect.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.DeleteMessage(System.Int32,System.Threading.CancellationToken)"
+                   file="GrayDuckMail.Common/EmailClientWrapper/DeleteMessage.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.Disconnect(System.Boolean,System.Threading.CancellationToken)"
+                   file="GrayDuckMail.Common/EmailClientWrapper/Disconnect.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.Dispose"
+                   file="GrayDuckMail.Common/EmailClientWrapper/Dispose.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.GetMessages(System.Threading.CancellationToken)"
+                   file="GrayDuckMail.Common/EmailClientWrapper/GetMessages.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.PerformClientMethod(System.Action{MailKit.Net.Pop3.Pop3Client},System.Action{MailKit.Net.Imap.ImapClient,MailKit.IMailFolder})"
+                   file="GrayDuckMail.Common/EmailClientWrapper/PerformClientMethod.md"/>
+            <topic id="M:GrayDuckMail.Common.EmailClientWrapper.PerformClientMethod``1(System.Func{MailKit.Net.Pop3.Pop3Client,``0},System.Func{MailKit.Net.Imap.ImapClient,MailKit.IMailFolder,``0})"
+                   file="GrayDuckMail.Common/EmailClientWrapper/PerformClientMethod__1.md"/>
+         </topic>
          <topic id="T:GrayDuckMail.Common.EmailDefinition"
                 file="GrayDuckMail.Common/EmailDefinition/README.md"
                 title="EmailDefinition">
@@ -123,6 +153,9 @@
             <topic id="F:GrayDuckMail.Common.EmailHelper.STATUS_GROUP_ACTION_FAILED"
                    file="GrayDuckMail.Common/EmailHelper/STATUS_GROUP_ACTION_FAILED.md"/>
          </topic>
+         <topic id="T:GrayDuckMail.Common.EmailProtocol"
+                file="GrayDuckMail.Common/EmailProtocol/README.md"
+                title="EmailProtocol"/>
          <topic id="T:GrayDuckMail.Common.HTMLCleaner"
                 file="GrayDuckMail.Common/HTMLCleaner/README.md"
                 title="HTMLCleaner">
@@ -409,8 +442,12 @@
                 title="DockerEnvironmentVariables">
             <topic id="M:GrayDuckMail.Web.DockerEnvironmentVariables.#cctor"
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/_cctor.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.EmailProtocol"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/EmailProtocol.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.FetchTime"
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/FetchTime.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.IMAPFolder"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/IMAPFolder.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.LogLevel"
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/LogLevel.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.MinimumSearchScore"
@@ -919,15 +956,15 @@
                    file="GrayDuckMail.Web.Worker/EmailFetcher/FilterMessages.md"/>
             <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.FilterMessages(System.Collections.Generic.IEnumerable{GrayDuckMail.Common.IndexedMimeMessage},System.String)"
                    file="GrayDuckMail.Web.Worker/EmailFetcher/FilterMessages_1.md"/>
-            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessBounces(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,GrayDuckMail.Common.IndexedMimeMessage)"
+            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessBounces(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,GrayDuckMail.Common.EmailClientWrapper,GrayDuckMail.Common.IndexedMimeMessage)"
                    file="GrayDuckMail.Web.Worker/EmailFetcher/ProcessBounces.md"/>
-            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessDiscussionMessages(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.IndexedMimeMessage,GrayDuckMail.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,System.Threading.CancellationToken)"
+            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessDiscussionMessages(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.IndexedMimeMessage,GrayDuckMail.Common.Database.SqliteDatabase,GrayDuckMail.Common.EmailClientWrapper,System.Threading.CancellationToken)"
                    file="GrayDuckMail.Web.Worker/EmailFetcher/ProcessDiscussionMessages.md"/>
-            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessRequests(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,GrayDuckMail.Common.IndexedMimeMessage,System.Threading.CancellationToken)"
+            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessRequests(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,GrayDuckMail.Common.EmailClientWrapper,GrayDuckMail.Common.IndexedMimeMessage,System.Threading.CancellationToken)"
                    file="GrayDuckMail.Web.Worker/EmailFetcher/ProcessRequests.md"/>
-            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessSubscriptionConfirmations(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,GrayDuckMail.Common.IndexedMimeMessage,System.Threading.CancellationToken)"
+            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessSubscriptionConfirmations(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,GrayDuckMail.Common.EmailClientWrapper,GrayDuckMail.Common.IndexedMimeMessage,System.Threading.CancellationToken)"
                    file="GrayDuckMail.Web.Worker/EmailFetcher/ProcessSubscriptionConfirmations.md"/>
-            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessUnsubscribeConfirmations(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,MailKit.Net.Pop3.Pop3Client,GrayDuckMail.Common.IndexedMimeMessage)"
+            <topic id="M:GrayDuckMail.Web.Worker.EmailFetcher.ProcessUnsubscribeConfirmations(GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.SqliteDatabase,GrayDuckMail.Common.EmailClientWrapper,GrayDuckMail.Common.IndexedMimeMessage)"
                    file="GrayDuckMail.Web.Worker/EmailFetcher/ProcessUnsubscribeConfirmations.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Web.Worker.EmailSender"
