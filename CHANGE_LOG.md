@@ -1,4 +1,4 @@
-#Change Log
+# Change Log
 
 This file lists major changes between releases in [Gray Duck Mail](https://grayduckmail.com).
 
