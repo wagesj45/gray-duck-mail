@@ -13,8 +13,8 @@ private static void ProcessDiscussionMessages(
 	DiscussionList discussionList,
 	IndexedMimeMessage discussionMessage,
 	SqliteDatabase database,
-	Pop3Client pop3Client,
-	CancellationToken stoppingToken
+	EmailClientWrapper client,
+	CancellationToken cancellationToken = default
 )
 ```
 
@@ -32,26 +32,27 @@ Type: [GrayDuckMail.Common.IndexedMimeMessage][3]
 Type: [GrayDuckMail.Common.Database.SqliteDatabase][4]  
  The database.
 
-##### *pop3Client*
-Type: Pop3Client  
- The POP3 client.
+##### *client*
+Type: [GrayDuckMail.Common.EmailClientWrapper][5]  
+ The email client.
 
-##### *stoppingToken*
-Type: [System.Threading.CancellationToken][5]  
- Triggered when [StopAsync(CancellationToken)][6] is called.
+##### *cancellationToken* (Optional)
+Type: [System.Threading.CancellationToken][6]  
+ Triggered when [StopAsync(CancellationToken)][7] is called.
 
 
 See Also
 --------
 
 #### Reference
-[EmailFetcher Class][7]  
+[EmailFetcher Class][8]  
 [GrayDuckMail.Web.Worker Namespace][1]  
 
 [1]: ../README.md
 [2]: ../../GrayDuckMail.Common.Database/DiscussionList/README.md
 [3]: ../../GrayDuckMail.Common/IndexedMimeMessage/README.md
 [4]: ../../GrayDuckMail.Common.Database/SqliteDatabase/README.md
-[5]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
-[6]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice.stopasync#microsoft-extensions-hosting-ihostedservice-stopasync(system-threading-cancellationtoken)
-[7]: README.md
+[5]: ../../GrayDuckMail.Common/EmailClientWrapper/README.md
+[6]: https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken
+[7]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice.stopasync#microsoft-extensions-hosting-ihostedservice-stopasync(system-threading-cancellationtoken)
+[8]: README.md

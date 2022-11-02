@@ -302,7 +302,7 @@ namespace GrayDuckMail.Common
                             var customized = new UriBuilder(unsubscribeUri);
                             customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
 
-                            techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: <a href='{1}'>{1}</a>", discussionList.Name, customized.Uri.AbsoluteUri);
+                            techHeader.InnerHtml = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: <a href='{1}'>{1}</a>", discussionList.Name, customized.Uri.AbsoluteUri);
                         }
                         else
                         {
@@ -324,7 +324,20 @@ namespace GrayDuckMail.Common
                     {
                         logger.Debug("Message body determined to contain plain text.");
 
-                        var techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        var techHeader = string.Empty;
+                        if(UsingUnsubscribeUri)
+                        {
+                            //Use an unsubscribe link that points to an externally accesible URL.
+                            var customized = new UriBuilder(unsubscribeUri);
+                            customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
+                            
+                            techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: {1}", discussionList.Name, customized.Uri.AbsoluteUri);
+                        }
+                        else
+                        {
+                            //Create a fallback link to the unsubscribe email alias.
+                            techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                        }
                         var cleanedText = message.BodyText.Replace(techHeader, "");
                         var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
 

@@ -42,6 +42,12 @@ namespace GrayDuckMail.Web.Worker
             logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
             var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
 
+            //Configure Email Unsubscribe Link
+            if (DockerEnvironmentVariables.WebUnsubscribe)
+            {
+                EmailHelper.ConfigureUnsubscribeLink(DockerEnvironmentVariables.WebExternalURL, DockerEnvironmentVariables.WebUseHTTPS);
+            }
+
             logger.Info("Beginning email sender loop.");
             while (!cancellationToken.IsCancellationRequested)
             {

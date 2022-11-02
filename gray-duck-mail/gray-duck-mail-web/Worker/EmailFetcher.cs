@@ -57,21 +57,22 @@ namespace GrayDuckMail.Web.Worker
                     {
                         logger.Debug("Processing list {0}", discussionList.Name);
 
-                        using (var pop3Client = new Pop3Client())
+                        using (var client = new EmailClientWrapper(DockerEnvironmentVariables.EmailProtocol, DockerEnvironmentVariables.IMAPFolder))
                         {
                             try
                             {
                                 logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
-                                pop3Client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: cancellationToken);
+                                client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: cancellationToken);
 
                                 logger.Debug("Authenticating as {0}", discussionList.UserName);
-                                pop3Client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
+                                client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
 
-                                if (pop3Client.Count > 0)
+                                var emailMessages = client.GetMessages(cancellationToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
+                                
+                                if (emailMessages.Any())
                                 {
-                                    logger.Info("Processing {0} messages.", pop3Client.Count);
+                                    logger.Info("Processing {0} messages.", emailMessages.Count());
 
-                                    var emailMessages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: cancellationToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
                                     var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
                                     var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                                     var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
@@ -82,25 +83,25 @@ namespace GrayDuckMail.Web.Worker
                                     // Subscription Confirmation Emails
                                     foreach (var subscriptionConfirmation in filteredSubscribe)
                                     {
-                                        ProcessSubscriptionConfirmations(discussionList, database, pop3Client, subscriptionConfirmation, cancellationToken);
+                                        ProcessSubscriptionConfirmations(discussionList, database, client, subscriptionConfirmation, cancellationToken);
                                     }
 
                                     // Unsubscribe Confirmation Emails
                                     foreach (var unsubscribeConfirmation in filteredUnsubscribe)
                                     {
-                                        ProcessUnsubscribeConfirmations(discussionList, database, pop3Client, unsubscribeConfirmation);
+                                        ProcessUnsubscribeConfirmations(discussionList, database, client, unsubscribeConfirmation);
                                     }
 
                                     // List Assignment Request Emails
                                     foreach (var request in filteredRequest)
                                     {
-                                        ProcessRequests(discussionList, database, pop3Client, request, cancellationToken);
+                                        ProcessRequests(discussionList, database, client, request, cancellationToken);
                                     }
 
                                     // Bounced email messages.
                                     foreach (var bounce in filteredBounced)
                                     {
-                                        ProcessBounces(discussionList, database, pop3Client, bounce);
+                                        ProcessBounces(discussionList, database, client, bounce);
                                     }
 
                                     // Remaining messages can be assumed to be communications between discussion list members.
@@ -111,7 +112,7 @@ namespace GrayDuckMail.Web.Worker
                                         .Except(filteredBounced);
                                     foreach (var discussionMessage in discussionMessages)
                                     {
-                                        ProcessDiscussionMessages(discussionList, discussionMessage, database, pop3Client, cancellationToken);
+                                        ProcessDiscussionMessages(discussionList, discussionMessage, database, client, cancellationToken);
                                     }
                                 }
                                 else
@@ -124,7 +125,7 @@ namespace GrayDuckMail.Web.Worker
                                 logger.Error(e);
                             }
 
-                            pop3Client.Disconnect(true, cancellationToken);
+                            client.Disconnect(true, cancellationToken);
                         }
                     }
 
@@ -155,12 +156,12 @@ namespace GrayDuckMail.Web.Worker
         /// </summary>
         /// <param name="discussionList">           Discussion List database object. </param>
         /// <param name="database">                 The database. </param>
-        /// <param name="pop3Client">               The POP3 client. </param>
+        /// <param name="client">               The email client. </param>
         /// <param name="subscriptionConfirmation"> The subscription confirmation. </param>
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
+        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
         {
             var from = subscriptionConfirmation.Message.Sender ?? subscriptionConfirmation.Message.From.Mailboxes.SingleOrDefault();
             var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
@@ -182,7 +183,7 @@ namespace GrayDuckMail.Web.Worker
             SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index);
-            pop3Client.DeleteMessage(subscriptionConfirmation.Index);
+            client.DeleteMessage(subscriptionConfirmation.Index, cancellationToken);
         }
 
         /// <summary>
@@ -191,9 +192,9 @@ namespace GrayDuckMail.Web.Worker
         /// </summary>
         /// <param name="discussionList">          Discussion List database object. </param>
         /// <param name="database">                The database. </param>
-        /// <param name="pop3Client">              The POP3 client. </param>
+        /// <param name="client">              The email client. </param>
         /// <param name="unsubscribeConfirmation"> The unsubscribe confirmation. </param>
-        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage unsubscribeConfirmation)
+        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
             var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
@@ -207,7 +208,7 @@ namespace GrayDuckMail.Web.Worker
             SharedMemory.AddEmail(EmailDefinition.CreateUnsubscriptionConfirmation(discussionList, subscription.Contact));
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index);
-            pop3Client.DeleteMessage(unsubscribeConfirmation.Index);
+            client.DeleteMessage(unsubscribeConfirmation.Index);
         }
 
         /// <summary>
@@ -215,12 +216,12 @@ namespace GrayDuckMail.Web.Worker
         /// </summary>
         /// <param name="discussionList">    Discussion List database object. </param>
         /// <param name="database">          The database. </param>
-        /// <param name="pop3Client">        The POP3 client. </param>
+        /// <param name="client">            The email client. </param>
         /// <param name="request">           The request message. </param>
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage request, CancellationToken cancellationToken = default)
+        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage request, CancellationToken cancellationToken = default)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
             var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
@@ -272,15 +273,15 @@ namespace GrayDuckMail.Web.Worker
             }
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", request.Message.MessageId, request.Index);
-            pop3Client.DeleteMessage(request.Index);
+            client.DeleteMessage(request.Index, cancellationToken);
         }
 
         /// <summary> Process the bounced messages recieved from a contact. </summary>
         /// <param name="discussionList"> Discussion List database object. </param>
         /// <param name="database">       The database. </param>
-        /// <param name="pop3Client">     The POP3 client. </param>
+        /// <param name="client">     The email client. </param>
         /// <param name="bounce">         The bounced message. </param>
-        private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, Pop3Client pop3Client, IndexedMimeMessage bounce)
+        private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage bounce)
         {
             var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
             var bouncedOriginallyTo = EmailHelper.GetBouncedMessageRecipient(bounce);
@@ -301,7 +302,7 @@ namespace GrayDuckMail.Web.Worker
             }
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", bounce.Message.MessageId, bounce.Index);
-            pop3Client.DeleteMessage(bounce.Index);
+            client.DeleteMessage(bounce.Index);
         }
 
         /// <summary>
@@ -311,13 +312,13 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="discussionList">    Discussion List database object. </param>
         /// <param name="discussionMessage"> Message describing the discussion. </param>
         /// <param name="database">          The database. </param>
-        /// <param name="pop3Client">        The POP3 client. </param>
-        /// <param name="stoppingToken">
+        /// <param name="client">        The email client. </param>
+        /// <param name="cancellationToken">
         ///     Triggered when
         ///     <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" />
         ///     is called.
         /// </param>
-        private static void ProcessDiscussionMessages(DiscussionList discussionList, IndexedMimeMessage discussionMessage, SqliteDatabase database, Pop3Client pop3Client, CancellationToken stoppingToken)
+        private static void ProcessDiscussionMessages(DiscussionList discussionList, IndexedMimeMessage discussionMessage, SqliteDatabase database, EmailClientWrapper client, CancellationToken cancellationToken = default)
         {
             logger.Debug(discussionMessage.ToString());
 
@@ -377,7 +378,7 @@ namespace GrayDuckMail.Web.Worker
             }
 
             logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", discussionMessage.Message.MessageId, discussionMessage.Index);
-            pop3Client.DeleteMessage(discussionMessage.Index);
+            client.DeleteMessage(discussionMessage.Index, cancellationToken);
         }
 
         /// <summary>
