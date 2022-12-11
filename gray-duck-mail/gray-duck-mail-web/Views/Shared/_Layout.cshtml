@@ -1,11 +1,12 @@
 ﻿@using System.Reflection
+@using GrayDuckMail.Common.Localization
 @model BasePageModel
 <!DOCTYPE html>
 <html lang="en" data-theme="@Model?.Theme?.ToLowerInvariant()">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gray Duck Mail - @ViewData["Title"]</title>
+    <title>@LanguageHelper.GetValue(ResourceName.ApplicationName) - @ViewData["Title"]</title>
     <link rel="stylesheet" href="/css/pico.min.css" />
     <link rel="stylesheet" href="/css/site.css" />
     <link rel="stylesheet" href="/icofont/icofont.min.css" />
@@ -17,7 +18,7 @@
                 <li>
                     <a href="/">
                         <img src="/img/logo-64.png" style="margin-right: 1em; width: 2em;" />
-                        <strong>Gray Duck Mail</strong>
+                        <strong>@LanguageHelper.GetValue(ResourceName.ApplicationName)</strong>
                     </a>
                 </li>
             </ul>

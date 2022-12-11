@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GrayDuckMail.Common.Localization;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -138,7 +139,7 @@ namespace GrayDuckMail.Common.Database
         {
             if (!File.Exists(this.DatabaseFilePath.AbsolutePath))
             {
-                logger.Debug("Creating db file at {0}.", databaseFilePath.AbsolutePath);
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_CreatingDB, databaseFilePath.AbsolutePath));
                 using (var _db = new SqliteDatabase())
                 {
                     _db.DatabaseFilePath = databaseFilePath;
