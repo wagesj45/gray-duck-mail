@@ -356,6 +356,9 @@ namespace GrayDuckMail.Web.Worker
                 {
                     message.ParentID = parentMessage.ID;
                 }
+
+                // Attach the message to the database for archival.
+                database.Messages.Add(message);
                 
                 var listParticipants = discussionList.Subscriptions
                         .Where(subscription => subscription.Status == SubscriptionStatus.Subscribed)

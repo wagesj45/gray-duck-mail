@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gray-duck-mail-common", "gr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project-website", "project-website", "{24BE41B3-0CC5-45B4-B39D-A2EC6C48B5F5}"
 	ProjectSection(SolutionItems) = preProject
+		..\project-website\change-log.html = ..\project-website\change-log.html
 		..\project-website\email-landing.html = ..\project-website\email-landing.html
 		..\project-website\getting-started.html = ..\project-website\getting-started.html
 		..\project-website\gray-duck.jpg = ..\project-website\gray-duck.jpg
