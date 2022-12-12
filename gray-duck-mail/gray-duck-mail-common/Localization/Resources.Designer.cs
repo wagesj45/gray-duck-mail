@@ -70,11 +70,344 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not create database file..
+        /// </summary>
+        internal static string Exception_DBNotCreated {
+            get {
+                return ResourceManager.GetString("Exception_DBNotCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not determine the formatting of the message..
+        /// </summary>
+        internal static string Exception_FormatNotDetermined {
+            get {
+                return ResourceManager.GetString("Exception_FormatNotDetermined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating email wrapper object..
+        /// </summary>
+        internal static string Logger_CreatingEmailWrapper {
+            get {
+                return ResourceManager.GetString("Logger_CreatingEmailWrapper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnecting..
+        /// </summary>
+        internal static string Logger_Disconnecting {
+            get {
+                return ResourceManager.GetString("Logger_Disconnecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IMAP client disposing..
+        /// </summary>
+        internal static string Logger_DisposingIMAP {
+            get {
+                return ResourceManager.GetString("Logger_DisposingIMAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to POP3 Client disposing..
+        /// </summary>
+        internal static string Logger_DisposingPOP3 {
+            get {
+                return ResourceManager.GetString("Logger_DisposingPOP3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disposing of the client wrapper object..
+        /// </summary>
+        internal static string Logger_DisposingWrapper {
+            get {
+                return ResourceManager.GetString("Logger_DisposingWrapper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The discussion list is empty..
+        /// </summary>
+        internal static string Logger_EmptyDiscussionList {
+            get {
+                return ResourceManager.GetString("Logger_EmptyDiscussionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authenticating with {0}:{1}..
+        /// </summary>
+        internal static string Logger_Format_AuthenticatingWith {
+            get {
+                return ResourceManager.GetString("Logger_Format_AuthenticatingWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting to {0}:{1}..
+        /// </summary>
+        internal static string Logger_Format_ConnectingTo {
+            get {
+                return ResourceManager.GetString("Logger_Format_ConnectingTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating db file at {0}..
         /// </summary>
         internal static string Logger_Format_CreatingDB {
             get {
                 return ResourceManager.GetString("Logger_Format_CreatingDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database file created at {0}..
+        /// </summary>
+        internal static string Logger_Format_DBCreated {
+            get {
+                return ResourceManager.GetString("Logger_Format_DBCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not create database file at {0}..
+        /// </summary>
+        internal static string Logger_Format_DBNotCreated {
+            get {
+                return ResourceManager.GetString("Logger_Format_DBNotCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting message {0}..
+        /// </summary>
+        internal static string Logger_Format_DeletingMessage {
+            get {
+                return ResourceManager.GetString("Logger_Format_DeletingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading assembly {0}..
+        /// </summary>
+        internal static string Logger_Format_LoadingAssembly {
+            get {
+                return ResourceManager.GetString("Logger_Format_LoadingAssembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending onboarding email to {0} ({1})..
+        /// </summary>
+        internal static string Logger_Format_SendingOnboardingEmail {
+            get {
+                return ResourceManager.GetString("Logger_Format_SendingOnboardingEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email template processed: {0}..
+        /// </summary>
+        internal static string Logger_Format_TemplateProcessed {
+            get {
+                return ResourceManager.GetString("Logger_Format_TemplateProcessed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found the following resource names in the assembly manifest:.
+        /// </summary>
+        internal static string Logger_FoundResources {
+            get {
+                return ResourceManager.GetString("Logger_FoundResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- {0}.
+        /// </summary>
+        internal static string Logger_FoundResourcesLine {
+            get {
+                return ResourceManager.GetString("Logger_FoundResourcesLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting messages..
+        /// </summary>
+        internal static string Logger_GettingMessages {
+            get {
+                return ResourceManager.GetString("Logger_GettingMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading main HTML email template..
+        /// </summary>
+        internal static string Logger_LoadingHTMLTemplate {
+            get {
+                return ResourceManager.GetString("Logger_LoadingHTMLTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mesasge body determined to contain HTML..
+        /// </summary>
+        internal static string Logger_MessageContainsHTML {
+            get {
+                return ResourceManager.GetString("Logger_MessageContainsHTML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message body determined to contain plain text..
+        /// </summary>
+        internal static string Logger_MessageContainsPlainText {
+            get {
+                return ResourceManager.GetString("Logger_MessageContainsPlainText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relaying message to {0} ({1}).
+        /// </summary>
+        internal static string Logger_RelayingMessage {
+            get {
+                return ResourceManager.GetString("Logger_RelayingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email template read into memory..
+        /// </summary>
+        internal static string Logger_TemplateInMemory {
+            get {
+                return ResourceManager.GetString("Logger_TemplateInMemory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown client type was requested..
+        /// </summary>
+        internal static string Logger_UnknownClientType {
+            get {
+                return ResourceManager.GetString("Logger_UnknownClientType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using IMAP client..
+        /// </summary>
+        internal static string Logger_UsingIMAP {
+            get {
+                return ResourceManager.GetString("Logger_UsingIMAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using POP3 client..
+        /// </summary>
+        internal static string Logger_UsingPOP3 {
+            get {
+                return ResourceManager.GetString("Logger_UsingPOP3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This message is part of the &apos;{0}&apos; discussion list. You can unsubscribe by sending any message to &lt;a href=&apos;mailto:{1}&apos;&gt;{1}&lt;/a&gt;.
+        /// </summary>
+        internal static string Mail_Format_HTMLUnsubscribeEmailMessage {
+            get {
+                return ResourceManager.GetString("Mail_Format_HTMLUnsubscribeEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This message is part of the &apos;{0}&apos; discussion list. You can unsubscribe by clicking here: &lt;a href=&apos;{1}&apos;&gt;{1}&lt;/a&gt;.
+        /// </summary>
+        internal static string Mail_Format_HTMLUnsubscribeLinkMessage {
+            get {
+                return ResourceManager.GetString("Mail_Format_HTMLUnsubscribeLinkMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Mail_Format_OnboardingBody {
+            get {
+                return ResourceManager.GetString("Mail_Format_OnboardingBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Mail_Format_OnboardingSubheading {
+            get {
+                return ResourceManager.GetString("Mail_Format_OnboardingSubheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscribe to {0}.
+        /// </summary>
+        internal static string Mail_Format_OnboardingSubject {
+            get {
+                return ResourceManager.GetString("Mail_Format_OnboardingSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} - Message from {1}.
+        /// </summary>
+        internal static string Mail_Format_Subject {
+            get {
+                return ResourceManager.GetString("Mail_Format_Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  - Message from {0}.
+        /// </summary>
+        internal static string Mail_Format_SubjectReplace {
+            get {
+                return ResourceManager.GetString("Mail_Format_SubjectReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This message is part of the &apos;{0}&apos; discussion list. You can unsubscribe by sending any message to {1}..
+        /// </summary>
+        internal static string Mail_Format_TextUnsubscribeEmailMessage {
+            get {
+                return ResourceManager.GetString("Mail_Format_TextUnsubscribeEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This message is part of the &apos;{0}&apos; discussion list. You can unsubscribe by clicking here: {1}.
+        /// </summary>
+        internal static string Mail_Format_TextUnsubscribeLinkMessage {
+            get {
+                return ResourceManager.GetString("Mail_Format_TextUnsubscribeLinkMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Mail_OnboardingHeading {
+            get {
+                return ResourceManager.GetString("Mail_OnboardingHeading", resourceCulture);
             }
         }
     }

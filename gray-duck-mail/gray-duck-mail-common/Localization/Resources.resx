@@ -120,7 +120,119 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Gray Duck Mail</value>
   </data>
+  <data name="Exception_DBNotCreated" xml:space="preserve">
+    <value>Could not create database file.</value>
+  </data>
+  <data name="Exception_FormatNotDetermined" xml:space="preserve">
+    <value>Could not determine the formatting of the message.</value>
+  </data>
+  <data name="Logger_CreatingEmailWrapper" xml:space="preserve">
+    <value>Creating email wrapper object.</value>
+  </data>
+  <data name="Logger_Disconnecting" xml:space="preserve">
+    <value>Disconnecting.</value>
+  </data>
+  <data name="Logger_DisposingIMAP" xml:space="preserve">
+    <value>IMAP client disposing.</value>
+  </data>
+  <data name="Logger_DisposingPOP3" xml:space="preserve">
+    <value>POP3 Client disposing.</value>
+  </data>
+  <data name="Logger_DisposingWrapper" xml:space="preserve">
+    <value>Disposing of the client wrapper object.</value>
+  </data>
+  <data name="Logger_EmptyDiscussionList" xml:space="preserve">
+    <value>The discussion list is empty.</value>
+  </data>
+  <data name="Logger_Format_AuthenticatingWith" xml:space="preserve">
+    <value>Authenticating with {0}:{1}.</value>
+  </data>
+  <data name="Logger_Format_ConnectingTo" xml:space="preserve">
+    <value>Connecting to {0}:{1}.</value>
+  </data>
   <data name="Logger_Format_CreatingDB" xml:space="preserve">
     <value>Creating db file at {0}.</value>
+  </data>
+  <data name="Logger_Format_DBCreated" xml:space="preserve">
+    <value>Database file created at {0}.</value>
+  </data>
+  <data name="Logger_Format_DBNotCreated" xml:space="preserve">
+    <value>Could not create database file at {0}.</value>
+  </data>
+  <data name="Logger_Format_DeletingMessage" xml:space="preserve">
+    <value>Deleting message {0}.</value>
+  </data>
+  <data name="Logger_Format_LoadingAssembly" xml:space="preserve">
+    <value>Loading assembly {0}.</value>
+  </data>
+  <data name="Logger_Format_SendingOnboardingEmail" xml:space="preserve">
+    <value>Sending onboarding email to {0} ({1}).</value>
+  </data>
+  <data name="Logger_Format_TemplateProcessed" xml:space="preserve">
+    <value>Email template processed: {0}.</value>
+  </data>
+  <data name="Logger_FoundResources" xml:space="preserve">
+    <value>Found the following resource names in the assembly manifest:</value>
+  </data>
+  <data name="Logger_FoundResourcesLine" xml:space="preserve">
+    <value>-- {0}</value>
+  </data>
+  <data name="Logger_GettingMessages" xml:space="preserve">
+    <value>Getting messages.</value>
+  </data>
+  <data name="Logger_LoadingHTMLTemplate" xml:space="preserve">
+    <value>Loading main HTML email template.</value>
+  </data>
+  <data name="Logger_MessageContainsHTML" xml:space="preserve">
+    <value>Mesasge body determined to contain HTML.</value>
+  </data>
+  <data name="Logger_MessageContainsPlainText" xml:space="preserve">
+    <value>Message body determined to contain plain text.</value>
+  </data>
+  <data name="Logger_RelayingMessage" xml:space="preserve">
+    <value>Relaying message to {0} ({1})</value>
+  </data>
+  <data name="Logger_TemplateInMemory" xml:space="preserve">
+    <value>Email template read into memory.</value>
+  </data>
+  <data name="Logger_UnknownClientType" xml:space="preserve">
+    <value>An unknown client type was requested.</value>
+  </data>
+  <data name="Logger_UsingIMAP" xml:space="preserve">
+    <value>Using IMAP client.</value>
+  </data>
+  <data name="Logger_UsingPOP3" xml:space="preserve">
+    <value>Using POP3 client.</value>
+  </data>
+  <data name="Mail_Format_HTMLUnsubscribeEmailMessage" xml:space="preserve">
+    <value>This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to &lt;a href='mailto:{1}'&gt;{1}&lt;/a&gt;</value>
+  </data>
+  <data name="Mail_Format_HTMLUnsubscribeLinkMessage" xml:space="preserve">
+    <value>This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: &lt;a href='{1}'&gt;{1}&lt;/a&gt;</value>
+  </data>
+  <data name="Mail_Format_OnboardingBody" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Mail_Format_OnboardingSubheading" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Mail_Format_OnboardingSubject" xml:space="preserve">
+    <value>Subscribe to {0}</value>
+  </data>
+  <data name="Mail_Format_Subject" xml:space="preserve">
+    <value>{0} - Message from {1}</value>
+  </data>
+  <data name="Mail_Format_SubjectReplace" xml:space="preserve">
+    <value> - Message from {0}</value>
+    <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
+  </data>
+  <data name="Mail_Format_TextUnsubscribeEmailMessage" xml:space="preserve">
+    <value>This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.</value>
+  </data>
+  <data name="Mail_Format_TextUnsubscribeLinkMessage" xml:space="preserve">
+    <value>This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: {1}</value>
+  </data>
+  <data name="Mail_OnboardingHeading" xml:space="preserve">
+    <value />
   </data>
 </root>

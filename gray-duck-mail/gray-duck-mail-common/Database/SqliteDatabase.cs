@@ -148,12 +148,12 @@ namespace GrayDuckMail.Common.Database
                 }
                 if (File.Exists(databaseFilePath.AbsolutePath))
                 {
-                    logger.Info("Database file created at {0}.", databaseFilePath.AbsolutePath);
+                    logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_DBCreated, databaseFilePath.AbsolutePath));
                 }
                 else
                 {
-                    logger.Error("Could not create database file at {0}.", databaseFilePath.AbsolutePath);
-                    throw new FileNotFoundException("Could not create database file.", databaseFilePath.AbsolutePath);
+                    logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_DBNotCreated, databaseFilePath.AbsolutePath));
+                    throw new FileNotFoundException(LanguageHelper.GetValue(ResourceName.Exception_DBNotCreated), databaseFilePath.AbsolutePath);
                 }
             }
         }

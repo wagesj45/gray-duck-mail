@@ -43,8 +43,16 @@ namespace GrayDuckMail.Common.Localization
 <#
 		foreach (var a in attributes)
 		{
+		var value = doc.Root.Elements().Where(e => e.Name == "data" && e.Attributes().Where(_a => _a.Name == a.Name && _a.Value == a.Value).Any()).DescendantsAndSelf().Where(d => d.Name == "value").FirstOrDefault()?.Value?.Trim();
+		var comment = doc.Root.Elements().Where(e => e.Name == "data" && e.Attributes().Where(_a => _a.Name == a.Name && _a.Value == a.Value).Any()).DescendantsAndSelf().Where(d => d.Name == "comment").FirstOrDefault()?.Value?.Trim();
 #>
-		/// <summary> <#= a.Value #> </summary>
+		/// <summary> <#= value #> </summary>
+		<# if(!string.IsNullOrWhiteSpace(comment))
+		{ 
+		#> /// <remarks> <#= comment #> </remarks>
+		<# 
+		} 
+		#>
 		<#= a.Value #>,
 <#
 		}
