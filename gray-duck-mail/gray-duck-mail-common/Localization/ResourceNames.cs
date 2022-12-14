@@ -13,8 +13,14 @@ namespace GrayDuckMail.Common.Localization
 				Exception_DBNotCreated,
 		/// <summary> Could not determine the formatting of the message. </summary>
 				Exception_FormatNotDetermined,
+		/// <summary> No search term was provided. </summary>
+				Exception_NoSearchTerm,
+		/// <summary> The property selector was unable to resolve to a property name. </summary>
+				Exception_PropertySelectorResolutionError,
 		/// <summary> Creating email wrapper object. </summary>
 				Logger_CreatingEmailWrapper,
+		/// <summary> Message is a multipart message with at least one 'delivery-status' section. </summary>
+				Logger_DeliveryStatusDetected,
 		/// <summary> Disconnecting. </summary>
 				Logger_Disconnecting,
 		/// <summary> IMAP client disposing. </summary>
@@ -25,6 +31,12 @@ namespace GrayDuckMail.Common.Localization
 				Logger_DisposingWrapper,
 		/// <summary> The discussion list is empty. </summary>
 				Logger_EmptyDiscussionList,
+		/// <summary> A failed delivery was detected. </summary>
+				Logger_FailedDeliveryDetected,
+		/// <summary> The bounced email contains a failure report, but an unknown recipient status group. </summary>
+				Logger_FailureDetectedUnknownRecipient,
+		/// <summary> Assigning index {0} to {1}. </summary>
+				Logger_Format_AssigningMimeMessageIndex,
 		/// <summary> Authenticating with {0}:{1}. </summary>
 				Logger_Format_AuthenticatingWith,
 		/// <summary> Connecting to {0}:{1}. </summary>
@@ -37,16 +49,26 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_DBNotCreated,
 		/// <summary> Deleting message {0}. </summary>
 				Logger_Format_DeletingMessage,
+		/// <summary> -- {0}: {1} </summary>
+				Logger_Format_FailureStatusGroupsLine,
 		/// <summary> Loading assembly {0}. </summary>
 				Logger_Format_LoadingAssembly,
 		/// <summary> Sending onboarding email to {0} ({1}). </summary>
 				Logger_Format_SendingOnboardingEmail,
+		/// <summary> Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}. </summary>
+				Logger_Format_SendingOwnerNotification,
+		/// <summary> Sending the subscription confirmation email to {0} ({1}). </summary>
+				Logger_Format_SendingSubscriptionConfirmation,
+		/// <summary> Sending the subscription confirmation email to {0} ({1}). </summary>
+				Logger_Format_SendingUnsubscriptionConfirmation,
 		/// <summary> Email template processed: {0}. </summary>
 				Logger_Format_TemplateProcessed,
 		/// <summary> Found the following resource names in the assembly manifest: </summary>
 				Logger_FoundResources,
 		/// <summary> -- {0} </summary>
 				Logger_FoundResourcesLine,
+		/// <summary> Generating an email. </summary>
+				Logger_GeneratingEmail,
 		/// <summary> Getting messages. </summary>
 				Logger_GettingMessages,
 		/// <summary> Loading main HTML email template. </summary>
@@ -57,6 +79,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_MessageContainsPlainText,
 		/// <summary> Relaying message to {0} ({1}) </summary>
 				Logger_RelayingMessage,
+		/// <summary> The SMTP client is not connected. Connecting now. </summary>
+				Logger_SMTPNotConnected,
 		/// <summary> Email template read into memory. </summary>
 				Logger_TemplateInMemory,
 		/// <summary> An unknown client type was requested. </summary>
@@ -69,22 +93,48 @@ namespace GrayDuckMail.Common.Localization
 				Mail_Format_HTMLUnsubscribeEmailMessage,
 		/// <summary> This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: <a href='{1}'>{1}</a> </summary>
 				Mail_Format_HTMLUnsubscribeLinkMessage,
-		/// <summary>  </summary>
+		/// <summary> The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email. </summary>
 				Mail_Format_OnboardingBody,
-		/// <summary>  </summary>
+		/// <summary> You've been invited to the '{0}' Email Discussion List </summary>
 				Mail_Format_OnboardingSubheading,
 		/// <summary> Subscribe to {0} </summary>
 				Mail_Format_OnboardingSubject,
+		/// <summary> {0} has requested access to the '{0}' Email Discussion List </summary>
+				Mail_Format_OwnerNotificationSubheading,
+		/// <summary> Request to join {0} </summary>
+				Mail_Format_OwnerNotificationSubject,
 		/// <summary> {0} - Message from {1} </summary>
 				Mail_Format_Subject,
 		/// <summary> - Message from {0} </summary>
 		 /// <remarks> It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space. </remarks>
 				Mail_Format_SubjectReplace,
+		/// <summary> Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy. </summary>
+				Mail_Format_SubscriptionConfirmationBody,
+		/// <summary> You've been subscribed to the '{0}' Email Discussion List </summary>
+				Mail_Format_SubscriptionConfirmationSubheading,
+		/// <summary> Welcome to {0} </summary>
+				Mail_Format_SubscriptionConfirmationSubject,
 		/// <summary> This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}. </summary>
 				Mail_Format_TextUnsubscribeEmailMessage,
 		/// <summary> This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: {1} </summary>
 				Mail_Format_TextUnsubscribeLinkMessage,
-		/// <summary>  </summary>
+		/// <summary> You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to <a href='mailto:{0}'>{0}</a>. </summary>
+				Mail_Format_UnsubscriptionConfirmationBody,
+		/// <summary> You will no longer recieve messages from the '{0}' Email Discussion List </summary>
+				Mail_Format_UnsubscriptionConfirmationSubheading,
+		/// <summary> You have been unsubscribed from {0}. </summary>
+				Mail_Format_UnsubscriptionConfirmationSubject,
+		/// <summary> Welcome! </summary>
 				Mail_OnboardingHeading,
+		/// <summary> Owner </summary>
+				Mail_Owner,
+		/// <summary> Please visit the the web administration interface to process this request. </summary>
+				Mail_OwnerNotificationBody,
+		/// <summary> Discussion List Access Request </summary>
+				Mail_OwnerNotificationHeading,
+		/// <summary> Thanks for subscribing! </summary>
+				Mail_SubscriptionConfirmationHeading,
+		/// <summary> Sorry to see you go. </summary>
+				Mail_UnsubscriptionConfirmationHeading,
 	}
 }

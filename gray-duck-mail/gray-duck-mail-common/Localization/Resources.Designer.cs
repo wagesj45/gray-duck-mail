@@ -88,11 +88,38 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No search term was provided..
+        /// </summary>
+        internal static string Exception_NoSearchTerm {
+            get {
+                return ResourceManager.GetString("Exception_NoSearchTerm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The property selector was unable to resolve to a property name..
+        /// </summary>
+        internal static string Exception_PropertySelectorResolutionError {
+            get {
+                return ResourceManager.GetString("Exception_PropertySelectorResolutionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating email wrapper object..
         /// </summary>
         internal static string Logger_CreatingEmailWrapper {
             get {
                 return ResourceManager.GetString("Logger_CreatingEmailWrapper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message is a multipart message with at least one &apos;delivery-status&apos; section..
+        /// </summary>
+        internal static string Logger_DeliveryStatusDetected {
+            get {
+                return ResourceManager.GetString("Logger_DeliveryStatusDetected", resourceCulture);
             }
         }
         
@@ -138,6 +165,33 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_EmptyDiscussionList {
             get {
                 return ResourceManager.GetString("Logger_EmptyDiscussionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A failed delivery was detected..
+        /// </summary>
+        internal static string Logger_FailedDeliveryDetected {
+            get {
+                return ResourceManager.GetString("Logger_FailedDeliveryDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bounced email contains a failure report, but an unknown recipient status group..
+        /// </summary>
+        internal static string Logger_FailureDetectedUnknownRecipient {
+            get {
+                return ResourceManager.GetString("Logger_FailureDetectedUnknownRecipient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assigning index {0} to {1}..
+        /// </summary>
+        internal static string Logger_Format_AssigningMimeMessageIndex {
+            get {
+                return ResourceManager.GetString("Logger_Format_AssigningMimeMessageIndex", resourceCulture);
             }
         }
         
@@ -196,6 +250,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -- {0}: {1}.
+        /// </summary>
+        internal static string Logger_Format_FailureStatusGroupsLine {
+            get {
+                return ResourceManager.GetString("Logger_Format_FailureStatusGroupsLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading assembly {0}..
         /// </summary>
         internal static string Logger_Format_LoadingAssembly {
@@ -210,6 +273,33 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_Format_SendingOnboardingEmail {
             get {
                 return ResourceManager.GetString("Logger_Format_SendingOnboardingEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}..
+        /// </summary>
+        internal static string Logger_Format_SendingOwnerNotification {
+            get {
+                return ResourceManager.GetString("Logger_Format_SendingOwnerNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending the subscription confirmation email to {0} ({1})..
+        /// </summary>
+        internal static string Logger_Format_SendingSubscriptionConfirmation {
+            get {
+                return ResourceManager.GetString("Logger_Format_SendingSubscriptionConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending the subscription confirmation email to {0} ({1})..
+        /// </summary>
+        internal static string Logger_Format_SendingUnsubscriptionConfirmation {
+            get {
+                return ResourceManager.GetString("Logger_Format_SendingUnsubscriptionConfirmation", resourceCulture);
             }
         }
         
@@ -237,6 +327,15 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_FoundResourcesLine {
             get {
                 return ResourceManager.GetString("Logger_FoundResourcesLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generating an email..
+        /// </summary>
+        internal static string Logger_GeneratingEmail {
+            get {
+                return ResourceManager.GetString("Logger_GeneratingEmail", resourceCulture);
             }
         }
         
@@ -282,6 +381,15 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_RelayingMessage {
             get {
                 return ResourceManager.GetString("Logger_RelayingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The SMTP client is not connected. Connecting now..
+        /// </summary>
+        internal static string Logger_SMTPNotConnected {
+            get {
+                return ResourceManager.GetString("Logger_SMTPNotConnected", resourceCulture);
             }
         }
         
@@ -340,7 +448,7 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The &apos;{0}&apos; email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email..
         /// </summary>
         internal static string Mail_Format_OnboardingBody {
             get {
@@ -349,7 +457,7 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to You&apos;ve been invited to the &apos;{0}&apos; Email Discussion List.
         /// </summary>
         internal static string Mail_Format_OnboardingSubheading {
             get {
@@ -363,6 +471,24 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Mail_Format_OnboardingSubject {
             get {
                 return ResourceManager.GetString("Mail_Format_OnboardingSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has requested access to the &apos;{0}&apos; Email Discussion List.
+        /// </summary>
+        internal static string Mail_Format_OwnerNotificationSubheading {
+            get {
+                return ResourceManager.GetString("Mail_Format_OwnerNotificationSubheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request to join {0}.
+        /// </summary>
+        internal static string Mail_Format_OwnerNotificationSubject {
+            get {
+                return ResourceManager.GetString("Mail_Format_OwnerNotificationSubject", resourceCulture);
             }
         }
         
@@ -385,6 +511,33 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Glad to have you. To send a message to everyone on the discussion list, just send an email to &lt;a href=&apos;mailto:{0}&apos;&gt;{0}&lt;/a&gt;. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy..
+        /// </summary>
+        internal static string Mail_Format_SubscriptionConfirmationBody {
+            get {
+                return ResourceManager.GetString("Mail_Format_SubscriptionConfirmationBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve been subscribed to the &apos;{0}&apos; Email Discussion List.
+        /// </summary>
+        internal static string Mail_Format_SubscriptionConfirmationSubheading {
+            get {
+                return ResourceManager.GetString("Mail_Format_SubscriptionConfirmationSubheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to {0}.
+        /// </summary>
+        internal static string Mail_Format_SubscriptionConfirmationSubject {
+            get {
+                return ResourceManager.GetString("Mail_Format_SubscriptionConfirmationSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This message is part of the &apos;{0}&apos; discussion list. You can unsubscribe by sending any message to {1}..
         /// </summary>
         internal static string Mail_Format_TextUnsubscribeEmailMessage {
@@ -403,11 +556,83 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to You have successfully unsubscribed from this discussion list. If you&apos;d ever like to resubscribe, send a message to &lt;a href=&apos;mailto:{0}&apos;&gt;{0}&lt;/a&gt;..
+        /// </summary>
+        internal static string Mail_Format_UnsubscriptionConfirmationBody {
+            get {
+                return ResourceManager.GetString("Mail_Format_UnsubscriptionConfirmationBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will no longer recieve messages from the &apos;{0}&apos; Email Discussion List.
+        /// </summary>
+        internal static string Mail_Format_UnsubscriptionConfirmationSubheading {
+            get {
+                return ResourceManager.GetString("Mail_Format_UnsubscriptionConfirmationSubheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have been unsubscribed from {0}..
+        /// </summary>
+        internal static string Mail_Format_UnsubscriptionConfirmationSubject {
+            get {
+                return ResourceManager.GetString("Mail_Format_UnsubscriptionConfirmationSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome!.
         /// </summary>
         internal static string Mail_OnboardingHeading {
             get {
                 return ResourceManager.GetString("Mail_OnboardingHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        internal static string Mail_Owner {
+            get {
+                return ResourceManager.GetString("Mail_Owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please visit the the web administration interface to process this request..
+        /// </summary>
+        internal static string Mail_OwnerNotificationBody {
+            get {
+                return ResourceManager.GetString("Mail_OwnerNotificationBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion List Access Request.
+        /// </summary>
+        internal static string Mail_OwnerNotificationHeading {
+            get {
+                return ResourceManager.GetString("Mail_OwnerNotificationHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thanks for subscribing!.
+        /// </summary>
+        internal static string Mail_SubscriptionConfirmationHeading {
+            get {
+                return ResourceManager.GetString("Mail_SubscriptionConfirmationHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry to see you go..
+        /// </summary>
+        internal static string Mail_UnsubscriptionConfirmationHeading {
+            get {
+                return ResourceManager.GetString("Mail_UnsubscriptionConfirmationHeading", resourceCulture);
             }
         }
     }

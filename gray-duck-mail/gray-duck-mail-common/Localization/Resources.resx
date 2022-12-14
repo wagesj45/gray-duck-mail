@@ -126,8 +126,17 @@
   <data name="Exception_FormatNotDetermined" xml:space="preserve">
     <value>Could not determine the formatting of the message.</value>
   </data>
+  <data name="Exception_NoSearchTerm" xml:space="preserve">
+    <value>No search term was provided.</value>
+  </data>
+  <data name="Exception_PropertySelectorResolutionError" xml:space="preserve">
+    <value>The property selector was unable to resolve to a property name.</value>
+  </data>
   <data name="Logger_CreatingEmailWrapper" xml:space="preserve">
     <value>Creating email wrapper object.</value>
+  </data>
+  <data name="Logger_DeliveryStatusDetected" xml:space="preserve">
+    <value>Message is a multipart message with at least one 'delivery-status' section.</value>
   </data>
   <data name="Logger_Disconnecting" xml:space="preserve">
     <value>Disconnecting.</value>
@@ -143,6 +152,15 @@
   </data>
   <data name="Logger_EmptyDiscussionList" xml:space="preserve">
     <value>The discussion list is empty.</value>
+  </data>
+  <data name="Logger_FailedDeliveryDetected" xml:space="preserve">
+    <value>A failed delivery was detected.</value>
+  </data>
+  <data name="Logger_FailureDetectedUnknownRecipient" xml:space="preserve">
+    <value>The bounced email contains a failure report, but an unknown recipient status group.</value>
+  </data>
+  <data name="Logger_Format_AssigningMimeMessageIndex" xml:space="preserve">
+    <value>Assigning index {0} to {1}.</value>
   </data>
   <data name="Logger_Format_AuthenticatingWith" xml:space="preserve">
     <value>Authenticating with {0}:{1}.</value>
@@ -162,11 +180,23 @@
   <data name="Logger_Format_DeletingMessage" xml:space="preserve">
     <value>Deleting message {0}.</value>
   </data>
+  <data name="Logger_Format_FailureStatusGroupsLine" xml:space="preserve">
+    <value>-- {0}: {1}</value>
+  </data>
   <data name="Logger_Format_LoadingAssembly" xml:space="preserve">
     <value>Loading assembly {0}.</value>
   </data>
   <data name="Logger_Format_SendingOnboardingEmail" xml:space="preserve">
     <value>Sending onboarding email to {0} ({1}).</value>
+  </data>
+  <data name="Logger_Format_SendingOwnerNotification" xml:space="preserve">
+    <value>Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}.</value>
+  </data>
+  <data name="Logger_Format_SendingSubscriptionConfirmation" xml:space="preserve">
+    <value>Sending the subscription confirmation email to {0} ({1}).</value>
+  </data>
+  <data name="Logger_Format_SendingUnsubscriptionConfirmation" xml:space="preserve">
+    <value>Sending the subscription confirmation email to {0} ({1}).</value>
   </data>
   <data name="Logger_Format_TemplateProcessed" xml:space="preserve">
     <value>Email template processed: {0}.</value>
@@ -176,6 +206,9 @@
   </data>
   <data name="Logger_FoundResourcesLine" xml:space="preserve">
     <value>-- {0}</value>
+  </data>
+  <data name="Logger_GeneratingEmail" xml:space="preserve">
+    <value>Generating an email.</value>
   </data>
   <data name="Logger_GettingMessages" xml:space="preserve">
     <value>Getting messages.</value>
@@ -191,6 +224,9 @@
   </data>
   <data name="Logger_RelayingMessage" xml:space="preserve">
     <value>Relaying message to {0} ({1})</value>
+  </data>
+  <data name="Logger_SMTPNotConnected" xml:space="preserve">
+    <value>The SMTP client is not connected. Connecting now.</value>
   </data>
   <data name="Logger_TemplateInMemory" xml:space="preserve">
     <value>Email template read into memory.</value>
@@ -211,13 +247,19 @@
     <value>This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: &lt;a href='{1}'&gt;{1}&lt;/a&gt;</value>
   </data>
   <data name="Mail_Format_OnboardingBody" xml:space="preserve">
-    <value />
+    <value>The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.</value>
   </data>
   <data name="Mail_Format_OnboardingSubheading" xml:space="preserve">
-    <value />
+    <value>You've been invited to the '{0}' Email Discussion List</value>
   </data>
   <data name="Mail_Format_OnboardingSubject" xml:space="preserve">
     <value>Subscribe to {0}</value>
+  </data>
+  <data name="Mail_Format_OwnerNotificationSubheading" xml:space="preserve">
+    <value>{0} has requested access to the '{0}' Email Discussion List</value>
+  </data>
+  <data name="Mail_Format_OwnerNotificationSubject" xml:space="preserve">
+    <value>Request to join {0}</value>
   </data>
   <data name="Mail_Format_Subject" xml:space="preserve">
     <value>{0} - Message from {1}</value>
@@ -226,13 +268,46 @@
     <value> - Message from {0}</value>
     <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
   </data>
+  <data name="Mail_Format_SubscriptionConfirmationBody" xml:space="preserve">
+    <value>Glad to have you. To send a message to everyone on the discussion list, just send an email to &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.</value>
+  </data>
+  <data name="Mail_Format_SubscriptionConfirmationSubheading" xml:space="preserve">
+    <value>You've been subscribed to the '{0}' Email Discussion List</value>
+  </data>
+  <data name="Mail_Format_SubscriptionConfirmationSubject" xml:space="preserve">
+    <value>Welcome to {0}</value>
+  </data>
   <data name="Mail_Format_TextUnsubscribeEmailMessage" xml:space="preserve">
     <value>This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.</value>
   </data>
   <data name="Mail_Format_TextUnsubscribeLinkMessage" xml:space="preserve">
     <value>This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: {1}</value>
   </data>
+  <data name="Mail_Format_UnsubscriptionConfirmationBody" xml:space="preserve">
+    <value>You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;.</value>
+  </data>
+  <data name="Mail_Format_UnsubscriptionConfirmationSubheading" xml:space="preserve">
+    <value>You will no longer recieve messages from the '{0}' Email Discussion List</value>
+  </data>
+  <data name="Mail_Format_UnsubscriptionConfirmationSubject" xml:space="preserve">
+    <value>You have been unsubscribed from {0}.</value>
+  </data>
   <data name="Mail_OnboardingHeading" xml:space="preserve">
-    <value />
+    <value>Welcome!</value>
+  </data>
+  <data name="Mail_Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Mail_OwnerNotificationBody" xml:space="preserve">
+    <value>Please visit the the web administration interface to process this request.</value>
+  </data>
+  <data name="Mail_OwnerNotificationHeading" xml:space="preserve">
+    <value>Discussion List Access Request</value>
+  </data>
+  <data name="Mail_SubscriptionConfirmationHeading" xml:space="preserve">
+    <value>Thanks for subscribing!</value>
+  </data>
+  <data name="Mail_UnsubscriptionConfirmationHeading" xml:space="preserve">
+    <value>Sorry to see you go.</value>
   </data>
 </root>
