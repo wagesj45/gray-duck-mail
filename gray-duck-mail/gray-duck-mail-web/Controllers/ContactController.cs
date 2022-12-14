@@ -1,5 +1,6 @@
 ﻿using GrayDuckMail.Common;
 using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using GrayDuckMail.Web.Models;
 using GrayDuckMail.Web.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
@@ -77,7 +78,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (contact == null)
             {
-                logger.Error("Could not find contact with ID = {0}", contactID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindContact, contactID));
                 return View("Error");
             }
 
@@ -100,7 +101,7 @@ namespace GrayDuckMail.Web.Controllers
         {
             if (formInput == null)
             {
-                logger.Error("Form input was malformed or missing for /Contact/Edit");
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/Contact/Edit");
                 return View("Error");
             }
 
@@ -108,7 +109,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (contact == null)
             {
-                logger.Error("Could not find an existing contact with ID {0} to edit.", formInput.ID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindContact, formInput.ID));
                 return View("Error");
             }
 
@@ -132,7 +133,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (contact == null)
             {
-                logger.Error("Could not find contact with ID = {0}", contactID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindContact, contactID));
                 return View("Error");
             }
 
@@ -156,7 +157,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (contact == null)
             {
-                logger.Error("Could not find contact with ID = {0}", contactID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindContact, contactID));
                 return View("Error");
             }
 
@@ -177,7 +178,7 @@ namespace GrayDuckMail.Web.Controllers
         {
             if (formInput == null)
             {
-                logger.Error("Form input was malformed or missing for /Contact/Create");
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/Contact/Create"));
                 return View("Error");
             }
 
@@ -227,7 +228,7 @@ namespace GrayDuckMail.Web.Controllers
 
                 if (this.UseFuzzySearch)
                 {
-                    logger.Info("Performing fuzzy search: {0}", searchTerm);
+                    logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_PerformingFuzzySearch, searchTerm));
 
                     contacts = this.SqliteDatabase.Contacts
                         .Include(contact => contact.ContactSubscriptions)

@@ -1,4 +1,5 @@
 ﻿using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using GrayDuckMail.Web.Models;
 using GrayDuckMail.Web.Models.Forms;
 using Microsoft.AspNetCore.Authorization;
@@ -63,26 +64,26 @@ namespace GrayDuckMail.Web.Controllers
 
             if (discussionList == null)
             {
-                logger.Error("Invalid unsubscription request for non-existant discussion list with ID {0}.", discussionListID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_InvalidUnsubscriptionDiscussionList, discussionListID));
             }
 
             if (contact == null)
             {
-                logger.Error("Invalid unsubscription request for non-existant contact with ID {0}.", contactID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_InvalidUnsubscriptionContact, contactID));
             }
 
             if (subscription == null)
             {
-                logger.Error("Invalid unsubscription request. No subscription status found.");
+                logger.Error(LanguageHelper.GetValue(ResourceName.Logger_InvalidUnsubscriptionSubscription));
             }
             else if (subscription.Status != SubscriptionStatus.Subscribed)
             {
-                logger.Error("Invalid unsubscription status for contact with ID {0} and discussion list {1} due to subscription status {2}.", contactID, discussionListID, subscription.Status);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_InvalidUnsubscriptionSubscriptionStatus, contactID, discussionListID, subscription.Status));
             }
 
             if (discussionList != null && contact != null && subscription.Status == SubscriptionStatus.Subscribed)
             {
-                logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserUnsubscribing, subscription.Contact.Name, discussionList.Name));
                 subscription.Status = SubscriptionStatus.Unsubscribed;
 
                 this.SqliteDatabase.SaveChanges();

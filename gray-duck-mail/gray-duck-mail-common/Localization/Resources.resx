@@ -126,6 +126,12 @@
   <data name="Exception_FormatNotDetermined" xml:space="preserve">
     <value>Could not determine the formatting of the message.</value>
   </data>
+  <data name="Exception_MalformedDatabase" xml:space="preserve">
+    <value>The file upload was not in the correct SQLite file format.</value>
+  </data>
+  <data name="Exception_MalformedUpload" xml:space="preserve">
+    <value>The file uploaded is missing or was malformed.</value>
+  </data>
   <data name="Exception_NoSearchTerm" xml:space="preserve">
     <value>No search term was provided.</value>
   </data>
@@ -159,6 +165,9 @@
   <data name="Logger_FailureDetectedUnknownRecipient" xml:space="preserve">
     <value>The bounced email contains a failure report, but an unknown recipient status group.</value>
   </data>
+  <data name="Logger_Format_AssigningContact" xml:space="preserve">
+    <value>Assigning Contact {0} to Discussion List {1}.</value>
+  </data>
   <data name="Logger_Format_AssigningMimeMessageIndex" xml:space="preserve">
     <value>Assigning index {0} to {1}.</value>
   </data>
@@ -167,6 +176,12 @@
   </data>
   <data name="Logger_Format_ConnectingTo" xml:space="preserve">
     <value>Connecting to {0}:{1}.</value>
+  </data>
+  <data name="Logger_Format_CouldNotFindContact" xml:space="preserve">
+    <value>Could not find contact with ID = {0}.</value>
+  </data>
+  <data name="Logger_Format_CouldNotFindDiscussionList" xml:space="preserve">
+    <value>Could not find discussion list with ID = {0}</value>
   </data>
   <data name="Logger_Format_CreatingDB" xml:space="preserve">
     <value>Creating db file at {0}.</value>
@@ -183,8 +198,23 @@
   <data name="Logger_Format_FailureStatusGroupsLine" xml:space="preserve">
     <value>-- {0}: {1}</value>
   </data>
+  <data name="Logger_Format_FormInputMalformed" xml:space="preserve">
+    <value>Form input was malformed or missing for {0}.</value>
+  </data>
+  <data name="Logger_Format_InvalidUnsubscriptionContact" xml:space="preserve">
+    <value>Invalid unsubscription request for non-existant contact with ID {0}.</value>
+  </data>
+  <data name="Logger_Format_InvalidUnsubscriptionDiscussionList" xml:space="preserve">
+    <value>Invalid unsubscription request for non-existant discussion list with ID {0}.</value>
+  </data>
+  <data name="Logger_Format_InvalidUnsubscriptionSubscriptionStatus" xml:space="preserve">
+    <value>Invalid unsubscription status for contact with ID {0} and discussion list {1} due to subscription status {2}.</value>
+  </data>
   <data name="Logger_Format_LoadingAssembly" xml:space="preserve">
     <value>Loading assembly {0}.</value>
+  </data>
+  <data name="Logger_Format_PerformingFuzzySearch" xml:space="preserve">
+    <value>Performing fuzzy search: {0}</value>
   </data>
   <data name="Logger_Format_SendingOnboardingEmail" xml:space="preserve">
     <value>Sending onboarding email to {0} ({1}).</value>
@@ -195,11 +225,23 @@
   <data name="Logger_Format_SendingSubscriptionConfirmation" xml:space="preserve">
     <value>Sending the subscription confirmation email to {0} ({1}).</value>
   </data>
+  <data name="Logger_Format_SendingTest" xml:space="preserve">
+    <value>Sending a test Owner Notification email to discussion list {0}.</value>
+  </data>
   <data name="Logger_Format_SendingUnsubscriptionConfirmation" xml:space="preserve">
     <value>Sending the subscription confirmation email to {0} ({1}).</value>
   </data>
+  <data name="Logger_Format_ServingPage" xml:space="preserve">
+    <value>Serving page '{0}'</value>
+  </data>
   <data name="Logger_Format_TemplateProcessed" xml:space="preserve">
     <value>Email template processed: {0}.</value>
+  </data>
+  <data name="Logger_Format_UnassigningContact" xml:space="preserve">
+    <value>Removing Contact {0} to Discussion List {1}.</value>
+  </data>
+  <data name="Logger_Format_UserUnsubscribing" xml:space="preserve">
+    <value>User {0} unsubscribing from {1}.</value>
   </data>
   <data name="Logger_FoundResources" xml:space="preserve">
     <value>Found the following resource names in the assembly manifest:</value>
@@ -213,6 +255,12 @@
   <data name="Logger_GettingMessages" xml:space="preserve">
     <value>Getting messages.</value>
   </data>
+  <data name="Logger_InitializingControllerDatabase" xml:space="preserve">
+    <value>Initializing database for controller.</value>
+  </data>
+  <data name="Logger_InvalidUnsubscriptionSubscription" xml:space="preserve">
+    <value>Invalid unsubscription request. No subscription status found.</value>
+  </data>
   <data name="Logger_LoadingHTMLTemplate" xml:space="preserve">
     <value>Loading main HTML email template.</value>
   </data>
@@ -224,6 +272,18 @@
   </data>
   <data name="Logger_RelayingMessage" xml:space="preserve">
     <value>Relaying message to {0} ({1})</value>
+  </data>
+  <data name="Logger_RequestOnExternalPort" xml:space="preserve">
+    <value>The request is being processed from the designated external port. Request Origin: {0}</value>
+  </data>
+  <data name="Logger_RequestOnInternalPort" xml:space="preserve">
+    <value>The request is being processed from the designated internal port.</value>
+  </data>
+  <data name="Logger_RequestOnUnknownPort" xml:space="preserve">
+    <value>The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1}</value>
+  </data>
+  <data name="Logger_SavingAssignments" xml:space="preserve">
+    <value>Saving assignments.</value>
   </data>
   <data name="Logger_SMTPNotConnected" xml:space="preserve">
     <value>The SMTP client is not connected. Connecting now.</value>

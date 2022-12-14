@@ -1,4 +1,5 @@
 ﻿using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using GrayDuckMail.Web.Models;
 using GrayDuckMail.Web.Models.Forms;
 using Microsoft.AspNetCore.Authorization;
@@ -94,12 +95,12 @@ namespace GrayDuckMail.Web.Controllers
         {
             if (formInput.DatabaseFile == null)
             {
-                var nullException = new ArgumentException("The file uploaded is missing or was malformed.", nameof(formInput));
+                var nullException = new ArgumentException(LanguageHelper.GetValue(ResourceName.Exception_MalformedUpload), nameof(formInput));
             }
 
             if (!SqliteDatabase.IsValidContentType(formInput.DatabaseFile.ContentType))
             {
-                var formatException = new FormatException("The file upload was not in the corref SQLite file format.");
+                var formatException = new FormatException(LanguageHelper.GetValue(ResourceName.Exception_MalformedDatabase));
                 logger.Error(formatException);
 
                 throw formatException;

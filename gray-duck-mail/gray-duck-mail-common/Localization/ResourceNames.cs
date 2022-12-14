@@ -13,6 +13,10 @@ namespace GrayDuckMail.Common.Localization
 				Exception_DBNotCreated,
 		/// <summary> Could not determine the formatting of the message. </summary>
 				Exception_FormatNotDetermined,
+		/// <summary> The file upload was not in the correct SQLite file format. </summary>
+				Exception_MalformedDatabase,
+		/// <summary> The file uploaded is missing or was malformed. </summary>
+				Exception_MalformedUpload,
 		/// <summary> No search term was provided. </summary>
 				Exception_NoSearchTerm,
 		/// <summary> The property selector was unable to resolve to a property name. </summary>
@@ -35,12 +39,18 @@ namespace GrayDuckMail.Common.Localization
 				Logger_FailedDeliveryDetected,
 		/// <summary> The bounced email contains a failure report, but an unknown recipient status group. </summary>
 				Logger_FailureDetectedUnknownRecipient,
+		/// <summary> Assigning Contact {0} to Discussion List {1}. </summary>
+				Logger_Format_AssigningContact,
 		/// <summary> Assigning index {0} to {1}. </summary>
 				Logger_Format_AssigningMimeMessageIndex,
 		/// <summary> Authenticating with {0}:{1}. </summary>
 				Logger_Format_AuthenticatingWith,
 		/// <summary> Connecting to {0}:{1}. </summary>
 				Logger_Format_ConnectingTo,
+		/// <summary> Could not find contact with ID = {0}. </summary>
+				Logger_Format_CouldNotFindContact,
+		/// <summary> Could not find discussion list with ID = {0} </summary>
+				Logger_Format_CouldNotFindDiscussionList,
 		/// <summary> Creating db file at {0}. </summary>
 				Logger_Format_CreatingDB,
 		/// <summary> Database file created at {0}. </summary>
@@ -51,18 +61,36 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_DeletingMessage,
 		/// <summary> -- {0}: {1} </summary>
 				Logger_Format_FailureStatusGroupsLine,
+		/// <summary> Form input was malformed or missing for {0}. </summary>
+				Logger_Format_FormInputMalformed,
+		/// <summary> Invalid unsubscription request for non-existant contact with ID {0}. </summary>
+				Logger_Format_InvalidUnsubscriptionContact,
+		/// <summary> Invalid unsubscription request for non-existant discussion list with ID {0}. </summary>
+				Logger_Format_InvalidUnsubscriptionDiscussionList,
+		/// <summary> Invalid unsubscription status for contact with ID {0} and discussion list {1} due to subscription status {2}. </summary>
+				Logger_Format_InvalidUnsubscriptionSubscriptionStatus,
 		/// <summary> Loading assembly {0}. </summary>
 				Logger_Format_LoadingAssembly,
+		/// <summary> Performing fuzzy search: {0} </summary>
+				Logger_Format_PerformingFuzzySearch,
 		/// <summary> Sending onboarding email to {0} ({1}). </summary>
 				Logger_Format_SendingOnboardingEmail,
 		/// <summary> Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}. </summary>
 				Logger_Format_SendingOwnerNotification,
 		/// <summary> Sending the subscription confirmation email to {0} ({1}). </summary>
 				Logger_Format_SendingSubscriptionConfirmation,
+		/// <summary> Sending a test Owner Notification email to discussion list {0}. </summary>
+				Logger_Format_SendingTest,
 		/// <summary> Sending the subscription confirmation email to {0} ({1}). </summary>
 				Logger_Format_SendingUnsubscriptionConfirmation,
+		/// <summary> Serving page '{0}' </summary>
+				Logger_Format_ServingPage,
 		/// <summary> Email template processed: {0}. </summary>
 				Logger_Format_TemplateProcessed,
+		/// <summary> Removing Contact {0} to Discussion List {1}. </summary>
+				Logger_Format_UnassigningContact,
+		/// <summary> User {0} unsubscribing from {1}. </summary>
+				Logger_Format_UserUnsubscribing,
 		/// <summary> Found the following resource names in the assembly manifest: </summary>
 				Logger_FoundResources,
 		/// <summary> -- {0} </summary>
@@ -71,6 +99,10 @@ namespace GrayDuckMail.Common.Localization
 				Logger_GeneratingEmail,
 		/// <summary> Getting messages. </summary>
 				Logger_GettingMessages,
+		/// <summary> Initializing database for controller. </summary>
+				Logger_InitializingControllerDatabase,
+		/// <summary> Invalid unsubscription request. No subscription status found. </summary>
+				Logger_InvalidUnsubscriptionSubscription,
 		/// <summary> Loading main HTML email template. </summary>
 				Logger_LoadingHTMLTemplate,
 		/// <summary> Mesasge body determined to contain HTML. </summary>
@@ -79,6 +111,14 @@ namespace GrayDuckMail.Common.Localization
 				Logger_MessageContainsPlainText,
 		/// <summary> Relaying message to {0} ({1}) </summary>
 				Logger_RelayingMessage,
+		/// <summary> The request is being processed from the designated external port. Request Origin: {0} </summary>
+				Logger_RequestOnExternalPort,
+		/// <summary> The request is being processed from the designated internal port. </summary>
+				Logger_RequestOnInternalPort,
+		/// <summary> The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1} </summary>
+				Logger_RequestOnUnknownPort,
+		/// <summary> Saving assignments. </summary>
+				Logger_SavingAssignments,
 		/// <summary> The SMTP client is not connected. Connecting now. </summary>
 				Logger_SMTPNotConnected,
 		/// <summary> Email template read into memory. </summary>
