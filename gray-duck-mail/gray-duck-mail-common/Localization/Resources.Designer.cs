@@ -124,11 +124,29 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding email definition to queue..
+        /// </summary>
+        internal static string Logger_AddingEmailDefinition {
+            get {
+                return ResourceManager.GetString("Logger_AddingEmailDefinition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  using SSL.
         /// </summary>
         internal static string Logger_AppendUsingSSL {
             get {
                 return ResourceManager.GetString("Logger_AppendUsingSSL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application stopped..
+        /// </summary>
+        internal static string Logger_ApplicationStopped {
+            get {
+                return ResourceManager.GetString("Logger_ApplicationStopped", resourceCulture);
             }
         }
         
@@ -223,6 +241,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to fetch email definition from queue..
+        /// </summary>
+        internal static string Logger_EmailDefinitionFetchFailure {
+            get {
+                return ResourceManager.GetString("Logger_EmailDefinitionFetchFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found an email definition in the shared memory queue..
         /// </summary>
         internal static string Logger_EmailDefinitionFound {
@@ -273,6 +300,15 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_FailureDetectedUnknownRecipient {
             get {
                 return ResourceManager.GetString("Logger_FailureDetectedUnknownRecipient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetching email defintion from queue..
+        /// </summary>
+        internal static string Logger_FetchingEmailDefinition {
+            get {
+                return ResourceManager.GetString("Logger_FetchingEmailDefinition", resourceCulture);
             }
         }
         
@@ -471,6 +507,15 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_Format_FormInputMalformed {
             get {
                 return ResourceManager.GetString("Logger_Format_FormInputMalformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing exisiting database {0}..
+        /// </summary>
+        internal static string Logger_Format_ImportingExistingDatabase {
+            get {
+                return ResourceManager.GetString("Logger_Format_ImportingExistingDatabase", resourceCulture);
             }
         }
         
@@ -754,6 +799,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Using custom view layout: {0}.
+        /// </summary>
+        internal static string Logger_Format_UsingCustomView {
+            get {
+                return ResourceManager.GetString("Logger_Format_UsingCustomView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found the following resource names in the assembly manifest:.
         /// </summary>
         internal static string Logger_FoundResources {
@@ -795,6 +849,15 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_InitializingControllerDatabase {
             get {
                 return ResourceManager.GetString("Logger_InitializingControllerDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initializing shared memory object via static constructor..
+        /// </summary>
+        internal static string Logger_InitializingSharedMemory {
+            get {
+                return ResourceManager.GetString("Logger_InitializingSharedMemory", resourceCulture);
             }
         }
         
@@ -871,6 +934,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registering service workers..
+        /// </summary>
+        internal static string Logger_RegisteringServiceWorkers {
+            get {
+                return ResourceManager.GetString("Logger_RegisteringServiceWorkers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Relaying message to {0} ({1}).
         /// </summary>
         internal static string Logger_RelayingMessage {
@@ -907,6 +979,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Running application..
+        /// </summary>
+        internal static string Logger_RunningApplication {
+            get {
+                return ResourceManager.GetString("Logger_RunningApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving assignments..
         /// </summary>
         internal static string Logger_SavingAssignments {
@@ -921,6 +1002,24 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_SMTPNotConnected {
             get {
                 return ResourceManager.GetString("Logger_SMTPNotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting the main application..
+        /// </summary>
+        internal static string Logger_StartingApplication {
+            get {
+                return ResourceManager.GetString("Logger_StartingApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping the application..
+        /// </summary>
+        internal static string Logger_StoppingApplication {
+            get {
+                return ResourceManager.GetString("Logger_StoppingApplication", resourceCulture);
             }
         }
         

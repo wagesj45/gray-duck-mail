@@ -138,8 +138,14 @@
   <data name="Exception_PropertySelectorResolutionError" xml:space="preserve">
     <value>The property selector was unable to resolve to a property name.</value>
   </data>
+  <data name="Logger_AddingEmailDefinition" xml:space="preserve">
+    <value>Adding email definition to queue.</value>
+  </data>
   <data name="Logger_AppendUsingSSL" xml:space="preserve">
     <value> using SSL</value>
+  </data>
+  <data name="Logger_ApplicationStopped" xml:space="preserve">
+    <value>Application stopped.</value>
   </data>
   <data name="Logger_BeginningFetchLoop" xml:space="preserve">
     <value>Beginning email fetch loop.</value>
@@ -171,6 +177,9 @@
   <data name="Logger_DisposingWrapper" xml:space="preserve">
     <value>Disposing of the client wrapper object.</value>
   </data>
+  <data name="Logger_EmailDefinitionFetchFailure" xml:space="preserve">
+    <value>Unable to fetch email definition from queue.</value>
+  </data>
   <data name="Logger_EmailDefinitionFound" xml:space="preserve">
     <value>Found an email definition in the shared memory queue.</value>
   </data>
@@ -188,6 +197,9 @@
   </data>
   <data name="Logger_FailureDetectedUnknownRecipient" xml:space="preserve">
     <value>The bounced email contains a failure report, but an unknown recipient status group.</value>
+  </data>
+  <data name="Logger_FetchingEmailDefinition" xml:space="preserve">
+    <value>Fetching email defintion from queue.</value>
   </data>
   <data name="Logger_FilteringBouncedMessages" xml:space="preserve">
     <value>Filtering bounced messages.</value>
@@ -254,6 +266,9 @@
   </data>
   <data name="Logger_Format_FormInputMalformed" xml:space="preserve">
     <value>Form input was malformed or missing for {0}.</value>
+  </data>
+  <data name="Logger_Format_ImportingExistingDatabase" xml:space="preserve">
+    <value>Importing exisiting database {0}.</value>
   </data>
   <data name="Logger_Format_InvalidUnsubscriptionContact" xml:space="preserve">
     <value>Invalid unsubscription request for non-existant contact with ID {0}.</value>
@@ -348,6 +363,9 @@
   <data name="Logger_Format_UserUnsubscribing" xml:space="preserve">
     <value>User {0} unsubscribing from {1}.</value>
   </data>
+  <data name="Logger_Format_UsingCustomView" xml:space="preserve">
+    <value>Using custom view layout: {0}</value>
+  </data>
   <data name="Logger_FoundResources" xml:space="preserve">
     <value>Found the following resource names in the assembly manifest:</value>
   </data>
@@ -362,6 +380,9 @@
   </data>
   <data name="Logger_InitializingControllerDatabase" xml:space="preserve">
     <value>Initializing database for controller.</value>
+  </data>
+  <data name="Logger_InitializingSharedMemory" xml:space="preserve">
+    <value>Initializing shared memory object via static constructor.</value>
   </data>
   <data name="Logger_InvalidUnsubscriptionSubscription" xml:space="preserve">
     <value>Invalid unsubscription request. No subscription status found.</value>
@@ -387,6 +408,9 @@
   <data name="Logger_OnboarderShutDown" xml:space="preserve">
     <value>Onboarder shutting down.</value>
   </data>
+  <data name="Logger_RegisteringServiceWorkers" xml:space="preserve">
+    <value>Registering service workers.</value>
+  </data>
   <data name="Logger_RelayingMessage" xml:space="preserve">
     <value>Relaying message to {0} ({1})</value>
   </data>
@@ -399,11 +423,20 @@
   <data name="Logger_RequestOnUnknownPort" xml:space="preserve">
     <value>The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1}</value>
   </data>
+  <data name="Logger_RunningApplication" xml:space="preserve">
+    <value>Running application.</value>
+  </data>
   <data name="Logger_SavingAssignments" xml:space="preserve">
     <value>Saving assignments.</value>
   </data>
   <data name="Logger_SMTPNotConnected" xml:space="preserve">
     <value>The SMTP client is not connected. Connecting now.</value>
+  </data>
+  <data name="Logger_StartingApplication" xml:space="preserve">
+    <value>Starting the main application.</value>
+  </data>
+  <data name="Logger_StoppingApplication" xml:space="preserve">
+    <value>Stopping the application.</value>
   </data>
   <data name="Logger_TemplateInMemory" xml:space="preserve">
     <value>Email template read into memory.</value>

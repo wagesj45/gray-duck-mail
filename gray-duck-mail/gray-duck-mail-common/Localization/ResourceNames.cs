@@ -21,8 +21,12 @@ namespace GrayDuckMail.Common.Localization
 				Exception_NoSearchTerm,
 		/// <summary> The property selector was unable to resolve to a property name. </summary>
 				Exception_PropertySelectorResolutionError,
+		/// <summary> Adding email definition to queue. </summary>
+				Logger_AddingEmailDefinition,
 		/// <summary> using SSL </summary>
 				Logger_AppendUsingSSL,
+		/// <summary> Application stopped. </summary>
+				Logger_ApplicationStopped,
 		/// <summary> Beginning email fetch loop. </summary>
 				Logger_BeginningFetchLoop,
 		/// <summary> Beginning onboarding loop. </summary>
@@ -43,6 +47,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_DisposingPOP3,
 		/// <summary> Disposing of the client wrapper object. </summary>
 				Logger_DisposingWrapper,
+		/// <summary> Unable to fetch email definition from queue. </summary>
+				Logger_EmailDefinitionFetchFailure,
 		/// <summary> Found an email definition in the shared memory queue. </summary>
 				Logger_EmailDefinitionFound,
 		/// <summary> Email fetcher shutting down. </summary>
@@ -55,6 +61,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_FailedDeliveryDetected,
 		/// <summary> The bounced email contains a failure report, but an unknown recipient status group. </summary>
 				Logger_FailureDetectedUnknownRecipient,
+		/// <summary> Fetching email defintion from queue. </summary>
+				Logger_FetchingEmailDefinition,
 		/// <summary> Filtering bounced messages. </summary>
 				Logger_FilteringBouncedMessages,
 		/// <summary> The email address for {0} appears to no longer be active. </summary>
@@ -99,6 +107,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_FilterMatch,
 		/// <summary> Form input was malformed or missing for {0}. </summary>
 				Logger_Format_FormInputMalformed,
+		/// <summary> Importing exisiting database {0}. </summary>
+				Logger_Format_ImportingExistingDatabase,
 		/// <summary> Invalid unsubscription request for non-existant contact with ID {0}. </summary>
 				Logger_Format_InvalidUnsubscriptionContact,
 		/// <summary> Invalid unsubscription request for non-existant discussion list with ID {0}. </summary>
@@ -161,6 +171,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_UserSubscribing,
 		/// <summary> User {0} unsubscribing from {1}. </summary>
 				Logger_Format_UserUnsubscribing,
+		/// <summary> Using custom view layout: {0} </summary>
+				Logger_Format_UsingCustomView,
 		/// <summary> Found the following resource names in the assembly manifest: </summary>
 				Logger_FoundResources,
 		/// <summary> -- {0} </summary>
@@ -171,6 +183,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_GettingMessages,
 		/// <summary> Initializing database for controller. </summary>
 				Logger_InitializingControllerDatabase,
+		/// <summary> Initializing shared memory object via static constructor. </summary>
+				Logger_InitializingSharedMemory,
 		/// <summary> Invalid unsubscription request. No subscription status found. </summary>
 				Logger_InvalidUnsubscriptionSubscription,
 		/// <summary> Loading main HTML email template. </summary>
@@ -187,6 +201,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_NoOnboardingAssignments,
 		/// <summary> Onboarder shutting down. </summary>
 				Logger_OnboarderShutDown,
+		/// <summary> Registering service workers. </summary>
+				Logger_RegisteringServiceWorkers,
 		/// <summary> Relaying message to {0} ({1}) </summary>
 				Logger_RelayingMessage,
 		/// <summary> The request is being processed from the designated external port. Request Origin: {0} </summary>
@@ -195,10 +211,16 @@ namespace GrayDuckMail.Common.Localization
 				Logger_RequestOnInternalPort,
 		/// <summary> The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1} </summary>
 				Logger_RequestOnUnknownPort,
+		/// <summary> Running application. </summary>
+				Logger_RunningApplication,
 		/// <summary> Saving assignments. </summary>
 				Logger_SavingAssignments,
 		/// <summary> The SMTP client is not connected. Connecting now. </summary>
 				Logger_SMTPNotConnected,
+		/// <summary> Starting the main application. </summary>
+				Logger_StartingApplication,
+		/// <summary> Stopping the application. </summary>
+				Logger_StoppingApplication,
 		/// <summary> Email template read into memory. </summary>
 				Logger_TemplateInMemory,
 		/// <summary> An unknown client type was requested. </summary>
