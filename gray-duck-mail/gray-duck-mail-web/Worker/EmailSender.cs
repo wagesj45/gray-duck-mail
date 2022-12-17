@@ -1,5 +1,6 @@
 ﻿using GrayDuckMail.Common;
 using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -39,7 +40,7 @@ namespace GrayDuckMail.Web.Worker
         /// </returns>
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_EstablishingDatabaseContext, ApplicationSettings.DatabaseFilePath.AbsolutePath));
             var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
 
             //Configure Email Unsubscribe Link
@@ -48,7 +49,7 @@ namespace GrayDuckMail.Web.Worker
                 EmailHelper.ConfigureUnsubscribeLink(DockerEnvironmentVariables.WebExternalURL, DockerEnvironmentVariables.WebUseHTTPS);
             }
 
-            logger.Info("Beginning email sender loop.");
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningSenderLoop));
             while (!cancellationToken.IsCancellationRequested)
             {
                 for (int i = 0; i < DockerEnvironmentVariables.RateLimitPerRoundCount; i++)
@@ -59,7 +60,7 @@ namespace GrayDuckMail.Web.Worker
 
                         if (emailDefinition != null)
                         {
-                            logger.Debug("Found an email definition in the shared memory queue.");
+                            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_EmailDefinitionFound));
 
                             switch (emailDefinition.Type)
                             {
@@ -102,7 +103,7 @@ namespace GrayDuckMail.Web.Worker
                                     break;
                                 case EmailDefinitionType.Unknown:
                                 default:
-                                    logger.Error("Recieved a malformed EmailDefinition.");
+                                    logger.Error(LanguageHelper.GetValue(ResourceName.Logger_MalformedEmailDefinition));
                                     break;
                             }
                         }
@@ -119,11 +120,11 @@ namespace GrayDuckMail.Web.Worker
                 }
 
                 // End the loop and wait the alloted time.
-                logger.Debug("Fetch send complete. Waiting {0}", DockerEnvironmentVariables.RateLimitRoundWaitTime);
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_SenderLoopComplete, DockerEnvironmentVariables.RateLimitRoundWaitTime));
                 await Task.Delay(DockerEnvironmentVariables.RateLimitRoundWaitTime, cancellationToken);
             }
 
-            logger.Info("Email sender shutting down.");
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_EmailSenderShutDown));
             return;
         }
     }

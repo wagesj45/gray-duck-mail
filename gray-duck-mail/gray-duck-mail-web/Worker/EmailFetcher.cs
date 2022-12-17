@@ -1,5 +1,6 @@
 ﻿using GrayDuckMail.Common;
 using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using MailKit.Net.Pop3;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -42,9 +43,9 @@ namespace GrayDuckMail.Web.Worker
         /// </returns>
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            logger.Info("Beginning email fetch loop.");
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningFetchLoop));
 
-            logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_EstablishingDatabaseContext, ApplicationSettings.DatabaseFilePath.AbsolutePath));
             var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
 
             while (!cancellationToken.IsCancellationRequested)
@@ -55,23 +56,23 @@ namespace GrayDuckMail.Web.Worker
 
                     foreach (var discussionList in discussionLists)
                     {
-                        logger.Debug("Processing list {0}", discussionList.Name);
+                        logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingList, discussionList.Name));
 
                         using (var client = new EmailClientWrapper(DockerEnvironmentVariables.EmailProtocol, DockerEnvironmentVariables.IMAPFolder))
                         {
                             try
                             {
-                                logger.Debug("Connecting to {0}:{1}{2}", discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? " using SSL" : "");
+                                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_ConnectingToSSL, discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL ? LanguageHelper.GetValue(ResourceName.Logger_AppendUsingSSL) : ""));
                                 client.Connect(discussionList.IncomingMailServer, discussionList.IncomingMailPort, discussionList.UseSSL, cancellationToken: cancellationToken);
 
-                                logger.Debug("Authenticating as {0}", discussionList.UserName);
+                                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingAs, discussionList.UserName));
                                 client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
 
                                 var emailMessages = client.GetMessages(cancellationToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
                                 
                                 if (emailMessages.Any())
                                 {
-                                    logger.Info("Processing {0} messages.", emailMessages.Count());
+                                    logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingMessages, emailMessages.Count()));
 
                                     var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
                                     var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
@@ -117,7 +118,7 @@ namespace GrayDuckMail.Web.Worker
                                 }
                                 else
                                 {
-                                    logger.Debug("No messages found.");
+                                    logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_NoMessagesFound));
                                 }
                             }
                             catch (Exception e)
@@ -131,7 +132,7 @@ namespace GrayDuckMail.Web.Worker
 
                     if (database.ChangeTracker.HasChanges())
                     {
-                        logger.Info("Committing changes to database.");
+                        logger.Info(LanguageHelper.GetValue(ResourceName.Logger_CommittingChangesToDatabase));
                         database.SaveChanges();
                     }
                 }
@@ -142,11 +143,11 @@ namespace GrayDuckMail.Web.Worker
                 }
 
                 // End the loop and wait the alloted time.
-                logger.Debug("Fetch loop complete. Waiting {0}", DockerEnvironmentVariables.FetchTime);
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FetchLoopComplete, DockerEnvironmentVariables.FetchTime));
                 await Task.Delay(DockerEnvironmentVariables.FetchTime, cancellationToken);
             }
 
-            logger.Info("Email fetcher shutting down.");
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_EmailFetcherShutdown));
             return;
         }
 
@@ -169,20 +170,20 @@ namespace GrayDuckMail.Web.Worker
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
-            logger.Info("Processing subscription message from {0}.", subscription.Contact.Name);
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingSubscriptionMessage, subscription.Contact.Name));
 
             if (!subscription.Contact.Activated)
             {
-                logger.Info("Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.", subscription.Contact.Name, subscription.Contact.ID);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SettingActive, subscription.Contact.Name, subscription.Contact.ID));
                 subscription.Contact.Activated = true;
             }
 
-            logger.Info("User {0} subscribing to {1}.", subscription.Contact.Name, discussionList.Name);
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserSubscribing, subscription.Contact.Name, discussionList.Name));
             subscription.Status = SubscriptionStatus.Subscribed;
 
             SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
 
-            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index));
             client.DeleteMessage(subscriptionConfirmation.Index, cancellationToken);
         }
 
@@ -202,12 +203,12 @@ namespace GrayDuckMail.Web.Worker
                 .Where(subscription => subscription.Contact.Email == from.Address)
                 .SingleOrDefault();
 
-            logger.Info("User {0} unsubscribing from {1}.", subscription.Contact.Name, discussionList.Name);
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserUnsubscribing, subscription.Contact.Name, discussionList.Name));
             subscription.Status = SubscriptionStatus.Unsubscribed;
 
             SharedMemory.AddEmail(EmailDefinition.CreateUnsubscriptionConfirmation(discussionList, subscription.Contact));
 
-            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server. (Disabled)", unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index));
             client.DeleteMessage(unsubscribeConfirmation.Index);
         }
 
@@ -232,7 +233,7 @@ namespace GrayDuckMail.Web.Worker
 
             if (subscription == null)
             {
-                logger.Info("An unknown user has requested access to {0}. An alert will be sent to the owner address alias.", discussionList);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnknownUserRequestedAccess, discussionList));
 
                 var newContact = new Contact()
                 {
@@ -257,22 +258,22 @@ namespace GrayDuckMail.Web.Worker
             {
                 if (subscription.Status == SubscriptionStatus.Subscribed)
                 {
-                    logger.Error("{0}, who is already subscribed to {1}, has requested access again. Ignoring this message.", subscription.Contact.Name, discussionList.Name);
+                    logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserAlreadySubscribed, subscription.Contact.Name, discussionList.Name));
                 }
                 else if (subscription.Status != SubscriptionStatus.Denied)
                 {
-                    logger.Info("{0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed.", subscription.Contact.Name, discussionList.Name);
+                    logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserPreviouslySubscribed, subscription.Contact.Name, discussionList.Name));
                     subscription.Status = SubscriptionStatus.Subscribed;
 
                     SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
                 }
                 else
                 {
-                    logger.Debug("{0} has requested access to {1}, but has previously been denied. Ignoring this request.", subscription.Contact.Name, discussionList.Name);
+                    logger.Debug("", subscription.Contact.Name, discussionList.Name);
                 }
             }
 
-            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", request.Message.MessageId, request.Index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, request.Message.MessageId, request.Index));
             client.DeleteMessage(request.Index, cancellationToken);
         }
 
@@ -292,16 +293,16 @@ namespace GrayDuckMail.Web.Worker
 
             if (subscription != null)
             {
-                logger.Info("The email address for {0} appears to no longer be active.", subscription.Contact.Name);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_AddressNotActive, subscription.Contact.Name));
                 subscription.Status = SubscriptionStatus.Bounced;
                 subscription.Contact.Activated = false;
             }
             else
             {
-                logger.Error("A bounced email was recieved for an address that is not subscribed to {0}. Ignoring this message.", discussionList.Name);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnsubscribedBounce, discussionList.Name));
             }
 
-            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", bounce.Message.MessageId, bounce.Index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, bounce.Message.MessageId, bounce.Index));
             client.DeleteMessage(bounce.Index);
         }
 
@@ -371,16 +372,16 @@ namespace GrayDuckMail.Web.Worker
             }
             else
             {
-                logger.Error("The sender is unrecognized or unauthorized to participate in {0}. We'll log it and let the message be deleted.", discussionList.Name);
-                logger.Error("From: {0} ({1})", from.Name, from.Address);
-                logger.Error("Encoding: {0}", from.Encoding.EncodingName);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorized, discussionList.Name));
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorizedFrom, from.Name, from.Address));
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorizedEncoding, from.Encoding.EncodingName));
                 foreach (var domain in from.Route)
                 {
-                    logger.Error("-- {0}", domain);
+                    logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorizedDomainLine, domain));
                 }
             }
 
-            logger.Debug("Message {0} (Index {1}) processed. Marked for deletion from the server.", discussionMessage.Message.MessageId, discussionMessage.Index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, discussionMessage.Message.MessageId, discussionMessage.Index));
             client.DeleteMessage(discussionMessage.Index, cancellationToken);
         }
 
@@ -395,7 +396,7 @@ namespace GrayDuckMail.Web.Worker
         /// </returns>
         private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, string emailToAddress)
         {
-            logger.Debug("Filtering messages for {0}.", emailToAddress);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessages, emailToAddress));
 
             var filteredMessages = messages.Select(message => (Message: message, Recipients: message.Message.GetRecipients(true)))
             .Where(anon => anon.Recipients.Any(rec => rec.Address.Equals(emailToAddress, StringComparison.OrdinalIgnoreCase)))
@@ -412,7 +413,7 @@ namespace GrayDuckMail.Web.Worker
         /// </returns>
         private IEnumerable<IndexedMimeMessage> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
         {
-            logger.Debug("Filtering bounced messages.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FilteringBouncedMessages);
 
             return FilterMessages(messages, message => EmailHelper.IsBouncedMessage(message));
         }
@@ -428,15 +429,15 @@ namespace GrayDuckMail.Web.Worker
         /// </returns>
         private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, Func<IndexedMimeMessage, bool> filter)
         {
-            logger.Trace("Filtering {0} messages.", messages.Count());
+            logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringCount, messages.Count()));
 
             var filteredMessages = new List<IndexedMimeMessage>();
             foreach (var message in messages)
             {
-                logger.Trace("Filtering message {0}.", message.Index);
+                logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessage, message.Index));
                 if (filter(message))
                 {
-                    logger.Trace("Message {0} matches the filter criteria.", message.Index);
+                    logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilterMatch, message.Index));
                     filteredMessages.Add(message);
                 }
             }

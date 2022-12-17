@@ -21,6 +21,16 @@ namespace GrayDuckMail.Common.Localization
 				Exception_NoSearchTerm,
 		/// <summary> The property selector was unable to resolve to a property name. </summary>
 				Exception_PropertySelectorResolutionError,
+		/// <summary> using SSL </summary>
+				Logger_AppendUsingSSL,
+		/// <summary> Beginning email fetch loop. </summary>
+				Logger_BeginningFetchLoop,
+		/// <summary> Beginning onboarding loop. </summary>
+				Logger_BeginningOnboarderLoop,
+		/// <summary> Beginning email sender loop. </summary>
+				Logger_BeginningSenderLoop,
+		/// <summary> Committing changes to database. </summary>
+				Logger_CommittingChangesToDatabase,
 		/// <summary> Creating email wrapper object. </summary>
 				Logger_CreatingEmailWrapper,
 		/// <summary> Message is a multipart message with at least one 'delivery-status' section. </summary>
@@ -33,20 +43,34 @@ namespace GrayDuckMail.Common.Localization
 				Logger_DisposingPOP3,
 		/// <summary> Disposing of the client wrapper object. </summary>
 				Logger_DisposingWrapper,
+		/// <summary> Found an email definition in the shared memory queue. </summary>
+				Logger_EmailDefinitionFound,
+		/// <summary> Email fetcher shutting down. </summary>
+				Logger_EmailFetcherShutdown,
+		/// <summary> Email sender shutting down. </summary>
+				Logger_EmailSenderShutDown,
 		/// <summary> The discussion list is empty. </summary>
 				Logger_EmptyDiscussionList,
 		/// <summary> A failed delivery was detected. </summary>
 				Logger_FailedDeliveryDetected,
 		/// <summary> The bounced email contains a failure report, but an unknown recipient status group. </summary>
 				Logger_FailureDetectedUnknownRecipient,
+		/// <summary> Filtering bounced messages. </summary>
+				Logger_FilteringBouncedMessages,
+		/// <summary> The email address for {0} appears to no longer be active. </summary>
+				Logger_Format_AddressNotActive,
 		/// <summary> Assigning Contact {0} to Discussion List {1}. </summary>
 				Logger_Format_AssigningContact,
 		/// <summary> Assigning index {0} to {1}. </summary>
 				Logger_Format_AssigningMimeMessageIndex,
+		/// <summary> Authenticating as {0}. </summary>
+				Logger_Format_AuthenticatingAs,
 		/// <summary> Authenticating with {0}:{1}. </summary>
 				Logger_Format_AuthenticatingWith,
 		/// <summary> Connecting to {0}:{1}. </summary>
 				Logger_Format_ConnectingTo,
+		/// <summary> Connecting to {0}:{1}{2} </summary>
+				Logger_Format_ConnectingToSSL,
 		/// <summary> Could not find contact with ID = {0}. </summary>
 				Logger_Format_CouldNotFindContact,
 		/// <summary> Could not find discussion list with ID = {0} </summary>
@@ -59,8 +83,20 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_DBNotCreated,
 		/// <summary> Deleting message {0}. </summary>
 				Logger_Format_DeletingMessage,
+		/// <summary> Establishing database context using {0}. </summary>
+				Logger_Format_EstablishingDatabaseContext,
 		/// <summary> -- {0}: {1} </summary>
 				Logger_Format_FailureStatusGroupsLine,
+		/// <summary> Fetch loop complete. Waiting {0}. </summary>
+				Logger_Format_FetchLoopComplete,
+		/// <summary> Filtering {0} messages. </summary>
+				Logger_Format_FilteringCount,
+		/// <summary> Filtering message {0}. </summary>
+				Logger_Format_FilteringMessage,
+		/// <summary> Filtering messages for {0}. </summary>
+				Logger_Format_FilteringMessages,
+		/// <summary> Message {0} matches the filter criteria. </summary>
+				Logger_Format_FilterMatch,
 		/// <summary> Form input was malformed or missing for {0}. </summary>
 				Logger_Format_FormInputMalformed,
 		/// <summary> Invalid unsubscription request for non-existant contact with ID {0}. </summary>
@@ -71,8 +107,20 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_InvalidUnsubscriptionSubscriptionStatus,
 		/// <summary> Loading assembly {0}. </summary>
 				Logger_Format_LoadingAssembly,
+		/// <summary> Message {0} (Index {1}) processed. Marked for deletion from the server. </summary>
+				Logger_Format_MessageProcessed,
+		/// <summary> Onboarding loop complete. Waiting {0}. </summary>
+				Logger_Format_OnboarderLoopComplete,
 		/// <summary> Performing fuzzy search: {0} </summary>
 				Logger_Format_PerformingFuzzySearch,
+		/// <summary> Processing list {0}. </summary>
+				Logger_Format_ProcessingList,
+		/// <summary> Processing {0} messages. </summary>
+				Logger_Format_ProcessingMessages,
+		/// <summary> Processing subscription message from {0}. </summary>
+				Logger_Format_ProcessingSubscriptionMessage,
+		/// <summary> Email sender loop complete. Waiting {0}. </summary>
+				Logger_Format_SenderLoopComplete,
 		/// <summary> Sending onboarding email to {0} ({1}). </summary>
 				Logger_Format_SendingOnboardingEmail,
 		/// <summary> Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}. </summary>
@@ -85,10 +133,32 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_SendingUnsubscriptionConfirmation,
 		/// <summary> Serving page '{0}' </summary>
 				Logger_Format_ServingPage,
+		/// <summary> Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email. </summary>
+				Logger_Format_SettingActive,
 		/// <summary> Email template processed: {0}. </summary>
 				Logger_Format_TemplateProcessed,
 		/// <summary> Removing Contact {0} to Discussion List {1}. </summary>
 				Logger_Format_UnassigningContact,
+		/// <summary> An unknown user has requested access to {0}. An alert will be sent to the owner address alias. </summary>
+				Logger_Format_UnknownUserRequestedAccess,
+		/// <summary> The sender is unrecognized or unauthorized to participate in {0}. We'll log it and let the message be deleted. </summary>
+				Logger_Format_UnrecognizedOrUnauthorized,
+		/// <summary> -- {0} </summary>
+				Logger_Format_UnrecognizedOrUnauthorizedDomainLine,
+		/// <summary> Encoding: {0} </summary>
+				Logger_Format_UnrecognizedOrUnauthorizedEncoding,
+		/// <summary> From: {0} ({1}) </summary>
+				Logger_Format_UnrecognizedOrUnauthorizedFrom,
+		/// <summary> A bounced email was recieved for an address that is not subscribed to {0}. Ignoring this message. </summary>
+				Logger_Format_UnsubscribedBounce,
+		/// <summary> {0}, who is already subscribed to {1}, has requested access again. Ignoring this message. </summary>
+				Logger_Format_UserAlreadySubscribed,
+		/// <summary> {0} has requested access to {1}, but has previously been denied. Ignoring this request. </summary>
+				Logger_Format_UserPreviouslyDenied,
+		/// <summary> {0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed. </summary>
+				Logger_Format_UserPreviouslySubscribed,
+		/// <summary> User {0} subscribing to {1}. </summary>
+				Logger_Format_UserSubscribing,
 		/// <summary> User {0} unsubscribing from {1}. </summary>
 				Logger_Format_UserUnsubscribing,
 		/// <summary> Found the following resource names in the assembly manifest: </summary>
@@ -105,10 +175,18 @@ namespace GrayDuckMail.Common.Localization
 				Logger_InvalidUnsubscriptionSubscription,
 		/// <summary> Loading main HTML email template. </summary>
 				Logger_LoadingHTMLTemplate,
+		/// <summary> Recieved a malformed EmailDefinition. </summary>
+				Logger_MalformedEmailDefinition,
 		/// <summary> Mesasge body determined to contain HTML. </summary>
 				Logger_MessageContainsHTML,
 		/// <summary> Message body determined to contain plain text. </summary>
 				Logger_MessageContainsPlainText,
+		/// <summary> No messages found. </summary>
+				Logger_NoMessagesFound,
+		/// <summary> No freshly created assignments waiting for onboarding. </summary>
+				Logger_NoOnboardingAssignments,
+		/// <summary> Onboarder shutting down. </summary>
+				Logger_OnboarderShutDown,
 		/// <summary> Relaying message to {0} ({1}) </summary>
 				Logger_RelayingMessage,
 		/// <summary> The request is being processed from the designated external port. Request Origin: {0} </summary>

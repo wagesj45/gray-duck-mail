@@ -124,6 +124,51 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  using SSL.
+        /// </summary>
+        internal static string Logger_AppendUsingSSL {
+            get {
+                return ResourceManager.GetString("Logger_AppendUsingSSL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beginning email fetch loop..
+        /// </summary>
+        internal static string Logger_BeginningFetchLoop {
+            get {
+                return ResourceManager.GetString("Logger_BeginningFetchLoop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beginning onboarding loop..
+        /// </summary>
+        internal static string Logger_BeginningOnboarderLoop {
+            get {
+                return ResourceManager.GetString("Logger_BeginningOnboarderLoop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beginning email sender loop..
+        /// </summary>
+        internal static string Logger_BeginningSenderLoop {
+            get {
+                return ResourceManager.GetString("Logger_BeginningSenderLoop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Committing changes to database..
+        /// </summary>
+        internal static string Logger_CommittingChangesToDatabase {
+            get {
+                return ResourceManager.GetString("Logger_CommittingChangesToDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating email wrapper object..
         /// </summary>
         internal static string Logger_CreatingEmailWrapper {
@@ -178,6 +223,33 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Found an email definition in the shared memory queue..
+        /// </summary>
+        internal static string Logger_EmailDefinitionFound {
+            get {
+                return ResourceManager.GetString("Logger_EmailDefinitionFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email fetcher shutting down..
+        /// </summary>
+        internal static string Logger_EmailFetcherShutdown {
+            get {
+                return ResourceManager.GetString("Logger_EmailFetcherShutdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email sender shutting down..
+        /// </summary>
+        internal static string Logger_EmailSenderShutDown {
+            get {
+                return ResourceManager.GetString("Logger_EmailSenderShutDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The discussion list is empty..
         /// </summary>
         internal static string Logger_EmptyDiscussionList {
@@ -205,6 +277,24 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filtering bounced messages..
+        /// </summary>
+        internal static string Logger_FilteringBouncedMessages {
+            get {
+                return ResourceManager.GetString("Logger_FilteringBouncedMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The email address for {0} appears to no longer be active..
+        /// </summary>
+        internal static string Logger_Format_AddressNotActive {
+            get {
+                return ResourceManager.GetString("Logger_Format_AddressNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigning Contact {0} to Discussion List {1}..
         /// </summary>
         internal static string Logger_Format_AssigningContact {
@@ -223,6 +313,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authenticating as {0}..
+        /// </summary>
+        internal static string Logger_Format_AuthenticatingAs {
+            get {
+                return ResourceManager.GetString("Logger_Format_AuthenticatingAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authenticating with {0}:{1}..
         /// </summary>
         internal static string Logger_Format_AuthenticatingWith {
@@ -237,6 +336,15 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_Format_ConnectingTo {
             get {
                 return ResourceManager.GetString("Logger_Format_ConnectingTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting to {0}:{1}{2}.
+        /// </summary>
+        internal static string Logger_Format_ConnectingToSSL {
+            get {
+                return ResourceManager.GetString("Logger_Format_ConnectingToSSL", resourceCulture);
             }
         }
         
@@ -295,11 +403,65 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Establishing database context using {0}..
+        /// </summary>
+        internal static string Logger_Format_EstablishingDatabaseContext {
+            get {
+                return ResourceManager.GetString("Logger_Format_EstablishingDatabaseContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -- {0}: {1}.
         /// </summary>
         internal static string Logger_Format_FailureStatusGroupsLine {
             get {
                 return ResourceManager.GetString("Logger_Format_FailureStatusGroupsLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetch loop complete. Waiting {0}..
+        /// </summary>
+        internal static string Logger_Format_FetchLoopComplete {
+            get {
+                return ResourceManager.GetString("Logger_Format_FetchLoopComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtering {0} messages..
+        /// </summary>
+        internal static string Logger_Format_FilteringCount {
+            get {
+                return ResourceManager.GetString("Logger_Format_FilteringCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtering message {0}..
+        /// </summary>
+        internal static string Logger_Format_FilteringMessage {
+            get {
+                return ResourceManager.GetString("Logger_Format_FilteringMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtering messages for {0}..
+        /// </summary>
+        internal static string Logger_Format_FilteringMessages {
+            get {
+                return ResourceManager.GetString("Logger_Format_FilteringMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message {0} matches the filter criteria..
+        /// </summary>
+        internal static string Logger_Format_FilterMatch {
+            get {
+                return ResourceManager.GetString("Logger_Format_FilterMatch", resourceCulture);
             }
         }
         
@@ -349,11 +511,65 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message {0} (Index {1}) processed. Marked for deletion from the server..
+        /// </summary>
+        internal static string Logger_Format_MessageProcessed {
+            get {
+                return ResourceManager.GetString("Logger_Format_MessageProcessed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Onboarding loop complete. Waiting {0}..
+        /// </summary>
+        internal static string Logger_Format_OnboarderLoopComplete {
+            get {
+                return ResourceManager.GetString("Logger_Format_OnboarderLoopComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Performing fuzzy search: {0}.
         /// </summary>
         internal static string Logger_Format_PerformingFuzzySearch {
             get {
                 return ResourceManager.GetString("Logger_Format_PerformingFuzzySearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing list {0}..
+        /// </summary>
+        internal static string Logger_Format_ProcessingList {
+            get {
+                return ResourceManager.GetString("Logger_Format_ProcessingList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing {0} messages..
+        /// </summary>
+        internal static string Logger_Format_ProcessingMessages {
+            get {
+                return ResourceManager.GetString("Logger_Format_ProcessingMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing subscription message from {0}..
+        /// </summary>
+        internal static string Logger_Format_ProcessingSubscriptionMessage {
+            get {
+                return ResourceManager.GetString("Logger_Format_ProcessingSubscriptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email sender loop complete. Waiting {0}..
+        /// </summary>
+        internal static string Logger_Format_SenderLoopComplete {
+            get {
+                return ResourceManager.GetString("Logger_Format_SenderLoopComplete", resourceCulture);
             }
         }
         
@@ -412,6 +628,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email..
+        /// </summary>
+        internal static string Logger_Format_SettingActive {
+            get {
+                return ResourceManager.GetString("Logger_Format_SettingActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email template processed: {0}..
         /// </summary>
         internal static string Logger_Format_TemplateProcessed {
@@ -426,6 +651,96 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_Format_UnassigningContact {
             get {
                 return ResourceManager.GetString("Logger_Format_UnassigningContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown user has requested access to {0}. An alert will be sent to the owner address alias..
+        /// </summary>
+        internal static string Logger_Format_UnknownUserRequestedAccess {
+            get {
+                return ResourceManager.GetString("Logger_Format_UnknownUserRequestedAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The sender is unrecognized or unauthorized to participate in {0}. We&apos;ll log it and let the message be deleted..
+        /// </summary>
+        internal static string Logger_Format_UnrecognizedOrUnauthorized {
+            get {
+                return ResourceManager.GetString("Logger_Format_UnrecognizedOrUnauthorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- {0}.
+        /// </summary>
+        internal static string Logger_Format_UnrecognizedOrUnauthorizedDomainLine {
+            get {
+                return ResourceManager.GetString("Logger_Format_UnrecognizedOrUnauthorizedDomainLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encoding: {0}.
+        /// </summary>
+        internal static string Logger_Format_UnrecognizedOrUnauthorizedEncoding {
+            get {
+                return ResourceManager.GetString("Logger_Format_UnrecognizedOrUnauthorizedEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From: {0} ({1}).
+        /// </summary>
+        internal static string Logger_Format_UnrecognizedOrUnauthorizedFrom {
+            get {
+                return ResourceManager.GetString("Logger_Format_UnrecognizedOrUnauthorizedFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A bounced email was recieved for an address that is not subscribed to {0}. Ignoring this message..
+        /// </summary>
+        internal static string Logger_Format_UnsubscribedBounce {
+            get {
+                return ResourceManager.GetString("Logger_Format_UnsubscribedBounce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}, who is already subscribed to {1}, has requested access again. Ignoring this message..
+        /// </summary>
+        internal static string Logger_Format_UserAlreadySubscribed {
+            get {
+                return ResourceManager.GetString("Logger_Format_UserAlreadySubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has requested access to {1}, but has previously been denied. Ignoring this request..
+        /// </summary>
+        internal static string Logger_Format_UserPreviouslyDenied {
+            get {
+                return ResourceManager.GetString("Logger_Format_UserPreviouslyDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed..
+        /// </summary>
+        internal static string Logger_Format_UserPreviouslySubscribed {
+            get {
+                return ResourceManager.GetString("Logger_Format_UserPreviouslySubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} subscribing to {1}..
+        /// </summary>
+        internal static string Logger_Format_UserSubscribing {
+            get {
+                return ResourceManager.GetString("Logger_Format_UserSubscribing", resourceCulture);
             }
         }
         
@@ -502,6 +817,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recieved a malformed EmailDefinition..
+        /// </summary>
+        internal static string Logger_MalformedEmailDefinition {
+            get {
+                return ResourceManager.GetString("Logger_MalformedEmailDefinition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mesasge body determined to contain HTML..
         /// </summary>
         internal static string Logger_MessageContainsHTML {
@@ -516,6 +840,33 @@ namespace GrayDuckMail.Common.Localization {
         internal static string Logger_MessageContainsPlainText {
             get {
                 return ResourceManager.GetString("Logger_MessageContainsPlainText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No messages found..
+        /// </summary>
+        internal static string Logger_NoMessagesFound {
+            get {
+                return ResourceManager.GetString("Logger_NoMessagesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No freshly created assignments waiting for onboarding..
+        /// </summary>
+        internal static string Logger_NoOnboardingAssignments {
+            get {
+                return ResourceManager.GetString("Logger_NoOnboardingAssignments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Onboarder shutting down..
+        /// </summary>
+        internal static string Logger_OnboarderShutDown {
+            get {
+                return ResourceManager.GetString("Logger_OnboarderShutDown", resourceCulture);
             }
         }
         

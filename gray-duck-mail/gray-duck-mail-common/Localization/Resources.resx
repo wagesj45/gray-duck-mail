@@ -138,6 +138,21 @@
   <data name="Exception_PropertySelectorResolutionError" xml:space="preserve">
     <value>The property selector was unable to resolve to a property name.</value>
   </data>
+  <data name="Logger_AppendUsingSSL" xml:space="preserve">
+    <value> using SSL</value>
+  </data>
+  <data name="Logger_BeginningFetchLoop" xml:space="preserve">
+    <value>Beginning email fetch loop.</value>
+  </data>
+  <data name="Logger_BeginningOnboarderLoop" xml:space="preserve">
+    <value>Beginning onboarding loop.</value>
+  </data>
+  <data name="Logger_BeginningSenderLoop" xml:space="preserve">
+    <value>Beginning email sender loop.</value>
+  </data>
+  <data name="Logger_CommittingChangesToDatabase" xml:space="preserve">
+    <value>Committing changes to database.</value>
+  </data>
   <data name="Logger_CreatingEmailWrapper" xml:space="preserve">
     <value>Creating email wrapper object.</value>
   </data>
@@ -156,6 +171,15 @@
   <data name="Logger_DisposingWrapper" xml:space="preserve">
     <value>Disposing of the client wrapper object.</value>
   </data>
+  <data name="Logger_EmailDefinitionFound" xml:space="preserve">
+    <value>Found an email definition in the shared memory queue.</value>
+  </data>
+  <data name="Logger_EmailFetcherShutdown" xml:space="preserve">
+    <value>Email fetcher shutting down.</value>
+  </data>
+  <data name="Logger_EmailSenderShutDown" xml:space="preserve">
+    <value>Email sender shutting down.</value>
+  </data>
   <data name="Logger_EmptyDiscussionList" xml:space="preserve">
     <value>The discussion list is empty.</value>
   </data>
@@ -165,17 +189,29 @@
   <data name="Logger_FailureDetectedUnknownRecipient" xml:space="preserve">
     <value>The bounced email contains a failure report, but an unknown recipient status group.</value>
   </data>
+  <data name="Logger_FilteringBouncedMessages" xml:space="preserve">
+    <value>Filtering bounced messages.</value>
+  </data>
+  <data name="Logger_Format_AddressNotActive" xml:space="preserve">
+    <value>The email address for {0} appears to no longer be active.</value>
+  </data>
   <data name="Logger_Format_AssigningContact" xml:space="preserve">
     <value>Assigning Contact {0} to Discussion List {1}.</value>
   </data>
   <data name="Logger_Format_AssigningMimeMessageIndex" xml:space="preserve">
     <value>Assigning index {0} to {1}.</value>
   </data>
+  <data name="Logger_Format_AuthenticatingAs" xml:space="preserve">
+    <value>Authenticating as {0}.</value>
+  </data>
   <data name="Logger_Format_AuthenticatingWith" xml:space="preserve">
     <value>Authenticating with {0}:{1}.</value>
   </data>
   <data name="Logger_Format_ConnectingTo" xml:space="preserve">
     <value>Connecting to {0}:{1}.</value>
+  </data>
+  <data name="Logger_Format_ConnectingToSSL" xml:space="preserve">
+    <value>Connecting to {0}:{1}{2}</value>
   </data>
   <data name="Logger_Format_CouldNotFindContact" xml:space="preserve">
     <value>Could not find contact with ID = {0}.</value>
@@ -195,8 +231,26 @@
   <data name="Logger_Format_DeletingMessage" xml:space="preserve">
     <value>Deleting message {0}.</value>
   </data>
+  <data name="Logger_Format_EstablishingDatabaseContext" xml:space="preserve">
+    <value>Establishing database context using {0}.</value>
+  </data>
   <data name="Logger_Format_FailureStatusGroupsLine" xml:space="preserve">
     <value>-- {0}: {1}</value>
+  </data>
+  <data name="Logger_Format_FetchLoopComplete" xml:space="preserve">
+    <value>Fetch loop complete. Waiting {0}.</value>
+  </data>
+  <data name="Logger_Format_FilteringCount" xml:space="preserve">
+    <value>Filtering {0} messages.</value>
+  </data>
+  <data name="Logger_Format_FilteringMessage" xml:space="preserve">
+    <value>Filtering message {0}.</value>
+  </data>
+  <data name="Logger_Format_FilteringMessages" xml:space="preserve">
+    <value>Filtering messages for {0}.</value>
+  </data>
+  <data name="Logger_Format_FilterMatch" xml:space="preserve">
+    <value>Message {0} matches the filter criteria.</value>
   </data>
   <data name="Logger_Format_FormInputMalformed" xml:space="preserve">
     <value>Form input was malformed or missing for {0}.</value>
@@ -213,8 +267,26 @@
   <data name="Logger_Format_LoadingAssembly" xml:space="preserve">
     <value>Loading assembly {0}.</value>
   </data>
+  <data name="Logger_Format_MessageProcessed" xml:space="preserve">
+    <value>Message {0} (Index {1}) processed. Marked for deletion from the server.</value>
+  </data>
+  <data name="Logger_Format_OnboarderLoopComplete" xml:space="preserve">
+    <value>Onboarding loop complete. Waiting {0}.</value>
+  </data>
   <data name="Logger_Format_PerformingFuzzySearch" xml:space="preserve">
     <value>Performing fuzzy search: {0}</value>
+  </data>
+  <data name="Logger_Format_ProcessingList" xml:space="preserve">
+    <value>Processing list {0}.</value>
+  </data>
+  <data name="Logger_Format_ProcessingMessages" xml:space="preserve">
+    <value>Processing {0} messages.</value>
+  </data>
+  <data name="Logger_Format_ProcessingSubscriptionMessage" xml:space="preserve">
+    <value>Processing subscription message from {0}.</value>
+  </data>
+  <data name="Logger_Format_SenderLoopComplete" xml:space="preserve">
+    <value>Email sender loop complete. Waiting {0}.</value>
   </data>
   <data name="Logger_Format_SendingOnboardingEmail" xml:space="preserve">
     <value>Sending onboarding email to {0} ({1}).</value>
@@ -234,11 +306,44 @@
   <data name="Logger_Format_ServingPage" xml:space="preserve">
     <value>Serving page '{0}'</value>
   </data>
+  <data name="Logger_Format_SettingActive" xml:space="preserve">
+    <value>Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.</value>
+  </data>
   <data name="Logger_Format_TemplateProcessed" xml:space="preserve">
     <value>Email template processed: {0}.</value>
   </data>
   <data name="Logger_Format_UnassigningContact" xml:space="preserve">
     <value>Removing Contact {0} to Discussion List {1}.</value>
+  </data>
+  <data name="Logger_Format_UnknownUserRequestedAccess" xml:space="preserve">
+    <value>An unknown user has requested access to {0}. An alert will be sent to the owner address alias.</value>
+  </data>
+  <data name="Logger_Format_UnrecognizedOrUnauthorized" xml:space="preserve">
+    <value>The sender is unrecognized or unauthorized to participate in {0}. We'll log it and let the message be deleted.</value>
+  </data>
+  <data name="Logger_Format_UnrecognizedOrUnauthorizedDomainLine" xml:space="preserve">
+    <value>-- {0}</value>
+  </data>
+  <data name="Logger_Format_UnrecognizedOrUnauthorizedEncoding" xml:space="preserve">
+    <value>Encoding: {0}</value>
+  </data>
+  <data name="Logger_Format_UnrecognizedOrUnauthorizedFrom" xml:space="preserve">
+    <value>From: {0} ({1})</value>
+  </data>
+  <data name="Logger_Format_UnsubscribedBounce" xml:space="preserve">
+    <value>A bounced email was recieved for an address that is not subscribed to {0}. Ignoring this message.</value>
+  </data>
+  <data name="Logger_Format_UserAlreadySubscribed" xml:space="preserve">
+    <value>{0}, who is already subscribed to {1}, has requested access again. Ignoring this message.</value>
+  </data>
+  <data name="Logger_Format_UserPreviouslyDenied" xml:space="preserve">
+    <value>{0} has requested access to {1}, but has previously been denied. Ignoring this request.</value>
+  </data>
+  <data name="Logger_Format_UserPreviouslySubscribed" xml:space="preserve">
+    <value>{0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed.</value>
+  </data>
+  <data name="Logger_Format_UserSubscribing" xml:space="preserve">
+    <value>User {0} subscribing to {1}.</value>
   </data>
   <data name="Logger_Format_UserUnsubscribing" xml:space="preserve">
     <value>User {0} unsubscribing from {1}.</value>
@@ -264,11 +369,23 @@
   <data name="Logger_LoadingHTMLTemplate" xml:space="preserve">
     <value>Loading main HTML email template.</value>
   </data>
+  <data name="Logger_MalformedEmailDefinition" xml:space="preserve">
+    <value>Recieved a malformed EmailDefinition.</value>
+  </data>
   <data name="Logger_MessageContainsHTML" xml:space="preserve">
     <value>Mesasge body determined to contain HTML.</value>
   </data>
   <data name="Logger_MessageContainsPlainText" xml:space="preserve">
     <value>Message body determined to contain plain text.</value>
+  </data>
+  <data name="Logger_NoMessagesFound" xml:space="preserve">
+    <value>No messages found.</value>
+  </data>
+  <data name="Logger_NoOnboardingAssignments" xml:space="preserve">
+    <value>No freshly created assignments waiting for onboarding.</value>
+  </data>
+  <data name="Logger_OnboarderShutDown" xml:space="preserve">
+    <value>Onboarder shutting down.</value>
   </data>
   <data name="Logger_RelayingMessage" xml:space="preserve">
     <value>Relaying message to {0} ({1})</value>
