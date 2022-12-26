@@ -1265,5 +1265,41 @@ namespace GrayDuckMail.Common.Localization {
                 return ResourceManager.GetString("Mail_UnsubscriptionConfirmationHeading", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administration.
+        /// </summary>
+        internal static string View_Administration_Heading {
+            get {
+                return ResourceManager.GetString("View_Administration_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perform specialized tasks to manage and maintain your service here..
+        /// </summary>
+        internal static string View_Administration_Subheading {
+            get {
+                return ResourceManager.GetString("View_Administration_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administration.
+        /// </summary>
+        internal static string View_Administration_Title {
+            get {
+                return ResourceManager.GetString("View_Administration_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web Settings.
+        /// </summary>
+        internal static string View_Administration_WebSettings {
+            get {
+                return ResourceManager.GetString("View_Administration_WebSettings", resourceCulture);
+            }
+        }
     }
 }

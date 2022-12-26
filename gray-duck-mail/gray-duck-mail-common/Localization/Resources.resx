@@ -520,4 +520,16 @@
   <data name="Mail_UnsubscriptionConfirmationHeading" xml:space="preserve">
     <value>Sorry to see you go.</value>
   </data>
+  <data name="View_Administration_Heading" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="View_Administration_Subheading" xml:space="preserve">
+    <value>Perform specialized tasks to manage and maintain your service here.</value>
+  </data>
+  <data name="View_Administration_Title" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="View_Administration_WebSettings" xml:space="preserve">
+    <value>Web Settings</value>
+  </data>
 </root>

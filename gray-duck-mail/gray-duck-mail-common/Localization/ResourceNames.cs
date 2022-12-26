@@ -276,5 +276,13 @@ namespace GrayDuckMail.Common.Localization
 				Mail_SubscriptionConfirmationHeading,
 		/// <summary> Sorry to see you go. </summary>
 				Mail_UnsubscriptionConfirmationHeading,
+		/// <summary> Administration </summary>
+				View_Administration_Heading,
+		/// <summary> Perform specialized tasks to manage and maintain your service here. </summary>
+				View_Administration_Subheading,
+		/// <summary> Administration </summary>
+				View_Administration_Title,
+		/// <summary> Web Settings </summary>
+				View_Administration_WebSettings,
 	}
 }

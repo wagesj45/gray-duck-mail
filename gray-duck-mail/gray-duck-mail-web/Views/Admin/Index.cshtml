@@ -1,17 +1,18 @@
 ﻿@model AdminModel
+@using GrayDuckMail.Common.Localization
 @{
-    ViewData["Title"] = "Administration";
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_Administration_Title);
 }
 
 <hgroup>
-    <h1>Administration</h1>
-    <h2>Perform specialized tasks to manage and maintain your service here.</h2>
+    <h1>@LanguageHelper.GetValue(ResourceName.View_Administration_Heading)</h1>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_Administration_Subheading)</h2>
 </hgroup>
 
 <article>
     <header>
         <h3>
-            Web Settings
+            @LanguageHelper.GetValue(ResourceName.View_Administration_WebSettings)
         </h3>
     </header>
     <form id="webSettings" action="/Admin/SaveSettings" method="post">

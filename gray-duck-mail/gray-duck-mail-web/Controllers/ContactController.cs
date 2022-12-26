@@ -101,7 +101,7 @@ namespace GrayDuckMail.Web.Controllers
         {
             if (formInput == null)
             {
-                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/Contact/Edit");
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/Contact/Edit"));
                 return View("Error");
             }
 

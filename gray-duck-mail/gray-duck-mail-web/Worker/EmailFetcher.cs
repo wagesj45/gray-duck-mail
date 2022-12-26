@@ -413,7 +413,7 @@ namespace GrayDuckMail.Web.Worker
         /// </returns>
         private IEnumerable<IndexedMimeMessage> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
         {
-            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FilteringBouncedMessages);
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FilteringBouncedMessages));
 
             return FilterMessages(messages, message => EmailHelper.IsBouncedMessage(message));
         }

@@ -526,7 +526,7 @@ namespace GrayDuckMail.Common
         /// <returns> A MimeMessage. </returns>
         public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default)
         {
-            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GeneratingEmail);
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GeneratingEmail));
 
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
