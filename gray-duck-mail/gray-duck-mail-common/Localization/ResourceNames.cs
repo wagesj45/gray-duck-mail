@@ -276,6 +276,8 @@ namespace GrayDuckMail.Common.Localization
 				Mail_SubscriptionConfirmationHeading,
 		/// <summary> Sorry to see you go. </summary>
 				Mail_UnsubscriptionConfirmationHeading,
+		/// <summary> Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms. </summary>
+				View_Administration_AllowFuzzySearch,
 		/// <summary> Administration </summary>
 				View_Administration_Heading,
 		/// <summary> Perform specialized tasks to manage and maintain your service here. </summary>

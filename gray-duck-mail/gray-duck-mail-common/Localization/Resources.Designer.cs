@@ -1267,6 +1267,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms..
+        /// </summary>
+        internal static string View_Administration_AllowFuzzySearch {
+            get {
+                return ResourceManager.GetString("View_Administration_AllowFuzzySearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration.
         /// </summary>
         internal static string View_Administration_Heading {

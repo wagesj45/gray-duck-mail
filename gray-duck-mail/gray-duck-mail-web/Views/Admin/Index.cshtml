@@ -19,7 +19,7 @@
         <fieldset>
             <label for="useFuzzySearch">
                 <input type="checkbox" role="switch" id="useFuzzySearch" name="useFuzzySearch" @((Model.UseFuzzySearch) ? "checked" : "") />
-                Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms.
+                @LanguageHelper.GetValue(ResourceName.View_Administration_AllowFuzzySearch)
             </label>
             <mark><i class="icofont-warning"></i> Fuzzy search can give you better search results, but can be very slow.</mark>
         </fieldset>
