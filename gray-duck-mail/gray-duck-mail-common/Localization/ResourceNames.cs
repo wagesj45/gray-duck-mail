@@ -278,12 +278,51 @@ namespace GrayDuckMail.Common.Localization
 				Mail_UnsubscriptionConfirmationHeading,
 		/// <summary> Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms. </summary>
 				View_Administration_AllowFuzzySearch,
+		/// <summary> Choose a SQLite database file to import </summary>
+				View_Administration_ChooseDatabase,
+		/// <summary> Docker environment variable runtime values. </summary>
+				View_Administration_DockerEnvironmentVariables,
+		/// <summary> Export </summary>
+				View_Administration_Export,
+		/// <summary> Export Database </summary>
+				View_Administration_ExportDatabase,
+		/// <summary> Save a copy of your database, including contacts, discussion lists, and messages. </summary>
+				View_Administration_ExportDatabaseDescription,
+		/// <summary> Fuzzy search can give you better search results, but can be very slow. </summary>
+				View_Administration_FuzzySearchExplaination,
 		/// <summary> Administration </summary>
 				View_Administration_Heading,
+		/// <summary> Import </summary>
+				View_Administration_Import,
+		/// <summary> Import Database </summary>
+				View_Administration_ImportDatabase,
+		/// <summary> Import a database file to transfer contacts, discussion lists, and messages. </summary>
+				View_Administration_ImportDatabaseDescription,
+		/// <summary> WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding. </summary>
+				View_Administration_ImportWarning,
+		/// <summary> Number of items per page </summary>
+				View_Administration_ItemsPerPage,
+		/// <summary> Save Settings </summary>
+				View_Administration_SaveSettings,
+		/// <summary> Site Theme </summary>
+				View_Administration_SiteTheme,
 		/// <summary> Perform specialized tasks to manage and maintain your service here. </summary>
 				View_Administration_Subheading,
+		/// <summary> System </summary>
+				View_Administration_System,
+		/// <summary> Your system is currently configured to send </summary>
+		 /// <remarks> This formatted string is manually to avoid issues with the HTML view engine. </remarks>
+				View_Administration_SystemConfigurationPart1,
+		/// <summary> emails at once, with a maximum of </summary>
+		 /// <remarks> This formatted string is manually to avoid issues with the HTML view engine. </remarks>
+				View_Administration_SystemConfigurationPart2,
+		/// <summary> emails sent per hour. </summary>
+		 /// <remarks> This formatted string is manually to avoid issues with the HTML view engine. </remarks>
+				View_Administration_SystemConfigurationPart3,
 		/// <summary> Administration </summary>
 				View_Administration_Title,
+		/// <summary> Value </summary>
+				View_Administration_Value,
 		/// <summary> Web Settings </summary>
 				View_Administration_WebSettings,
 	}

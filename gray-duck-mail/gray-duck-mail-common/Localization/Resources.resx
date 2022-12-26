@@ -523,14 +523,71 @@
   <data name="View_Administration_AllowFuzzySearch" xml:space="preserve">
     <value>Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms.</value>
   </data>
+  <data name="View_Administration_ChooseDatabase" xml:space="preserve">
+    <value>Choose a SQLite database file to import</value>
+  </data>
+  <data name="View_Administration_DockerEnvironmentVariables" xml:space="preserve">
+    <value>Docker environment variable runtime values.</value>
+  </data>
+  <data name="View_Administration_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="View_Administration_ExportDatabase" xml:space="preserve">
+    <value>Export Database</value>
+  </data>
+  <data name="View_Administration_ExportDatabaseDescription" xml:space="preserve">
+    <value>Save a copy of your database, including contacts, discussion lists, and messages.</value>
+  </data>
+  <data name="View_Administration_FuzzySearchExplaination" xml:space="preserve">
+    <value>Fuzzy search can give you better search results, but can be very slow.</value>
+  </data>
   <data name="View_Administration_Heading" xml:space="preserve">
     <value>Administration</value>
+  </data>
+  <data name="View_Administration_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="View_Administration_ImportDatabase" xml:space="preserve">
+    <value>Import Database</value>
+  </data>
+  <data name="View_Administration_ImportDatabaseDescription" xml:space="preserve">
+    <value>Import a database file to transfer contacts, discussion lists, and messages.</value>
+  </data>
+  <data name="View_Administration_ImportWarning" xml:space="preserve">
+    <value>WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding.</value>
+  </data>
+  <data name="View_Administration_ItemsPerPage" xml:space="preserve">
+    <value>Number of items per page</value>
+  </data>
+  <data name="View_Administration_SaveSettings" xml:space="preserve">
+    <value>Save Settings</value>
+  </data>
+  <data name="View_Administration_SiteTheme" xml:space="preserve">
+    <value>Site Theme</value>
   </data>
   <data name="View_Administration_Subheading" xml:space="preserve">
     <value>Perform specialized tasks to manage and maintain your service here.</value>
   </data>
+  <data name="View_Administration_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="View_Administration_SystemConfigurationPart1" xml:space="preserve">
+    <value>Your system is currently configured to send</value>
+    <comment>This formatted string is manually to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Administration_SystemConfigurationPart2" xml:space="preserve">
+    <value>emails at once, with a maximum of</value>
+    <comment>This formatted string is manually to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Administration_SystemConfigurationPart3" xml:space="preserve">
+    <value>emails sent per hour.</value>
+    <comment>This formatted string is manually to avoid issues with the HTML view engine.</comment>
+  </data>
   <data name="View_Administration_Title" xml:space="preserve">
     <value>Administration</value>
+  </data>
+  <data name="View_Administration_Value" xml:space="preserve">
+    <value>Value</value>
   </data>
   <data name="View_Administration_WebSettings" xml:space="preserve">
     <value>Web Settings</value>

@@ -1276,11 +1276,128 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose a SQLite database file to import.
+        /// </summary>
+        internal static string View_Administration_ChooseDatabase {
+            get {
+                return ResourceManager.GetString("View_Administration_ChooseDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Docker environment variable runtime values..
+        /// </summary>
+        internal static string View_Administration_DockerEnvironmentVariables {
+            get {
+                return ResourceManager.GetString("View_Administration_DockerEnvironmentVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        internal static string View_Administration_Export {
+            get {
+                return ResourceManager.GetString("View_Administration_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Database.
+        /// </summary>
+        internal static string View_Administration_ExportDatabase {
+            get {
+                return ResourceManager.GetString("View_Administration_ExportDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save a copy of your database, including contacts, discussion lists, and messages..
+        /// </summary>
+        internal static string View_Administration_ExportDatabaseDescription {
+            get {
+                return ResourceManager.GetString("View_Administration_ExportDatabaseDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fuzzy search can give you better search results, but can be very slow..
+        /// </summary>
+        internal static string View_Administration_FuzzySearchExplaination {
+            get {
+                return ResourceManager.GetString("View_Administration_FuzzySearchExplaination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration.
         /// </summary>
         internal static string View_Administration_Heading {
             get {
                 return ResourceManager.GetString("View_Administration_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string View_Administration_Import {
+            get {
+                return ResourceManager.GetString("View_Administration_Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Database.
+        /// </summary>
+        internal static string View_Administration_ImportDatabase {
+            get {
+                return ResourceManager.GetString("View_Administration_ImportDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import a database file to transfer contacts, discussion lists, and messages..
+        /// </summary>
+        internal static string View_Administration_ImportDatabaseDescription {
+            get {
+                return ResourceManager.GetString("View_Administration_ImportDatabaseDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding..
+        /// </summary>
+        internal static string View_Administration_ImportWarning {
+            get {
+                return ResourceManager.GetString("View_Administration_ImportWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of items per page.
+        /// </summary>
+        internal static string View_Administration_ItemsPerPage {
+            get {
+                return ResourceManager.GetString("View_Administration_ItemsPerPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Settings.
+        /// </summary>
+        internal static string View_Administration_SaveSettings {
+            get {
+                return ResourceManager.GetString("View_Administration_SaveSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site Theme.
+        /// </summary>
+        internal static string View_Administration_SiteTheme {
+            get {
+                return ResourceManager.GetString("View_Administration_SiteTheme", resourceCulture);
             }
         }
         
@@ -1294,11 +1411,56 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System.
+        /// </summary>
+        internal static string View_Administration_System {
+            get {
+                return ResourceManager.GetString("View_Administration_System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your system is currently configured to send.
+        /// </summary>
+        internal static string View_Administration_SystemConfigurationPart1 {
+            get {
+                return ResourceManager.GetString("View_Administration_SystemConfigurationPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to emails at once, with a maximum of.
+        /// </summary>
+        internal static string View_Administration_SystemConfigurationPart2 {
+            get {
+                return ResourceManager.GetString("View_Administration_SystemConfigurationPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to emails sent per hour..
+        /// </summary>
+        internal static string View_Administration_SystemConfigurationPart3 {
+            get {
+                return ResourceManager.GetString("View_Administration_SystemConfigurationPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration.
         /// </summary>
         internal static string View_Administration_Title {
             get {
                 return ResourceManager.GetString("View_Administration_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        internal static string View_Administration_Value {
+            get {
+                return ResourceManager.GetString("View_Administration_Value", resourceCulture);
             }
         }
         
