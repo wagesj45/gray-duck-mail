@@ -24,22 +24,22 @@
             </ul>
             <ul>
                 <li>
-                    <a href="/List"><i class="icofont-list"></i> Discussion Lists</a>
+                    <a href="/List"><i class="icofont-list"></i> @LanguageHelper.GetValue(ResourceName.View_Shared_Layout_DiscussionLists)</a>
                 </li>
                 <li>
-                    <a href="/Contact"><i class="icofont-ui-user-group"></i> Contacts</a>
+                    <a href="/Contact"><i class="icofont-ui-user-group"></i> @LanguageHelper.GetValue(ResourceName.View_Shared_Layout_Contacts)</a>
                 </li>
                 <li>
-                    <a href="/Admin"><i class="icofont-dashboard-web"></i> Administration</a>
+                    <a href="/Admin"><i class="icofont-dashboard-web"></i> @LanguageHelper.GetValue(ResourceName.View_Shared_Layout_Administration)</a>
                 </li>
             </ul>
         </nav>
     </header>
     @RenderBody()
     <footer>
-        Find this project to be useful? Please consider <a href="https://support.jordanwages.com/">donating</a>!
+        @LanguageHelper.GetValue(ResourceName.View_Shared_Layout_FooterUsefulPart1) <a href="https://support.jordanwages.com/">@LanguageHelper.GetValue(ResourceName.View_Shared_Layout_FooterUsefulPart2)</a>@LanguageHelper.GetValue(ResourceName.View_Shared_Layout_FooterUsefulPart3)
         <br />
-        <a href="https://git.jordanwages.com/wagesj45/gray-duck-mail">Source code</a> licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>.
+        <a href="https://github.com/wagesj45/gray-duck-mail">@LanguageHelper.GetValue(ResourceName.View_Shared_Layout_SourceCodePart1)</a> @LanguageHelper.GetValue(ResourceName.View_Shared_Layout_SourceCodePart2) <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>.
         <nav>
             <ul>
                 <li><a href="https://picocss.com">Pico CSS</a></li>
@@ -48,7 +48,7 @@
         </nav>
         <br />
         <small>
-            Version @ApplicationSettings.ApplicationVersion
+            @LanguageHelper.GetValue(ResourceName.View_Shared_Layout_Version) @ApplicationSettings.ApplicationVersion | @LanguageHelper.GetCurrentLanguage().CommonName
         </small>
     </footer>
     <script src="/js/site.js" asp-append-version="true"></script>

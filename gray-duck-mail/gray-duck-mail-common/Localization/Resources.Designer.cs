@@ -1949,5 +1949,122 @@ namespace GrayDuckMail.Common.Localization {
                 return ResourceManager.GetString("View_Home_Index_YouHave", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Remote Origin logged is {0}..
+        /// </summary>
+        internal static string View_Shared_ErrorLayout_Format_RemoteOrigin {
+            get {
+                return ResourceManager.GetString("View_Shared_ErrorLayout_Format_RemoteOrigin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string View_Shared_ErrorLayout_Heading {
+            get {
+                return ResourceManager.GetString("View_Shared_ErrorLayout_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing your request..
+        /// </summary>
+        internal static string View_Shared_ErrorLayout_Subheading {
+            get {
+                return ResourceManager.GetString("View_Shared_ErrorLayout_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string View_Shared_ErrorLayout_Title {
+            get {
+                return ResourceManager.GetString("View_Shared_ErrorLayout_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administration.
+        /// </summary>
+        internal static string View_Shared_Layout_Administration {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_Administration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacts.
+        /// </summary>
+        internal static string View_Shared_Layout_Contacts {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion Lists.
+        /// </summary>
+        internal static string View_Shared_Layout_DiscussionLists {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_DiscussionLists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find this project to be useful? Please consider.
+        /// </summary>
+        internal static string View_Shared_Layout_FooterUsefulPart1 {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_FooterUsefulPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to donating.
+        /// </summary>
+        internal static string View_Shared_Layout_FooterUsefulPart2 {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_FooterUsefulPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to !.
+        /// </summary>
+        internal static string View_Shared_Layout_FooterUsefulPart3 {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_FooterUsefulPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source code.
+        /// </summary>
+        internal static string View_Shared_Layout_SourceCodePart1 {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_SourceCodePart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to licensed under.
+        /// </summary>
+        internal static string View_Shared_Layout_SourceCodePart2 {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_SourceCodePart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        internal static string View_Shared_Layout_Version {
+            get {
+                return ResourceManager.GetString("View_Shared_Layout_Version", resourceCulture);
+            }
+        }
     }
 }

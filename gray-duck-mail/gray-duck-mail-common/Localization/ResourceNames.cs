@@ -418,8 +418,10 @@ namespace GrayDuckMail.Common.Localization
 		/// <summary> At a glance... </summary>
 				View_Home_Index_AtAGlance,
 		/// <summary> discussion </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Home_Index_DicussionListsInfoPart1,
 		/// <summary> . </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Home_Index_DicussionListsInfoPart2,
 		/// <summary> Welcome </summary>
 				View_Home_Index_Heading,
@@ -432,14 +434,48 @@ namespace GrayDuckMail.Common.Localization
 		/// <summary> messages </summary>
 				View_Home_Index_Messages,
 		/// <summary> You have a total of </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Home_Index_NumberOfMessagesPart1,
 		/// <summary> . </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Home_Index_NumberOfMessagesPart2,
 		/// <summary> Hello! Welcome to your email discussion lists. </summary>
 				View_Home_Index_Subheading,
 		/// <summary> Home Page </summary>
 				View_Home_Index_Title,
 		/// <summary> You have </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Home_Index_YouHave,
+		/// <summary> The Remote Origin logged is {0}. </summary>
+				View_Shared_ErrorLayout_Format_RemoteOrigin,
+		/// <summary> Error </summary>
+				View_Shared_ErrorLayout_Heading,
+		/// <summary> An error occurred while processing your request. </summary>
+				View_Shared_ErrorLayout_Subheading,
+		/// <summary> Error </summary>
+				View_Shared_ErrorLayout_Title,
+		/// <summary> Administration </summary>
+				View_Shared_Layout_Administration,
+		/// <summary> Contacts </summary>
+				View_Shared_Layout_Contacts,
+		/// <summary> Discussion Lists </summary>
+				View_Shared_Layout_DiscussionLists,
+		/// <summary> Find this project to be useful? Please consider </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Shared_Layout_FooterUsefulPart1,
+		/// <summary> donating </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Shared_Layout_FooterUsefulPart2,
+		/// <summary> ! </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Shared_Layout_FooterUsefulPart3,
+		/// <summary> Source code </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Shared_Layout_SourceCodePart1,
+		/// <summary> licensed under </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Shared_Layout_SourceCodePart2,
+		/// <summary> Version </summary>
+				View_Shared_Layout_Version,
 	}
 }
