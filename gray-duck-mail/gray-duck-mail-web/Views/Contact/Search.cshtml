@@ -70,7 +70,7 @@
                 {
                     <a href="/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
-                @LanguageHelper.FormatValue(ResourceName.View_Common_PageCount,Model.PageNumber,Model.TotalPages)
+                @LanguageHelper.FormatValue(ResourceName.View_Common_Format_PageCount, Model.PageNumber, Model.TotalPages)
                 @if (Model.PageNumber < Model.TotalPages)
                 {
                     <a href="/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>

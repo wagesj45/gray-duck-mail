@@ -604,14 +604,14 @@
   <data name="View_Common_Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="View_Common_Format_PageCount" xml:space="preserve">
+    <value>Page {0} of {1}</value>
+  </data>
   <data name="View_Common_Name" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="View_Common_NumberOfDiscussionLists" xml:space="preserve">
     <value>Number of Discussion Lists</value>
-  </data>
-  <data name="View_Common_PageCount" xml:space="preserve">
-    <value>Page {0} of {1}</value>
   </data>
   <data name="View_Common_Remove" xml:space="preserve">
     <value>Remove</value>
@@ -709,5 +709,17 @@
   </data>
   <data name="View_Contacts_Search_Title" xml:space="preserve">
     <value>Contact Search</value>
+  </data>
+  <data name="View_External_Unsubscribe_Format_Successful" xml:space="preserve">
+    <value>{0} has been unsubscribed from {1}.</value>
+  </data>
+  <data name="View_External_Unsubscribe_Heading" xml:space="preserve">
+    <value>Unsubscribe</value>
+  </data>
+  <data name="View_External_Unsubscribe_Title" xml:space="preserve">
+    <value>Unsubscribe</value>
+  </data>
+  <data name="View_External_Unsubscribe_Unsuccessful" xml:space="preserve">
+    <value>There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed.</value>
   </data>
 </root>

@@ -333,12 +333,12 @@ namespace GrayDuckMail.Common.Localization
 				View_Common_Edit,
 		/// <summary> Email </summary>
 				View_Common_Email,
+		/// <summary> Page {0} of {1} </summary>
+				View_Common_Format_PageCount,
 		/// <summary> Name </summary>
 				View_Common_Name,
 		/// <summary> Number of Discussion Lists </summary>
 				View_Common_NumberOfDiscussionLists,
-		/// <summary> Page {0} of {1} </summary>
-				View_Common_PageCount,
 		/// <summary> Remove </summary>
 				View_Common_Remove,
 		/// <summary> Save Changes </summary>
@@ -407,5 +407,13 @@ namespace GrayDuckMail.Common.Localization
 				View_Contacts_Search_SubheadingPart1,
 		/// <summary> Contact Search </summary>
 				View_Contacts_Search_Title,
+		/// <summary> {0} has been unsubscribed from {1}. </summary>
+				View_External_Unsubscribe_Format_Successful,
+		/// <summary> Unsubscribe </summary>
+				View_External_Unsubscribe_Heading,
+		/// <summary> Unsubscribe </summary>
+				View_External_Unsubscribe_Title,
+		/// <summary> There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed. </summary>
+				View_External_Unsubscribe_Unsuccessful,
 	}
 }

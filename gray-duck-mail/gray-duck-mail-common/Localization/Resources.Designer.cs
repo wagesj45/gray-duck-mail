@@ -1510,6 +1510,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page {0} of {1}.
+        /// </summary>
+        internal static string View_Common_Format_PageCount {
+            get {
+                return ResourceManager.GetString("View_Common_Format_PageCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string View_Common_Name {
@@ -1524,15 +1533,6 @@ namespace GrayDuckMail.Common.Localization {
         internal static string View_Common_NumberOfDiscussionLists {
             get {
                 return ResourceManager.GetString("View_Common_NumberOfDiscussionLists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Page {0} of {1}.
-        /// </summary>
-        internal static string View_Common_PageCount {
-            get {
-                return ResourceManager.GetString("View_Common_PageCount", resourceCulture);
             }
         }
         
@@ -1794,6 +1794,42 @@ namespace GrayDuckMail.Common.Localization {
         internal static string View_Contacts_Search_Title {
             get {
                 return ResourceManager.GetString("View_Contacts_Search_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has been unsubscribed from {1}..
+        /// </summary>
+        internal static string View_External_Unsubscribe_Format_Successful {
+            get {
+                return ResourceManager.GetString("View_External_Unsubscribe_Format_Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsubscribe.
+        /// </summary>
+        internal static string View_External_Unsubscribe_Heading {
+            get {
+                return ResourceManager.GetString("View_External_Unsubscribe_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsubscribe.
+        /// </summary>
+        internal static string View_External_Unsubscribe_Title {
+            get {
+                return ResourceManager.GetString("View_External_Unsubscribe_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed..
+        /// </summary>
+        internal static string View_External_Unsubscribe_Unsuccessful {
+            get {
+                return ResourceManager.GetString("View_External_Unsubscribe_Unsuccessful", resourceCulture);
             }
         }
     }
