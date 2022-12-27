@@ -1,20 +1,21 @@
-﻿@model RemoveContactModel
+﻿@using GrayDuckMail.Common.Localization;
+@model RemoveContactModel
 @{
-    ViewData["Title"] = "Remove Contact?";
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_Contacts_Remove_Title);
 }
 
 <hgroup>
-    <h1>Removing @Model.Contact.Name</h1>
-    <h2>Are you sure you want to remove this contact?</h2>
+    <h1>@LanguageHelper.GetValue(ResourceName.View_Contacts_Remove_HeadingPart1) @Model.Contact.Name</h1>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_Contacts_Remove_Subheading)</h2>
 </hgroup>
 
 <article>
     <div class="grid">
         <div>
-            <a href="/Contact/ConfirmRemove/@Model.Contact.ID" role="button" style="width:100%;"><i class="icofont-delete-alt"></i> Remove</a>
+            <a href="/Contact/ConfirmRemove/@Model.Contact.ID" role="button" style="width:100%;"><i class="icofont-delete-alt"></i> @LanguageHelper.GetValue(ResourceName.View_Common_Remove)</a>
         </div>
         <div>
-            <a href="/Contact" role="button" class="contrast" style="width:100%;"><i class="icofont-not-allowed"></i> Cancel</a>
+            <a href="/Contact" role="button" class="contrast" style="width:100%;"><i class="icofont-not-allowed"></i> @LanguageHelper.GetValue(ResourceName.View_Common_Cancel)</a>
         </div>
     </div>
 </article>

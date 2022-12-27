@@ -1,11 +1,12 @@
-﻿@model ContactsModel
+﻿@using GrayDuckMail.Common.Localization;
+@model ContactsModel
 @{
-    ViewData["Title"] = "Contacts";
+    ViewData["Title"] = @LanguageHelper.GetValue(ResourceName.View_Contacts_Index_Title);
 }
 
 <hgroup>
-    <h1>Contacts</h1>
-    <h2>View the contacts in your system below.</h2>
+    <h1>@LanguageHelper.GetValue(ResourceName.View_Contacts_Index_Heading)</h1>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_Contacts_Index_Subheading)</h2>
 </hgroup>
 
 <article>
@@ -13,7 +14,7 @@
         <nav>
             <ul>
                 <li>
-                    <a href="/Contact/New"><i class="icofont-ui-add"></i> Create New Contact</a>
+                    <a href="/Contact/New"><i class="icofont-ui-add"></i> @LanguageHelper.GetValue(ResourceName.View_Contacts_Index_CreateNewContact)</a>
                 </li>
             </ul>
             <ul>
@@ -30,10 +31,10 @@
         <table>
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Number of Discussion Lists</th>
-                    <th scope="col">Activated</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_Name)</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_Email)</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_NumberOfDiscussionLists)</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_Activated)</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -55,8 +56,8 @@
                             }
                         </td>
                         <td>
-                            <a href="/Contact/Edit/@contact.ID" data-tooltip="Edit"><i class="icofont-edit-alt"></i></a>
-                            <a href="/Contact/Remove/@contact.ID" data-tooltip="Remove"><i class="icofont-delete-alt"></i></a>
+                            <a href="/Contact/Edit/@contact.ID" data-tooltip="@LanguageHelper.GetValue(ResourceName.View_Common_Edit)"><i class="icofont-edit-alt"></i></a>
+                            <a href="/Contact/Remove/@contact.ID" data-tooltip="@LanguageHelper.GetValue(ResourceName.View_Common_Remove)"><i class="icofont-delete-alt"></i></a>
                         </td>
                     </tr>
                 }
@@ -69,7 +70,7 @@
                 {
                     <a href="/Contact/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
-                Page @Model.PageNumber of @Model.TotalPages
+                @LanguageHelper.FormatValue(ResourceName.View_Common_PageCount, Model.PageNumber, Model.TotalPages)
                 @if (Model.PageNumber < Model.TotalPages)
                 {
                     <a href="/Contact/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
@@ -79,6 +80,6 @@
     }
     else
     {
-        <p>No contacts have been set up yet. You can <a href="/Contact/New">create a new contact</a> now.</p>
+        <p>@LanguageHelper.GetValue(ResourceName.View_Contacts_Index_NoContactsPart1) <a href="/Contact/New">@LanguageHelper.GetValue(ResourceName.View_Contacts_Index_NoContactsPart2)</a> @LanguageHelper.GetValue(ResourceName.View_Contacts_Index_NoContactsPart3)</p>
     }
 </article>

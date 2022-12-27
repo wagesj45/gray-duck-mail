@@ -311,13 +311,13 @@ namespace GrayDuckMail.Common.Localization
 		/// <summary> System </summary>
 				View_Administration_System,
 		/// <summary> Your system is currently configured to send </summary>
-		 /// <remarks> This formatted string is manually to avoid issues with the HTML view engine. </remarks>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Administration_SystemConfigurationPart1,
 		/// <summary> emails at once, with a maximum of </summary>
-		 /// <remarks> This formatted string is manually to avoid issues with the HTML view engine. </remarks>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Administration_SystemConfigurationPart2,
 		/// <summary> emails sent per hour. </summary>
-		 /// <remarks> This formatted string is manually to avoid issues with the HTML view engine. </remarks>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Administration_SystemConfigurationPart3,
 		/// <summary> Administration </summary>
 				View_Administration_Title,
@@ -325,5 +325,87 @@ namespace GrayDuckMail.Common.Localization
 				View_Administration_Value,
 		/// <summary> Web Settings </summary>
 				View_Administration_WebSettings,
+		/// <summary> Activated </summary>
+				View_Common_Activated,
+		/// <summary> Cancel </summary>
+				View_Common_Cancel,
+		/// <summary> Edit </summary>
+				View_Common_Edit,
+		/// <summary> Email </summary>
+				View_Common_Email,
+		/// <summary> Name </summary>
+				View_Common_Name,
+		/// <summary> Number of Discussion Lists </summary>
+				View_Common_NumberOfDiscussionLists,
+		/// <summary> Page {0} of {1} </summary>
+				View_Common_PageCount,
+		/// <summary> Remove </summary>
+				View_Common_Remove,
+		/// <summary> Save Changes </summary>
+				View_Common_SaveChanges,
+		/// <summary> The user is activated and the email address is considered valid and working. </summary>
+				View_Contacts_Edit_ActivatedDescription,
+		/// <summary> Contact Details </summary>
+				View_Contacts_Edit_ContactDetails,
+		/// <summary> Create Contact </summary>
+				View_Contacts_Edit_CreateContact,
+		/// <summary> Edit Contact </summary>
+				View_Contacts_Edit_Heading,
+		/// <summary> New Contact </summary>
+				View_Contacts_Edit_HeadingNew,
+		/// <summary> Create a new contact below. </summary>
+				View_Contacts_Edit_SubheadingNew,
+		/// <summary> Edit the details for </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Edit_SubheadingPart1,
+		/// <summary> below. </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Edit_SubheadingPart2,
+		/// <summary> Contact Editor </summary>
+				View_Contacts_Edit_Title,
+		/// <summary> Create New Contact </summary>
+				View_Contacts_Index_CreateNewContact,
+		/// <summary> Contacts </summary>
+				View_Contacts_Index_Heading,
+		/// <summary> No contacts have been set up yet. You can </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Index_NoContactsPart1,
+		/// <summary> create a new contact </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Index_NoContactsPart2,
+		/// <summary> now. </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Index_NoContactsPart3,
+		/// <summary> View the contacts in your system below. </summary>
+				View_Contacts_Index_Subheading,
+		/// <summary> Contacts </summary>
+				View_Contacts_Index_Title,
+		/// <summary> Removing </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Remove_HeadingPart1,
+		/// <summary> Are you sure you want to remove this contact? </summary>
+				View_Contacts_Remove_Subheading,
+		/// <summary> Remove Contact? </summary>
+				View_Contacts_Remove_Title,
+		/// <summary> Create New Contact </summary>
+				View_Contacts_Search_CreateNewContact,
+		/// <summary> Search Results </summary>
+				View_Contacts_Search_Heading,
+		/// <summary> No contacts could be found. Try a more enabling </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Search_NoContactsFoundPart1,
+		/// <summary> Use Fuzzy Search </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Search_NoContactsFoundPart2,
+		/// <summary> in the Administration settings. </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Search_NoContactsFoundPart3,
+		/// <summary> Find's simliar and mispelled search terms. </summary>
+				View_Contacts_Search_NoContactsFoundTooltip,
+		/// <summary> Search for </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Contacts_Search_SubheadingPart1,
+		/// <summary> Contact Search </summary>
+				View_Contacts_Search_Title,
 	}
 }

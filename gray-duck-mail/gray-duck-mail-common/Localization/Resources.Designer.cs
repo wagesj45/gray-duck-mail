@@ -1472,5 +1472,329 @@ namespace GrayDuckMail.Common.Localization {
                 return ResourceManager.GetString("View_Administration_WebSettings", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activated.
+        /// </summary>
+        internal static string View_Common_Activated {
+            get {
+                return ResourceManager.GetString("View_Common_Activated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string View_Common_Cancel {
+            get {
+                return ResourceManager.GetString("View_Common_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string View_Common_Edit {
+            get {
+                return ResourceManager.GetString("View_Common_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string View_Common_Email {
+            get {
+                return ResourceManager.GetString("View_Common_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string View_Common_Name {
+            get {
+                return ResourceManager.GetString("View_Common_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of Discussion Lists.
+        /// </summary>
+        internal static string View_Common_NumberOfDiscussionLists {
+            get {
+                return ResourceManager.GetString("View_Common_NumberOfDiscussionLists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page {0} of {1}.
+        /// </summary>
+        internal static string View_Common_PageCount {
+            get {
+                return ResourceManager.GetString("View_Common_PageCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string View_Common_Remove {
+            get {
+                return ResourceManager.GetString("View_Common_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        internal static string View_Common_SaveChanges {
+            get {
+                return ResourceManager.GetString("View_Common_SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user is activated and the email address is considered valid and working..
+        /// </summary>
+        internal static string View_Contacts_Edit_ActivatedDescription {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_ActivatedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Details.
+        /// </summary>
+        internal static string View_Contacts_Edit_ContactDetails {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_ContactDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Contact.
+        /// </summary>
+        internal static string View_Contacts_Edit_CreateContact {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_CreateContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Contact.
+        /// </summary>
+        internal static string View_Contacts_Edit_Heading {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Contact.
+        /// </summary>
+        internal static string View_Contacts_Edit_HeadingNew {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_HeadingNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new contact below..
+        /// </summary>
+        internal static string View_Contacts_Edit_SubheadingNew {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_SubheadingNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit the details for.
+        /// </summary>
+        internal static string View_Contacts_Edit_SubheadingPart1 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_SubheadingPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to below..
+        /// </summary>
+        internal static string View_Contacts_Edit_SubheadingPart2 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_SubheadingPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Editor.
+        /// </summary>
+        internal static string View_Contacts_Edit_Title {
+            get {
+                return ResourceManager.GetString("View_Contacts_Edit_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New Contact.
+        /// </summary>
+        internal static string View_Contacts_Index_CreateNewContact {
+            get {
+                return ResourceManager.GetString("View_Contacts_Index_CreateNewContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacts.
+        /// </summary>
+        internal static string View_Contacts_Index_Heading {
+            get {
+                return ResourceManager.GetString("View_Contacts_Index_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No contacts have been set up yet. You can.
+        /// </summary>
+        internal static string View_Contacts_Index_NoContactsPart1 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Index_NoContactsPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to create a new contact.
+        /// </summary>
+        internal static string View_Contacts_Index_NoContactsPart2 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Index_NoContactsPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to now..
+        /// </summary>
+        internal static string View_Contacts_Index_NoContactsPart3 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Index_NoContactsPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View the contacts in your system below..
+        /// </summary>
+        internal static string View_Contacts_Index_Subheading {
+            get {
+                return ResourceManager.GetString("View_Contacts_Index_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacts.
+        /// </summary>
+        internal static string View_Contacts_Index_Title {
+            get {
+                return ResourceManager.GetString("View_Contacts_Index_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing.
+        /// </summary>
+        internal static string View_Contacts_Remove_HeadingPart1 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Remove_HeadingPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove this contact?.
+        /// </summary>
+        internal static string View_Contacts_Remove_Subheading {
+            get {
+                return ResourceManager.GetString("View_Contacts_Remove_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Contact?.
+        /// </summary>
+        internal static string View_Contacts_Remove_Title {
+            get {
+                return ResourceManager.GetString("View_Contacts_Remove_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New Contact.
+        /// </summary>
+        internal static string View_Contacts_Search_CreateNewContact {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_CreateNewContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Results.
+        /// </summary>
+        internal static string View_Contacts_Search_Heading {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No contacts could be found. Try a more enabling.
+        /// </summary>
+        internal static string View_Contacts_Search_NoContactsFoundPart1 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_NoContactsFoundPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Fuzzy Search.
+        /// </summary>
+        internal static string View_Contacts_Search_NoContactsFoundPart2 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_NoContactsFoundPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to in the Administration settings..
+        /// </summary>
+        internal static string View_Contacts_Search_NoContactsFoundPart3 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_NoContactsFoundPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find&apos;s simliar and mispelled search terms..
+        /// </summary>
+        internal static string View_Contacts_Search_NoContactsFoundTooltip {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_NoContactsFoundTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for.
+        /// </summary>
+        internal static string View_Contacts_Search_SubheadingPart1 {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_SubheadingPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Search.
+        /// </summary>
+        internal static string View_Contacts_Search_Title {
+            get {
+                return ResourceManager.GetString("View_Contacts_Search_Title", resourceCulture);
+            }
+        }
     }
 }

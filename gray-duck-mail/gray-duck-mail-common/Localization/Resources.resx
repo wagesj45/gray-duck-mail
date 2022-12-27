@@ -573,15 +573,15 @@
   </data>
   <data name="View_Administration_SystemConfigurationPart1" xml:space="preserve">
     <value>Your system is currently configured to send</value>
-    <comment>This formatted string is manually to avoid issues with the HTML view engine.</comment>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_SystemConfigurationPart2" xml:space="preserve">
     <value>emails at once, with a maximum of</value>
-    <comment>This formatted string is manually to avoid issues with the HTML view engine.</comment>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_SystemConfigurationPart3" xml:space="preserve">
     <value>emails sent per hour.</value>
-    <comment>This formatted string is manually to avoid issues with the HTML view engine.</comment>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_Title" xml:space="preserve">
     <value>Administration</value>
@@ -591,5 +591,123 @@
   </data>
   <data name="View_Administration_WebSettings" xml:space="preserve">
     <value>Web Settings</value>
+  </data>
+  <data name="View_Common_Activated" xml:space="preserve">
+    <value>Activated</value>
+  </data>
+  <data name="View_Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="View_Common_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="View_Common_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="View_Common_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="View_Common_NumberOfDiscussionLists" xml:space="preserve">
+    <value>Number of Discussion Lists</value>
+  </data>
+  <data name="View_Common_PageCount" xml:space="preserve">
+    <value>Page {0} of {1}</value>
+  </data>
+  <data name="View_Common_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="View_Common_SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="View_Contacts_Edit_ActivatedDescription" xml:space="preserve">
+    <value>The user is activated and the email address is considered valid and working.</value>
+  </data>
+  <data name="View_Contacts_Edit_ContactDetails" xml:space="preserve">
+    <value>Contact Details</value>
+  </data>
+  <data name="View_Contacts_Edit_CreateContact" xml:space="preserve">
+    <value>Create Contact</value>
+  </data>
+  <data name="View_Contacts_Edit_Heading" xml:space="preserve">
+    <value>Edit Contact</value>
+  </data>
+  <data name="View_Contacts_Edit_HeadingNew" xml:space="preserve">
+    <value>New Contact</value>
+  </data>
+  <data name="View_Contacts_Edit_SubheadingNew" xml:space="preserve">
+    <value>Create a new contact below.</value>
+  </data>
+  <data name="View_Contacts_Edit_SubheadingPart1" xml:space="preserve">
+    <value>Edit the details for</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Edit_SubheadingPart2" xml:space="preserve">
+    <value>below.</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Edit_Title" xml:space="preserve">
+    <value>Contact Editor</value>
+  </data>
+  <data name="View_Contacts_Index_CreateNewContact" xml:space="preserve">
+    <value>Create New Contact</value>
+  </data>
+  <data name="View_Contacts_Index_Heading" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="View_Contacts_Index_NoContactsPart1" xml:space="preserve">
+    <value>No contacts have been set up yet. You can</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Index_NoContactsPart2" xml:space="preserve">
+    <value>create a new contact</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Index_NoContactsPart3" xml:space="preserve">
+    <value>now.</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Index_Subheading" xml:space="preserve">
+    <value>View the contacts in your system below.</value>
+  </data>
+  <data name="View_Contacts_Index_Title" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="View_Contacts_Remove_HeadingPart1" xml:space="preserve">
+    <value>Removing</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Remove_Subheading" xml:space="preserve">
+    <value>Are you sure you want to remove this contact?</value>
+  </data>
+  <data name="View_Contacts_Remove_Title" xml:space="preserve">
+    <value>Remove Contact?</value>
+  </data>
+  <data name="View_Contacts_Search_CreateNewContact" xml:space="preserve">
+    <value>Create New Contact</value>
+  </data>
+  <data name="View_Contacts_Search_Heading" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="View_Contacts_Search_NoContactsFoundPart1" xml:space="preserve">
+    <value>No contacts could be found. Try a more enabling</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Search_NoContactsFoundPart2" xml:space="preserve">
+    <value>Use Fuzzy Search</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Search_NoContactsFoundPart3" xml:space="preserve">
+    <value>in the Administration settings.</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Search_NoContactsFoundTooltip" xml:space="preserve">
+    <value>Find's simliar and mispelled search terms.</value>
+  </data>
+  <data name="View_Contacts_Search_SubheadingPart1" xml:space="preserve">
+    <value>Search for</value>
+    <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
+  </data>
+  <data name="View_Contacts_Search_Title" xml:space="preserve">
+    <value>Contact Search</value>
   </data>
 </root>

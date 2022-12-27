@@ -1,24 +1,25 @@
-﻿@model EditContactModel
+﻿@using GrayDuckMail.Common.Localization;
+@model EditContactModel
 @{
-    ViewData["Title"] = "Contact Editor";
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_Title);
 }
 
 <hgroup>
     @if (Model != null && Model.Contact != null)
     {
-        <h1>Edit Contact</h1>
-        <h2>Edit the details for <strong>@Model.Contact.Name</strong> below.</h2>
+        <h1>@LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_Heading)</h1>
+        <h2>@LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_SubheadingPart1) <strong>@Model.Contact.Name</strong> @LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_SubheadingPart2)</h2>
     }
     else
     {
-        <h1>New Contact</h1>
-        <h2>Create a new contact below.</h2>
+        <h1>@LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_HeadingNew)</h1>
+        <h2>@LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_SubheadingNew)</h2>
     }
 </hgroup>
 
 <article>
     <header>
-        <h3>Contact Details</h3>
+        <h3>@LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_ContactDetails)</h3>
     </header>
     <form id="contactDetails" action="/Contact/@(Model.Contact?.ID > 0 ? "Edit" : "Create")" method="post">
         @if (Model.Contact?.ID > 0)
@@ -26,27 +27,26 @@
             <input type="hidden" id="id" name="id" value="@Model.Contact?.ID" />
         }
         <label for="name">
-            Name
+            @LanguageHelper.GetValue(ResourceName.View_Common_Name)
             <input type="text" id="name" name="name" value="@Model.Contact?.Name" />
         </label>
         <label for="email">
-            Email
+            @LanguageHelper.GetValue(ResourceName.View_Common_Email)
             <input type="email" id="email" name="email" value="@Model.Contact?.Email" />
-            <small>A short description of the discussion list.</small>
         </label>
         <label for="activated">
             <input type="checkbox" role="switch" id="activated" name="activated" @((Model.Contact?.Activated ?? false) ? "checked" : "") />
-            The user is activated and the email address is considered valid and working.
+            @LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_ActivatedDescription)
         </label>
     </form>
     <footer>
         @if (Model.Contact != null)
         {
-            <button type="submit" form="contactDetails"><i class="icofont-save"></i> Save Changes</button>
+            <button type="submit" form="contactDetails"><i class="icofont-save"></i> @LanguageHelper.GetValue(ResourceName.View_Common_SaveChanges)</button>
         }
         else
         {
-            <button type="submit" form="contactDetails"><i class="icofont-ui-add"></i> Create Contact</button>
+            <button type="submit" form="contactDetails"><i class="icofont-ui-add"></i> @LanguageHelper.GetValue(ResourceName.View_Contacts_Edit_CreateContact)</button>
         }
     </footer>
 </article>
