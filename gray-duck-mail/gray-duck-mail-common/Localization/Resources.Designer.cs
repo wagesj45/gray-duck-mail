@@ -1832,5 +1832,122 @@ namespace GrayDuckMail.Common.Localization {
                 return ResourceManager.GetString("View_External_Unsubscribe_Unsuccessful", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At a glance....
+        /// </summary>
+        internal static string View_Home_Index_AtAGlance {
+            get {
+                return ResourceManager.GetString("View_Home_Index_AtAGlance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to discussion.
+        /// </summary>
+        internal static string View_Home_Index_DicussionListsInfoPart1 {
+            get {
+                return ResourceManager.GetString("View_Home_Index_DicussionListsInfoPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..
+        /// </summary>
+        internal static string View_Home_Index_DicussionListsInfoPart2 {
+            get {
+                return ResourceManager.GetString("View_Home_Index_DicussionListsInfoPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome.
+        /// </summary>
+        internal static string View_Home_Index_Heading {
+            get {
+                return ResourceManager.GetString("View_Home_Index_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to list.
+        /// </summary>
+        internal static string View_Home_Index_List {
+            get {
+                return ResourceManager.GetString("View_Home_Index_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lists.
+        /// </summary>
+        internal static string View_Home_Index_Lists {
+            get {
+                return ResourceManager.GetString("View_Home_Index_Lists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to message.
+        /// </summary>
+        internal static string View_Home_Index_Message {
+            get {
+                return ResourceManager.GetString("View_Home_Index_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to messages.
+        /// </summary>
+        internal static string View_Home_Index_Messages {
+            get {
+                return ResourceManager.GetString("View_Home_Index_Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have a total of.
+        /// </summary>
+        internal static string View_Home_Index_NumberOfMessagesPart1 {
+            get {
+                return ResourceManager.GetString("View_Home_Index_NumberOfMessagesPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..
+        /// </summary>
+        internal static string View_Home_Index_NumberOfMessagesPart2 {
+            get {
+                return ResourceManager.GetString("View_Home_Index_NumberOfMessagesPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello! Welcome to your email discussion lists..
+        /// </summary>
+        internal static string View_Home_Index_Subheading {
+            get {
+                return ResourceManager.GetString("View_Home_Index_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home Page.
+        /// </summary>
+        internal static string View_Home_Index_Title {
+            get {
+                return ResourceManager.GetString("View_Home_Index_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have.
+        /// </summary>
+        internal static string View_Home_Index_YouHave {
+            get {
+                return ResourceManager.GetString("View_Home_Index_YouHave", resourceCulture);
+            }
+        }
     }
 }

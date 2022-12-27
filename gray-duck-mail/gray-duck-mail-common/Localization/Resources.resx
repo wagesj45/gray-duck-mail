@@ -722,4 +722,43 @@
   <data name="View_External_Unsubscribe_Unsuccessful" xml:space="preserve">
     <value>There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed.</value>
   </data>
+  <data name="View_Home_Index_AtAGlance" xml:space="preserve">
+    <value>At a glance...</value>
+  </data>
+  <data name="View_Home_Index_DicussionListsInfoPart1" xml:space="preserve">
+    <value>discussion</value>
+  </data>
+  <data name="View_Home_Index_DicussionListsInfoPart2" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="View_Home_Index_Heading" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="View_Home_Index_List" xml:space="preserve">
+    <value>list</value>
+  </data>
+  <data name="View_Home_Index_Lists" xml:space="preserve">
+    <value>lists</value>
+  </data>
+  <data name="View_Home_Index_Message" xml:space="preserve">
+    <value>message</value>
+  </data>
+  <data name="View_Home_Index_Messages" xml:space="preserve">
+    <value>messages</value>
+  </data>
+  <data name="View_Home_Index_NumberOfMessagesPart1" xml:space="preserve">
+    <value>You have a total of</value>
+  </data>
+  <data name="View_Home_Index_NumberOfMessagesPart2" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="View_Home_Index_Subheading" xml:space="preserve">
+    <value>Hello! Welcome to your email discussion lists.</value>
+  </data>
+  <data name="View_Home_Index_Title" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="View_Home_Index_YouHave" xml:space="preserve">
+    <value>You have</value>
+  </data>
 </root>

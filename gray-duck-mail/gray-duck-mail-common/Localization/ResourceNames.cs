@@ -415,5 +415,31 @@ namespace GrayDuckMail.Common.Localization
 				View_External_Unsubscribe_Title,
 		/// <summary> There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed. </summary>
 				View_External_Unsubscribe_Unsuccessful,
+		/// <summary> At a glance... </summary>
+				View_Home_Index_AtAGlance,
+		/// <summary> discussion </summary>
+				View_Home_Index_DicussionListsInfoPart1,
+		/// <summary> . </summary>
+				View_Home_Index_DicussionListsInfoPart2,
+		/// <summary> Welcome </summary>
+				View_Home_Index_Heading,
+		/// <summary> list </summary>
+				View_Home_Index_List,
+		/// <summary> lists </summary>
+				View_Home_Index_Lists,
+		/// <summary> message </summary>
+				View_Home_Index_Message,
+		/// <summary> messages </summary>
+				View_Home_Index_Messages,
+		/// <summary> You have a total of </summary>
+				View_Home_Index_NumberOfMessagesPart1,
+		/// <summary> . </summary>
+				View_Home_Index_NumberOfMessagesPart2,
+		/// <summary> Hello! Welcome to your email discussion lists. </summary>
+				View_Home_Index_Subheading,
+		/// <summary> Home Page </summary>
+				View_Home_Index_Title,
+		/// <summary> You have </summary>
+				View_Home_Index_YouHave,
 	}
 }
