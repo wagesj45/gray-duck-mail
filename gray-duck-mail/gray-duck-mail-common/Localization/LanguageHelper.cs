@@ -16,17 +16,8 @@ namespace GrayDuckMail.Common.Localization
     {
         #region Members
 
-        ///// <summary>
-        ///// The title of the column in <c>Resources.resx</c> that contains the name of a language
-        ///// resource value.
-        ///// </summary>
-        //private const string LOOKUP_RESOURCE_NAME = "Name";
-
-        ///// <summary>
-        ///// The title of the column in <c>Resources.resx</c> that contains the text of a language
-        ///// resource value.
-        ///// </summary>
-        //private const string LOOKUP_RESOURCE_DESCRIPTION = "Description";
+        /// <summary> The current language. </summary>
+        private static Language currentLanguage = GetDefaultLanguage();
 
         #endregion Members
 
@@ -45,6 +36,7 @@ namespace GrayDuckMail.Common.Localization
                 yield return Language.EnglishUnitedStates;
                 yield return Language.SpanishSpain;
                 yield return Language.JapaneseJapan;
+                yield return Language.GermanGermany;
             }
         }
 
@@ -77,16 +69,7 @@ namespace GrayDuckMail.Common.Localization
         /// <returns> The current localized language. </returns>
         public static Language GetCurrentLanguage()
         {
-            var cultureName = Thread.CurrentThread.CurrentCulture.Name;
-            var result = SupportedLanguages.Where(sl => sl.Name.Equals(cultureName, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-
-            if(result == null)
-            {
-                result = GetDefaultLanguage();
-                SetLanguage(result.Name);
-            }
-
-            return result;
+            return currentLanguage;
         }
 
         /// <summary>
@@ -122,8 +105,7 @@ namespace GrayDuckMail.Common.Localization
                 var lang = GetLanguage(language);
                 if (lang != null)
                 {
-                    Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang.CultureCode);
-                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang.CultureCode);
+                    currentLanguage = lang;
                     return true;
                 }
             }

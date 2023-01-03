@@ -115,7 +115,15 @@ namespace GrayDuckMail.Common.Localization
         {
             get
             {
-                return new ActiveLanguage("jp-JP", "Japanese - Japan", 0x0411, "JPN");
+                return new ActiveLanguage("ja-JP", "Japanese - Japan", 0x0411, "JPN");
+            }
+        }
+
+        public static Language GermanGermany
+        {
+            get
+            {
+                return new ActiveLanguage("de-DE", "German - Germany", 0x0407, "DEU");
             }
         }
 

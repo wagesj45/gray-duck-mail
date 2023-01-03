@@ -1,19 +1,20 @@
 ﻿@using GrayDuckMail.Common
 @using GrayDuckMail.Common.Database
+@using GrayDuckMail.Common.Localization;
 @using GrayDuckMail.Web.Models.Forms
 @model DiscussionListAssignModel
 @{
-    ViewData["Title"] = "Discussion List Assignments";
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_List_Assign_Title);
 }
 
 <hgroup>
-    <h1>Discussion List Assignment</h1>
-    <h2>Assign contacts to <strong>@Model.DiscussionList.Name</strong> below.</h2>
+    <h1>@LanguageHelper.GetValue(ResourceName.View_List_Assign_Title)</h1>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_List_Assign_SubheadingPart1) <strong>@Model.DiscussionList.Name</strong>@LanguageHelper.GetValue(ResourceName.View_List_Assign_SubheadingPart1) </h2>
     @if (@Model.Subscriptions.Any(subscription => subscription.Status == SubscriptionStatus.Created))
     {
         <h3>
             <mark>
-                There are some invitations still processing. Your server is configured to process new subscribers every @DockerEnvironmentVariables.FetchTime.TotalMinutes minutes. Please be patient.
+                @LanguageHelper.FormatValue(ResourceName.View_List_Assign_InvitationsProcessing, DockerEnvironmentVariables.FetchTime.TotalMinutes)
             </mark>
         </h3>
     }
@@ -43,25 +44,25 @@
                 @switch (Model.GetSubscription(contact.ID))
                 {
                     case SubscriptionStatus.AwaitingConfirmation:
-                        <span data-tooltip="Awaiting Confirmation"><i class="icofont-hour-glass"></i></span>
+                        <span data-tooltip="@LanguageHelper.GetValue(ResourceName.View_List_Assign_AwaitingConfirmation)"><i class="icofont-hour-glass"></i></span>
                         break;
                     case SubscriptionStatus.Bounced:
-                        <span data-tooltip="@contact.Email has bounced."><i class="icofont-exclamation-circle"></i></span>
+                        <span data-tooltip="@LanguageHelper.FormatValue(ResourceName.View_List_Assign_Format_EmailBounced, contact.Email)"><i class="icofont-exclamation-circle"></i></span>
                         break;
                     case SubscriptionStatus.Created:
-                        <span data-tooltip="User will be invited soon."><i class="icofont-plus-circle"></i></span>
+                        <span data-tooltip="@LanguageHelper.GetValue(ResourceName.View_List_Assign_Created)"><i class="icofont-plus-circle"></i></span>
                         break;
                     case SubscriptionStatus.Denied:
-                        <span data-tooltip="You have denied this entry to this discussion group."><i class="icofont-not-allowed"></i></span>
+                        <span data-tooltip="@LanguageHelper.GetValue(ResourceName.View_List_Assign_Denied)"><i class="icofont-not-allowed"></i></span>
                         break;
                     case SubscriptionStatus.Requested:
-                        <span data-tooltip="This user has asked to participate in this discussion group."><i class="icofont-question-circle"></i></span>
+                        <span data-tooltip="@LanguageHelper.GetValue(ResourceName.View_List_Assign_Requested)"><i class="icofont-question-circle"></i></span>
                         break;
                     case SubscriptionStatus.Subscribed:
-                        <span data-tooltip="This user is subscribed to this discussion list."><i class="icofont-check-circled"></i></span>
+                        <span data-tooltip="@LanguageHelper.GetValue(ResourceName.View_List_Assign_Subscribed)"><i class="icofont-check-circled"></i></span>
                         break;
                     case SubscriptionStatus.Unsubscribed:
-                        <span data-tooltip="This user has unsubscribed from this discussion group."><i class="icofont-eye-blocked"></i></span>
+                        <span data-tooltip="@LanguageHelper.GetValue(ResourceName.View_List_Assign_Unsubscribed)"><i class="icofont-eye-blocked"></i></span>
                         break;
                     default:
                         <!-- Unknown Subscription Status. -->
@@ -70,5 +71,5 @@
             </div>
         </div>
     }
-    <button type="submit">Save Changes</button>
+    <button type="submit">@LanguageHelper.GetValue(ResourceName.View_Common_SaveChanges)</button>
 </form>

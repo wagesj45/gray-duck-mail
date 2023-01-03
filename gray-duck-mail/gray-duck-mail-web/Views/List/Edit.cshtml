@@ -1,80 +1,83 @@
-﻿@model EditDiscussionListModel
+﻿@using GrayDuckMail.Common.Localization;
+@model EditDiscussionListModel
 @{
-    ViewData["Title"] = "New Discussion List";
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_List_Edit_Title);
 }
 
 <hgroup>
     @if (Model.DiscussionList != null)
     {
-        <h1>Edit Discussion List</h1>
-        <h2>Edit the details for <strong>@Model.DiscussionList.Name</strong> below.</h2>
+        <h1>@LanguageHelper.GetValue(ResourceName.View_List_Edit_Heading)</h1>
+        <h2>@LanguageHelper.GetValue(ResourceName.View_List_Edit_SubheadingPart1) <strong>@Model.DiscussionList.Name</strong> @LanguageHelper.GetValue(ResourceName.View_List_Edit_SubheadingPart2)</h2>
     }
     else
     {
-        <h1>New Discussion List</h1>
-        <h2>Create a new discussion list below.</h2>
+        /// <summary> Gets the /h 2> </summary>
+        /// <value> The < /h 2> </value>
+        <h1>@LanguageHelper.GetValue(ResourceName.View_List_Edit_HeadingNew)</h1>
+        <h2>@LanguageHelper.GetValue(ResourceName.View_List_Edit_SubheadingNew)</h2>
     }
 </hgroup>
 
 <article>
     <header>
-        <h3>Discussion List Details</h3>
+        <h3>@LanguageHelper.GetValue(ResourceName.View_List_Edit_DiscussionListDetails)</h3>
     </header>
     <form id="discussionListDetails" action="/List/@(Model.DiscussionList?.ID > 0 ? "Edit" : "Create")" method="post">
         <input type="hidden" id="id" name="id" value="@Model.DiscussionList?.ID" />
         <label for="name">
-            Name
+            @LanguageHelper.GetValue(ResourceName.View_Common_Name)
             <input type="text" id="name" name="name" value="@Model.DiscussionList?.Name" />
         </label>
         <label for="description">
-            Description
+            @LanguageHelper.GetValue(ResourceName.View_Common_Description)
             <input type="text" id="description" name="description" value="@Model.DiscussionList?.Description" />
-            <small>A short description of the discussion list.</small>
+            <small>@LanguageHelper.GetValue(ResourceName.View_Common_DescriptionExplaination)</small>
         </label>
         <label for="baseEmailAddress">
-            List Email Address
+            @LanguageHelper.GetValue(ResourceName.View_Common_ListEmailAddress)
             <input type="email" id="baseEmailAddress" name="baseEmailAddress" value="@Model.DiscussionList?.BaseEmailAddress" />
-            <small><i class="icofont-info-square"></i> Automatic email aliases will be used, such as <kbd>bounce-list@example.com</kbd> and <kbd>unsubscribe-list@example.com</kbd>.</small>
+            <small><i class="icofont-info-square"></i>@LanguageHelper.GetValue(ResourceName.View_Common_Format_ListEmailAddressExplainationPart1) <kbd>@LanguageHelper.GetValue(ResourceName.View_Common_Format_ListEmailAddressExplainationPart2)</kbd> @LanguageHelper.GetValue(ResourceName.View_Common_Format_ListEmailAddressExplainationPart3) <kbd>@LanguageHelper.GetValue(ResourceName.View_Common_Format_ListEmailAddressExplainationPart4)</kbd>@LanguageHelper.GetValue(ResourceName.View_Common_Format_ListEmailAddressExplainationPart5)</small>
         </label>
-        <h3>Remote Email Configuration</h3>
+        <h3>@LanguageHelper.GetValue(ResourceName.View_List_Edit_RemoteEmailConfiguration)</h3>
         <label for="userName">
-            User Name
+            @LanguageHelper.GetValue(ResourceName.View_Common_UserName)
             <input type="text" id="userName" name="userName" value="@Model.DiscussionList?.UserName" />
         </label>
         <label for="password">
-            Password
+            @LanguageHelper.GetValue(ResourceName.View_Common_Password)
             <input type="password" id="password" name="password" value="@Model.DiscussionList?.Password" />
-            <small><i class="icofont-warning"></i> Passwords are not encrypted when stored. Always secure your server, and never expose Easy Mail Discussion to the public internet!</small>
+            <small><i class="icofont-warning"></i> @LanguageHelper.GetValue(ResourceName.View_Common_PasswordWarning)</small>
         </label>
         <label for="incomingMailServer">
-            Incoming Mail Server
+            @LanguageHelper.GetValue(ResourceName.View_List_Edit_IncomingMailServer)
             <input type="text" id="incomingMailServer" name="incomingMailServer" value="@Model.DiscussionList?.IncomingMailServer" />
         </label>
         <label for="incomingMailPort">
-            Incoming Mail Server Port
+            @LanguageHelper.GetValue(ResourceName.View_List_Edit_IncomingMailPort)
             <input type="number" id="incomingMailPort" name="incomingMailPort" value="@Model.DiscussionList?.IncomingMailPort" />
         </label>
         <label for="outgoingMailServer">
-            Outgoing Mail Server
+            @LanguageHelper.GetValue(ResourceName.View_List_Edit_OutgoingMailServer)
             <input type="text" id="outgoingMailServer" name="outgoingMailServer" value="@Model.DiscussionList?.OutgoingMailServer" />
         </label>
         <label for="outgoingMailPort">
-            Outgoing Mail Server Port
+            @LanguageHelper.GetValue(ResourceName.View_List_Edit_OutgoingMailPort)
             <input type="number" id="outgoingMailPort" name="outgoingMailPort" value="@Model.DiscussionList?.OutgoingMailPort" />
         </label>
         <label for="useSSL">
             <input type="checkbox" role="switch" id="useSSL" name="useSSL" @((Model.DiscussionList?.UseSSL ?? false) ? "checked" : "") />
-            Use SSL or TLS for a secure connection to the mail server.
+            @LanguageHelper.GetValue(ResourceName.View_List_Edit_UseSSL)
         </label>
     </form>
     <footer>
         @if (Model != null && Model.DiscussionList != null)
         {
-            <button type="submit" form="discussionListDetails"><i class="icofont-save"></i> Save Changes</button>
+            <button type="submit" form="discussionListDetails"><i class="icofont-save"></i> @LanguageHelper.GetValue(ResourceName.View_Common_SaveChanges)</button>
         }
         else
         {
-            <button type="submit" form="discussionListDetails"><i class="icofont-ui-add"></i> Create Discussion List</button>
+            <button type="submit" form="discussionListDetails"><i class="icofont-ui-add"></i> @LanguageHelper.GetValue(ResourceName.View_List_Edit_CreateDiscussionList)</button>
         }
     </footer>
 </article>

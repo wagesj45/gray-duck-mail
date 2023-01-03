@@ -118,514 +118,514 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationName" xml:space="preserve">
-    <value>Gray Duck Mail</value>
+    <value>グレイダックメイル</value>
   </data>
   <data name="Exception_DBNotCreated" xml:space="preserve">
-    <value>Could not create database file.</value>
+    <value>データベース ファイルを作成できませんでした。</value>
   </data>
   <data name="Exception_FormatNotDetermined" xml:space="preserve">
-    <value>Could not determine the formatting of the message.</value>
+    <value>メッセージのフォーマットを判別できませんでした。</value>
   </data>
   <data name="Exception_MalformedDatabase" xml:space="preserve">
-    <value>The file upload was not in the correct SQLite file format.</value>
+    <value>ファイルのアップロードが正しい SQLite ファイル形式ではありませんでした。</value>
   </data>
   <data name="Exception_MalformedUpload" xml:space="preserve">
-    <value>The file uploaded is missing or was malformed.</value>
+    <value>アップロードされたファイルが見つからないか、形式が正しくありません。</value>
   </data>
   <data name="Exception_NoSearchTerm" xml:space="preserve">
-    <value>No search term was provided.</value>
+    <value>検索語句が指定されていません。</value>
   </data>
   <data name="Exception_PropertySelectorResolutionError" xml:space="preserve">
-    <value>The property selector was unable to resolve to a property name.</value>
+    <value>プロパティ セレクターがプロパティ名を解決できませんでした。</value>
   </data>
   <data name="Logger_AddingEmailDefinition" xml:space="preserve">
-    <value>Adding email definition to queue.</value>
+    <value>電子メール定義をキューに追加しています。</value>
   </data>
   <data name="Logger_AppendUsingSSL" xml:space="preserve">
-    <value> using SSL</value>
+    <value>SSL の使用</value>
   </data>
   <data name="Logger_ApplicationStopped" xml:space="preserve">
-    <value>Application stopped.</value>
+    <value>アプリケーションが停止しました。</value>
   </data>
   <data name="Logger_BeginningFetchLoop" xml:space="preserve">
-    <value>Beginning email fetch loop.</value>
+    <value>メール取得ループの開始。</value>
   </data>
   <data name="Logger_BeginningOnboarderLoop" xml:space="preserve">
-    <value>Beginning onboarding loop.</value>
+    <value>オンボーディング ループの開始。</value>
   </data>
   <data name="Logger_BeginningSenderLoop" xml:space="preserve">
-    <value>Beginning email sender loop.</value>
+    <value>メール送信者ループの開始。</value>
   </data>
   <data name="Logger_CommittingChangesToDatabase" xml:space="preserve">
-    <value>Committing changes to database.</value>
+    <value>データベースへの変更をコミットしています。</value>
   </data>
   <data name="Logger_CreatingEmailWrapper" xml:space="preserve">
-    <value>Creating email wrapper object.</value>
+    <value>電子メール ラッパー オブジェクトを作成しています。</value>
   </data>
   <data name="Logger_DeliveryStatusDetected" xml:space="preserve">
-    <value>Message is a multipart message with at least one 'delivery-status' section.</value>
+    <value>メッセージは、少なくとも 1 つの「配信ステータス」セクションを持つマルチパート メッセージです。</value>
   </data>
   <data name="Logger_Disconnecting" xml:space="preserve">
-    <value>Disconnecting.</value>
+    <value>切断しています。</value>
   </data>
   <data name="Logger_DisposingIMAP" xml:space="preserve">
-    <value>IMAP client disposing.</value>
+    <value>IMAP クライアントの破棄。</value>
   </data>
   <data name="Logger_DisposingPOP3" xml:space="preserve">
-    <value>POP3 Client disposing.</value>
+    <value>POP3 クライアントの破棄。</value>
   </data>
   <data name="Logger_DisposingWrapper" xml:space="preserve">
-    <value>Disposing of the client wrapper object.</value>
+    <value>クライアント ラッパー オブジェクトの破棄。</value>
   </data>
   <data name="Logger_EmailDefinitionFetchFailure" xml:space="preserve">
-    <value>Unable to fetch email definition from queue.</value>
+    <value>キューから電子メール定義を取得できません。</value>
   </data>
   <data name="Logger_EmailDefinitionFound" xml:space="preserve">
-    <value>Found an email definition in the shared memory queue.</value>
+    <value>共有メモリ キューに電子メール定義が見つかりました。</value>
   </data>
   <data name="Logger_EmailFetcherShutdown" xml:space="preserve">
-    <value>Email fetcher shutting down.</value>
+    <value>メール フェッチャーをシャットダウンしています。</value>
   </data>
   <data name="Logger_EmailSenderShutDown" xml:space="preserve">
-    <value>Email sender shutting down.</value>
+    <value>メールの送信者がシャットダウンしています。</value>
   </data>
   <data name="Logger_EmptyDiscussionList" xml:space="preserve">
-    <value>The discussion list is empty.</value>
+    <value>ディスカッション リストが空です。</value>
   </data>
   <data name="Logger_FailedDeliveryDetected" xml:space="preserve">
-    <value>A failed delivery was detected.</value>
+    <value>配信の失敗が検出されました。</value>
   </data>
   <data name="Logger_FailureDetectedUnknownRecipient" xml:space="preserve">
-    <value>The bounced email contains a failure report, but an unknown recipient status group.</value>
+    <value>バウンスされた電子メールには失敗レポートが含まれていますが、不明な受信者ステータス グループです。</value>
   </data>
   <data name="Logger_FetchingEmailDefinition" xml:space="preserve">
-    <value>Fetching email defintion from queue.</value>
+    <value>キューからメール定義を取得しています。</value>
   </data>
   <data name="Logger_FilteringBouncedMessages" xml:space="preserve">
-    <value>Filtering bounced messages.</value>
+    <value>バウンスされたメッセージのフィルタリング。</value>
   </data>
   <data name="Logger_Format_AddressNotActive" xml:space="preserve">
-    <value>The email address for {0} appears to no longer be active.</value>
+    <value>{0} の電子メール アドレスは無効になっているようです。</value>
   </data>
   <data name="Logger_Format_AssigningContact" xml:space="preserve">
-    <value>Assigning Contact {0} to Discussion List {1}.</value>
+    <value>連絡先 {0} をディスカッション リスト {1} に割り当てています。</value>
   </data>
   <data name="Logger_Format_AssigningMimeMessageIndex" xml:space="preserve">
-    <value>Assigning index {0} to {1}.</value>
+    <value>インデックス {0} を {1} に割り当てています。</value>
   </data>
   <data name="Logger_Format_AuthenticatingAs" xml:space="preserve">
-    <value>Authenticating as {0}.</value>
+    <value>{0} として認証しています。</value>
   </data>
   <data name="Logger_Format_AuthenticatingWith" xml:space="preserve">
-    <value>Authenticating with {0}:{1}.</value>
+    <value>{0}:{1} で認証しています。</value>
   </data>
   <data name="Logger_Format_ConnectingTo" xml:space="preserve">
-    <value>Connecting to {0}:{1}.</value>
+    <value>{0} に接続しています:{1}。</value>
   </data>
   <data name="Logger_Format_ConnectingToSSL" xml:space="preserve">
-    <value>Connecting to {0}:{1}{2}</value>
+    <value>{0} に接続中:{1}{2}</value>
   </data>
   <data name="Logger_Format_CouldNotFindContact" xml:space="preserve">
-    <value>Could not find contact with ID = {0}.</value>
+    <value>ID = {0} の連絡先が見つかりませんでした。</value>
   </data>
   <data name="Logger_Format_CouldNotFindDiscussionList" xml:space="preserve">
-    <value>Could not find discussion list with ID = {0}</value>
+    <value>ID = {0} のディスカッション リストが見つかりませんでした</value>
   </data>
   <data name="Logger_Format_CreatingDB" xml:space="preserve">
-    <value>Creating db file at {0}.</value>
+    <value>{0} に db ファイルを作成しています。</value>
   </data>
   <data name="Logger_Format_DBCreated" xml:space="preserve">
-    <value>Database file created at {0}.</value>
+    <value>{0} に作成されたデータベース ファイル。</value>
   </data>
   <data name="Logger_Format_DBNotCreated" xml:space="preserve">
-    <value>Could not create database file at {0}.</value>
+    <value>{0} にデータベース ファイルを作成できませんでした。</value>
   </data>
   <data name="Logger_Format_DeletingMessage" xml:space="preserve">
-    <value>Deleting message {0}.</value>
+    <value>メッセージ {0} を削除しています。</value>
   </data>
   <data name="Logger_Format_EstablishingDatabaseContext" xml:space="preserve">
-    <value>Establishing database context using {0}.</value>
+    <value>{0} を使用してデータベース コンテキストを確立しています。</value>
   </data>
   <data name="Logger_Format_FailureStatusGroupsLine" xml:space="preserve">
     <value>-- {0}: {1}</value>
   </data>
   <data name="Logger_Format_FetchLoopComplete" xml:space="preserve">
-    <value>Fetch loop complete. Waiting {0}.</value>
+    <value>フェッチ ループが完了しました。 {0} を待っています。</value>
   </data>
   <data name="Logger_Format_FilteringCount" xml:space="preserve">
-    <value>Filtering {0} messages.</value>
+    <value>{0} メッセージをフィルタリングしています。</value>
   </data>
   <data name="Logger_Format_FilteringMessage" xml:space="preserve">
-    <value>Filtering message {0}.</value>
+    <value>メッセージ {0} をフィルタリングしています。</value>
   </data>
   <data name="Logger_Format_FilteringMessages" xml:space="preserve">
-    <value>Filtering messages for {0}.</value>
+    <value>{0} のメッセージをフィルタリングしています。</value>
   </data>
   <data name="Logger_Format_FilterMatch" xml:space="preserve">
-    <value>Message {0} matches the filter criteria.</value>
+    <value>メッセージ {0} はフィルター条件に一致します。</value>
   </data>
   <data name="Logger_Format_FormInputMalformed" xml:space="preserve">
-    <value>Form input was malformed or missing for {0}.</value>
+    <value>{0} のフォーム入力の形式が正しくないか、欠落しています。</value>
   </data>
   <data name="Logger_Format_ImportingExistingDatabase" xml:space="preserve">
-    <value>Importing exisiting database {0}.</value>
+    <value>既存のデータベース {0} をインポートしています。</value>
   </data>
   <data name="Logger_Format_InvalidUnsubscriptionContact" xml:space="preserve">
-    <value>Invalid unsubscription request for non-existant contact with ID {0}.</value>
+    <value>ID {0} の存在しない連絡先に対する登録解除要求は無効です。</value>
   </data>
   <data name="Logger_Format_InvalidUnsubscriptionDiscussionList" xml:space="preserve">
-    <value>Invalid unsubscription request for non-existant discussion list with ID {0}.</value>
+    <value>ID {0} の存在しないディスカッション リストの登録解除要求は無効です。</value>
   </data>
   <data name="Logger_Format_InvalidUnsubscriptionSubscriptionStatus" xml:space="preserve">
-    <value>Invalid unsubscription status for contact with ID {0} and discussion list {1} due to subscription status {2}.</value>
+    <value>サブスクリプション ステータス {2} のため、ID {0} およびディスカッション リスト {1} の連絡先のサブスクリプション解除ステータスが無効です。</value>
   </data>
   <data name="Logger_Format_LoadingAssembly" xml:space="preserve">
-    <value>Loading assembly {0}.</value>
+    <value>アセンブリ {0} をロードしています。</value>
   </data>
   <data name="Logger_Format_MessageProcessed" xml:space="preserve">
-    <value>Message {0} (Index {1}) processed. Marked for deletion from the server.</value>
+    <value>メッセージ {0} (インデックス {1}) が処理されました。サーバーから削除するようにマークされています。</value>
   </data>
   <data name="Logger_Format_OnboarderLoopComplete" xml:space="preserve">
-    <value>Onboarding loop complete. Waiting {0}.</value>
+    <value>オンボーディング ループが完了しました。 {0} を待っています。</value>
   </data>
   <data name="Logger_Format_PerformingFuzzySearch" xml:space="preserve">
-    <value>Performing fuzzy search: {0}</value>
+    <value>あいまい検索を実行しています: {0}</value>
   </data>
   <data name="Logger_Format_ProcessingList" xml:space="preserve">
-    <value>Processing list {0}.</value>
+    <value>リスト {0} を処理しています。</value>
   </data>
   <data name="Logger_Format_ProcessingMessages" xml:space="preserve">
-    <value>Processing {0} messages.</value>
+    <value>{0} メッセージを処理しています。</value>
   </data>
   <data name="Logger_Format_ProcessingSubscriptionMessage" xml:space="preserve">
-    <value>Processing subscription message from {0}.</value>
+    <value>{0} からのサブスクリプション メッセージを処理しています。</value>
   </data>
   <data name="Logger_Format_SenderLoopComplete" xml:space="preserve">
-    <value>Email sender loop complete. Waiting {0}.</value>
+    <value>メール送信者ループが完了しました。 {0} を待っています。</value>
   </data>
   <data name="Logger_Format_SendingOnboardingEmail" xml:space="preserve">
-    <value>Sending onboarding email to {0} ({1}).</value>
+    <value>{0} ({1}) にオンボーディング メールを送信しています。</value>
   </data>
   <data name="Logger_Format_SendingOwnerNotification" xml:space="preserve">
-    <value>Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}.</value>
+    <value>{0} ({1}) が {2} へのアクセスを要求したという通知をディスカッション リストの所有者に送信しています。</value>
   </data>
   <data name="Logger_Format_SendingSubscriptionConfirmation" xml:space="preserve">
-    <value>Sending the subscription confirmation email to {0} ({1}).</value>
+    <value>サブスクリプション確認メールを {0} ({1}) に送信しています。</value>
   </data>
   <data name="Logger_Format_SendingTest" xml:space="preserve">
-    <value>Sending a test Owner Notification email to discussion list {0}.</value>
+    <value>テスト所有者通知メールをディスカッション リスト {0} に送信しています。</value>
   </data>
   <data name="Logger_Format_SendingUnsubscriptionConfirmation" xml:space="preserve">
-    <value>Sending the subscription confirmation email to {0} ({1}).</value>
+    <value>サブスクリプション確認メールを {0} ({1}) に送信しています。</value>
   </data>
   <data name="Logger_Format_ServingPage" xml:space="preserve">
-    <value>Serving page '{0}'</value>
+    <value>ページ '{0}' を提供しています</value>
   </data>
   <data name="Logger_Format_SettingActive" xml:space="preserve">
-    <value>Setting {0} (ID {1}) as active. They have confirmed they control the email address by responding to the subscription confirmation email.</value>
+    <value>{0} (ID {1}) をアクティブに設定しています。彼らは、サブスクリプション確認メールに返信することにより、メールアドレスを管理していることを確認しました.</value>
   </data>
   <data name="Logger_Format_TemplateProcessed" xml:space="preserve">
-    <value>Email template processed: {0}.</value>
+    <value>処理された電子メール テンプレート: {0}。</value>
   </data>
   <data name="Logger_Format_UnassigningContact" xml:space="preserve">
-    <value>Removing Contact {0} to Discussion List {1}.</value>
+    <value>連絡先 {0} をディスカッション リスト {1} から削除しています。</value>
   </data>
   <data name="Logger_Format_UnknownUserRequestedAccess" xml:space="preserve">
-    <value>An unknown user has requested access to {0}. An alert will be sent to the owner address alias.</value>
+    <value>不明なユーザーが {0} へのアクセスを要求しました。所有者のアドレス エイリアスにアラートが送信されます。</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorized" xml:space="preserve">
-    <value>The sender is unrecognized or unauthorized to participate in {0}. We'll log it and let the message be deleted.</value>
+    <value>送信者が認識されていないか、{0} への参加が承認されていません。ログに記録し、メッセージを削除します。</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorizedDomainLine" xml:space="preserve">
     <value>-- {0}</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorizedEncoding" xml:space="preserve">
-    <value>Encoding: {0}</value>
+    <value>エンコーディング: {0}</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorizedFrom" xml:space="preserve">
-    <value>From: {0} ({1})</value>
+    <value>送信元: {0} ({1})</value>
   </data>
   <data name="Logger_Format_UnsubscribedBounce" xml:space="preserve">
-    <value>A bounced email was recieved for an address that is not subscribed to {0}. Ignoring this message.</value>
+    <value>{0} に登録されていないアドレス宛てのバウンスメールを受信しました。このメッセージを無視します。</value>
   </data>
   <data name="Logger_Format_UserAlreadySubscribed" xml:space="preserve">
-    <value>{0}, who is already subscribed to {1}, has requested access again. Ignoring this message.</value>
+    <value>すでに {1} を購読している {0} が、再度アクセスを要求しました。このメッセージを無視します。</value>
   </data>
   <data name="Logger_Format_UserPreviouslyDenied" xml:space="preserve">
-    <value>{0} has requested access to {1}, but has previously been denied. Ignoring this request.</value>
+    <value>{0} は {1} へのアクセスを要求しましたが、以前に拒否されました。この要求を無視します。</value>
   </data>
   <data name="Logger_Format_UserPreviouslySubscribed" xml:space="preserve">
-    <value>{0} has requested access to {1}. Because they have previously be associated with the discussion list, they will be subscribed.</value>
+    <value>{0} が {1} へのアクセスを要求しました。それらは以前にディスカッション リストに関連付けられているため、購読されます。</value>
   </data>
   <data name="Logger_Format_UserSubscribing" xml:space="preserve">
-    <value>User {0} subscribing to {1}.</value>
+    <value>ユーザー {0} が {1} を購読しています。</value>
   </data>
   <data name="Logger_Format_UserUnsubscribing" xml:space="preserve">
-    <value>User {0} unsubscribing from {1}.</value>
+    <value>ユーザー {0} が {1} から登録解除しています。</value>
   </data>
   <data name="Logger_Format_UsingCustomView" xml:space="preserve">
-    <value>Using custom view layout: {0}</value>
+    <value>カスタム ビュー レイアウトの使用: {0}</value>
   </data>
   <data name="Logger_FoundResources" xml:space="preserve">
-    <value>Found the following resource names in the assembly manifest:</value>
+    <value>アセンブリ マニフェストで次のリソース名が見つかりました:</value>
   </data>
   <data name="Logger_FoundResourcesLine" xml:space="preserve">
     <value>-- {0}</value>
   </data>
   <data name="Logger_GeneratingEmail" xml:space="preserve">
-    <value>Generating an email.</value>
+    <value>電子メールの生成。</value>
   </data>
   <data name="Logger_GettingMessages" xml:space="preserve">
-    <value>Getting messages.</value>
+    <value>メッセージの取得。</value>
   </data>
   <data name="Logger_InitializingControllerDatabase" xml:space="preserve">
-    <value>Initializing database for controller.</value>
+    <value>コントローラのデータベースを初期化しています。</value>
   </data>
   <data name="Logger_InitializingSharedMemory" xml:space="preserve">
-    <value>Initializing shared memory object via static constructor.</value>
+    <value>静的コンストラクターを介して共有メモリ オブジェクトを初期化しています。</value>
   </data>
   <data name="Logger_InvalidUnsubscriptionSubscription" xml:space="preserve">
-    <value>Invalid unsubscription request. No subscription status found.</value>
+    <value>登録解除リクエストが無効です。サブスクリプション ステータスが見つかりません。</value>
   </data>
   <data name="Logger_LoadingHTMLTemplate" xml:space="preserve">
-    <value>Loading main HTML email template.</value>
+    <value>メインの HTML メール テンプレートを読み込んでいます。</value>
   </data>
   <data name="Logger_MalformedEmailDefinition" xml:space="preserve">
-    <value>Recieved a malformed EmailDefinition.</value>
+    <value>不正な形式の EmailDefinition を受け取りました。</value>
   </data>
   <data name="Logger_MessageContainsHTML" xml:space="preserve">
-    <value>Mesasge body determined to contain HTML.</value>
+    <value>メッセージ本文に HTML が含まれていると判断されました。</value>
   </data>
   <data name="Logger_MessageContainsPlainText" xml:space="preserve">
-    <value>Message body determined to contain plain text.</value>
+    <value>プレーン テキストを含むと判断されたメッセージ本文。</value>
   </data>
   <data name="Logger_NoMessagesFound" xml:space="preserve">
-    <value>No messages found.</value>
+    <value>メッセージが見つかりません。</value>
   </data>
   <data name="Logger_NoOnboardingAssignments" xml:space="preserve">
-    <value>No freshly created assignments waiting for onboarding.</value>
+    <value>オンボーディングを待っている新しく作成された割り当てはありません。</value>
   </data>
   <data name="Logger_OnboarderShutDown" xml:space="preserve">
-    <value>Onboarder shutting down.</value>
+    <value>オンボーダーのシャットダウン。</value>
   </data>
   <data name="Logger_RegisteringServiceWorkers" xml:space="preserve">
-    <value>Registering service workers.</value>
+    <value>Service Worker の登録。</value>
   </data>
   <data name="Logger_RelayingMessage" xml:space="preserve">
-    <value>Relaying message to {0} ({1})</value>
+    <value>メッセージを {0} に中継中 ({1})</value>
   </data>
   <data name="Logger_RequestOnExternalPort" xml:space="preserve">
-    <value>The request is being processed from the designated external port. Request Origin: {0}</value>
+    <value>リクエストは、指定された外部ポートから処理されています。リクエスト元: {0}</value>
   </data>
   <data name="Logger_RequestOnInternalPort" xml:space="preserve">
-    <value>The request is being processed from the designated internal port.</value>
+    <value>要求は、指定された内部ポートから処理されています。</value>
   </data>
   <data name="Logger_RequestOnUnknownPort" xml:space="preserve">
-    <value>The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1}</value>
+    <value>要求は不明なポート ({0}) から処理されています)。 Docker コンテナーの構成が間違っている可能性があります。リモート起点: {1}</value>
   </data>
   <data name="Logger_RunningApplication" xml:space="preserve">
-    <value>Running application.</value>
+    <value>実行中のアプリケーション。</value>
   </data>
   <data name="Logger_SavingAssignments" xml:space="preserve">
-    <value>Saving assignments.</value>
+    <value>割り当てを保存します。</value>
   </data>
   <data name="Logger_SMTPNotConnected" xml:space="preserve">
-    <value>The SMTP client is not connected. Connecting now.</value>
+    <value>SMTP クライアントが接続されていません。現在接続中です。</value>
   </data>
   <data name="Logger_StartingApplication" xml:space="preserve">
-    <value>Starting the main application.</value>
+    <value>メインアプリケーションの起動。</value>
   </data>
   <data name="Logger_StoppingApplication" xml:space="preserve">
-    <value>Stopping the application.</value>
+    <value>アプリケーションを停止しています。</value>
   </data>
   <data name="Logger_TemplateInMemory" xml:space="preserve">
-    <value>Email template read into memory.</value>
+    <value>電子メール テンプレートがメモリに読み込まれました。</value>
   </data>
   <data name="Logger_UnknownClientType" xml:space="preserve">
-    <value>An unknown client type was requested.</value>
+    <value>不明なクライアント タイプが要求されました。</value>
   </data>
   <data name="Logger_UsingIMAP" xml:space="preserve">
-    <value>Using IMAP client.</value>
+    <value>IMAP クライアントの使用。</value>
   </data>
   <data name="Logger_UsingPOP3" xml:space="preserve">
-    <value>Using POP3 client.</value>
+    <value>POP3 クライアントを使用しています。</value>
   </data>
   <data name="Mail_Format_HTMLUnsubscribeEmailMessage" xml:space="preserve">
-    <value>This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to &lt;a href='mailto:{1}'&gt;{1}&lt;/a&gt;</value>
+    <value>このメッセージは、'{0}' ディスカッション リストの一部です。 &lt;a href='mailto:{1}'&gt;{1}&lt;/a&gt; にメッセージを送信することで、登録を解除できます</value>
   </data>
   <data name="Mail_Format_HTMLUnsubscribeLinkMessage" xml:space="preserve">
-    <value>This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: &lt;a href='{1}'&gt;{1}&lt;/a&gt;</value>
+    <value>このメッセージは、'{0}' ディスカッション リストの一部です。ここをクリックして登録を解除できます: &lt;a href='{1}'&gt;{1}&lt;/a&gt;</value>
   </data>
   <data name="Mail_Format_OnboardingBody" xml:space="preserve">
-    <value>The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.</value>
+    <value>'{0}' メーリング リストの管理者があなたを参加に招待しました。サブスクリプションを確認するには、この電子メールに返信してください。参加したくない場合は、このメールを無視してください。</value>
   </data>
   <data name="Mail_Format_OnboardingSubheading" xml:space="preserve">
-    <value>You've been invited to the '{0}' Email Discussion List</value>
+    <value>'{0}' メール ディスカッション リストに招待されました</value>
   </data>
   <data name="Mail_Format_OnboardingSubject" xml:space="preserve">
-    <value>Subscribe to {0}</value>
+    <value>{0} を購読する</value>
   </data>
   <data name="Mail_Format_OwnerNotificationSubheading" xml:space="preserve">
-    <value>{0} has requested access to the '{0}' Email Discussion List</value>
+    <value>{0} は、'{0}' 電子メール ディスカッション リストへのアクセスを要求しました</value>
   </data>
   <data name="Mail_Format_OwnerNotificationSubject" xml:space="preserve">
-    <value>Request to join {0}</value>
+    <value>{0}への参加をリクエスト</value>
   </data>
   <data name="Mail_Format_Subject" xml:space="preserve">
-    <value>{0} - Message from {1}</value>
+    <value>{0} - {1} からのメッセージ</value>
   </data>
   <data name="Mail_Format_SubjectReplace" xml:space="preserve">
-    <value> - Message from {0}</value>
+    <value>- {0} からのメッセージ</value>
     <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
   </data>
   <data name="Mail_Format_SubscriptionConfirmationBody" xml:space="preserve">
-    <value>Glad to have you. To send a message to everyone on the discussion list, just send an email to &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.</value>
+    <value>よろしくお願いします。ディスカッション リストの全員にメッセージを送信するには、&lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt; にメールを送信します。グループの誰かからメッセージを受け取ったら、そのメールに返信するだけで、ディスカッション リストの全員がコピーを受け取ります。</value>
   </data>
   <data name="Mail_Format_SubscriptionConfirmationSubheading" xml:space="preserve">
-    <value>You've been subscribed to the '{0}' Email Discussion List</value>
+    <value>'{0}' メール ディスカッション リストに登録しました</value>
   </data>
   <data name="Mail_Format_SubscriptionConfirmationSubject" xml:space="preserve">
-    <value>Welcome to {0}</value>
+    <value>{0}へようこそ</value>
   </data>
   <data name="Mail_Format_TextUnsubscribeEmailMessage" xml:space="preserve">
-    <value>This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.</value>
+    <value>このメッセージは、'{0}' ディスカッション リストの一部です。 {1} に任意のメッセージを送信して、購読を解除できます。</value>
   </data>
   <data name="Mail_Format_TextUnsubscribeLinkMessage" xml:space="preserve">
-    <value>This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: {1}</value>
+    <value>このメッセージは、'{0}' ディスカッション リストの一部です。ここをクリックして登録を解除できます: {1}</value>
   </data>
   <data name="Mail_Format_UnsubscriptionConfirmationBody" xml:space="preserve">
-    <value>You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;.</value>
+    <value>このディスカッション リストからの退会に成功しました。再登録したい場合は、&lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt; にメッセージを送信してください。</value>
   </data>
   <data name="Mail_Format_UnsubscriptionConfirmationSubheading" xml:space="preserve">
-    <value>You will no longer recieve messages from the '{0}' Email Discussion List</value>
+    <value>'{0}' メール ディスカッション リストからメッセージを受信しなくなります</value>
   </data>
   <data name="Mail_Format_UnsubscriptionConfirmationSubject" xml:space="preserve">
-    <value>You have been unsubscribed from {0}.</value>
+    <value>{0} から退会しました。</value>
   </data>
   <data name="Mail_OnboardingHeading" xml:space="preserve">
-    <value>Welcome!</value>
+    <value>いらっしゃいませ！</value>
   </data>
   <data name="Mail_Owner" xml:space="preserve">
-    <value>Owner</value>
+    <value>オーナー</value>
   </data>
   <data name="Mail_OwnerNotificationBody" xml:space="preserve">
-    <value>Please visit the the web administration interface to process this request.</value>
+    <value>このリクエストを処理するには、ウェブ管理インターフェースにアクセスしてください。</value>
   </data>
   <data name="Mail_OwnerNotificationHeading" xml:space="preserve">
-    <value>Discussion List Access Request</value>
+    <value>ディスカッション リストへのアクセス リクエスト</value>
   </data>
   <data name="Mail_SubscriptionConfirmationHeading" xml:space="preserve">
-    <value>Thanks for subscribing!</value>
+    <value>購読していただきありがとうございます！</value>
   </data>
   <data name="Mail_UnsubscriptionConfirmationHeading" xml:space="preserve">
-    <value>Sorry to see you go.</value>
+    <value>あなたを見送るのが申し訳ない。</value>
   </data>
   <data name="View_Administration_AllowFuzzySearch" xml:space="preserve">
-    <value>Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms.</value>
+    <value>システムがあいまい検索を使用できるようにします。これにより、類似またはスペルミスのある検索語に一致させることができます。</value>
   </data>
   <data name="View_Administration_ChooseDatabase" xml:space="preserve">
-    <value>Choose a SQLite database file to import</value>
+    <value>インポートする SQLite データベース ファイルを選択してください</value>
   </data>
   <data name="View_Administration_DockerEnvironmentVariables" xml:space="preserve">
-    <value>Docker environment variable runtime values.</value>
+    <value>Docker 環境変数のランタイム値。</value>
   </data>
   <data name="View_Administration_Export" xml:space="preserve">
-    <value>Export</value>
+    <value>輸出</value>
   </data>
   <data name="View_Administration_ExportDatabase" xml:space="preserve">
-    <value>Export Database</value>
+    <value>データベースのエクスポート</value>
   </data>
   <data name="View_Administration_ExportDatabaseDescription" xml:space="preserve">
-    <value>Save a copy of your database, including contacts, discussion lists, and messages.</value>
+    <value>連絡先、ディスカッション リスト、メッセージなど、データベースのコピーを保存します。</value>
   </data>
   <data name="View_Administration_FuzzySearchExplaination" xml:space="preserve">
-    <value>Fuzzy search can give you better search results, but can be very slow.</value>
+    <value>あいまい検索を使用すると、より良い検索結果が得られますが、非常に遅くなる可能性があります。</value>
   </data>
   <data name="View_Administration_Heading" xml:space="preserve">
-    <value>Administration</value>
+    <value>管理</value>
   </data>
   <data name="View_Administration_Import" xml:space="preserve">
-    <value>Import</value>
+    <value>輸入</value>
   </data>
   <data name="View_Administration_ImportDatabase" xml:space="preserve">
-    <value>Import Database</value>
+    <value>データベースのインポート</value>
   </data>
   <data name="View_Administration_ImportDatabaseDescription" xml:space="preserve">
-    <value>Import a database file to transfer contacts, discussion lists, and messages.</value>
+    <value>データベース ファイルをインポートして、連絡先、ディスカッション リスト、およびメッセージを転送します。</value>
   </data>
   <data name="View_Administration_ImportWarning" xml:space="preserve">
-    <value>WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding.</value>
+    <value>警告: これにより、既存のデータベース ファイルが上書きされます。続行する前に、データベースのバックアップがあることを確認してください。</value>
   </data>
   <data name="View_Administration_ItemsPerPage" xml:space="preserve">
-    <value>Number of items per page</value>
+    <value>ページあたりのアイテム数</value>
   </data>
   <data name="View_Administration_SaveSettings" xml:space="preserve">
-    <value>Save Settings</value>
+    <value>設定を保存する</value>
   </data>
   <data name="View_Administration_SiteTheme" xml:space="preserve">
-    <value>Site Theme</value>
+    <value>サイトのテーマ</value>
   </data>
   <data name="View_Administration_Subheading" xml:space="preserve">
-    <value>Perform specialized tasks to manage and maintain your service here.</value>
+    <value>ここで、サービスを管理および維持するための特別なタスクを実行します。</value>
   </data>
   <data name="View_Administration_System" xml:space="preserve">
-    <value>System</value>
+    <value>システム</value>
   </data>
   <data name="View_Administration_SystemConfigurationPart1" xml:space="preserve">
-    <value>Your system is currently configured to send</value>
+    <value>システムは現在、送信するように構成されています</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_SystemConfigurationPart2" xml:space="preserve">
-    <value>emails at once, with a maximum of</value>
+    <value>一度にメール送信、最大</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_SystemConfigurationPart3" xml:space="preserve">
-    <value>emails sent per hour.</value>
+    <value>1 時間あたりに送信されるメール。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_Title" xml:space="preserve">
-    <value>Administration</value>
+    <value>管理</value>
   </data>
   <data name="View_Administration_Value" xml:space="preserve">
-    <value>Value</value>
+    <value>価値</value>
   </data>
   <data name="View_Administration_WebSettings" xml:space="preserve">
-    <value>Web Settings</value>
+    <value>ウェブ設定</value>
   </data>
   <data name="View_Common_Activated" xml:space="preserve">
-    <value>Activated</value>
+    <value>アクティブ化</value>
   </data>
   <data name="View_Common_Archive" xml:space="preserve">
-    <value>Archive</value>
+    <value>アーカイブ</value>
   </data>
   <data name="View_Common_Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="View_Common_Create" xml:space="preserve">
-    <value>Create</value>
+    <value>作成</value>
   </data>
   <data name="View_Common_Description" xml:space="preserve">
-    <value>Description</value>
+    <value>説明</value>
   </data>
   <data name="View_Common_DescriptionExplaination" xml:space="preserve">
-    <value>A short description of the discussion list.</value>
+    <value>ディスカッション リストの簡単な説明。</value>
   </data>
   <data name="View_Common_Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>編集</value>
   </data>
   <data name="View_Common_Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Eメール</value>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart1" xml:space="preserve">
-    <value>Automatic email aliases will be used, such as</value>
+    <value>などの自動電子メール エイリアスが使用されます。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart2" xml:space="preserve">
-    <value>bounce-list@example.com</value>
+    <value>バウンスリスト@example.com</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart3" xml:space="preserve">
-    <value>and</value>
+    <value>と</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart4" xml:space="preserve">
@@ -637,143 +637,143 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Common_Format_PageCount" xml:space="preserve">
-    <value>Page {0} of {1}</value>
+    <value>ページ {0}/{1}</value>
   </data>
   <data name="View_Common_ListEmailAddress" xml:space="preserve">
-    <value>List Email Address</value>
+    <value>リストのメールアドレス</value>
   </data>
   <data name="View_Common_Name" xml:space="preserve">
-    <value>Name</value>
+    <value>名前</value>
   </data>
   <data name="View_Common_NumberOfDiscussionLists" xml:space="preserve">
-    <value>Number of Discussion Lists</value>
+    <value>ディスカッション リストの数</value>
   </data>
   <data name="View_Common_Password" xml:space="preserve">
-    <value>Password</value>
+    <value>パスワード</value>
   </data>
   <data name="View_Common_PasswordWarning" xml:space="preserve">
-    <value>Passwords are not encrypted when stored. Always secure your server, and never expose Gray Duck Mail's administration interface to the public internet!</value>
+    <value>パスワードは保存時に暗号化されません。常にサーバーを保護し、Gray Duck Mail の管理インターフェイスを公共のインターネットに決して公開しないでください!</value>
   </data>
   <data name="View_Common_Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>削除する</value>
   </data>
   <data name="View_Common_SaveChanges" xml:space="preserve">
-    <value>Save Changes</value>
+    <value>変更内容を保存</value>
   </data>
   <data name="View_Common_Search" xml:space="preserve">
-    <value>Search</value>
+    <value>検索</value>
   </data>
   <data name="View_Common_UserName" xml:space="preserve">
-    <value>User Name</value>
+    <value>ユーザー名</value>
   </data>
   <data name="View_Contacts_Edit_ActivatedDescription" xml:space="preserve">
-    <value>The user is activated and the email address is considered valid and working.</value>
+    <value>ユーザーがアクティブ化され、電子メール アドレスが有効で機能していると見なされます。</value>
   </data>
   <data name="View_Contacts_Edit_ContactDetails" xml:space="preserve">
-    <value>Contact Details</value>
+    <value>連絡先の詳細</value>
   </data>
   <data name="View_Contacts_Edit_CreateContact" xml:space="preserve">
-    <value>Create Contact</value>
+    <value>連絡先を作成</value>
   </data>
   <data name="View_Contacts_Edit_Heading" xml:space="preserve">
-    <value>Edit Contact</value>
+    <value>連絡先を編集</value>
   </data>
   <data name="View_Contacts_Edit_HeadingNew" xml:space="preserve">
-    <value>New Contact</value>
+    <value>新しい連絡先</value>
   </data>
   <data name="View_Contacts_Edit_SubheadingNew" xml:space="preserve">
-    <value>Create a new contact below.</value>
+    <value>以下で新しい連絡先を作成します。</value>
   </data>
   <data name="View_Contacts_Edit_SubheadingPart1" xml:space="preserve">
-    <value>Edit the details for</value>
+    <value>の詳細を編集します</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Edit_SubheadingPart2" xml:space="preserve">
-    <value>below.</value>
+    <value>未満。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Edit_Title" xml:space="preserve">
-    <value>Contact Editor</value>
+    <value>連絡先編集者</value>
   </data>
   <data name="View_Contacts_Index_CreateNewContact" xml:space="preserve">
-    <value>Create New Contact</value>
+    <value>新しい連絡先を作成</value>
   </data>
   <data name="View_Contacts_Index_Heading" xml:space="preserve">
-    <value>Contacts</value>
+    <value>連絡先</value>
   </data>
   <data name="View_Contacts_Index_NoContactsPart1" xml:space="preserve">
-    <value>No contacts have been set up yet. You can</value>
+    <value>まだ連絡先が設定されていません。あなたはできる</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Index_NoContactsPart2" xml:space="preserve">
-    <value>create a new contact</value>
+    <value>新しい連絡先を作成する</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Index_NoContactsPart3" xml:space="preserve">
-    <value>now.</value>
+    <value>今。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Index_Subheading" xml:space="preserve">
-    <value>View the contacts in your system below.</value>
+    <value>システム内の連絡先を以下に表示します。</value>
   </data>
   <data name="View_Contacts_Index_Title" xml:space="preserve">
-    <value>Contacts</value>
+    <value>連絡先</value>
   </data>
   <data name="View_Contacts_Remove_HeadingPart1" xml:space="preserve">
-    <value>Removing</value>
+    <value>削除する</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Remove_Subheading" xml:space="preserve">
-    <value>Are you sure you want to remove this contact?</value>
+    <value>この連絡先を削除してもよろしいですか?</value>
   </data>
   <data name="View_Contacts_Remove_Title" xml:space="preserve">
-    <value>Remove Contact?</value>
+    <value>連絡先を削除します？</value>
   </data>
   <data name="View_Contacts_Search_CreateNewContact" xml:space="preserve">
-    <value>Create New Contact</value>
+    <value>新しい連絡先を作成</value>
   </data>
   <data name="View_Contacts_Search_Heading" xml:space="preserve">
-    <value>Search Results</value>
+    <value>の検索結果</value>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundPart1" xml:space="preserve">
-    <value>No contacts could be found. Try a more enabling</value>
+    <value>連絡先が見つかりませんでした。もっと有効にしてみてください</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundPart2" xml:space="preserve">
-    <value>Use Fuzzy Search</value>
+    <value>あいまい検索を使用する</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundPart3" xml:space="preserve">
-    <value>in the Administration settings.</value>
+    <value>管理設定で。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundTooltip" xml:space="preserve">
-    <value>Find's simliar and mispelled search terms.</value>
+    <value>Find の類似したスペルミスのある検索用語。</value>
   </data>
   <data name="View_Contacts_Search_SubheadingPart1" xml:space="preserve">
-    <value>Search for</value>
+    <value>検索する</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Search_Title" xml:space="preserve">
-    <value>Contact Search</value>
+    <value>連絡先検索</value>
   </data>
   <data name="View_External_Unsubscribe_Format_Successful" xml:space="preserve">
-    <value>{0} has been unsubscribed from {1}.</value>
+    <value>{0} は {1} から登録解除されました。</value>
   </data>
   <data name="View_External_Unsubscribe_Heading" xml:space="preserve">
-    <value>Unsubscribe</value>
+    <value>登録解除</value>
   </data>
   <data name="View_External_Unsubscribe_Title" xml:space="preserve">
-    <value>Unsubscribe</value>
+    <value>登録解除</value>
   </data>
   <data name="View_External_Unsubscribe_Unsuccessful" xml:space="preserve">
-    <value>There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed.</value>
+    <value>登録解除中にエラーが発生しました。連絡先またはディスカッション リストが見つからないか、連絡先が既に登録解除されています。</value>
   </data>
   <data name="View_Home_Index_AtAGlance" xml:space="preserve">
-    <value>At a glance...</value>
+    <value>一見すると...</value>
   </data>
   <data name="View_Home_Index_DicussionListsInfoPart1" xml:space="preserve">
-    <value>discussion</value>
+    <value>討論</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Home_Index_DicussionListsInfoPart2" xml:space="preserve">
@@ -781,22 +781,22 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Home_Index_Heading" xml:space="preserve">
-    <value>Welcome</value>
+    <value>いらっしゃいませ</value>
   </data>
   <data name="View_Home_Index_List" xml:space="preserve">
-    <value>list</value>
+    <value>リスト</value>
   </data>
   <data name="View_Home_Index_Lists" xml:space="preserve">
-    <value>lists</value>
+    <value>リスト</value>
   </data>
   <data name="View_Home_Index_Message" xml:space="preserve">
-    <value>message</value>
+    <value>メッセージ</value>
   </data>
   <data name="View_Home_Index_Messages" xml:space="preserve">
-    <value>messages</value>
+    <value>メッセージ</value>
   </data>
   <data name="View_Home_Index_NumberOfMessagesPart1" xml:space="preserve">
-    <value>You have a total of</value>
+    <value>あなたはの合計を持っています</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Home_Index_NumberOfMessagesPart2" xml:space="preserve">
@@ -804,245 +804,236 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Home_Index_Subheading" xml:space="preserve">
-    <value>Hello! Welcome to your email discussion lists.</value>
+    <value>こんにちは！メール ディスカッション リストへようこそ。</value>
   </data>
   <data name="View_Home_Index_Title" xml:space="preserve">
-    <value>Home Page</value>
+    <value>ホームページ</value>
   </data>
   <data name="View_Home_Index_YouHave" xml:space="preserve">
-    <value>You have</value>
+    <value>あなたが持っている</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_ArchiveSearch_FormatTitle" xml:space="preserve">
-    <value>{0} Archive Search</value>
+    <value>{0} アーカイブ検索</value>
   </data>
   <data name="View_List_ArchiveSearch_Format_Heading" xml:space="preserve">
-    <value>{0} Archive</value>
+    <value>{0} アーカイブ</value>
   </data>
   <data name="View_List_ArchiveSearch_SubheadingPart1" xml:space="preserve">
-    <value>Search for</value>
+    <value>検索する</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Archive_Format_Subheading" xml:space="preserve">
-    <value>Here you can view the archived messages sent on the '{0}' discussion list.</value>
+    <value>ここでは、'{0}' ディスカッション リストで送信されたアーカイブ メッセージを表示できます。</value>
   </data>
   <data name="View_List_Archive_Format_Title" xml:space="preserve">
-    <value>{0} Archive</value>
+    <value>{0} アーカイブ</value>
   </data>
   <data name="View_List_Archive_Heading" xml:space="preserve">
-    <value>Archive</value>
+    <value>アーカイブ</value>
   </data>
   <data name="View_List_Assign_AwaitingConfirmation" xml:space="preserve">
-    <value>Awaiting Confirmation</value>
+    <value>確認待ち</value>
   </data>
   <data name="View_List_Assign_Created" xml:space="preserve">
-    <value>User will be invited soon.</value>
+    <value>ユーザーはすぐに招待されます。</value>
   </data>
   <data name="View_List_Assign_Denied" xml:space="preserve">
-    <value>You have denied this entry to the discussion list.</value>
+    <value>このディスカッション リストへのエントリを拒否しました。</value>
   </data>
   <data name="View_List_Assign_Format_EmailBounced" xml:space="preserve">
-    <value>{0} has bounced.</value>
+    <value>{0} がバウンスしました。</value>
   </data>
   <data name="View_List_Assign_Heading" xml:space="preserve">
-    <value>Discussion List Assignment</value>
+    <value>ディスカッション リストの割り当て</value>
   </data>
   <data name="View_List_Assign_InvitationsProcessing" xml:space="preserve">
-    <value>There are some invitations still processing. Your server is configured to process new subscribers every {0} minutes. Please be patient.</value>
+    <value>まだ処理中の招待状があります。サーバーは、{0} 分ごとに新しいサブスクライバーを処理するように構成されています。しばらくお待ちください。</value>
   </data>
   <data name="View_List_Assign_Requested" xml:space="preserve">
-    <value>This user has asked to participate in the discussion list.</value>
+    <value>このユーザーは、ディスカッション リストへの参加を求めています。</value>
   </data>
   <data name="View_List_Assign_SubheadingPart1" xml:space="preserve">
-    <value>Assign contacts to</value>
+    <value>に連絡先を割り当てる</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Assign_SubheadingPart2" xml:space="preserve">
-    <value>below.</value>
+    <value>未満。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Assign_Subscribed" xml:space="preserve">
-    <value>This user is subscribed to this discussion list.</value>
+    <value>このユーザーは、このディスカッション リストに登録されています。</value>
   </data>
   <data name="View_List_Assign_Title" xml:space="preserve">
-    <value>Discussion List Assignments</value>
+    <value>ディスカッション リストの割り当て</value>
   </data>
   <data name="View_List_Assign_Unsubscribed" xml:space="preserve">
-    <value>This user has unsubscribed from this discussion list.</value>
+    <value>このユーザーは、このディスカッション リストから退会しました。</value>
   </data>
   <data name="View_List_Common_NoMessagesPart1" xml:space="preserve">
-    <value>No messages have been sent yet. You can</value>
+    <value>メッセージはまだ送信されていません。あなたはできる</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Common_NoMessagesPart2" xml:space="preserve">
-    <value>contribute to the discussion</value>
+    <value>議論に貢献する</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Common_NoMessagesPart3" xml:space="preserve">
-    <value>now.</value>
+    <value>今。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Common_Sent" xml:space="preserve">
-    <value>Sent:</value>
+    <value>送信済：</value>
   </data>
   <data name="View_List_Common_Subject" xml:space="preserve">
-    <value>Subject:</value>
+    <value>主題：</value>
   </data>
   <data name="View_List_Edit_CreateDiscussionList" xml:space="preserve">
-    <value>Create Discussion List</value>
+    <value>ディスカッション リストの作成</value>
   </data>
   <data name="View_List_Edit_DiscussionListDetails" xml:space="preserve">
-    <value>Discussion List Details</value>
+    <value>ディスカッション リストの詳細</value>
   </data>
   <data name="View_List_Edit_Heading" xml:space="preserve">
-    <value>Edit Discussion List</value>
+    <value>ディスカッション リストの編集</value>
   </data>
   <data name="View_List_Edit_HeadingNew" xml:space="preserve">
-    <value>New Discussion List</value>
+    <value>新しいディスカッション リスト</value>
   </data>
   <data name="View_List_Edit_IncomingMailPort" xml:space="preserve">
-    <value>Incoming Mail Server Port</value>
+    <value>受信メール サーバー ポート</value>
   </data>
   <data name="View_List_Edit_IncomingMailServer" xml:space="preserve">
-    <value>Incoming Mail Server</value>
+    <value>受信メールサーバー</value>
   </data>
   <data name="View_List_Edit_OutgoingMailPort" xml:space="preserve">
-    <value>Outgoing Mail Server Port</value>
+    <value>送信メール サーバー ポート</value>
   </data>
   <data name="View_List_Edit_OutgoingMailServer" xml:space="preserve">
-    <value>Outgoing Mail Server</value>
+    <value>送信メールサーバー</value>
   </data>
   <data name="View_List_Edit_RemoteEmailConfiguration" xml:space="preserve">
-    <value>Remote Email Configuration</value>
+    <value>リモート電子メール構成</value>
   </data>
   <data name="View_List_Edit_SubheadingNew" xml:space="preserve">
-    <value>Create a new discussion list below.</value>
+    <value>以下で新しいディスカッション リストを作成します。</value>
   </data>
   <data name="View_List_Edit_SubheadingPart1" xml:space="preserve">
-    <value>Edit the details for</value>
+    <value>の詳細を編集します</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Edit_SubheadingPart2" xml:space="preserve">
-    <value>below.</value>
+    <value>未満。</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Edit_Title" xml:space="preserve">
-    <value>Discussion List Editor</value>
+    <value>ディスカッション リスト エディタ</value>
   </data>
   <data name="View_List_Edit_UseSSL" xml:space="preserve">
-    <value>Use SSL or TLS for a secure connection to the mail server.</value>
+    <value>メール サーバーへの安全な接続には、SSL または TLS を使用します。</value>
   </data>
   <data name="View_List_Index_AssignContacts" xml:space="preserve">
-    <value>Assign Contacts</value>
+    <value>連絡先を割り当てる</value>
   </data>
   <data name="View_List_Index_CreateNewDiscussionList" xml:space="preserve">
-    <value>Create New Discussion List</value>
+    <value>新しいディスカッション リストの作成</value>
   </data>
   <data name="View_List_Index_Heading" xml:space="preserve">
-    <value>Discussion Lists</value>
+    <value>ディスカッション リスト</value>
   </data>
   <data name="View_List_Index_IncomingMailServer" xml:space="preserve">
-    <value>Incoming Mail Server:</value>
-  </data>
-  <data name="View_List_Index_NoDiscussionListPart1" xml:space="preserve">
-    <value>No discussion lists have been set up yet. You can</value>
-  </data>
-  <data name="View_List_Index_NoDiscussionListPart2" xml:space="preserve">
-    <value>create a new discussion list</value>
-  </data>
-  <data name="View_List_Index_NoDiscussionListPart3" xml:space="preserve">
-    <value>now.</value>
+    <value>受信メール サーバー:</value>
   </data>
   <data name="View_List_Index_NotUsingSSL" xml:space="preserve">
-    <value>Not using SSL/TLS</value>
+    <value>SSL/TLS を使用しない</value>
   </data>
   <data name="View_List_Index_OutgoingMailServer" xml:space="preserve">
-    <value>Outgoing Mail Server:</value>
+    <value>送信メールサーバー：</value>
   </data>
   <data name="View_List_Index_Subheading" xml:space="preserve">
-    <value>View your discussion lists below.</value>
+    <value>以下のディスカッション リストを表示します。</value>
   </data>
   <data name="View_List_Index_TestMessage" xml:space="preserve">
-    <value>Send a Test Message</value>
+    <value>テスト メッセージを送信する</value>
   </data>
   <data name="View_List_Index_Title" xml:space="preserve">
-    <value>Discussion Lists</value>
+    <value>ディスカッション リスト</value>
   </data>
   <data name="View_List_Index_UserName" xml:space="preserve">
-    <value>User Name:</value>
+    <value>ユーザー名:</value>
   </data>
   <data name="View_List_Index_UsingSSL" xml:space="preserve">
-    <value>Using SSL/TLS</value>
+    <value>SSL/TLS の使用</value>
   </data>
   <data name="View_List_Message_ErrorProcessingMessage" xml:space="preserve">
-    <value>An error occurred while processing this message.</value>
+    <value>このメッセージの処理中にエラーが発生しました。</value>
   </data>
   <data name="View_List_Message_Format_Heading" xml:space="preserve">
-    <value>Message from {0}</value>
+    <value>{0} からのメッセージ</value>
   </data>
   <data name="View_List_Message_Format_ReplyLink" xml:space="preserve">
-    <value>From {0} at {1}: {2}</value>
+    <value>{1} の {0} から: {2}</value>
   </data>
   <data name="View_List_Message_Format_Title" xml:space="preserve">
-    <value>Message from {0}</value>
+    <value>{0} からのメッセージ</value>
   </data>
   <data name="View_List_Message_From" xml:space="preserve">
-    <value>From:</value>
+    <value>から：</value>
   </data>
   <data name="View_List_Message_MessageID" xml:space="preserve">
-    <value>Message ID:</value>
+    <value>メッセージ ID:</value>
   </data>
   <data name="View_List_Message_NotFound" xml:space="preserve">
-    <value>That message cannot be found.</value>
+    <value>そのメッセージが見つかりません。</value>
   </data>
   <data name="View_List_Message_Replies" xml:space="preserve">
-    <value>Replies</value>
+    <value>返信</value>
   </data>
   <data name="View_List_Message_Reply" xml:space="preserve">
-    <value>Reply</value>
+    <value>返事</value>
   </data>
   <data name="View_List_Message_Sent" xml:space="preserve">
-    <value>Sent:</value>
+    <value>送信済：</value>
   </data>
   <data name="View_List_Message_Subheading" xml:space="preserve">
-    <value>View the detailed information for this message below.</value>
+    <value>以下のこのメッセージの詳細情報を参照してください。</value>
   </data>
   <data name="View_List_Remove_Format_Heading" xml:space="preserve">
-    <value>Removing {0}</value>
+    <value>{0} を削除しています</value>
   </data>
   <data name="View_List_Remove_Subheading" xml:space="preserve">
-    <value>Are you sure you want to remove this discussion list?</value>
+    <value>このディスカッション リストを削除してもよろしいですか?</value>
   </data>
   <data name="View_List_Remove_Title" xml:space="preserve">
-    <value>Remove Discussion List</value>
+    <value>ディスカッション リストを削除</value>
   </data>
   <data name="View_Shared_ErrorLayout_Format_RemoteOrigin" xml:space="preserve">
-    <value>The Remote Origin logged is {0}.</value>
+    <value>ログに記録されたリモート オリジンは {0} です。</value>
   </data>
   <data name="View_Shared_ErrorLayout_Heading" xml:space="preserve">
-    <value>Error</value>
+    <value>エラー</value>
   </data>
   <data name="View_Shared_ErrorLayout_Subheading" xml:space="preserve">
-    <value>An error occurred while processing your request.</value>
+    <value>リクエストの処理中にエラーが発生しました。</value>
   </data>
   <data name="View_Shared_ErrorLayout_Title" xml:space="preserve">
-    <value>Error</value>
+    <value>エラー</value>
   </data>
   <data name="View_Shared_Layout_Administration" xml:space="preserve">
-    <value>Administration</value>
+    <value>管理</value>
   </data>
   <data name="View_Shared_Layout_Contacts" xml:space="preserve">
-    <value>Contacts</value>
+    <value>連絡先</value>
   </data>
   <data name="View_Shared_Layout_DiscussionLists" xml:space="preserve">
-    <value>Discussion Lists</value>
+    <value>ディスカッション リスト</value>
   </data>
   <data name="View_Shared_Layout_FooterUsefulPart1" xml:space="preserve">
-    <value>Find this project to be useful? Please consider</value>
+    <value>このプロジェクトは役に立ちますか?考えてください</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_FooterUsefulPart2" xml:space="preserve">
-    <value>donating</value>
+    <value>寄付</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_FooterUsefulPart3" xml:space="preserve">
@@ -1050,14 +1041,23 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_SourceCodePart1" xml:space="preserve">
-    <value>Source code</value>
+    <value>ソースコード</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_SourceCodePart2" xml:space="preserve">
-    <value>licensed under</value>
+    <value>の下でライセンスされています</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_Version" xml:space="preserve">
-    <value>Version</value>
+    <value>バージョン</value>
+  </data>
+  <data name="View_List_Index_NoDiscussionListPart1" xml:space="preserve">
+    <value>議論リストはまだ設定されていません。 あなたはできる</value>
+  </data>
+  <data name="View_List_Index_NoDiscussionListPart2" xml:space="preserve">
+    <value>新しいディスカッションリストを作成します</value>
+  </data>
+  <data name="View_List_Index_NoDiscussionListPart3" xml:space="preserve">
+    <value>今。</value>
   </data>
 </root>

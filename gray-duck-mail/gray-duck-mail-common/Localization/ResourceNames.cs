@@ -327,22 +327,55 @@ namespace GrayDuckMail.Common.Localization
 				View_Administration_WebSettings,
 		/// <summary> Activated </summary>
 				View_Common_Activated,
+		/// <summary> Archive </summary>
+				View_Common_Archive,
 		/// <summary> Cancel </summary>
 				View_Common_Cancel,
+		/// <summary> Create </summary>
+				View_Common_Create,
+		/// <summary> Description </summary>
+				View_Common_Description,
+		/// <summary> A short description of the discussion list. </summary>
+				View_Common_DescriptionExplaination,
 		/// <summary> Edit </summary>
 				View_Common_Edit,
 		/// <summary> Email </summary>
 				View_Common_Email,
+		/// <summary> Automatic email aliases will be used, such as </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Common_Format_ListEmailAddressExplainationPart1,
+		/// <summary> bounce-list@example.com </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Common_Format_ListEmailAddressExplainationPart2,
+		/// <summary> and </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Common_Format_ListEmailAddressExplainationPart3,
+		/// <summary> unsubscribe-list@example.com </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Common_Format_ListEmailAddressExplainationPart4,
+		/// <summary> . </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_Common_Format_ListEmailAddressExplainationPart5,
 		/// <summary> Page {0} of {1} </summary>
 				View_Common_Format_PageCount,
+		/// <summary> List Email Address </summary>
+				View_Common_ListEmailAddress,
 		/// <summary> Name </summary>
 				View_Common_Name,
 		/// <summary> Number of Discussion Lists </summary>
 				View_Common_NumberOfDiscussionLists,
+		/// <summary> Password </summary>
+				View_Common_Password,
+		/// <summary> Passwords are not encrypted when stored. Always secure your server, and never expose Gray Duck Mail's administration interface to the public internet! </summary>
+				View_Common_PasswordWarning,
 		/// <summary> Remove </summary>
 				View_Common_Remove,
 		/// <summary> Save Changes </summary>
 				View_Common_SaveChanges,
+		/// <summary> Search </summary>
+				View_Common_Search,
+		/// <summary> User Name </summary>
+				View_Common_UserName,
 		/// <summary> The user is activated and the email address is considered valid and working. </summary>
 				View_Contacts_Edit_ActivatedDescription,
 		/// <summary> Contact Details </summary>
@@ -446,6 +479,144 @@ namespace GrayDuckMail.Common.Localization
 		/// <summary> You have </summary>
 		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_Home_Index_YouHave,
+		/// <summary> {0} Archive Search </summary>
+				View_List_ArchiveSearch_FormatTitle,
+		/// <summary> {0} Archive </summary>
+				View_List_ArchiveSearch_Format_Heading,
+		/// <summary> Search for </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_ArchiveSearch_SubheadingPart1,
+		/// <summary> Here you can view the archived messages sent on the '{0}' discussion list. </summary>
+				View_List_Archive_Format_Subheading,
+		/// <summary> {0} Archive </summary>
+				View_List_Archive_Format_Title,
+		/// <summary> Archive </summary>
+				View_List_Archive_Heading,
+		/// <summary> Awaiting Confirmation </summary>
+				View_List_Assign_AwaitingConfirmation,
+		/// <summary> User will be invited soon. </summary>
+				View_List_Assign_Created,
+		/// <summary> You have denied this entry to the discussion list. </summary>
+				View_List_Assign_Denied,
+		/// <summary> {0} has bounced. </summary>
+				View_List_Assign_Format_EmailBounced,
+		/// <summary> Discussion List Assignment </summary>
+				View_List_Assign_Heading,
+		/// <summary> There are some invitations still processing. Your server is configured to process new subscribers every {0} minutes. Please be patient. </summary>
+				View_List_Assign_InvitationsProcessing,
+		/// <summary> This user has asked to participate in the discussion list. </summary>
+				View_List_Assign_Requested,
+		/// <summary> Assign contacts to </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_Assign_SubheadingPart1,
+		/// <summary> below. </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_Assign_SubheadingPart2,
+		/// <summary> This user is subscribed to this discussion list. </summary>
+				View_List_Assign_Subscribed,
+		/// <summary> Discussion List Assignments </summary>
+				View_List_Assign_Title,
+		/// <summary> This user has unsubscribed from this discussion list. </summary>
+				View_List_Assign_Unsubscribed,
+		/// <summary> No messages have been sent yet. You can </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_Common_NoMessagesPart1,
+		/// <summary> contribute to the discussion </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_Common_NoMessagesPart2,
+		/// <summary> now. </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_Common_NoMessagesPart3,
+		/// <summary> Sent: </summary>
+				View_List_Common_Sent,
+		/// <summary> Subject: </summary>
+				View_List_Common_Subject,
+		/// <summary> Create Discussion List </summary>
+				View_List_Edit_CreateDiscussionList,
+		/// <summary> Discussion List Details </summary>
+				View_List_Edit_DiscussionListDetails,
+		/// <summary> Edit Discussion List </summary>
+				View_List_Edit_Heading,
+		/// <summary> New Discussion List </summary>
+				View_List_Edit_HeadingNew,
+		/// <summary> Incoming Mail Server Port </summary>
+				View_List_Edit_IncomingMailPort,
+		/// <summary> Incoming Mail Server </summary>
+				View_List_Edit_IncomingMailServer,
+		/// <summary> Outgoing Mail Server Port </summary>
+				View_List_Edit_OutgoingMailPort,
+		/// <summary> Outgoing Mail Server </summary>
+				View_List_Edit_OutgoingMailServer,
+		/// <summary> Remote Email Configuration </summary>
+				View_List_Edit_RemoteEmailConfiguration,
+		/// <summary> Create a new discussion list below. </summary>
+				View_List_Edit_SubheadingNew,
+		/// <summary> Edit the details for </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_Edit_SubheadingPart1,
+		/// <summary> below. </summary>
+		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
+				View_List_Edit_SubheadingPart2,
+		/// <summary> Discussion List Editor </summary>
+				View_List_Edit_Title,
+		/// <summary> Use SSL or TLS for a secure connection to the mail server. </summary>
+				View_List_Edit_UseSSL,
+		/// <summary> Assign Contacts </summary>
+				View_List_Index_AssignContacts,
+		/// <summary> Create New Discussion List </summary>
+				View_List_Index_CreateNewDiscussionList,
+		/// <summary> Discussion Lists </summary>
+				View_List_Index_Heading,
+		/// <summary> Incoming Mail Server: </summary>
+				View_List_Index_IncomingMailServer,
+		/// <summary> No discussion lists have been set up yet. You can </summary>
+				View_List_Index_NoDiscussionListPart1,
+		/// <summary> create a new discussion list </summary>
+				View_List_Index_NoDiscussionListPart2,
+		/// <summary> now. </summary>
+				View_List_Index_NoDiscussionListPart3,
+		/// <summary> Not using SSL/TLS </summary>
+				View_List_Index_NotUsingSSL,
+		/// <summary> Outgoing Mail Server: </summary>
+				View_List_Index_OutgoingMailServer,
+		/// <summary> View your discussion lists below. </summary>
+				View_List_Index_Subheading,
+		/// <summary> Send a Test Message </summary>
+				View_List_Index_TestMessage,
+		/// <summary> Discussion Lists </summary>
+				View_List_Index_Title,
+		/// <summary> User Name: </summary>
+				View_List_Index_UserName,
+		/// <summary> Using SSL/TLS </summary>
+				View_List_Index_UsingSSL,
+		/// <summary> An error occurred while processing this message. </summary>
+				View_List_Message_ErrorProcessingMessage,
+		/// <summary> Message from {0} </summary>
+				View_List_Message_Format_Heading,
+		/// <summary> From {0} at {1}: {2} </summary>
+				View_List_Message_Format_ReplyLink,
+		/// <summary> Message from {0} </summary>
+				View_List_Message_Format_Title,
+		/// <summary> From: </summary>
+				View_List_Message_From,
+		/// <summary> Message ID: </summary>
+				View_List_Message_MessageID,
+		/// <summary> That message cannot be found. </summary>
+				View_List_Message_NotFound,
+		/// <summary> Replies </summary>
+				View_List_Message_Replies,
+		/// <summary> Reply </summary>
+				View_List_Message_Reply,
+		/// <summary> Sent: </summary>
+				View_List_Message_Sent,
+		/// <summary> View the detailed information for this message below. </summary>
+				View_List_Message_Subheading,
+		/// <summary> Removing {0} </summary>
+				View_List_Remove_Format_Heading,
+		/// <summary> Are you sure you want to remove this discussion list? </summary>
+				View_List_Remove_Subheading,
+		/// <summary> Remove Discussion List </summary>
+				View_List_Remove_Title,
 		/// <summary> The Remote Origin logged is {0}. </summary>
 				View_Shared_ErrorLayout_Format_RemoteOrigin,
 		/// <summary> Error </summary>

@@ -1483,11 +1483,47 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Archive.
+        /// </summary>
+        internal static string View_Common_Archive {
+            get {
+                return ResourceManager.GetString("View_Common_Archive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string View_Common_Cancel {
             get {
                 return ResourceManager.GetString("View_Common_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        internal static string View_Common_Create {
+            get {
+                return ResourceManager.GetString("View_Common_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string View_Common_Description {
+            get {
+                return ResourceManager.GetString("View_Common_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A short description of the discussion list..
+        /// </summary>
+        internal static string View_Common_DescriptionExplaination {
+            get {
+                return ResourceManager.GetString("View_Common_DescriptionExplaination", resourceCulture);
             }
         }
         
@@ -1510,11 +1546,65 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatic email aliases will be used, such as.
+        /// </summary>
+        internal static string View_Common_Format_ListEmailAddressExplainationPart1 {
+            get {
+                return ResourceManager.GetString("View_Common_Format_ListEmailAddressExplainationPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to bounce-list@example.com.
+        /// </summary>
+        internal static string View_Common_Format_ListEmailAddressExplainationPart2 {
+            get {
+                return ResourceManager.GetString("View_Common_Format_ListEmailAddressExplainationPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        internal static string View_Common_Format_ListEmailAddressExplainationPart3 {
+            get {
+                return ResourceManager.GetString("View_Common_Format_ListEmailAddressExplainationPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unsubscribe-list@example.com.
+        /// </summary>
+        internal static string View_Common_Format_ListEmailAddressExplainationPart4 {
+            get {
+                return ResourceManager.GetString("View_Common_Format_ListEmailAddressExplainationPart4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..
+        /// </summary>
+        internal static string View_Common_Format_ListEmailAddressExplainationPart5 {
+            get {
+                return ResourceManager.GetString("View_Common_Format_ListEmailAddressExplainationPart5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page {0} of {1}.
         /// </summary>
         internal static string View_Common_Format_PageCount {
             get {
                 return ResourceManager.GetString("View_Common_Format_PageCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List Email Address.
+        /// </summary>
+        internal static string View_Common_ListEmailAddress {
+            get {
+                return ResourceManager.GetString("View_Common_ListEmailAddress", resourceCulture);
             }
         }
         
@@ -1537,6 +1627,24 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string View_Common_Password {
+            get {
+                return ResourceManager.GetString("View_Common_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords are not encrypted when stored. Always secure your server, and never expose Gray Duck Mail&apos;s administration interface to the public internet!.
+        /// </summary>
+        internal static string View_Common_PasswordWarning {
+            get {
+                return ResourceManager.GetString("View_Common_PasswordWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         internal static string View_Common_Remove {
@@ -1551,6 +1659,24 @@ namespace GrayDuckMail.Common.Localization {
         internal static string View_Common_SaveChanges {
             get {
                 return ResourceManager.GetString("View_Common_SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string View_Common_Search {
+            get {
+                return ResourceManager.GetString("View_Common_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        internal static string View_Common_UserName {
+            get {
+                return ResourceManager.GetString("View_Common_UserName", resourceCulture);
             }
         }
         
@@ -1947,6 +2073,591 @@ namespace GrayDuckMail.Common.Localization {
         internal static string View_Home_Index_YouHave {
             get {
                 return ResourceManager.GetString("View_Home_Index_YouHave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here you can view the archived messages sent on the &apos;{0}&apos; discussion list..
+        /// </summary>
+        internal static string View_List_Archive_Format_Subheading {
+            get {
+                return ResourceManager.GetString("View_List_Archive_Format_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Archive.
+        /// </summary>
+        internal static string View_List_Archive_Format_Title {
+            get {
+                return ResourceManager.GetString("View_List_Archive_Format_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive.
+        /// </summary>
+        internal static string View_List_Archive_Heading {
+            get {
+                return ResourceManager.GetString("View_List_Archive_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Archive.
+        /// </summary>
+        internal static string View_List_ArchiveSearch_Format_Heading {
+            get {
+                return ResourceManager.GetString("View_List_ArchiveSearch_Format_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Archive Search.
+        /// </summary>
+        internal static string View_List_ArchiveSearch_FormatTitle {
+            get {
+                return ResourceManager.GetString("View_List_ArchiveSearch_FormatTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for.
+        /// </summary>
+        internal static string View_List_ArchiveSearch_SubheadingPart1 {
+            get {
+                return ResourceManager.GetString("View_List_ArchiveSearch_SubheadingPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Awaiting Confirmation.
+        /// </summary>
+        internal static string View_List_Assign_AwaitingConfirmation {
+            get {
+                return ResourceManager.GetString("View_List_Assign_AwaitingConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User will be invited soon..
+        /// </summary>
+        internal static string View_List_Assign_Created {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have denied this entry to the discussion list..
+        /// </summary>
+        internal static string View_List_Assign_Denied {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Denied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has bounced..
+        /// </summary>
+        internal static string View_List_Assign_Format_EmailBounced {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Format_EmailBounced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion List Assignment.
+        /// </summary>
+        internal static string View_List_Assign_Heading {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are some invitations still processing. Your server is configured to process new subscribers every {0} minutes. Please be patient..
+        /// </summary>
+        internal static string View_List_Assign_InvitationsProcessing {
+            get {
+                return ResourceManager.GetString("View_List_Assign_InvitationsProcessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This user has asked to participate in the discussion list..
+        /// </summary>
+        internal static string View_List_Assign_Requested {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Requested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assign contacts to.
+        /// </summary>
+        internal static string View_List_Assign_SubheadingPart1 {
+            get {
+                return ResourceManager.GetString("View_List_Assign_SubheadingPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to below..
+        /// </summary>
+        internal static string View_List_Assign_SubheadingPart2 {
+            get {
+                return ResourceManager.GetString("View_List_Assign_SubheadingPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This user is subscribed to this discussion list..
+        /// </summary>
+        internal static string View_List_Assign_Subscribed {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Subscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion List Assignments.
+        /// </summary>
+        internal static string View_List_Assign_Title {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This user has unsubscribed from this discussion list..
+        /// </summary>
+        internal static string View_List_Assign_Unsubscribed {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Unsubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No messages have been sent yet. You can.
+        /// </summary>
+        internal static string View_List_Common_NoMessagesPart1 {
+            get {
+                return ResourceManager.GetString("View_List_Common_NoMessagesPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to contribute to the discussion.
+        /// </summary>
+        internal static string View_List_Common_NoMessagesPart2 {
+            get {
+                return ResourceManager.GetString("View_List_Common_NoMessagesPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to now..
+        /// </summary>
+        internal static string View_List_Common_NoMessagesPart3 {
+            get {
+                return ResourceManager.GetString("View_List_Common_NoMessagesPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sent:.
+        /// </summary>
+        internal static string View_List_Common_Sent {
+            get {
+                return ResourceManager.GetString("View_List_Common_Sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subject:.
+        /// </summary>
+        internal static string View_List_Common_Subject {
+            get {
+                return ResourceManager.GetString("View_List_Common_Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Discussion List.
+        /// </summary>
+        internal static string View_List_Edit_CreateDiscussionList {
+            get {
+                return ResourceManager.GetString("View_List_Edit_CreateDiscussionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion List Details.
+        /// </summary>
+        internal static string View_List_Edit_DiscussionListDetails {
+            get {
+                return ResourceManager.GetString("View_List_Edit_DiscussionListDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Discussion List.
+        /// </summary>
+        internal static string View_List_Edit_Heading {
+            get {
+                return ResourceManager.GetString("View_List_Edit_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Discussion List.
+        /// </summary>
+        internal static string View_List_Edit_HeadingNew {
+            get {
+                return ResourceManager.GetString("View_List_Edit_HeadingNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incoming Mail Server Port.
+        /// </summary>
+        internal static string View_List_Edit_IncomingMailPort {
+            get {
+                return ResourceManager.GetString("View_List_Edit_IncomingMailPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incoming Mail Server.
+        /// </summary>
+        internal static string View_List_Edit_IncomingMailServer {
+            get {
+                return ResourceManager.GetString("View_List_Edit_IncomingMailServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outgoing Mail Server Port.
+        /// </summary>
+        internal static string View_List_Edit_OutgoingMailPort {
+            get {
+                return ResourceManager.GetString("View_List_Edit_OutgoingMailPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outgoing Mail Server.
+        /// </summary>
+        internal static string View_List_Edit_OutgoingMailServer {
+            get {
+                return ResourceManager.GetString("View_List_Edit_OutgoingMailServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote Email Configuration.
+        /// </summary>
+        internal static string View_List_Edit_RemoteEmailConfiguration {
+            get {
+                return ResourceManager.GetString("View_List_Edit_RemoteEmailConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new discussion list below..
+        /// </summary>
+        internal static string View_List_Edit_SubheadingNew {
+            get {
+                return ResourceManager.GetString("View_List_Edit_SubheadingNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit the details for.
+        /// </summary>
+        internal static string View_List_Edit_SubheadingPart1 {
+            get {
+                return ResourceManager.GetString("View_List_Edit_SubheadingPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to below..
+        /// </summary>
+        internal static string View_List_Edit_SubheadingPart2 {
+            get {
+                return ResourceManager.GetString("View_List_Edit_SubheadingPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion List Editor.
+        /// </summary>
+        internal static string View_List_Edit_Title {
+            get {
+                return ResourceManager.GetString("View_List_Edit_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use SSL or TLS for a secure connection to the mail server..
+        /// </summary>
+        internal static string View_List_Edit_UseSSL {
+            get {
+                return ResourceManager.GetString("View_List_Edit_UseSSL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assign Contacts.
+        /// </summary>
+        internal static string View_List_Index_AssignContacts {
+            get {
+                return ResourceManager.GetString("View_List_Index_AssignContacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New Discussion List.
+        /// </summary>
+        internal static string View_List_Index_CreateNewDiscussionList {
+            get {
+                return ResourceManager.GetString("View_List_Index_CreateNewDiscussionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion Lists.
+        /// </summary>
+        internal static string View_List_Index_Heading {
+            get {
+                return ResourceManager.GetString("View_List_Index_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incoming Mail Server:.
+        /// </summary>
+        internal static string View_List_Index_IncomingMailServer {
+            get {
+                return ResourceManager.GetString("View_List_Index_IncomingMailServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No discussion lists have been set up yet. You can.
+        /// </summary>
+        internal static string View_List_Index_NoDiscussionListPart1 {
+            get {
+                return ResourceManager.GetString("View_List_Index_NoDiscussionListPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to create a new discussion list.
+        /// </summary>
+        internal static string View_List_Index_NoDiscussionListPart2 {
+            get {
+                return ResourceManager.GetString("View_List_Index_NoDiscussionListPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to now..
+        /// </summary>
+        internal static string View_List_Index_NoDiscussionListPart3 {
+            get {
+                return ResourceManager.GetString("View_List_Index_NoDiscussionListPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not using SSL/TLS.
+        /// </summary>
+        internal static string View_List_Index_NotUsingSSL {
+            get {
+                return ResourceManager.GetString("View_List_Index_NotUsingSSL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outgoing Mail Server:.
+        /// </summary>
+        internal static string View_List_Index_OutgoingMailServer {
+            get {
+                return ResourceManager.GetString("View_List_Index_OutgoingMailServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View your discussion lists below..
+        /// </summary>
+        internal static string View_List_Index_Subheading {
+            get {
+                return ResourceManager.GetString("View_List_Index_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send a Test Message.
+        /// </summary>
+        internal static string View_List_Index_TestMessage {
+            get {
+                return ResourceManager.GetString("View_List_Index_TestMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discussion Lists.
+        /// </summary>
+        internal static string View_List_Index_Title {
+            get {
+                return ResourceManager.GetString("View_List_Index_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name:.
+        /// </summary>
+        internal static string View_List_Index_UserName {
+            get {
+                return ResourceManager.GetString("View_List_Index_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using SSL/TLS.
+        /// </summary>
+        internal static string View_List_Index_UsingSSL {
+            get {
+                return ResourceManager.GetString("View_List_Index_UsingSSL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing this message..
+        /// </summary>
+        internal static string View_List_Message_ErrorProcessingMessage {
+            get {
+                return ResourceManager.GetString("View_List_Message_ErrorProcessingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message from {0}.
+        /// </summary>
+        internal static string View_List_Message_Format_Heading {
+            get {
+                return ResourceManager.GetString("View_List_Message_Format_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From {0} at {1}: {2}.
+        /// </summary>
+        internal static string View_List_Message_Format_ReplyLink {
+            get {
+                return ResourceManager.GetString("View_List_Message_Format_ReplyLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message from {0}.
+        /// </summary>
+        internal static string View_List_Message_Format_Title {
+            get {
+                return ResourceManager.GetString("View_List_Message_Format_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From:.
+        /// </summary>
+        internal static string View_List_Message_From {
+            get {
+                return ResourceManager.GetString("View_List_Message_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message ID:.
+        /// </summary>
+        internal static string View_List_Message_MessageID {
+            get {
+                return ResourceManager.GetString("View_List_Message_MessageID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That message cannot be found..
+        /// </summary>
+        internal static string View_List_Message_NotFound {
+            get {
+                return ResourceManager.GetString("View_List_Message_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replies.
+        /// </summary>
+        internal static string View_List_Message_Replies {
+            get {
+                return ResourceManager.GetString("View_List_Message_Replies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reply.
+        /// </summary>
+        internal static string View_List_Message_Reply {
+            get {
+                return ResourceManager.GetString("View_List_Message_Reply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sent:.
+        /// </summary>
+        internal static string View_List_Message_Sent {
+            get {
+                return ResourceManager.GetString("View_List_Message_Sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View the detailed information for this message below..
+        /// </summary>
+        internal static string View_List_Message_Subheading {
+            get {
+                return ResourceManager.GetString("View_List_Message_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing {0}.
+        /// </summary>
+        internal static string View_List_Remove_Format_Heading {
+            get {
+                return ResourceManager.GetString("View_List_Remove_Format_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove this discussion list?.
+        /// </summary>
+        internal static string View_List_Remove_Subheading {
+            get {
+                return ResourceManager.GetString("View_List_Remove_Subheading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Discussion List.
+        /// </summary>
+        internal static string View_List_Remove_Title {
+            get {
+                return ResourceManager.GetString("View_List_Remove_Title", resourceCulture);
             }
         }
         
