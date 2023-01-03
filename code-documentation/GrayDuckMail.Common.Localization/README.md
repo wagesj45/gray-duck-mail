@@ -1,8 +1,6 @@
 GrayDuckMail.Common.Localization Namespace
 ==========================================
-
-[Missing &lt;summary> documentation for "N:GrayDuckMail.Common.Localization"]
-
+A collection of resources and objects that localize string elements to a given language.
 
 
 Classes
