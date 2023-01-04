@@ -58,7 +58,8 @@
 <NamespaceSummaryItem name="GrayDuckMail.Web.Controllers" isDocumented="True">A collection of MVC web controllers that accept and process web requests.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="GrayDuckMail.Web.Models" isDocumented="True">A collection of MVC model calsses that describe data transactions between MVC controllers and MVC views.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="GrayDuckMail.Web.Models.Forms" isDocumented="True">A collection of MVC model calsses that represent incoming HTML forms input.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="GrayDuckMail.Web.Worker" isDocumented="True">A collection of asyncronous worker threads that power the automated features of Gray Duck Mail.</NamespaceSummaryItem></NamespaceSummaries>
+<NamespaceSummaryItem name="GrayDuckMail.Web.Worker" isDocumented="True">A collection of asyncronous worker threads that power the automated features of Gray Duck Mail.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="GrayDuckMail.Common.Localization" isDocumented="True">A collection of resources and objects that localize string elements to a given language.</NamespaceSummaryItem></NamespaceSummaries>
     <VisibleItems>InheritedMembers, Privates, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <ProjectSummary>This documentation provides detailed information on the architecture and code powering Gray Duck Mail.</ProjectSummary>
   </PropertyGroup>

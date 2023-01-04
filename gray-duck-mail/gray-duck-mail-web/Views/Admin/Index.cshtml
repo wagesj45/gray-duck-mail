@@ -1,32 +1,33 @@
 ﻿@model AdminModel
+@using GrayDuckMail.Common.Localization
 @{
-    ViewData["Title"] = "Administration";
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_Administration_Title);
 }
 
 <hgroup>
-    <h1>Administration</h1>
-    <h2>Perform specialized tasks to manage and maintain your service here.</h2>
+    <h1>@LanguageHelper.GetValue(ResourceName.View_Administration_Heading)</h1>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_Administration_Subheading)</h2>
 </hgroup>
 
 <article>
     <header>
         <h3>
-            Web Settings
+            @LanguageHelper.GetValue(ResourceName.View_Administration_WebSettings)
         </h3>
     </header>
     <form id="webSettings" action="/Admin/SaveSettings" method="post">
         <fieldset>
             <label for="useFuzzySearch">
                 <input type="checkbox" role="switch" id="useFuzzySearch" name="useFuzzySearch" @((Model.UseFuzzySearch) ? "checked" : "") />
-                Allow the system to use fuzzy search. This allows for matching similar or mispelled search terms.
+                @LanguageHelper.GetValue(ResourceName.View_Administration_AllowFuzzySearch)
             </label>
-            <mark><i class="icofont-warning"></i> Fuzzy search can give you better search results, but can be very slow.</mark>
+            <mark><i class="icofont-warning"></i> @LanguageHelper.GetValue(ResourceName.View_Administration_FuzzySearchExplaination)</mark>
         </fieldset>
         <label>
-            Number of items per page
+            @LanguageHelper.GetValue(ResourceName.View_Administration_ItemsPerPage)
             <input type="number" id="pageSize" name="pageSize" value="@Model.PageSize" />
         </label>
-        <label for="theme">Site Theme</label>
+        <label for="theme">@LanguageHelper.GetValue(ResourceName.View_Administration_SiteTheme)</label>
         <select id="theme" name=theme>
             @foreach (var theme in ThemeHelper.Themes)
             {
@@ -37,58 +38,58 @@
         </select>
     </form>
     <footer>
-        <button type="submit" form="webSettings"><i class="icofont-save"></i> Save Settings</button>
+        <button type="submit" form="webSettings"><i class="icofont-save"></i> @LanguageHelper.GetValue(ResourceName.View_Administration_SaveSettings)</button>
     </footer>
 </article>
 <article>
     <header>
-        <h3>Export Database</h3>
+        <h3>@LanguageHelper.GetValue(ResourceName.View_Administration_ExportDatabase)</h3>
     </header>
     <p>
-        Save a copy of your database, including contacts, discussion lists, and messages.
+        @LanguageHelper.GetValue(ResourceName.View_Administration_ExportDatabaseDescription)
     </p>
     <footer>
-        <a href="/Admin/ExportDatabase" role="button" style="width: 100%"><i class="icofont-download"></i> Export</a>
+        <a href="/Admin/ExportDatabase" role="button" style="width: 100%"><i class="icofont-download"></i> @LanguageHelper.GetValue(ResourceName.View_Administration_Export)</a>
     </footer>
 </article>
 <article>
     <header>
-        <h3>Import Database</h3>
+        <h3>@LanguageHelper.GetValue(ResourceName.View_Administration_ImportDatabase)</h3>
     </header>
     <p>
-        Import a database file to transfer contacts, discussion lists, and messages.
+        @LanguageHelper.GetValue(ResourceName.View_Administration_ImportDatabaseDescription)
     </p>
     <form id="importDatabase" action="/Admin/ImportDatabase" method="post" enctype="multipart/form-data">
         <label for="databaseFile">
-            Choose a SQLite database file to import
+            @LanguageHelper.GetValue(ResourceName.View_Administration_ChooseDatabase)
             <input type="file" id="databaseFileUpldate" name="databaseFile">
         </label>
     </form>
     <p>
-        <mark><i class="icofont-warning"></i> <strong>WARNING: This will overwrite your existing database file. Please make sure you have a backup of your database before proceeding.</strong></mark>
+        <mark><i class="icofont-warning"></i> <strong>@LanguageHelper.GetValue(ResourceName.View_Administration_ImportWarning)</strong></mark>
     </p>
     <footer>
-        <button type="submit" form="importDatabase"><i class="icofont-upload"></i> Import</button>
+        <button type="submit" form="importDatabase"><i class="icofont-upload"></i> @LanguageHelper.GetValue(ResourceName.View_Administration_Import)</button>
     </footer>
 </article>
 <article>
     <header>
-        <h3>System</h3>
+        <h3>@LanguageHelper.GetValue(ResourceName.View_Administration_System)</h3>
     </header>
     <p>
         @{
             var maxPerHour = Convert.ToInt32((60 * 60 / DockerEnvironmentVariables.RateLimitRoundWaitTime.TotalSeconds) * DockerEnvironmentVariables.RateLimitPerRoundCount);
         }
-        Your system is currently configured to send <strong>@DockerEnvironmentVariables.RateLimitPerRoundCount</strong> emails at once, with a maximum of <strong>@maxPerHour</strong> emails sent per hour.
+        @LanguageHelper.GetValue(ResourceName.View_Administration_SystemConfigurationPart1) <strong>@DockerEnvironmentVariables.RateLimitPerRoundCount</strong> @LanguageHelper.GetValue(ResourceName.View_Administration_SystemConfigurationPart2) <strong>@maxPerHour</strong> @LanguageHelper.GetValue(ResourceName.View_Administration_SystemConfigurationPart3)
     </p>
     <p>
-        Docker environment variable runtime values.
+        @LanguageHelper.GetValue(ResourceName.View_Administration_DockerEnvironmentVariables)
     </p>
     <table role="grid" ">
         <thead>
             <tr>
                 <th scope="col">ENV</th>
-                <th scope="col">Value</th>
+                <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Administration_Value)</th>
             </tr>
         </thead>
         <tbody>

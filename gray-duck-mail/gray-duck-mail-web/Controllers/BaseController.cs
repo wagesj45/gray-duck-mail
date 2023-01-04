@@ -1,4 +1,5 @@
 ﻿using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
@@ -40,7 +41,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <summary> A lazily initialized SQLite database context. </summary>
         private Lazy<SqliteDatabase> sqliteDatabase = new Lazy<SqliteDatabase>(() =>
         {
-            logger.Trace("Initializing database for controller.");
+            logger.Trace(LanguageHelper.GetValue(ResourceName.Logger_InitializingControllerDatabase));
             return new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
         });
 
@@ -161,7 +162,7 @@ namespace GrayDuckMail.Web.Controllers
         /// <seealso cref="Controller.OnActionExecuting(ActionExecutingContext)"/>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            logger.Info("Serving page '{0}'", context.HttpContext.Request.Path);
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_ServingPage, context.HttpContext.Request.Path));
 
             if(!IsAccessAllowed(context))
             {
@@ -180,12 +181,12 @@ namespace GrayDuckMail.Web.Controllers
 
             if (localPort == BaseController.INTERNAL_PORT)
             {
-                logger.Debug("The request is being processed from the designated internal port.");
+                logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_RequestOnInternalPort));
                 return true;
             }
             else if (localPort == BaseController.EXTERNAL_PORT)
             {
-                logger.Info("The request is being processed from the designated external port. Request Origin: {0}", context.HttpContext.Connection.RemoteIpAddress);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_RequestOnExternalPort, context.HttpContext.Connection.RemoteIpAddress));
                 var externalAccessAttributes = context.ActionDescriptor.FilterDescriptors.Where(f => f.Filter.ToString().Equals("GrayDuckMail.Web.ExternalAccessAttribute"));
                 
                 if (externalAccessAttributes.Any())
@@ -195,7 +196,7 @@ namespace GrayDuckMail.Web.Controllers
             }
             else
             {
-                logger.Error("The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1}", localPort, context.HttpContext.Connection.RemoteIpAddress);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_RequestOnUnknownPort, localPort, context.HttpContext.Connection.RemoteIpAddress));
             }
 
             return false;

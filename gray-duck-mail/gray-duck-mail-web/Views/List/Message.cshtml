@@ -1,12 +1,13 @@
 ﻿@using GrayDuckMail.Common
+@using GrayDuckMail.Common.Localization;
 @model MessagePageModel
 @{
-    ViewData["Title"] = string.Format("Message from ", Model.Message.OriginatorContact.Name);
+    ViewData["Title"] = LanguageHelper.FormatValue(ResourceName.View_List_Message_Format_Title, Model.Message.OriginatorContact.Name);
 }
 
 <hgroup>
-    <h1>Message from @Model.Message.OriginatorContact.Name</h1>
-    <h2>View the detailed information for this message below.</h2>
+    <h1>@LanguageHelper.FormatValue(ResourceName.View_List_Message_Format_Heading, Model.Message.OriginatorContact.Name)</h1>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_List_Message_Subheading)</h2>
 </hgroup>
 
 <article>
@@ -17,9 +18,9 @@
             <aside>
                 <nav>
                     <ul>
-                        <li><i class="icofont-ui-user"></i> <em>From: @Model.Message.OriginatorContact.Name</em></li>
-                        <li><i class="icofont-clock-time"></i> <em>Sent: @Model.Message.Recieved.ToLocalTime()</em></li>
-                        <li><i class="icofont-id"></i> Message ID: @Model.Message.EmailID</li>
+                        <li><i class="icofont-ui-user"></i> <em>@LanguageHelper.GetValue(ResourceName.View_List_Message_From) @Model.Message.OriginatorContact.Name</em></li>
+                        <li><i class="icofont-clock-time"></i> <em>@LanguageHelper.GetValue(ResourceName.View_List_Message_Sent) @Model.Message.Recieved.ToLocalTime()</em></li>
+                        <li><i class="icofont-id"></i> @LanguageHelper.GetValue(ResourceName.View_List_Message_MessageID) @Model.Message.EmailID</li>
                     </ul>
                 </nav>
             </aside>
@@ -42,16 +43,16 @@
             }
             else
             {
-                <em>An error occurred while processing this message.</em>
+                <em>@LanguageHelper.GetValue(ResourceName.View_List_Message_ErrorProcessingMessage)</em>
             }
             @if (Model.Children.Any())
             {
                 <footer id="children">
-                    <i class="icofont-mail"></i><i class="icofont-reply"></i> <strong>@Model.Children.Count()</strong> @(Model.Children.Count() == 1 ? "Reply" : "Replies")
+                    <i class="icofont-mail"></i><i class="icofont-reply"></i> <strong>@Model.Children.Count()</strong> @(Model.Children.Count() == 1 ? LanguageHelper.GetValue(ResourceName.View_List_Message_Reply) : LanguageHelper.GetValue(ResourceName.View_List_Message_Replies))
                     <ul>
                         @foreach (var child in Model.Children)
                         {
-                            <li><a href="/List/Message/@child.ID">From @child.OriginatorContact.Name at @child.Recieved.ToLocalTime(): @child.Subject</a></li>
+                            <li><a href="/List/Message/@child.ID">@LanguageHelper.FormatValue(ResourceName.View_List_Message_Format_ReplyLink, child.OriginatorContact.Name, child.Recieved.ToLocalTime(), child.Subject)</a></li>
                         }
                     </ul>
                 </footer>
@@ -64,6 +65,7 @@
                 {
                     <a href="/List/Message/@Model.Message.ID/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
+                @LanguageHelper.FormatValue(ResourceName.View_Common_Format_PageCount, Model.PageNumber, Model.TotalPages)
                 Page @Model.PageNumber of @Model.TotalPages
                 @if (Model.PageNumber < Model.TotalPages)
                 {
@@ -74,6 +76,6 @@
     }
     else
     {
-        <p>That message cannot be found.</p>
+        <p>@LanguageHelper.GetValue(ResourceName.View_List_Message_NotFound)</p>
     }
 </article>

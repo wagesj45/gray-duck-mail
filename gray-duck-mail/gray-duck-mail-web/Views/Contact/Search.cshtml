@@ -1,11 +1,12 @@
-﻿@model ContactSearchModel
+﻿@using GrayDuckMail.Common.Localization;
+@model ContactSearchModel
 @{
     ViewData["Title"] = "Contact Search";
 }
 
 <hgroup>
-    <h1>Contacts</h1>
-    <h2>Search for <em>@Model.Contacts.SearchTerm</em></h2>
+    <h1>@LanguageHelper.GetValue(ResourceName.View_Contacts_Search_Heading)</h1>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_Contacts_Search_SubheadingPart1) <em>@Model.Contacts.SearchTerm</em></h2>
 </hgroup>
 
 <article>
@@ -13,7 +14,7 @@
         <nav>
             <ul>
                 <li>
-                    <a href="/Contact/New"><i class="icofont-ui-add"></i> Create New Contact</a>
+                    <a href="/Contact/New"><i class="icofont-ui-add"></i> @LanguageHelper.GetValue(ResourceName.View_Contacts_Search_CreateNewContact)</a>
                 </li>
             </ul>
             <ul>
@@ -30,10 +31,10 @@
         <table>
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Number of Discussion Lists</th>
-                    <th scope="col">Activated</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_Name)</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_Email)</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_NumberOfDiscussionLists)</th>
+                    <th scope="col">@LanguageHelper.GetValue(ResourceName.View_Common_Activated)</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -55,8 +56,8 @@
                             }
                         </td>
                         <td>
-                            <a href="/Contact/Edit/@contact.Item.ID" data-tooltip="Edit"><i class="icofont-edit-alt"></i></a>
-                            <a href="/Contact/Remove/@contact.Item.ID" data-tooltip="Remove"><i class="icofont-delete-alt"></i></a>
+                            <a href="/Contact/Edit/@contact.Item.ID" data-tooltip="@LanguageHelper.GetValue(ResourceName.View_Common_Edit)"><i class="icofont-edit-alt"></i></a>
+                            <a href="/Contact/Remove/@contact.Item.ID" data-tooltip="@LanguageHelper.GetValue(ResourceName.View_Common_Remove)"><i class="icofont-delete-alt"></i></a>
                         </td>
                     </tr>
                 }
@@ -69,7 +70,7 @@
                 {
                     <a href="/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber - 1)"><i class="icofont-caret-left"></i></a>
                 }
-                Page @Model.PageNumber of @Model.TotalPages
+                @LanguageHelper.FormatValue(ResourceName.View_Common_Format_PageCount, Model.PageNumber, Model.TotalPages)
                 @if (Model.PageNumber < Model.TotalPages)
                 {
                     <a href="/Contact/Search/@Model.Contacts.SearchTerm/@(Model.PageNumber + 1)"><i class="icofont-caret-right"></i></a>
@@ -79,6 +80,6 @@
     }
     else
     {
-        <p>No contacts could be found. Try a more enabling <em data-tooltip="Find's simliar and mispelled search terms.">Use Fuzzy Search</em> in the Administration settings.</p>
+        <p>@LanguageHelper.GetValue(ResourceName.View_Contacts_Search_NoContactsFoundPart1) <em data-tooltip="@LanguageHelper.GetValue(ResourceName.View_Contacts_Search_NoContactsFoundTooltip)">@LanguageHelper.GetValue(ResourceName.View_Contacts_Search_NoContactsFoundPart2)</em> @LanguageHelper.GetValue(ResourceName.View_Contacts_Search_NoContactsFoundPart3)</p>
     }
 </article>

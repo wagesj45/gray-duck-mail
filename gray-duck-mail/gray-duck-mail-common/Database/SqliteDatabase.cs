@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GrayDuckMail.Common.Localization;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -138,7 +139,7 @@ namespace GrayDuckMail.Common.Database
         {
             if (!File.Exists(this.DatabaseFilePath.AbsolutePath))
             {
-                logger.Debug("Creating db file at {0}.", databaseFilePath.AbsolutePath);
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_CreatingDB, databaseFilePath.AbsolutePath));
                 using (var _db = new SqliteDatabase())
                 {
                     _db.DatabaseFilePath = databaseFilePath;
@@ -147,12 +148,12 @@ namespace GrayDuckMail.Common.Database
                 }
                 if (File.Exists(databaseFilePath.AbsolutePath))
                 {
-                    logger.Info("Database file created at {0}.", databaseFilePath.AbsolutePath);
+                    logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_DBCreated, databaseFilePath.AbsolutePath));
                 }
                 else
                 {
-                    logger.Error("Could not create database file at {0}.", databaseFilePath.AbsolutePath);
-                    throw new FileNotFoundException("Could not create database file.", databaseFilePath.AbsolutePath);
+                    logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_DBNotCreated, databaseFilePath.AbsolutePath));
+                    throw new FileNotFoundException(LanguageHelper.GetValue(ResourceName.Exception_DBNotCreated), databaseFilePath.AbsolutePath);
                 }
             }
         }

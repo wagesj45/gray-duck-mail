@@ -77,6 +77,17 @@ The time between sending groups of emails from the queue. After a given round of
 
 The time between fetching email from the remote server. The default value is a [System.TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan?view=netcore-3.1) set to `00:05:00`.
 
+#### `LANGUAGE`
+
+System localization is supported. Language files are stored as `*.resx` files. Although the initial translations were automated, pull requests are accepted for human translations.
+
+The following values are supported:
+
+- `en-US` - English
+- `ja-JP` - Japanese
+- `es-ES` - Spanish
+- `de-DE` - German
+
 #### `LOG_LEVEL`
 
 The verbosity level with which to log application events. The default value is a [System.String](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1) set to `info`.

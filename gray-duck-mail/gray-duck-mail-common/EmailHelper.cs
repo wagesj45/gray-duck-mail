@@ -1,4 +1,5 @@
 ﻿using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using HtmlAgilityPack;
 using MailKit.Net.Smtp;
 using MimeKit;
@@ -132,15 +133,15 @@ namespace GrayDuckMail.Common
             {
                 if (string.IsNullOrEmpty(defaultEmailTemplate))
                 {
-                    logger.Info("Loading main HTML email template.");
+                    logger.Info(LanguageHelper.GetValue(ResourceName.Logger_LoadingHTMLTemplate));
 
                     var assembly = Assembly.GetAssembly(typeof(EmailHelper));
-                    logger.Debug("Loading assembly {0}", assembly.FullName);
+                    logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_LoadingAssembly, assembly.FullName));
 
-                    logger.Debug("Found the following resource names in the assembly manifest:");
+                    logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FoundResources));
                     foreach (var name in assembly.GetManifestResourceNames())
                     {
-                        logger.Debug("-- {0}", name);
+                        logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_FoundResourcesLine, name));
                     }
 
                     var stream = assembly.GetManifestResourceStream("GrayDuckMail.Common.EmailTemplates.Main.html");
@@ -149,7 +150,7 @@ namespace GrayDuckMail.Common
                     {
                         defaultEmailTemplate = reader.ReadToEnd();
 
-                        logger.Debug("Email template read into memory.");
+                        logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_TemplateInMemory));
                         logger.Trace(defaultEmailTemplate);
                     }
                 }
@@ -207,7 +208,7 @@ namespace GrayDuckMail.Common
                 .Replace("{footer}", footer)
                 .Replace("{unsubscribe}", unsubscribe);
 
-            logger.Debug("Email template processed: {0}");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_Format_TemplateProcessed));
             logger.Trace(result);
 
             return result;
@@ -223,7 +224,7 @@ namespace GrayDuckMail.Common
         {
             if (discussionList.Subscriptions == null || !discussionList.Subscriptions.Any())
             {
-                logger.Error("The discussion list is empty.");
+                logger.Error(LanguageHelper.GetValue(ResourceName.Logger_EmptyDiscussionList));
                 return false;
             }
             var authorized = discussionList.Subscriptions.Where(subscription => subscription.Contact.ID == contact.ID && ContactAssociatedStatuses.Contains(subscription.Status)).Any();
@@ -239,7 +240,7 @@ namespace GrayDuckMail.Common
         {
             if (discussionList.Subscriptions == null || !discussionList.Subscriptions.Any())
             {
-                logger.Error("The discussion list is empty.");
+                logger.Error(LanguageHelper.GetValue(ResourceName.Logger_EmptyDiscussionList));
                 return false;
             }
             var assignable = discussionList.Subscriptions.Where(subscription => subscription.Contact.ID == contact.ID && !ContactUnassignableStatuses.Contains(subscription.Status)).Any();
@@ -266,17 +267,17 @@ namespace GrayDuckMail.Common
         /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void RelayEmail(DiscussionList discussionList, Contact recipient, Message message, SqliteDatabase database, SmtpClient client, CancellationToken stoppingToken = default)
         {
-            logger.Debug("Relaying message to {0} ({1})", recipient.Name, recipient.Email);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_RelayingMessage, recipient.Name, recipient.Email));
 
             var relay = SendEmail(discussionList,
                 recipient,
-                string.Format("{0} - Message from {1}", message.Subject.Replace(String.Format(" - Message from {0}", discussionList.Name), ""), discussionList.Name),
+                LanguageHelper.FormatValue(ResourceName.Mail_Format_Subject, message.Subject.Replace(LanguageHelper.FormatValue(ResourceName.Mail_Format_SubjectReplace, discussionList.Name), ""), discussionList.Name),
                 discussionList.BaseEmailAddress,
                 () =>
                 {
                     if (!string.IsNullOrWhiteSpace(message.BodyHTML))
                     {
-                        logger.Debug("Mesasge body determined to contain HTML.");
+                        logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_MessageContainsHTML));
 
                         var html = new HtmlDocument();
                         html.LoadHtml(message.BodyHTML);
@@ -302,12 +303,12 @@ namespace GrayDuckMail.Common
                             var customized = new UriBuilder(unsubscribeUri);
                             customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
 
-                            techHeader.InnerHtml = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: <a href='{1}'>{1}</a>", discussionList.Name, customized.Uri.AbsoluteUri);
+                            techHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLUnsubscribeLinkMessage, discussionList.Name, customized.Uri.AbsoluteUri);
                         }
                         else
                         {
                             //Create a fallback link to the unsubscribe email alias.
-                            techHeader.InnerHtml = String.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to <a href='mailto:{1}'>{1}</a>", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                            techHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLUnsubscribeEmailMessage, discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                         }
                         bodyNode.AppendChild(techHeader);
 
@@ -322,7 +323,7 @@ namespace GrayDuckMail.Common
 
                     if (!string.IsNullOrWhiteSpace(message.BodyText))
                     {
-                        logger.Debug("Message body determined to contain plain text.");
+                        logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_MessageContainsPlainText));
 
                         var techHeader = string.Empty;
                         if(UsingUnsubscribeUri)
@@ -331,12 +332,12 @@ namespace GrayDuckMail.Common
                             var customized = new UriBuilder(unsubscribeUri);
                             customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
                             
-                            techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by clicking here: {1}", discussionList.Name, customized.Uri.AbsoluteUri);
+                            techHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextUnsubscribeLinkMessage, discussionList.Name, customized.Uri.AbsoluteUri);
                         }
                         else
                         {
                             //Create a fallback link to the unsubscribe email alias.
-                            techHeader = string.Format("This message is part of the '{0}' discussion list. You can unsubscribe by sending any message to {1}.", discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+                            techHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextUnsubscribeEmailMessage, discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                         }
                         var cleanedText = message.BodyText.Replace(techHeader, "");
                         var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
@@ -347,7 +348,7 @@ namespace GrayDuckMail.Common
                         };
                     }
 
-                    var formatException = new FormatException("Could not determine the formatting of the message.");
+                    var formatException = new FormatException(LanguageHelper.GetValue(ResourceName.Exception_FormatNotDetermined));
 
                     throw formatException;
                 },
@@ -376,20 +377,20 @@ namespace GrayDuckMail.Common
         /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void SendOnboardingEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
-            logger.Info("Sending onboarding email to {0} ({1}).", recipient.Name, recipient.Email);
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingOnboardingEmail, recipient.Name, recipient.Email));
 
             SendEmail(discussionList,
                 recipient,
-                string.Format("Subscribe to {0}", discussionList.Name),
+                LanguageHelper.FormatValue(ResourceName.Mail_Format_OnboardingSubject, discussionList.Name),
                 EmailAliasHelper.GetSubscribeAlias(discussionList),
                 () =>
                 {
                     return new TextPart(TextFormat.Html)
                     {
                         Text = EmailHelper.FillDefaultTemplate(
-                            "Welcome!",
-                            String.Format("You've been invited to the '{0}' Email Discussion List", discussionList.Name),
-                            String.Format("The '{0}' email list administator has invited you to participate. To confirm your subscription, simply reply to this e-mail. If you do not wish to participate, you can ignore this email.", discussionList.Name),
+                            LanguageHelper.GetValue(ResourceName.Mail_OnboardingHeading),
+                            LanguageHelper.FormatValue(ResourceName.Mail_Format_OnboardingSubheading, discussionList.Name),
+                            LanguageHelper.FormatValue(ResourceName.Mail_Format_OnboardingBody, discussionList.Name),
                             discussionList.Name,
                             discussionList,
                             recipient
@@ -413,21 +414,21 @@ namespace GrayDuckMail.Common
         /// </param>
         public static void SendRequestOwnerNotificationEmail(DiscussionList discussionList, Contact requester, SmtpClient client, CancellationToken cancellationToken = default)
         {
-            logger.Info("Sending a notication to the discussion list owner that {0} ({1}) has requested access to {2}.", requester.Name, requester.Email, discussionList.Name);
-            var ownerContact = new Contact() { Name = "Owner", Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true };
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingOwnerNotification, requester.Name, requester.Email, discussionList.Name));
+            var ownerContact = new Contact() { Name = LanguageHelper.GetValue(ResourceName.Mail_Owner), Email = EmailAliasHelper.GetOwnerAlias(discussionList), Activated = true };
 
             SendEmail(discussionList,
                 ownerContact,
-                string.Format("Request to join {0}", discussionList.Name),
+                LanguageHelper.FormatValue(ResourceName.Mail_Format_OwnerNotificationSubject, discussionList.Name),
                 EmailAliasHelper.GetSubscribeAlias(discussionList),
                 () =>
                 {
                     return new TextPart(TextFormat.Html)
                     {
                         Text = EmailHelper.FillDefaultTemplate(
-                            "Discussion List Access Request",
-                            String.Format("{0} has requested access to the '{0}' Email Discussion List", requester.Name, discussionList.Name),
-                            "Please visit the the web administration interface to process this request.",
+                            LanguageHelper.GetValue(ResourceName.Mail_OwnerNotificationHeading),
+                            LanguageHelper.FormatValue(ResourceName.Mail_Format_OwnerNotificationSubheading, requester.Name, discussionList.Name),
+                            LanguageHelper.GetValue(ResourceName.Mail_OwnerNotificationBody),
                             discussionList.Name,
                             discussionList,
                             ownerContact
@@ -451,20 +452,20 @@ namespace GrayDuckMail.Common
         /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void SendSubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
-            logger.Info("Sending the subscription confirmation email to {0} ({1}).", recipient.Name, recipient.Email);
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingSubscriptionConfirmation, recipient.Name, recipient.Email));
 
             SendEmail(discussionList,
                 recipient,
-                string.Format("Welcome to {0}", discussionList.Name),
+                LanguageHelper.FormatValue(ResourceName.Mail_Format_SubscriptionConfirmationSubject, discussionList.Name),
                 discussionList.BaseEmailAddress,
                 () =>
                 {
                     return new TextPart(TextFormat.Html)
                     {
                         Text = EmailHelper.FillDefaultTemplate(
-                            "Thanks for subscribing!",
-                            String.Format("You've been subscribed to the '{0}' Email Discussion List", discussionList.Name),
-                            String.Format("Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.", discussionList.BaseEmailAddress),
+                            LanguageHelper.GetValue(ResourceName.Mail_SubscriptionConfirmationHeading),
+                            LanguageHelper.FormatValue(ResourceName.Mail_Format_SubscriptionConfirmationSubheading, discussionList.Name),
+                            LanguageHelper.FormatValue(ResourceName.Mail_Format_SubscriptionConfirmationBody, discussionList.BaseEmailAddress),
                             discussionList.Name,
                             discussionList,
                             recipient
@@ -485,20 +486,20 @@ namespace GrayDuckMail.Common
         /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
         public static void SendUnsubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
-            logger.Info("Sending the subscription confirmation email to {0} ({1}).", recipient.Name, recipient.Email);
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingUnsubscriptionConfirmation), recipient.Name, recipient.Email);
 
             SendEmail(discussionList,
                 recipient,
-                string.Format("You have been unsubscribed from {0}.", discussionList.Name),
+                LanguageHelper.FormatValue(ResourceName.Mail_Format_UnsubscriptionConfirmationSubject, discussionList.Name),
                 discussionList.BaseEmailAddress,
                 () =>
                 {
                     return new TextPart(TextFormat.Html)
                     {
                         Text = EmailHelper.FillDefaultTemplate(
-                            "Sorry to see you go.",
-                            String.Format("You will no longer recieve messages from the '{0}' Email Discussion List", discussionList.Name),
-                            String.Format("You have successfully unsubscribed from this discussion list. If you'd ever like to resubscribe, send a message to <a href='mailto:{0}'>{0}</a>.", EmailAliasHelper.GetRequestAlias(discussionList)),
+                            LanguageHelper.GetValue(ResourceName.Mail_UnsubscriptionConfirmationHeading),
+                            LanguageHelper.FormatValue(ResourceName.Mail_Format_UnsubscriptionConfirmationSubheading, discussionList.Name),
+                            LanguageHelper.FormatValue(ResourceName.Mail_Format_UnsubscriptionConfirmationBody, EmailAliasHelper.GetRequestAlias(discussionList)),
                             discussionList.Name,
                             discussionList,
                             recipient
@@ -525,7 +526,7 @@ namespace GrayDuckMail.Common
         /// <returns> A MimeMessage. </returns>
         public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default)
         {
-            logger.Debug("Generating an email.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GeneratingEmail));
 
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
@@ -538,7 +539,7 @@ namespace GrayDuckMail.Common
 
             if (!client.IsConnected)
             {
-                logger.Info("The SMTP client is not connected. Connecting now.");
+                logger.Info(LanguageHelper.GetValue(ResourceName.Logger_SMTPNotConnected));
                 client.Connect(discussionList.OutgoingMailServer, discussionList.OutgoingMailPort, discussionList.UseSSL, cancellationToken: cancellationToken);
 
                 // Note: only needed if the SMTP server requires authentication
@@ -584,7 +585,7 @@ namespace GrayDuckMail.Common
 
             if (multipartMessage != null && multipartMessage.OfType<MessageDeliveryStatus>().Any())
             {
-                logger.Debug("Message is a multipart message with at least one 'delivery-status' section.");
+                logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_DeliveryStatusDetected));
                 foreach (var deliveryStatus in multipartMessage.OfType<MessageDeliveryStatus>())
                 {
                     foreach (var statusGroup in deliveryStatus.StatusGroups)
@@ -595,7 +596,7 @@ namespace GrayDuckMail.Common
                         {
                             if (BouncedEmailStatusGroupActions.Contains(action.ToLowerInvariant()))
                             {
-                                logger.Debug("A failed delivery was detected.");
+                                logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FailedDeliveryDetected));
 
                                 var recipient = statusGroup["Original-Recipient"]
                                     ?? statusGroup["Failed-Recipient"]
@@ -605,11 +606,11 @@ namespace GrayDuckMail.Common
 
                                 if (string.IsNullOrWhiteSpace(address))
                                 {
-                                    logger.Error("The bounced email contains a failure report, but an unknown recipient status group.");
+                                    logger.Error(LanguageHelper.GetValue(ResourceName.Logger_FailureDetectedUnknownRecipient));
 
                                     foreach (var group in statusGroup)
                                     {
-                                        logger.Debug(string.Format("-- {0}: {1}", group.Field, group.Value));
+                                        logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FailureStatusGroupsLine, group.Field, group.Value));
                                     }
 
                                     return "UNKNOWN_ADDRESS";

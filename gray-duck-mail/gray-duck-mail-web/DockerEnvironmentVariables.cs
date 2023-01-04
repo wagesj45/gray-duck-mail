@@ -1,4 +1,5 @@
 ﻿using GrayDuckMail.Common;
+using GrayDuckMail.Common.Localization;
 using System;
 
 namespace GrayDuckMail.Web
@@ -160,6 +161,19 @@ namespace GrayDuckMail.Web
             return "http://example.com";
         });
 
+        /// <summary> The docker environment variable for <see cref="Language"/>. </summary>
+        private static Lazy<Language> envLanguage = new Lazy<Language>(() =>
+        {
+            var language = Environment.GetEnvironmentVariable("LANGUAGE");
+
+            if(!string.IsNullOrWhiteSpace(language)) 
+            {
+                return LanguageHelper.GetLanguage(language);
+            }
+
+            return LanguageHelper.GetDefaultLanguage();
+        });
+
         #endregion
 
         #region Properties
@@ -270,6 +284,13 @@ namespace GrayDuckMail.Web
         public static string WebExternalURL
         {
             get => envWebExternalURL.Value;
+        }
+
+        /// <summary> Gets the localization language. </summary>
+        /// <value> The localization language. </value>
+        public static Language Language
+        {
+            get => envLanguage.Value;
         }
 
         #endregion

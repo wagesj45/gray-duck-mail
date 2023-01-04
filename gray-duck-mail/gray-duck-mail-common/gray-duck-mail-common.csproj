@@ -1,26 +1,58 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>GrayDuckMail.Common</RootNamespace>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>GrayDuckMail.Common</RootNamespace>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="EmailTemplates\Main.html" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="EmailTemplates\Main.html" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="EmailTemplates\Main.html" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="EmailTemplates\Main.html" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Fastenshtein" Version="1.0.0.8" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
-    <PackageReference Include="MailKit" Version="3.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.15" />
-    <PackageReference Include="NLog" Version="4.7.14" />
-    <PackageReference Include="System.Linq" Version="4.3.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Fastenshtein" Version="1.0.0.8" />
+		<PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
+		<PackageReference Include="MailKit" Version="3.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.15" />
+		<PackageReference Include="NLog" Version="4.7.14" />
+		<PackageReference Include="System.Linq" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Localization\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Localization\ResourceNames.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>ResourceNames.tt</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Localization\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<RunCustomToolOn>ResourceNames.tt</RunCustomToolOn>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Localization\ResourceNames.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>ResourceNames.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
 
 </Project>

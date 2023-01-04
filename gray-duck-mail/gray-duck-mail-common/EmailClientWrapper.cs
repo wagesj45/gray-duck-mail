@@ -1,4 +1,5 @@
-﻿using MailKit;
+﻿using GrayDuckMail.Common.Localization;
+using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
 using MimeKit;
@@ -47,7 +48,7 @@ namespace GrayDuckMail.Common
         /// </param>
         public EmailClientWrapper(EmailProtocol emailClientType, string imapFolderName = default)
         {
-            logger.Debug("Creating email wrapper object.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_CreatingEmailWrapper));
 
             this.emailClientType = emailClientType;
             this.imapFolderName = imapFolderName;
@@ -112,11 +113,11 @@ namespace GrayDuckMail.Common
             switch (this.emailClientType)
             {
                 case EmailProtocol.POP3:
-                    logger.Debug("Using POP3 client.");
+                    logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_UsingPOP3));
                     pop3Method(this.POP3Client);
                     break;
                 case EmailProtocol.IMAP:
-                    logger.Debug("Using IMAP client.");
+                    logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_UsingIMAP));
                     var folder = default(IMailFolder);
                     if(this.IMAPClient.IsConnected && this.IMAPClient.IsAuthenticated)
                     {
@@ -132,7 +133,7 @@ namespace GrayDuckMail.Common
                     break;
                 case EmailProtocol.Unknown:
                 default:
-                    logger.Error("An unknown client type was requested.");
+                    logger.Error(LanguageHelper.GetValue(ResourceName.Logger_UnknownClientType));
                     break;
             }
         }
@@ -147,10 +148,10 @@ namespace GrayDuckMail.Common
             switch (this.emailClientType)
             {
                 case EmailProtocol.POP3:
-                    logger.Debug("Using POP3 client.");
+                    logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_UsingPOP3));
                     return pop3Method(this.POP3Client);
                 case EmailProtocol.IMAP:
-                    logger.Debug("Using IMAP client.");
+                    logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_UsingIMAP));
                     var folder = default(IMailFolder);
                     if (this.IMAPClient.IsConnected && this.IMAPClient.IsAuthenticated)
                     {
@@ -166,7 +167,7 @@ namespace GrayDuckMail.Common
                     return result;
                 case EmailProtocol.Unknown:
                 default:
-                    logger.Error("An unknown client type was requested.");
+                    logger.Error(LanguageHelper.GetValue(ResourceName.Logger_UnknownClientType));
                     break;
             }
 
@@ -182,7 +183,7 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Connect(string host, int port, bool useSSL, CancellationToken cancellationToken = default)
         {
-            logger.Debug("Connecting to {0}:{1}.", host, port);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_ConnectingTo, host, port));
 
             PerformClientMethod(
                 pop3Client => pop3Client.Connect(host, port, useSSL, cancellationToken: cancellationToken),
@@ -198,7 +199,7 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Authenticate(string userName, string password, CancellationToken cancellationToken = default)
         {
-            logger.Debug("Authenticating with {0}:{1}.", userName, password);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingWith, userName, password));
 
             PerformClientMethod(
                 pop3Client => pop3Client.Authenticate(userName, password, cancellationToken: cancellationToken),
@@ -213,7 +214,7 @@ namespace GrayDuckMail.Common
         /// <returns> The messages. </returns>
         public IList<MimeMessage> GetMessages(CancellationToken cancellationToken = default)
         {
-            logger.Debug("Getting messages.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GettingMessages));
 
             return PerformClientMethod(
             pop3Client =>
@@ -246,7 +247,7 @@ namespace GrayDuckMail.Common
         /// </param>
         public void DeleteMessage(int index, CancellationToken cancellationToken = default)
         {
-            logger.Debug("Deleting message {0}.", index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_DeletingMessage, index));
 
             PerformClientMethod(
             pop3Client => pop3Client.DeleteMessage(index),
@@ -267,7 +268,7 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Disconnect(bool quit, CancellationToken cancellationToken = default)
         {
-            logger.Debug("Disconnecting.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_Disconnecting));
 
             PerformClientMethod(
                 pop3Client => pop3Client.Disconnect(quit, cancellationToken),
@@ -289,17 +290,17 @@ namespace GrayDuckMail.Common
             // they don't exist. Since we're already disposing of the wrapper, that's wasted
             // effort.
 
-            logger.Debug("Disposing of the client wrapper object.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_DisposingWrapper));
 
             if (this.pop3Client != null)
             {
-                logger.Info("POP3 Client disposing.");
+                logger.Info(LanguageHelper.GetValue(ResourceName.Logger_DisposingPOP3));
                 this.pop3Client.Dispose();
             }
 
             if (this.imapClient != null)
             {
-                logger.Info("IMAP client disposing.");
+                logger.Info(LanguageHelper.GetValue(ResourceName.Logger_DisposingIMAP));
                 this.imapClient.Dispose();
             }
         }

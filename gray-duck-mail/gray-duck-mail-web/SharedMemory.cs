@@ -1,4 +1,5 @@
 ﻿using GrayDuckMail.Common;
+using GrayDuckMail.Common.Localization;
 using NLog;
 using System.Collections.Concurrent;
 
@@ -29,7 +30,7 @@ namespace GrayDuckMail.Web
         /// <summary> Static constructor. </summary>
         static SharedMemory()
         {
-            logger.Debug("Initializing shared memory object via static constructor.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_InitializingSharedMemory));
         }
 
         #endregion
@@ -40,7 +41,7 @@ namespace GrayDuckMail.Web
         /// <param name="emailDefinition"> The email definition. </param>
         public static void AddEmail(EmailDefinition emailDefinition)
         {
-            logger.Debug("Adding email definition to queue.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_AddingEmailDefinition));
             emailQueue.Enqueue(emailDefinition);
         }
 
@@ -50,11 +51,11 @@ namespace GrayDuckMail.Web
         {
             if (emailQueue.TryDequeue(out EmailDefinition emailDefinition))
             {
-                logger.Debug("Fetching email defintion from queue.");
+                logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FetchingEmailDefinition));
                 return emailDefinition; ;
             }
 
-            logger.Debug("Unable to fetch email definition from queue.");
+            logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_EmailDefinitionFetchFailure));
             return default(EmailDefinition);
         }
 

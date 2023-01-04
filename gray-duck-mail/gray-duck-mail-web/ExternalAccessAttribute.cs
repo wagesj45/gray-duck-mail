@@ -1,4 +1,5 @@
-﻿using GrayDuckMail.Web.Controllers;
+﻿using GrayDuckMail.Common.Localization;
+using GrayDuckMail.Web.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NLog;
@@ -30,15 +31,15 @@ namespace GrayDuckMail.Web
 
             if (localPort == BaseController.INTERNAL_PORT)
             {
-                logger.Debug("The request is being processed from the designated internal port.");
+                logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_RequestOnInternalPort));
             }
             else if (localPort == BaseController.EXTERNAL_PORT)
             {
-                logger.Info("The request is being processed from the designated external port. Request Origin: {0}", filterContext.HttpContext.Connection.RemoteIpAddress);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_RequestOnExternalPort, filterContext.HttpContext.Connection.RemoteIpAddress));
             }
             else
             {
-                logger.Error("The request is being processed from an unknown port ({0})). The docker container is likely misconfigured. Remote Origin: {1}", localPort, filterContext.HttpContext.Connection.RemoteIpAddress);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_RequestOnUnknownPort, localPort, filterContext.HttpContext.Connection.RemoteIpAddress));
             }
         } 
 

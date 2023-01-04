@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GrayDuckMail.Common.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NLog;
 
@@ -40,7 +41,7 @@ namespace GrayDuckMail.Web
 
                 if (viewResult != null)
                 {
-                    logger.Info("Using custom view layout: {0}", this.layout);
+                    logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UsingCustomView, this.layout));
                     viewResult.ViewData["Layout"] = this.layout;
                 }
             }

@@ -1,4 +1,5 @@
-﻿using MimeKit;
+﻿using GrayDuckMail.Common.Localization;
+using MimeKit;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -58,7 +59,7 @@ namespace GrayDuckMail.Common
         /// <returns> An indexed message. </returns>
         public static IndexedMimeMessage IndexMimeMessage(int index, MimeMessage originalMessage)
         {
-            logger.Trace("Assigning index {0} to {1}.", index, originalMessage.MessageId);
+            logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_AssigningMimeMessageIndex, index, originalMessage.MessageId));
 
             var indexedMimeMessage = new IndexedMimeMessage
             {

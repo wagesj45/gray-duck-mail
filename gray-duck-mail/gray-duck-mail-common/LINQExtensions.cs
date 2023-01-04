@@ -1,4 +1,5 @@
 ﻿using Fastenshtein;
+using GrayDuckMail.Common.Localization;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
@@ -184,7 +185,7 @@ namespace GrayDuckMail.Common
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                var argumentException = new ArgumentException("The property selector was unable to resolve to a property name.", nameof(propertySelector));
+                var argumentException = new ArgumentException(LanguageHelper.GetValue(ResourceName.Exception_PropertySelectorResolutionError), nameof(propertySelector));
                 logger.Error(argumentException);
 
                 throw argumentException;
@@ -192,7 +193,7 @@ namespace GrayDuckMail.Common
 
             if(string.IsNullOrWhiteSpace(searchTerm))
             {
-                var argumentException = new ArgumentException("No search term was provided.", nameof(searchTerm));
+                var argumentException = new ArgumentException(LanguageHelper.GetValue(ResourceName.Exception_NoSearchTerm), nameof(searchTerm));
                 logger.Error(argumentException);
 
                 throw argumentException;

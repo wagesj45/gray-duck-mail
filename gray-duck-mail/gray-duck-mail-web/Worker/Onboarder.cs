@@ -1,5 +1,6 @@
 ﻿using GrayDuckMail.Common;
 using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -39,15 +40,15 @@ namespace GrayDuckMail.Web.Worker
         /// </returns>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            logger.Debug("Establishing database context using {0}", ApplicationSettings.DatabaseFilePath.AbsolutePath);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_EstablishingDatabaseContext, ApplicationSettings.DatabaseFilePath.AbsolutePath));
             var database = new SqliteDatabase(ApplicationSettings.DatabaseFilePath.AbsolutePath);
 
-            logger.Info("Beginning email fetch loop.");
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningOnboarderLoop));
             while (!stoppingToken.IsCancellationRequested)
             {
                 foreach (var discussionList in database.DiscussionLists)
                 {
-                    logger.Debug("Processing list {0}", discussionList.Name);
+                    logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingList, discussionList.Name));
 
                     var createdSubscriptions = database.ContactSubscriptions
                         .Include(subscription => subscription.Contact)
@@ -71,18 +72,18 @@ namespace GrayDuckMail.Web.Worker
                     }
                     else
                     {
-                        logger.Debug("No freshly created assignments waiting for onboarding.");
+                        logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_NoOnboardingAssignments));
                     }
                 }
 
                 database.SaveChanges();
 
                 // End the loop and wait the alloted time.
-                logger.Debug("Fetch loop complete. Waiting {0}", DockerEnvironmentVariables.FetchTime);
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_OnboarderLoopComplete, DockerEnvironmentVariables.FetchTime));
                 await Task.Delay(DockerEnvironmentVariables.FetchTime, stoppingToken);
             }
 
-            logger.Info("Email fetcher shutting down.");
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_OnboarderShutDown));
             return;
         }
     }

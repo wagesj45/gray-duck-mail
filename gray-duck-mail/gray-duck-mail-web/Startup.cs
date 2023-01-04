@@ -1,4 +1,5 @@
 using GrayDuckMail.Common;
+using GrayDuckMail.Common.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -64,7 +65,7 @@ namespace GrayDuckMail.Web
             // Technically this could be multiple files if they're somehow injected into the 
             foreach (var file in importedDatabases)
             {
-                logger.Info("Importing exisiting database {0}", file);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_ImportingExistingDatabase, file));
 
                 // If the original database still exists, remove it.
                 if (File.Exists(ApplicationSettings.DatabaseFilePath.AbsolutePath))
@@ -138,17 +139,17 @@ namespace GrayDuckMail.Web
 
             lifetime.ApplicationStarted.Register(() =>
             {
-                logger.Info("Running application.");
+                logger.Info(LanguageHelper.GetValue(ResourceName.Logger_StartingApplication));
             });
 
             lifetime.ApplicationStopping.Register(() =>
             {
-                logger.Info("Stopping the application.");
+                logger.Info(LanguageHelper.GetValue(ResourceName.Logger_StoppingApplication));
             });
 
             lifetime.ApplicationStopped.Register(() =>
             {
-                logger.Info("Application stopped.");
+                logger.Info(LanguageHelper.GetValue(ResourceName.Logger_ApplicationStopped));
             });
         }
 

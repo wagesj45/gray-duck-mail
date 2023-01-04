@@ -1,8 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Contacts";
+﻿@using GrayDuckMail.Common.Localization;
+@{
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_Shared_ErrorLayout_Title);
 }
 
-<h1>Error.</h1>
-<h2>An error occurred while processing your request.</h2>
+<h1>@LanguageHelper.GetValue(ResourceName.View_Shared_ErrorLayout_Heading)</h1>
+<h2>@LanguageHelper.GetValue(ResourceName.View_Shared_ErrorLayout_Subheading)</h2>
 <hr />
-<h3>The Remote Origin logged is @Context.Connection.RemoteIpAddress</h3>
+<h3>@LanguageHelper.FormatValue(ResourceName.View_Shared_ErrorLayout_Format_RemoteOrigin, Context.Connection.RemoteIpAddress)</h3>

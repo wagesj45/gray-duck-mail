@@ -1,4 +1,5 @@
 using GrayDuckMail.Common;
+using GrayDuckMail.Common.Localization;
 using GrayDuckMail.Web.Worker;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +31,9 @@ namespace GrayDuckMail.Web
         /// <param name="args"> An array of command-line argument strings. </param>
         public static void Main(string[] args)
         {
-            logger.Info("Starting the main application.");
+            LanguageHelper.SetLanguage(DockerEnvironmentVariables.Language.Name);
+
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_StartingApplication));
 
             CreateHostBuilder(args).Build().Run();
         }
@@ -44,7 +47,7 @@ namespace GrayDuckMail.Web
                 {
                     if (!DockerEnvironmentVariables.WebOnly)
                     {
-                        logger.Info("Registering service workers.");
+                        logger.Info(LanguageHelper.GetValue(ResourceName.Logger_RegisteringServiceWorkers));
                         services.AddHostedService<EmailFetcher>();
                         services.AddHostedService<EmailSender>();
                         services.AddHostedService<Onboarder>();

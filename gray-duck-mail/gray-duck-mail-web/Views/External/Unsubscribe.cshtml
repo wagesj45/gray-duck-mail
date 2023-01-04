@@ -1,19 +1,20 @@
-﻿@model UnsubscribeModel
+﻿@using GrayDuckMail.Common.Localization;
+@model UnsubscribeModel
 @{
-    ViewData["Title"] = "Unsubscribe";
+    ViewData["Title"] = LanguageHelper.GetValue(ResourceName.View_External_Unsubscribe_Title);
 }
 
 <hgroup>
-    <h1>Unsubscribe</h1>
+    <h1>@LanguageHelper.GetValue(ResourceName.View_External_Unsubscribe_Heading)</h1>
 </hgroup>
 
 <article>
     @if(Model.Successful)
     {
-        <p>@Model.UserEmail has been unsubscribed from @Model.DiscussionList.Name.</p>
+        <p>@LanguageHelper.FormatValue(ResourceName.View_External_Unsubscribe_Format_Successful, Model.UserEmail, Model.DiscussionList.Name)</p>
     }
     else
     {
-        <p>There was an error while trying to unsubscribe. Either the contact or discussion list could not be found, or the contact is already unsubscribed.</p>
+        <p>@LanguageHelper.GetValue(ResourceName.View_External_Unsubscribe_Unsuccessful)</p>
     }
 </article>

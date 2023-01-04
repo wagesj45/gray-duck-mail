@@ -1,5 +1,6 @@
 ﻿using GrayDuckMail.Common;
 using GrayDuckMail.Common.Database;
+using GrayDuckMail.Common.Localization;
 using GrayDuckMail.Web.Models;
 using GrayDuckMail.Web.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
@@ -79,7 +80,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (discussionList == null)
             {
-                logger.Error("Could not find discussion list with ID = {0}", discussionListID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindDiscussionList, discussionListID));
                 return View("Error");
             }
 
@@ -102,7 +103,7 @@ namespace GrayDuckMail.Web.Controllers
         {
             if (formInput == null)
             {
-                logger.Error("Form input was malformed or missing for /List/Edit");
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/List/Edit"));
                 return View("Error");
             }
 
@@ -110,7 +111,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (discussionList == null)
             {
-                logger.Error("Could not find an existing discussion list with ID {0} to edit.", formInput.ID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindDiscussionList, formInput.ID));
                 return View("Error");
             }
 
@@ -141,7 +142,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (discussionList == null)
             {
-                logger.Error("Could not find discussion list with ID = {0}", discussionListID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindDiscussionList, discussionListID));
                 return View("Error");
             }
 
@@ -165,7 +166,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (discussionList == null)
             {
-                logger.Error("Could not find discussion list with ID = {0}", discussionListID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindDiscussionList, discussionListID));
                 return View("Error");
             }
 
@@ -186,7 +187,7 @@ namespace GrayDuckMail.Web.Controllers
         {
             if (formInput == null)
             {
-                logger.Error("Form input was malformed or missing for /List/Create");
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/List/Create"));
                 return View("Error");
             }
 
@@ -227,7 +228,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if (discussionList == null)
             {
-                logger.Error("Could not find discussion list with ID = {0}", discussionListID);
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindDiscussionList, discussionListID));
                 return View("Error");
             }
 
@@ -261,7 +262,7 @@ namespace GrayDuckMail.Web.Controllers
                 {
                     if (subscription == null)
                     {
-                        logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
+                        logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AssigningContact, assignment.ContactID, formInput.DiscussionListID));
                         subscription = new ContactSubscription()
                         {
                             ContactID = assignment.ContactID,
@@ -272,12 +273,12 @@ namespace GrayDuckMail.Web.Controllers
                     }
                     if (subscription.Status == SubscriptionStatus.Requested)
                     {
-                        logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
+                        logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AssigningContact, assignment.ContactID, formInput.DiscussionListID));
                         subscription.Status = SubscriptionStatus.Subscribed;
                     }
                     else if (subscription.Status == SubscriptionStatus.Denied)
                     {
-                        logger.Debug("Assigning Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
+                        logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AssigningContact, assignment.ContactID, formInput.DiscussionListID));
                         subscription.Status = SubscriptionStatus.Subscribed;
                     }
                 }
@@ -285,14 +286,14 @@ namespace GrayDuckMail.Web.Controllers
                 {
                     if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status) && subscription.Contact.Activated)
                     {
-                        logger.Debug("Removing Contact {0} to Discussion List {1}.", assignment.ContactID, formInput.DiscussionListID);
+                        logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnassigningContact, assignment.ContactID, formInput.DiscussionListID));
 
                         subscription.Status = SubscriptionStatus.Denied;
                     }
                 }
             }
 
-            logger.Info("Saving assignments.");
+            logger.Info(LanguageHelper.GetValue(ResourceName.Logger_SavingAssignments));
             this.SqliteDatabase.SaveChanges();
 
             return RedirectToAction("Index");
@@ -314,7 +315,7 @@ namespace GrayDuckMail.Web.Controllers
 
             if(discussionList != null)
             {
-                logger.Info("Sending a test Owner Notification email to discussion list {0}.", discussionList.Name);
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingTest, discussionList.Name));
 
                 SharedMemory.AddEmail(EmailDefinition.CreateOwnerNotification(discussionList, ownerContact));
                 
@@ -417,7 +418,7 @@ namespace GrayDuckMail.Web.Controllers
 
                 if (this.UseFuzzySearch)
                 {
-                    logger.Info("Performing fuzzy search: {0}", searchTerm);
+                    logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_PerformingFuzzySearch, searchTerm));
 
                     messages = this.SqliteDatabase.Messages
                     .Where(message => message.DiscussionListID == discussionListID)
