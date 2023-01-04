@@ -41,6 +41,9 @@ namespace GrayDuckMail.Common
         /// <summary> The base URL to use when constructing externally accessable unsubscribe links. </summary>
         private static Uri unsubscribeUri;
 
+        /// <summary> The secret token used for creating a secure unsubscribe link. </summary>
+        private static string hashSecret = string.Empty;
+
         #endregion
 
         #region Properties
@@ -164,16 +167,20 @@ namespace GrayDuckMail.Common
         #region Methods
 
         /// <summary> Configures an externally accessible unsubscribe link. </summary>
-        /// <param name="baseUrl"> The base URL. </param>
-        /// <param name="secure">  True if using HTTPS, false if not. </param>
-        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure)
+        /// <param name="baseUrl">    The base URL. </param>
+        /// <param name="secure">     True if using HTTPS, false if not. </param>
+        /// <param name="hashSecret">
+        ///     The secret token used for creating a secure unsubscribe link.
+        /// </param>
+        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure, string hashSecret)
         {
             var builder = new UriBuilder();
             builder.Scheme = secure ? "https" : "http";
             builder.Host = baseUrl;
            
             unsubscribeUri = builder.Uri;
-            usingUnsubscribeUri = true;           
+            usingUnsubscribeUri = true;
+            EmailHelper.hashSecret = hashSecret;
         }
 
         /// <summary> Fill the default HTML email template with values. </summary>
@@ -191,7 +198,7 @@ namespace GrayDuckMail.Common
             {
                 //Use an unsubscribe link that points to an externally accesible URL.
                 var customized = new UriBuilder(unsubscribeUri);
-                customized.Path = string.Format("Unsubscribe/{0}/{1}", contact.ID, discussionList.ID);
+                customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", contact.ID, discussionList.ID, HashHelper.Hash(contact.ID, discussionList.ID, hashSecret));
 
                 unsubscribe = customized.Uri.AbsoluteUri;
             }
@@ -301,7 +308,7 @@ namespace GrayDuckMail.Common
                         {
                             //Use an unsubscribe link that points to an externally accesible URL.
                             var customized = new UriBuilder(unsubscribeUri);
-                            customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
+                            customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", recipient.ID, discussionList.ID, HashHelper.Hash(recipient.ID, discussionList.ID, hashSecret));
 
                             techHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLUnsubscribeLinkMessage, discussionList.Name, customized.Uri.AbsoluteUri);
                         }
@@ -330,7 +337,7 @@ namespace GrayDuckMail.Common
                         {
                             //Use an unsubscribe link that points to an externally accesible URL.
                             var customized = new UriBuilder(unsubscribeUri);
-                            customized.Path = string.Format("Unsubscribe/{0}/{1}", recipient.ID, discussionList.ID);
+                            customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", recipient.ID, discussionList.ID, HashHelper.Hash(recipient.ID, discussionList.ID, hashSecret));
                             
                             techHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextUnsubscribeLinkMessage, discussionList.Name, customized.Uri.AbsoluteUri);
                         }

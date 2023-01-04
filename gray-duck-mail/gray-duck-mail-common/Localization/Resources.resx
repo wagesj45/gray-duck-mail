@@ -195,6 +195,9 @@
   <data name="Logger_FailedDeliveryDetected" xml:space="preserve">
     <value>A failed delivery was detected.</value>
   </data>
+  <data name="Logger_FailedHashMatch" xml:space="preserve">
+    <value>The given contact ID and discussion list ID did not form a valid hash with the secret token.</value>
+  </data>
   <data name="Logger_FailureDetectedUnknownRecipient" xml:space="preserve">
     <value>The bounced email contains a failure report, but an unknown recipient status group.</value>
   </data>
