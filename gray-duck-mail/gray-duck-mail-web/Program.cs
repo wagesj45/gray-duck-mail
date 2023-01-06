@@ -31,7 +31,6 @@ namespace GrayDuckMail.Web
         /// <param name="args"> An array of command-line argument strings. </param>
         public static void Main(string[] args)
         {
-            HashHelper.Hash(1, 1, "ABCD");
             LanguageHelper.SetLanguage(DockerEnvironmentVariables.Language.Name);
 
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_StartingApplication));

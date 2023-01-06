@@ -44,8 +44,9 @@ Properties
 | ![Public property]![Static member] | [RateLimitRoundWaitTime][13] | Gets the time between rounds sending email messages.                                                                                                                                        |
 | ![Public property]![Static member] | [WebExternalURL][14]         | Gets a URL used when creating an unsubscribe link.                                                                                                                                          |
 | ![Public property]![Static member] | [WebOnly][15]                | Gets a value that if set, only the web interface will be initialized. [Background worker threads][16] will not be initialized.                                                              |
-| ![Public property]![Static member] | [WebUnsubscribe][17]         | Gets a value indicating whether the an externally accessable unsubscription link is supported. If set to true, messages will replace the unsubscribe link with a link pointing toward [!:]. |
-| ![Public property]![Static member] | [WebUseHTTPS][18]            | Gets a value indicating whether the an externally accessable unsubscription link should assume HTTPS transport.                                                                             |
+| ![Public property]![Static member] | [WebSecret][17]              | Gets the web secret.                                                                                                                                                                        |
+| ![Public property]![Static member] | [WebUnsubscribe][18]         | Gets a value indicating whether the an externally accessable unsubscription link is supported. If set to true, messages will replace the unsubscribe link with a link pointing toward [!:]. |
+| ![Public property]![Static member] | [WebUseHTTPS][19]            | Gets a value indicating whether the an externally accessable unsubscription link should assume HTTPS transport.                                                                             |
 
 
 See Also
@@ -55,7 +56,7 @@ See Also
 [GrayDuckMail.Web Namespace][2]  
 
 #### Other Resources
-[https://docs.docker.com/compose/environment-variables/][19]  
+[https://docs.docker.com/compose/environment-variables/][20]  
 
 [1]: https://docs.microsoft.com/dotnet/api/system.object
 [2]: ../README.md
@@ -73,9 +74,10 @@ See Also
 [14]: WebExternalURL.md
 [15]: WebOnly.md
 [16]: https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.backgroundservice
-[17]: WebUnsubscribe.md
-[18]: WebUseHTTPS.md
-[19]: https://docs.docker.com/compose/environment-variables/
+[17]: WebSecret.md
+[18]: WebUnsubscribe.md
+[19]: WebUseHTTPS.md
+[20]: https://docs.docker.com/compose/environment-variables/
 [Private method]: ../../icons/privmethod.gif "Private method"
 [Static member]: ../../icons/static.gif "Static member"
 [Public property]: ../../icons/pubproperty.svg "Public property"

@@ -124,7 +124,7 @@
                    file="GrayDuckMail.Common/EmailHelper/DefaultEmailTemplate.md"/>
             <topic id="P:GrayDuckMail.Common.EmailHelper.UsingUnsubscribeUri"
                    file="GrayDuckMail.Common/EmailHelper/UsingUnsubscribeUri.md"/>
-            <topic id="M:GrayDuckMail.Common.EmailHelper.ConfigureUnsubscribeLink(System.String,System.Boolean)"
+            <topic id="M:GrayDuckMail.Common.EmailHelper.ConfigureUnsubscribeLink(System.String,System.Boolean,System.String)"
                    file="GrayDuckMail.Common/EmailHelper/ConfigureUnsubscribeLink.md"/>
             <topic id="M:GrayDuckMail.Common.EmailHelper.FillDefaultTemplate(System.String,System.String,System.String,System.String,GrayDuckMail.Common.Database.DiscussionList,GrayDuckMail.Common.Database.Contact)"
                    file="GrayDuckMail.Common/EmailHelper/FillDefaultTemplate.md"/>
@@ -187,6 +187,16 @@
                    file="GrayDuckMail.Common/EnumerationHelper/GetEnumerationValue__1.md"/>
             <topic id="M:GrayDuckMail.Common.EnumerationHelper.GetEnumerationValue``1(System.String)"
                    file="GrayDuckMail.Common/EnumerationHelper/GetEnumerationValue__1_1.md"/>
+         </topic>
+         <topic id="T:GrayDuckMail.Common.HashHelper"
+                file="GrayDuckMail.Common/HashHelper/README.md"
+                title="HashHelper">
+            <topic id="M:GrayDuckMail.Common.HashHelper.#cctor"
+                   file="GrayDuckMail.Common/HashHelper/_cctor.md"/>
+            <topic id="M:GrayDuckMail.Common.HashHelper.CheckHash(System.Int32,System.Int32,System.String,System.String)"
+                   file="GrayDuckMail.Common/HashHelper/CheckHash.md"/>
+            <topic id="M:GrayDuckMail.Common.HashHelper.Hash(System.Int32,System.Int32,System.String)"
+                   file="GrayDuckMail.Common/HashHelper/Hash.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Common.HTMLCleaner"
                 file="GrayDuckMail.Common/HTMLCleaner/README.md"
@@ -579,6 +589,8 @@
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/WebExternalURL.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebOnly"
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/WebOnly.md"/>
+            <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebSecret"
+                   file="GrayDuckMail.Web/DockerEnvironmentVariables/WebSecret.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebUnsubscribe"
                    file="GrayDuckMail.Web/DockerEnvironmentVariables/WebUnsubscribe.md"/>
             <topic id="P:GrayDuckMail.Web.DockerEnvironmentVariables.WebUseHTTPS"
@@ -725,7 +737,7 @@
                    file="GrayDuckMail.Web.Controllers/ExternalController/_cctor.md"/>
             <topic id="M:GrayDuckMail.Web.Controllers.ExternalController.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)"
                    file="GrayDuckMail.Web.Controllers/ExternalController/_ctor.md"/>
-            <topic id="M:GrayDuckMail.Web.Controllers.ExternalController.Unsubscribe(System.Int32,System.Int32)"
+            <topic id="M:GrayDuckMail.Web.Controllers.ExternalController.Unsubscribe(System.Int32,System.Int32,System.String)"
                    file="GrayDuckMail.Web.Controllers/ExternalController/Unsubscribe.md"/>
          </topic>
          <topic id="T:GrayDuckMail.Web.Controllers.HomeController"
