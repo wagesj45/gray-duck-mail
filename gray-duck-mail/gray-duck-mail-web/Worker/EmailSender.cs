@@ -46,7 +46,7 @@ namespace GrayDuckMail.Web.Worker
             //Configure Email Unsubscribe Link
             if (DockerEnvironmentVariables.WebUnsubscribe)
             {
-                EmailHelper.ConfigureUnsubscribeLink(DockerEnvironmentVariables.WebExternalURL, DockerEnvironmentVariables.WebUseHTTPS);
+                EmailHelper.ConfigureUnsubscribeLink(DockerEnvironmentVariables.WebExternalURL, DockerEnvironmentVariables.WebUseHTTPS, DockerEnvironmentVariables.WebSecret);
             }
 
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningSenderLoop));

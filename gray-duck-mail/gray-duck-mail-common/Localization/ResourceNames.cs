@@ -59,6 +59,8 @@ namespace GrayDuckMail.Common.Localization
 				Logger_EmptyDiscussionList,
 		/// <summary> A failed delivery was detected. </summary>
 				Logger_FailedDeliveryDetected,
+		/// <summary> The given contact ID and discussion list ID did not form a valid hash with the secret token. </summary>
+				Logger_FailedHashMatch,
 		/// <summary> The bounced email contains a failure report, but an unknown recipient status group. </summary>
 				Logger_FailureDetectedUnknownRecipient,
 		/// <summary> Fetching email defintion from queue. </summary>

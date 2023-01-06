@@ -174,6 +174,28 @@ namespace GrayDuckMail.Web
             return LanguageHelper.GetDefaultLanguage();
         });
 
+        /// <summary> The docker environment variable for <see cref="WebSecret"/>. </summary>
+        private static Lazy<string> envWebSecret = new Lazy<string>(() =>
+        {
+            var webSecret = Environment.GetEnvironmentVariable("WEB_SECRET");
+
+            if(string.IsNullOrWhiteSpace(webSecret))
+            {
+                // If the web secret token is blank, generate a new one
+                // and set the value.
+
+                webSecret = Guid.NewGuid().ToString();
+                Environment.SetEnvironmentVariable("WEB_SECRET", webSecret);
+            }
+
+            if(!string.IsNullOrWhiteSpace(webSecret))
+            {
+                return webSecret;
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(webSecret));
+        });
+
         #endregion
 
         #region Properties
@@ -291,6 +313,13 @@ namespace GrayDuckMail.Web
         public static Language Language
         {
             get => envLanguage.Value;
+        }
+
+        /// <summary> Gets the web secret. </summary>
+        /// <value> The web secret. </value>
+        public static string WebSecret
+        {
+            get => envWebSecret.Value;
         }
 
         #endregion

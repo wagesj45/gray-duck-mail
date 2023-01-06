@@ -11,7 +11,8 @@ Syntax
 ```csharp
 public static void ConfigureUnsubscribeLink(
 	string baseUrl,
-	bool secure
+	bool secure,
+	string hashSecret
 )
 ```
 
@@ -24,6 +25,10 @@ Type: [System.String][2]
 ##### *secure*
 Type: [System.Boolean][3]  
  True if using HTTPS, false if not.
+
+##### *hashSecret*
+Type: [System.String][2]  
+ The secret token used for creating a secure unsubscribe link.
 
 
 See Also

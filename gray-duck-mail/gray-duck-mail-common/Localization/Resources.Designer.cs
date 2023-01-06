@@ -295,6 +295,15 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The given contact ID and discussion list ID did not form a valid hash with the secret token..
+        /// </summary>
+        internal static string Logger_FailedHashMatch {
+            get {
+                return ResourceManager.GetString("Logger_FailedHashMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The bounced email contains a failure report, but an unknown recipient status group..
         /// </summary>
         internal static string Logger_FailureDetectedUnknownRecipient {

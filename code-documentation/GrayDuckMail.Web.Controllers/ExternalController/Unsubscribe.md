@@ -11,7 +11,8 @@ Syntax
 ```csharp
 public IActionResult Unsubscribe(
 	int contactID,
-	int discussionListID
+	int discussionListID,
+	string hash
 )
 ```
 
@@ -25,8 +26,12 @@ Type: [System.Int32][2]
 Type: [System.Int32][2]  
  Identifier for the discussion list.
 
+##### *hash*
+Type: [System.String][3]  
+ The hash of the web server secret token, the contact ID, and the discussion list ID.
+
 #### Return Value
-Type: [IActionResult][3]  
+Type: [IActionResult][4]  
  A response to return to the caller. 
 
 Remarks
@@ -37,10 +42,13 @@ See Also
 --------
 
 #### Reference
-[ExternalController Class][4]  
+[ExternalController Class][5]  
 [GrayDuckMail.Web.Controllers Namespace][1]  
+[DockerEnvironmentVariables.WebSecret][6]  
 
 [1]: ../README.md
 [2]: https://docs.microsoft.com/dotnet/api/system.int32
-[3]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult
-[4]: README.md
+[3]: https://docs.microsoft.com/dotnet/api/system.string
+[4]: https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult
+[5]: README.md
+[6]: ../../GrayDuckMail.Web/DockerEnvironmentVariables/WebSecret.md

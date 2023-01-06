@@ -19,11 +19,13 @@ Gray Duck Mail is written in C# and is powered by [ASP.NET Core 3.1 MVC](https:/
       - [`RATE_LIMIT_ROUND_WAIT_TIME`](#rate_limit_round_wait_time)
       - [`FETCH_TIME`](#fetch_time)
       - [`LOG_LEVEL`](#log_level)
+      - [`LANGUAGE`](#language)
       - [`MIN_SEARCH_SCORE`](#min_search_score)
       - [`WEB_ONLY`](#web_only)
       - [`WEB_UNSUBSCRIBE`](#web_unsubscribe)
       - [`WEB_USE_HTTPS`](#web_use_https)
       - [`WEB_EXTERNAL_URL`](#web_external_url)
+      - [`WEB_SECRET`](#web_secret)
       - [`ASPNETCORE_URLS`](#aspnetcore_urls)
    5. [Security Considerations](#security-considerations)
 2. [Web Interface](#web-interface)
@@ -135,6 +137,10 @@ The following values are supported:
 #### `WEB_EXTERNAL_URL`
 
 The host name used when generating an externally accessible unsubscribe link. The default value is a [System.String](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1) set to `example.com`.
+
+#### `WEB_SECRET`
+
+A unique string used when creating hash codes for the unsubscribe link appended to email messages. This string can be anything you choose. The hash is created by performing a SHA256 hash on the `ContactID`, `DiscussionListID`, and `WEB_SECRET`. This prevents outside actors from brute forcing the unsubscribe link maliciously. There is no default value for the [System.String](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=netcore-3.1), however if it is not set, the system will set it to the string representation of a random [GUID](https://learn.microsoft.com/en-us/dotnet/api/system.guid?view=netcore-3.1).
 
 #### `ASPNETCORE_URLS`
 

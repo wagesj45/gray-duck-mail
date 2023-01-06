@@ -1,4 +1,5 @@
-﻿using GrayDuckMail.Common.Database;
+﻿using GrayDuckMail.Common;
+using GrayDuckMail.Common.Database;
 using GrayDuckMail.Common.Localization;
 using GrayDuckMail.Web.Models;
 using GrayDuckMail.Web.Models.Forms;
@@ -48,11 +49,13 @@ namespace GrayDuckMail.Web.Controllers
         /// </remarks>
         /// <param name="contactID">        Identifier for the contact. </param>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>
+        /// <param name="hash">             The hash of the web server secret token, the contact ID, and the discussion list ID. </param>
         /// <returns> A response to return to the caller. </returns>
-        [Route("/Unsubscribe/{contactID}/{discussionListID}")]
+        /// <seealso cref="DockerEnvironmentVariables.WebSecret"/>
+        [Route("/Unsubscribe/{contactID}/{discussionListID}/{hash}")]
         [ExternalAccess]
         [ViewLayout("_BlankLayout")]
-        public IActionResult Unsubscribe(int contactID, int discussionListID)
+        public IActionResult Unsubscribe(int contactID, int discussionListID, string hash)
         {
             var success = false;
             var discussionList = this.SqliteDatabase.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionListID).SingleOrDefault();
@@ -72,6 +75,12 @@ namespace GrayDuckMail.Web.Controllers
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_InvalidUnsubscriptionContact, contactID));
             }
 
+            var hashMatch = HashHelper.CheckHash(contactID, discussionListID, DockerEnvironmentVariables.WebSecret, hash);
+            if (!hashMatch)
+            {
+                logger.Error(LanguageHelper.GetValue(ResourceName.Logger_FailedHashMatch));
+            }
+
             if (subscription == null)
             {
                 logger.Error(LanguageHelper.GetValue(ResourceName.Logger_InvalidUnsubscriptionSubscription));
@@ -81,7 +90,11 @@ namespace GrayDuckMail.Web.Controllers
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_InvalidUnsubscriptionSubscriptionStatus, contactID, discussionListID, subscription.Status));
             }
 
-            if (discussionList != null && contact != null && subscription.Status == SubscriptionStatus.Subscribed)
+            if (discussionList != null 
+                && contact != null 
+                && subscription != null
+                && subscription.Status == SubscriptionStatus.Subscribed
+                && hashMatch)
             {
                 logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserUnsubscribing, subscription.Contact.Name, discussionList.Name));
                 subscription.Status = SubscriptionStatus.Unsubscribed;
