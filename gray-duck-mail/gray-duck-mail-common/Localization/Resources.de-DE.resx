@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,431 +118,434 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationName" xml:space="preserve">
-    <value>Graue Entenpost</value>
+    <value>Gray Duck Mail</value>
   </data>
   <data name="Exception_DBNotCreated" xml:space="preserve">
-    <value>Es konnte keine Datenbankdatei erstellt werden.</value>
+    <value>Konnte keine Datenbankdatei erstellen.</value>
   </data>
   <data name="Exception_FormatNotDetermined" xml:space="preserve">
     <value>Konnte die Formatierung der Nachricht nicht bestimmen.</value>
   </data>
   <data name="Exception_MalformedDatabase" xml:space="preserve">
-    <value>Das Datei -Upload befand sich nicht im richtigen SQLite -Dateiformat.</value>
+    <value>Der Datei-Upload erfolgte nicht im korrekten SQLite-Dateiformat.</value>
   </data>
   <data name="Exception_MalformedUpload" xml:space="preserve">
-    <value>Die hochgeladene Datei fehlt oder wurde missgebildet.</value>
+    <value>Die hochgeladene Datei fehlt oder wurde falsch formatiert.</value>
   </data>
   <data name="Exception_NoSearchTerm" xml:space="preserve">
-    <value>Es wurde kein Suchbegriff bereitgestellt.</value>
+    <value>Es wurde kein Suchbegriff angegeben.</value>
   </data>
   <data name="Exception_PropertySelectorResolutionError" xml:space="preserve">
-    <value>Der Eigenschaftswählte war nicht in der Lage, einen Eigenschaftsnamen zu lösen.</value>
+    <value>Der Eigenschaftsselektor konnte keinen Eigenschaftsnamen aufgelösen.</value>
   </data>
   <data name="Logger_AddingEmailDefinition" xml:space="preserve">
-    <value>Hinzufügen von E -Mail -Definition zur Warteschlange.</value>
+    <value>Hinzufügen einer E-Mail-Definition zur Warteschlange.</value>
   </data>
   <data name="Logger_AppendUsingSSL" xml:space="preserve">
-    <value>mit SSL</value>
+    <value> unter Verwendung von SSL</value>
   </data>
   <data name="Logger_ApplicationStopped" xml:space="preserve">
     <value>Anwendung gestoppt.</value>
   </data>
   <data name="Logger_BeginningFetchLoop" xml:space="preserve">
-    <value>Beginn der E -Mail -Fetch -Schleife.</value>
+    <value>Beginn der Abrufschleife für E-Mails.</value>
   </data>
   <data name="Logger_BeginningOnboarderLoop" xml:space="preserve">
-    <value>Beginn der Onboarding -Schleife.</value>
+    <value>Beginn der Onboarding-Schleife.</value>
   </data>
   <data name="Logger_BeginningSenderLoop" xml:space="preserve">
-    <value>E -Mail -Absenderschleife beginnen.</value>
+    <value>Beginn der E-Mail-Sendeschleife.</value>
   </data>
   <data name="Logger_CommittingChangesToDatabase" xml:space="preserve">
-    <value>Änderungen an der Datenbank festlegen.</value>
+    <value>Änderungen an die Datenbank übertragen.</value>
   </data>
   <data name="Logger_CreatingEmailWrapper" xml:space="preserve">
-    <value>Erstellen von E -Mail -Wrapper -Objekt.</value>
+    <value>Erzeugung eines E-Mail-Wrapper-Objekts.</value>
   </data>
   <data name="Logger_DeliveryStatusDetected" xml:space="preserve">
-    <value>Nachricht ist eine mehrteilige Nachricht mit mindestens einem Abschnitt "Zustellungsstatus".</value>
+    <value>Die Nachricht ist eine mehrteilige Nachricht mit mindestens einem 'delivery-status' Abschnitt.</value>
   </data>
   <data name="Logger_Disconnecting" xml:space="preserve">
-    <value>Trennen.</value>
+    <value>Verbindungsunterbrechung.</value>
   </data>
   <data name="Logger_DisposingIMAP" xml:space="preserve">
-    <value>IMAP -Client entsorgen.</value>
+    <value>IMAP-Client wird entsorgt.</value>
   </data>
   <data name="Logger_DisposingPOP3" xml:space="preserve">
-    <value>POP3 -Kunde zur Verfügung.</value>
+    <value>POP3-Client wird entsorgt.</value>
   </data>
   <data name="Logger_DisposingWrapper" xml:space="preserve">
-    <value>Entsorgung des Client -Wrapper -Objekts.</value>
+    <value>Beseitigung des Client-Wrapper-Objekts.</value>
   </data>
   <data name="Logger_EmailDefinitionFetchFailure" xml:space="preserve">
-    <value>Die E -Mail -Definition kann nicht aus der Warteschlange abgeholt werden.</value>
+    <value>Konnte die E-Mail-Definition nicht aus der Warteschlange abrufen.</value>
   </data>
   <data name="Logger_EmailDefinitionFound" xml:space="preserve">
-    <value>Fand eine E -Mail -Definition in der gemeinsamen Speicherwarteschlange.</value>
+    <value>Fand eine E-Mail-Definition in der Warteschlange des Shared-Memory.</value>
   </data>
   <data name="Logger_EmailFetcherShutdown" xml:space="preserve">
-    <value>E -Mail -Fetcher -Herunterfahren.</value>
+    <value>Email-Fetcher wird heruntergefahren.</value>
   </data>
   <data name="Logger_EmailSenderShutDown" xml:space="preserve">
-    <value>E -Mail -Absender schließt.</value>
+    <value>E-Mail-Sender wird heruntergefahren.</value>
   </data>
   <data name="Logger_EmptyDiscussionList" xml:space="preserve">
     <value>Die Diskussionsliste ist leer.</value>
   </data>
   <data name="Logger_FailedDeliveryDetected" xml:space="preserve">
-    <value>Eine fehlgeschlagene Lieferung wurde festgestellt.</value>
+    <value>Eine fehlgeschlagene Zustellung wurde festgestellt.</value>
+  </data>
+  <data name="Logger_FailedHashMatch" xml:space="preserve">
+    <value>Die angegebene Kontakt-ID und Diskussionslisten-ID bildeten keinen gültigen Hash mit dem geheimen Token.</value>
   </data>
   <data name="Logger_FailureDetectedUnknownRecipient" xml:space="preserve">
-    <value>Die verprallte E -Mail enthält einen Fehlerbericht, aber eine unbekannte Empfängerstatusgruppe.</value>
+    <value>Die zurückgesendete E-Mail enthält einen Fehlerbericht, aber eine unbekannte Empfängerstatusgruppe.</value>
   </data>
   <data name="Logger_FetchingEmailDefinition" xml:space="preserve">
-    <value>E -Mail -Definition aus der Warteschlange abrufen.</value>
+    <value>Abruf der E-Mail-Definition aus der Warteschlange.</value>
   </data>
   <data name="Logger_FilteringBouncedMessages" xml:space="preserve">
-    <value>Filterung abprallte Nachrichten.</value>
+    <value>Filtern von abgelehnten Nachrichten.</value>
   </data>
   <data name="Logger_Format_AddressNotActive" xml:space="preserve">
-    <value>Die E -Mail -Adresse für {0} scheint nicht mehr aktiv zu sein.</value>
+    <value>Die E-Mail-Adresse für {0} scheint nicht mehr aktiv zu sein.</value>
   </data>
   <data name="Logger_Format_AssigningContact" xml:space="preserve">
-    <value>Zuweisen von Kontakt {0} der Diskussionsliste {1}.</value>
+    <value>Zuordnung des Kontakts {0} zur Diskussionsliste {1}.</value>
   </data>
   <data name="Logger_Format_AssigningMimeMessageIndex" xml:space="preserve">
-    <value>Zuweisen von Index {0} an {1}.</value>
+    <value>Zuweisung des Index {0} an {1}.</value>
   </data>
   <data name="Logger_Format_AuthenticatingAs" xml:space="preserve">
     <value>Authentifizierung als {0}.</value>
   </data>
   <data name="Logger_Format_AuthenticatingWith" xml:space="preserve">
-    <value>Authentifizierung mit {0}: {1}.</value>
+    <value>Authentifizierung mit {0}:{1}.</value>
   </data>
   <data name="Logger_Format_ConnectingTo" xml:space="preserve">
-    <value>Verbindung zu {0}: {1}.</value>
+    <value>Verbindung zu {0}:{1}.</value>
   </data>
   <data name="Logger_Format_ConnectingToSSL" xml:space="preserve">
-    <value>Verbindung zu {0}: {1} {2}</value>
+    <value>Verbindung zu {0}:{1}{2}</value>
   </data>
   <data name="Logger_Format_CouldNotFindContact" xml:space="preserve">
-    <value>Konnte keinen Kontakt mit id = {0} finden.</value>
+    <value>Konnte keinen Kontakt mit ID = {0} finden.</value>
   </data>
   <data name="Logger_Format_CouldNotFindDiscussionList" xml:space="preserve">
-    <value>Konnte keine Diskussionsliste mit id = {0} finden</value>
+    <value>Konnte Diskussionsliste mit ID = {0} nicht finden</value>
   </data>
   <data name="Logger_Format_CreatingDB" xml:space="preserve">
-    <value>Erstellen von DB -Datei unter {0}.</value>
+    <value>Erzeuge db-Datei in {0}.</value>
   </data>
   <data name="Logger_Format_DBCreated" xml:space="preserve">
-    <value>Datenbankdatei erstellt bei {0}.</value>
+    <value>Datenbankdatei erstellt in {0}.</value>
   </data>
   <data name="Logger_Format_DBNotCreated" xml:space="preserve">
-    <value>Es konnte keine Datenbankdatei unter {0} erstellt werden.</value>
+    <value>Konnte Datenbankdatei in {0} nicht erstellen.</value>
   </data>
   <data name="Logger_Format_DeletingMessage" xml:space="preserve">
-    <value>Meldung löschen {0}.</value>
+    <value>Löschen der Meldung {0}.</value>
   </data>
   <data name="Logger_Format_EstablishingDatabaseContext" xml:space="preserve">
-    <value>Erstellen von Datenbankkontext mit {0}.</value>
+    <value>Bereitstellung des Datenbankkontextes mit {0}.</value>
   </data>
   <data name="Logger_Format_FailureStatusGroupsLine" xml:space="preserve">
-    <value>- {0}: {1}</value>
+    <value>-- {0}: {1}</value>
   </data>
   <data name="Logger_Format_FetchLoopComplete" xml:space="preserve">
-    <value>Loop abschließen. Warten {0}.</value>
+    <value>Fetch-Schleife abgeschlossen. Wartet {0}.</value>
   </data>
   <data name="Logger_Format_FilteringCount" xml:space="preserve">
-    <value>Filterung {0} Nachrichten.</value>
+    <value>Filtern von {0} Meldungen.</value>
   </data>
   <data name="Logger_Format_FilteringMessage" xml:space="preserve">
-    <value>Filtermeldung {0}.</value>
+    <value>Filtern der Meldung {0}.</value>
   </data>
   <data name="Logger_Format_FilteringMessages" xml:space="preserve">
-    <value>Filtermeldungen für {0}.</value>
+    <value>Filtern von Meldungen für {0}.</value>
   </data>
   <data name="Logger_Format_FilterMatch" xml:space="preserve">
-    <value>Nachricht {0} stimmt mit den Filterkriterien überein.</value>
+    <value>Meldung {0} entspricht den Filterkriterien.</value>
   </data>
   <data name="Logger_Format_FormInputMalformed" xml:space="preserve">
-    <value>Die Formeingabe wurde für {0} fehlerhaft oder fehlend.</value>
+    <value>Formulareingabe war fehlerhaft oder fehlte für {0}.</value>
   </data>
   <data name="Logger_Format_ImportingExistingDatabase" xml:space="preserve">
-    <value>Importieren vorhandener Datenbank {0}.</value>
+    <value>Importieren der vorhandenen Datenbank {0}.</value>
   </data>
   <data name="Logger_Format_InvalidUnsubscriptionContact" xml:space="preserve">
-    <value>Ungültige Anforderung für nicht existierende nicht existierende nicht existierende Kontakte mit ID {0}.</value>
+    <value>Ungültige Abmeldeanfrage für nicht existierenden Kontakt mit ID {0}.</value>
   </data>
   <data name="Logger_Format_InvalidUnsubscriptionDiscussionList" xml:space="preserve">
-    <value>Ungültige Anforderung für nicht existierende Diskussionen mit ID {0}.</value>
+    <value>Ungültige Abmeldungsanfrage für nicht existierende Diskussionsliste mit ID {0}.</value>
   </data>
   <data name="Logger_Format_InvalidUnsubscriptionSubscriptionStatus" xml:space="preserve">
-    <value>Ungültiger UNSUBSUBSCHRIFT -STATUS für den Kontakt mit ID {0} und Diskussionsliste {1} aufgrund des Abonnementstatus {2}.</value>
+    <value>Ungültiger Abmeldestatus für Kontakt mit ID {0} und Diskussionsliste {1} aufgrund des Abonnementstatus {2}.</value>
   </data>
   <data name="Logger_Format_LoadingAssembly" xml:space="preserve">
-    <value>Laden der Montage {0}.</value>
+    <value>Lade Zusammenstellung {0}.</value>
   </data>
   <data name="Logger_Format_MessageProcessed" xml:space="preserve">
-    <value>Nachricht {0} (index {1}) verarbeitet. Markiert zum Löschen vom Server.</value>
+    <value>Nachricht {0} (Index {1}) verarbeitet. Zum Löschen auf dem Server vorgemerkt.</value>
   </data>
   <data name="Logger_Format_OnboarderLoopComplete" xml:space="preserve">
-    <value>Onboarding -Schleife vollständig. Warten {0}.</value>
+    <value>Onboarding-Schleife abgeschlossen. Wartet {0}.</value>
   </data>
   <data name="Logger_Format_PerformingFuzzySearch" xml:space="preserve">
-    <value>Fuzzy -Suche durchführen: {0}</value>
+    <value>Durchführung einer unscharfen Suche: {0}</value>
   </data>
   <data name="Logger_Format_ProcessingList" xml:space="preserve">
     <value>Verarbeitungsliste {0}.</value>
   </data>
   <data name="Logger_Format_ProcessingMessages" xml:space="preserve">
-    <value>Verarbeitung {0} Nachrichten.</value>
+    <value>Bearbeitung von {0} Meldungen.</value>
   </data>
   <data name="Logger_Format_ProcessingSubscriptionMessage" xml:space="preserve">
-    <value>Verarbeitung von Abonnementnachricht von {0}.</value>
+    <value>Verarbeitung der Abonnementmeldung von {0}.</value>
   </data>
   <data name="Logger_Format_SenderLoopComplete" xml:space="preserve">
-    <value>E -Mail -Absenderschleife abgeschlossen. Warten {0}.</value>
+    <value>E-Mail-Senderschleife abgeschlossen. Wartet {0}.</value>
   </data>
   <data name="Logger_Format_SendingOnboardingEmail" xml:space="preserve">
-    <value>Senden von Onboarding -E -Mails an {0} ({1}).</value>
+    <value>Senden einer Willkommens-E-Mail an {0} ({1}).</value>
   </data>
   <data name="Logger_Format_SendingOwnerNotification" xml:space="preserve">
-    <value>Senden einer Benachrichtigung an den Diskussionslistenbesitzer, dass {0} ({1}) den Zugriff auf {2} angefordert hat.</value>
+    <value>Senden einer Benachrichtigung an den Eigentümer der Diskussionsliste, dass {0} ({1}) Zugriff auf {2} beantragt hat.</value>
   </data>
   <data name="Logger_Format_SendingSubscriptionConfirmation" xml:space="preserve">
-    <value>Senden der E -Mail der Abonnementbestätigung an {0} ({1}).</value>
+    <value>Senden der E-Mail zur Bestätigung des Abonnements an {0} ({1}).</value>
   </data>
   <data name="Logger_Format_SendingTest" xml:space="preserve">
-    <value>Senden eines Testbesitzer -Benachrichtigungs -E -Mail an die Diskussionsliste {0}.</value>
+    <value>Senden einer Test-E-Mail zur Benachrichtigung des Eigentümers der Diskussionsliste {0}.</value>
   </data>
   <data name="Logger_Format_SendingUnsubscriptionConfirmation" xml:space="preserve">
-    <value>Senden der E -Mail der Abonnementbestätigung an {0} ({1}).</value>
+    <value>Senden der Abonnementbestätigungs-E-Mail an {0} ({1}).</value>
   </data>
   <data name="Logger_Format_ServingPage" xml:space="preserve">
-    <value>Servierseite '{0}'</value>
+    <value>Bereitstellung der Seite '{0}'</value>
   </data>
   <data name="Logger_Format_SettingActive" xml:space="preserve">
-    <value>Einstellung {0} (id {1}) als aktiv. Sie haben bestätigt, dass sie die E -Mail -Adresse kontrollieren, indem sie auf die E -Mail der Abonnementbestätigung antworten.</value>
+    <value>Setzen von {0} (ID {1}) als aktiv. Sie haben bestätigt, dass sie die E-Mail-Adresse kontrollieren, indem sie auf die E-Mail zur Bestätigung des Abonnements geantwortet haben.</value>
   </data>
   <data name="Logger_Format_TemplateProcessed" xml:space="preserve">
-    <value>E -Mail -Vorlage verarbeitet: {0}.</value>
+    <value>E-Mail-Vorlage verarbeitet: {0}.</value>
   </data>
   <data name="Logger_Format_UnassigningContact" xml:space="preserve">
-    <value>Entfernen Sie den Kontakt {0} zur Diskussionsliste {1}.</value>
+    <value>Entfernen des Kontakts {0} aus der Diskussionsliste {1}.</value>
   </data>
   <data name="Logger_Format_UnknownUserRequestedAccess" xml:space="preserve">
-    <value>Ein unbekannter Benutzer hat Zugriff auf {0} angefordert. Eine Warnung wird an den Alias des Eigentümeradresses gesendet.</value>
+    <value>Ein unbekannter Benutzer hat Zugriff auf {0} angefordert. Es wird eine Warnung an den Alias der Eigentümeradresse gesendet.</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorized" xml:space="preserve">
-    <value>Der Absender ist nicht anerkannt oder nicht autorisiert, um an {0} teilzunehmen. Wir werden es protokollieren und die Nachricht gelöscht werden.</value>
+    <value>Der Absender wird nicht erkannt oder ist nicht berechtigt, an {0} teilzunehmen. Wir protokollieren es und löschen die Nachricht.</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorizedDomainLine" xml:space="preserve">
-    <value>- {0}</value>
+    <value>-- {0}</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorizedEncoding" xml:space="preserve">
-    <value>Codierung: {0}</value>
+    <value>Encoding: {0}</value>
   </data>
   <data name="Logger_Format_UnrecognizedOrUnauthorizedFrom" xml:space="preserve">
     <value>Von: {0} ({1})</value>
   </data>
   <data name="Logger_Format_UnsubscribedBounce" xml:space="preserve">
-    <value>Eine abprallte E -Mail wurde für eine Adresse erhalten, die nicht {0} abonniert ist. Ignorieren Sie diese Nachricht.</value>
+    <value>Eine zurückgesendete E-Mail wurde für eine Adresse empfangen, die nicht bei {0} abonniert ist. Diese Nachricht wird ignoriert.</value>
   </data>
   <data name="Logger_Format_UserAlreadySubscribed" xml:space="preserve">
-    <value>{0}, der bereits {1} abonniert ist, hat erneut Zugriff angefordert. Ignorieren Sie diese Nachricht.</value>
+    <value>{0}, der bereits {1} abonniert hat, hat erneut Zugang beantragt. Diese Nachricht wird ignoriert.</value>
   </data>
   <data name="Logger_Format_UserPreviouslyDenied" xml:space="preserve">
-    <value>{0} hat Zugriff auf {1} angefordert, wurde jedoch zuvor abgelehnt. Ignorieren Sie diese Anfrage.</value>
+    <value>{0} hat den Zugriff auf {1} beantragt, wurde aber zuvor verweigert. Diese Anfrage wird ignoriert.</value>
   </data>
   <data name="Logger_Format_UserPreviouslySubscribed" xml:space="preserve">
-    <value>{0} hat Zugriff auf {1} angefordert. Da sie zuvor mit der Diskussionsliste in Verbindung gebracht wurden, werden sie abonniert.</value>
+    <value>{0} hat Zugriff auf {1} beantragt. Da sie zuvor mit der Diskussionsliste verbunden waren, werden sie abonniert.</value>
   </data>
   <data name="Logger_Format_UserSubscribing" xml:space="preserve">
     <value>Benutzer {0} abonniert {1}.</value>
   </data>
   <data name="Logger_Format_UserUnsubscribing" xml:space="preserve">
-    <value>Benutzer {0} Abmeldung von {1}.</value>
+    <value>Benutzer {0} meldet sich von {1} ab.</value>
   </data>
   <data name="Logger_Format_UsingCustomView" xml:space="preserve">
-    <value>Verwenden von benutzerdefiniertem Ansichtslayout: {0}</value>
+    <value>Benutzerdefiniertes Ansichtslayout verwenden: {0}</value>
   </data>
   <data name="Logger_FoundResources" xml:space="preserve">
-    <value>Fand die folgenden Ressourcennamen im Versammlungsmanifest:</value>
+    <value>Fand die folgenden Ressourcennamen im Assembly-Manifest:</value>
   </data>
   <data name="Logger_FoundResourcesLine" xml:space="preserve">
-    <value>- {0}</value>
+    <value>-- {0}</value>
   </data>
   <data name="Logger_GeneratingEmail" xml:space="preserve">
-    <value>E -Mail generieren.</value>
+    <value>Erzeugung einer E-Mail.</value>
   </data>
   <data name="Logger_GettingMessages" xml:space="preserve">
     <value>Nachrichten erhalten.</value>
   </data>
   <data name="Logger_InitializingControllerDatabase" xml:space="preserve">
-    <value>Initialisierung der Datenbank für Controller.</value>
+    <value>Initialisierung der Datenbank für den Controller.</value>
   </data>
   <data name="Logger_InitializingSharedMemory" xml:space="preserve">
-    <value>Initialisieren des gemeinsam genutzten Speicherobjekts über statischen Konstruktor.</value>
+    <value>Initialisierung des Shared-Memory-Objekts über den statischen Konstruktor.</value>
   </data>
   <data name="Logger_InvalidUnsubscriptionSubscription" xml:space="preserve">
-    <value>Ungültige Anforderung zur Schriftzahl von Unleitungen. Kein Abonnementstatus gefunden.</value>
+    <value>Ungültige Abbestellungsanfrage. Kein Abonnementstatus gefunden.</value>
   </data>
   <data name="Logger_LoadingHTMLTemplate" xml:space="preserve">
-    <value>Laden Sie die HTML -E -Mail -Vorlage für Haupth -HTML.</value>
+    <value>Laden der Haupt-HTML-E-Mail-Vorlage.</value>
   </data>
   <data name="Logger_MalformedEmailDefinition" xml:space="preserve">
-    <value>Erhielt eine missgebildete E -Mail -Definition.</value>
+    <value>Erhielt eine fehlerhafte EmailDefinition.</value>
   </data>
   <data name="Logger_MessageContainsHTML" xml:space="preserve">
-    <value>Message -Körper, der für HTML festgelegt wurde.</value>
+    <value>Nachrichtentext enthält HTML.</value>
   </data>
   <data name="Logger_MessageContainsPlainText" xml:space="preserve">
-    <value>Message -Körper, der entschlossen ist, einen einfachen Text zu enthalten.</value>
+    <value>Nachrichtentext enthält Plain Text.</value>
   </data>
   <data name="Logger_NoMessagesFound" xml:space="preserve">
     <value>Keine Nachrichten gefunden.</value>
   </data>
   <data name="Logger_NoOnboardingAssignments" xml:space="preserve">
-    <value>Keine frisch erstellten Aufgaben warten auf das Onboarding.</value>
+    <value>Keine neuen Zuordnungen, die auf Onboarding warten.</value>
   </data>
   <data name="Logger_OnboarderShutDown" xml:space="preserve">
-    <value>Onboarder herunterfahren.</value>
+    <value>Onboarder wird heruntergefahren.</value>
   </data>
   <data name="Logger_RegisteringServiceWorkers" xml:space="preserve">
-    <value>Registrierung von Dienstangestellten.</value>
+    <value>Registrierung von Dienstarbeitern.</value>
   </data>
   <data name="Logger_RelayingMessage" xml:space="preserve">
-    <value>Meldung an {0} ({1}) weitergeben</value>
+    <value>Weiterleitung der Nachricht an {0} ({1})</value>
   </data>
   <data name="Logger_RequestOnExternalPort" xml:space="preserve">
-    <value>Die Anfrage wird vom bestimmten externen Port bearbeitet. Anfrage Origin: {0}</value>
+    <value>Die Anfrage wird von dem angegebenen externen Port verarbeitet. Ursprung: {0}</value>
   </data>
   <data name="Logger_RequestOnInternalPort" xml:space="preserve">
-    <value>Die Anfrage wird vom bestimmten internen Port bearbeitet.</value>
+    <value>Die Anfrage wird von dem angegebenen internen Port verarbeitet.</value>
   </data>
   <data name="Logger_RequestOnUnknownPort" xml:space="preserve">
-    <value>Die Anfrage wird von einem unbekannten Port ({0})) verarbeitet. Der Docker -Container ist wahrscheinlich falsch konfiguriert. Remote Herkunft: {1}</value>
+    <value>Die Anfrage wird von einem unbekannten Port ({0})) verarbeitet. Der Docker-Container ist wahrscheinlich falsch konfiguriert. Ursprung: {1}</value>
   </data>
   <data name="Logger_RunningApplication" xml:space="preserve">
-    <value>Ausführungsanwendung.</value>
+    <value>Laufende Anwendung.</value>
   </data>
   <data name="Logger_SavingAssignments" xml:space="preserve">
-    <value>Aufträge sparen.</value>
+    <value>Zuordnungen speichern.</value>
   </data>
   <data name="Logger_SMTPNotConnected" xml:space="preserve">
-    <value>Der SMTP -Client ist nicht verbunden. Jetzt verbinden.</value>
+    <value>Der SMTP-Client ist nicht verbunden. Verbinde jetzt.</value>
   </data>
   <data name="Logger_StartingApplication" xml:space="preserve">
-    <value>Die Hauptanwendung starten.</value>
+    <value>Start der Hauptanwendung.</value>
   </data>
   <data name="Logger_StoppingApplication" xml:space="preserve">
     <value>Stoppen der Anwendung.</value>
   </data>
   <data name="Logger_TemplateInMemory" xml:space="preserve">
-    <value>E -Mail -Vorlage in den Speicher gelesen.</value>
+    <value>Einlesen der E-Mail-Vorlage in den Speicher.</value>
   </data>
   <data name="Logger_UnknownClientType" xml:space="preserve">
-    <value>Ein unbekannter Client -Typ wurde angefordert.</value>
+    <value>Ein unbekannter Client-Typ wurde angefordert.</value>
   </data>
   <data name="Logger_UsingIMAP" xml:space="preserve">
-    <value>Verwenden von IMAP -Client.</value>
+    <value>Verwende IMAP-Client.</value>
   </data>
   <data name="Logger_UsingPOP3" xml:space="preserve">
-    <value>Verwenden von Pop3 -Client.</value>
+    <value>Verwende POP3-Client.</value>
   </data>
   <data name="Mail_Format_HTMLUnsubscribeEmailMessage" xml:space="preserve">
-    <value>Diese Nachricht ist Teil der Diskussionsliste '{0}'. Sie können sich abmelden, indem Sie eine Nachricht an &lt;a href='MailTo: &lt;S1}'&gt; {1} &lt;/a&gt; senden</value>
+    <value>Diese Nachricht ist Teil der '{0}'-Diskussionsliste. Sie können sich abmelden, indem Sie eine beliebige Nachricht an &lt;a href='mailto:{1}'&gt;{1}&lt;/a&gt;</value>
   </data>
   <data name="Mail_Format_HTMLUnsubscribeLinkMessage" xml:space="preserve">
-    <value>Diese Nachricht ist Teil der Diskussionsliste '{0}'. Sie können sich abmelden, indem Sie hier klicken: &lt;a href='er1}'&gt; {1} &lt;/a&gt;</value>
+    <value>Diese Nachricht ist Teil der '{0}'-Diskussionsliste. Sie können sich abmelden, indem Sie hier klicken: &lt;a href='{1}'&gt;{1}&lt;/a&gt;</value>
   </data>
   <data name="Mail_Format_OnboardingBody" xml:space="preserve">
-    <value>Der E -Mail -List -Administrator '{0}' hat Sie zur Teilnahme eingeladen. Um Ihr Abonnement zu bestätigen, antworten Sie einfach auf diese E-Mail. Wenn Sie nicht teilnehmen möchten, können Sie diese E -Mail ignorieren.</value>
+    <value>Der Administrator der E-Mail-Liste '{0}' hat Sie zur Teilnahme eingeladen. Um Ihre Teilnahme zu bestätigen, antworten Sie einfach auf diese E-Mail. Wenn Sie nicht teilnehmen möchten, können Sie diese E-Mail ignorieren.</value>
   </data>
   <data name="Mail_Format_OnboardingSubheading" xml:space="preserve">
-    <value>Sie wurden in die E -Mail -Diskussionsliste von '{0}' eingeladen</value>
+    <value>Sie wurden in die E-Mail-Diskussionsliste '{0}' eingeladen</value>
   </data>
   <data name="Mail_Format_OnboardingSubject" xml:space="preserve">
-    <value>Abonnieren Sie {0}</value>
+    <value>Abonnement für {0}</value>
   </data>
   <data name="Mail_Format_OwnerNotificationSubheading" xml:space="preserve">
-    <value>{0} hat Zugriff auf die E -Mail -Diskussionsliste '{0}' angefordert</value>
+    <value>{0} hat Zugriff auf die E-Mail-Diskussionsliste '{0}' beantragt</value>
   </data>
   <data name="Mail_Format_OwnerNotificationSubject" xml:space="preserve">
-    <value>Anfrage zum Beitritt {0}</value>
+    <value>Beitrittanfrage zu {0}</value>
   </data>
   <data name="Mail_Format_Subject" xml:space="preserve">
     <value>{0} - Nachricht von {1}</value>
   </data>
   <data name="Mail_Format_SubjectReplace" xml:space="preserve">
-    <value>- Nachricht von {0}</value>
+    <value> - Nachricht von {0}</value>
     <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
   </data>
   <data name="Mail_Format_SubscriptionConfirmationBody" xml:space="preserve">
-    <value>Froh, dich zu haben. Um eine Nachricht an alle auf der Diskussionsliste zu senden, senden Sie einfach eine E -Mail an &lt;a href='MailTo: &lt;S0}'&gt; {0} &lt;/a&gt;. Wenn Sie eine Nachricht von jemandem in der Gruppe erhalten, können Sie einfach auf diese E -Mail antworten, und alle in der Diskussionsliste erhalten eine Kopie.</value>
+    <value>Schön, dass Sie da sind. Um eine Nachricht an alle Mitglieder der Diskussionsliste zu senden, senden Sie einfach eine E-Mail an &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;. Wenn Sie eine Nachricht von jemandem aus der Gruppe erhalten, können Sie einfach auf diese E-Mail antworten, und alle Mitglieder der Diskussionsliste erhalten eine Kopie.</value>
   </data>
   <data name="Mail_Format_SubscriptionConfirmationSubheading" xml:space="preserve">
-    <value>Sie wurden der E -Mail -Diskussionsliste von '{0}' abonniert</value>
+    <value>Sie haben sich für die E-Mail-Diskussionsliste '{0}' angemeldet</value>
   </data>
   <data name="Mail_Format_SubscriptionConfirmationSubject" xml:space="preserve">
     <value>Willkommen bei {0}</value>
   </data>
   <data name="Mail_Format_TextUnsubscribeEmailMessage" xml:space="preserve">
-    <value>Diese Nachricht ist Teil der Diskussionsliste '{0}'. Sie können sich abmelden, indem Sie eine Nachricht an {1} senden.</value>
+    <value>Diese Nachricht ist Teil der Diskussionsliste '{0}'. Sie können sich abmelden, indem Sie eine beliebige Nachricht an {1} senden.</value>
   </data>
   <data name="Mail_Format_TextUnsubscribeLinkMessage" xml:space="preserve">
-    <value>Diese Nachricht ist Teil der Diskussionsliste '{0}'. Sie können sich abmelden, indem Sie hier klicken: {1}</value>
+    <value>Diese Nachricht ist Teil der '{0}'-Diskussionsliste. Sie können sich abmelden, indem Sie hier klicken: {1}</value>
   </data>
   <data name="Mail_Format_UnsubscriptionConfirmationBody" xml:space="preserve">
-    <value>Sie haben sich von dieser Diskussionsliste erfolgreich abgemeldet. Wenn Sie jemals erneut abschreiben möchten, senden Sie eine Nachricht an &lt;a href='mailto: {0}'&gt; {0} &lt;/a&gt;.</value>
+    <value>Sie haben sich erfolgreich von dieser Diskussionsliste abgemeldet. Wenn Sie sich erneut anmelden möchten, senden Sie eine Nachricht an &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;.</value>
   </data>
   <data name="Mail_Format_UnsubscriptionConfirmationSubheading" xml:space="preserve">
-    <value>Sie erhalten keine Nachrichten mehr aus der E -Mail -Diskussionsliste von '{0}'</value>
+    <value>Sie werden keine Nachrichten mehr von der E-Mail-Diskussionsliste '{0}' erhalten</value>
   </data>
   <data name="Mail_Format_UnsubscriptionConfirmationSubject" xml:space="preserve">
-    <value>Sie wurden von {0} abgemeldet.</value>
+    <value>Sie sind von {0} abgemeldet worden.</value>
   </data>
   <data name="Mail_OnboardingHeading" xml:space="preserve">
-    <value>Herzlich willkommen!</value>
+    <value>Willkommen!</value>
   </data>
   <data name="Mail_Owner" xml:space="preserve">
-    <value>Inhaberin</value>
+    <value>Eigentümer</value>
   </data>
   <data name="Mail_OwnerNotificationBody" xml:space="preserve">
-    <value>Bitte besuchen Sie die Webadministrationsschnittstelle, um diese Anfrage zu bearbeiten.</value>
+    <value>Bitte besuchen Sie die Webadministrationsoberfläche, um diese Anfrage zu bearbeiten.</value>
   </data>
   <data name="Mail_OwnerNotificationHeading" xml:space="preserve">
-    <value>Diskussionslistenzugriffsanforderung</value>
+    <value>Anfrage zum Zugriff auf die Diskussionsliste</value>
   </data>
   <data name="Mail_SubscriptionConfirmationHeading" xml:space="preserve">
-    <value>Danke fürs Abonnieren!</value>
+    <value>Danke für das Abonnement!</value>
   </data>
   <data name="Mail_UnsubscriptionConfirmationHeading" xml:space="preserve">
-    <value>Es tut mir leid dich gehen zu sehen.</value>
+    <value>Schade, dass Sie gehen.</value>
   </data>
   <data name="View_Administration_AllowFuzzySearch" xml:space="preserve">
-    <value>Erlauben Sie dem System, Fuzzy -Suche zu verwenden. Dies ermöglicht die Übereinstimmung mit ähnlichen oder falsch gesprochenen Suchbegriffen.</value>
+    <value>Erlauben Sie dem System, die unscharfe Suche zu verwenden. Dies ermöglicht den Abgleich ähnlicher oder falsch geschriebener Suchbegriffe.</value>
   </data>
   <data name="View_Administration_ChooseDatabase" xml:space="preserve">
-    <value>Wählen Sie eine SQLite -Datenbankdatei zum Importieren aus</value>
+    <value>Wählen Sie eine SQLite-Datenbankdatei zum Importieren</value>
   </data>
   <data name="View_Administration_DockerEnvironmentVariables" xml:space="preserve">
-    <value>Docker Umgebungsvariable Laufzeitwerte.</value>
+    <value>Laufzeitwerte der Docker-Umgebungsvariablen</value>
   </data>
   <data name="View_Administration_Export" xml:space="preserve">
-    <value>Export</value>
+    <value>Exportieren</value>
   </data>
   <data name="View_Administration_ExportDatabase" xml:space="preserve">
     <value>Datenbank exportieren</value>
   </data>
   <data name="View_Administration_ExportDatabaseDescription" xml:space="preserve">
-    <value>Speichern Sie eine Kopie Ihrer Datenbank, einschließlich Kontakte, Diskussionslisten und Nachrichten.</value>
+    <value>Speichern Sie eine Kopie Ihrer Datenbank, einschließlich der Kontakte, Diskussionslisten und Nachrichten.</value>
   </data>
   <data name="View_Administration_FuzzySearchExplaination" xml:space="preserve">
-    <value>Fuzzy -Suche kann Ihnen bessere Suchergebnisse liefern, kann aber sehr langsam sein.</value>
+    <value>Die unscharfe Suche kann bessere Suchergebnisse liefern, kann aber sehr langsam sein.</value>
   </data>
   <data name="View_Administration_Heading" xml:space="preserve">
-    <value>Verwaltung</value>
+    <value>Administration</value>
   </data>
   <data name="View_Administration_Import" xml:space="preserve">
     <value>Importieren</value>
@@ -554,43 +557,43 @@
     <value>Importieren Sie eine Datenbankdatei, um Kontakte, Diskussionslisten und Nachrichten zu übertragen.</value>
   </data>
   <data name="View_Administration_ImportWarning" xml:space="preserve">
-    <value>Warnung: Dies überschreibt Ihre vorhandene Datenbankdatei. Bitte stellen Sie sicher, dass Sie eine Sicherung Ihrer Datenbank haben, bevor Sie fortfahren.</value>
+    <value>WARNUNG: Dadurch wird Ihre bestehende Datenbankdatei überschrieben. Bitte stellen Sie sicher, dass Sie eine Sicherungskopie Ihrer Datenbank haben, bevor Sie fortfahren.</value>
   </data>
   <data name="View_Administration_ItemsPerPage" xml:space="preserve">
-    <value>Anzahl der Elemente pro Seite</value>
+    <value>Anzahl der Einträge pro Seite</value>
   </data>
   <data name="View_Administration_SaveSettings" xml:space="preserve">
     <value>Einstellungen speichern</value>
   </data>
   <data name="View_Administration_SiteTheme" xml:space="preserve">
-    <value>Site -Thema</value>
+    <value>Seitenansicht</value>
   </data>
   <data name="View_Administration_Subheading" xml:space="preserve">
-    <value>Führen Sie spezielle Aufgaben aus, um Ihren Service hier zu verwalten und zu pflegen.</value>
+    <value>Hier können Sie spezielle Aufgaben zur Verwaltung und Wartung Ihres Dienstes durchführen.</value>
   </data>
   <data name="View_Administration_System" xml:space="preserve">
     <value>System</value>
   </data>
   <data name="View_Administration_SystemConfigurationPart1" xml:space="preserve">
-    <value>Ihr System ist derzeit für Senden konfiguriert</value>
+    <value>Ihr System ist derzeit zum Senden von</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_SystemConfigurationPart2" xml:space="preserve">
-    <value>E -Mails gleichzeitig mit einem Maximum von</value>
+    <value>E-Mails auf einmal und einem Maximum von</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_SystemConfigurationPart3" xml:space="preserve">
-    <value>E -Mails pro Stunde gesendet.</value>
+    <value>E-Mails pro Stunde konfiguriert.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Administration_Title" xml:space="preserve">
-    <value>Verwaltung</value>
+    <value>Administration</value>
   </data>
   <data name="View_Administration_Value" xml:space="preserve">
     <value>Wert</value>
   </data>
   <data name="View_Administration_WebSettings" xml:space="preserve">
-    <value>Webeinstellungen</value>
+    <value>Web-Einstellungen</value>
   </data>
   <data name="View_Common_Activated" xml:space="preserve">
     <value>Aktiviert</value>
@@ -599,10 +602,10 @@
     <value>Archiv</value>
   </data>
   <data name="View_Common_Cancel" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>Abbrechen</value>
   </data>
   <data name="View_Common_Create" xml:space="preserve">
-    <value>Schaffen</value>
+    <value>Erstellen</value>
   </data>
   <data name="View_Common_Description" xml:space="preserve">
     <value>Beschreibung</value>
@@ -614,10 +617,10 @@
     <value>Bearbeiten</value>
   </data>
   <data name="View_Common_Email" xml:space="preserve">
-    <value>Email</value>
+    <value>E-Mail</value>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart1" xml:space="preserve">
-    <value>Es werden automatische E -Mail -Aliase verwendet, wie z.</value>
+    <value>Automatische E-Mail-Aliase werden verwendet, wie z.B.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart2" xml:space="preserve">
@@ -629,7 +632,7 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart4" xml:space="preserve">
-    <value>UNSUBSCRICK-LIST@EMABLE.COM</value>
+    <value>unsubscribe-list@example.com</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Common_Format_ListEmailAddressExplainationPart5" xml:space="preserve">
@@ -640,7 +643,7 @@
     <value>Seite {0} von {1}</value>
   </data>
   <data name="View_Common_ListEmailAddress" xml:space="preserve">
-    <value>Listen Sie eine E -Mail -Adresse auf</value>
+    <value>Listen-E-Mail-Adresse</value>
   </data>
   <data name="View_Common_Name" xml:space="preserve">
     <value>Name</value>
@@ -652,7 +655,7 @@
     <value>Passwort</value>
   </data>
   <data name="View_Common_PasswordWarning" xml:space="preserve">
-    <value>Passwörter werden beim Speichern nicht verschlüsselt. Sichern Sie sich immer Ihren Server und setzen Sie niemals die Verwaltungsschnittstelle von Grey Duck Mail in das öffentliche Internet aus!</value>
+    <value>Passwörter werden nicht verschlüsselt gespeichert. Sichern Sie Ihren Server immer ab und machen Sie die Administrationsoberfläche von Gray Duck Mail niemals dem öffentlichen Internet zugänglich!</value>
   </data>
   <data name="View_Common_Remove" xml:space="preserve">
     <value>Entfernen</value>
@@ -661,13 +664,13 @@
     <value>Änderungen speichern</value>
   </data>
   <data name="View_Common_Search" xml:space="preserve">
-    <value>Suche</value>
+    <value>Suchen</value>
   </data>
   <data name="View_Common_UserName" xml:space="preserve">
-    <value>Nutzername</value>
+    <value>Benutzername</value>
   </data>
   <data name="View_Contacts_Edit_ActivatedDescription" xml:space="preserve">
-    <value>Der Benutzer wird aktiviert und die E -Mail -Adresse gilt als gültig und arbeitet.</value>
+    <value>Der Benutzer ist aktiviert und die E-Mail-Adresse wird als gültig und funktionierend angesehen.</value>
   </data>
   <data name="View_Contacts_Edit_ContactDetails" xml:space="preserve">
     <value>Kontaktdetails</value>
@@ -682,18 +685,18 @@
     <value>Neuer Kontakt</value>
   </data>
   <data name="View_Contacts_Edit_SubheadingNew" xml:space="preserve">
-    <value>Erstellen Sie unten einen neuen Kontakt.</value>
+    <value>Erstellen Sie einen neuen Kontakt</value>
   </data>
   <data name="View_Contacts_Edit_SubheadingPart1" xml:space="preserve">
-    <value>Bearbeiten Sie die Details für</value>
+    <value>Bearbeiten Sie die hier Details für</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Edit_SubheadingPart2" xml:space="preserve">
-    <value>unter.</value>
+    <value>.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Edit_Title" xml:space="preserve">
-    <value>Kontakt Editor</value>
+    <value>Kontakt-Editor</value>
   </data>
   <data name="View_Contacts_Index_CreateNewContact" xml:space="preserve">
     <value>Neuen Kontakt erstellen</value>
@@ -702,25 +705,25 @@
     <value>Kontakte</value>
   </data>
   <data name="View_Contacts_Index_NoContactsPart1" xml:space="preserve">
-    <value>Es wurden noch keine Kontakte eingerichtet. Sie können</value>
+    <value>Es wurden noch keine Kontakte angelegt.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Index_NoContactsPart2" xml:space="preserve">
-    <value>Erstellen Sie einen neuen Kontakt</value>
+    <value>Sie können jetzt einen neuen Kontakt</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Index_NoContactsPart3" xml:space="preserve">
-    <value>jetzt.</value>
+    <value>anlegen.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Index_Subheading" xml:space="preserve">
-    <value>Sehen Sie sich die Kontakte in Ihrem System unten an.</value>
+    <value>Zeigen Sie hier die Kontakte in Ihrem System an.</value>
   </data>
   <data name="View_Contacts_Index_Title" xml:space="preserve">
     <value>Kontakte</value>
   </data>
   <data name="View_Contacts_Remove_HeadingPart1" xml:space="preserve">
-    <value>Entfernen</value>
+    <value>Entferne</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Remove_Subheading" xml:space="preserve">
@@ -736,19 +739,19 @@
     <value>Suchergebnisse</value>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundPart1" xml:space="preserve">
-    <value>Es konnten keine Kontakte gefunden werden. Versuchen Sie es mehr zu ermöglichen</value>
+    <value>Es konnten keine Kontakte gefunden werden. Aktivieren Sie die</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundPart2" xml:space="preserve">
-    <value>Verwenden Sie Fuzzy -Suche</value>
+    <value>unscharfe Suche</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundPart3" xml:space="preserve">
-    <value>in den Verwaltungseinstellungen.</value>
+    <value>in den Verwaltungseinstellungen und versuchen Sie es erneut.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Contacts_Search_NoContactsFoundTooltip" xml:space="preserve">
-    <value>Finden Sie ähnliche und falsch geschriebene Suchbegriffe.</value>
+    <value>Findet ähnliche und falsch geschriebene Suchbegriffe.</value>
   </data>
   <data name="View_Contacts_Search_SubheadingPart1" xml:space="preserve">
     <value>Suchen nach</value>
@@ -767,7 +770,7 @@
     <value>Abbestellen</value>
   </data>
   <data name="View_External_Unsubscribe_Unsuccessful" xml:space="preserve">
-    <value>Es gab einen Fehler beim Versuch, sich abzumenden. Entweder konnten die Kontakt- oder Diskussionsliste nicht gefunden werden, oder der Kontakt ist bereits nicht eingestellt.</value>
+    <value>Beim Versuch, sich abzumelden, ist ein Fehler aufgetreten. Entweder konnte der Kontakt oder die Diskussionsliste nicht gefunden werden, oder der Kontakt ist bereits abgemeldet.</value>
   </data>
   <data name="View_Home_Index_AtAGlance" xml:space="preserve">
     <value>Auf einen Blick...</value>
@@ -781,19 +784,19 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Home_Index_Heading" xml:space="preserve">
-    <value>Herzlich willkommen</value>
+    <value>Willkommen</value>
   </data>
   <data name="View_Home_Index_List" xml:space="preserve">
-    <value>aufführen</value>
+    <value>Liste</value>
   </data>
   <data name="View_Home_Index_Lists" xml:space="preserve">
     <value>Listen</value>
   </data>
   <data name="View_Home_Index_Message" xml:space="preserve">
-    <value>Botschaft</value>
+    <value>Nachricht</value>
   </data>
   <data name="View_Home_Index_Messages" xml:space="preserve">
-    <value>Mitteilungen</value>
+    <value>Nachrichten</value>
   </data>
   <data name="View_Home_Index_NumberOfMessagesPart1" xml:space="preserve">
     <value>Sie haben insgesamt</value>
@@ -804,7 +807,7 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Home_Index_Subheading" xml:space="preserve">
-    <value>Hallo! Willkommen zu Ihren E -Mail -Diskussionslisten.</value>
+    <value>Hallo! Willkommen bei Ihren E-Mail-Diskussionslisten.</value>
   </data>
   <data name="View_Home_Index_Title" xml:space="preserve">
     <value>Startseite</value>
@@ -824,7 +827,7 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Archive_Format_Subheading" xml:space="preserve">
-    <value>Hier können Sie die auf der Diskussionsliste '{0}' gesendeten archivierten Nachrichten anzeigen.</value>
+    <value>Hier können Sie die archivierten Nachrichten der Diskussionsliste '{0}' einsehen.</value>
   </data>
   <data name="View_List_Archive_Format_Title" xml:space="preserve">
     <value>{0} Archiv</value>
@@ -836,42 +839,42 @@
     <value>Warte auf Bestätigung</value>
   </data>
   <data name="View_List_Assign_Created" xml:space="preserve">
-    <value>Der Benutzer wird bald eingeladen.</value>
+    <value>Benutzer wird bald eingeladen.</value>
   </data>
   <data name="View_List_Assign_Denied" xml:space="preserve">
-    <value>Sie haben diesen Eintrag in die Diskussionsliste verweigert.</value>
+    <value>Sie haben diesen Eintrag in die Diskussionsliste abgelehnt.</value>
   </data>
   <data name="View_List_Assign_Format_EmailBounced" xml:space="preserve">
-    <value>{0} ist abprall.</value>
+    <value>{0} ist geplatzt.</value>
   </data>
   <data name="View_List_Assign_Heading" xml:space="preserve">
-    <value>Diskussionslistenzuweisung</value>
+    <value>Diskussionslistenzuordnung</value>
   </data>
   <data name="View_List_Assign_InvitationsProcessing" xml:space="preserve">
-    <value>Es gibt noch einige Einladungen, die noch verarbeitet werden. Ihr Server ist so konfiguriert, dass neue Abonnenten alle {0} Minuten verarbeitet werden. Bitte haben Sie Geduld.</value>
+    <value>Es sind noch einige Einladungen in Bearbeitung. Ihr Server ist so konfiguriert, dass neue Abonnenten alle {0} Minuten verarbeitet werden. Bitte haben Sie etwas Geduld.</value>
   </data>
   <data name="View_List_Assign_Requested" xml:space="preserve">
-    <value>Dieser Benutzer hat gebeten, an der Diskussionsliste teilzunehmen.</value>
+    <value>Dieser Benutzer hat um die Teilnahme an der Diskussionsliste gebeten.</value>
   </data>
   <data name="View_List_Assign_SubheadingPart1" xml:space="preserve">
-    <value>Weisen Sie Kontakte zu</value>
+    <value>Kontakte zu</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Assign_SubheadingPart2" xml:space="preserve">
-    <value>unter.</value>
+    <value>zuordnen.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Assign_Subscribed" xml:space="preserve">
-    <value>Dieser Benutzer ist dieser Diskussionsliste abonniert.</value>
+    <value>Dieser Benutzer ist bei dieser Diskussionsliste angemeldet.</value>
   </data>
   <data name="View_List_Assign_Title" xml:space="preserve">
-    <value>Diskussionslistenzuweisungen</value>
+    <value>Diskussionslisten-Zuordnungen</value>
   </data>
   <data name="View_List_Assign_Unsubscribed" xml:space="preserve">
-    <value>Dieser Benutzer hat sich aus dieser Diskussionsliste abgemeldet.</value>
+    <value>Dieser Benutzer hat sich von dieser Diskussionsliste abgemeldet.</value>
   </data>
   <data name="View_List_Common_NoMessagesPart1" xml:space="preserve">
-    <value>Es wurden noch keine Nachrichten gesendet. Sie können</value>
+    <value>Es wurden noch keine Nachrichten gesendet. Sie können jetzt</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Common_NoMessagesPart2" xml:space="preserve">
@@ -879,14 +882,14 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Common_NoMessagesPart3" xml:space="preserve">
-    <value>jetzt.</value>
+    <value>.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Common_Sent" xml:space="preserve">
-    <value>Geschickt:</value>
+    <value>Gesendet:</value>
   </data>
   <data name="View_List_Common_Subject" xml:space="preserve">
-    <value>Thema:</value>
+    <value>Betreff:</value>
   </data>
   <data name="View_List_Edit_CreateDiscussionList" xml:space="preserve">
     <value>Diskussionsliste erstellen</value>
@@ -897,61 +900,70 @@
   <data name="View_List_Edit_Heading" xml:space="preserve">
     <value>Diskussionsliste bearbeiten</value>
   </data>
-  <data name="View_List_Edit_HeadingNew" xml:space="preserve">
+ <data name="View_List_Edit_HeadingNew" xml:space="preserve">
     <value>Neue Diskussionsliste</value>
   </data>
   <data name="View_List_Edit_IncomingMailPort" xml:space="preserve">
-    <value>Eingehender Mailserverport</value>
+    <value>Port des Posteingangsserver</value>
   </data>
   <data name="View_List_Edit_IncomingMailServer" xml:space="preserve">
-    <value>Eingehender Mailserver</value>
+    <value>Posteingangsserver</value>
   </data>
   <data name="View_List_Edit_OutgoingMailPort" xml:space="preserve">
-    <value>Ausgehender Mailserverport</value>
+    <value>Port des Postausgangsservers</value>
   </data>
   <data name="View_List_Edit_OutgoingMailServer" xml:space="preserve">
-    <value>Postausgangsserver</value>
+    <value>Postausgangsservers</value>
   </data>
   <data name="View_List_Edit_RemoteEmailConfiguration" xml:space="preserve">
-    <value>Remote -E -Mail -Konfiguration</value>
+    <value>Konfiguration des entfernten E-Mail-Servers</value>
   </data>
   <data name="View_List_Edit_SubheadingNew" xml:space="preserve">
-    <value>Erstellen Sie unten eine neue Diskussionsliste.</value>
+    <value>Erstellen Sie eine neue Diskussionsliste</value>
   </data>
   <data name="View_List_Edit_SubheadingPart1" xml:space="preserve">
-    <value>Bearbeiten Sie die Details für</value>
+    <value>Bearbeiten Sie hier die Details für</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Edit_SubheadingPart2" xml:space="preserve">
-    <value>unter.</value>
+    <value>.</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_List_Edit_Title" xml:space="preserve">
-    <value>Diskussionsliste Editor</value>
+    <value>Diskussionslisten-Editor</value>
   </data>
   <data name="View_List_Edit_UseSSL" xml:space="preserve">
     <value>Verwenden Sie SSL oder TLS für eine sichere Verbindung zum Mailserver.</value>
   </data>
   <data name="View_List_Index_AssignContacts" xml:space="preserve">
-    <value>Kontakte zuweisen</value>
+    <value>Kontakte zuordnen</value>
   </data>
   <data name="View_List_Index_CreateNewDiscussionList" xml:space="preserve">
-    <value>Erstellen Sie eine neue Diskussionsliste</value>
+    <value>Neue Diskussionsliste erstellen</value>
   </data>
   <data name="View_List_Index_Heading" xml:space="preserve">
     <value>Diskussionslisten</value>
   </data>
   <data name="View_List_Index_IncomingMailServer" xml:space="preserve">
-    <value>Eingehender Mailserver:</value>
+    <value>Posteingangsserver:</value>
+  </data>
+  <data name="View_List_Index_NoDiscussionListPart1" xml:space="preserve">
+    <value>Es wurden noch keine Diskussionslisten eingerichtet. Sie können jetzt</value>
+  </data>
+  <data name="View_List_Index_NoDiscussionListPart2" xml:space="preserve">
+    <value>eine neue Diskussionsliste</value>
+  </data>
+  <data name="View_List_Index_NoDiscussionListPart3" xml:space="preserve">
+    <value>erstellen.</value>
   </data>
   <data name="View_List_Index_NotUsingSSL" xml:space="preserve">
-    <value>SSL/TLS nicht verwenden</value>
+    <value>SSL/TLS wird nicht genutzt</value>
   </data>
   <data name="View_List_Index_OutgoingMailServer" xml:space="preserve">
     <value>Postausgangsserver:</value>
   </data>
   <data name="View_List_Index_Subheading" xml:space="preserve">
-    <value>Sehen Sie sich Ihre Diskussionslisten unten an.</value>
+    <value>Betrachten Sie hier Ihre Diskussionslisten.</value>
   </data>
   <data name="View_List_Index_TestMessage" xml:space="preserve">
     <value>Senden Sie eine Testnachricht</value>
@@ -960,28 +972,28 @@
     <value>Diskussionslisten</value>
   </data>
   <data name="View_List_Index_UserName" xml:space="preserve">
-    <value>Nutzername:</value>
+    <value>Benutzername:</value>
   </data>
   <data name="View_List_Index_UsingSSL" xml:space="preserve">
-    <value>Verwenden von SSL/TLS</value>
+    <value>Verwendung von SSL/TLS</value>
   </data>
   <data name="View_List_Message_ErrorProcessingMessage" xml:space="preserve">
-    <value>Bei der Verarbeitung dieser Nachricht trat ein Fehler auf.</value>
+    <value>Bei der Verarbeitung dieser Nachricht ist ein Fehler aufgetreten.</value>
   </data>
   <data name="View_List_Message_Format_Heading" xml:space="preserve">
-    <value>Nachricht von {0}</value>
+    <value>Mitteilung von {0}</value>
   </data>
   <data name="View_List_Message_Format_ReplyLink" xml:space="preserve">
-    <value>Von {0} at {1}: {2}</value>
+    <value>Von {0} an {1}: {2}</value>
   </data>
   <data name="View_List_Message_Format_Title" xml:space="preserve">
-    <value>Nachricht von {0}</value>
+    <value>Mitteilung von {0}</value>
   </data>
   <data name="View_List_Message_From" xml:space="preserve">
-    <value>Von:</value>
+    <value>Absender:</value>
   </data>
   <data name="View_List_Message_MessageID" xml:space="preserve">
-    <value>Nachrichten ID:</value>
+    <value>Nachrichten-ID:</value>
   </data>
   <data name="View_List_Message_NotFound" xml:space="preserve">
     <value>Diese Nachricht kann nicht gefunden werden.</value>
@@ -990,16 +1002,16 @@
     <value>Antworten</value>
   </data>
   <data name="View_List_Message_Reply" xml:space="preserve">
-    <value>Antworten</value>
+    <value>Antwort</value>
   </data>
   <data name="View_List_Message_Sent" xml:space="preserve">
-    <value>Geschickt:</value>
+    <value>Gesendet:</value>
   </data>
   <data name="View_List_Message_Subheading" xml:space="preserve">
-    <value>Zeigen Sie die detaillierten Informationen für diese Nachricht unten an.</value>
+    <value>Sehen Sie sich die detaillierten Informationen zu dieser Nachricht an.</value>
   </data>
   <data name="View_List_Remove_Format_Heading" xml:space="preserve">
-    <value>Entfernen {0}</value>
+    <value>Entfernen von {0}</value>
   </data>
   <data name="View_List_Remove_Subheading" xml:space="preserve">
     <value>Sind Sie sicher, dass Sie diese Diskussionsliste entfernen möchten?</value>
@@ -1008,19 +1020,19 @@
     <value>Diskussionsliste entfernen</value>
   </data>
   <data name="View_Shared_ErrorLayout_Format_RemoteOrigin" xml:space="preserve">
-    <value>Der ferngesteuerte Ursprung ist {0}.</value>
+    <value>Der protokollierte entfertne Ursprung ist {0}.</value>
   </data>
   <data name="View_Shared_ErrorLayout_Heading" xml:space="preserve">
     <value>Fehler</value>
   </data>
   <data name="View_Shared_ErrorLayout_Subheading" xml:space="preserve">
-    <value>Während Ihrer Anfrage ist ein Fehler aufgetreten.</value>
+    <value>Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten.</value>
   </data>
   <data name="View_Shared_ErrorLayout_Title" xml:space="preserve">
     <value>Fehler</value>
   </data>
   <data name="View_Shared_Layout_Administration" xml:space="preserve">
-    <value>Verwaltung</value>
+    <value>Administration</value>
   </data>
   <data name="View_Shared_Layout_Contacts" xml:space="preserve">
     <value>Kontakte</value>
@@ -1029,15 +1041,15 @@
     <value>Diskussionslisten</value>
   </data>
   <data name="View_Shared_Layout_FooterUsefulPart1" xml:space="preserve">
-    <value>Finden Sie dieses Projekt als nützlich? Beachten Sie bitte</value>
+    <value>Findest du dieses Projekt nützlich? Bitte ziehe eine</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_FooterUsefulPart2" xml:space="preserve">
-    <value>spenden</value>
+    <value>Spende</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_FooterUsefulPart3" xml:space="preserve">
-    <value>!</value>
+    <value>in Betracht!</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_SourceCodePart1" xml:space="preserve">
@@ -1049,15 +1061,6 @@
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
   </data>
   <data name="View_Shared_Layout_Version" xml:space="preserve">
-    <value>Ausführung</value>
-  </data>
-  <data name="View_List_Index_NoDiscussionListPart1" xml:space="preserve">
-    <value>Es wurden noch keine Diskussionslisten eingerichtet. Sie können</value>
-  </data>
-  <data name="View_List_Index_NoDiscussionListPart2" xml:space="preserve">
-    <value>Erstellen Sie eine neue Diskussionsliste</value>
-  </data>
-  <data name="View_List_Index_NoDiscussionListPart3" xml:space="preserve">
-    <value>jetzt.</value>
+    <value>Version</value>
   </data>
 </root>
