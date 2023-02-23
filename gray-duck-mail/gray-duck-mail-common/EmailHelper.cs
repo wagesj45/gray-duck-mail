@@ -196,11 +196,9 @@ namespace GrayDuckMail.Common
 
             if (UsingUnsubscribeUri)
             {
-                //Use an unsubscribe link that points to an externally accesible URL.
-                var customized = new UriBuilder(unsubscribeUri);
-                customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", contact.ID, discussionList.ID, HashHelper.Hash(contact.ID, discussionList.ID, hashSecret));
+                var unsubscriptionLink = GetUnsubscribeLink(discussionList, contact);
 
-                unsubscribe = customized.Uri.AbsoluteUri;
+                unsubscribe = unsubscriptionLink;
             }
             else
             {
@@ -306,11 +304,9 @@ namespace GrayDuckMail.Common
                         var techHeader = html.CreateElement("mark");
                         if (UsingUnsubscribeUri)
                         {
-                            //Use an unsubscribe link that points to an externally accesible URL.
-                            var customized = new UriBuilder(unsubscribeUri);
-                            customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", recipient.ID, discussionList.ID, HashHelper.Hash(recipient.ID, discussionList.ID, hashSecret));
+                            var unsubscriptionLink = GetUnsubscribeLink(discussionList, recipient);
 
-                            techHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLUnsubscribeLinkMessage, discussionList.Name, customized.Uri.AbsoluteUri);
+                            techHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLUnsubscribeLinkMessage, discussionList.Name, unsubscriptionLink);
                         }
                         else
                         {
@@ -335,11 +331,9 @@ namespace GrayDuckMail.Common
                         var techHeader = string.Empty;
                         if(UsingUnsubscribeUri)
                         {
-                            //Use an unsubscribe link that points to an externally accesible URL.
-                            var customized = new UriBuilder(unsubscribeUri);
-                            customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", recipient.ID, discussionList.ID, HashHelper.Hash(recipient.ID, discussionList.ID, hashSecret));
-                            
-                            techHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextUnsubscribeLinkMessage, discussionList.Name, customized.Uri.AbsoluteUri);
+                            var unsubscriptionLink = GetUnsubscribeLink(discussionList, recipient);
+
+                            techHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextUnsubscribeLinkMessage, discussionList.Name, unsubscriptionLink);
                         }
                         else
                         {
@@ -535,12 +529,24 @@ namespace GrayDuckMail.Common
         {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GeneratingEmail));
 
+            var unsubscribeHeader = new StringBuilder();
+            unsubscribeHeader.AppendFormat("<mailto:{0}>", EmailAliasHelper.GetUnsubscribeAlias(discussionList));
+
+            if(UsingUnsubscribeUri)
+            {
+                var unsubscriptionLink = GetUnsubscribeLink(discussionList, recipient);
+
+                unsubscribeHeader.AppendFormat(",{0}<{1}>", unsubscriptionLink, Environment.NewLine);
+            }
+
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
             message.ReplyTo.Add(new MailboxAddress(discussionList.Name, replyTo));
             message.To.Add(new MailboxAddress(recipient.Name, recipient.Email));
             message.Subject = subject;
             message.Headers.Insert(0, HeaderId.ReturnPath, string.Format("Bounces <{0}>", EmailAliasHelper.GetBounceAlias(discussionList)));
+            message.Headers.Insert(1, HeaderId.ListUnsubscribe, unsubscribeHeader.ToString());
+            message.Headers.Insert(2, HeaderId.ListUnsubscribePost, "List-Unsubscribe=One-Click");
 
             message.Body = bodyGenerator();
 
@@ -556,6 +562,17 @@ namespace GrayDuckMail.Common
             client.Send(message, cancellationToken: cancellationToken);
 
             return message;
+        }
+
+        /// <summary> Gets the fully formed unsubscribe link. </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="recipient">      The recipient. </param>
+        /// <returns> The unsubscribe link. </returns>
+        private static string GetUnsubscribeLink(DiscussionList discussionList, Contact recipient)
+        {
+            var customized = new UriBuilder(unsubscribeUri);
+            customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", recipient.ID, discussionList.ID, HashHelper.Hash(recipient.ID, discussionList.ID, hashSecret));
+            return customized.Uri.AbsoluteUri;
         }
 
         /// <summary>
