@@ -536,7 +536,7 @@ namespace GrayDuckMail.Common
             {
                 var unsubscriptionLink = GetUnsubscribeLink(discussionList, recipient);
 
-                unsubscribeHeader.AppendFormat(",{0}<{1}>", unsubscriptionLink, Environment.NewLine);
+                unsubscribeHeader.AppendFormat(",{0}<{1}>", Environment.NewLine, unsubscriptionLink);
             }
 
             var message = new MimeMessage();
