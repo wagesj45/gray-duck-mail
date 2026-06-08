@@ -174,10 +174,33 @@ namespace GrayDuckMail.Common
         /// </param>
         public static void ConfigureUnsubscribeLink(string baseUrl, bool secure, string hashSecret)
         {
-            var builder = new UriBuilder();
-            builder.Scheme = secure ? "https" : "http";
-            builder.Host = baseUrl;
-           
+            UriBuilder builder;
+
+            if (baseUrl.Contains("://"))
+            {
+                builder = new UriBuilder(baseUrl);
+            }
+            else
+            {
+                builder = new UriBuilder
+                {
+                    Scheme = secure ? "https" : "http"
+                };
+
+                var host = baseUrl;
+                var port = secure ? 443 : 80;
+                var colonIndex = baseUrl.LastIndexOf(':');
+
+                if (colonIndex > 0 && int.TryParse(baseUrl.Substring(colonIndex + 1), out var explicitPort))
+                {
+                    host = baseUrl.Substring(0, colonIndex);
+                    port = explicitPort;
+                }
+
+                builder.Host = host;
+                builder.Port = port;
+            }
+
             unsubscribeUri = builder.Uri;
             usingUnsubscribeUri = true;
             EmailHelper.hashSecret = hashSecret;
