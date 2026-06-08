@@ -66,7 +66,6 @@ namespace GrayDuckMail.Common
             get
             {
                 yield return SubscriptionStatus.Subscribed;
-                yield return SubscriptionStatus.AwaitingConfirmation;
             }
         }
 
@@ -114,6 +113,56 @@ namespace GrayDuckMail.Common
                 yield return STATUS_GROUP_ACTION_FAILED;
                 yield return STATUS_GROUP_ACTION_DELAYED;
             }
+        }
+
+        /// <summary> Gets the mailbox portion of an address without a plus-tag suffix. </summary>
+        /// <param name="email"> The email address. </param>
+        /// <returns> The base mailbox address. </returns>
+        /// <remarks>
+        /// For example, <c>user+tag@example.com</c> and <c>user@example.com</c> both normalize to
+        /// <c>user@example.com</c>.
+        /// </remarks>
+        public static string GetBaseEmailAddress(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return email;
+            }
+
+            var atIndex = email.LastIndexOf('@');
+            if (atIndex <= 0)
+            {
+                return email;
+            }
+
+            var localPart = email.Substring(0, atIndex);
+            var domain = email.Substring(atIndex);
+            var plusIndex = localPart.IndexOf('+');
+            if (plusIndex > 0)
+            {
+                localPart = localPart.Substring(0, plusIndex);
+            }
+
+            return localPart + domain;
+        }
+
+        /// <summary> Determines whether two addresses refer to the same mailbox. </summary>
+        /// <param name="first">  The first address. </param>
+        /// <param name="second"> The second address. </param>
+        /// <returns> True if the addresses match exactly or share the same base mailbox. </returns>
+        public static bool EmailsMatch(string first, string second)
+        {
+            if (string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(second))
+            {
+                return false;
+            }
+
+            if (string.Equals(first, second, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return string.Equals(GetBaseEmailAddress(first), GetBaseEmailAddress(second), StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary> Gets the default HTML email template. </summary>
@@ -174,10 +223,33 @@ namespace GrayDuckMail.Common
         /// </param>
         public static void ConfigureUnsubscribeLink(string baseUrl, bool secure, string hashSecret)
         {
-            var builder = new UriBuilder();
-            builder.Scheme = secure ? "https" : "http";
-            builder.Host = baseUrl;
-           
+            UriBuilder builder;
+
+            if (baseUrl.Contains("://"))
+            {
+                builder = new UriBuilder(baseUrl);
+            }
+            else
+            {
+                builder = new UriBuilder
+                {
+                    Scheme = secure ? "https" : "http"
+                };
+
+                var host = baseUrl;
+                var port = secure ? 443 : 80;
+                var colonIndex = baseUrl.LastIndexOf(':');
+
+                if (colonIndex > 0 && int.TryParse(baseUrl.Substring(colonIndex + 1), out var explicitPort))
+                {
+                    host = baseUrl.Substring(0, colonIndex);
+                    port = explicitPort;
+                }
+
+                builder.Host = host;
+                builder.Port = port;
+            }
+
             unsubscribeUri = builder.Uri;
             usingUnsubscribeUri = true;
             EmailHelper.hashSecret = hashSecret;
@@ -276,6 +348,11 @@ namespace GrayDuckMail.Common
         {
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_RelayingMessage, recipient.Name, recipient.Email));
 
+            var originator = GetMessageOriginator(message, database);
+            var posterName = string.IsNullOrWhiteSpace(originator?.Name) ? "Unknown" : originator.Name;
+            var posterEmail = string.IsNullOrWhiteSpace(originator?.Email) ? "unknown" : originator.Email;
+            var fromDisplayName = $"{posterName} via {discussionList.Name}";
+
             var relay = SendEmail(discussionList,
                 recipient,
                 LanguageHelper.FormatValue(ResourceName.Mail_Format_Subject, message.Subject.Replace(LanguageHelper.FormatValue(ResourceName.Mail_Format_SubjectReplace, discussionList.Name), ""), discussionList.Name),
@@ -302,6 +379,10 @@ namespace GrayDuckMail.Common
 
                             bodyNode = html.DocumentNode;
                         }
+
+                        var originatorHeader = html.CreateElement("p");
+                        originatorHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLRelayOriginatorMessage, posterName, posterEmail);
+                        bodyNode.PrependChild(originatorHeader);
 
                         var techHeader = html.CreateElement("mark");
                         if (UsingUnsubscribeUri)
@@ -347,7 +428,8 @@ namespace GrayDuckMail.Common
                             techHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextUnsubscribeEmailMessage, discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                         }
                         var cleanedText = message.BodyText.Replace(techHeader, "");
-                        var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
+                        var originatorHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextRelayOriginatorMessage, posterName, posterEmail);
+                        var modifiedText = string.Format("{0}{1}{2}{1}{3}", originatorHeader, Environment.NewLine, cleanedText, techHeader);
 
                         return new TextPart(TextFormat.Text)
                         {
@@ -360,7 +442,8 @@ namespace GrayDuckMail.Common
                     throw formatException;
                 },
                 client,
-                stoppingToken
+                stoppingToken,
+                fromDisplayName
                 );
 
             var relayIdentifier = new RelayIdentifier()
@@ -530,13 +613,14 @@ namespace GrayDuckMail.Common
         /// <param name="bodyGenerator">     The <see cref="MimeEntity">body generator</see> function. </param>
         /// <param name="client">            The SMTP client. </param>
         /// <param name="cancellationToken"> (Optional) A token that allows processing to be cancelled. </param>
+        /// <param name="fromDisplayName">   (Optional) The sender display name. Defaults to the discussion list name. </param>
         /// <returns> A MimeMessage. </returns>
-        public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default)
+        public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default, string fromDisplayName = null)
         {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GeneratingEmail));
 
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
+            message.From.Add(new MailboxAddress(fromDisplayName ?? discussionList.Name, discussionList.BaseEmailAddress));
             message.ReplyTo.Add(new MailboxAddress(discussionList.Name, replyTo));
             message.To.Add(new MailboxAddress(recipient.Name, recipient.Email));
             message.Subject = subject;
@@ -556,6 +640,178 @@ namespace GrayDuckMail.Common
             client.Send(message, cancellationToken: cancellationToken);
 
             return message;
+        }
+
+        /// <summary> Details extracted from a delivery-status notification. </summary>
+        public class BounceReport
+        {
+            /// <summary> Gets or sets the failed recipient address. </summary>
+            public string Recipient { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the delivery action from the status report. </summary>
+            public string Action { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the delivery status code from the status report. </summary>
+            public string Status { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the diagnostic code from the status report. </summary>
+            public string DiagnosticCode { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the remote MTA named in the status report. </summary>
+            public string RemoteMta { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the bounce notification message identifier. </summary>
+            public string BounceMessageId { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the bounce notification sender address. </summary>
+            public string BounceFrom { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the subject of the original bounced message. </summary>
+            public string OriginalSubject { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the message identifier of the original bounced message. </summary>
+            public string OriginalMessageId { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the sender of the original bounced message. </summary>
+            public string OriginalFrom { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the human-readable explanation from the bounce notification. </summary>
+            public string Explanation { get; set; } = string.Empty;
+
+            /// <summary> Gets the raw status report lines extracted from the notification. </summary>
+            public IList<string> StatusDetails { get; } = new List<string>();
+        }
+
+        /// <summary> Extracts delivery failure details from a bounce notification. </summary>
+        /// <param name="message"> The bounce notification. </param>
+        /// <returns> The extracted bounce report. </returns>
+        public static BounceReport GetBounceReport(IndexedMimeMessage message)
+        {
+            var report = new BounceReport();
+
+            if (message?.Message == null)
+            {
+                return report;
+            }
+
+            report.BounceMessageId = message.Message.MessageId;
+            report.BounceFrom = message.Message.From?.Mailboxes.FirstOrDefault()?.Address ?? string.Empty;
+            report.Explanation = message.Message.TextBody ?? string.Empty;
+
+            var embeddedMessage = GetEmbeddedMessage(message.Message.Body);
+            if (embeddedMessage != null)
+            {
+                report.OriginalSubject = embeddedMessage.Subject;
+                report.OriginalMessageId = embeddedMessage.MessageId;
+                report.OriginalFrom = embeddedMessage.From?.Mailboxes.FirstOrDefault()?.Address ?? string.Empty;
+            }
+
+            if (!(message.Message.Body is Multipart multipartMessage))
+            {
+                return report;
+            }
+
+            foreach (var deliveryStatus in multipartMessage.OfType<MessageDeliveryStatus>())
+            {
+                foreach (var statusGroup in deliveryStatus.StatusGroups)
+                {
+                    var action = statusGroup["Action"]?.Trim() ?? string.Empty;
+                    if (string.IsNullOrWhiteSpace(action)
+                        || !BouncedEmailStatusGroupActions.Contains(action.ToLowerInvariant()))
+                    {
+                        continue;
+                    }
+
+                    report.Action = action;
+                    report.Status = statusGroup["Status"]?.Trim() ?? string.Empty;
+                    report.DiagnosticCode = statusGroup["Diagnostic-Code"]?.Trim() ?? string.Empty;
+                    report.RemoteMta = statusGroup["Remote-MTA"]?.Trim() ?? string.Empty;
+
+                    var recipient = statusGroup["Original-Recipient"]
+                        ?? statusGroup["Failed-Recipient"]
+                        ?? statusGroup["Final-Recipient"];
+
+                    if (recipient != null)
+                    {
+                        var addressParts = recipient.Split(';');
+                        report.Recipient = (addressParts.Length > 1 ? addressParts[1] : addressParts[0]).Trim().ToLowerInvariant();
+                    }
+
+                    foreach (var group in statusGroup)
+                    {
+                        report.StatusDetails.Add(string.Format("{0}: {1}", group.Field, group.Value));
+                    }
+
+                    return report;
+                }
+            }
+
+            return report;
+        }
+
+        /// <summary>
+        /// Logs a bounce notification because these messages are not forwarded to the list owner.
+        /// </summary>
+        /// <param name="log">            The logger. </param>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="report">         The bounce report. </param>
+        /// <param name="subscription">   The matched subscription, if any. </param>
+        public static void LogBounceReport(Logger log, DiscussionList discussionList, BounceReport report, ContactSubscription subscription)
+        {
+            log.Info(LanguageHelper.GetValue(ResourceName.Logger_BouncedEmailNotForwardedToOwner));
+            log.Info(LanguageHelper.FormatValue(
+                ResourceName.Logger_Format_BouncedEmailReport,
+                discussionList.Name,
+                string.IsNullOrWhiteSpace(report.Recipient) ? "UNKNOWN" : report.Recipient,
+                string.IsNullOrWhiteSpace(report.Action) ? "UNKNOWN" : report.Action,
+                string.IsNullOrWhiteSpace(report.Status) ? "UNKNOWN" : report.Status,
+                string.IsNullOrWhiteSpace(report.DiagnosticCode) ? "UNKNOWN" : report.DiagnosticCode,
+                string.IsNullOrWhiteSpace(report.RemoteMta) ? "UNKNOWN" : report.RemoteMta,
+                string.IsNullOrWhiteSpace(report.BounceMessageId) ? "UNKNOWN" : report.BounceMessageId,
+                string.IsNullOrWhiteSpace(report.OriginalSubject) ? "UNKNOWN" : report.OriginalSubject,
+                string.IsNullOrWhiteSpace(report.OriginalMessageId) ? "UNKNOWN" : report.OriginalMessageId,
+                subscription?.Contact?.Name ?? "NONE",
+                subscription?.Contact?.Email ?? "NONE"));
+
+            foreach (var statusDetail in report.StatusDetails)
+            {
+                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_FailureStatusGroupsLine, "status", statusDetail));
+            }
+
+            if (!string.IsNullOrWhiteSpace(report.OriginalFrom))
+            {
+                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedOriginalMessageFrom, report.OriginalFrom));
+            }
+
+            if (!string.IsNullOrWhiteSpace(report.Explanation))
+            {
+                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedEmailExplanation, report.Explanation.Trim()));
+            }
+        }
+
+        /// <summary> Gets the original message embedded in a bounce notification, if present. </summary>
+        /// <param name="body"> The message body. </param>
+        /// <returns> The embedded message. </returns>
+        private static MimeMessage GetEmbeddedMessage(MimeEntity body)
+        {
+            if (body is MessagePart messagePart)
+            {
+                return messagePart.Message;
+            }
+
+            if (body is Multipart multipart)
+            {
+                foreach (var part in multipart)
+                {
+                    var embeddedMessage = GetEmbeddedMessage(part);
+                    if (embeddedMessage != null)
+                    {
+                        return embeddedMessage;
+                    }
+                }
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -631,6 +887,25 @@ namespace GrayDuckMail.Common
             }
 
             return string.Empty;
+        }
+
+        /// <summary> Gets the contact who sent a relayed message. </summary>
+        /// <param name="message">  The relayed message. </param>
+        /// <param name="database"> The database. </param>
+        /// <returns> The originator contact, if one can be determined. </returns>
+        private static Contact GetMessageOriginator(Message message, SqliteDatabase database)
+        {
+            if (message?.OriginatorContact != null)
+            {
+                return message.OriginatorContact;
+            }
+
+            if (message == null || message.OriginatorContactID == 0 || database == null)
+            {
+                return null;
+            }
+
+            return database.Contacts.Find(message.OriginatorContactID);
         }
 
         #endregion

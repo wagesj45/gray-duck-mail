@@ -73,6 +73,14 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_AssigningContact,
 		/// <summary> Assigning index {0} to {1}. </summary>
 				Logger_Format_AssigningMimeMessageIndex,
+		/// <summary> Bounce notification is not forwarded to the list owner. Details follow. </summary>
+				Logger_BouncedEmailNotForwardedToOwner,
+		/// <summary> Bounce explanation: {0} </summary>
+				Logger_Format_BouncedEmailExplanation,
+		/// <summary> Bounce on list '{0}': recipient={1}, action={2}, status={3}, diagnostic={4}, remote-mta={5}, bounce-message-id={6}, original-subject='{7}', original-message-id={8}, matched-contact={9}, matched-email={10} </summary>
+				Logger_Format_BouncedEmailReport,
+		/// <summary> Bounced original message from: {0} </summary>
+				Logger_Format_BouncedOriginalMessageFrom,
 		/// <summary> Authenticating as {0}. </summary>
 				Logger_Format_AuthenticatingAs,
 		/// <summary> Authenticating with {0}:{1}. </summary>
@@ -250,6 +258,10 @@ namespace GrayDuckMail.Common.Localization
 		/// <summary> - Message from {0} </summary>
 		 /// <remarks> It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space. </remarks>
 				Mail_Format_SubjectReplace,
+		/// <summary> From: {0} ({1}) </summary>
+				Mail_Format_TextRelayOriginatorMessage,
+		/// <summary> &lt;strong&gt;From:&lt;/strong&gt; {0} &amp;lt;{1}&amp;gt; </summary>
+				Mail_Format_HTMLRelayOriginatorMessage,
 		/// <summary> Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy. </summary>
 				Mail_Format_SubscriptionConfirmationBody,
 		/// <summary> You've been subscribed to the '{0}' Email Discussion List </summary>

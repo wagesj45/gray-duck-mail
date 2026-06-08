@@ -54,9 +54,11 @@ namespace GrayDuckMail.Web.Worker
             {
                 for (int i = 0; i < DockerEnvironmentVariables.RateLimitPerRoundCount; i++)
                 {
+                    EmailDefinition emailDefinition = null;
+
                     try
                     {
-                        var emailDefinition = SharedMemory.PopEmail();
+                        emailDefinition = SharedMemory.PopEmail();
 
                         if (emailDefinition != null)
                         {
@@ -116,6 +118,13 @@ namespace GrayDuckMail.Web.Worker
                     {
                         //We want to catch any potential exception so that the loop can continue in case of failure.
                         logger.Error(e);
+
+                        if (emailDefinition != null && IsTransientSmtpFailure(e))
+                        {
+                            SharedMemory.AddEmail(emailDefinition);
+                            logger.Warn("Re-queued email after transient SMTP failure ({0}).", emailDefinition.Type);
+                            break;
+                        }
                     }
                 }
 
@@ -126,6 +135,20 @@ namespace GrayDuckMail.Web.Worker
 
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_EmailSenderShutDown));
             return;
+        }
+
+        /// <summary> Determines whether an SMTP failure is transient and safe to retry later. </summary>
+        /// <param name="exception"> The exception. </param>
+        /// <returns> True if the failure is transient. </returns>
+        private static bool IsTransientSmtpFailure(Exception exception)
+        {
+            if (!(exception is SmtpCommandException smtpException))
+            {
+                return false;
+            }
+
+            var statusCode = (int)smtpException.StatusCode;
+            return statusCode >= 400 && statusCode < 500;
         }
     }
 }
