@@ -119,7 +119,10 @@ namespace GrayDuckMail.Web.Controllers
             discussionList.Description = formInput.Description;
             discussionList.BaseEmailAddress = formInput.BaseEmailAddress;
             discussionList.UserName = formInput.UserName;
-            discussionList.Password = formInput.Password;
+            if (!string.IsNullOrEmpty(formInput.Password))
+            {
+                discussionList.Password = formInput.Password;
+            }
             discussionList.IncomingMailServer = formInput.IncomingMailServer;
             discussionList.IncomingMailPort = formInput.IncomingMailPort;
             discussionList.OutgoingMailServer = formInput.OutgoingMailServer;
@@ -251,12 +254,20 @@ namespace GrayDuckMail.Web.Controllers
         [Route("List/Assign")]
         public IActionResult Assign(DiscussionListAssignForm formInput)
         {
+            if (formInput == null || formInput.ContactID == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/List/Assign"));
+                return View("Error");
+            }
+
             foreach (var assignment in formInput.Assignments)
             {
                 var subscription = this.SqliteDatabase.ContactSubscriptions
                     .Where(subscription => subscription.DiscussionListID == formInput.DiscussionListID && subscription.ContactID == assignment.ContactID)
                     .Include(subscription => subscription.Contact)
                     .FirstOrDefault();
+
+                var suppressSelfRelay = formInput.SuppressSelfRelay ?? Array.Empty<int>();
 
                 if (assignment.IsAssigned)
                 {
@@ -267,9 +278,14 @@ namespace GrayDuckMail.Web.Controllers
                         {
                             ContactID = assignment.ContactID,
                             DiscussionListID = formInput.DiscussionListID,
-                            Status = SubscriptionStatus.Created
+                            Status = SubscriptionStatus.Created,
+                            SuppressSelfRelay = false
                         };
                         this.SqliteDatabase.ContactSubscriptions.Add(subscription);
+                    }
+                    else if (subscription.Status == SubscriptionStatus.Subscribed)
+                    {
+                        subscription.SuppressSelfRelay = suppressSelfRelay.Contains(assignment.ContactID);
                     }
                     if (subscription.Status == SubscriptionStatus.Requested)
                     {
@@ -284,6 +300,11 @@ namespace GrayDuckMail.Web.Controllers
                 }
                 else
                 {
+                    if (subscription != null && subscription.Status == SubscriptionStatus.Subscribed)
+                    {
+                        subscription.SuppressSelfRelay = suppressSelfRelay.Contains(assignment.ContactID);
+                    }
+
                     if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status) && subscription.Contact.Activated)
                     {
                         logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnassigningContact, assignment.ContactID, formInput.DiscussionListID));
@@ -297,6 +318,61 @@ namespace GrayDuckMail.Web.Controllers
             this.SqliteDatabase.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        /// <summary> Queues another onboarding confirmation email for a pending contact. </summary>
+        /// <remarks> Fulfills the <c>/List/ResendConfirmation</c> request. </remarks>
+        /// <param name="discussionListID"> Identifier for the discussion list. </param>
+        /// <param name="contactID"> Identifier for the contact. </param>
+        /// <returns> A response to return to the caller. </returns>
+        [Route("List/ResendConfirmation/{discussionListID}/{contactID}")]
+        public IActionResult ResendConfirmation(int discussionListID, int contactID)
+        {
+            var subscription = this.SqliteDatabase.ContactSubscriptions
+                .Include(subscription => subscription.Contact)
+                .Include(subscription => subscription.DiscussionList)
+                .Where(subscription => subscription.DiscussionListID == discussionListID && subscription.ContactID == contactID)
+                .SingleOrDefault();
+
+            if (subscription?.Contact == null || subscription.DiscussionList == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindContact, contactID));
+                return View("Error");
+            }
+
+            if (subscription.Status != SubscriptionStatus.AwaitingConfirmation
+                && subscription.Status != SubscriptionStatus.Created
+                && subscription.Status != SubscriptionStatus.Bounced)
+            {
+                return RedirectToAction("Assign", new { discussionListID });
+            }
+
+            if (subscription.Status == SubscriptionStatus.Bounced)
+            {
+                subscription.Contact.Activated = true;
+            }
+
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingOnboardingEmail, subscription.Contact.Name, subscription.Contact.Email));
+
+            SharedMemory.AddEmail(EmailDefinition.CreateOnboarding(subscription.DiscussionList, subscription.Contact));
+            subscription.Status = SubscriptionStatus.AwaitingConfirmation;
+            this.SqliteDatabase.SaveChanges();
+
+            if (DockerEnvironmentVariables.WebOnly)
+            {
+                var emailDefinition = SharedMemory.PopEmail();
+
+                if (emailDefinition != null)
+                {
+                    using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
+                    {
+                        EmailHelper.SendOnboardingEmail(emailDefinition.DiscussionList, emailDefinition.Contact, smtpClient);
+                        smtpClient.Disconnect(true);
+                    }
+                }
+            }
+
+            return RedirectToAction("Assign", new { discussionListID });
         }
 
         /// <summary> Queues a test message in the form of an Owner Requst notification. </summary>

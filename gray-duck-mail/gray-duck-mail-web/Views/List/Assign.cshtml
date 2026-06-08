@@ -9,7 +9,7 @@
 
 <hgroup>
     <h1>@LanguageHelper.GetValue(ResourceName.View_List_Assign_Title)</h1>
-    <h2>@LanguageHelper.GetValue(ResourceName.View_List_Assign_SubheadingPart1) <strong>@Model.DiscussionList.Name</strong>@LanguageHelper.GetValue(ResourceName.View_List_Assign_SubheadingPart1) </h2>
+    <h2>@LanguageHelper.GetValue(ResourceName.View_List_Assign_SubheadingPart1) <strong>@Model.DiscussionList.Name</strong> @LanguageHelper.GetValue(ResourceName.View_List_Assign_SubheadingPart2)</h2>
     @if (@Model.Subscriptions.Any(subscription => subscription.Status == SubscriptionStatus.Created))
     {
         <h3>
@@ -25,6 +25,7 @@
 
     @foreach (var contact in Model.Contacts)
     {
+        var subscriptionStatus = Model.GetSubscription(contact.ID);
         <div class="grid">
             <div>
                 <fieldset>
@@ -34,14 +35,14 @@
                            name="assigned"
                            id="assigned"
                            @(EmailHelper.IsAuthorizedForMailDistribution(Model.DiscussionList, contact) ? "checked" : "" )
-                           @(EmailHelper.ContactUnassignableStatuses.Contains(Model.GetSubscription(contact.ID)) ? "disabled" : "")
+                           @(EmailHelper.ContactUnassignableStatuses.Contains(subscriptionStatus) ? "disabled" : "")
                            value="@contact.ID" />
                         @contact.Name
                     </label>
                 </fieldset>
             </div>
-            <div>
-                @switch (Model.GetSubscription(contact.ID))
+            <div class="assign-actions">
+                @switch (subscriptionStatus)
                 {
                     case SubscriptionStatus.AwaitingConfirmation:
                         <span data-tooltip="@LanguageHelper.GetValue(ResourceName.View_List_Assign_AwaitingConfirmation)"><i class="icofont-hour-glass"></i></span>
@@ -68,8 +69,46 @@
                         <!-- Unknown Subscription Status. -->
                         break;
                 }
+                @if (Model.HasSubscription(contact.ID) && subscriptionStatus == SubscriptionStatus.Subscribed)
+                {
+                    var suppressSelfRelay = Model.GetSuppressSelfRelay(contact.ID);
+                    var suppressSelfRelayTooltip = suppressSelfRelay
+                        ? LanguageHelper.GetValue(ResourceName.View_List_Assign_EnableSelfRelay)
+                        : LanguageHelper.GetValue(ResourceName.View_List_Assign_SuppressSelfRelay);
+                    <label class="suppress-self-relay-toggle"
+                           data-tooltip="@suppressSelfRelayTooltip"
+                           data-tooltip-suppress="@LanguageHelper.GetValue(ResourceName.View_List_Assign_SuppressSelfRelay)"
+                           data-tooltip-relay="@LanguageHelper.GetValue(ResourceName.View_List_Assign_EnableSelfRelay)">
+                        <input type="checkbox"
+                               name="suppressSelfRelay"
+                               value="@contact.ID"
+                               @(suppressSelfRelay ? "checked" : "") />
+                        <i class="icofont-loop" aria-hidden="true"></i>
+                    </label>
+                }
+                @if (subscriptionStatus == SubscriptionStatus.AwaitingConfirmation || subscriptionStatus == SubscriptionStatus.Created || subscriptionStatus == SubscriptionStatus.Bounced)
+                {
+                    var retryTooltip = subscriptionStatus == SubscriptionStatus.Bounced
+                        ? ResourceName.View_List_Assign_Retry
+                        : ResourceName.View_List_Assign_ResendConfirmation;
+                    <a href="/List/ResendConfirmation/@Model.DiscussionList.ID/@contact.ID" data-tooltip="@LanguageHelper.GetValue(retryTooltip)"><i class="icofont-send-mail"></i></a>
+                    <a href="/Contact/Edit/@contact.ID" data-tooltip="@LanguageHelper.GetValue(ResourceName.View_Common_Edit)"><i class="icofont-edit-alt"></i></a>
+                }
             </div>
         </div>
     }
     <button type="submit">@LanguageHelper.GetValue(ResourceName.View_Common_SaveChanges)</button>
 </form>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.suppress-self-relay-toggle input').forEach(function (input) {
+            input.addEventListener('change', function () {
+                var label = input.closest('.suppress-self-relay-toggle');
+                label.dataset.tooltip = input.checked
+                    ? label.dataset.tooltipRelay
+                    : label.dataset.tooltipSuppress;
+            });
+        });
+    </script>
+}

@@ -44,6 +44,13 @@ namespace GrayDuckMail.Common.Database
         public SubscriptionStatus Status { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether list posts from this contact are not relayed back to
+        /// them when they are the sender.
+        /// </summary>
+        /// <value> True to suppress self-relay, false if not. </value>
+        public bool SuppressSelfRelay { get; set; } = false;
+
+        /// <summary>
         /// Gets or sets a <see cref="DiscussionList"/> that the <see cref="Contact"/> is assigned to.
         /// </summary>
         /// <value> A discussion list. </value>

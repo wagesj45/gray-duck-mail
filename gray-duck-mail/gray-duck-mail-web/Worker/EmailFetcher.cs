@@ -282,7 +282,8 @@ namespace GrayDuckMail.Web.Worker
                 {
                     Contact = newContact,
                     DiscussionList = discussionList,
-                    Status = SubscriptionStatus.Requested
+                    Status = SubscriptionStatus.Requested,
+                    SuppressSelfRelay = false
                 };
 
                 database.Contacts.Add(newContact);
@@ -409,8 +410,13 @@ namespace GrayDuckMail.Web.Worker
                 database.Messages.Add(message);
                 
                 var listParticipants = discussionList.Subscriptions
-                        .Where(subscription => subscription.Status == SubscriptionStatus.Subscribed)
+                        .Where(subscription => subscription.Status == SubscriptionStatus.Subscribed);
+
+                if (originatorSubscription.SuppressSelfRelay)
+                {
+                    listParticipants = listParticipants
                         .Where(subscription => subscription.ContactID != originatorSubscription.ContactID);
+                }
 
                 foreach (var participant in listParticipants)
                 {

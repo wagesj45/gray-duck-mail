@@ -2257,6 +2257,24 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resend confirmation.
+        /// </summary>
+        internal static string View_List_Assign_ResendConfirmation {
+            get {
+                return ResourceManager.GetString("View_List_Assign_ResendConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retry invitation.
+        /// </summary>
+        internal static string View_List_Assign_Retry {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assign contacts to.
         /// </summary>
         internal static string View_List_Assign_SubheadingPart1 {
@@ -2280,6 +2298,24 @@ namespace GrayDuckMail.Common.Localization {
         internal static string View_List_Assign_Subscribed {
             get {
                 return ResourceManager.GetString("View_List_Assign_Subscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to send my posts back to me.
+        /// </summary>
+        internal static string View_List_Assign_EnableSelfRelay {
+            get {
+                return ResourceManager.GetString("View_List_Assign_EnableSelfRelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to skip sending my posts back to me.
+        /// </summary>
+        internal static string View_List_Assign_SuppressSelfRelay {
+            get {
+                return ResourceManager.GetString("View_List_Assign_SuppressSelfRelay", resourceCulture);
             }
         }
         

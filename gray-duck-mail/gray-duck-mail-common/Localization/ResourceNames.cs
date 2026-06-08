@@ -520,6 +520,10 @@ namespace GrayDuckMail.Common.Localization
 				View_List_Assign_InvitationsProcessing,
 		/// <summary> This user has asked to participate in the discussion list. </summary>
 				View_List_Assign_Requested,
+		/// <summary> Resend confirmation </summary>
+				View_List_Assign_ResendConfirmation,
+		/// <summary> Retry invitation </summary>
+				View_List_Assign_Retry,
 		/// <summary> Assign contacts to </summary>
 		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_List_Assign_SubheadingPart1,
@@ -528,6 +532,10 @@ namespace GrayDuckMail.Common.Localization
 				View_List_Assign_SubheadingPart2,
 		/// <summary> This user is subscribed to this discussion list. </summary>
 				View_List_Assign_Subscribed,
+		/// <summary> Click to send my posts back to me </summary>
+				View_List_Assign_EnableSelfRelay,
+		/// <summary> Click to skip sending my posts back to me </summary>
+				View_List_Assign_SuppressSelfRelay,
 		/// <summary> Discussion List Assignments </summary>
 				View_List_Assign_Title,
 		/// <summary> This user has unsubscribed from this discussion list. </summary>

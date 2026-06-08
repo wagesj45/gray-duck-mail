@@ -47,7 +47,23 @@ namespace GrayDuckMail.Web.Models
         public bool HasSubscription(int contactID)
         {
             return this.Subscriptions.Where(a => a.ContactID == contactID).Any();
-        } 
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether a contact's own list posts are suppressed from being relayed
+        /// back to them.
+        /// </summary>
+        /// <param name="contactID"> Identifier for the contact. </param>
+        /// <returns> True if self-relay is suppressed, false if not. </returns>
+        public bool GetSuppressSelfRelay(int contactID)
+        {
+            var subscription = this.Subscriptions
+                .Where(subscription => subscription.ContactID == contactID)
+                .Where(subscription => subscription.DiscussionListID == this.DiscussionList.ID)
+                .FirstOrDefault();
+
+            return subscription?.SuppressSelfRelay ?? false;
+        }
 
         #endregion
     }
