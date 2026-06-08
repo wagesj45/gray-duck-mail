@@ -1,4 +1,4 @@
-﻿using GrayDuckMail.Common.Localization;
+using GrayDuckMail.Common.Localization;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
@@ -199,7 +199,7 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Authenticate(string userName, string password, CancellationToken cancellationToken = default)
         {
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingWith, userName, password));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingAs, userName));
 
             PerformClientMethod(
                 pop3Client => pop3Client.Authenticate(userName, password, cancellationToken: cancellationToken),
@@ -214,30 +214,52 @@ namespace GrayDuckMail.Common
         /// <returns> The messages. </returns>
         public IList<MimeMessage> GetMessages(CancellationToken cancellationToken = default)
         {
+            return GetIndexedMessages(cancellationToken).Select(indexedMessage => indexedMessage.Message).ToList();
+        }
+
+        /// <summary> Gets all messages with server-specific indexing metadata. </summary>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        /// <returns> The indexed messages. </returns>
+        public IList<IndexedMimeMessage> GetIndexedMessages(CancellationToken cancellationToken = default)
+        {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GettingMessages));
 
-            return PerformClientMethod(
+            return PerformClientMethod<IList<IndexedMimeMessage>>(
             pop3Client =>
             {
                 if(pop3Client.Count > 0)
                 {
                     var messages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: cancellationToken);
-                    return messages;
+                    return messages.Select((message, index) => IndexedMimeMessage.IndexMimeMessage(index, message)).ToList();
                 }
 
-                return Enumerable.Empty<MimeMessage>().ToList();
+                return Enumerable.Empty<IndexedMimeMessage>().ToList();
             },
             (imapClient, imapFolder) =>
             {
                 if(imapFolder.Count > 0)
                 {
-                    var messages = Enumerable.Range(0, imapFolder.Count).Select(i => imapFolder.GetMessage(i)).ToList();
-                    return messages;
+                    var summaries = imapFolder.Fetch(0, -1, MessageSummaryItems.UniqueId, cancellationToken);
+                    return summaries.Select((summary, index) =>
+                        IndexedMimeMessage.IndexMimeMessage(index, imapFolder.GetMessage(summary.UniqueId), summary.UniqueId))
+                        .ToList();
                 }
 
-                return Enumerable.Empty<MimeMessage>().ToList();
+                return Enumerable.Empty<IndexedMimeMessage>().ToList();
             }
             );
+        }
+
+        /// <summary> Marks the specified message for deletion. </summary>
+        /// <param name="indexedMessage">    The indexed message. </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        public void DeleteMessage(IndexedMimeMessage indexedMessage, CancellationToken cancellationToken = default)
+        {
+            DeleteMessage(indexedMessage.Index, indexedMessage.ImapUniqueId, cancellationToken);
         }
 
         /// <summary> Marks the specified message for deletion. </summary>
@@ -247,13 +269,33 @@ namespace GrayDuckMail.Common
         /// </param>
         public void DeleteMessage(int index, CancellationToken cancellationToken = default)
         {
+            DeleteMessage(index, imapUniqueId: null, cancellationToken: cancellationToken);
+        }
+
+        /// <summary> Marks the specified message for deletion. </summary>
+        /// <param name="index">             Zero-based index of the message. </param>
+        /// <param name="imapUniqueId">
+        ///     (Optional) The IMAP unique identifier to delete when using an IMAP client.
+        /// </param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        private void DeleteMessage(int index, UniqueId? imapUniqueId, CancellationToken cancellationToken = default)
+        {
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_DeletingMessage, index));
 
             PerformClientMethod(
             pop3Client => pop3Client.DeleteMessage(index),
             (imapClient, imapFolder) =>
             {
-                imapFolder.SetFlags(index, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
+                if (imapUniqueId.HasValue)
+                {
+                    imapFolder.SetFlags(imapUniqueId.Value, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
+                }
+                else
+                {
+                    imapFolder.SetFlags(index, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
+                }
             }
             );
         }

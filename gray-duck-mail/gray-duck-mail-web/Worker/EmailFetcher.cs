@@ -68,7 +68,7 @@ namespace GrayDuckMail.Web.Worker
                                 logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingAs, discussionList.UserName));
                                 client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
 
-                                var emailMessages = client.GetMessages(cancellationToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
+                                var emailMessages = client.GetIndexedMessages(cancellationToken);
                                 
                                 if (emailMessages.Any())
                                 {
@@ -184,7 +184,7 @@ namespace GrayDuckMail.Web.Worker
             SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
 
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index));
-            client.DeleteMessage(subscriptionConfirmation.Index, cancellationToken);
+            client.DeleteMessage(subscriptionConfirmation, cancellationToken);
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace GrayDuckMail.Web.Worker
             SharedMemory.AddEmail(EmailDefinition.CreateUnsubscriptionConfirmation(discussionList, subscription.Contact));
 
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index));
-            client.DeleteMessage(unsubscribeConfirmation.Index);
+            client.DeleteMessage(unsubscribeConfirmation);
         }
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace GrayDuckMail.Web.Worker
             }
 
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, request.Message.MessageId, request.Index));
-            client.DeleteMessage(request.Index, cancellationToken);
+            client.DeleteMessage(request, cancellationToken);
         }
 
         /// <summary> Process the bounced messages recieved from a contact. </summary>
@@ -303,7 +303,7 @@ namespace GrayDuckMail.Web.Worker
             }
 
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, bounce.Message.MessageId, bounce.Index));
-            client.DeleteMessage(bounce.Index);
+            client.DeleteMessage(bounce);
         }
 
         /// <summary>
@@ -382,7 +382,7 @@ namespace GrayDuckMail.Web.Worker
             }
 
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, discussionMessage.Message.MessageId, discussionMessage.Index));
-            client.DeleteMessage(discussionMessage.Index, cancellationToken);
+            client.DeleteMessage(discussionMessage, cancellationToken);
         }
 
         /// <summary>
