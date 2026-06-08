@@ -213,6 +213,18 @@
   <data name="Logger_Format_AssigningMimeMessageIndex" xml:space="preserve">
     <value>Asignando índice {0} a {1}.</value>
   </data>
+  <data name="Logger_BouncedEmailNotForwardedToOwner" xml:space="preserve">
+    <value>Bounce notification is not forwarded to the list owner. Details follow.</value>
+  </data>
+  <data name="Logger_Format_BouncedEmailExplanation" xml:space="preserve">
+    <value>Bounce explanation: {0}</value>
+  </data>
+  <data name="Logger_Format_BouncedEmailReport" xml:space="preserve">
+    <value>Bounce on list '{0}': recipient={1}, action={2}, status={3}, diagnostic={4}, remote-mta={5}, bounce-message-id={6}, original-subject='{7}', original-message-id={8}, matched-contact={9}, matched-email={10}</value>
+  </data>
+  <data name="Logger_Format_BouncedOriginalMessageFrom" xml:space="preserve">
+    <value>Bounced original message from: {0}</value>
+  </data>
   <data name="Logger_Format_AuthenticatingAs" xml:space="preserve">
     <value>Autenticándose como {0}.</value>
   </data>

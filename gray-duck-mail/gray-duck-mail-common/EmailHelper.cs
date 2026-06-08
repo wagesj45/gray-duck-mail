@@ -630,6 +630,178 @@ namespace GrayDuckMail.Common
             return message;
         }
 
+        /// <summary> Details extracted from a delivery-status notification. </summary>
+        public class BounceReport
+        {
+            /// <summary> Gets or sets the failed recipient address. </summary>
+            public string Recipient { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the delivery action from the status report. </summary>
+            public string Action { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the delivery status code from the status report. </summary>
+            public string Status { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the diagnostic code from the status report. </summary>
+            public string DiagnosticCode { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the remote MTA named in the status report. </summary>
+            public string RemoteMta { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the bounce notification message identifier. </summary>
+            public string BounceMessageId { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the bounce notification sender address. </summary>
+            public string BounceFrom { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the subject of the original bounced message. </summary>
+            public string OriginalSubject { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the message identifier of the original bounced message. </summary>
+            public string OriginalMessageId { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the sender of the original bounced message. </summary>
+            public string OriginalFrom { get; set; } = string.Empty;
+
+            /// <summary> Gets or sets the human-readable explanation from the bounce notification. </summary>
+            public string Explanation { get; set; } = string.Empty;
+
+            /// <summary> Gets the raw status report lines extracted from the notification. </summary>
+            public IList<string> StatusDetails { get; } = new List<string>();
+        }
+
+        /// <summary> Extracts delivery failure details from a bounce notification. </summary>
+        /// <param name="message"> The bounce notification. </param>
+        /// <returns> The extracted bounce report. </returns>
+        public static BounceReport GetBounceReport(IndexedMimeMessage message)
+        {
+            var report = new BounceReport();
+
+            if (message?.Message == null)
+            {
+                return report;
+            }
+
+            report.BounceMessageId = message.Message.MessageId;
+            report.BounceFrom = message.Message.From?.Mailboxes.FirstOrDefault()?.Address ?? string.Empty;
+            report.Explanation = message.Message.TextBody ?? string.Empty;
+
+            var embeddedMessage = GetEmbeddedMessage(message.Message.Body);
+            if (embeddedMessage != null)
+            {
+                report.OriginalSubject = embeddedMessage.Subject;
+                report.OriginalMessageId = embeddedMessage.MessageId;
+                report.OriginalFrom = embeddedMessage.From?.Mailboxes.FirstOrDefault()?.Address ?? string.Empty;
+            }
+
+            if (!(message.Message.Body is Multipart multipartMessage))
+            {
+                return report;
+            }
+
+            foreach (var deliveryStatus in multipartMessage.OfType<MessageDeliveryStatus>())
+            {
+                foreach (var statusGroup in deliveryStatus.StatusGroups)
+                {
+                    var action = statusGroup["Action"]?.Trim() ?? string.Empty;
+                    if (string.IsNullOrWhiteSpace(action)
+                        || !BouncedEmailStatusGroupActions.Contains(action.ToLowerInvariant()))
+                    {
+                        continue;
+                    }
+
+                    report.Action = action;
+                    report.Status = statusGroup["Status"]?.Trim() ?? string.Empty;
+                    report.DiagnosticCode = statusGroup["Diagnostic-Code"]?.Trim() ?? string.Empty;
+                    report.RemoteMta = statusGroup["Remote-MTA"]?.Trim() ?? string.Empty;
+
+                    var recipient = statusGroup["Original-Recipient"]
+                        ?? statusGroup["Failed-Recipient"]
+                        ?? statusGroup["Final-Recipient"];
+
+                    if (recipient != null)
+                    {
+                        var addressParts = recipient.Split(';');
+                        report.Recipient = (addressParts.Length > 1 ? addressParts[1] : addressParts[0]).Trim().ToLowerInvariant();
+                    }
+
+                    foreach (var group in statusGroup)
+                    {
+                        report.StatusDetails.Add(string.Format("{0}: {1}", group.Field, group.Value));
+                    }
+
+                    return report;
+                }
+            }
+
+            return report;
+        }
+
+        /// <summary>
+        /// Logs a bounce notification because these messages are not forwarded to the list owner.
+        /// </summary>
+        /// <param name="log">            The logger. </param>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="report">         The bounce report. </param>
+        /// <param name="subscription">   The matched subscription, if any. </param>
+        public static void LogBounceReport(Logger log, DiscussionList discussionList, BounceReport report, ContactSubscription subscription)
+        {
+            log.Info(LanguageHelper.GetValue(ResourceName.Logger_BouncedEmailNotForwardedToOwner));
+            log.Info(LanguageHelper.FormatValue(
+                ResourceName.Logger_Format_BouncedEmailReport,
+                discussionList.Name,
+                string.IsNullOrWhiteSpace(report.Recipient) ? "UNKNOWN" : report.Recipient,
+                string.IsNullOrWhiteSpace(report.Action) ? "UNKNOWN" : report.Action,
+                string.IsNullOrWhiteSpace(report.Status) ? "UNKNOWN" : report.Status,
+                string.IsNullOrWhiteSpace(report.DiagnosticCode) ? "UNKNOWN" : report.DiagnosticCode,
+                string.IsNullOrWhiteSpace(report.RemoteMta) ? "UNKNOWN" : report.RemoteMta,
+                string.IsNullOrWhiteSpace(report.BounceMessageId) ? "UNKNOWN" : report.BounceMessageId,
+                string.IsNullOrWhiteSpace(report.OriginalSubject) ? "UNKNOWN" : report.OriginalSubject,
+                string.IsNullOrWhiteSpace(report.OriginalMessageId) ? "UNKNOWN" : report.OriginalMessageId,
+                subscription?.Contact?.Name ?? "NONE",
+                subscription?.Contact?.Email ?? "NONE"));
+
+            foreach (var statusDetail in report.StatusDetails)
+            {
+                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_FailureStatusGroupsLine, "status", statusDetail));
+            }
+
+            if (!string.IsNullOrWhiteSpace(report.OriginalFrom))
+            {
+                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedOriginalMessageFrom, report.OriginalFrom));
+            }
+
+            if (!string.IsNullOrWhiteSpace(report.Explanation))
+            {
+                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedEmailExplanation, report.Explanation.Trim()));
+            }
+        }
+
+        /// <summary> Gets the original message embedded in a bounce notification, if present. </summary>
+        /// <param name="body"> The message body. </param>
+        /// <returns> The embedded message. </returns>
+        private static MimeMessage GetEmbeddedMessage(MimeEntity body)
+        {
+            if (body is MessagePart messagePart)
+            {
+                return messagePart.Message;
+            }
+
+            if (body is Multipart multipart)
+            {
+                foreach (var part in multipart)
+                {
+                    var embeddedMessage = GetEmbeddedMessage(part);
+                    if (embeddedMessage != null)
+                    {
+                        return embeddedMessage;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Query if a messaged is a bounced message by determining if there is an error action code per
         /// <see cref="GetBouncedMessageRecipient(IndexedMimeMessage)"/>.

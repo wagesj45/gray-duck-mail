@@ -321,11 +321,13 @@ namespace GrayDuckMail.Web.Worker
         private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage bounce)
         {
             var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
-            var bouncedOriginallyTo = EmailHelper.GetBouncedMessageRecipient(bounce);
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
-                .Where(subscription => subscription.Contact.Email == bouncedFrom.Address || subscription.Contact.Email == bouncedOriginallyTo)
-                .SingleOrDefault();
+            var bounceReport = EmailHelper.GetBounceReport(bounce);
+            var bouncedOriginallyTo = string.IsNullOrWhiteSpace(bounceReport.Recipient)
+                ? EmailHelper.GetBouncedMessageRecipient(bounce)
+                : bounceReport.Recipient;
+            var subscription = FindSubscriptionByBounce(database, discussionList, bouncedOriginallyTo, bouncedFrom?.Address);
+
+            EmailHelper.LogBounceReport(logger, discussionList, bounceReport, subscription);
 
             if (subscription != null)
             {
@@ -541,6 +543,57 @@ namespace GrayDuckMail.Web.Worker
 
             return ResolveMatch(subscriptions.Where(subscription =>
                 EmailHelper.EmailsMatch(subscription.Contact.Email, senderEmail)));
+        }
+
+        /// <summary> Finds the subscription that matches a delivery failure notification. </summary>
+        /// <param name="database">              The database. </param>
+        /// <param name="discussionList">        The discussion list. </param>
+        /// <param name="bouncedRecipient">      The recipient named in the bounce report. </param>
+        /// <param name="bouncedSenderAddress">  The sender named in the bounce report. </param>
+        /// <returns> The subscription, if one can be determined unambiguously. </returns>
+        private static ContactSubscription FindSubscriptionByBounce(
+            SqliteDatabase database,
+            DiscussionList discussionList,
+            string bouncedRecipient,
+            string bouncedSenderAddress)
+        {
+            var subscriptions = database.ContactSubscriptions
+                .Where(subscription => subscription.DiscussionListID == discussionList.ID)
+                .Include(subscription => subscription.Contact)
+                .AsEnumerable()
+                .Where(subscription => subscription.Contact != null && !string.IsNullOrWhiteSpace(subscription.Contact.Email))
+                .ToList();
+
+            ContactSubscription ResolveExactMatch(string address)
+            {
+                if (string.IsNullOrWhiteSpace(address) || string.Equals(address, "UNKNOWN_ADDRESS", StringComparison.OrdinalIgnoreCase))
+                {
+                    return null;
+                }
+
+                var exactMatches = subscriptions
+                    .Where(subscription => string.Equals(subscription.Contact.Email, address, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                if (exactMatches.Count == 1)
+                {
+                    return exactMatches[0];
+                }
+
+                var baseMatches = subscriptions
+                    .Where(subscription => EmailHelper.EmailsMatch(subscription.Contact.Email, address))
+                    .ToList();
+
+                return baseMatches.Count == 1 ? baseMatches[0] : null;
+            }
+
+            var recipientMatch = ResolveExactMatch(bouncedRecipient);
+            if (recipientMatch != null)
+            {
+                return recipientMatch;
+            }
+
+            return ResolveExactMatch(bouncedSenderAddress);
         }
 
         /// <summary> Determines whether a message references the given email address. </summary>

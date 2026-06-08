@@ -358,6 +358,42 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bounce notification is not forwarded to the list owner. Details follow..
+        /// </summary>
+        internal static string Logger_BouncedEmailNotForwardedToOwner {
+            get {
+                return ResourceManager.GetString("Logger_BouncedEmailNotForwardedToOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bounce explanation: {0}.
+        /// </summary>
+        internal static string Logger_Format_BouncedEmailExplanation {
+            get {
+                return ResourceManager.GetString("Logger_Format_BouncedEmailExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bounce on list &apos;{0}&apos;: recipient={1}, action={2}, status={3}, diagnostic={4}, remote-mta={5}, bounce-message-id={6}, original-subject=&apos;{7}&apos;, original-message-id={8}, matched-contact={9}, matched-email={10}.
+        /// </summary>
+        internal static string Logger_Format_BouncedEmailReport {
+            get {
+                return ResourceManager.GetString("Logger_Format_BouncedEmailReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bounced original message from: {0}.
+        /// </summary>
+        internal static string Logger_Format_BouncedOriginalMessageFrom {
+            get {
+                return ResourceManager.GetString("Logger_Format_BouncedOriginalMessageFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authenticating as {0}..
         /// </summary>
         internal static string Logger_Format_AuthenticatingAs {
