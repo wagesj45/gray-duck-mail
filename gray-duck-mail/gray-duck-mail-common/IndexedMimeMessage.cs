@@ -1,4 +1,5 @@
-﻿using GrayDuckMail.Common.Localization;
+using GrayDuckMail.Common.Localization;
+using MailKit;
 using MimeKit;
 using NLog;
 using System;
@@ -35,6 +36,13 @@ namespace GrayDuckMail.Common
         /// <value> The message. </value>
         public MimeMessage Message { get; private set; }
 
+        /// <summary>
+        /// Gets the IMAP unique identifier for this message when fetched over IMAP. POP3 clients leave
+        /// this unset.
+        /// </summary>
+        /// <value> The IMAP unique identifier. </value>
+        public UniqueId? ImapUniqueId { get; private set; }
+
         #endregion
 
         #region Constructors
@@ -56,15 +64,19 @@ namespace GrayDuckMail.Common
         /// </summary>
         /// <param name="index">           The index. </param>
         /// <param name="originalMessage"> The original message object. </param>
+        /// <param name="imapUniqueId">
+        ///     (Optional) The IMAP unique identifier for <paramref name="originalMessage"/>.
+        /// </param>
         /// <returns> An indexed message. </returns>
-        public static IndexedMimeMessage IndexMimeMessage(int index, MimeMessage originalMessage)
+        public static IndexedMimeMessage IndexMimeMessage(int index, MimeMessage originalMessage, UniqueId? imapUniqueId = null)
         {
             logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_AssigningMimeMessageIndex, index, originalMessage.MessageId));
 
             var indexedMimeMessage = new IndexedMimeMessage
             {
                 Index = index,
-                Message = originalMessage
+                Message = originalMessage,
+                ImapUniqueId = imapUniqueId
             };
 
             return indexedMimeMessage;
