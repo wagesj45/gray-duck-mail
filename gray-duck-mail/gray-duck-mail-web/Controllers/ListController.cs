@@ -119,7 +119,10 @@ namespace GrayDuckMail.Web.Controllers
             discussionList.Description = formInput.Description;
             discussionList.BaseEmailAddress = formInput.BaseEmailAddress;
             discussionList.UserName = formInput.UserName;
-            discussionList.Password = formInput.Password;
+            if (!string.IsNullOrEmpty(formInput.Password))
+            {
+                discussionList.Password = formInput.Password;
+            }
             discussionList.IncomingMailServer = formInput.IncomingMailServer;
             discussionList.IncomingMailPort = formInput.IncomingMailPort;
             discussionList.OutgoingMailServer = formInput.OutgoingMailServer;
@@ -251,6 +254,12 @@ namespace GrayDuckMail.Web.Controllers
         [Route("List/Assign")]
         public IActionResult Assign(DiscussionListAssignForm formInput)
         {
+            if (formInput == null || formInput.ContactID == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_FormInputMalformed, "/List/Assign"));
+                return View("Error");
+            }
+
             foreach (var assignment in formInput.Assignments)
             {
                 var subscription = this.SqliteDatabase.ContactSubscriptions
