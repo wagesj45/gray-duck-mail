@@ -66,7 +66,6 @@ namespace GrayDuckMail.Common
             get
             {
                 yield return SubscriptionStatus.Subscribed;
-                yield return SubscriptionStatus.AwaitingConfirmation;
             }
         }
 
@@ -114,6 +113,56 @@ namespace GrayDuckMail.Common
                 yield return STATUS_GROUP_ACTION_FAILED;
                 yield return STATUS_GROUP_ACTION_DELAYED;
             }
+        }
+
+        /// <summary> Gets the mailbox portion of an address without a plus-tag suffix. </summary>
+        /// <param name="email"> The email address. </param>
+        /// <returns> The base mailbox address. </returns>
+        /// <remarks>
+        /// For example, <c>user+tag@example.com</c> and <c>user@example.com</c> both normalize to
+        /// <c>user@example.com</c>.
+        /// </remarks>
+        public static string GetBaseEmailAddress(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return email;
+            }
+
+            var atIndex = email.LastIndexOf('@');
+            if (atIndex <= 0)
+            {
+                return email;
+            }
+
+            var localPart = email.Substring(0, atIndex);
+            var domain = email.Substring(atIndex);
+            var plusIndex = localPart.IndexOf('+');
+            if (plusIndex > 0)
+            {
+                localPart = localPart.Substring(0, plusIndex);
+            }
+
+            return localPart + domain;
+        }
+
+        /// <summary> Determines whether two addresses refer to the same mailbox. </summary>
+        /// <param name="first">  The first address. </param>
+        /// <param name="second"> The second address. </param>
+        /// <returns> True if the addresses match exactly or share the same base mailbox. </returns>
+        public static bool EmailsMatch(string first, string second)
+        {
+            if (string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(second))
+            {
+                return false;
+            }
+
+            if (string.Equals(first, second, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return string.Equals(GetBaseEmailAddress(first), GetBaseEmailAddress(second), StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary> Gets the default HTML email template. </summary>
