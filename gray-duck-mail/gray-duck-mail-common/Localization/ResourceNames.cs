@@ -73,6 +73,14 @@ namespace GrayDuckMail.Common.Localization
 				Logger_Format_AssigningContact,
 		/// <summary> Assigning index {0} to {1}. </summary>
 				Logger_Format_AssigningMimeMessageIndex,
+		/// <summary> Bounce notification is not forwarded to the list owner. Details follow. </summary>
+				Logger_BouncedEmailNotForwardedToOwner,
+		/// <summary> Bounce explanation: {0} </summary>
+				Logger_Format_BouncedEmailExplanation,
+		/// <summary> Bounce on list '{0}': recipient={1}, action={2}, status={3}, diagnostic={4}, remote-mta={5}, bounce-message-id={6}, original-subject='{7}', original-message-id={8}, matched-contact={9}, matched-email={10} </summary>
+				Logger_Format_BouncedEmailReport,
+		/// <summary> Bounced original message from: {0} </summary>
+				Logger_Format_BouncedOriginalMessageFrom,
 		/// <summary> Authenticating as {0}. </summary>
 				Logger_Format_AuthenticatingAs,
 		/// <summary> Authenticating with {0}:{1}. </summary>
