@@ -490,6 +490,12 @@
     <value>- {0} からのメッセージ</value>
     <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
   </data>
+  <data name="Mail_Format_TextRelayOriginatorMessage" xml:space="preserve">
+    <value>From: {0} ({1})</value>
+  </data>
+  <data name="Mail_Format_HTMLRelayOriginatorMessage" xml:space="preserve">
+    <value>&lt;strong&gt;From:&lt;/strong&gt; {0} &amp;lt;{1}&amp;gt;</value>
+  </data>
   <data name="Mail_Format_SubscriptionConfirmationBody" xml:space="preserve">
     <value>よろしくお願いします。ディスカッション リストの全員にメッセージを送信するには、&lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt; にメールを送信します。グループの誰かからメッセージを受け取ったら、そのメールに返信するだけで、ディスカッション リストの全員がコピーを受け取ります。</value>
   </data>

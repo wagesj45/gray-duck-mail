@@ -258,6 +258,10 @@ namespace GrayDuckMail.Common.Localization
 		/// <summary> - Message from {0} </summary>
 		 /// <remarks> It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space. </remarks>
 				Mail_Format_SubjectReplace,
+		/// <summary> From: {0} ({1}) </summary>
+				Mail_Format_TextRelayOriginatorMessage,
+		/// <summary> &lt;strong&gt;From:&lt;/strong&gt; {0} &amp;lt;{1}&amp;gt; </summary>
+				Mail_Format_HTMLRelayOriginatorMessage,
 		/// <summary> Glad to have you. To send a message to everyone on the discussion list, just send an email to <a href='mailto:{0}'>{0}</a>. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy. </summary>
 				Mail_Format_SubscriptionConfirmationBody,
 		/// <summary> You've been subscribed to the '{0}' Email Discussion List </summary>

@@ -1186,6 +1186,24 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From: {0} ({1}).
+        /// </summary>
+        internal static string Mail_Format_TextRelayOriginatorMessage {
+            get {
+                return ResourceManager.GetString("Mail_Format_TextRelayOriginatorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;From:&lt;/strong&gt; {0} &amp;lt;{1}&amp;gt;.
+        /// </summary>
+        internal static string Mail_Format_HTMLRelayOriginatorMessage {
+            get {
+                return ResourceManager.GetString("Mail_Format_HTMLRelayOriginatorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Glad to have you. To send a message to everyone on the discussion list, just send an email to &lt;a href=&apos;mailto:{0}&apos;&gt;{0}&lt;/a&gt;. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy..
         /// </summary>
         internal static string Mail_Format_SubscriptionConfirmationBody {

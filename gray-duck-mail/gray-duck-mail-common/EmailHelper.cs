@@ -348,6 +348,11 @@ namespace GrayDuckMail.Common
         {
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_RelayingMessage, recipient.Name, recipient.Email));
 
+            var originator = GetMessageOriginator(message, database);
+            var posterName = string.IsNullOrWhiteSpace(originator?.Name) ? "Unknown" : originator.Name;
+            var posterEmail = string.IsNullOrWhiteSpace(originator?.Email) ? "unknown" : originator.Email;
+            var fromDisplayName = $"{posterName} via {discussionList.Name}";
+
             var relay = SendEmail(discussionList,
                 recipient,
                 LanguageHelper.FormatValue(ResourceName.Mail_Format_Subject, message.Subject.Replace(LanguageHelper.FormatValue(ResourceName.Mail_Format_SubjectReplace, discussionList.Name), ""), discussionList.Name),
@@ -374,6 +379,10 @@ namespace GrayDuckMail.Common
 
                             bodyNode = html.DocumentNode;
                         }
+
+                        var originatorHeader = html.CreateElement("p");
+                        originatorHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLRelayOriginatorMessage, posterName, posterEmail);
+                        bodyNode.PrependChild(originatorHeader);
 
                         var techHeader = html.CreateElement("mark");
                         if (UsingUnsubscribeUri)
@@ -419,7 +428,8 @@ namespace GrayDuckMail.Common
                             techHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextUnsubscribeEmailMessage, discussionList.Name, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                         }
                         var cleanedText = message.BodyText.Replace(techHeader, "");
-                        var modifiedText = string.Format("{0}{1}{2}", cleanedText, Environment.NewLine, techHeader);
+                        var originatorHeader = LanguageHelper.FormatValue(ResourceName.Mail_Format_TextRelayOriginatorMessage, posterName, posterEmail);
+                        var modifiedText = string.Format("{0}{1}{2}{1}{3}", originatorHeader, Environment.NewLine, cleanedText, techHeader);
 
                         return new TextPart(TextFormat.Text)
                         {
@@ -432,7 +442,8 @@ namespace GrayDuckMail.Common
                     throw formatException;
                 },
                 client,
-                stoppingToken
+                stoppingToken,
+                fromDisplayName
                 );
 
             var relayIdentifier = new RelayIdentifier()
@@ -602,13 +613,14 @@ namespace GrayDuckMail.Common
         /// <param name="bodyGenerator">     The <see cref="MimeEntity">body generator</see> function. </param>
         /// <param name="client">            The SMTP client. </param>
         /// <param name="cancellationToken"> (Optional) A token that allows processing to be cancelled. </param>
+        /// <param name="fromDisplayName">   (Optional) The sender display name. Defaults to the discussion list name. </param>
         /// <returns> A MimeMessage. </returns>
-        public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default)
+        public static MimeMessage SendEmail(DiscussionList discussionList, Contact recipient, string subject, string replyTo, Func<MimeEntity> bodyGenerator, SmtpClient client, CancellationToken cancellationToken = default, string fromDisplayName = null)
         {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GeneratingEmail));
 
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(discussionList.Name, discussionList.BaseEmailAddress));
+            message.From.Add(new MailboxAddress(fromDisplayName ?? discussionList.Name, discussionList.BaseEmailAddress));
             message.ReplyTo.Add(new MailboxAddress(discussionList.Name, replyTo));
             message.To.Add(new MailboxAddress(recipient.Name, recipient.Email));
             message.Subject = subject;
@@ -875,6 +887,25 @@ namespace GrayDuckMail.Common
             }
 
             return string.Empty;
+        }
+
+        /// <summary> Gets the contact who sent a relayed message. </summary>
+        /// <param name="message">  The relayed message. </param>
+        /// <param name="database"> The database. </param>
+        /// <returns> The originator contact, if one can be determined. </returns>
+        private static Contact GetMessageOriginator(Message message, SqliteDatabase database)
+        {
+            if (message?.OriginatorContact != null)
+            {
+                return message.OriginatorContact;
+            }
+
+            if (message == null || message.OriginatorContactID == 0 || database == null)
+            {
+                return null;
+            }
+
+            return database.Contacts.Find(message.OriginatorContactID);
         }
 
         #endregion

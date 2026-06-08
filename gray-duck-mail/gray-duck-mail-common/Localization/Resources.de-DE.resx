@@ -493,6 +493,12 @@
     <value> - Nachricht von {0}</value>
     <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
   </data>
+  <data name="Mail_Format_TextRelayOriginatorMessage" xml:space="preserve">
+    <value>From: {0} ({1})</value>
+  </data>
+  <data name="Mail_Format_HTMLRelayOriginatorMessage" xml:space="preserve">
+    <value>&lt;strong&gt;From:&lt;/strong&gt; {0} &amp;lt;{1}&amp;gt;</value>
+  </data>
   <data name="Mail_Format_SubscriptionConfirmationBody" xml:space="preserve">
     <value>Schön, dass Sie da sind. Um eine Nachricht an alle Mitglieder der Diskussionsliste zu senden, senden Sie einfach eine E-Mail an &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;. Wenn Sie eine Nachricht von jemandem aus der Gruppe erhalten, können Sie einfach auf diese E-Mail antworten, und alle Mitglieder der Diskussionsliste erhalten eine Kopie.</value>
   </data>
