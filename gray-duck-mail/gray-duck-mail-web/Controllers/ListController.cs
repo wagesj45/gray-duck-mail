@@ -267,6 +267,8 @@ namespace GrayDuckMail.Web.Controllers
                     .Include(subscription => subscription.Contact)
                     .FirstOrDefault();
 
+                var suppressSelfRelay = formInput.SuppressSelfRelay ?? Array.Empty<int>();
+
                 if (assignment.IsAssigned)
                 {
                     if (subscription == null)
@@ -276,9 +278,14 @@ namespace GrayDuckMail.Web.Controllers
                         {
                             ContactID = assignment.ContactID,
                             DiscussionListID = formInput.DiscussionListID,
-                            Status = SubscriptionStatus.Created
+                            Status = SubscriptionStatus.Created,
+                            SuppressSelfRelay = false
                         };
                         this.SqliteDatabase.ContactSubscriptions.Add(subscription);
+                    }
+                    else if (subscription.Status == SubscriptionStatus.Subscribed)
+                    {
+                        subscription.SuppressSelfRelay = suppressSelfRelay.Contains(assignment.ContactID);
                     }
                     if (subscription.Status == SubscriptionStatus.Requested)
                     {
@@ -293,6 +300,11 @@ namespace GrayDuckMail.Web.Controllers
                 }
                 else
                 {
+                    if (subscription != null && subscription.Status == SubscriptionStatus.Subscribed)
+                    {
+                        subscription.SuppressSelfRelay = suppressSelfRelay.Contains(assignment.ContactID);
+                    }
+
                     if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status) && subscription.Contact.Activated)
                     {
                         logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnassigningContact, assignment.ContactID, formInput.DiscussionListID));

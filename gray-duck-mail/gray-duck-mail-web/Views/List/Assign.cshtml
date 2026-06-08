@@ -69,6 +69,23 @@
                         <!-- Unknown Subscription Status. -->
                         break;
                 }
+                @if (Model.HasSubscription(contact.ID) && subscriptionStatus == SubscriptionStatus.Subscribed)
+                {
+                    var suppressSelfRelay = Model.GetSuppressSelfRelay(contact.ID);
+                    var suppressSelfRelayTooltip = suppressSelfRelay
+                        ? LanguageHelper.GetValue(ResourceName.View_List_Assign_EnableSelfRelay)
+                        : LanguageHelper.GetValue(ResourceName.View_List_Assign_SuppressSelfRelay);
+                    <label class="suppress-self-relay-toggle"
+                           data-tooltip="@suppressSelfRelayTooltip"
+                           data-tooltip-suppress="@LanguageHelper.GetValue(ResourceName.View_List_Assign_SuppressSelfRelay)"
+                           data-tooltip-relay="@LanguageHelper.GetValue(ResourceName.View_List_Assign_EnableSelfRelay)">
+                        <input type="checkbox"
+                               name="suppressSelfRelay"
+                               value="@contact.ID"
+                               @(suppressSelfRelay ? "checked" : "") />
+                        <i class="icofont-loop" aria-hidden="true"></i>
+                    </label>
+                }
                 @if (subscriptionStatus == SubscriptionStatus.AwaitingConfirmation || subscriptionStatus == SubscriptionStatus.Created || subscriptionStatus == SubscriptionStatus.Bounced)
                 {
                     var retryTooltip = subscriptionStatus == SubscriptionStatus.Bounced
@@ -82,3 +99,16 @@
     }
     <button type="submit">@LanguageHelper.GetValue(ResourceName.View_Common_SaveChanges)</button>
 </form>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.suppress-self-relay-toggle input').forEach(function (input) {
+            input.addEventListener('change', function () {
+                var label = input.closest('.suppress-self-relay-toggle');
+                label.dataset.tooltip = input.checked
+                    ? label.dataset.tooltipRelay
+                    : label.dataset.tooltipSuppress;
+            });
+        });
+    </script>
+}

@@ -2302,6 +2302,24 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click to send my posts back to me.
+        /// </summary>
+        internal static string View_List_Assign_EnableSelfRelay {
+            get {
+                return ResourceManager.GetString("View_List_Assign_EnableSelfRelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to skip sending my posts back to me.
+        /// </summary>
+        internal static string View_List_Assign_SuppressSelfRelay {
+            get {
+                return ResourceManager.GetString("View_List_Assign_SuppressSelfRelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discussion List Assignments.
         /// </summary>
         internal static string View_List_Assign_Title {

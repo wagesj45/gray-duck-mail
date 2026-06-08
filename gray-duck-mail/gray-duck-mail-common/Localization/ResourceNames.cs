@@ -532,6 +532,10 @@ namespace GrayDuckMail.Common.Localization
 				View_List_Assign_SubheadingPart2,
 		/// <summary> This user is subscribed to this discussion list. </summary>
 				View_List_Assign_Subscribed,
+		/// <summary> Click to send my posts back to me </summary>
+				View_List_Assign_EnableSelfRelay,
+		/// <summary> Click to skip sending my posts back to me </summary>
+				View_List_Assign_SuppressSelfRelay,
 		/// <summary> Discussion List Assignments </summary>
 				View_List_Assign_Title,
 		/// <summary> This user has unsubscribed from this discussion list. </summary>

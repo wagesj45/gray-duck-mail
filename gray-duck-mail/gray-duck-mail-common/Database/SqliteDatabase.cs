@@ -124,6 +124,7 @@ namespace GrayDuckMail.Common.Database
         {
             this.DatabaseFilePath = new Uri(databaseFilePath);
             EnsureDatabaseFile(this.DatabaseFilePath);
+            EnsureSchemaUpdates();
         }
 
         #endregion
@@ -154,6 +155,80 @@ namespace GrayDuckMail.Common.Database
                 {
                     logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_DBNotCreated, databaseFilePath.AbsolutePath));
                     throw new FileNotFoundException(LanguageHelper.GetValue(ResourceName.Exception_DBNotCreated), databaseFilePath.AbsolutePath);
+                }
+            }
+        }
+
+        /// <summary> Applies schema updates needed for existing database files. </summary>
+        private void EnsureSchemaUpdates()
+        {
+            var connection = Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+            {
+                connection.Open();
+            }
+
+            try
+            {
+                var schemaVersion = 0;
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "PRAGMA user_version";
+                    schemaVersion = Convert.ToInt32(command.ExecuteScalar());
+                }
+
+                var hasSuppressSelfRelayColumn = false;
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "PRAGMA table_info(ContactSubscription)";
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (string.Equals(reader.GetString(1), "SuppressSelfRelay", StringComparison.OrdinalIgnoreCase))
+                            {
+                                hasSuppressSelfRelayColumn = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (!hasSuppressSelfRelayColumn)
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "ALTER TABLE ContactSubscription ADD COLUMN SuppressSelfRelay INTEGER NOT NULL DEFAULT 0";
+                        command.ExecuteNonQuery();
+                    }
+
+                    hasSuppressSelfRelayColumn = true;
+                    schemaVersion = Math.Max(schemaVersion, 1);
+                }
+
+                if (hasSuppressSelfRelayColumn && schemaVersion < 2)
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "UPDATE ContactSubscription SET SuppressSelfRelay = 0";
+                        command.ExecuteNonQuery();
+                    }
+
+                    schemaVersion = 2;
+                }
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = $"PRAGMA user_version = {schemaVersion}";
+                    command.ExecuteNonQuery();
+                }
+            }
+            finally
+            {
+                if (shouldClose)
+                {
+                    connection.Close();
                 }
             }
         }
@@ -228,6 +303,8 @@ namespace GrayDuckMail.Common.Database
                 .WithMany(e => e.Subscriptions)
                 .HasForeignKey(e => e.DiscussionListID)
                 .IsRequired();
+                entity.Property(e => e.SuppressSelfRelay)
+                .HasDefaultValue(false);
             });
 
             //Describe the DiscussionList table.

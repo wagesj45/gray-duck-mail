@@ -40,6 +40,13 @@ namespace GrayDuckMail.Web.Models.Forms
         public int[] Assigned { get; set; }
 
         /// <summary>
+        /// Gets or sets the contact identifiers that should not receive their own list posts when they
+        /// are the sender.
+        /// </summary>
+        /// <value> The contact identifiers with self-relay suppressed. </value>
+        public int[] SuppressSelfRelay { get; set; }
+
+        /// <summary>
         /// Gets the assignments connecting <see cref="ContactID">contacts</see> to the
         /// <see cref="DiscussionListID">discussion list</see>.
         /// </summary>

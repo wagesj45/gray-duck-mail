@@ -6,10 +6,45 @@
     gap: 0.5rem;
 }
 
+.assign-actions label {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    width: auto;
+}
+
 .assign-actions a,
 .assign-actions span {
     display: inline-flex;
     align-items: center;
+}
+
+.assign-actions .suppress-self-relay-toggle {
+    cursor: pointer;
+}
+
+.assign-actions .suppress-self-relay-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.assign-actions .suppress-self-relay-toggle i {
+    font-size: 1.25em;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.assign-actions .suppress-self-relay-toggle input:checked + i {
+    opacity: 0.35;
+}
+
+.assign-actions .suppress-self-relay-toggle input:focus-visible + i {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
 .message {
