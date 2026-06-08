@@ -490,6 +490,12 @@
     <value>- Mensaje de {0}</value>
     <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
   </data>
+  <data name="Mail_Format_TextRelayOriginatorMessage" xml:space="preserve">
+    <value>From: {0} ({1})</value>
+  </data>
+  <data name="Mail_Format_HTMLRelayOriginatorMessage" xml:space="preserve">
+    <value>&lt;strong&gt;From:&lt;/strong&gt; {0} &amp;lt;{1}&amp;gt;</value>
+  </data>
   <data name="Mail_Format_SubscriptionConfirmationBody" xml:space="preserve">
     <value>Afortunado de tenerte. Para enviar un mensaje a todos los que están en la lista de discusión, simplemente envíe un correo electrónico a &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;. Cuando recibe un mensaje de alguien en el grupo, simplemente puede responder a ese correo electrónico y todos en la lista de discusión recibirán una copia.</value>
   </data>
