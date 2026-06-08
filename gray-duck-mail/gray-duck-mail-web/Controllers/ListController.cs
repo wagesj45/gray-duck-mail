@@ -308,6 +308,61 @@ namespace GrayDuckMail.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary> Queues another onboarding confirmation email for a pending contact. </summary>
+        /// <remarks> Fulfills the <c>/List/ResendConfirmation</c> request. </remarks>
+        /// <param name="discussionListID"> Identifier for the discussion list. </param>
+        /// <param name="contactID"> Identifier for the contact. </param>
+        /// <returns> A response to return to the caller. </returns>
+        [Route("List/ResendConfirmation/{discussionListID}/{contactID}")]
+        public IActionResult ResendConfirmation(int discussionListID, int contactID)
+        {
+            var subscription = this.SqliteDatabase.ContactSubscriptions
+                .Include(subscription => subscription.Contact)
+                .Include(subscription => subscription.DiscussionList)
+                .Where(subscription => subscription.DiscussionListID == discussionListID && subscription.ContactID == contactID)
+                .SingleOrDefault();
+
+            if (subscription?.Contact == null || subscription.DiscussionList == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_CouldNotFindContact, contactID));
+                return View("Error");
+            }
+
+            if (subscription.Status != SubscriptionStatus.AwaitingConfirmation
+                && subscription.Status != SubscriptionStatus.Created
+                && subscription.Status != SubscriptionStatus.Bounced)
+            {
+                return RedirectToAction("Assign", new { discussionListID });
+            }
+
+            if (subscription.Status == SubscriptionStatus.Bounced)
+            {
+                subscription.Contact.Activated = true;
+            }
+
+            logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingOnboardingEmail, subscription.Contact.Name, subscription.Contact.Email));
+
+            SharedMemory.AddEmail(EmailDefinition.CreateOnboarding(subscription.DiscussionList, subscription.Contact));
+            subscription.Status = SubscriptionStatus.AwaitingConfirmation;
+            this.SqliteDatabase.SaveChanges();
+
+            if (DockerEnvironmentVariables.WebOnly)
+            {
+                var emailDefinition = SharedMemory.PopEmail();
+
+                if (emailDefinition != null)
+                {
+                    using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
+                    {
+                        EmailHelper.SendOnboardingEmail(emailDefinition.DiscussionList, emailDefinition.Contact, smtpClient);
+                        smtpClient.Disconnect(true);
+                    }
+                }
+            }
+
+            return RedirectToAction("Assign", new { discussionListID });
+        }
+
         /// <summary> Queues a test message in the form of an Owner Requst notification. </summary>
         /// <remarks> Fulfills the <c>/List/Test</c> request. </remarks>
         /// <param name="discussionListID"> Identifier for the discussion list. </param>

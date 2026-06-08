@@ -1,4 +1,17 @@
 ﻿/* Any custom CSS will go here. */
+.assign-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.assign-actions a,
+.assign-actions span {
+    display: inline-flex;
+    align-items: center;
+}
+
 .message {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;

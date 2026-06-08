@@ -520,6 +520,10 @@ namespace GrayDuckMail.Common.Localization
 				View_List_Assign_InvitationsProcessing,
 		/// <summary> This user has asked to participate in the discussion list. </summary>
 				View_List_Assign_Requested,
+		/// <summary> Resend confirmation </summary>
+				View_List_Assign_ResendConfirmation,
+		/// <summary> Retry invitation </summary>
+				View_List_Assign_Retry,
 		/// <summary> Assign contacts to </summary>
 		 /// <remarks> This formatted string is manually split to avoid issues with the HTML view engine. </remarks>
 				View_List_Assign_SubheadingPart1,

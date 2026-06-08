@@ -2257,6 +2257,24 @@ namespace GrayDuckMail.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resend confirmation.
+        /// </summary>
+        internal static string View_List_Assign_ResendConfirmation {
+            get {
+                return ResourceManager.GetString("View_List_Assign_ResendConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retry invitation.
+        /// </summary>
+        internal static string View_List_Assign_Retry {
+            get {
+                return ResourceManager.GetString("View_List_Assign_Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assign contacts to.
         /// </summary>
         internal static string View_List_Assign_SubheadingPart1 {

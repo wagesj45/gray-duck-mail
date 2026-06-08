@@ -871,6 +871,12 @@
   <data name="View_List_Assign_Requested" xml:space="preserve">
     <value>Este usuario ha solicitado participar en la lista de discusión.</value>
   </data>
+  <data name="View_List_Assign_ResendConfirmation" xml:space="preserve">
+    <value>Resend confirmation</value>
+  </data>
+  <data name="View_List_Assign_Retry" xml:space="preserve">
+    <value>Retry invitation</value>
+  </data>
   <data name="View_List_Assign_SubheadingPart1" xml:space="preserve">
     <value>Asignar contactos a</value>
     <comment>This formatted string is manually split to avoid issues with the HTML view engine.</comment>
