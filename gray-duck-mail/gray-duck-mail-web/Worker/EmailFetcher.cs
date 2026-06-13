@@ -25,6 +25,20 @@ namespace GrayDuckMail.Web.Worker
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Envelope-only recipient headers that mail servers may add when alias forwarding does not
+        /// populate standard recipient fields.
+        /// </summary>
+        private static readonly string[] KnownEnvelopeRecipientHeaders = new[]
+        {
+            "Delivered-To",
+            "X-Original-To",
+            "X-Envelope-To",
+            "Envelope-To",
+            "X-Forwarded-To",
+            "X-Real-To"
+        };
+
         #endregion
 
         #region Methods
@@ -68,13 +82,13 @@ namespace GrayDuckMail.Web.Worker
                                 logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingAs, discussionList.UserName));
                                 client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
 
-                                var emailMessages = client.GetIndexedMessages(cancellationToken);
+                                var emailMessages = client.GetRetrievedMessages(cancellationToken);
                                 
                                 if (emailMessages.Any())
                                 {
                                     logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingMessages, emailMessages.Count()));
 
-                                    var filteredSubscribe = FilterSubscribeMessages(emailMessages, discussionList, database);
+                                    var filteredSubscribe = FilterSubscribeMessages(emailMessages, discussionList);
                                     var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                                     var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
                                     var filteredBouncedToBounceAlias = FilterMessages(emailMessages, EmailAliasHelper.GetBounceAlias(discussionList));
@@ -162,13 +176,13 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
+        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
         {
             var from = GetSenderAddress(subscriptionConfirmation.Message);
             if (from == null)
             {
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorized, discussionList.Name));
-                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
                 client.DeleteMessage(subscriptionConfirmation, cancellationToken);
                 return;
             }
@@ -184,7 +198,7 @@ namespace GrayDuckMail.Web.Worker
             if (subscription == null)
             {
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorizedFrom, from.Name, from.Address));
-                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
                 client.DeleteMessage(subscriptionConfirmation, cancellationToken);
                 return;
             }
@@ -192,7 +206,7 @@ namespace GrayDuckMail.Web.Worker
             if (subscription.Status == SubscriptionStatus.Subscribed)
             {
                 logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserAlreadySubscribed, subscription.Contact.Name, discussionList.Name));
-                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
                 client.DeleteMessage(subscriptionConfirmation, cancellationToken);
                 return;
             }
@@ -210,7 +224,7 @@ namespace GrayDuckMail.Web.Worker
 
             SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
             client.DeleteMessage(subscriptionConfirmation, cancellationToken);
         }
 
@@ -222,13 +236,13 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="database">                The database. </param>
         /// <param name="client">              The email client. </param>
         /// <param name="unsubscribeConfirmation"> The unsubscribe confirmation. </param>
-        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage unsubscribeConfirmation)
+        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
             if (from == null)
             {
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorized, discussionList.Name));
-                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.ServerIdentifier));
                 client.DeleteMessage(unsubscribeConfirmation);
                 return;
             }
@@ -238,7 +252,7 @@ namespace GrayDuckMail.Web.Worker
             if (subscription == null)
             {
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorizedFrom, from.Name, from.Address));
-                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.ServerIdentifier));
                 client.DeleteMessage(unsubscribeConfirmation);
                 return;
             }
@@ -248,7 +262,7 @@ namespace GrayDuckMail.Web.Worker
 
             SharedMemory.AddEmail(EmailDefinition.CreateUnsubscriptionConfirmation(discussionList, subscription.Contact));
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.ServerIdentifier));
             client.DeleteMessage(unsubscribeConfirmation);
         }
 
@@ -262,7 +276,7 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage request, CancellationToken cancellationToken = default)
+        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage request, CancellationToken cancellationToken = default)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
             var subscription = FindSubscriptionBySenderEmail(database, discussionList, from?.Address, request.Message);
@@ -309,7 +323,7 @@ namespace GrayDuckMail.Web.Worker
                 }
             }
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, request.Message.MessageId, request.Index));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, request.Message.MessageId, request.ServerIdentifier));
             client.DeleteMessage(request, cancellationToken);
         }
 
@@ -318,7 +332,7 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="database">       The database. </param>
         /// <param name="client">     The email client. </param>
         /// <param name="bounce">         The bounced message. </param>
-        private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage bounce)
+        private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage bounce)
         {
             var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
             var bounceReport = EmailHelper.GetBounceReport(bounce);
@@ -340,7 +354,7 @@ namespace GrayDuckMail.Web.Worker
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnsubscribedBounce, discussionList.Name));
             }
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, bounce.Message.MessageId, bounce.Index));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, bounce.Message.MessageId, bounce.ServerIdentifier));
             client.DeleteMessage(bounce);
         }
 
@@ -357,7 +371,7 @@ namespace GrayDuckMail.Web.Worker
         ///     <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" />
         ///     is called.
         /// </param>
-        private static void ProcessDiscussionMessages(DiscussionList discussionList, IndexedMimeMessage discussionMessage, SqliteDatabase database, EmailClientWrapper client, CancellationToken cancellationToken = default)
+        private static void ProcessDiscussionMessages(DiscussionList discussionList, RetrievedMessage discussionMessage, SqliteDatabase database, EmailClientWrapper client, CancellationToken cancellationToken = default)
         {
             logger.Debug(discussionMessage.ToString());
 
@@ -366,14 +380,6 @@ namespace GrayDuckMail.Web.Worker
                 .Where(subscription => subscription.Contact != null
                     && EmailHelper.EmailsMatch(subscription.Contact.Email, from?.Address))
                 .SingleOrDefault();
-
-            if (originatorSubscription != null
-                && (originatorSubscription.Status == SubscriptionStatus.AwaitingConfirmation
-                    || originatorSubscription.Status == SubscriptionStatus.Created))
-            {
-                ProcessSubscriptionConfirmations(discussionList, database, client, discussionMessage, cancellationToken);
-                return;
-            }
 
             if (originatorSubscription != null && EmailHelper.ContactAuthorizedStatuses.Contains(originatorSubscription.Status))
             {
@@ -428,46 +434,22 @@ namespace GrayDuckMail.Web.Worker
                 }
             }
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, discussionMessage.Message.MessageId, discussionMessage.Index));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, discussionMessage.Message.MessageId, discussionMessage.ServerIdentifier));
             client.DeleteMessage(discussionMessage, cancellationToken);
         }
 
         /// <summary>
-        /// Filter messages intended to confirm a subscription, including replies that were sent to the
-        /// list base address instead of the subscribe alias.
+        /// Filter messages addressed to the list subscribe alias.
         /// </summary>
         /// <param name="messages">       The messages. </param>
         /// <param name="discussionList"> The discussion list. </param>
-        /// <param name="database">       The database. </param>
         /// <returns> Subscription confirmation messages. </returns>
-        private IEnumerable<IndexedMimeMessage> FilterSubscribeMessages(IEnumerable<IndexedMimeMessage> messages, DiscussionList discussionList, SqliteDatabase database)
+        private IEnumerable<RetrievedMessage> FilterSubscribeMessages(IEnumerable<RetrievedMessage> messages, DiscussionList discussionList)
         {
             var subscribeAlias = EmailAliasHelper.GetSubscribeAlias(discussionList);
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessages, subscribeAlias));
 
-            var pendingSubscriptions = database.ContactSubscriptions
-                .Where(subscription => subscription.DiscussionListID == discussionList.ID)
-                .Where(subscription => subscription.Status == SubscriptionStatus.AwaitingConfirmation || subscription.Status == SubscriptionStatus.Created)
-                .Include(subscription => subscription.Contact)
-                .AsEnumerable()
-                .Where(subscription => subscription.Contact != null && !string.IsNullOrWhiteSpace(subscription.Contact.Email))
-                .ToList();
-
-            return messages.Where(message =>
-            {
-                if (IsAddressedTo(message.Message, subscribeAlias))
-                {
-                    return true;
-                }
-
-                var from = GetSenderAddress(message.Message);
-                if (from == null)
-                {
-                    return false;
-                }
-
-                return pendingSubscriptions.Any(subscription => EmailHelper.EmailsMatch(subscription.Contact.Email, from.Address));
-            });
+            return messages.Where(message => IsAddressedTo(message.Message, subscribeAlias));
         }
 
         /// <summary> Finds a list subscription for the sender's email address. </summary>
@@ -642,22 +624,9 @@ namespace GrayDuckMail.Web.Worker
                 return true;
             }
 
-            foreach (var headerName in new[] { "Delivered-To", "X-Original-To", "X-Envelope-To", "Envelope-To", "X-Forwarded-To", "X-Real-To" })
+            foreach (var headerName in KnownEnvelopeRecipientHeaders)
             {
                 if (HeaderContainsAddress(message, headerName, address))
-                {
-                    return true;
-                }
-            }
-
-            for (int i = 0; i < message.Headers.Count; i++)
-            {
-                if (!message.Headers[i].Field.Equals("Received", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                if (AddressAppearsInHeaderValue(message.Headers[i].Value, address))
                 {
                     return true;
                 }
@@ -720,7 +689,7 @@ namespace GrayDuckMail.Web.Worker
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
-        private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, string emailToAddress)
+        private IEnumerable<RetrievedMessage> FilterMessages(IEnumerable<RetrievedMessage> messages, string emailToAddress)
         {
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessages, emailToAddress));
 
@@ -736,7 +705,7 @@ namespace GrayDuckMail.Web.Worker
         /// An enumerator that allows foreach to be used to process filter bounced messages in this
         /// collection.
         /// </returns>
-        private IEnumerable<IndexedMimeMessage> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
+        private IEnumerable<RetrievedMessage> FilterBouncedMessages(IEnumerable<RetrievedMessage> messages)
         {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FilteringBouncedMessages));
 
@@ -745,24 +714,24 @@ namespace GrayDuckMail.Web.Worker
 
         /// <summary>
         /// Filter messages based on the a user provided
-        /// <see cref="Func{IndexedMimeMessage, Bool}">function</see>.
+        /// <see cref="Func{RetrievedMessage, Bool}">function</see>.
         /// </summary>
         /// <param name="messages"> The messages. </param>
         /// <param name="filter">   Specifies the filtering function. </param>
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
-        private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, Func<IndexedMimeMessage, bool> filter)
+        private IEnumerable<RetrievedMessage> FilterMessages(IEnumerable<RetrievedMessage> messages, Func<RetrievedMessage, bool> filter)
         {
             logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringCount, messages.Count()));
 
-            var filteredMessages = new List<IndexedMimeMessage>();
+            var filteredMessages = new List<RetrievedMessage>();
             foreach (var message in messages)
             {
-                logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessage, message.Index));
+                logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessage, message.ServerIdentifier));
                 if (filter(message))
                 {
-                    logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilterMatch, message.Index));
+                    logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilterMatch, message.ServerIdentifier));
                     filteredMessages.Add(message);
                 }
             }

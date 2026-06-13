@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -115,12 +116,13 @@ namespace GrayDuckMail.Common
             }
         }
 
-        /// <summary> Gets the mailbox portion of an address without a plus-tag suffix. </summary>
+        /// <summary> Gets the mailbox portion of an address without a subaddress detail suffix. </summary>
         /// <param name="email"> The email address. </param>
         /// <returns> The base mailbox address. </returns>
         /// <remarks>
-        /// For example, <c>user+tag@example.com</c> and <c>user@example.com</c> both normalize to
-        /// <c>user@example.com</c>.
+        /// When <see cref="TagAddressingSeparator"/> is set, the local-part is truncated at the first
+        /// occurrence of that separator. For example, with separator <c>+</c>,
+        /// <c>user+tag@example.com</c> normalizes to <c>user@example.com</c>.
         /// </remarks>
         public static string GetBaseEmailAddress(string email)
         {
@@ -137,10 +139,14 @@ namespace GrayDuckMail.Common
 
             var localPart = email.Substring(0, atIndex);
             var domain = email.Substring(atIndex);
-            var plusIndex = localPart.IndexOf('+');
-            if (plusIndex > 0)
+            var separator = TagAddressingSeparator;
+            if (separator != null)
             {
-                localPart = localPart.Substring(0, plusIndex);
+                var separatorIndex = localPart.IndexOf(separator);
+                if (separatorIndex > 0)
+                {
+                    localPart = localPart.Substring(0, separatorIndex);
+                }
             }
 
             return localPart + domain;
@@ -149,7 +155,10 @@ namespace GrayDuckMail.Common
         /// <summary> Determines whether two addresses refer to the same mailbox. </summary>
         /// <param name="first">  The first address. </param>
         /// <param name="second"> The second address. </param>
-        /// <returns> True if the addresses match exactly or share the same base mailbox. </returns>
+        /// <returns>
+        /// True if the addresses match exactly, or if <see cref="TagAddressingSeparator"/> is set and
+        /// they share the same base mailbox after removing a subaddress detail suffix.
+        /// </returns>
         public static bool EmailsMatch(string first, string second)
         {
             if (string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(second))
@@ -162,7 +171,56 @@ namespace GrayDuckMail.Common
                 return true;
             }
 
+            if (TagAddressingSeparator == null)
+            {
+                return false;
+            }
+
             return string.Equals(GetBaseEmailAddress(first), GetBaseEmailAddress(second), StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// Gets the subaddress separator character when tag addressing normalization is enabled.
+        /// </summary>
+        /// <remarks>
+        /// Controlled by the <c>ENABLE_TAG_ADDRESSING</c> environment variable. Set to <c>+</c> or
+        /// <c>-</c> to enable normalization using that separator character sequence, as described in
+        /// RFC 5233 subaddressing. Unset or empty disables normalization.
+        /// </remarks>
+        /// <value> The separator character, or <see langword="null"/> when disabled. </value>
+        public static string TagAddressingSeparator
+        {
+            get => tagAddressingSeparator.Value;
+        }
+
+        /// <summary>
+        /// Gets whether subaddress normalization is enabled for sender and recipient matching.
+        /// </summary>
+        /// <value> True when <see cref="TagAddressingSeparator"/> is set. </value>
+        public static bool EnableTagAddressing
+        {
+            get => TagAddressingSeparator != null;
+        }
+
+        private static readonly Lazy<string> tagAddressingSeparator = new Lazy<string>(ParseTagAddressingSeparator);
+
+        private static string ParseTagAddressingSeparator()
+        {
+            var value = Environment.GetEnvironmentVariable("ENABLE_TAG_ADDRESSING");
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return null;
+            }
+
+            value = value.Trim();
+
+            if (value == "+" || value == "-")
+            {
+                return value;
+            }
+
+            return null;
         }
 
         /// <summary> Gets the default HTML email template. </summary>
@@ -216,39 +274,23 @@ namespace GrayDuckMail.Common
         #region Methods
 
         /// <summary> Configures an externally accessible unsubscribe link. </summary>
-        /// <param name="baseUrl">    The base URL. </param>
+        /// <param name="baseUrl">    The external hostname. </param>
         /// <param name="secure">     True if using HTTPS, false if not. </param>
         /// <param name="hashSecret">
         ///     The secret token used for creating a secure unsubscribe link.
         /// </param>
-        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure, string hashSecret)
+        /// <param name="externalPort">
+        ///     (Optional) The external port for unsubscribe links. Defaults to 443 when
+        ///     <paramref name="secure"/> is true, otherwise 80.
+        /// </param>
+        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure, string hashSecret, int? externalPort = null)
         {
-            UriBuilder builder;
-
-            if (baseUrl.Contains("://"))
+            var builder = new UriBuilder
             {
-                builder = new UriBuilder(baseUrl);
-            }
-            else
-            {
-                builder = new UriBuilder
-                {
-                    Scheme = secure ? "https" : "http"
-                };
-
-                var host = baseUrl;
-                var port = secure ? 443 : 80;
-                var colonIndex = baseUrl.LastIndexOf(':');
-
-                if (colonIndex > 0 && int.TryParse(baseUrl.Substring(colonIndex + 1), out var explicitPort))
-                {
-                    host = baseUrl.Substring(0, colonIndex);
-                    port = explicitPort;
-                }
-
-                builder.Host = host;
-                builder.Port = port;
-            }
+                Scheme = secure ? "https" : "http",
+                Host = baseUrl,
+                Port = externalPort ?? (secure ? 443 : 80)
+            };
 
             unsubscribeUri = builder.Uri;
             usingUnsubscribeUri = true;
@@ -381,7 +423,10 @@ namespace GrayDuckMail.Common
                         }
 
                         var originatorHeader = html.CreateElement("p");
-                        originatorHeader.InnerHtml = LanguageHelper.FormatValue(ResourceName.Mail_Format_HTMLRelayOriginatorMessage, posterName, posterEmail);
+                        originatorHeader.InnerHtml = LanguageHelper.FormatValue(
+                            ResourceName.Mail_Format_HTMLRelayOriginatorMessage,
+                            WebUtility.HtmlEncode(posterName),
+                            WebUtility.HtmlEncode(posterEmail));
                         bodyNode.PrependChild(originatorHeader);
 
                         var techHeader = html.CreateElement("mark");
@@ -685,7 +730,7 @@ namespace GrayDuckMail.Common
         /// <summary> Extracts delivery failure details from a bounce notification. </summary>
         /// <param name="message"> The bounce notification. </param>
         /// <returns> The extracted bounce report. </returns>
-        public static BounceReport GetBounceReport(IndexedMimeMessage message)
+        public static BounceReport GetBounceReport(RetrievedMessage message)
         {
             var report = new BounceReport();
 
@@ -758,8 +803,8 @@ namespace GrayDuckMail.Common
         /// <param name="subscription">   The matched subscription, if any. </param>
         public static void LogBounceReport(Logger log, DiscussionList discussionList, BounceReport report, ContactSubscription subscription)
         {
-            log.Info(LanguageHelper.GetValue(ResourceName.Logger_BouncedEmailNotForwardedToOwner));
-            log.Info(LanguageHelper.FormatValue(
+            log.Debug(LanguageHelper.GetValue(ResourceName.Logger_BouncedEmailNotForwardedToOwner));
+            log.Debug(LanguageHelper.FormatValue(
                 ResourceName.Logger_Format_BouncedEmailReport,
                 discussionList.Name,
                 string.IsNullOrWhiteSpace(report.Recipient) ? "UNKNOWN" : report.Recipient,
@@ -775,17 +820,17 @@ namespace GrayDuckMail.Common
 
             foreach (var statusDetail in report.StatusDetails)
             {
-                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_FailureStatusGroupsLine, "status", statusDetail));
+                log.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FailureStatusGroupsLine, "status", statusDetail));
             }
 
             if (!string.IsNullOrWhiteSpace(report.OriginalFrom))
             {
-                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedOriginalMessageFrom, report.OriginalFrom));
+                log.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedOriginalMessageFrom, report.OriginalFrom));
             }
 
             if (!string.IsNullOrWhiteSpace(report.Explanation))
             {
-                log.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedEmailExplanation, report.Explanation.Trim()));
+                log.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_BouncedEmailExplanation, report.Explanation.Trim()));
             }
         }
 
@@ -816,12 +861,12 @@ namespace GrayDuckMail.Common
 
         /// <summary>
         /// Query if a messaged is a bounced message by determining if there is an error action code per
-        /// <see cref="GetBouncedMessageRecipient(IndexedMimeMessage)"/>.
+        /// <see cref="GetBouncedMessageRecipient(RetrievedMessage)"/>.
         /// </summary>
         /// <param name="message"> The message. </param>
         /// <returns> True if the message is bounced, false if not. </returns>
-        /// <seealso cref="GetBouncedMessageRecipient(IndexedMimeMessage)"/>
-        public static bool IsBouncedMessage(IndexedMimeMessage message)
+        /// <seealso cref="GetBouncedMessageRecipient(RetrievedMessage)"/>
+        public static bool IsBouncedMessage(RetrievedMessage message)
         {
             var bounced = !string.IsNullOrWhiteSpace(GetBouncedMessageRecipient(message));
 
@@ -834,7 +879,7 @@ namespace GrayDuckMail.Common
         /// </exception>
         /// <param name="message"> The message. </param>
         /// <returns> The bounced message recipient. </returns>
-        public static string GetBouncedMessageRecipient(IndexedMimeMessage message)
+        public static string GetBouncedMessageRecipient(RetrievedMessage message)
         {
             if (message == null)
             {

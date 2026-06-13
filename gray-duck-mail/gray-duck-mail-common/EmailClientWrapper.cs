@@ -214,88 +214,71 @@ namespace GrayDuckMail.Common
         /// <returns> The messages. </returns>
         public IList<MimeMessage> GetMessages(CancellationToken cancellationToken = default)
         {
-            return GetIndexedMessages(cancellationToken).Select(indexedMessage => indexedMessage.Message).ToList();
+            return GetRetrievedMessages(cancellationToken).Select(retrievedMessage => retrievedMessage.Message).ToList();
         }
 
-        /// <summary> Gets all messages with server-specific indexing metadata. </summary>
+        /// <summary> Gets all messages with server-specific retrieval metadata. </summary>
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        /// <returns> The indexed messages. </returns>
-        public IList<IndexedMimeMessage> GetIndexedMessages(CancellationToken cancellationToken = default)
+        /// <returns> The retrieved messages. </returns>
+        public IList<RetrievedMessage> GetRetrievedMessages(CancellationToken cancellationToken = default)
         {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GettingMessages));
 
-            return PerformClientMethod<IList<IndexedMimeMessage>>(
+            return PerformClientMethod<IList<RetrievedMessage>>(
             pop3Client =>
             {
                 if(pop3Client.Count > 0)
                 {
                     var messages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: cancellationToken);
-                    return messages.Select((message, index) => IndexedMimeMessage.IndexMimeMessage(index, message)).ToList();
+                    return messages.Select((message, index) => RetrievedMessage.FromPop3(index, message)).ToList();
                 }
 
-                return Enumerable.Empty<IndexedMimeMessage>().ToList();
+                return Enumerable.Empty<RetrievedMessage>().ToList();
             },
             (imapClient, imapFolder) =>
             {
                 if(imapFolder.Count > 0)
                 {
                     var summaries = imapFolder.Fetch(0, -1, MessageSummaryItems.UniqueId, cancellationToken);
-                    return summaries.Select((summary, index) =>
-                        IndexedMimeMessage.IndexMimeMessage(index, imapFolder.GetMessage(summary.UniqueId), summary.UniqueId))
+                    return summaries.Select(summary =>
+                        RetrievedMessage.FromImap(summary.UniqueId, imapFolder.GetMessage(summary.UniqueId)))
                         .ToList();
                 }
 
-                return Enumerable.Empty<IndexedMimeMessage>().ToList();
+                return Enumerable.Empty<RetrievedMessage>().ToList();
             }
             );
         }
 
         /// <summary> Marks the specified message for deletion. </summary>
-        /// <param name="indexedMessage">    The indexed message. </param>
+        /// <param name="message">           The retrieved message. </param>
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        public void DeleteMessage(IndexedMimeMessage indexedMessage, CancellationToken cancellationToken = default)
+        public void DeleteMessage(RetrievedMessage message, CancellationToken cancellationToken = default)
         {
-            DeleteMessage(indexedMessage.Index, indexedMessage.ImapUniqueId, cancellationToken);
-        }
-
-        /// <summary> Marks the specified message for deletion. </summary>
-        /// <param name="index">             Zero-based index of the message. </param>
-        /// <param name="cancellationToken">
-        ///     (Optional) A token that allows processing to be cancelled.
-        /// </param>
-        public void DeleteMessage(int index, CancellationToken cancellationToken = default)
-        {
-            DeleteMessage(index, imapUniqueId: null, cancellationToken: cancellationToken);
-        }
-
-        /// <summary> Marks the specified message for deletion. </summary>
-        /// <param name="index">             Zero-based index of the message. </param>
-        /// <param name="imapUniqueId">
-        ///     (Optional) The IMAP unique identifier to delete when using an IMAP client.
-        /// </param>
-        /// <param name="cancellationToken">
-        ///     (Optional) A token that allows processing to be cancelled.
-        /// </param>
-        private void DeleteMessage(int index, UniqueId? imapUniqueId, CancellationToken cancellationToken = default)
-        {
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_DeletingMessage, index));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_DeletingMessage, message.ServerIdentifier));
 
             PerformClientMethod(
-            pop3Client => pop3Client.DeleteMessage(index),
+            pop3Client =>
+            {
+                if (!message.Pop3Index.HasValue)
+                {
+                    throw new InvalidOperationException("POP3 deletion requires a POP3 message index.");
+                }
+
+                pop3Client.DeleteMessage(message.Pop3Index.Value);
+            },
             (imapClient, imapFolder) =>
             {
-                if (imapUniqueId.HasValue)
+                if (!message.ImapUniqueId.HasValue)
                 {
-                    imapFolder.SetFlags(imapUniqueId.Value, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
+                    throw new InvalidOperationException("IMAP deletion requires an IMAP unique identifier.");
                 }
-                else
-                {
-                    imapFolder.SetFlags(index, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
-                }
+
+                imapFolder.SetFlags(message.ImapUniqueId.Value, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
             }
             );
         }
