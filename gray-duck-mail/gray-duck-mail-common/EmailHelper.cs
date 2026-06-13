@@ -120,8 +120,8 @@ namespace GrayDuckMail.Common
         /// <param name="email"> The email address. </param>
         /// <returns> The base mailbox address. </returns>
         /// <remarks>
-        /// When <see cref="TagAddressingSeparator"/> is set, the local-part is truncated at the first
-        /// occurrence of that separator. For example, with separator <c>+</c>,
+        /// When <see cref="EnableTagAddressing"/> is true, the local-part is truncated at the first
+        /// <c>+</c> (RFC 5233 / Gmail-style subaddressing). For example,
         /// <c>user+tag@example.com</c> normalizes to <c>user@example.com</c>.
         /// </remarks>
         public static string GetBaseEmailAddress(string email)
@@ -139,13 +139,12 @@ namespace GrayDuckMail.Common
 
             var localPart = email.Substring(0, atIndex);
             var domain = email.Substring(atIndex);
-            var separator = TagAddressingSeparator;
-            if (separator != null)
+            if (EnableTagAddressing)
             {
-                var separatorIndex = localPart.IndexOf(separator);
-                if (separatorIndex > 0)
+                var plusIndex = localPart.IndexOf('+');
+                if (plusIndex > 0)
                 {
-                    localPart = localPart.Substring(0, separatorIndex);
+                    localPart = localPart.Substring(0, plusIndex);
                 }
             }
 
@@ -156,8 +155,8 @@ namespace GrayDuckMail.Common
         /// <param name="first">  The first address. </param>
         /// <param name="second"> The second address. </param>
         /// <returns>
-        /// True if the addresses match exactly, or if <see cref="TagAddressingSeparator"/> is set and
-        /// they share the same base mailbox after removing a subaddress detail suffix.
+        /// True if the addresses match exactly, or if <see cref="EnableTagAddressing"/> is true and
+        /// they share the same base mailbox after removing a plus-tag suffix.
         /// </returns>
         public static bool EmailsMatch(string first, string second)
         {
@@ -171,7 +170,7 @@ namespace GrayDuckMail.Common
                 return true;
             }
 
-            if (TagAddressingSeparator == null)
+            if (!EnableTagAddressing)
             {
                 return false;
             }
@@ -180,48 +179,40 @@ namespace GrayDuckMail.Common
         }
 
         /// <summary>
-        /// Gets the subaddress separator character when tag addressing normalization is enabled.
+        /// Gets whether plus-tag address normalization is enabled for sender and recipient matching.
         /// </summary>
         /// <remarks>
-        /// Controlled by the <c>ENABLE_TAG_ADDRESSING</c> environment variable. Set to <c>+</c> or
-        /// <c>-</c> to enable normalization using that separator character sequence, as described in
-        /// RFC 5233 subaddressing. Unset or empty disables normalization.
+        /// Controlled by the <c>ENABLE_TAG_ADDRESSING</c> environment variable (<c>0</c> = off,
+        /// <c>1</c> = on). When enabled, addresses are normalized at the first <c>+</c> in the
+        /// local-part per RFC 5233 subaddressing.
         /// </remarks>
-        /// <value> The separator character, or <see langword="null"/> when disabled. </value>
-        public static string TagAddressingSeparator
-        {
-            get => tagAddressingSeparator.Value;
-        }
-
-        /// <summary>
-        /// Gets whether subaddress normalization is enabled for sender and recipient matching.
-        /// </summary>
-        /// <value> True when <see cref="TagAddressingSeparator"/> is set. </value>
+        /// <value> True when plus-tag normalization is enabled. </value>
         public static bool EnableTagAddressing
         {
-            get => TagAddressingSeparator != null;
+            get => enableTagAddressing.Value;
         }
 
-        private static readonly Lazy<string> tagAddressingSeparator = new Lazy<string>(ParseTagAddressingSeparator);
-
-        private static string ParseTagAddressingSeparator()
+        private static readonly Lazy<bool> enableTagAddressing = new Lazy<bool>(() =>
         {
             var value = Environment.GetEnvironmentVariable("ENABLE_TAG_ADDRESSING");
 
             if (string.IsNullOrWhiteSpace(value))
             {
-                return null;
+                return false;
             }
 
-            value = value.Trim();
-
-            if (value == "+" || value == "-")
+            if (bool.TryParse(value.Trim(), out var parsedBool))
             {
-                return value;
+                return parsedBool;
             }
 
-            return null;
-        }
+            if (int.TryParse(value.Trim(), out var parsedInt))
+            {
+                return parsedInt != 0;
+            }
+
+            return false;
+        });
 
         /// <summary> Gets the default HTML email template. </summary>
         /// <remarks>

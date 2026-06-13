@@ -340,25 +340,17 @@ namespace GrayDuckMail.Web
         }
 
         /// <summary>
-        /// Gets the subaddress separator character when tag addressing normalization is enabled.
+        /// Gets whether plus-tag address normalization is enabled when matching senders and
+        /// recipients.
         /// </summary>
         /// <remarks>
-        /// Set <c>ENABLE_TAG_ADDRESSING</c> to <c>+</c> or <c>-</c> (RFC 5233). Unset disables
-        /// normalization.
+        /// Set <c>ENABLE_TAG_ADDRESSING</c> to <c>1</c> to enable (normalizes at <c>+</c> only).
+        /// Defaults to off.
         /// </remarks>
-        /// <value> The separator character, or <see langword="null"/> when disabled. </value>
-        public static string TagAddressingSeparator
-        {
-            get => EmailHelper.TagAddressingSeparator;
-        }
-
-        /// <summary>
-        /// Gets whether subaddress normalization is enabled when matching senders and recipients.
-        /// </summary>
-        /// <value> True when <see cref="TagAddressingSeparator"/> is set. </value>
+        /// <value> True when plus-tag normalization is enabled. </value>
         public static bool EnableTagAddressing
         {
-            get => TagAddressingSeparator != null;
+            get => EmailHelper.EnableTagAddressing;
         }
 
         /// <summary> Gets the web secret. </summary>
