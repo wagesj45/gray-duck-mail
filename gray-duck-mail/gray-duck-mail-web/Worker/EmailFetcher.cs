@@ -594,9 +594,9 @@ namespace GrayDuckMail.Web.Worker
                 return true;
             }
 
-            for (int i = 0; i < message.Headers.Count; i++)
+            foreach (var headerName in KnownEnvelopeRecipientHeaders)
             {
-                if (AddressAppearsInHeaderValue(message.Headers[i].Value, address))
+                if (HeaderContainsAddress(message, headerName, address))
                 {
                     return true;
                 }

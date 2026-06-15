@@ -121,8 +121,7 @@ namespace GrayDuckMail.Common
         /// <returns> The base mailbox address. </returns>
         /// <remarks>
         /// When <see cref="EnableTagAddressing"/> is true, the local-part is truncated at the first
-        /// <c>+</c> (RFC 5233 / Gmail-style subaddressing). For example,
-        /// <c>user+tag@example.com</c> normalizes to <c>user@example.com</c>.
+        /// <c>+</c> or <c>-</c> separator character per RFC 5233 subaddressing.
         /// </remarks>
         public static string GetBaseEmailAddress(string email)
         {
@@ -142,9 +141,11 @@ namespace GrayDuckMail.Common
             if (EnableTagAddressing)
             {
                 var plusIndex = localPart.IndexOf('+');
-                if (plusIndex > 0)
+                var hyphenIndex = localPart.IndexOf('-');
+                var separatorIndex = new[] { plusIndex, hyphenIndex }.Where(index => index > 0).DefaultIfEmpty(-1).Min();
+                if (separatorIndex > 0)
                 {
-                    localPart = localPart.Substring(0, plusIndex);
+                    localPart = localPart.Substring(0, separatorIndex);
                 }
             }
 
@@ -156,7 +157,7 @@ namespace GrayDuckMail.Common
         /// <param name="second"> The second address. </param>
         /// <returns>
         /// True if the addresses match exactly, or if <see cref="EnableTagAddressing"/> is true and
-        /// they share the same base mailbox after removing a plus-tag suffix.
+        /// they share the same base mailbox after removing a tag suffix.
         /// </returns>
         public static bool EmailsMatch(string first, string second)
         {
@@ -179,14 +180,13 @@ namespace GrayDuckMail.Common
         }
 
         /// <summary>
-        /// Gets whether plus-tag address normalization is enabled for sender and recipient matching.
+        /// Gets whether tag-address normalization is enabled for sender and recipient matching.
         /// </summary>
         /// <remarks>
-        /// Controlled by the <c>ENABLE_TAG_ADDRESSING</c> environment variable (<c>0</c> = off,
-        /// <c>1</c> = on). When enabled, addresses are normalized at the first <c>+</c> in the
-        /// local-part per RFC 5233 subaddressing.
+        /// Controlled by the <c>ENABLE_TAG_ADDRESSING</c> environment variable. When enabled,
+        /// addresses are normalized at the first <c>+</c> or <c>-</c> in the local-part.
         /// </remarks>
-        /// <value> True when plus-tag normalization is enabled. </value>
+        /// <value> True when tag-address normalization is enabled. </value>
         public static bool EnableTagAddressing
         {
             get => enableTagAddressing.Value;
@@ -206,12 +206,7 @@ namespace GrayDuckMail.Common
                 return parsedBool;
             }
 
-            if (int.TryParse(value.Trim(), out var parsedInt))
-            {
-                return parsedInt != 0;
-            }
-
-            return false;
+            return int.TryParse(value.Trim(), out var parsedInt) && parsedInt != 0;
         });
 
         /// <summary> Gets the default HTML email template. </summary>

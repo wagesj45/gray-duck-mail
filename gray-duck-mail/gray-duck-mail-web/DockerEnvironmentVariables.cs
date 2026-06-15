@@ -340,14 +340,13 @@ namespace GrayDuckMail.Web
         }
 
         /// <summary>
-        /// Gets whether plus-tag address normalization is enabled when matching senders and
-        /// recipients.
+        /// Gets whether tag-address normalization is enabled when matching senders and recipients.
         /// </summary>
         /// <remarks>
-        /// Set <c>ENABLE_TAG_ADDRESSING</c> to <c>1</c> to enable (normalizes at <c>+</c> only).
-        /// Defaults to off.
+        /// Set <c>ENABLE_TAG_ADDRESSING</c> to <c>1</c> or <c>true</c> to normalize both <c>+</c>
+        /// and <c>-</c> tag-address separators. Defaults to off.
         /// </remarks>
-        /// <value> True when plus-tag normalization is enabled. </value>
+        /// <value> True when tag-address normalization is enabled. </value>
         public static bool EnableTagAddressing
         {
             get => EmailHelper.EnableTagAddressing;
