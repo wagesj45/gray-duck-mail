@@ -1,4 +1,4 @@
-﻿using GrayDuckMail.Common.Localization;
+using GrayDuckMail.Common.Localization;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
@@ -199,7 +199,7 @@ namespace GrayDuckMail.Common
         /// </param>
         public void Authenticate(string userName, string password, CancellationToken cancellationToken = default)
         {
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingWith, userName, password));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingAs, userName));
 
             PerformClientMethod(
                 pop3Client => pop3Client.Authenticate(userName, password, cancellationToken: cancellationToken),
@@ -214,46 +214,71 @@ namespace GrayDuckMail.Common
         /// <returns> The messages. </returns>
         public IList<MimeMessage> GetMessages(CancellationToken cancellationToken = default)
         {
+            return GetRetrievedMessages(cancellationToken).Select(retrievedMessage => retrievedMessage.Message).ToList();
+        }
+
+        /// <summary> Gets all messages with server-specific retrieval metadata. </summary>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
+        /// <returns> The retrieved messages. </returns>
+        public IList<RetrievedMessage> GetRetrievedMessages(CancellationToken cancellationToken = default)
+        {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_GettingMessages));
 
-            return PerformClientMethod(
+            return PerformClientMethod<IList<RetrievedMessage>>(
             pop3Client =>
             {
                 if(pop3Client.Count > 0)
                 {
                     var messages = pop3Client.GetMessages(0, pop3Client.Count, cancellationToken: cancellationToken);
-                    return messages;
+                    return messages.Select((message, index) => RetrievedMessage.FromPop3(index, message)).ToList();
                 }
 
-                return Enumerable.Empty<MimeMessage>().ToList();
+                return Enumerable.Empty<RetrievedMessage>().ToList();
             },
             (imapClient, imapFolder) =>
             {
                 if(imapFolder.Count > 0)
                 {
-                    var messages = Enumerable.Range(0, imapFolder.Count).Select(i => imapFolder.GetMessage(i)).ToList();
-                    return messages;
+                    var summaries = imapFolder.Fetch(0, -1, MessageSummaryItems.UniqueId, cancellationToken);
+                    return summaries.Select(summary =>
+                        RetrievedMessage.FromImap(summary.UniqueId, imapFolder.GetMessage(summary.UniqueId)))
+                        .ToList();
                 }
 
-                return Enumerable.Empty<MimeMessage>().ToList();
+                return Enumerable.Empty<RetrievedMessage>().ToList();
             }
             );
         }
 
         /// <summary> Marks the specified message for deletion. </summary>
-        /// <param name="index">             Zero-based index of the message. </param>
+        /// <param name="message">           The retrieved message. </param>
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        public void DeleteMessage(int index, CancellationToken cancellationToken = default)
+        public void DeleteMessage(RetrievedMessage message, CancellationToken cancellationToken = default)
         {
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_DeletingMessage, index));
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_DeletingMessage, message.ServerIdentifier));
 
             PerformClientMethod(
-            pop3Client => pop3Client.DeleteMessage(index),
+            pop3Client =>
+            {
+                if (!message.Pop3Index.HasValue)
+                {
+                    throw new InvalidOperationException("POP3 deletion requires a POP3 message index.");
+                }
+
+                pop3Client.DeleteMessage(message.Pop3Index.Value);
+            },
             (imapClient, imapFolder) =>
             {
-                imapFolder.SetFlags(index, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
+                if (!message.ImapUniqueId.HasValue)
+                {
+                    throw new InvalidOperationException("IMAP deletion requires an IMAP unique identifier.");
+                }
+
+                imapFolder.SetFlags(message.ImapUniqueId.Value, MessageFlags.Deleted, false, cancellationToken: cancellationToken);
             }
             );
         }

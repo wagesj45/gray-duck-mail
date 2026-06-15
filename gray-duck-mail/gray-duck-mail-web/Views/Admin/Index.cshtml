@@ -138,6 +138,14 @@
                 <td>@DockerEnvironmentVariables.WebExternalURL</td>
             </tr>
             <tr>
+                <th scope="row">WEB_EXTERNAL_PORT</th>
+                <td>@(DockerEnvironmentVariables.WebExternalPort?.ToString() ?? (DockerEnvironmentVariables.WebUseHTTPS ? "443" : "80"))</td>
+            </tr>
+            <tr>
+                <th scope="row">ENABLE_TAG_ADDRESSING</th>
+                <td>@DockerEnvironmentVariables.EnableTagAddressing</td>
+            </tr>
+            <tr>
                 <th scope="row">WEB_SECRET</th>
                 <td>@DockerEnvironmentVariables.WebSecret</td>
             </tr>

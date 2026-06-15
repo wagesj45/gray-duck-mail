@@ -46,7 +46,11 @@ namespace GrayDuckMail.Web.Worker
             //Configure Email Unsubscribe Link
             if (DockerEnvironmentVariables.WebUnsubscribe)
             {
-                EmailHelper.ConfigureUnsubscribeLink(DockerEnvironmentVariables.WebExternalURL, DockerEnvironmentVariables.WebUseHTTPS, DockerEnvironmentVariables.WebSecret);
+                EmailHelper.ConfigureUnsubscribeLink(
+                    DockerEnvironmentVariables.WebExternalURL,
+                    DockerEnvironmentVariables.WebUseHTTPS,
+                    DockerEnvironmentVariables.WebSecret,
+                    DockerEnvironmentVariables.WebExternalPort);
             }
 
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningSenderLoop));
@@ -54,9 +58,12 @@ namespace GrayDuckMail.Web.Worker
             {
                 for (int i = 0; i < DockerEnvironmentVariables.RateLimitPerRoundCount; i++)
                 {
+                    EmailDefinition emailDefinition = null;
+                    bool delivered = false;
+
                     try
                     {
-                        var emailDefinition = SharedMemory.PopEmail();
+                        emailDefinition = SharedMemory.PopEmail();
 
                         if (emailDefinition != null)
                         {
@@ -68,6 +75,7 @@ namespace GrayDuckMail.Web.Worker
                                     using (var smtpClient = new SmtpClient())
                                     {
                                         EmailHelper.RelayEmail(emailDefinition.DiscussionList, emailDefinition.Contact, emailDefinition.Message, database, smtpClient, cancellationToken);
+                                        delivered = true;
                                         smtpClient.Disconnect(true, cancellationToken);
                                     }
                                     break;
@@ -75,6 +83,7 @@ namespace GrayDuckMail.Web.Worker
                                     using (var smtpClient = new SmtpClient())
                                     {
                                         EmailHelper.SendOnboardingEmail(emailDefinition.DiscussionList, emailDefinition.Contact, smtpClient, cancellationToken);
+                                        delivered = true;
                                         smtpClient.Disconnect(true, cancellationToken);
                                     }
                                     break;
@@ -82,6 +91,7 @@ namespace GrayDuckMail.Web.Worker
                                     using (var smtpClient = new SmtpClient())
                                     {
                                         EmailHelper.SendRequestOwnerNotificationEmail(emailDefinition.DiscussionList, emailDefinition.Contact, smtpClient, cancellationToken);
+                                        delivered = true;
                                         smtpClient.Disconnect(true, cancellationToken);
                                     }
                                     break;
@@ -89,7 +99,7 @@ namespace GrayDuckMail.Web.Worker
                                     using (var smtpClient = new SmtpClient())
                                     {
                                         EmailHelper.SendSubscriptionConfirmationEmail(emailDefinition.DiscussionList, emailDefinition.Contact, smtpClient, cancellationToken);
-
+                                        delivered = true;
                                         smtpClient.Disconnect(true, cancellationToken);
                                     }
                                     break;
@@ -97,7 +107,7 @@ namespace GrayDuckMail.Web.Worker
                                     using (var smtpClient = new SmtpClient())
                                     {
                                         EmailHelper.SendUnsubscriptionConfirmationEmail(emailDefinition.DiscussionList, emailDefinition.Contact, smtpClient, cancellationToken);
-
+                                        delivered = true;
                                         smtpClient.Disconnect(true, cancellationToken);
                                     }
                                     break;
@@ -116,6 +126,24 @@ namespace GrayDuckMail.Web.Worker
                     {
                         //We want to catch any potential exception so that the loop can continue in case of failure.
                         logger.Error(e);
+
+                        if (emailDefinition == null)
+                        {
+                            continue;
+                        }
+
+                        if (delivered)
+                        {
+                            logger.Warn("SMTP operation failed after successful delivery ({0}); message will not be re-queued.", emailDefinition.Type);
+                            continue;
+                        }
+
+                        if (IsTransientSmtpFailure(e))
+                        {
+                            SharedMemory.AddEmail(emailDefinition);
+                            logger.Warn("Re-queued email after transient SMTP failure ({0}).", emailDefinition.Type);
+                            break;
+                        }
                     }
                 }
 
@@ -126,6 +154,23 @@ namespace GrayDuckMail.Web.Worker
 
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_EmailSenderShutDown));
             return;
+        }
+
+        /// <summary> Determines whether an SMTP failure is transient and safe to retry later. </summary>
+        /// <param name="exception"> The exception. </param>
+        /// <returns> True if the failure is transient. </returns>
+        private static bool IsTransientSmtpFailure(Exception exception)
+        {
+            if (exception is SmtpCommandException smtpException)
+            {
+                var statusCode = (int)smtpException.StatusCode;
+                if (statusCode >= 400 && statusCode < 500)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

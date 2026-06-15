@@ -158,7 +158,20 @@ namespace GrayDuckMail.Web
                 return webExternalUrl;
             }
 
-            return "http://example.com";
+            return "example.com";
+        });
+
+        /// <summary> The docker environment variable for <see cref="WebExternalPort"/>. </summary>
+        private static Lazy<int?> envWebExternalPort = new Lazy<int?>(() =>
+        {
+            var webExternalPort = Environment.GetEnvironmentVariable("WEB_EXTERNAL_PORT");
+
+            if (!string.IsNullOrWhiteSpace(webExternalPort) && int.TryParse(webExternalPort, out var value))
+            {
+                return value;
+            }
+
+            return null;
         });
 
         /// <summary> The docker environment variable for <see cref="Language"/>. </summary>
@@ -301,11 +314,22 @@ namespace GrayDuckMail.Web
         }
 
         /// <summary> Gets a URL used when creating an unsubscribe link. </summary>
-        /// <remarks> The default value is <see langword="true"/>. </remarks>
-        /// <value> The external base URL. </value>
+        /// <remarks> The default value is <c>example.com</c>. </remarks>
+        /// <value> The external hostname. </value>
         public static string WebExternalURL
         {
             get => envWebExternalURL.Value;
+        }
+
+        /// <summary> Gets the external port used when creating an unsubscribe link. </summary>
+        /// <remarks>
+        /// When unset, unsubscribe links use port 443 if <see cref="WebUseHTTPS"/> is true,
+        /// otherwise port 80.
+        /// </remarks>
+        /// <value> The external port, if configured. </value>
+        public static int? WebExternalPort
+        {
+            get => envWebExternalPort.Value;
         }
 
         /// <summary> Gets the localization language. </summary>
@@ -313,6 +337,19 @@ namespace GrayDuckMail.Web
         public static Language Language
         {
             get => envLanguage.Value;
+        }
+
+        /// <summary>
+        /// Gets whether tag-address normalization is enabled when matching senders and recipients.
+        /// </summary>
+        /// <remarks>
+        /// Set <c>ENABLE_TAG_ADDRESSING</c> to <c>1</c> or <c>true</c> to normalize both <c>+</c>
+        /// and <c>-</c> tag-address separators. Defaults to off.
+        /// </remarks>
+        /// <value> True when tag-address normalization is enabled. </value>
+        public static bool EnableTagAddressing
+        {
+            get => EmailHelper.EnableTagAddressing;
         }
 
         /// <summary> Gets the web secret. </summary>

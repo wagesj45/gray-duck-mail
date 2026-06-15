@@ -216,6 +216,18 @@
   <data name="Logger_Format_AssigningMimeMessageIndex" xml:space="preserve">
     <value>Assigning index {0} to {1}.</value>
   </data>
+  <data name="Logger_BouncedEmailNotForwardedToOwner" xml:space="preserve">
+    <value>Bounce notification is not forwarded to the list owner. Details follow.</value>
+  </data>
+  <data name="Logger_Format_BouncedEmailExplanation" xml:space="preserve">
+    <value>Bounce explanation: {0}</value>
+  </data>
+  <data name="Logger_Format_BouncedEmailReport" xml:space="preserve">
+    <value>Bounce on list '{0}': recipient={1}, action={2}, status={3}, diagnostic={4}, remote-mta={5}, bounce-message-id={6}, original-subject='{7}', original-message-id={8}, matched-contact={9}, matched-email={10}</value>
+  </data>
+  <data name="Logger_Format_BouncedOriginalMessageFrom" xml:space="preserve">
+    <value>Bounced original message from: {0}</value>
+  </data>
   <data name="Logger_Format_AuthenticatingAs" xml:space="preserve">
     <value>Authenticating as {0}.</value>
   </data>
@@ -480,6 +492,12 @@
   <data name="Mail_Format_SubjectReplace" xml:space="preserve">
     <value> - Message from {0}</value>
     <comment>It is important that this message mirrors Mail_Format_Subject with all characters after {0}, including the first space.</comment>
+  </data>
+  <data name="Mail_Format_TextRelayOriginatorMessage" xml:space="preserve">
+    <value>From: {0} ({1})</value>
+  </data>
+  <data name="Mail_Format_HTMLRelayOriginatorMessage" xml:space="preserve">
+    <value>&lt;strong&gt;From:&lt;/strong&gt; {0} &amp;lt;{1}&amp;gt;</value>
   </data>
   <data name="Mail_Format_SubscriptionConfirmationBody" xml:space="preserve">
     <value>Glad to have you. To send a message to everyone on the discussion list, just send an email to &lt;a href='mailto:{0}'&gt;{0}&lt;/a&gt;. When you recieve a message from someone in the group, you can simply reply to that email and everyone on the discussion list will get a copy.</value>

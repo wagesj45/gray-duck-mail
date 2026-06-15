@@ -25,6 +25,20 @@ namespace GrayDuckMail.Web.Worker
         /// <summary> The logging conduit. </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Envelope-only recipient headers that mail servers may add when alias forwarding does not
+        /// populate standard recipient fields.
+        /// </summary>
+        private static readonly string[] KnownEnvelopeRecipientHeaders = new[]
+        {
+            "Delivered-To",
+            "X-Original-To",
+            "X-Envelope-To",
+            "Envelope-To",
+            "X-Forwarded-To",
+            "X-Real-To"
+        };
+
         #endregion
 
         #region Methods
@@ -68,13 +82,13 @@ namespace GrayDuckMail.Web.Worker
                                 logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AuthenticatingAs, discussionList.UserName));
                                 client.Authenticate(discussionList.UserName, discussionList.Password, cancellationToken: cancellationToken);
 
-                                var emailMessages = client.GetMessages(cancellationToken).Select((emailMessage, index) => IndexedMimeMessage.IndexMimeMessage(index, emailMessage));
+                                var emailMessages = client.GetRetrievedMessages(cancellationToken);
                                 
                                 if (emailMessages.Any())
                                 {
                                     logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingMessages, emailMessages.Count()));
 
-                                    var filteredSubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetSubscribeAlias(discussionList));
+                                    var filteredSubscribe = FilterSubscribeMessages(emailMessages, discussionList);
                                     var filteredUnsubscribe = FilterMessages(emailMessages, EmailAliasHelper.GetUnsubscribeAlias(discussionList));
                                     var filteredRequest = FilterMessages(emailMessages, EmailAliasHelper.GetRequestAlias(discussionList));
                                     var filteredBouncedToBounceAlias = FilterMessages(emailMessages, EmailAliasHelper.GetBounceAlias(discussionList));
@@ -162,13 +176,40 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
+        private static void ProcessSubscriptionConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage subscriptionConfirmation, CancellationToken cancellationToken = default)
         {
-            var from = subscriptionConfirmation.Message.Sender ?? subscriptionConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
-                .Where(subscription => subscription.Contact.Email == from.Address)
-                .SingleOrDefault();
+            var from = GetSenderAddress(subscriptionConfirmation.Message);
+            if (from == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorized, discussionList.Name));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
+                client.DeleteMessage(subscriptionConfirmation, cancellationToken);
+                return;
+            }
+
+            var subscription = FindSubscriptionBySenderEmail(
+                database,
+                discussionList,
+                from.Address,
+                subscriptionConfirmation.Message,
+                SubscriptionStatus.Created,
+                SubscriptionStatus.AwaitingConfirmation);
+
+            if (subscription == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorizedFrom, from.Name, from.Address));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
+                client.DeleteMessage(subscriptionConfirmation, cancellationToken);
+                return;
+            }
+
+            if (subscription.Status == SubscriptionStatus.Subscribed)
+            {
+                logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserAlreadySubscribed, subscription.Contact.Name, discussionList.Name));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
+                client.DeleteMessage(subscriptionConfirmation, cancellationToken);
+                return;
+            }
 
             logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingSubscriptionMessage, subscription.Contact.Name));
 
@@ -183,8 +224,8 @@ namespace GrayDuckMail.Web.Worker
 
             SharedMemory.AddEmail(EmailDefinition.CreateSubscriptionConfirmation(discussionList, subscription.Contact));
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.Index));
-            client.DeleteMessage(subscriptionConfirmation.Index, cancellationToken);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, subscriptionConfirmation.Message.MessageId, subscriptionConfirmation.ServerIdentifier));
+            client.DeleteMessage(subscriptionConfirmation, cancellationToken);
         }
 
         /// <summary>
@@ -195,21 +236,34 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="database">                The database. </param>
         /// <param name="client">              The email client. </param>
         /// <param name="unsubscribeConfirmation"> The unsubscribe confirmation. </param>
-        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage unsubscribeConfirmation)
+        private static void ProcessUnsubscribeConfirmations(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage unsubscribeConfirmation)
         {
             var from = unsubscribeConfirmation.Message.Sender ?? unsubscribeConfirmation.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
-                .Where(subscription => subscription.Contact.Email == from.Address)
-                .SingleOrDefault();
+            if (from == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorized, discussionList.Name));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.ServerIdentifier));
+                client.DeleteMessage(unsubscribeConfirmation);
+                return;
+            }
+
+            var subscription = FindSubscriptionBySenderEmail(database, discussionList, from.Address, unsubscribeConfirmation.Message);
+
+            if (subscription == null)
+            {
+                logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnrecognizedOrUnauthorizedFrom, from.Name, from.Address));
+                logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.ServerIdentifier));
+                client.DeleteMessage(unsubscribeConfirmation);
+                return;
+            }
 
             logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_UserUnsubscribing, subscription.Contact.Name, discussionList.Name));
             subscription.Status = SubscriptionStatus.Unsubscribed;
 
             SharedMemory.AddEmail(EmailDefinition.CreateUnsubscriptionConfirmation(discussionList, subscription.Contact));
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.Index));
-            client.DeleteMessage(unsubscribeConfirmation.Index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, unsubscribeConfirmation.Message.MessageId, unsubscribeConfirmation.ServerIdentifier));
+            client.DeleteMessage(unsubscribeConfirmation);
         }
 
         /// <summary>
@@ -222,14 +276,10 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage request, CancellationToken cancellationToken = default)
+        private static void ProcessRequests(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage request, CancellationToken cancellationToken = default)
         {
             var from = request.Message.Sender ?? request.Message.From.Mailboxes.SingleOrDefault();
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
-                .Include(subscription => subscription.Contact)
-                .Where(subscription => subscription.Contact.Email == from.Address)
-                .SingleOrDefault();
+            var subscription = FindSubscriptionBySenderEmail(database, discussionList, from?.Address, request.Message);
 
             if (subscription == null)
             {
@@ -273,8 +323,8 @@ namespace GrayDuckMail.Web.Worker
                 }
             }
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, request.Message.MessageId, request.Index));
-            client.DeleteMessage(request.Index, cancellationToken);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, request.Message.MessageId, request.ServerIdentifier));
+            client.DeleteMessage(request, cancellationToken);
         }
 
         /// <summary> Process the bounced messages recieved from a contact. </summary>
@@ -282,14 +332,16 @@ namespace GrayDuckMail.Web.Worker
         /// <param name="database">       The database. </param>
         /// <param name="client">     The email client. </param>
         /// <param name="bounce">         The bounced message. </param>
-        private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, IndexedMimeMessage bounce)
+        private static void ProcessBounces(DiscussionList discussionList, SqliteDatabase database, EmailClientWrapper client, RetrievedMessage bounce)
         {
             var bouncedFrom = bounce.Message.Sender ?? bounce.Message.From.Mailboxes.SingleOrDefault();
-            var bouncedOriginallyTo = EmailHelper.GetBouncedMessageRecipient(bounce);
-            var subscription = database.DiscussionLists.Where(_discussionList => _discussionList.ID == discussionList.ID)
-                .SelectMany(_discussionList => _discussionList.Subscriptions)
-                .Where(subscription => subscription.Contact.Email == bouncedFrom.Address || subscription.Contact.Email == bouncedOriginallyTo)
-                .SingleOrDefault();
+            var bounceReport = EmailHelper.GetBounceReport(bounce);
+            var bouncedOriginallyTo = string.IsNullOrWhiteSpace(bounceReport.Recipient)
+                ? EmailHelper.GetBouncedMessageRecipient(bounce)
+                : bounceReport.Recipient;
+            var subscription = FindSubscriptionByBounce(database, discussionList, bouncedOriginallyTo, bouncedFrom?.Address);
+
+            EmailHelper.LogBounceReport(logger, discussionList, bounceReport, subscription);
 
             if (subscription != null)
             {
@@ -302,8 +354,8 @@ namespace GrayDuckMail.Web.Worker
                 logger.Error(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnsubscribedBounce, discussionList.Name));
             }
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, bounce.Message.MessageId, bounce.Index));
-            client.DeleteMessage(bounce.Index);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, bounce.Message.MessageId, bounce.ServerIdentifier));
+            client.DeleteMessage(bounce);
         }
 
         /// <summary>
@@ -319,13 +371,14 @@ namespace GrayDuckMail.Web.Worker
         ///     <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" />
         ///     is called.
         /// </param>
-        private static void ProcessDiscussionMessages(DiscussionList discussionList, IndexedMimeMessage discussionMessage, SqliteDatabase database, EmailClientWrapper client, CancellationToken cancellationToken = default)
+        private static void ProcessDiscussionMessages(DiscussionList discussionList, RetrievedMessage discussionMessage, SqliteDatabase database, EmailClientWrapper client, CancellationToken cancellationToken = default)
         {
             logger.Debug(discussionMessage.ToString());
 
             var from = discussionMessage.Message.Sender ?? discussionMessage.Message.From.Mailboxes.SingleOrDefault();
             var originatorSubscription = discussionList.Subscriptions
-                .Where(subscription => subscription.Contact.Email.Equals(from.Address, StringComparison.OrdinalIgnoreCase))
+                .Where(subscription => subscription.Contact != null
+                    && EmailHelper.EmailsMatch(subscription.Contact.Email, from?.Address))
                 .SingleOrDefault();
 
             if (originatorSubscription != null && EmailHelper.ContactAuthorizedStatuses.Contains(originatorSubscription.Status))
@@ -381,8 +434,250 @@ namespace GrayDuckMail.Web.Worker
                 }
             }
 
-            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, discussionMessage.Message.MessageId, discussionMessage.Index));
-            client.DeleteMessage(discussionMessage.Index, cancellationToken);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_MessageProcessed, discussionMessage.Message.MessageId, discussionMessage.ServerIdentifier));
+            client.DeleteMessage(discussionMessage, cancellationToken);
+        }
+
+        /// <summary>
+        /// Filter messages addressed to the list subscribe alias.
+        /// </summary>
+        /// <param name="messages">       The messages. </param>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <returns> Subscription confirmation messages. </returns>
+        private IEnumerable<RetrievedMessage> FilterSubscribeMessages(IEnumerable<RetrievedMessage> messages, DiscussionList discussionList)
+        {
+            var subscribeAlias = EmailAliasHelper.GetSubscribeAlias(discussionList);
+            logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessages, subscribeAlias));
+
+            return messages.Where(message => IsAddressedTo(message.Message, subscribeAlias));
+        }
+
+        /// <summary> Finds a list subscription for the sender's email address. </summary>
+        /// <param name="database">           The database. </param>
+        /// <param name="discussionList">     The discussion list. </param>
+        /// <param name="senderEmail">        The sender email. </param>
+        /// <param name="message">            (Optional) The message being processed. </param>
+        /// <param name="preferredStatuses">  (Optional) Preferred subscription statuses when multiple contacts match. </param>
+        /// <returns> The subscription, if one exists. </returns>
+        private static ContactSubscription FindSubscriptionBySenderEmail(
+            SqliteDatabase database,
+            DiscussionList discussionList,
+            string senderEmail,
+            MimeMessage message = null,
+            params SubscriptionStatus[] preferredStatuses)
+        {
+            if (string.IsNullOrWhiteSpace(senderEmail))
+            {
+                return null;
+            }
+
+            var subscriptions = database.ContactSubscriptions
+                .Where(subscription => subscription.DiscussionListID == discussionList.ID)
+                .Include(subscription => subscription.Contact)
+                .AsEnumerable()
+                .Where(subscription => subscription.Contact != null && !string.IsNullOrWhiteSpace(subscription.Contact.Email))
+                .ToList();
+
+            ContactSubscription ResolveMatch(IEnumerable<ContactSubscription> matches)
+            {
+                var matchedSubscriptions = matches.ToList();
+                if (matchedSubscriptions.Count == 1)
+                {
+                    return matchedSubscriptions[0];
+                }
+
+                if (matchedSubscriptions.Count == 0)
+                {
+                    return null;
+                }
+
+                if (preferredStatuses != null && preferredStatuses.Length > 0)
+                {
+                    var preferredMatches = matchedSubscriptions
+                        .Where(subscription => preferredStatuses.Contains(subscription.Status))
+                        .ToList();
+
+                    if (preferredMatches.Count == 1)
+                    {
+                        return preferredMatches[0];
+                    }
+                }
+
+                return null;
+            }
+
+            var exactMatch = ResolveMatch(subscriptions.Where(subscription =>
+                string.Equals(subscription.Contact.Email, senderEmail, StringComparison.OrdinalIgnoreCase)));
+            if (exactMatch != null)
+            {
+                return exactMatch;
+            }
+
+            if (message != null)
+            {
+                var referencedMatch = ResolveMatch(subscriptions.Where(subscription =>
+                    MessageReferencesEmail(message, subscription.Contact.Email)));
+                if (referencedMatch != null)
+                {
+                    return referencedMatch;
+                }
+            }
+
+            return ResolveMatch(subscriptions.Where(subscription =>
+                EmailHelper.EmailsMatch(subscription.Contact.Email, senderEmail)));
+        }
+
+        /// <summary> Finds the subscription that matches a delivery failure notification. </summary>
+        /// <param name="database">              The database. </param>
+        /// <param name="discussionList">        The discussion list. </param>
+        /// <param name="bouncedRecipient">      The recipient named in the bounce report. </param>
+        /// <param name="bouncedSenderAddress">  The sender named in the bounce report. </param>
+        /// <returns> The subscription, if one can be determined unambiguously. </returns>
+        private static ContactSubscription FindSubscriptionByBounce(
+            SqliteDatabase database,
+            DiscussionList discussionList,
+            string bouncedRecipient,
+            string bouncedSenderAddress)
+        {
+            var subscriptions = database.ContactSubscriptions
+                .Where(subscription => subscription.DiscussionListID == discussionList.ID)
+                .Include(subscription => subscription.Contact)
+                .AsEnumerable()
+                .Where(subscription => subscription.Contact != null && !string.IsNullOrWhiteSpace(subscription.Contact.Email))
+                .ToList();
+
+            ContactSubscription ResolveExactMatch(string address)
+            {
+                if (string.IsNullOrWhiteSpace(address) || string.Equals(address, "UNKNOWN_ADDRESS", StringComparison.OrdinalIgnoreCase))
+                {
+                    return null;
+                }
+
+                var exactMatches = subscriptions
+                    .Where(subscription => string.Equals(subscription.Contact.Email, address, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                if (exactMatches.Count == 1)
+                {
+                    return exactMatches[0];
+                }
+
+                var baseMatches = subscriptions
+                    .Where(subscription => EmailHelper.EmailsMatch(subscription.Contact.Email, address))
+                    .ToList();
+
+                return baseMatches.Count == 1 ? baseMatches[0] : null;
+            }
+
+            var recipientMatch = ResolveExactMatch(bouncedRecipient);
+            if (recipientMatch != null)
+            {
+                return recipientMatch;
+            }
+
+            return ResolveExactMatch(bouncedSenderAddress);
+        }
+
+        /// <summary> Determines whether a message references the given email address. </summary>
+        /// <param name="message"> The message. </param>
+        /// <param name="address"> The address. </param>
+        /// <returns> True if the message references the address. </returns>
+        private static bool MessageReferencesEmail(MimeMessage message, string address)
+        {
+            if (string.IsNullOrWhiteSpace(address))
+            {
+                return false;
+            }
+
+            if (message.GetRecipients(true).Any(recipient => EmailHelper.EmailsMatch(recipient.Address, address)))
+            {
+                return true;
+            }
+
+            foreach (var headerName in KnownEnvelopeRecipientHeaders)
+            {
+                if (HeaderContainsAddress(message, headerName, address))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether a message was addressed to the given mailbox, including envelope-only
+        /// targets added by mail server alias forwarding.
+        /// </summary>
+        /// <param name="message"> The message. </param>
+        /// <param name="address"> The target address. </param>
+        /// <returns> True if the message was addressed to the target. </returns>
+        private static bool IsAddressedTo(MimeMessage message, string address)
+        {
+            if (string.IsNullOrWhiteSpace(address))
+            {
+                return false;
+            }
+
+            if (message.GetRecipients(true).Any(recipient => recipient.Address.Equals(address, StringComparison.OrdinalIgnoreCase)))
+            {
+                return true;
+            }
+
+            foreach (var headerName in KnownEnvelopeRecipientHeaders)
+            {
+                if (HeaderContainsAddress(message, headerName, address))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary> Determines whether a header contains the given email address. </summary>
+        /// <param name="message">    The message. </param>
+        /// <param name="headerName"> Name of the header. </param>
+        /// <param name="address">    The address. </param>
+        /// <returns> True if the header contains the address. </returns>
+        private static bool HeaderContainsAddress(MimeMessage message, string headerName, string address)
+        {
+            for (int i = 0; i < message.Headers.Count; i++)
+            {
+                if (!message.Headers[i].Field.Equals(headerName, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                if (AddressAppearsInHeaderValue(message.Headers[i].Value, address))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary> Determines whether a header value references the given email address. </summary>
+        /// <param name="headerValue"> The header value. </param>
+        /// <param name="address">     The address. </param>
+        /// <returns> True if the value references the address. </returns>
+        private static bool AddressAppearsInHeaderValue(string headerValue, string address)
+        {
+            if (string.IsNullOrWhiteSpace(headerValue) || string.IsNullOrWhiteSpace(address))
+            {
+                return false;
+            }
+
+            return headerValue.IndexOf(address, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        /// <summary> Gets the sender address from a message. </summary>
+        /// <param name="message"> The message. </param>
+        /// <returns> The sender address, if one could be determined. </returns>
+        private static MailboxAddress GetSenderAddress(MimeMessage message)
+        {
+            return message.From.Mailboxes.FirstOrDefault() ?? message.Sender;
         }
 
         /// <summary>
@@ -394,13 +689,12 @@ namespace GrayDuckMail.Web.Worker
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
-        private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, string emailToAddress)
+        private IEnumerable<RetrievedMessage> FilterMessages(IEnumerable<RetrievedMessage> messages, string emailToAddress)
         {
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessages, emailToAddress));
 
-            var filteredMessages = messages.Select(message => (Message: message, Recipients: message.Message.GetRecipients(true)))
-            .Where(anon => anon.Recipients.Any(rec => rec.Address.Equals(emailToAddress, StringComparison.OrdinalIgnoreCase)))
-            .Select(anon => anon.Message);
+            var filteredMessages = messages
+            .Where(message => IsAddressedTo(message.Message, emailToAddress));
 
             return filteredMessages;
         }
@@ -411,7 +705,7 @@ namespace GrayDuckMail.Web.Worker
         /// An enumerator that allows foreach to be used to process filter bounced messages in this
         /// collection.
         /// </returns>
-        private IEnumerable<IndexedMimeMessage> FilterBouncedMessages(IEnumerable<IndexedMimeMessage> messages)
+        private IEnumerable<RetrievedMessage> FilterBouncedMessages(IEnumerable<RetrievedMessage> messages)
         {
             logger.Debug(LanguageHelper.GetValue(ResourceName.Logger_FilteringBouncedMessages));
 
@@ -420,24 +714,24 @@ namespace GrayDuckMail.Web.Worker
 
         /// <summary>
         /// Filter messages based on the a user provided
-        /// <see cref="Func{IndexedMimeMessage, Bool}">function</see>.
+        /// <see cref="Func{RetrievedMessage, Bool}">function</see>.
         /// </summary>
         /// <param name="messages"> The messages. </param>
         /// <param name="filter">   Specifies the filtering function. </param>
         /// <returns>
         /// An enumerator that allows foreach to be used to process filter messages in this collection.
         /// </returns>
-        private IEnumerable<IndexedMimeMessage> FilterMessages(IEnumerable<IndexedMimeMessage> messages, Func<IndexedMimeMessage, bool> filter)
+        private IEnumerable<RetrievedMessage> FilterMessages(IEnumerable<RetrievedMessage> messages, Func<RetrievedMessage, bool> filter)
         {
             logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringCount, messages.Count()));
 
-            var filteredMessages = new List<IndexedMimeMessage>();
+            var filteredMessages = new List<RetrievedMessage>();
             foreach (var message in messages)
             {
-                logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessage, message.Index));
+                logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilteringMessage, message.ServerIdentifier));
                 if (filter(message))
                 {
-                    logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilterMatch, message.Index));
+                    logger.Trace(LanguageHelper.FormatValue(ResourceName.Logger_Format_FilterMatch, message.ServerIdentifier));
                     filteredMessages.Add(message);
                 }
             }
