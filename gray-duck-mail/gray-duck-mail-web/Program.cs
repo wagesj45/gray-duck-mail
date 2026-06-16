@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,11 @@ namespace GrayDuckMail.Web
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.Configure<ConsoleLoggerOptions>(options =>
+                    {
+                        options.TimestampFormat = "yyyy-MM-dd HH:mm:ss.fff ";
+                    });
+
                     if (!DockerEnvironmentVariables.WebOnly)
                     {
                         logger.Info(LanguageHelper.GetValue(ResourceName.Logger_RegisteringServiceWorkers));

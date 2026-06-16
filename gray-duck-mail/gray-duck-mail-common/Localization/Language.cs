@@ -119,6 +119,8 @@ namespace GrayDuckMail.Common.Localization
             }
         }
 
+        /// <summary> Gets the German - Germany language. </summary>
+        /// <value> The German - Germany language. </value>
         public static Language GermanGermany
         {
             get

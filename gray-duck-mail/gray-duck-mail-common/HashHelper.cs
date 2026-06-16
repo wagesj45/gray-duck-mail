@@ -6,6 +6,7 @@ using System.Text;
 
 namespace GrayDuckMail.Common
 {
+    /// <summary> Helper methods for creating and validating secure hashes. </summary>
     public static class HashHelper
     {
         #region Members

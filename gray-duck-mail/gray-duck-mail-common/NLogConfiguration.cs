@@ -31,7 +31,9 @@ namespace GrayDuckMail.Common
             configuration.AddRule(ParseLogLevel(logLevel), LogLevel.Fatal, consoleTarget);
             configuration.AddRule(ParseLogLevel(logLevel), LogLevel.Fatal, fileTarget);
 
-            consoleTarget.Layout = "[${logger}] ${message} ${exception:format=tostring}";
+            var logLayout = "${longdate} [${logger}] ${message} ${exception:format=tostring}";
+            consoleTarget.Layout = logLayout;
+            fileTarget.Layout = logLayout;
 
             consoleTarget.RowHighlightingRules.Add(
                 new ConsoleRowHighlightingRule()
