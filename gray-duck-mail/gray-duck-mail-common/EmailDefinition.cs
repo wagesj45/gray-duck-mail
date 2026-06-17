@@ -14,14 +14,24 @@ namespace GrayDuckMail.Common
         /// <value> The type. </value>
         public EmailDefinitionType Type { get; set; }
 
+        /// <summary> Gets or sets the contact being mailed. </summary>
+        /// <value> The contact. </value>
         public Contact Contact { get; set; }
 
+        /// <summary> Gets or sets the discussion list for the email. </summary>
+        /// <value> The discussion list. </value>
         public DiscussionList DiscussionList { get; set; }
 
+        /// <summary> Gets or sets the email subject. </summary>
+        /// <value> The subject. </value>
         public string Subject { get; set; }
 
+        /// <summary> Gets or sets the email body. </summary>
+        /// <value> The body. </value>
         public string Body { get; set; }
 
+        /// <summary> Gets or sets the relayed message, if any. </summary>
+        /// <value> The message. </value>
         public Message Message { get; set; }
 
         #endregion

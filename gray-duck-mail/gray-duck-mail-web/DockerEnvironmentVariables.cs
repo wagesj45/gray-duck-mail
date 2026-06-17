@@ -50,7 +50,7 @@ namespace GrayDuckMail.Web
             return 20;
         });
 
-        /// <summary> The docker environment variable for <see cref=""/>. </summary>
+        /// <summary> The docker environment variable for <see cref="EmailProtocol"/>. </summary>
         private static Lazy<EmailProtocol> envEmailProtocol = new Lazy<EmailProtocol>(() =>
         {
             var emailProtocol = Environment.GetEnvironmentVariable("EMAIL_PROTOCOL");
@@ -62,7 +62,7 @@ namespace GrayDuckMail.Web
             return EmailProtocol.POP3;
         });
 
-        /// <summary> The docker environment variable for <see cref=""/>. </summary>
+        /// <summary> The docker environment variable for <see cref="IMAPFolder"/>. </summary>
         private static Lazy<string> envIMAPFolder = new Lazy<string>(() => {
             var folder = Environment.GetEnvironmentVariable("IMAP_FOLDER");
             if(!string.IsNullOrWhiteSpace(folder))
@@ -131,7 +131,7 @@ namespace GrayDuckMail.Web
             return false;
         });
 
-        /// <summary> The docker environment variable for <see cref=""/>. </summary>
+        /// <summary> The docker environment variable for <see cref="WebUseHTTPS"/>. </summary>
         private static Lazy<bool> envWebUseHTTPS = new Lazy<bool>(() =>
         {
             var webUseHTTPS = Environment.GetEnvironmentVariable("WEB_USE_HTTPS");
@@ -293,7 +293,7 @@ namespace GrayDuckMail.Web
         /// <summary>
         /// Gets a value indicating whether the an externally accessable unsubscription link is
         /// supported. If set to <see langword="true"/>, messages will replace the unsubscribe link with
-        /// a link pointing toward <see cref=""/>.
+        /// a link pointing toward <see cref="WebExternalURL"/>.
         /// </summary>
         /// <remarks> The default value is <see langword="true"/> </remarks>
         /// <value> True if an externally accessable port is exposed, false otherwise. </value>

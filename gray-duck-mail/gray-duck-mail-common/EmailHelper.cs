@@ -289,6 +289,7 @@ namespace GrayDuckMail.Common
         /// <param name="body">           The body. </param>
         /// <param name="footer">         The footer. </param>
         /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="contact">        The contact receiving the email. </param>
         /// <returns> A string with a processed main email template. </returns>
         public static string FillDefaultTemplate(string heading, string subheading, string body, string footer, DiscussionList discussionList, Contact contact)
         {
@@ -371,7 +372,7 @@ namespace GrayDuckMail.Common
         /// <param name="stoppingToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken, string)"/>
         public static void RelayEmail(DiscussionList discussionList, Contact recipient, Message message, SqliteDatabase database, SmtpClient client, CancellationToken stoppingToken = default)
         {
             logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_RelayingMessage, recipient.Name, recipient.Email));
@@ -495,7 +496,7 @@ namespace GrayDuckMail.Common
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken, string)"/>
         public static void SendOnboardingEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingOnboardingEmail, recipient.Name, recipient.Email));
@@ -570,7 +571,7 @@ namespace GrayDuckMail.Common
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken, string)"/>
         public static void SendSubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingSubscriptionConfirmation, recipient.Name, recipient.Email));
@@ -604,7 +605,7 @@ namespace GrayDuckMail.Common
         /// <param name="cancellationToken">
         ///     (Optional) A token that allows processing to be cancelled.
         /// </param>
-        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken)"/>
+        /// <seealso cref="SendEmail(DiscussionList, Contact, string, string, Func{MimeEntity}, SmtpClient, CancellationToken, string)"/>
         public static void SendUnsubscriptionConfirmationEmail(DiscussionList discussionList, Contact recipient, SmtpClient client, CancellationToken cancellationToken = default)
         {
             logger.Info(LanguageHelper.FormatValue(ResourceName.Logger_Format_SendingUnsubscriptionConfirmation), recipient.Name, recipient.Email);

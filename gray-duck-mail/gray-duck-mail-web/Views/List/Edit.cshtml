@@ -46,7 +46,11 @@
         </label>
         <label for="password">
             @LanguageHelper.GetValue(ResourceName.View_Common_Password)
-            <input type="password" id="password" name="password" value="@Model.DiscussionList?.Password" />
+            <input type="password" id="password" name="password" autocomplete="new-password" />
+            @if (Model.DiscussionList != null)
+            {
+                <small>Leave blank to keep the current password.</small>
+            }
             <small><i class="icofont-warning"></i> @LanguageHelper.GetValue(ResourceName.View_Common_PasswordWarning)</small>
         </label>
         <label for="incomingMailServer">

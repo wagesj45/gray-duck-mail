@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GrayDuckMail.Web.Models.Forms
@@ -54,9 +55,16 @@ namespace GrayDuckMail.Web.Models.Forms
         {
             get
             {
-                for(int i = 0; i < ContactID.Length; i++)
+                if (this.ContactID == null)
                 {
-                    yield return (this.ContactID[i], this.Assigned.Contains(this.ContactID[i]));
+                    yield break;
+                }
+
+                var assigned = this.Assigned ?? Array.Empty<int>();
+
+                for (int i = 0; i < this.ContactID.Length; i++)
+                {
+                    yield return (this.ContactID[i], assigned.Contains(this.ContactID[i]));
                 }
             }
         }
