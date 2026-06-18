@@ -46,6 +46,8 @@ namespace GrayDuckMail.Web.Worker
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningOnboarderLoop));
             while (!stoppingToken.IsCancellationRequested)
             {
+                database.ChangeTracker.Clear();
+
                 foreach (var discussionList in database.DiscussionLists)
                 {
                     logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_ProcessingList, discussionList.Name));

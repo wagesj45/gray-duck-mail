@@ -222,7 +222,11 @@ namespace GrayDuckMail.Web.Controllers
         [Route("List/Assign/{discussionListID}")]
         public IActionResult Assign(int discussionListID)
         {
-            var discussionList = this.SqliteDatabase.DiscussionLists.Where(list => list.ID == discussionListID).FirstOrDefault();
+            var discussionList = this.SqliteDatabase.DiscussionLists
+                .Include(list => list.Subscriptions)
+                .ThenInclude(subscription => subscription.Contact)
+                .Where(list => list.ID == discussionListID)
+                .FirstOrDefault();
             var contacts = this.SqliteDatabase.Contacts.ToArray();
             var subscriptions = this.SqliteDatabase.ContactSubscriptions.Where(subscription => subscription.DiscussionListID == discussionListID)
                 .Include(subscription => subscription.Contact)
@@ -285,7 +289,8 @@ namespace GrayDuckMail.Web.Controllers
                         logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AssigningContact, assignment.ContactID, formInput.DiscussionListID));
                         subscription.Status = SubscriptionStatus.Subscribed;
                     }
-                    else if (subscription.Status == SubscriptionStatus.Denied)
+                    else if (subscription.Status == SubscriptionStatus.Denied
+                        || subscription.Status == SubscriptionStatus.Unsubscribed)
                     {
                         logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_AssigningContact, assignment.ContactID, formInput.DiscussionListID));
                         subscription.Status = SubscriptionStatus.Subscribed;
@@ -293,7 +298,7 @@ namespace GrayDuckMail.Web.Controllers
                 }
                 else
                 {
-                    if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status) && subscription.Contact.Activated)
+                    if (subscription != null && EmailHelper.ContactAssociatedStatuses.Contains(subscription.Status))
                     {
                         logger.Debug(LanguageHelper.FormatValue(ResourceName.Logger_Format_UnassigningContact, assignment.ContactID, formInput.DiscussionListID));
 

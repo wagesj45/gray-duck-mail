@@ -1,4 +1,5 @@
-﻿using GrayDuckMail.Common.Database;
+﻿using GrayDuckMail.Common;
+using GrayDuckMail.Common.Database;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,6 +38,16 @@ namespace GrayDuckMail.Web.Models
                 .FirstOrDefault();
 
             return subscriptionStatus;
+        }
+
+        /// <summary>
+        /// Query if a <see cref="Contact"/> is assigned to the discussion list for mail distribution.
+        /// </summary>
+        /// <param name="contactID"> Identifier for the contact. </param>
+        /// <returns> True if assigned, false if not. </returns>
+        public bool IsAssigned(int contactID)
+        {
+            return EmailHelper.ContactAssociatedStatuses.Contains(this.GetSubscription(contactID));
         }
 
         /// <summary> Query if a <see cref="Contact"/> has an established subscription status. </summary>
