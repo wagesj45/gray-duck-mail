@@ -42,6 +42,14 @@ namespace GrayDuckMail.Common
         /// <summary> The base URL to use when constructing externally accessable unsubscribe links. </summary>
         private static Uri unsubscribeUri;
 
+        /// <summary>
+        /// The external port for the admin web UI, used for <c>List-Archive</c> links when configured.
+        /// </summary>
+        private static int? adminExternalPort;
+
+        /// <summary> When true, outgoing mail includes a <c>List-Archive</c> header. </summary>
+        private static bool includeListArchive;
+
         /// <summary> The secret token used for creating a secure unsubscribe link. </summary>
         private static string hashSecret = string.Empty;
 
@@ -269,7 +277,15 @@ namespace GrayDuckMail.Common
         ///     (Optional) The external port for unsubscribe links. Defaults to 443 when
         ///     <paramref name="secure"/> is true, otherwise 80.
         /// </param>
-        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure, string hashSecret, int? externalPort = null)
+        /// <param name="adminPort">
+        ///     (Optional) The external port for the admin web UI, used when
+        ///     <paramref name="includeListArchive"/> is true.
+        /// </param>
+        /// <param name="includeListArchive">
+        ///     When true, outgoing mail includes a <c>List-Archive</c> header pointing at the web
+        ///     archive. Defaults to false.
+        /// </param>
+        public static void ConfigureUnsubscribeLink(string baseUrl, bool secure, string hashSecret, int? externalPort = null, int? adminPort = null, bool includeListArchive = false)
         {
             var builder = new UriBuilder
             {
@@ -280,7 +296,165 @@ namespace GrayDuckMail.Common
 
             unsubscribeUri = builder.Uri;
             usingUnsubscribeUri = true;
+            adminExternalPort = adminPort;
+            EmailHelper.includeListArchive = includeListArchive;
             EmailHelper.hashSecret = hashSecret;
+        }
+
+        /// <summary>
+        /// Builds the RFC 2369 <c>List-Help</c> header value for outgoing list mail.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <returns> A comma-separated list of angle-bracketed help URLs. </returns>
+        public static string BuildListHelpHeaderValue(DiscussionList discussionList)
+        {
+            return string.Join(", ",
+                FormatHeaderMailto(EmailAliasHelper.GetRequestAlias(discussionList), "help"),
+                FormatHeaderMailto(EmailAliasHelper.GetOwnerAlias(discussionList)));
+        }
+
+        /// <summary>
+        /// Builds the RFC 2369 <c>List-Subscribe</c> header value for outgoing list mail.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <returns> An angle-bracketed subscribe URL. </returns>
+        public static string BuildListSubscribeHeaderValue(DiscussionList discussionList)
+        {
+            return FormatHeaderMailto(EmailAliasHelper.GetSubscribeAlias(discussionList), "subscribe");
+        }
+
+        /// <summary>
+        /// Builds the RFC 2369 <c>List-Unsubscribe</c> header value for outgoing list mail.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="recipient">    The recipient. </param>
+        /// <returns> A comma-separated list of angle-bracketed unsubscribe URLs. </returns>
+        public static string BuildListUnsubscribeHeaderValue(DiscussionList discussionList, Contact recipient)
+        {
+            var urls = new List<string>();
+
+            var webUnsubscribeUri = GetWebUnsubscribeUri(discussionList, recipient);
+            if (webUnsubscribeUri != null)
+            {
+                urls.Add(FormatHeaderUrl(webUnsubscribeUri));
+            }
+
+            urls.Add(FormatHeaderMailto(EmailAliasHelper.GetUnsubscribeAlias(discussionList), "unsubscribe"));
+
+            return string.Join(", ", urls);
+        }
+
+        /// <summary>
+        /// Builds the RFC 2369 <c>List-Post</c> header value for outgoing list mail.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <returns> An angle-bracketed post URL. </returns>
+        public static string BuildListPostHeaderValue(DiscussionList discussionList)
+        {
+            return FormatHeaderMailto(discussionList.BaseEmailAddress);
+        }
+
+        /// <summary>
+        /// Builds the RFC 2369 <c>List-Owner</c> header value for outgoing list mail.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <returns> An angle-bracketed owner URL. </returns>
+        public static string BuildListOwnerHeaderValue(DiscussionList discussionList)
+        {
+            return FormatHeaderMailto(EmailAliasHelper.GetOwnerAlias(discussionList));
+        }
+
+        /// <summary>
+        /// Builds the RFC 2369 <c>List-Archive</c> header value when a web archive URL is configured.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <returns> An angle-bracketed archive URL, or null when unavailable. </returns>
+        public static string BuildListArchiveHeaderValue(DiscussionList discussionList)
+        {
+            var archiveUri = GetAdminArchiveUri(discussionList);
+            return archiveUri == null ? null : FormatHeaderUrl(archiveUri);
+        }
+
+        /// <summary> Adds RFC 2369 list command headers to an outgoing message. </summary>
+        /// <param name="message">        The message. </param>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="recipient">      The recipient. </param>
+        private static void AddListCommandHeaders(MimeMessage message, DiscussionList discussionList, Contact recipient)
+        {
+            message.Headers.Add("List-Help", BuildListHelpHeaderValue(discussionList));
+            message.Headers.Add("List-Subscribe", BuildListSubscribeHeaderValue(discussionList));
+            message.Headers.Add("List-Unsubscribe", BuildListUnsubscribeHeaderValue(discussionList, recipient));
+            message.Headers.Add("List-Post", BuildListPostHeaderValue(discussionList));
+            message.Headers.Add("List-Owner", BuildListOwnerHeaderValue(discussionList));
+
+            var archiveHeader = BuildListArchiveHeaderValue(discussionList);
+            if (archiveHeader != null)
+            {
+                message.Headers.Add("List-Archive", archiveHeader);
+            }
+        }
+
+        /// <summary> Formats a URI for use in an RFC 2369 list header field. </summary>
+        /// <param name="uri"> The URI. </param>
+        /// <returns> An angle-bracketed URL. </returns>
+        private static string FormatHeaderUrl(Uri uri)
+        {
+            return $"<{uri.AbsoluteUri}>";
+        }
+
+        /// <summary> Formats a mailto URI for use in an RFC 2369 list header field. </summary>
+        /// <param name="address"> The email address. </param>
+        /// <param name="subject"> (Optional) The mailto subject parameter. </param>
+        /// <returns> An angle-bracketed mailto URL. </returns>
+        private static string FormatHeaderMailto(string address, string subject = null)
+        {
+            return subject == null
+                ? $"<mailto:{address}>"
+                : $"<mailto:{address}?subject={subject}>";
+        }
+
+        /// <summary>
+        /// Gets the per-recipient web unsubscribe URL when external unsubscribe links are enabled.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <param name="contact">        The contact. </param>
+        /// <returns> The unsubscribe URI, or null when unavailable. </returns>
+        private static Uri GetWebUnsubscribeUri(DiscussionList discussionList, Contact contact)
+        {
+            if (!UsingUnsubscribeUri || discussionList == null || contact == null || contact.ID <= 0)
+            {
+                return null;
+            }
+
+            var customized = new UriBuilder(unsubscribeUri);
+            customized.Path = string.Format(
+                "Unsubscribe/{0}/{1}/{2}",
+                contact.ID,
+                discussionList.ID,
+                HashHelper.Hash(contact.ID, discussionList.ID, hashSecret));
+
+            return customized.Uri;
+        }
+
+        /// <summary>
+        /// Gets the web archive URL when external admin access is configured.
+        /// </summary>
+        /// <param name="discussionList"> The discussion list. </param>
+        /// <returns> The archive URI, or null when unavailable. </returns>
+        private static Uri GetAdminArchiveUri(DiscussionList discussionList)
+        {
+            if (!includeListArchive || !UsingUnsubscribeUri || !adminExternalPort.HasValue || discussionList == null)
+            {
+                return null;
+            }
+
+            var customized = new UriBuilder(unsubscribeUri)
+            {
+                Port = adminExternalPort.Value,
+                Path = string.Format("List/Archive/{0}", discussionList.ID)
+            };
+
+            return customized.Uri;
         }
 
         /// <summary> Fill the default HTML email template with values. </summary>
@@ -295,13 +469,10 @@ namespace GrayDuckMail.Common
         {
             var unsubscribe = string.Empty;
 
-            if (UsingUnsubscribeUri)
+            var webUnsubscribeUri = GetWebUnsubscribeUri(discussionList, contact);
+            if (webUnsubscribeUri != null)
             {
-                //Use an unsubscribe link that points to an externally accesible URL.
-                var customized = new UriBuilder(unsubscribeUri);
-                customized.Path = string.Format("Unsubscribe/{0}/{1}/{2}", contact.ID, discussionList.ID, HashHelper.Hash(contact.ID, discussionList.ID, hashSecret));
-
-                unsubscribe = customized.Uri.AbsoluteUri;
+                unsubscribe = webUnsubscribeUri.AbsoluteUri;
             }
             else
             {
@@ -657,6 +828,7 @@ namespace GrayDuckMail.Common
             message.To.Add(new MailboxAddress(recipient.Name, recipient.Email));
             message.Subject = subject;
             message.Headers.Insert(0, HeaderId.ReturnPath, string.Format("Bounces <{0}>", EmailAliasHelper.GetBounceAlias(discussionList)));
+            AddListCommandHeaders(message, discussionList, recipient);
 
             message.Body = bodyGenerator();
 

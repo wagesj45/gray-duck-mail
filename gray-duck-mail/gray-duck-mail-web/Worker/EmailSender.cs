@@ -50,7 +50,9 @@ namespace GrayDuckMail.Web.Worker
                     DockerEnvironmentVariables.WebExternalURL,
                     DockerEnvironmentVariables.WebUseHTTPS,
                     DockerEnvironmentVariables.WebSecret,
-                    DockerEnvironmentVariables.WebExternalPort);
+                    DockerEnvironmentVariables.WebExternalPort,
+                    DockerEnvironmentVariables.WebAdminExternalPort,
+                    DockerEnvironmentVariables.WebListArchive);
             }
 
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningSenderLoop));
