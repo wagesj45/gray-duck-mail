@@ -66,6 +66,9 @@ namespace GrayDuckMail.Web.Worker
             {
                 try
                 {
+                    // Admin UI updates subscriptions in a separate DbContext; clear stale tracked rows.
+                    database.ChangeTracker.Clear();
+
                     var discussionLists = database.DiscussionLists.Include(list => list.Subscriptions).ThenInclude(list => list.Contact);
 
                     foreach (var discussionList in discussionLists)
@@ -413,10 +416,13 @@ namespace GrayDuckMail.Web.Worker
 
                 // Attach the message to the database for archival.
                 database.Messages.Add(message);
-                
-                var listParticipants = discussionList.Subscriptions
-                        .Where(subscription => subscription.Status == SubscriptionStatus.Subscribed)
-                        .Where(subscription => subscription.ContactID != originatorSubscription.ContactID);
+
+                var listParticipants = database.ContactSubscriptions
+                    .AsNoTracking()
+                    .Include(subscription => subscription.Contact)
+                    .Where(subscription => subscription.DiscussionListID == discussionList.ID
+                        && subscription.Status == SubscriptionStatus.Subscribed)
+                    .Where(subscription => subscription.ContactID != originatorSubscription.ContactID);
 
                 foreach (var participant in listParticipants)
                 {

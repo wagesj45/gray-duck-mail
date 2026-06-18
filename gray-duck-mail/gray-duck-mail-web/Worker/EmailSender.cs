@@ -56,6 +56,8 @@ namespace GrayDuckMail.Web.Worker
             logger.Info(LanguageHelper.GetValue(ResourceName.Logger_BeginningSenderLoop));
             while (!cancellationToken.IsCancellationRequested)
             {
+                database.ChangeTracker.Clear();
+
                 for (int i = 0; i < DockerEnvironmentVariables.RateLimitPerRoundCount; i++)
                 {
                     EmailDefinition emailDefinition = null;
@@ -72,6 +74,19 @@ namespace GrayDuckMail.Web.Worker
                             switch (emailDefinition.Type)
                             {
                                 case EmailDefinitionType.Relay:
+                                    if (!database.ContactSubscriptions.AsNoTracking().Any(subscription =>
+                                            subscription.DiscussionListID == emailDefinition.DiscussionList.ID
+                                            && subscription.ContactID == emailDefinition.Contact.ID
+                                            && subscription.Status == SubscriptionStatus.Subscribed))
+                                    {
+                                        logger.Info(
+                                            "Skipping relay to {0} ({1}); contact is not subscribed on list {2}.",
+                                            emailDefinition.Contact.Name,
+                                            emailDefinition.Contact.Email,
+                                            emailDefinition.DiscussionList.Name);
+                                        break;
+                                    }
+
                                     using (var smtpClient = new SmtpClient())
                                     {
                                         EmailHelper.RelayEmail(emailDefinition.DiscussionList, emailDefinition.Contact, emailDefinition.Message, database, smtpClient, cancellationToken);

@@ -33,7 +33,7 @@
                         <input type="checkbox"
                            name="assigned"
                            id="assigned"
-                           @(EmailHelper.IsAuthorizedForMailDistribution(Model.DiscussionList, contact) ? "checked" : "" )
+                           @(Model.IsAssigned(contact.ID) ? "checked" : "" )
                            @(EmailHelper.ContactUnassignableStatuses.Contains(Model.GetSubscription(contact.ID)) ? "disabled" : "")
                            value="@contact.ID" />
                         @contact.Name
