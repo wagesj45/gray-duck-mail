@@ -174,6 +174,36 @@ namespace GrayDuckMail.Web
             return null;
         });
 
+        /// <summary> The docker environment variable for <see cref="WebListArchive"/>. </summary>
+        private static Lazy<bool> envWebListArchive = new Lazy<bool>(() =>
+        {
+            var webListArchive = Environment.GetEnvironmentVariable("WEB_LIST_ARCHIVE");
+
+            if (bool.TryParse(webListArchive, out var parsedBool))
+            {
+                return parsedBool;
+            }
+            else if (int.TryParse(webListArchive, out var parsedInt))
+            {
+                return parsedInt != 0;
+            }
+
+            return false;
+        });
+
+        /// <summary> The docker environment variable for <see cref="WebAdminExternalPort"/>. </summary>
+        private static Lazy<int?> envWebAdminExternalPort = new Lazy<int?>(() =>
+        {
+            var webAdminExternalPort = Environment.GetEnvironmentVariable("WEB_ADMIN_EXTERNAL_PORT");
+
+            if (!string.IsNullOrWhiteSpace(webAdminExternalPort) && int.TryParse(webAdminExternalPort, out var value))
+            {
+                return value;
+            }
+
+            return null;
+        });
+
         /// <summary> The docker environment variable for <see cref="Language"/>. </summary>
         private static Lazy<Language> envLanguage = new Lazy<Language>(() =>
         {
@@ -330,6 +360,25 @@ namespace GrayDuckMail.Web
         public static int? WebExternalPort
         {
             get => envWebExternalPort.Value;
+        }
+
+        /// <summary>
+        /// Gets whether outgoing mail should include a <c>List-Archive</c> header.
+        /// </summary>
+        /// <remarks> Set <c>WEB_LIST_ARCHIVE</c> to <c>1</c> to enable. Defaults to off. </remarks>
+        /// <value> True when the list archive header is enabled. </value>
+        public static bool WebListArchive
+        {
+            get => envWebListArchive.Value;
+        }
+
+        /// <summary>
+        /// Gets the external port for the admin web UI, used for <c>List-Archive</c> header links.
+        /// </summary>
+        /// <value> The admin external port, if configured. </value>
+        public static int? WebAdminExternalPort
+        {
+            get => envWebAdminExternalPort.Value;
         }
 
         /// <summary> Gets the localization language. </summary>
