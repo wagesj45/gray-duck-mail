@@ -50,6 +50,11 @@ namespace GrayDuckMail.Common
         /// <summary> When true, outgoing mail includes a <c>List-Archive</c> header. </summary>
         private static bool includeListArchive;
 
+        /// <summary>
+        /// The RFC 8058 <c>List-Unsubscribe-Post</c> header value signaling one-click unsubscribe.
+        /// </summary>
+        public const string ListUnsubscribePostHeaderValue = "List-Unsubscribe=One-Click";
+
         /// <summary> The secret token used for creating a secure unsubscribe link. </summary>
         private static string hashSecret = string.Empty;
 
@@ -384,6 +389,12 @@ namespace GrayDuckMail.Common
             message.Headers.Add("List-Help", BuildListHelpHeaderValue(discussionList));
             message.Headers.Add("List-Subscribe", BuildListSubscribeHeaderValue(discussionList));
             message.Headers.Add("List-Unsubscribe", BuildListUnsubscribeHeaderValue(discussionList, recipient));
+
+            if (GetWebUnsubscribeUri(discussionList, recipient) != null)
+            {
+                message.Headers.Add("List-Unsubscribe-Post", ListUnsubscribePostHeaderValue);
+            }
+
             message.Headers.Add("List-Post", BuildListPostHeaderValue(discussionList));
             message.Headers.Add("List-Owner", BuildListOwnerHeaderValue(discussionList));
 
